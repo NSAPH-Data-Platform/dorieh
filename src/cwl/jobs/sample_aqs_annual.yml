@@ -1,0 +1,12 @@
+database:
+  path: /opt/airflow/dags/epa/database.ini
+  class: File
+connection_name: nsaph
+table: no2_annual
+aggregation: annual
+parameter_code: "42602"
+years:
+  - "2019"
+  - "2020"
+  - "2021"
+proxy: http://10.240.64.17:3128

@@ -1,0 +1,986 @@
+medicare:
+  reference: ""
+  header: false
+  quoting: 3
+  index: "unless excluded"
+  schema: "medicare"
+  schema.audit: "medicare_audit"
+  description: "Data model for Medicare"
+  tables:
+    mbsf_d:
+      description: |
+        Data from mbsf_d* files that is used to create beneficiary and
+        enrollment tables
+      create:
+        type: materialized view
+        from:
+          - cms.mbsf_*d*
+      columns:
+        - bene_id
+        - year
+        - dual_mo:
+            type: INT
+            cast:
+              '*':  '{column_name}::INT'
+        - dual_indicators:
+            type: CHAR(1)[12]
+            optional: true
+            m: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
+            source:
+              - dual_$m
+            cast:
+              'character varying': string_to_array({column_name}, NULL)
+        - file
+        - record
+      indices:
+        d_sy_idx:
+          columns:
+            - year
+            - bene_id
+
+    ps:
+      description: |
+        Patient Summary view. Combines multiple patient summary (aka MBSF)
+        files into a single view, transforming columns to the same type
+      create:
+        type: view
+        from:
+          - cms.mbsf_ab*
+          - cms.mcr_bene_*
+#        exclude:
+#          - mbsf_ab_2015
+      columns:
+        - bene_id
+        - file
+        - record
+        - year:
+            source: '(CASE WHEN "year"::int < 20 THEN (2000 + "year"::int) WHEN (20 < "year"::int AND "year"::int < 100) THEN (1900 + "year"::int) WHEN "year" IS NULL THEN 2000 ELSE "year"::int END)'
+        - state:
+            source: '(SELECT state_id FROM public.us_states as s WHERE s.ssa2 = "state")'
+        - ssa2:
+            source: state
+            description: Social Security Administration (SSA) two digit code for state
+            reference: https://www.nber.org/research/data/ssa-federal-information-processing-series-fips-state-and-county-crosswalk
+        - fips2:
+            source: '(SELECT fips2 FROM public.us_states as s WHERE s.ssa2 = "state")'
+            description: 2 digit state FIPS, see https://en.wikipedia.org/wiki/Federal_Information_Processing_Standard_state_code
+            reference:  https://www.census.gov/library/reference/code-lists/ansi.html#states
+        - zip:
+            type: INT
+            description: US Postal ZIP code, the first 5 digits of it
+            cast:
+              numeric: "(CASE WHEN {column_name} < 100000 THEN {column_name}::int ELSE ({column_name}/10000)::INT END)"
+              "character varying": "SUBSTRING({column_name} FROM 1 FOR 5)::INT"
+              integer: "{column_name}::INT"
+        - zip4:
+            type: INT
+            description: Additional 4 digits for US zip 5+4 code, when provided
+            source: zip
+            cast:
+              numeric: "(CASE WHEN {column_name} < 100000 THEN NULL ELSE ({column_name}%10000)::INT END)"
+              "character varying": "(CASE WHEN LENGTH({column_name}) < 6 THEN NULL ELSE SUBSTRING({column_name} FROM 6 FOR 4)::INT END)"
+              integer: "{column_name}::INT"
+        - dob:
+            type: date
+            description: Date of birth
+            cast:
+              "character varying": "public.parse_date({column_name})"
+              numeric: "to_date(to_char({column_name}, '00000000'), 'YYYYMMDD')"
+            source:
+              - dob
+              - bene_dob
+              - bene_birth_dt
+        - age:
+            type: INT
+            description: Age on January 1 of a given year, if provided
+            optional: true
+            source:
+              - age
+              - bene_age_at_beg_ref_yr
+            cast:
+              '*': "{column_name}::INT"
+        - dod:
+            type: date
+            description: Date of beneficiary death, if available
+            cast:
+              "character varying": "(CASE WHEN {column_name} = '00000000' THEN NULL ELSE public.parse_date({column_name}) END)"
+              numeric: "(CASE WHEN {column_name} < 19000000 THEN NULL ELSE to_date(to_char({column_name}, '00000000'), 'YYYYMMDD') END)"
+            source:
+              - death_dt
+              - bef_dod
+              - bene_dod
+              - bene_death_dt
+        - ssa3:
+            optional: true
+            description: Social Security Administration (SSA) three digit code for county
+            reference: https://www.nber.org/research/data/ssa-federal-information-processing-series-fips-state-and-county-crosswalk
+            source:
+              - cnty_cd
+              - bene_county_cd
+              - ssa_county
+        - sex:
+            reference: https://resdac.org/cms-data/variables/sex-beneficiary-0
+            type: VARCHAR
+            cast:
+              '*': "{column_name}::VARCHAR"
+            source:
+              - sex
+              - bene_sex_ident_cd
+        - race:
+            reference: https://resdac.org/cms-data/variables/beneficiary-race-code-ffs
+            type: VARCHAR
+            cast:
+              '*': "{column_name}::VARCHAR"
+            source:
+              - bene_race_cd
+              - race
+        - dod_ndi:
+            description: This variable is the date of death as reported on the Beneficiary’s death certificate.
+            reference: https://resdac.org/cms-data/variables/ndi-date-deathmbsf
+            optional: true
+            source:  ndi_death_dt
+            type: DATE
+        - race_rti:
+            description: Research Triangle Institute (RTI) Race Code
+            reference: https://resdac.org/cms-data/variables/research-triangle-institute-rti-race-code
+            optional: true
+            source: rti_race_cd
+        - hmo_indicators:
+            type: CHAR(1)[12]
+            optional: false
+            description: Array of indicators if the beneficiary was enrolled in HMO during a given month
+            reference: https://resdac.org/cms-data/variables/hmo-indicator
+            m: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
+            source:
+              - hmoind
+              - hmoind$m
+              - hmoind12
+              - bene_hmo_ind_$m
+            cast:
+              'character varying': string_to_array({column_name}, NULL)
+        - hmo_cvg_count:
+            type: INT
+            optional: false
+            description: Number of months during a given year, the beneficiary received their Part A and Part B benefits through a managed care plan
+            reference: https://requests.resdac.org/cms-data/variables/hmo-coverage-count
+            source:
+              - hmo_mo
+              - hmocovg
+              - bene_hmo_cvrage_tot_mons
+            cast:
+              '*': "CASE WHEN {column_name} IS NULL THEN 0 ELSE {column_name}::INT END"
+        - buyin_indicators:
+            type: CHAR(1)[12]
+            optional: true
+            description: |
+              Array of indicators if the beneficiary’s state of residence paid his/her monthly
+              premium for Part B coverage (and Part A if necessary). State Medicaid programs
+              can pay those premiums for certain dual eligibles; this action is called
+              “buying in” and so this variable is the “buy-in code.”
+            reference: https://resdac.org/cms-data/variables/medicare-entitlementbuy-indicator
+            m: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
+            source:
+              - medicare_buy_in
+              - buyin$m
+              - buyin12
+              - bene_mdcr_entlmt_buyin_ind_$m
+            cast:
+              'character varying': string_to_array({column_name}, NULL)
+        - buyin_cvg_count:
+            type: INT
+            optional: false
+            description: Number of months during a given year, during the year when the beneficiary premium was paid by the state. 
+            reference: https://resdac.org/cms-data/variables/state-buy-coverage-count
+            source:
+              - buyin_mo
+              - buycovg
+              - state_buy_in_mo
+              - bene_state_buyin_tot_mons
+              - dual
+            cast:
+              '*': "CASE WHEN {column_name} IS NULL THEN 0 WHEN year = 2015 AND {column_name} = '1' THEN 12 ELSE {column_name}::INT END"
+
+        - orec:
+            type: INT
+            optional: true # no data for 2015
+            source:
+               - orec
+               - orig_ent
+               - bene_entlmt_rsn_orig
+            cast:
+              '*': "{column_name}::INT"
+        - curec:
+            type: INT
+            optional: true
+            source:
+               - cur_ent
+               - bene_entlmt_rsn_curr
+            cast:
+              '*': "{column_name}::INT"
+
+    ip:
+      description: |
+        Inpatient Adminissions view. Combines multiple inpatient admissions
+        files (aka MedPar) into a single view, transforming columns
+        to the same type
+      create:
+        type: view
+        from:
+          - cms.medpar_*
+          - cms.mcr_ip_*
+      columns:
+        - bene_id
+        - file
+        - record
+        - year:
+            type: INT
+            source: '(CASE WHEN "year"::int < 20 THEN (2000 + "year"::int) WHEN (20 < "year"::int AND "year"::int < 100) THEN (1900 + "year"::int) WHEN "year" IS NULL THEN 2000 ELSE "year"::int END)'
+        - state:
+            source: '(SELECT state_id FROM public.us_states as s WHERE s.ssa2 = "state")'
+        - ssa2:
+            source: state
+        - fips2:
+            source: '(SELECT fips2 FROM public.us_states as s WHERE s.ssa2 = "state")'
+        - zip:
+            type: INT
+            cast:
+              numeric: "(CASE WHEN {column_name} < 100000 THEN {column_name}::int ELSE ({column_name}/10000)::INT END)"
+              "character varying": "SUBSTRING({column_name} FROM 1 FOR 5)::INT"
+        - zip4:
+            type: INT
+            source: zip
+            cast:
+              numeric: "(CASE WHEN {column_name} < 100000 THEN NULL ELSE ({column_name}%10000)::INT END)"
+              "character varying": "(CASE WHEN LENGTH({column_name}) < 6 THEN NULL ELSE SUBSTRING({column_name} FROM 6 FOR 4)::INT END)"
+        - admission_date_raw:
+            type: VARCHAR
+            cast:
+              numeric: "TRIM(to_char({column_name}, '999999999'))"
+              '*': "{column_name}::VARCHAR"
+            source:
+              - medpar_admsn_dt
+              - admsn_dt
+              - admsndt
+        - admission_date:
+            type: DATE
+            cast:
+              "character varying": "public.parse_date({column_name})"
+              numeric: "public.parse_date({column_name})"
+            source:
+              - medpar_admsn_dt
+              - admsn_dt
+              - admsndt
+
+        - discharge_date_raw:
+            type: VARCHAR
+            cast:
+              numeric: "TRIM(to_char({column_name}, '999999999'))"
+              '*': "{column_name}::VARCHAR"
+            source:
+              - medpar_dschrg_dt
+              - dschrg_dt
+              - dschrgdt
+        - discharge_date:
+            type: DATE
+            cast:
+              "character varying": "public.parse_date({column_name})"
+              numeric: "public.parse_date({column_name})"
+            source:
+              - medpar_dschrg_dt
+              - dschrg_dt
+              - dschrgdt
+
+        - adm_day_of_week:
+            type: INT
+            cast:
+              "character varying": "{column_name}::INT"
+              numeric: "{column_name}::INT"
+            source:
+              - medpar_admsn_day_cd
+              - admsn_day_cd
+              - admsnday
+
+        - src_admsn_cd:
+            type: CHAR(1)
+            source:
+              - src_ip_admsn_cd
+              - src_adms
+              - medpar_src_ip_admsn_cd
+
+        - dschrg_dstntn_cd:
+            type: CHAR(1)
+            source:
+              - dschrg_dstntn_cd
+              - dstntncd
+              - medpar_dschrg_dstntn_cd
+
+        - dschrgcd:
+            type: CHAR(1)
+            source:
+              - dschrgcd
+              - bene_dschrg_stus_cd
+              - medpar_bene_dschrg_stus_cd
+
+        - diag[$n=1:25]:
+            type: varchar
+            optional: true
+            source:
+              - medpar_dgns_cd_$n
+              - dgns_cd0$n
+              - dgns_cd$n
+              - dgns_$n_cd
+              - dgnscd$n
+
+        # Expenditure variables
+        - los_day_cnt:
+            reference: "https://resdac.org/cms-data/variables/days-beneficiarys-stay-hospitalsnf"
+            description: The count in days of the total length of a beneficiary's stay in a hospital
+            type: INT
+            cast:
+              "*": "{column_name}::INT"
+            source:
+              - los_day_cnt
+              - loscnt
+              - medpar_los_day_cnt
+
+        - drg_price_amt:
+            reference: "https://resdac.org/cms-data/variables/drg-price-amount"
+            description: |
+              The amount (called the 'DRG price' for purposes of MEDPAR analysis) 
+              that would have been paid if no deductibles, coinsurance, primary payers, or outliers 
+              were involved (rounded to whole dollars).
+            type: NUMERIC
+            source:
+              - drg_price_amt
+              - drgprice
+              - medpar_drg_price_amt
+
+        - drg_outlier_pmt_amt:
+            reference: "https://resdac.org/cms-data/variables/drg-outlier-approved-payment-amount"
+            description: |
+              The amount of additional payment (rounded to whole dollars) approved due 
+              to an outlier situation over the DRG allowance for the stay.
+            type: NUMERIC
+            source:
+              - drg_outlier_pmt_amt
+              - outlramt
+              - medpar_drg_outlier_pmt_amt
+
+        - pass_thru_amt:
+            reference: "https://resdac.org/cms-data/variables/pass-thru-diem-amount-stay"
+            description: |
+              The total of all claim pass through per diem amounts (rounded to whole dollars) for the stay.
+            type: NUMERIC
+            source:
+              - pass_thru_amt
+              - passthru
+              - medpar_pass_thru_amt
+
+        - mdcr_pmt_amt:
+            reference: "https://resdac.org/cms-data/variables/total-medicare-payment-amount"
+            description: |
+              Amount of payment made from the Medicare trust fund for the services covered by the claim record.
+              For hospital services, this amount does not include the claim pass-through per diem payments 
+              made by Medicare.
+            type: NUMERIC
+            source:
+              - mdcr_pmt_amt
+              - pmt_amt
+              - medpar_mdcr_pmt_amt
+
+    _ps:
+      description: internal intermediate view adding some data conversions
+      create:
+        type: materialized view
+        select: |
+          *,
+          CASE WHEN ssa3 is NOT NULL THEN
+            CASE WHEN year > 2010 THEN
+                (SELECT fips3 from public.ssa as s where ps.ssa3 = s.ssa3 and ps.year = s.year and ps.fips2 = s.fips2 ORDER BY 1 DESC LIMIT 1)
+              ELSE
+                (SELECT fips3 from public.ssa as s where ps.ssa3 = s.ssa3 and 2003 = s.year and ps.fips2 = s.fips2 ORDER BY 1 DESC LIMIT 1)
+            END
+          ELSE
+            (SELECT public.zip_to_fips3(year, zip))
+          END AS fips3,
+          CASE WHEN ssa3 is NOT NULL THEN
+              False
+            ELSE
+              (SELECT NOT public.is_zip_to_fips_exact(year, zip))
+          END AS fips3_is_approximated,
+          CASE WHEN year > 2010 THEN (SELECT string_agg(distinct fips3::varchar, ',') from public.ssa as s where ps.ssa3 = s.ssa3 and ps.year = s.year and ps.fips2 = s.fips2)
+              ELSE (SELECT string_agg(distinct fips3::varchar, ',') from public.ssa as s where ps.ssa3 = s.ssa3 and 2003 = s.year and ps.fips2 = s.fips2) END AS fips3_list,
+          CASE WHEN age is not NULL THEN (year - age) ELSE NULL END as yob
+        from: ps
+      indices:
+        ps_to_enrl_idx:
+          columns:
+            - bene_id
+            - year
+            - state
+        pelg_yo_idx:
+          columns:
+            - year
+            - orec
+        pelg_so_idx:
+          columns:
+            - state
+            - orec
+        pelg_yso_idx:
+          columns:
+            - year
+            - state
+            - orec
+
+    _beneficiaries:
+      description: internal intermediate view adding some data conversions
+      create:
+        type: view
+        from: medicare._ps
+        group by:
+          - bene_id
+      columns:
+        - bene_id
+        - dob:
+            source: "MIN(dob)"
+            identifier: true
+        - yob:
+            source: "MIN(yob)"
+        - dod:
+            source: "MAX(dod)"
+        - first_enrollment_year:
+            source: "MIN(year)"
+        - last_enrollment_year:
+            source: "MAX(year)"
+        - all_enrollment_years:
+            type: INT[]
+            source: "ARRAY_AGG(DISTINCT year ORDER BY year)"
+        - race:
+            reference: "https://resdac.org/cms-data/variables/raceethnicity-msis"
+            source: "string_agg(distinct race, ',')"
+            identifier: true
+        - race_rti:
+            reference: "https://resdac.org/cms-data/variables/research-triangle-institute-rti-race-code"
+            source: "string_agg(distinct race_rti, ',')"
+        - sex:
+            source: "string_agg(distinct sex, ',')"
+            identifier: true
+        - orec:
+            source: MAX(orec)
+        - discrepancies:
+            source: >
+              (
+                COUNT(distinct {identifiers}) - 1 +
+                CASE
+                  (COUNT(DISTINCT dod) FILTER (WHERE dod is not null))
+                  WHEN 0 THEN 0
+                  ELSE COUNT(DISTINCT dod) FILTER (WHERE dod is not null) - 1
+                END
+              )
+            description: "Number of possible discrepancies for the beneficiary, .i.e., records that use alternative DOB, race, ethnicity or DOD"
+        - dob_latest:
+            source: |
+              CASE
+                WHEN MAX(dob) <> MIN(dob) THEN  MAX(dob)
+              END
+        - yob_latest:
+            source: |
+              CASE
+                WHEN MAX(yob) <> MIN(yob) THEN  MAX(yob)
+              END
+        - dod_earliest:
+            source: |
+              CASE
+                WHEN MIN(dod) <> MAX(dod) THEN MIN(dod)
+              END
+    _enrollments:
+      description: |
+        Internal intermediate view of beneficiary enrollments into
+        Medicare program, by year and state of enrollment
+      create:
+        type: view
+        from: medicare._ps
+        group by:
+          - bene_id
+          - year
+          - state
+      columns:
+        - bene_id
+        - year
+        - state
+        - age:
+            source: MAX(age)
+        - age_min:
+            source: |
+              CASE
+                WHEN MIN(age) <> MAX(age) THEN MIN(age)
+              END
+        - orec:
+            source: MAX(orec)
+        - curec:
+            source: MAX(curec)
+        - state_iso:
+            type: "char(5)"
+            source: "('US-' || state) "
+        - fips2:
+            source: MAX(fips2)
+        - fips3:
+            source: MAX(fips3)
+        - fips3_is_approximated:
+            source: every(fips3_is_approximated)
+        - fips3_valdiated:
+            source: public.validate_zip_fips(MAX(zip), MAX(fips2), MAX(fips3))
+        - ssa2:
+            source: MAX(ssa2)
+        - ssa3:
+            source: MAX(ssa3)
+        - ssa2_list:
+            source: "string_agg(distinct ssa2, ',')"
+        - ssa3_list:
+            source: "string_agg(distinct ssa3, ',')"
+        - residence_county:
+            source: MAX(fips3)
+        - residence_counties:
+            source: "string_agg(distinct fips3_list, ',')"
+        - fips5:
+            source: "(MAX(fips2) || MAX(fips3))"
+        - zip:
+            source: "MAX(zip)"
+        - zips:
+            source: "string_agg(distinct zip::varchar, ',')"
+        - hmo_indicators:
+            source: "MAX(hmo_indicators)"
+        - hmo_cvg_count:
+            source: "MAX(hmo_cvg_count)"
+        - buyin_indicators:
+            source: "MAX(buyin_indicators)"
+        - buyin_cvg_count:
+            source: "MAX(buyin_cvg_count)"
+        - dual_indicators:
+            source: "(SELECT MAX(dual_indicators) FROM medicare.mbsf_d AS d WHERE medicare._ps.year = d.year and medicare._ps.bene_id = d.bene_id)"
+            requires: medicare.mbsf_d
+        - dual_cvg_count:
+            source: |
+              (CASE
+                 WHEN EXISTS (SELECT * FROM medicare.mbsf_d AS d WHERE medicare._ps.year = d.year and medicare._ps.bene_id = d.bene_id)
+                 THEN
+                     COALESCE((SELECT MAX(dual_mo) FROM medicare.mbsf_d AS d WHERE medicare._ps.year = d.year and medicare._ps.bene_id = d.bene_id), 0)
+                 ELSE NULL
+              END)
+            requires: medicare.mbsf_d
+        - state_count:
+            source: |
+              (
+                SELECT COUNT(distinct state)
+                FROM medicare._ps AS ps2
+                WHERE
+                  _ps.bene_id = ps2.bene_id
+                  AND _ps.year = ps2.year
+              )
+            requires: medicare._ps
+        - died:
+            source: |
+              CASE EXTRACT (YEAR from MAX(dod))
+                WHEN year THEN TRUE
+                ELSE FALSE
+              END
+        - file:
+            source: "string_agg(distinct FILE, ',')"
+        - record:
+            source: "string_agg(distinct RECORD::VARCHAR, ',')"
+    beneficiaries:
+      description: |
+        Cleaned up and unified Medicare beneficiaries table,
+        indexed and optimized for efficient queries
+      create:
+        type: table
+        select: "*"
+        from: _beneficiaries
+      columns:
+        - number_of_gap_years:
+            type: INT
+            source:
+              type: generated
+              code: "GENERATED ALWAYS AS (last_enrollment_year - first_enrollment_year + 1 - CARDINALITY(all_enrollment_years)) STORED"
+        - bene:
+            type: HLL_HASHVAL
+            description: |
+              HLL hash (see https://en.wikipedia.org/wiki/HyperLogLog).
+              Can be used to calculate number of beneficiaries
+              satisfying a certain given condition
+              Use #(hll_add_agg(bene)) or hll_cardinality(hll_add_agg(bene)) aggregator
+            reference: https://github.com/citusdata/postgresql-hll/blob/master/REFERENCE.md#basic-operational-functions
+            source:
+              type: "generated"
+              code: "GENERATED ALWAYS AS (hll_hash_text(bene_id)) STORED"
+      primary_key:
+        - bene_id
+      indices:
+        bene_rsd_idx:
+          columns:
+            - race
+            - sex
+            - discrepancies
+      children:
+        enrollments:
+          description: |
+            Cleaned up and unified Medicare beneficiaries enrollments table,
+            by state and year. This table is indexed and optimized
+            for efficient queries
+          create:
+            type: table
+            select: "*"
+            from: _enrollments
+            populate: true
+          columns:
+            - hmo:
+                type: boolean
+                source:
+                  type: generated
+                  code: "GENERATED ALWAYS AS (CASE WHEN hmo_cvg_count IS NULL THEN NULL WHEN hmo_cvg_count > 0 THEN TRUE ELSE FALSE END) STORED"
+            - buyin:
+                type: boolean
+                source:
+                  type: generated
+                  code: "GENERATED ALWAYS AS (CASE WHEN buyin_cvg_count IS NULL THEN NULL WHEN buyin_cvg_count > 0 THEN TRUE ELSE FALSE END) STORED"
+            - dual:
+                type: boolean
+                source:
+                  type: generated
+                  code: "GENERATED ALWAYS AS (CASE WHEN dual_cvg_count IS NULL THEN NULL WHEN dual_cvg_count > 0 THEN TRUE ELSE FALSE END) STORED"
+            - bene:
+                type: HLL_HASHVAL
+                description: |
+                  HLL hash (see https://en.wikipedia.org/wiki/HyperLogLog).
+                  Can be used to calculate number of beneficiaries
+                  satisfying a certain given condition
+                  Use #(hll_add_agg(bene)) or hll_cardinality(hll_add_agg(bene)) aggregator
+                reference: https://github.com/citusdata/postgresql-hll/blob/master/REFERENCE.md#basic-operational-functions
+                source:
+                  type: "generated"
+                  code: "GENERATED ALWAYS AS (hll_hash_text(bene_id)) STORED"
+          primary_key:
+            - bene_id
+            - year
+            - state
+          indices:
+            bsy_idx:
+              columns:
+                - bene_id
+                - state
+                - year
+            sy_idx:
+              columns:
+                - state
+                - year
+            sy_iso_idx:
+              columns:
+                - state_iso
+                - year
+            fips_idx:
+              columns:
+                - fips2
+                - fips3
+            zc_idx:
+              columns:
+                - zip
+                - fips5
+            scz_idx:
+              columns:
+                - state
+                - fips3
+                - zip
+          children:
+            admissions:
+              description: |
+                Medicare inpatient admissions
+              invalid.records:
+                action: "INSERT"
+                target:
+                  schema: $schema.audit
+              create:
+                type: table
+                select: |
+                  bene_id,
+                  file,
+                  record,
+                  year,
+                  state,
+                  ssa2,
+                  fips2,
+                  zip,
+                  zip4,
+                  admission_date_raw,
+                  discharge_date_raw,
+                  admission_date,
+                  discharge_date,
+                  adm_day_of_week,
+                  dschrgcd,
+                  dschrg_dstntn_cd,
+                  src_admsn_cd,
+                  btrim(diag1) As primary_diagnosis,
+                  array_remove(ARRAY[
+                  btrim(btrim(diag1)),
+                  btrim(diag2),
+                  btrim(diag3),
+                  btrim(diag4),
+                  btrim(diag5),
+                  btrim(diag6),
+                  btrim(diag7),
+                  btrim(diag8),
+                  btrim(diag9),
+                  btrim(diag10),
+                  btrim(diag11),
+                  btrim(diag12),
+                  btrim(diag13),
+                  btrim(diag14),
+                  btrim(diag15),
+                  btrim(diag16),
+                  btrim(diag17),
+                  btrim(diag18),
+                  btrim(diag19),
+                  btrim(diag20),
+                  btrim(diag21),
+                  btrim(diag22),
+                  btrim(diag23),
+                  btrim(diag24),
+                  btrim(diag25)
+                  ], NULL) As diagnoses,
+                  los_day_cnt,
+                  drg_price_amt,
+                  drg_outlier_pmt_amt,
+                  pass_thru_amt,
+                  mdcr_pmt_amt 
+
+                from: ip
+                populate: false
+              columns:
+                - admission_year:
+                    type: "INT"
+                    source:
+                      type: "generated"
+                      code: "GENERATED ALWAYS AS (EXTRACT (YEAR FROM admission_date)) STORED"
+                - diagnoses:
+                    type: "VARCHAR(12)[10]"
+                    source: None
+                - state_iso:
+                    type: "char(5)"
+                    source:
+                      type: generated
+                      code: "GENERATED ALWAYS AS ('US-' || state)  STORED"
+                    index:
+                      include:
+                        - bene
+                        - pd_hll_hash
+                - bene:
+                    type: HLL_HASHVAL
+                    description: |
+                      HLL hash (see https://en.wikipedia.org/wiki/HyperLogLog).
+                      Can be used to calculate number of beneficiaries
+                      satisfying a certain given condition
+                      Use #(hll_add_agg(bene)) or hll_cardinality(hll_add_agg(bene)) aggregator
+                    reference: https://github.com/citusdata/postgresql-hll/blob/master/REFERENCE.md#basic-operational-functions
+                    source:
+                      type: "generated"
+                      code: "GENERATED ALWAYS AS (hll_hash_text(bene_id)) STORED"
+                    index: false
+                - pd_hll_hash:
+                    type: HLL_HASHVAL
+                    source:
+                      type: "generated"
+                      code: "GENERATED ALWAYS AS (hll_hash_text(primary_diagnosis)) STORED"
+                    index: false
+                - icd_hll:
+                    type: HLL
+                    source:
+                      type: "generated"
+                      code: "GENERATED ALWAYS AS (hll_arr_agg(diagnoses)) STORED"
+                    index: false
+              primary_key:
+                - bene_id
+                - year
+                - state
+                - admission_date
+                - discharge_date
+              indices:
+                adm_ys_idx:
+                  columns:
+                    - state
+                    - year
+                adm_ys_iso_idx:
+                  columns:
+                    - state_iso
+                    - year
+                  include:
+                    - bene
+                adm_ysdz_idx:
+                  columns:
+                    - state
+                    - year
+                    - zip
+                    - primary_diagnosis
+
+  ## QC Tables
+    qc_enrl_bene:
+      description: |
+        Joined data for beneficiaries and enrollments
+      create:
+        type:  view
+        select: '*'
+        from: enrollments natural join beneficiaries
+      columns:
+        - consistent_dob:
+            type: VARCHAR(12)
+            source: |
+              (CASE
+                WHEN dob IS NULL THEN 'MISSING'
+                WHEN dob_latest IS NOT NULL THEN 'AMBIGUOUS'
+                ELSE 'CONSISTENT'
+              END)
+        - consistent_dod:
+            type: VARCHAR(12)
+            source: |
+              (CASE
+                WHEN dod IS NULL THEN 'NONE'
+                WHEN dod_earliest IS NOT NULL THEN 'AMBIGUOUS'
+                ELSE 'CONSISTENT'
+              END)
+        - consistent_sex:
+            type: VARCHAR(12)
+            source: |
+              (CASE
+                WHEN sex LIKE '%,%' THEN 'AMBIGUOUS'
+                ELSE 'CONSISTENT'
+              END)
+        - consistent_race:
+            type: VARCHAR(12)
+            source: |
+              (CASE
+                WHEN race LIKE '%,%' THEN 'AMBIGUOUS'
+                ELSE 'CONSISTENT'
+              END)
+    qc_enrollments:
+      description: |
+        Aggregate data for beneficiaries and enrollments
+      create:
+        type: materialized view
+        from: qc_enrl_bene
+        nullable group by:
+          - year
+          - state
+          - zip
+          - fips3
+          - orec
+          - curec
+          - hmo
+          - dual
+          - buyin
+          - consistent_dob
+          - consistent_dod
+          - consistent_sex
+          - consistent_race
+          - fips3_is_approximated
+          - fips3_valdiated
+      columns:
+        - year
+        - state
+        - zip
+        - fips3
+        - orec
+        - curec
+        - hmo
+        - dual
+        - buyin
+        - consistent_dob
+        - consistent_dod
+        - consistent_sex
+        - consistent_race
+        - fips3_is_approximated
+        - fips3_valdiated
+        - state_iso:
+            type: CHAR(5)
+            source: MAX(state_iso)
+        - NumRecords:
+            type: BIGINT
+            source: COUNT(*)
+            index: false
+        - NumDistinctBeneficaries:
+            type: BIGINT
+            source: "(#(hll_add_agg(bene)))::BIGINT"
+            index: false
+        - bene_hll:
+            source: "hll_add_agg(bene)"
+            index: false
+
+    qc_adm_union:
+      description: |
+        Union of data from admissions table with the records
+        discarded because of validation issues
+      create:
+        type:  view
+        from: admissions
+        select: |
+           reason,
+              year,
+              state,
+              state_iso,
+              admission_year,
+              diagnoses,
+              zip,
+              admission_date,
+              discharge_date,
+              adm_day_of_week,
+              primary_diagnosis,
+              bene_id,
+              bene,
+              pd_hll_hash,
+              icd_hll
+           FROM medicare_audit.admissions
+           UNION ALL 
+           SELECT 'OK'::VARCHAR AS reason,
+              year,
+              state,
+              state_iso,
+              admission_year,
+              diagnoses,
+              zip,
+              admission_date,
+              discharge_date,
+              adm_day_of_week,
+              primary_diagnosis,
+              bene_id,
+              bene,
+              pd_hll_hash,
+              icd_hll
+
+    qc_admissions:
+      description: |
+        Aggregate data for admissions, beneficiaries and enrollments
+      create:
+        type: materialized view
+        from: qc_adm_union
+        nullable group by:
+          - year
+          - state
+          - zip
+          - reason
+      columns:
+        - year
+        - state
+        - zip
+        - reason
+        - state_iso:
+            type: CHAR(5)
+            source: MAX(state_iso)
+        - NumRecords:
+            type: BIGINT
+            source: COUNT(*)
+            index: false
+        - NumDistinctBeneficaries:
+            type: BIGINT
+            source: "(#(hll_add_agg(bene)))::BIGINT"
+            index: false
+        - bene_hll:
+            source: "hll_add_agg(bene)"
+            index: false
+

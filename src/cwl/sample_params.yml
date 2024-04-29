@@ -1,0 +1,11 @@
+geography: zip
+database:
+  class: File
+  path: /opt/airflow/dags/gridmet/database.ini
+connection_name: nsaph
+years:
+  - '2019'
+  - '2020'
+bands:
+  - 'bi'
+  - 'erc'

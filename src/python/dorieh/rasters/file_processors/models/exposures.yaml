@@ -1,0 +1,238 @@
+exposures:
+  reference: "https://sites.wustl.edu/acag/datasets/surface-pm2-5/"
+  header: true
+  quoting: 3
+  index: "unless excluded"
+  schema: "exposures"
+  description: "Data model for pollution downloaded from Washington University in St. Louis"
+  tables:
+    pm25_monthly_county_mean:
+      description: |
+        Estimated annual and monthly ground-level fine particulate matter
+        (PM2.5) for 1998-2020 by combining Aerosol Optical Depth (AOD)
+        retrievals from the NASA MODIS, MISR, and SeaWIFS instruments with
+        the GEOS-Chem chemical transport model, and subsequently calibrating
+        to global ground-based observations using a Geographically Weighted
+        Regression (GWR), as detailed in the below reference for V5.GL.01.
+        V5.GL.02 follows the methodology of V5.GL.01, but updates the
+        ground-based observations used to calibrate the geophysical PM2.5
+        estimates for the entire time series, and extends temporal
+        coverage through 2020.
+
+        Aggregated at US county level
+
+      columns:
+        - county:
+            index: true
+            type: VARCHAR
+        - year:
+            index: true
+            type: INT
+        - month:
+            index: true
+            type: INT
+        - PM25:
+            type: NUMERIC
+        - fips5:
+            source:
+              type: "generated"
+              code: "GENERATED ALWAYS AS (county::INT) STORED"
+            type: INT
+            doc: County FIPS code as an integer, value is equal to "county".
+        - fips2:
+            source:
+              type: "generated"
+              code: "GENERATED ALWAYS AS (substring(county, 1, 2)::INT) STORED"
+            type: INT
+            doc: FIPS code of the US State in which the county is located
+        - fips3:
+            source:
+              type: "generated"
+              code: "GENERATED ALWAYS AS (substring(county, 3, 3)::INT) STORED"
+            type: INT
+            doc: FIPS code of the county without state FIPS code
+        - state:
+            source:
+              type: "generated"
+              code: "GENERATED ALWAYS AS (public.fips2state(substring(county, 1, 2)::VARCHAR)) STORED"
+        - state_iso:
+            source:
+              type: "generated"
+              code: "GENERATED ALWAYS AS (public.fips2state_iso(substring(county, 1, 2))) STORED"
+      primary_key:
+        - county
+        - year
+        - month
+
+    pm25_monthly_zcta_mean:
+      description: |
+        Estimated annual and monthly ground-level fine particulate matter
+        (PM2.5) for 1998-2020 by combining Aerosol Optical Depth (AOD)
+        retrievals from the NASA MODIS, MISR, and SeaWIFS instruments with
+        the GEOS-Chem chemical transport model, and subsequently calibrating
+        to global ground-based observations using a Geographically Weighted
+        Regression (GWR), as detailed in the below reference for V5.GL.01.
+        V5.GL.02 follows the methodology of V5.GL.01, but updates the
+        ground-based observations used to calibrate the geophysical PM2.5
+        estimates for the entire time series, and extends temporal
+        coverage through 2020.
+
+        Aggregated at US ZCTA (Zip Code Tabulation Area) level
+
+      columns:
+        - zcta:
+            index: true
+            type: VARCHAR
+        - year:
+            index: true
+            type: INT
+        - month:
+            index: true
+            type: INT
+        - PM25:
+            type: NUMERIC
+        - state:
+            index: true
+            source:
+              type: "generated"
+              code: "GENERATED ALWAYS AS (public.zip_to_state(year, zcta::INT)) STORED"
+            doc: |
+              This column is for informational purposes only. The US State or 
+              territory Id associated with this ZCTA. Some ZCTAs span over
+              more than one states or territories.
+        - city:
+            source:
+              type: "generated"
+              code: "GENERATED ALWAYS AS (public.zip_to_city(year, zcta::INT)) STORED"
+            doc: |
+              This column is for informational purposes only. The name 
+              of the city preferred by the US Postal service for the ZIP code
+              associated with this ZCTA.
+        - county:
+            source:
+              type: "generated"
+              code: "GENERATED ALWAYS AS (public.zip_to_fips5(year, zcta::INT)) STORED"
+            doc: |
+              This column is for informational purposes only. The US County  
+              FIPS code, for the county having the largest intersection 
+              in terms of population with this ZCTA. 
+
+      primary_key:
+        - zcta
+        - year
+        - month
+
+    pm25_components_annual_zcta_mean:
+      description: |
+        Estimated annual ground-level fine particulate matter
+        Aggregated at US ZCTA level
+      columns:
+      - PM25:
+          type: NUMERIC
+      - BC:
+          type: NUMERIC
+      - NH4:
+          type: NUMERIC
+      - NIT:
+          type: NUMERIC
+      - OM:
+          type: NUMERIC
+      - SO4:
+          type: NUMERIC
+      - SOIL:
+          type: NUMERIC
+      - SS:
+          type: NUMERIC
+      - zcta:
+          index: true
+          type: VARCHAR
+      - Year:
+          index: true
+          type: INT
+      - state:
+          index: true
+          source:
+            type: "generated"
+            code: "GENERATED ALWAYS AS (public.zip_to_state(year, zcta::INT)) STORED"
+          doc: |
+            This column is for informational purposes only. The US State or 
+            territory Id associated with this ZCTA. Some ZCTAs span over
+            more than one states or territories.
+      - city:
+          source:
+            type: "generated"
+            code: "GENERATED ALWAYS AS (public.zip_to_city(year, zcta::INT)) STORED"
+          doc: |
+            This column is for informational purposes only. The name 
+            of the city preferred by the US Postal service for the ZIP code
+            associated with this ZCTA.
+      - county:
+          source:
+            type: "generated"
+            code: "GENERATED ALWAYS AS (public.zip_to_fips5(year, zcta::INT)) STORED"
+          doc: |
+            This column is for informational purposes only. The US County  
+            FIPS code, for the county having the largest intersection 
+            in terms of population with this ZCTA. 
+
+      primary_key:
+      - zcta
+      - Year
+
+    pm25_components_annual_county_mean:
+      description: |
+        Estimated annual ground-level fine particulate matter
+        Aggregated at US Counties level
+      columns:
+        - PM25:
+            type: NUMERIC
+        - BC:
+            type: NUMERIC
+        - NH4:
+            type: NUMERIC
+        - NIT:
+            type: NUMERIC
+        - OM:
+            type: NUMERIC
+        - SO4:
+            type: NUMERIC
+        - SOIL:
+            type: NUMERIC
+        - SS:
+            type: NUMERIC
+        - county:
+            index: true
+            type: VARCHAR
+            doc: County FIPS code as a string, value is equal to "fips5"
+        - Year:
+            index: true
+            type: INT
+        - fips5:
+            source:
+              type: "generated"
+              code: "GENERATED ALWAYS AS (county::INT) STORED"
+            type: INT
+            doc: County FIPS code as an integer, value is equal to "county".
+        - fips2:
+            source:
+              type: "generated"
+              code: "GENERATED ALWAYS AS (substring(county, 1, 2)::INT) STORED"
+            type: INT
+            doc: FIPS code of the US State in which the county is located
+        - fips3:
+            source:
+              type: "generated"
+              code: "GENERATED ALWAYS AS (substring(county, 3, 3)::INT) STORED"
+            type: INT
+            doc: FIPS code of the county without state FIPS code
+        - state:
+            source:
+              type: "generated"
+              code: "GENERATED ALWAYS AS (public.fips2state(substring(county, 1, 2)::VARCHAR)) STORED"
+        - state_iso:
+            source:
+              type: "generated"
+              code: "GENERATED ALWAYS AS (public.fips2state_iso(substring(county, 1, 2))) STORED"
+      primary_key:
+        - county
+        - Year

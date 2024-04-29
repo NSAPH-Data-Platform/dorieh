@@ -1,0 +1,10 @@
+database:
+  path: /opt/airflow/dags/epa/database.ini
+  class: File
+connection_name: nsaph
+api-key: xxx
+parameter_code: pm25
+table: airnow_pm25_2018_2020
+from: 2018-01-01
+to: 2018-06-30
+proxy: http://10.240.64.17:3128

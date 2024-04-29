@@ -1,0 +1,92 @@
+medicare_legacy:
+  index: "unless excluded"
+  schema: "medicare_legacy"
+  schema.audit: "medicaid_legacy_audit"
+  description: "Data model for Legacy Medicare Data (processed by Yun/Ben"
+  tables:
+    ps:
+      columns:
+        - state:
+            source: STATE
+            type: INT
+        - zipcode:
+            source: ZIPCODE
+            type: INT
+        - dob:
+            source: DOB
+            type: INT
+        - sex:
+            source: SEX
+            type: INT
+        - race:
+            source: RACE
+            type: INT
+        - age:
+            source: AGE
+            type: INT
+        - orig_ent:
+            source: ORIG_ENT
+            type: INT
+        - cur_ent:
+            source: CUR_ENT
+            type: INT
+        - esrd_ind:
+            source: ESRD_IND
+            type: VARCHAR
+        - mcstatus:
+            source: MCSTATUS
+            type: INT
+        - prtaterm:
+            source: PRTATERM
+            type: INT
+        - prtbterm:
+            source: PRTBTERM
+            type: INT
+        - mc_ent:
+            source: MC_ENT
+            type: VARCHAR
+        - hmoind:
+            source: HMOIND
+            type: VARCHAR
+        - hicovg:
+            source: HICOVG
+            type: INT
+        - smicovg:
+            source: SMICOVG
+            type: INT
+        - hmocovg:
+            source: HMOCOVG
+            type: INT
+        - buycovg:
+            source: BUYCOVG
+            type: INT
+        - dodflag:
+            source: DODFLAG
+            type: VARCHAR
+        - bef_dod:
+            source: BEF_DOD
+            type: INT
+        - enrolyr:
+            source: ENROLYR
+            type: INT
+        - five_percent_flag:
+            source: FIVE_PERCENT_FLAG
+            type: INT
+        - intbid:
+            source: Intbid
+            type: VARCHAR
+        - FILE:
+            description: Name of the file, from which the data has been imported
+            index:
+              required_before_loading_data: true
+            source:
+              type: file
+            type: VARCHAR(128)
+        - RECORD:
+            description: Record number in the file
+            index: true
+            type: SERIAL
+      primary_key:
+        - FILE
+        - RECORD
+

@@ -1,0 +1,13 @@
+database:
+  path: /opt/local/database.ini
+  class: File
+connection_name: dorieh
+table: pm25_annual
+aggregation: annual
+parameter_code: PM25
+years:
+  - "2010"
+  - "2011"
+test_script:
+  path: /opt/local/pipelines/test_cases/aqs_test.sql
+  class: File

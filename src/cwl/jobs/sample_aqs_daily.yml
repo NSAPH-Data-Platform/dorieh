@@ -1,0 +1,12 @@
+database:
+  path: /opt/airflow/dags/epa/database.ini
+  class: File
+connection_name: nsaph
+table: pm25_daily
+aggregation: daily
+parameter_code: "88101"
+years:
+  - "2019"
+  - "2020"
+  - "2021"
+proxy: http://10.240.64.17:3128
