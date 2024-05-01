@@ -21,7 +21,7 @@
 
 cwlVersion: v1.2
 class: CommandLineTool
-baseCommand: [python, -m, epa.airnow]
+baseCommand: [python, -m, dorieh.epa.airnow]
 requirements:
   InlineJavascriptRequirement: {}
   EnvVarRequirement:

@@ -21,7 +21,7 @@
 
 cwlVersion: v1.2
 class: CommandLineTool
-baseCommand: [python, -m, epa.aqs_expand]
+baseCommand: [python, -m, dorieh.epa.aqs_expand]
 
 requirements:
   InlineJavascriptRequirement: {}

@@ -30,8 +30,8 @@ import sys
 from typing import List
 import yaml
 
-from cms.tools.mcr_registry import MedicareRegistry
-from cms.tools.mcr_sas import MedicareSAS
+from dorieh.cms.tools.mcr_registry import MedicareRegistry
+from dorieh.cms.tools.mcr_sas import MedicareSAS
 
 from dorieh.platform.data_model.utils import split
 from dorieh.platform.loader.introspector import Introspector

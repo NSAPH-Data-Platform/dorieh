@@ -36,9 +36,9 @@ import logging
 from typing import List, Dict
 import os
 
-from epa import STATE_CODE, COUNTY_CODE, \
+from dorieh.epa import STATE_CODE, COUNTY_CODE, \
     SITE_NUM, PARAMETER_CODE, MONITOR, RECORD, add_record_num
-from epa.aqs_ds_def import AQSContext, Parameter, Aggregation
+from dorieh.epa.aqs_ds_def import AQSContext, Parameter, Aggregation
 from dorieh.utils.io_utils import as_csv_reader, fopen, write_csv, \
     DownloadTask
 

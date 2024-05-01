@@ -28,7 +28,7 @@ import os
 
 from dorieh.platform.loader.data_loader import DataLoader
 
-from cms.tools.mcr_sas import MedicareSAS
+from dorieh.cms.tools.mcr_sas import MedicareSAS
 from dorieh.platform.loader import LoaderConfig
 
 

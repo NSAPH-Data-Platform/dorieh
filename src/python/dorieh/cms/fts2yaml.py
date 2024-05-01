@@ -324,7 +324,7 @@ class MedicareFTSColumn(FTSColumn):
 
 class CMSFTS:
     """
-    Abstract class for Medicaid and Medicare files from CMS
+    Abstract class for Medicaid and Medicare files from dorieh.cms
     """
 
     common_indices = [

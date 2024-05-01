@@ -28,7 +28,7 @@ than AQS
 
 from datetime import datetime
 
-from epa.airnow_ds_def import AirNowContext
+from dorieh.epa.airnow_ds_def import AirNowContext
 from dorieh.gis.downloader import GISDownloader, CensusShapeCollection
 
 

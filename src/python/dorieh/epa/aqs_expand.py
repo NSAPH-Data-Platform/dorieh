@@ -3,9 +3,9 @@ import csv
 import logging
 from typing import List, Optional
 
-from epa import PARAMETER_CODE, MONITOR, RECORD
-from epa.aqs_ds_def import Parameter
-from epa.aqs_tools import transfer
+from dorieh.epa import PARAMETER_CODE, MONITOR, RECORD
+from dorieh.epa.aqs_ds_def import Parameter
+from dorieh.epa.aqs_tools import transfer
 from dorieh.platform import init_logging
 from dorieh.utils.io_utils import fopen, file_as_csv_reader
 

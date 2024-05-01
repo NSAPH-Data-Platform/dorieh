@@ -1,5 +1,6 @@
 from setuptools import setup, find_packages
 
+find_packages()
 with open("README.md", "r") as readme:
     long_description = readme.read()
 
@@ -14,17 +15,8 @@ setup(
     description='Dorieh Data Engineering Platform',
     long_description = long_description,
     long_description_content_type = "text/markdown",
-    packages=[
-        'dorieh', 
-        'dorieh.platform.requests',
-        'dorieh.platform.data_model',
-        'dorieh.platform.loader',
-        'dorieh.platform.util',
-        'dorieh.platform.dbt',
-        'dorieh.platform.apprunner',
-        'dorieh.platform.operations',
-        'dorieh.platform.dictionary',
-        'dorieh.resources', 
+    packages=find_packages(where='./src/python') + [
+        'dorieh.resources',
         'dorieh.sql',
         'dorieh.cwl'
     ],
@@ -64,6 +56,7 @@ setup(
         'cwltool>=3.0.20200710214758',
         'decorator>=4.4.2',
         'defusedxml>=0.6.0',
+        'deprecated',
         'dill>=0.3.2',
         'dnspython>=2.0.0',
         'docker>=4.3.1',

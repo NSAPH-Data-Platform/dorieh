@@ -34,8 +34,8 @@ from typing import List, Union, Dict
 import pandas
 import yaml
 
-from epa import add_record_num, MONITOR
-from epa.airnow_ds_def import AirNowContext
+from dorieh.epa import add_record_num, MONITOR
+from dorieh.epa.airnow_ds_def import AirNowContext
 from dorieh.gis.annotator import GISAnnotator
 from dorieh.platform_utils.qc import Tester
 from dorieh.utils.io_utils import fopen, as_content

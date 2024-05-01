@@ -32,8 +32,8 @@ The tool also adds a column containing a uniquely generated Monitor Key
 
 import os
 
-from epa.aqs_ds_def import AQSContext
-from epa.aqs_tools import collect_aqs_download_tasks, download_data
+from dorieh.epa.aqs_ds_def import AQSContext
+from dorieh.epa.aqs_tools import collect_aqs_download_tasks, download_data
 from dorieh.platform import init_logging
 
 

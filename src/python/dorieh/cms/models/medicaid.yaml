@@ -192,7 +192,7 @@ medicaid:
                 source: |
                   (
                     SELECT COUNT(distinct state_cd)
-                    FROM cms.ps AS ps2
+                    from dorieh.cms.ps AS ps2
                     WHERE
                       cms.ps.bene_id = ps2.bene_id
                       AND cms.ps.max_yr_dt = ps2.max_yr_dt

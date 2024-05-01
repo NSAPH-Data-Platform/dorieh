@@ -30,7 +30,7 @@ from argparse import ArgumentParser
 from concurrent.futures import ThreadPoolExecutor
 from typing import List, Optional
 
-from cms.tools.mcr_file import MedicareFile
+from dorieh.cms.tools.mcr_file import MedicareFile
 
 
 class MedParFileSet:

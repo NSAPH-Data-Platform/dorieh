@@ -42,12 +42,12 @@ from typing import List
 from dorieh.platform import init_logging
 from dorieh.platform.loader.index_builder import IndexBuilder
 
-from cms.mcr_data_loader import MedicareDataLoader
-from cms.registry import Registry
+from dorieh.cms.mcr_data_loader import MedicareDataLoader
+from dorieh.cms.registry import Registry
 
-from cms.create_schema_config import CMSSchema
+from dorieh.cms.create_schema_config import CMSSchema
 
-from cms.fts2yaml import mcr_type
+from dorieh.cms.fts2yaml import mcr_type
 from dorieh.platform.loader.data_loader import DataLoader
 
 from dorieh.platform.loader import LoaderConfig

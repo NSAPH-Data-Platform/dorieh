@@ -29,8 +29,8 @@ from typing import Dict
 
 import yaml
 
-from cms.create_schema_config import CMSSchema
-from cms.fts2yaml import MedicaidFTS, MedicareFTS, mcr_type
+from dorieh.cms.create_schema_config import CMSSchema
+from dorieh.cms.fts2yaml import MedicaidFTS, MedicareFTS, mcr_type
 from dorieh.platform import init_logging
 
 

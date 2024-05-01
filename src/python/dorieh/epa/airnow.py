@@ -30,8 +30,8 @@ import logging
 import os
 from datetime import datetime
 
-from epa.airnow_downloader import AirNowDownloader
-from epa.airnow_ds_def import AirNowContext
+from dorieh.epa.airnow_downloader import AirNowDownloader
+from dorieh.epa.airnow_ds_def import AirNowContext
 from dorieh.platform import init_logging
 
 

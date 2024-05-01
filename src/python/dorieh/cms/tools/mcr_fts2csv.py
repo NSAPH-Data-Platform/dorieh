@@ -28,7 +28,7 @@ import gzip
 import os
 import sys
 
-from cms.fts2yaml import MedicareFTS, mcr_type
+from dorieh.cms.fts2yaml import MedicareFTS, mcr_type
 from dorieh.utils.fwf import FWFReader
 
 

@@ -31,7 +31,7 @@ from dorieh.platform import init_logging
 from dorieh.platform.loader.introspector import Introspector
 from dorieh.utils.context import Context, Argument, Cardinality
 
-from epa import RECORD
+from dorieh.epa import RECORD
 
 DOMAIN_NAME = "epa"
 

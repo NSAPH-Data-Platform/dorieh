@@ -20,7 +20,7 @@ import glob
 import os
 from typing import List, Tuple, Any, Callable
 
-from cms.fts2yaml import mcr_type, MedicareFTS
+from dorieh.cms.fts2yaml import mcr_type, MedicareFTS
 from dorieh.platform.loader.data_loader import DataLoader
 from dorieh.utils.fwf import FWFReader
 from dorieh.utils.io_utils import fopen
