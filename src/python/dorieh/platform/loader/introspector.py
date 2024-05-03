@@ -340,6 +340,8 @@ class Introspector:
                         self.guess_str(v, v2, scale, precision, max_val)
                 if t == "0":
                     continue
+                if not cell:
+                    continue
                 try:
                     c_type = self.reconcile(t, c_type)
                 except InconsistentTypes:

@@ -7,7 +7,7 @@ with open("README.md", "r") as readme:
 
 setup(
     name='dorieh',
-    version="0.0.1",
+    version="0.0.2",
     url='https://github.com/NSAPH-Data-Platform/dorieh',
     license='Apache 2.0',
     author='Michael A Bouzinier',
@@ -29,7 +29,8 @@ setup(
     package_data = {
         "dorieh.sql": ["*.sql"],
         "dorieh.resources": ["**/*", "*/*/*", "*/*/*/*"],
-        "dorieh.cwl": ["*.cwl"]
+        "dorieh.cwl": ["*.cwl"],
+        "dorieh.gis": ["data/*.csv"]
     },
     install_requires=[
         'alembic>=1.4.3',

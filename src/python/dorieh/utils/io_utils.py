@@ -192,8 +192,14 @@ def file_as_stream(filename: str, extension: str = ".csv", mode=None):
         entries = [
             e for e in zfile.namelist() if e.endswith(extension)
         ]
-        assert len(entries) == 1
-        stream = io.TextIOWrapper(zfile.open(entries[0]))
+        if len(entries) == 1:
+            entry = entries[0]
+        else:
+            base_name, _ = os.path.splitext(os.path.basename(filename))
+            entry = base_name + extension
+            if entry not in entries:
+                raise AssertionError(f"File {filename} should either contain a single entry or contain {entry}")
+        stream = io.TextIOWrapper(zfile.open(entry))
 
     else:
         try:

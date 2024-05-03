@@ -108,7 +108,7 @@ class GISDownloader:
     @classmethod
     def _download_shape(cls, url: str, output_dir: str = None) -> None:
         if output_dir is None:
-            output_dir = '../../../nsaph_gis'
+            output_dir = '.'
 
         shape_file = url.rsplit('/', 1)[1]
         dest = os.path.join(output_dir, shape_file)

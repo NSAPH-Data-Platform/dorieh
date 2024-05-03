@@ -21,7 +21,7 @@
 
 cwlVersion: v1.2
 class: CommandLineTool
-baseCommand: [python, -m, epa.registry]
+baseCommand: [python, -m, dorieh.epa.registry]
 
 doc: |
   This tool examines a directory with downlaoded

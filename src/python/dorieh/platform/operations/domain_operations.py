@@ -35,7 +35,7 @@
 #
 import logging
 
-import nsaph.dictionary.element
+import dorieh.platform.dictionary.element
 
 
 class DomainOperations:

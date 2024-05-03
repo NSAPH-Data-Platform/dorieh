@@ -25,7 +25,7 @@ This module executes VACUUM ANALYZE command
 import logging
 from datetime import datetime
 
-import nsaph.dictionary.element
+import dorieh.platform.dictionary.element
 from dorieh.platform.loader import LoaderBase
 from dorieh.platform.loader.common import CommonConfig
 from dorieh.platform.loader.monitor import DBActivityMonitor
