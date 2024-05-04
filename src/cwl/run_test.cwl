@@ -42,7 +42,9 @@ inputs:
     inputBinding:
       prefix: --connection
   script:
-    type:  File
+    type:
+    - File
+    - File[]
     inputBinding:
       prefix: --script
   depends_on:

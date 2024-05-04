@@ -1,0 +1,18 @@
+database:
+  path: /opt/local/database.ini
+  class: File
+connection_name:  dorieh
+test_script:
+  - path: /opt/local/pipelines/test_cases/county_rmax.sql
+    class: File
+  - path: /opt/local/pipelines/test_cases/county_rmin.sql
+    class: File
+
+dates: "dayOfMonth:13"
+bands:
+  - rmax
+  - rmin
+geography: county
+strategy:  auto
+ram: 8G
+

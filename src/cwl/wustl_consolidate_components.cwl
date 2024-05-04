@@ -21,7 +21,7 @@
 
 cwlVersion: v1.2
 class: CommandLineTool
-baseCommand: [python, -m, gridmet.netCDF_components_consolidator]
+baseCommand: [python, -mdorieh.rasters.netCDF_components_consolidator]
 
 requirements:
   InlineJavascriptRequirement: {}

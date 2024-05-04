@@ -75,7 +75,7 @@ inputs:
 
 steps:
   registry:
-    run: registry.cwl
+    run: build_gridmet_model.cwl
     doc: Writes down YAML file with the database model
     in: []
     out:

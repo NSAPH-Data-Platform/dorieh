@@ -160,7 +160,7 @@ steps:
       - err
 
   make_registry:
-    run: registry.cwl
+    run: build_gridmet_model.cwl
     doc: Writes down YAML file with the database model
     in:
       depends_on: init_db_schema/log

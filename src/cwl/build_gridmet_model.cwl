@@ -21,7 +21,7 @@
 
 cwlVersion: v1.2
 class: CommandLineTool
-baseCommand: [python, -m, gridmet.registry]
+baseCommand: [python, -m, dorieh.rasters.registry]
 
 doc: |
   This tool writes the data model for gridMET data.

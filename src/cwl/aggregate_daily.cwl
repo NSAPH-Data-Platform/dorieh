@@ -21,7 +21,7 @@
 
 cwlVersion: v1.2
 class: CommandLineTool
-baseCommand: [python, -m, gridmet.launcher]
+baseCommand: [python, -mdorieh.rasters.launcher]
 
 requirements:
   InlineJavascriptRequirement: {}

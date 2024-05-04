@@ -1,0 +1,12 @@
+connection_name:  None
+test_script:
+  path: /opt/local/pipelines/test_cases/exposures_test_pm25.sql
+  class: File
+
+table:      pm25_annual_components_mean
+geography:  zcta
+downloads:
+  path: "s3://nsaph-public/data/exposures/wustl/"
+  class: Directory
+strategy:   default
+shape_file_collection:  tiger
