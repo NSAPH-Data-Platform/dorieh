@@ -1,0 +1,26 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Test AQS" type="PythonConfigurationType" factoryName="Python" folderName="Pipelines - EPA">
+    <module name="dorieh" />
+    <option name="ENV_FILES" value="" />
+    <option name="INTERPRETER_OPTIONS" value="" />
+    <option name="PARENT_ENVS" value="true" />
+    <envs>
+      <env name="PYTHONUNBUFFERED" value="1" />
+    </envs>
+    <option name="SDK_HOME" value="" />
+    <option name="SDK_NAME" value="Python 3.10 (dorieh_test)" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../run/aqs" />
+    <option name="IS_MODULE_SDK" value="false" />
+    <option name="ADD_CONTENT_ROOTS" value="true" />
+    <option name="ADD_SOURCE_ROOTS" value="true" />
+    <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+    <option name="SCRIPT_NAME" value="/opt/venv/dorieh_test/bin/toil-cwl-runner" />
+    <option name="PARAMETERS" value="--jobStore j1 --retryCount 0 --cleanWorkDir never --outdir $PROJECT_DIR$/../../run/aqs/outputs --workDir $PROJECT_DIR$/../../run/aqs $PROJECT_DIR$/src/cwl/test_aqs.cwl --database $PROJECT_DIR$/../../database.ini --connection_name nsaph-8432 --test_script $PROJECT_DIR$/src/cwl/test_cases/aqs_test.sql --aggregation annual --parameter_code PM25 --table pm25_annual --years 2011 --years 2009" />
+    <option name="SHOW_COMMAND_LINE" value="false" />
+    <option name="EMULATE_TERMINAL" value="false" />
+    <option name="MODULE_MODE" value="false" />
+    <option name="REDIRECT_INPUT" value="false" />
+    <option name="INPUT_FILE" value="" />
+    <method v="2" />
+  </configuration>
+</component>

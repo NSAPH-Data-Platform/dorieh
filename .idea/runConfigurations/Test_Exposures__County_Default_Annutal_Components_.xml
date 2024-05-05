@@ -1,0 +1,27 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Test Exposures (County:Default:Annutal-Components)" type="PythonConfigurationType" factoryName="Python" folderName="Pipelines Exposures">
+    <module name="dorieh" />
+    <option name="ENV_FILES" value="" />
+    <option name="INTERPRETER_OPTIONS" value="" />
+    <option name="PARENT_ENVS" value="true" />
+    <envs>
+      <env name="PYTHONUNBUFFERED" value="1" />
+      <env name="AWS_PROFILE" value="urc" />
+    </envs>
+    <option name="SDK_HOME" value="" />
+    <option name="SDK_NAME" value="Python 3.10 (dorieh_test)" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../run/wustl4" />
+    <option name="IS_MODULE_SDK" value="false" />
+    <option name="ADD_CONTENT_ROOTS" value="true" />
+    <option name="ADD_SOURCE_ROOTS" value="true" />
+    <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+    <option name="SCRIPT_NAME" value="/opt/venv/dorieh_test/bin/toil-cwl-runner" />
+    <option name="PARAMETERS" value="--jobStore j1 --retryCount 1 --cleanWorkDir never --outdir $PROJECT_DIR$/../../run/wustl4/outputs --workDir $PROJECT_DIR$/../../run/wustl4 $PROJECT_DIR$/src/cwl/test_pm25_yearly_download.cwl --downloads s3://nsaph-public/data/exposures/wustl/ --strategy default --geography county --shape_file_collection tiger --database $PROJECT_DIR$/../../database.ini --connection_name nsaph-8432 --table pm25_components_annual_county_mean --ram 2GB --test_script $PROJECT_DIR$/src/cwl/test_cases/exposures_test_pm25_components.sql" />
+    <option name="SHOW_COMMAND_LINE" value="false" />
+    <option name="EMULATE_TERMINAL" value="false" />
+    <option name="MODULE_MODE" value="false" />
+    <option name="REDIRECT_INPUT" value="false" />
+    <option name="INPUT_FILE" value="" />
+    <method v="2" />
+  </configuration>
+</component>
