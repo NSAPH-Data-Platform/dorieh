@@ -21,7 +21,7 @@
 
 cwlVersion: v1.2
 class: CommandLineTool
-baseCommand: [python, -m, pollution.wustl_file_processor]
+baseCommand: [python, -m, dorieh.rasters.file_processors.wustl_file_processor]
 
 requirements:
   InlineJavascriptRequirement: {}

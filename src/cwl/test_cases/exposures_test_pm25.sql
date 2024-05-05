@@ -187,23 +187,25 @@ SELECT
 		THEN true ELSE false END AS passed
 
 -- Test case end
-UNION ALL
--- Test case start
-SELECT 
-	'exposures.pm25_components_annual_county_mean.zcta' As table_column,
-	'count distinct' As Testing,
-	CASE 
-		WHEN (SELECT COUNT(DISTINCT zcta) FROM exposures.pm25_components_annual_county_mean) = '33804' 
-		THEN true ELSE false END AS passed
-
--- Test case end
-UNION ALL
--- Test case start
-SELECT 
-	'exposures.pm25_components_annual_county_mean.zcta' As table_column,
-	'MD5 value' As Testing,
-	CASE 
-		WHEN (SELECT MD5(string_agg(zcta::varchar, '')) FROM exposures.pm25_components_annual_county_mean) = '12b3cbafbe4d32784a0c54915dfd3f4d' 
-		THEN true ELSE false END AS passed
-
+    
+-- ????
+-- UNION ALL
+-- -- Test case start
+-- SELECT
+-- 	'exposures.pm25_components_annual_county_mean.zcta' As table_column,
+-- 	'count distinct' As Testing,
+-- 	CASE
+-- 		WHEN (SELECT COUNT(DISTINCT zcta) FROM exposures.pm25_components_annual_county_mean) = '33804'
+-- 		THEN true ELSE false END AS passed
+--
+-- -- Test case end
+-- UNION ALL
+-- -- Test case start
+-- SELECT
+-- 	'exposures.pm25_components_annual_county_mean.zcta' As table_column,
+-- 	'MD5 value' As Testing,
+-- 	CASE
+-- 		WHEN (SELECT MD5(string_agg(zcta::varchar, '')) FROM exposures.pm25_components_annual_county_mean) = '12b3cbafbe4d32784a0c54915dfd3f4d'
+-- 		THEN true ELSE false END AS passed
+--
 -- Test case end

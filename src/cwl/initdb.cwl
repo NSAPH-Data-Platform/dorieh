@@ -21,7 +21,7 @@
 
 cwlVersion: v1.2
 class: CommandLineTool
-baseCommand: [python, -m, cms.init_cms_db]
+baseCommand: [python, -m, dorieh.cms.init_cms_db]
 requirements:
   InlineJavascriptRequirement: {}
 
