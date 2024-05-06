@@ -21,7 +21,7 @@
 
 cwlVersion: v1.2
 class: CommandLineTool
-baseCommand: [python, -m, cms.tools.mcr_combine_tables]
+baseCommand: [python, -m, dorieh.cms.tools.mcr_combine_tables]
 
 doc: |
   This tool combines disparate tables with raw Medicare data into a single

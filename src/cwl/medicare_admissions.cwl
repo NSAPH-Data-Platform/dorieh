@@ -77,7 +77,7 @@ steps:
   
   populate_admissions_table:
     run: create.cwl
-    doc: Creates `Enrollments` Table from the view
+    doc: Creates `Admisssions` Table from the view
     in:
       depends_on: create_admissions_table/log
       table:

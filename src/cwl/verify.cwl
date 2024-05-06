@@ -21,7 +21,7 @@
 
 cwlVersion: v1.2
 class: CommandLineTool
-baseCommand: [python, -m, cms.aggregates]
+baseCommand: [python, -m, dorieh.cms.aggregates]
 
 doc: |
   This tool verifies correct counts for a random selection of

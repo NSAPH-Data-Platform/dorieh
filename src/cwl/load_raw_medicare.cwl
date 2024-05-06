@@ -21,7 +21,7 @@
 
 cwlVersion: v1.2
 class: CommandLineTool
-baseCommand: [python, -m, cms.tools.mcr_fts2db]
+baseCommand: [python, -m, dorieh.cms.tools.mcr_fts2db]
 requirements:
   InlineJavascriptRequirement: {}
 
