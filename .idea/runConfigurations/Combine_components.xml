@@ -1,18 +1,28 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Combine components" type="PythonConfigurationType" factoryName="Python" folderName="Other GIS tasks">
+  <configuration default="false" name="Combine components" type="PythonConfigurationType" factoryName="Python" folderName="Python - Other GIS tasks">
     <module name="dorieh" />
-    <option name="ENV_FILES" value="" />
     <option name="INTERPRETER_OPTIONS" value="" />
     <option name="PARENT_ENVS" value="true" />
     <envs>
       <env name="PYTHONUNBUFFERED" value="1" />
     </envs>
-    <option name="SDK_HOME" value="" />
+    <option name="SDK_HOME" value="/opt/python/venvs/dorieh/bin/python" />
+    <option name="SDK_NAME" value="Python 3.10 (dorieh)" />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../run/gridmet" />
     <option name="IS_MODULE_SDK" value="true" />
     <option name="ADD_CONTENT_ROOTS" value="true" />
     <option name="ADD_SOURCE_ROOTS" value="true" />
     <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+    <EXTENSION ID="net.ashald.envfile">
+      <option name="IS_ENABLED" value="false" />
+      <option name="IS_SUBST" value="false" />
+      <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+      <option name="IS_IGNORE_MISSING_FILES" value="false" />
+      <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+      <ENTRIES>
+        <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+      </ENTRIES>
+    </EXTENSION>
     <option name="SCRIPT_NAME" value="dorieh.rasters.netCDF_components_consolidator" />
     <option name="PARAMETERS" value="-i pm25/V4NA03_PM25_NA_201601_201612-RH35.nc -c components/2016/GWRwSPEC_BCp_NA_201601_201612-wrtSPECtotal.nc components/2016/GWRwSPEC_NH4p_NA_201601_201612-wrtSPECtotal.nc components/2016/GWRwSPEC_NITp_NA_201601_201612-wrtSPECtotal.nc components/2016/GWRwSPEC_OMp_NA_201601_201612-wrtSPECtotal.nc components/2016/GWRwSPEC_SO4p_NA_201601_201612-wrtSPECtotal.nc components/2016/GWRwSPEC_SOILp_NA_201601_201612-wrtSPECtotal.nc components/2016/GWRwSPEC_SSp_NA_201601_201612-wrtSPECtotal.nc -o ." />
     <option name="SHOW_COMMAND_LINE" value="false" />

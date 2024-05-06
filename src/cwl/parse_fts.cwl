@@ -21,7 +21,7 @@
 
 cwlVersion: v1.2
 class: CommandLineTool
-baseCommand: [python, -m, cms.registry]
+baseCommand: [python, -m, dorieh.cms.registry]
 
 doc: |
   This tool examines a directory with raw CMS data, looking
