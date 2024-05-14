@@ -16,7 +16,7 @@ Handles the following types of data:
 ## Package Contents
 
 ```{toctree}
-usage
+epa_usage
 python_components
 cwl_tools
 ```

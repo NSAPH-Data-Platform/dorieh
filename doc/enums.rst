@@ -4,7 +4,7 @@ Parameters (Enums)
     :maxdepth: 2
     :caption: Contents:
 
-    bands
+    gridmet_bands
     geo
     shapes
     strategy

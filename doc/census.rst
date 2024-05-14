@@ -10,47 +10,37 @@ and the FTP site for Tiger Shapefile Downloads. This package also includes a com
    :maxdepth: 2
    :caption: Introduction
 
-   about
+   census_about
 
 .. toctree::
    :glob:
    :maxdepth: 2
    :caption: Researchers
 
-   env_set_up
-   quick_start
+   census_env_set_up
+   census_quick_start
    census_yaml
-   cached_data
+   census_cached_data
 
 .. toctree::
    :glob:
    :caption: Developers
 
-   contributing_checklist
-   modules
-   glossary
-   faq
-
-.. toctree::
-   :glob:
-   :maxdepth: 2
-   :caption: Community
-
-   contact
-   CHANGELOG
+   census_modules
+   census_glossary
 
 
 .. toctree::
    :maxdepth: 2
    :caption: Old Doc
 
-   start_guide
+   census_start_guide
 
 .. toctree::
    :glob:
    :hidden:
 
-   pipeline/*
+   pipeline/census_*
 
 
 
