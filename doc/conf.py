@@ -17,7 +17,7 @@ autodoc_member_order = 'bysource'
 
 # -- Project information -----------------------------------------------------
 
-project = 'NSAPH Data Platform'
+project = 'Dorieh Data Platform'
 copyright = '2021, Harvard University'
 author = 'Michael A Bouzinier'
 
@@ -54,7 +54,7 @@ include_patterns = ['**/doc/*', '**/doc/members/*', '**/doc/pipeline/*', '*.md']
 
 html_static_path = ['_static']
 html_css_files = [
-    'css/dorieh.platform.css',
+    'css/dorieh.css',
 ]
 
 #

@@ -1,0 +1,8 @@
+# Python packages required to build documentation
+
+Markdown==3.4  # https://github.com/ryanfox/sphinx-markdown-tables/issues/36
+sphinx_rtd_theme
+sphinx_paramlinks
+myst-parser
+cwltool
+cwlref-runner

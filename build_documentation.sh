@@ -1,12 +1,15 @@
 #!/bin/bash 
+namespace="NSAPH-Data-Platform"
+doc_source_branch="doc-builder"
+branch="main"
+
 
 read -r -d '' help_text <<- EOM
 Usage:
-  -b - specify custom branch to clone. Default is 'main'
-  -n - custom namespace on github to clone from. Default is 'NSAPH-Data-Platform'
+  -b - specify custom branch to clone. Default is ${branch}
+  -n - custom namespace on github to clone from. Default is ${namespace}
 EOM
 
-namespace="NSAPH-Data-Platform"
 
 dot -V
 if [ $? -ne 0 ]
@@ -24,62 +27,34 @@ do
     esac
 done
 
+git checkout "${doc_source_branch}"
+git merge "${branch}"
+pip install -r doc-requirements.txt
+pip install .
+pip uninstall markupsafe
+pip install markupsafe==2.0.1
+
 rm -rf docs
 
+# prepare rst templates for Python modules
+collector  src/python doc/members
 
-for name in "${packages[@]}"
-do
-  package="${package_prefix}${name}"
+# prepare markdown templates for CWL files
+cwl2md -i src/cwl -o doc/pipeline
 
-  git clone --branch $branch https://github.com/$namespace/$package doc/common/$name
+# make python sources available for autodoc
+abs_path=`realpath src/python`
+export PATH="$abs_path:$PATH"
 
-  # install library with dependencies
-  if [ -a doc/common/$name/setup.py ]
-  then
-    pip install doc/common/$name
-  fi
-
-  # install dependencies if exists
-  if [ -a doc/common/$name/requirements.txt ]
-  then
-    pip install -r doc/common/$name/requirements.txt
-  fi
-
-  # prepare rst templates for Python modules
-  if [ -d doc/common/$name/src/python ]
-  then
-     collector doc/common/$name/src/python doc/common/$name/doc/members
-  fi
-  if [ "$name" = "utils" ]
-  then
-     collector doc/common/$name doc/common/$name/doc/members
-  fi
-
-  # prepare markdown templates for CWL files
-  if [ -d doc/common/$name/src/cwl ]
-  then
-     mkdir -p doc/common/$name/doc/pipeline
-     cwl2md -i doc/common/$name/src/cwl -o doc/common/$name/doc/pipeline
-  fi
-
-  # make python sources available for autodoc
-  abs_path=`realpath doc/common/$name/src/python`
-  if [ -n "$abs_path" ]
-  then
-    export PATH="$abs_path:$PATH"
-  fi
-
-done
-
-copy_section doc/common/utils/README.md doc/home.md nsaph_utils
-copy_section doc/common/core-platform/README.md doc/home.md nsaph
-copy_section doc/common/gis/README.md doc/home.md gis
+copy_section doc/utils.md doc/home.md dorieh.utils
+copy_section doc/docutils.md doc/home.md dorieh.docutils
+copy_section doc/platform.md doc/home.md dorieh.platform
+copy_section doc/gis.md doc/home.md dorieh.gis
 
 
 # build documentation
 sphinx-build doc docs || exit
 touch docs/.nojekyll
 
-# remove copied repos
-# rm -rf doc/common
 git add docs
+

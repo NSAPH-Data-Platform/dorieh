@@ -61,57 +61,26 @@ General details of the building blocks are provided next.
 
 ### NSAPH Utilities
 
-<!-- section overview from dorieh.platform_utils -->
+<!-- section overview from dorieh.utils -->
 
-
-The nsaph_utils package is intended to hold python 
-code that will be useful
-across multiple portions of the NSAPH pipelines.
-
-The included utilities are developed to be as independent of
-specific infrastructure and execution environment as possible.
-
-Included utilities:
-
-* Interpolation code
-* Reading FST files from Python
-* various I/O wrappers
-* An API and CLI framework
-* QC Framework
-* Documentation utilities to simplify creation of consistent 
- documentation for NSAPH platform 
-
-
-<!-- end of section overview from dorieh.platform_utils -->
+<!-- end of section overview from dorieh.utils -->
 
 ### Core Platform
 
 <!-- section overview from dorieh.platform -->
 
-The data platform provides generic infrastructure for NSAPH Data Platform
-It depends on nsaph_util package, but it augments it
-with APIs and command line utilities dependent on the infrastructure 
-and the environment. For instance, its components assume presence of PostgreSQL
-DBMS (version 13 or later) and CWL runtime environment.
-
-Some mapping (or crosswalk) tables are also included in the Core
-Platform module. These tables include between different
-territorial codes, such as USPS ZIP codes, Census ZCTA codes,
-FIPS codes for US states
-and counties, SSA codes for codes for US states
-and counties. See more information in the
-[Mapping between different territorial codes](https://nsaph-data-platform.github.io/nsaph-platform-docs/common/core-platform/doc/TerritorialCodes.html)
-
 <!-- end of section overview from dorieh.platform -->
 
 ### GIS Utilities
 
-<!-- section overview from gis -->
+<!-- section overview from dorieh.gis -->
 
+<!-- end of section overview from dorieh.gis -->
 
-This library contains several packages, aimed to work with census shape files.
+<!-- section overview from dorieh.docutils -->
 
-<!-- end of section overview from gis -->
+<!-- end of section overview from dorieh.docutils -->
+
 
 ### Data Processing and Loading Pipelines
 

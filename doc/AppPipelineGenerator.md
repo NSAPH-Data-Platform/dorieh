@@ -64,7 +64,7 @@ If the file with database connections does not exist, you
 need to create one. For example, named database.ini somewhere
 on your local file system.
 
-## Usage
+## Using pipeline generator
 
 ### Generate pipeline and metadata
 

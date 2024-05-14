@@ -6,7 +6,7 @@
  
 ## Package nsaph
 
-* [](members/dorieh.platform.rst) API to initialize logging and database connections
+* [](members/platform.rst) API to initialize logging and database connections
 * [db](members/db.rst) Database connections API
 * [fips](members/fips.rst) US State FIPS codes, represented as Python dictionary
 * [pg_keywords](members/pg_keywords.rst) PostgreSQL keywords, e.g.

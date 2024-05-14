@@ -1,6 +1,6 @@
 # NSAPH Data Loader
 
-## Usage
+## Using Dorieh Data Loader
 
 ```
     python -u -m dorieh.platform.loader.data_loader [-h]
