@@ -44,7 +44,7 @@ fi
 
 pip install -r doc-requirements.txt
 pip install .
-pip uninstall markupsafe
+pip uninstall -y markupsafe
 pip install markupsafe==2.0.1
 
 rm -rf docs
@@ -70,4 +70,4 @@ sphinx-build doc docs || exit
 touch docs/.nojekyll
 
 git add docs
-
+git commit -a -m "Updating documentation"
