@@ -200,6 +200,8 @@ steps:
       input: write_interp/data
       database: database
       connection_name: connection_name
+      domain:
+        valueFrom: "census"
     out: [log, errors]
   index:
     run: index.cwl

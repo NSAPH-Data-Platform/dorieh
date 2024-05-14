@@ -66,3 +66,5 @@ source_suffix = {
     '.txt': 'restructuredtext',
     '.cwl': 'cwl',
 }
+
+suppress_warnings = ['autosectionlabel.*']
