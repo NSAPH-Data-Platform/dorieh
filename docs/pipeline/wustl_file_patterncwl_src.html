@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>wustl_file_pattern.cwl &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">wustl_file_pattern.cwl</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/pipeline/wustl_file_patterncwl_src.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="wustl-file-pattern-cwl">
+<h1>wustl_file_pattern.cwl<a class="headerlink" href="#wustl-file-pattern-cwl" title="Permalink to this heading"></a></h1>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1">#!/usr/bin/env cwl-runner</span>
+<span class="c1">### Expression evaluator to format a file name for pollution files downloaded from WashU</span>
+<span class="c1">#  Copyright (c) 2021-2023. Harvard University</span>
+<span class="c1">#</span>
+<span class="c1">#  Developed by Research Software Engineering,</span>
+<span class="c1">#  Faculty of Arts and Sciences, Research Computing (FAS RC)</span>
+<span class="c1">#  Author: Michael A Bouzinier</span>
+<span class="c1">#</span>
+<span class="c1">#  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1">#  you may not use this file except in compliance with the License.</span>
+<span class="c1">#  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#         http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1">#  limitations under the License.</span>
+<span class="c1">#</span>
+
+<span class="nt">cwlVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1.2</span>
+<span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExpressionTool</span>
+
+<span class="nt">requirements</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">StepInputExpressionRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="w">  </span><span class="nt">InlineJavascriptRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+
+<span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">  </span><span class="no">Given input directory, variable (band), year and month,</span>
+<span class="w">  </span><span class="no">evaluates the expected file name for the input data</span>
+
+<span class="nt">inputs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">downloads</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Directory</span>
+<span class="w">  </span><span class="nt">year</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">int</span>
+<span class="w">  </span><span class="nt">variables</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string[]</span>
+
+<span class="nt">expression</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">  </span><span class="no">${</span>
+<span class="w">    </span><span class="no">var files = [];</span>
+<span class="w">    </span><span class="no">var i;</span>
+<span class="w">    </span><span class="no">for (i in inputs.variables) {</span>
+<span class="w">      </span><span class="no">var v = inputs.variables[i].toUpperCase();</span>
+<span class="w">      </span><span class="no">var y = String(inputs.year);</span>
+<span class="w">      </span><span class="no">var f;</span>
+<span class="w">      </span><span class="no">if (v == &#39;PM25&#39;) {</span>
+<span class="w">        </span><span class="no">f = &quot;V4NA03_&quot; + v + &quot;_NA_&quot; + y + &quot;01_&quot; + y + &quot;12-RH35.nc&quot;;</span>
+<span class="w">      </span><span class="no">} else {</span>
+<span class="w">        </span><span class="no">if (y == &#39;2017&#39;) {</span>
+<span class="w">          </span><span class="no">f = &quot;GWRwSPEC.HEI_&quot; + v + &quot;p_NA_&quot; + y + &quot;01_&quot; + y + &quot;12-wrtSPECtotal.nc&quot;</span>
+<span class="w">        </span><span class="no">} else {</span>
+<span class="w">          </span><span class="no">f = &quot;GWRwSPEC_&quot; + v + &quot;p_NA_&quot; + y + &quot;01_&quot; + y + &quot;12-wrtSPECtotal.nc&quot;</span>
+<span class="w">        </span><span class="no">};</span>
+<span class="w">      </span><span class="no">};</span>
+<span class="w">      </span><span class="no">f = inputs.downloads.location + &#39;/&#39; + f;</span>
+<span class="w">      </span><span class="no">files.push({</span>
+<span class="w">        </span><span class="no">&quot;class&quot;: &quot;File&quot;,</span>
+<span class="w">        </span><span class="no">&quot;location&quot;: f</span>
+<span class="w">      </span><span class="no">});</span>
+<span class="w">    </span><span class="no">};</span>
+<span class="w">    </span><span class="no">return {</span>
+<span class="w">      </span><span class="no">netcdf_files: files</span>
+<span class="w">    </span><span class="no">}</span>
+<span class="w">  </span><span class="no">}</span>
+
+<span class="nt">outputs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">netcdf_files</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File[]</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The census_info Module &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">The census_info Module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/members/census_info.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-dorieh.census.census_info">
+<span id="the-census-info-module"></span><h1>The census_info Module<a class="headerlink" href="#module-dorieh.census.census_info" title="Permalink to this heading"></a></h1>
+<section id="census-info-py">
+<h2>census_info.py<a class="headerlink" href="#census-info-py" title="Permalink to this heading"></a></h2>
+<p>Core module for handling census metadata</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.census.census_info.get_endpoint">
+<span class="sig-name descname"><span class="pre">get_endpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sum_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/census/census_info.html#get_endpoint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.census.census_info.get_endpoint" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a string containing the URL to the census API endpoint</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.census.census_info.get_endpoint.params.year"></span><strong>year</strong><a class="paramlink headerlink reference internal" href="#dorieh.census.census_info.get_endpoint.params.year">¶</a> – The year for which you want data</p></li>
+<li><p><span class="target" id="dorieh.census.census_info.get_endpoint.params.dataset"></span><strong>dataset</strong><a class="paramlink headerlink reference internal" href="#dorieh.census.census_info.get_endpoint.params.dataset">¶</a> – The census data set you want (dec, acs1, acs5, pums)</p></li>
+<li><p><span class="target" id="dorieh.census.census_info.get_endpoint.params.sum_file"></span><strong>sum_file</strong><a class="paramlink headerlink reference internal" href="#dorieh.census.census_info.get_endpoint.params.sum_file">¶</a> – For the 2000 census, sf1 or sf3</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.census.census_info.get_varlist">
+<span class="sig-name descname"><span class="pre">get_varlist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sum_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/census/census_info.html#get_varlist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.census.census_info.get_varlist" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.census.census_info.get_varlist.params.year"></span><strong>year</strong><a class="paramlink headerlink reference internal" href="#dorieh.census.census_info.get_varlist.params.year">¶</a> – Year of data</p></li>
+<li><p><span class="target" id="dorieh.census.census_info.get_varlist.params.dataset"></span><strong>dataset</strong><a class="paramlink headerlink reference internal" href="#dorieh.census.census_info.get_varlist.params.dataset">¶</a> – The census data set you want (dec, acs1, acs5, pums)</p></li>
+<li><p><span class="target" id="dorieh.census.census_info.get_varlist.params.sum_file"></span><strong>sum_file</strong><a class="paramlink headerlink reference internal" href="#dorieh.census.census_info.get_varlist.params.sum_file">¶</a> – For the 2000 census, sf1 or sf3</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dataframe of available variables in a given data set</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.census.census_info.set_api_key">
+<span class="sig-name descname"><span class="pre">set_api_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/census/census_info.html#set_api_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.census.census_info.set_api_key" title="Permalink to this definition"></a></dt>
+<dd><p>Sets an environment variable to contain your census API key. To avoid needing to run this
+every session you can also permanently set CENSUS_API_KEY to your key in your environment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.census.census_info.set_api_key.params.key"></span><strong>key</strong><a class="paramlink headerlink reference internal" href="#dorieh.census.census_info.set_api_key.params.key">¶</a> – Your Census API key as a string</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>nothing</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.census.census_info.census_years">
+<span class="sig-name descname"><span class="pre">census_years</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2019</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/census/census_info.html#census_years"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.census.census_info.census_years" title="Permalink to this definition"></a></dt>
+<dd><p>Constructs a list of years for which census data is available in the range provided. At this point assumes we want the decennial census and acs5. Future functionality might expand to allow this to vary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.census.census_info.census_years.params.min_year"></span><strong>min_year</strong><a class="paramlink headerlink reference internal" href="#dorieh.census.census_info.census_years.params.min_year">¶</a> – minimum year we want data for</p></li>
+<li><p><span class="target" id="dorieh.census.census_info.census_years.params.max_year"></span><strong>max_year</strong><a class="paramlink headerlink reference internal" href="#dorieh.census.census_info.census_years.params.max_year">¶</a> – max year we want data for (inclusive)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of all years in specified range for which data is available</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

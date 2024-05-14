@@ -1,0 +1,83 @@
+# Medicare Beneficiaries data in-database processing pipeline
+
+
+ [Source code](medicare_beneficiariescwl_src.md) 
+
+
+![](medicare_beneficiaries.png)
+
+```{contents}
+---
+local:
+---
+```
+
+**Workflow**
+
+## Description
+
+This workflow processes raw Medicare beneficiaries summary data.
+The assumed initial state
+is that raw data is already in the database. We assume that the data
+for each year is in a separate table. The first step
+combines these disparate tables into a single view, creating uniform
+columns.
+
+
+## Inputs
+
+| Name            | Type   | Default | Description                                                      | 
+|:----------------|:-------|:--------|:-----------------------------------------------------------------|
+| database        | File   |         | Path to database connection file, usually database.ini           | 
+| connection_name | string |         | The name of the section in the database.ini file                 | 
+| depends_on      | File?  |         | a special field used to enforce dependencies and execution order | 
+
+## Outputs
+
+| Name                   | Type | Description | 
+|:-----------------------|:-----|:------------|
+| d_create_log           | File |             | 
+| d_index_log            | File |             | 
+| d_vacuum_log           | File |             | 
+| d_create_err           | File |             | 
+| d_index_err            | File |             | 
+| d_vacuum_err           | File |             | 
+| ps_create_log          | File |             | 
+| ps_create_err          | File |             | 
+| ps2_create_log         | File |             | 
+| ps2_create_err         | File |             | 
+| ps2_index_log          | File |             | 
+| ps2_vacuum_log         | File |             | 
+| ps2_index_err          | File |             | 
+| ps2_vacuum_err         | File |             | 
+| bene_view_log          | File |             | 
+| bene_view_err          | File |             | 
+| bene_table_create_log  | File |             | 
+| bene_table_index_log   | File |             | 
+| bene_table_vacuum_log  | File |             | 
+| bene_table_create_err  | File |             | 
+| bene_table_index_err   | File |             | 
+| bene_table_vacuum_err  | File |             | 
+| enrlm_view_log         | File |             | 
+| enrlm_view_err         | File |             | 
+| enrlm_table_create_log | File |             | 
+| enrlm_table_index_log  | File |             | 
+| enrlm_table_vacuum_log | File |             | 
+| enrlm_table_create_err | File |             | 
+| enrlm_table_index_err  | File |             | 
+| enrlm_table_vacuum_err | File |             | 
+
+## Steps
+
+| Name               | Runs                                                      | Description                                                                                       | 
+|:-------------------|:----------------------------------------------------------|:--------------------------------------------------------------------------------------------------|
+| create_d           | [medicare_combine_tables.cwl](medicare_combine_tables.md) | Combines patient summaries from disparate summary tables (one table per year) into a single view  | 
+| index_d            | [index.cwl](index.md)                                     | Build indices                                                                                     | 
+| vacuum_d           | [vacuum.cwl](vacuum.md)                                   | Vacuum the view                                                                                   | 
+| create_ps          | [medicare_combine_tables.cwl](medicare_combine_tables.md) | Combines patient summaries from disparate summary tables (one table per year) into a single view  | 
+| create__ps_view    | [matview.cwl](matview.md)                                 | Create _ps materialized view from ps                                                              | 
+| create_bene_view   | [create.cwl](create.md)                                   | Creates preliminary beneficiaries view                                                            | 
+| create_bene_table  | [matview.cwl](matview.md)                                 | Creates `Beneficiaries` Table from the view                                                       | 
+| create_enrlm_view  | [create.cwl](create.md)                                   | Creates preliminary _enrollments view                                                             | 
+| create_enrlm_table | [matview.cwl](matview.md)                                 | Creates `Enrollments` Table from the view                                                         | 
+

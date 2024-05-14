@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dorieh.platform.util.pg_json_dump &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">dorieh.platform.util.pg_json_dump</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for dorieh.platform.util.pg_json_dump</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">A command line utility to import/export JSON files as database tables</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1">#  Copyright (c) 2021. Harvard University</span>
+<span class="c1">#</span>
+<span class="c1">#  Developed by Research Software Engineering,</span>
+<span class="c1">#  Faculty of Arts and Sciences, Research Computing (FAS RC)</span>
+<span class="c1">#  Author: Michael A Bouzinier</span>
+<span class="c1">#</span>
+<span class="c1">#  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1">#  you may not use this file except in compliance with the License.</span>
+<span class="c1">#  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#         http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1">#  limitations under the License.</span>
+<span class="c1">#</span>
+
+<span class="kn">import</span> <span class="nn">decimal</span>
+<span class="kn">import</span> <span class="nn">gzip</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">argparse</span> <span class="kn">import</span> <span class="n">ArgumentParser</span>
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">contextmanager</span>
+<span class="kn">from</span> <span class="nn">numbers</span> <span class="kn">import</span> <span class="n">Number</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">psycopg2.extras</span> <span class="kn">import</span> <span class="n">RealDictCursor</span>
+<span class="kn">from</span> <span class="nn">psycopg2.extensions</span> <span class="kn">import</span> <span class="n">connection</span>
+
+<span class="kn">from</span> <span class="nn">dorieh.platform</span> <span class="kn">import</span> <span class="n">init_logging</span>
+<span class="kn">from</span> <span class="nn">dorieh.platform.util.resources</span> <span class="kn">import</span> <span class="n">get_resources</span><span class="p">,</span> <span class="n">get_resource_dir</span><span class="p">,</span> <span class="n">name2path</span>
+<span class="kn">from</span> <span class="nn">dorieh.platform.db</span> <span class="kn">import</span> <span class="n">Connection</span>
+<span class="kn">from</span> <span class="nn">dorieh.platform.fips</span> <span class="kn">import</span> <span class="n">fips_dict</span>
+
+
+<div class="viewcode-block" id="fqn"><a class="viewcode-back" href="../../../../members/pg_json_dump.html#dorieh.platform.util.pg_json_dump.fqn">[docs]</a><span class="k">def</span> <span class="nf">fqn</span><span class="p">(</span><span class="n">conn</span><span class="p">:</span> <span class="n">connection</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">table</span><span class="p">:</span>
+        <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        SELECT</span>
+<span class="s2">            table_schema</span>
+<span class="s2">        FROM</span>
+<span class="s2">            information_schema.tables</span>
+<span class="s2">        WHERE table_name = &#39;</span><span class="si">{}</span><span class="s2">&#39;</span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+            <span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cursor</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Table </span><span class="si">{}</span><span class="s2"> not found&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Multiple tables </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">rows</span><span class="p">)))</span>
+            <span class="n">schema</span> <span class="o">=</span> <span class="n">rows</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">table</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{schema}</span><span class="s2">.</span><span class="si">{table}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">,</span> <span class="n">table</span><span class="o">=</span><span class="n">table</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">table</span></div>
+
+
+<div class="viewcode-block" id="quote"><a class="viewcode-back" href="../../../../members/pg_json_dump.html#dorieh.platform.util.pg_json_dump.quote">[docs]</a><span class="k">def</span> <span class="nf">quote</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Number</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;&#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;&#39;&#39;&quot;</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="flush"><a class="viewcode-back" href="../../../../members/pg_json_dump.html#dorieh.platform.util.pg_json_dump.flush">[docs]</a><span class="k">def</span> <span class="nf">flush</span><span class="p">(</span><span class="n">cursor</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">rows</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">rows</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">column</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;INSERT INTO </span><span class="si">{}</span><span class="s2"> (</span><span class="si">{}</span><span class="s2">) VALUES </span><span class="se">\n\t</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">columns</span><span class="p">))</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;(</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+            <span class="n">quote</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">column</span><span class="p">])</span> <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">&quot;NULL&quot;</span>
+            <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">columns</span>
+        <span class="p">]))</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span>
+    <span class="p">]</span>
+    <span class="n">sql</span> <span class="o">+=</span> <span class="s2">&quot;,</span><span class="se">\n\t</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+        <span class="k">raise</span></div>
+
+
+<div class="viewcode-block" id="result_set"><a class="viewcode-back" href="../../../../members/pg_json_dump.html#dorieh.platform.util.pg_json_dump.result_set">[docs]</a><span class="nd">@contextmanager</span>
+<span class="k">def</span> <span class="nf">result_set</span><span class="p">(</span><span class="n">conn</span><span class="p">:</span> <span class="n">connection</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM &quot;</span> <span class="o">+</span> <span class="n">table</span>
+    <span class="k">with</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">(</span><span class="n">cursor_factory</span><span class="o">=</span><span class="n">RealDictCursor</span><span class="p">)</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+        <span class="k">yield</span> <span class="n">cursor</span></div>
+
+
+<div class="viewcode-block" id="dump"><a class="viewcode-back" href="../../../../members/pg_json_dump.html#dorieh.platform.util.pg_json_dump.dump">[docs]</a><span class="k">def</span> <span class="nf">dump</span><span class="p">(</span><span class="n">conn</span><span class="p">:</span> <span class="n">connection</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fd</span><span class="p">,</span> <span class="n">corrector</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">result_set</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">table</span><span class="p">)</span> <span class="k">as</span> <span class="n">rs</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">corrector</span><span class="p">:</span>
+                <span class="n">corrector</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">decimal</span><span class="o">.</span><span class="n">Decimal</span><span class="p">):</span>
+                    <span class="n">row</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">row</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">fd</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="export"><a class="viewcode-back" href="../../../../members/pg_json_dump.html#dorieh.platform.util.pg_json_dump.export">[docs]</a><span class="k">def</span> <span class="nf">export</span><span class="p">(</span><span class="n">conn</span><span class="p">:</span> <span class="n">connection</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">table</span> <span class="o">==</span> <span class="s2">&quot;us_states&quot;</span><span class="p">:</span>
+        <span class="n">corrector</span> <span class="o">=</span> <span class="n">add_state_fips</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">corrector</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">fqn</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">table</span><span class="p">)</span>
+    <span class="n">resource</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">get_resource_dir</span><span class="p">(),</span> <span class="n">name2path</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">data_path</span> <span class="o">=</span> <span class="n">resource</span> <span class="o">+</span> <span class="s2">&quot;.json.gz&quot;</span>
+    <span class="k">with</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;wt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
+        <span class="n">dump</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">fd</span><span class="p">,</span> <span class="n">corrector</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Exported table </span><span class="si">{}</span><span class="s2"> to </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">data_path</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="ensure"><a class="viewcode-back" href="../../../../members/pg_json_dump.html#dorieh.platform.util.pg_json_dump.ensure">[docs]</a><span class="k">def</span> <span class="nf">ensure</span><span class="p">(</span><span class="n">conn</span><span class="p">:</span> <span class="n">connection</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">table</span><span class="p">:</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="s2">&quot;public.&quot;</span> <span class="o">+</span> <span class="n">table</span>
+    <span class="n">SQL</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    SELECT EXISTS (</span>
+<span class="s2">        SELECT FROM information_schema.tables</span>
+<span class="s2">        WHERE table_name = &#39;</span><span class="si">{}</span><span class="s2">&#39;</span>
+<span class="s2">    )</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    <span class="n">sql</span> <span class="o">=</span> <span class="n">SQL</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">with</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cursor</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;True&quot;</span><span class="p">)</span>
+                <span class="k">return</span> 
+    <span class="n">import_table</span><span class="p">(</span><span class="n">conn</span><span class="o">=</span><span class="n">conn</span><span class="p">,</span> <span class="n">table</span><span class="o">=</span><span class="n">table</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="populate"><a class="viewcode-back" href="../../../../members/pg_json_dump.html#dorieh.platform.util.pg_json_dump.populate">[docs]</a><span class="k">def</span> <span class="nf">populate</span><span class="p">(</span><span class="n">cursor</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">data_path</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">with</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;rt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">fd</span><span class="p">:</span>
+            <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
+            <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+                <span class="n">flush</span><span class="p">(</span><span class="n">cursor</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">rows</span><span class="p">)</span>
+                <span class="n">rows</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">%</span> <span class="mi">10000</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">flush</span><span class="p">(</span><span class="n">cursor</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">rows</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Inserted: </span><span class="si">{:d}</span><span class="s2"> records into </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">table</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="import_table"><a class="viewcode-back" href="../../../../members/pg_json_dump.html#dorieh.platform.util.pg_json_dump.import_table">[docs]</a><span class="k">def</span> <span class="nf">import_table</span><span class="p">(</span><span class="n">conn</span><span class="p">:</span> <span class="n">connection</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">replace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+    <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">table</span><span class="p">:</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="s2">&quot;public.&quot;</span> <span class="o">+</span> <span class="n">table</span>
+    <span class="k">if</span> <span class="n">replace</span><span class="p">:</span>
+        <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;DROP TABLE IF EXISTS </span><span class="si">{}</span><span class="s2"> CASCADE&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+    <span class="n">resource</span> <span class="o">=</span> <span class="n">get_resources</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+    <span class="n">ddl_path</span> <span class="o">=</span> <span class="n">resource</span><span class="p">[</span><span class="s1">&#39;ddl&#39;</span><span class="p">]</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ddl_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">ddl</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+            <span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span>
+        <span class="p">])</span>
+    <span class="n">data_path</span> <span class="o">=</span> <span class="n">resource</span><span class="p">[</span><span class="s2">&quot;json.gz&quot;</span><span class="p">]</span>
+    <span class="k">with</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">ddl</span><span class="p">)</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">ddl</span><span class="p">)</span>
+        <span class="n">populate</span><span class="p">(</span><span class="n">cursor</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">data_path</span><span class="p">)</span>
+    <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="add_state_fips"><a class="viewcode-back" href="../../../../members/pg_json_dump.html#dorieh.platform.util.pg_json_dump.add_state_fips">[docs]</a><span class="k">def</span> <span class="nf">add_state_fips</span><span class="p">(</span><span class="n">row</span><span class="p">:</span> <span class="n">Dict</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">row</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;fips2&quot;</span><span class="p">):</span>
+        <span class="k">return</span>
+    <span class="n">fips</span><span class="o">=</span> <span class="n">fips_dict</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;state_id&quot;</span><span class="p">]]</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;fips2&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{:02d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fips</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="show"><a class="viewcode-back" href="../../../../members/pg_json_dump.html#dorieh.platform.util.pg_json_dump.show">[docs]</a><span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="n">conn</span><span class="p">:</span> <span class="n">connection</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">table</span> <span class="o">==</span> <span class="s2">&quot;us_states&quot;</span><span class="p">:</span>
+        <span class="n">corrector</span> <span class="o">=</span> <span class="n">add_state_fips</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">corrector</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">dump</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">corrector</span><span class="p">)</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">init_logging</span><span class="p">()</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span> <span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Import/Export resources&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--table&quot;</span><span class="p">,</span> <span class="s2">&quot;-t&quot;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Name of the table to load data into&quot;</span><span class="p">,</span>
+                        <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--db&quot;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Path to a database connection parameters file&quot;</span><span class="p">,</span>
+                        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;database.ini&quot;</span><span class="p">,</span>
+                        <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--connection&quot;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Section in the database connection parameters file&quot;</span><span class="p">,</span>
+                        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;nsaph2&quot;</span><span class="p">,</span>
+                        <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--action&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Action to perform&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">arguments</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="n">action</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()[</span><span class="n">arguments</span><span class="o">.</span><span class="n">action</span><span class="p">]</span>
+    <span class="k">with</span> <span class="n">Connection</span><span class="p">(</span><span class="n">arguments</span><span class="o">.</span><span class="n">db</span><span class="p">,</span> <span class="n">arguments</span><span class="o">.</span><span class="n">connection</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+        <span class="n">action</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">arguments</span><span class="o">.</span><span class="n">table</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

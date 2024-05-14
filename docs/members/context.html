@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The context Module &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">The context Module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/members/context.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-dorieh.utils.context">
+<span id="the-context-module"></span><h1>The context Module<a class="headerlink" href="#module-dorieh.utils.context" title="Permalink to this heading"></a></h1>
+<p>Utilities to create context and configuration objects</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.utils.context.Cardinality">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Cardinality</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/context.html#Cardinality"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.context.Cardinality" title="Permalink to this definition"></a></dt>
+<dd><p>Cardinality of a configuration parameter: multiple or singular</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.utils.context.Cardinality.single">
+<span class="sig-name descname"><span class="pre">single</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'single'</span></em><a class="headerlink" href="#dorieh.utils.context.Cardinality.single" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.utils.context.Cardinality.multiple">
+<span class="sig-name descname"><span class="pre">multiple</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'multiple'</span></em><a class="headerlink" href="#dorieh.utils.context.Cardinality.multiple" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.utils.context.Argument">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Argument</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">help:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type=&lt;class</span> <span class="pre">'str'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aliases:</span> <span class="pre">~typing.Optional[~typing.List]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cardinality:</span> <span class="pre">~dorieh.utils.context.Cardinality</span> <span class="pre">=</span> <span class="pre">Cardinality.single</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_values=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">required=True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/context.html#Argument"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.context.Argument" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper class to describe a command-line arguments
+This is practically, a more rigid format for
+:func ArgumentParser.add_argument:</p>
+<p>All arguments are passed to Argparser</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.utils.context.Argument.params.name"></span><strong>name</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.context.Argument.params.name">¶</a> – </p></li>
+<li><p><span class="target" id="dorieh.utils.context.Argument.params.help"></span><strong>help</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.context.Argument.params.help">¶</a> – </p></li>
+<li><p><span class="target" id="dorieh.utils.context.Argument.params.type"></span><strong>type</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.context.Argument.params.type">¶</a> – </p></li>
+<li><p><span class="target" id="dorieh.utils.context.Argument.params.aliases"></span><strong>aliases</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.context.Argument.params.aliases">¶</a> – </p></li>
+<li><p><span class="target" id="dorieh.utils.context.Argument.params.default"></span><strong>default</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.context.Argument.params.default">¶</a> – </p></li>
+<li><p><span class="target" id="dorieh.utils.context.Argument.params.cardinality"></span><strong>cardinality</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.context.Argument.params.cardinality">¶</a> – </p></li>
+<li><p><span class="target" id="dorieh.utils.context.Argument.params.valid_values"></span><strong>valid_values</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.context.Argument.params.valid_values">¶</a> – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.utils.context.Argument.get_action">
+<span class="sig-name descname"><span class="pre">get_action</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/context.html#Argument.get_action"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.context.Argument.get_action" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.utils.context.Argument.get_nargs">
+<span class="sig-name descname"><span class="pre">get_nargs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/context.html#Argument.get_nargs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.context.Argument.get_nargs" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.utils.context.Argument.get_help">
+<span class="sig-name descname"><span class="pre">get_help</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/context.html#Argument.get_help"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.context.Argument.get_help" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.utils.context.Argument.is_required">
+<span class="sig-name descname"><span class="pre">is_required</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/context.html#Argument.is_required"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.context.Argument.is_required" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.utils.context.Argument.add_to">
+<span class="sig-name descname"><span class="pre">add_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/context.html#Argument.add_to"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.context.Argument.add_to" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.utils.context.Context">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subclass</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_default</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/context.html#Context"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.context.Context" title="Permalink to this definition"></a></dt>
+<dd><p>Generic class allowing to build context and configuration objects
+and initialize them using command line arguments</p>
+<p>Creates a new object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.utils.context.Context.params.subclass"></span><strong>subclass</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.context.Context.params.subclass">¶</a> – A concrete class containing configuration information
+Configuration options must be defined as class memebers with names,
+starting with one ‘_’ characters and values be instances of
+:class Argument:</p></li>
+<li><p><span class="target" id="dorieh.utils.context.Context.params.description"></span><strong>description</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.context.Context.params.description">¶</a> – Optional text to use as description.
+If not specified, then it is extracted from subclass documentation</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.utils.context.Context.years">
+<span class="sig-name descname"><span class="pre">years</span></span><a class="headerlink" href="#dorieh.utils.context.Context.years" title="Permalink to this definition"></a></dt>
+<dd><p>Year or list of years to download. For example, 
+the following argument: 
+<cite>-y 1992:1995 1998 1999 2011 2015:2017</cite> will produce 
+the following list: 
+[1992,1993,1994,1995,1998,1999,2011,2015,2016,2017]</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.utils.context.Context.compress">
+<span class="sig-name descname"><span class="pre">compress</span></span><a class="headerlink" href="#dorieh.utils.context.Context.compress" title="Permalink to this definition"></a></dt>
+<dd><p>Specifies whether to use gzip compression for the result</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.utils.context.Context.instantiate">
+<span class="sig-name descname"><span class="pre">instantiate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/context.html#Context.instantiate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.context.Context.instantiate" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.utils.context.Context.set_empty_args">
+<span class="sig-name descname"><span class="pre">set_empty_args</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/context.html#Context.set_empty_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.context.Context.set_empty_args" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.utils.context.Context.default">
+<span class="sig-name descname"><span class="pre">default</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/context.html#Context.default"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.context.Context.default" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.utils.context.Context.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/context.html#Context.validate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.context.Context.validate" title="Permalink to this definition"></a></dt>
+<dd><p>Subclasses can override this method to implement custom handling
+of command line arguments</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.utils.context.Context.validate.params.attr"></span><strong>attr</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.context.Context.validate.params.attr">¶</a> – Command line argument name</p></li>
+<li><p><span class="target" id="dorieh.utils.context.Context.validate.params.value"></span><strong>value</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.context.Context.validate.params.value">¶</a> – Value returned by argparse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>value to use</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.utils.context.Context.enum">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">enum_cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/context.html#Context.enum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.context.Context.enum" title="Permalink to this definition"></a></dt>
+<dd><p>A helper method to return Enum value by its name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.utils.context.Context.enum.params.cls"></span><strong>cls</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.context.Context.enum.params.cls">¶</a> – Enum class</p></li>
+<li><p><span class="target" id="dorieh.utils.context.Context.enum.params.s"></span><strong>s</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.context.Context.enum.params.s">¶</a> – name of a member in Enum class</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>value of the member</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dorieh.rasters.gridmet_tools &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">dorieh.rasters.gridmet_tools</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for dorieh.rasters.gridmet_tools</h1><div class="highlight"><pre>
+<span></span><span class="c1">#  Copyright (c) 2021. Harvard University</span>
+<span class="c1">#</span>
+<span class="c1">#  Developed by Research Software Engineering,</span>
+<span class="c1">#  Faculty of Arts and Sciences, Research Computing (FAS RC)</span>
+<span class="c1">#  Author: Michael A Bouzinier</span>
+<span class="c1">#</span>
+<span class="c1">#  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1">#  you may not use this file except in compliance with the License.</span>
+<span class="c1">#  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#         http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1">#  limitations under the License.</span>
+<span class="c1">#</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">import</span> <span class="nn">rasterio</span>
+
+<span class="kn">from</span> <span class="nn">netCDF4._netCDF4</span> <span class="kn">import</span> <span class="n">Dataset</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">geopy</span>
+
+
+<div class="viewcode-block" id="get_atmos_url"><a class="viewcode-back" href="../../../rasters_tools.html#dorieh.rasters.gridmet_tools.get_atmos_url">[docs]</a><span class="k">def</span> <span class="nf">get_atmos_url</span><span class="p">(</span><span class="n">year</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">variable</span> <span class="o">=</span><span class="s2">&quot;PM25&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Constructs URL to download data from the</span>
+<span class="sd">    Atmospheric Composition Analysis Group</span>
+<span class="sd">    given a year and a band</span>
+
+<span class="sd">    :param year: year</span>
+<span class="sd">    :param variable: Gridmet band (variable)</span>
+<span class="sd">    :return: URL for download</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">base</span> <span class="o">=</span> <span class="s2">&quot;http://fizz.phys.dal.ca/~atmos/datasets/V4NA03/&quot;</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="n">base</span> <span class="o">+</span> <span class="s2">&quot;V4NA03_</span><span class="si">{}</span><span class="s2">_NA_</span><span class="si">{:d}</span><span class="s2">01_</span><span class="si">{:d}</span><span class="s2">12-RH35.nc&quot;</span>
+    <span class="k">return</span> <span class="n">pattern</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">year</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_nkn_url"><a class="viewcode-back" href="../../../rasters_tools.html#dorieh.rasters.gridmet_tools.get_nkn_url">[docs]</a><span class="k">def</span> <span class="nf">get_nkn_url</span><span class="p">(</span><span class="n">variable</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">year</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Constructs URL to download data from University of Idaho (UI)</span>
+<span class="sd">    Northwest Knowledge Network</span>
+<span class="sd">    given a year and a band</span>
+
+<span class="sd">    :param year: year</span>
+<span class="sd">    :param variable: Gridmet band (variable)</span>
+<span class="sd">    :return: URL for download</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">base</span> <span class="o">=</span> <span class="s2">&quot;https://www.northwestknowledge.net/metdata/data/&quot;</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="n">base</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_</span><span class="si">{:d}</span><span class="s2">.nc&quot;</span>
+    <span class="k">return</span> <span class="n">pattern</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">year</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="check_shape_file"><a class="viewcode-back" href="../../../members/gridmet_tools.html#dorieh.rasters.gridmet_tools.check_shape_file">[docs]</a><span class="k">def</span> <span class="nf">check_shape_file</span><span class="p">(</span><span class="n">shapes_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                     <span class="n">year</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                     <span class="n">geography_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                     <span class="n">shape_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">list</span><span class="p">]:</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">shapes_dir</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{:d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">year</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">/</span><span class="si">{}</span><span class="s2">/ESRI</span><span class="si">{:02d}</span><span class="s2">USZIP5_POLY_WGS84.shp&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">geography_type</span><span class="p">,</span> <span class="n">shape_type</span><span class="p">,</span>  <span class="n">year</span> <span class="o">-</span> <span class="mi">2000</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+    <span class="n">tiger_format</span> <span class="o">=</span> <span class="s2">&quot;tl_</span><span class="si">{:04d}</span><span class="s2">_us_</span><span class="si">{}</span><span class="s2">*.shp&quot;</span>
+    <span class="n">tiger_pattern</span> <span class="o">=</span> <span class="n">tiger_format</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">geography_type</span><span class="p">)</span>
+    <span class="n">tiger_shapes</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">shapes_dir</span><span class="p">,</span> <span class="n">tiger_pattern</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">tiger_shapes</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">tiger_shapes</span>
+
+    <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="find_shape_file"><a class="viewcode-back" href="../../../rasters_tools.html#dorieh.rasters.gridmet_tools.find_shape_file">[docs]</a><span class="k">def</span> <span class="nf">find_shape_file</span><span class="p">(</span><span class="n">shapes_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">year</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                    <span class="n">geography_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">shape_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds shapefile for a given type of geographies for the</span>
+<span class="sd">    closest available year</span>
+
+<span class="sd">    :param shapes_dir: Directory containing shape files organized as</span>
+<span class="sd">        ${year}/${geo_type}/{point|polygon}</span>
+<span class="sd">    :param year: year</span>
+<span class="sd">    :param geography_type: Geography type, e.g. zip, county, etc.</span>
+<span class="sd">    :param shape_type: Shape type: polygon, point, etc.</span>
+<span class="sd">    :return: a shape file for a given year if it exists or for the latest</span>
+<span class="sd">        year before the given</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">shape_file</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]:</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">year</span>
+        <span class="k">while</span> <span class="p">(</span><span class="mi">1980</span> <span class="o">&lt;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">2021</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">shape_file</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="n">shape_file</span> <span class="o">=</span> <span class="n">check_shape_file</span><span class="p">(</span><span class="n">shapes_dir</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">geography_type</span><span class="p">,</span> <span class="n">shape_type</span><span class="p">)</span>
+            <span class="n">y</span> <span class="o">+=</span> <span class="n">d</span>
+        <span class="k">if</span> <span class="n">shape_file</span><span class="p">:</span>
+            <span class="k">break</span>
+    <span class="k">if</span> <span class="n">shape_file</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+            <span class="s2">&quot;Could not find ZIP shape file for year </span><span class="si">{:d}</span><span class="s2"> or earlier&quot;</span>
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">year</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">shape_file</span></div>
+
+<div class="viewcode-block" id="get_variable"><a class="viewcode-back" href="../../../rasters_tools.html#dorieh.rasters.gridmet_tools.get_variable">[docs]</a><span class="k">def</span> <span class="nf">get_variable</span><span class="p">(</span><span class="n">dataset</span><span class="p">:</span> <span class="n">Dataset</span><span class="p">,</span>  <span class="n">variable</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extracts a variable (column) name by a variable &quot;standard name&quot;</span>
+<span class="sd">    from NCDF4 dataset</span>
+
+<span class="sd">    Standard name is a name of a band as described here:</span>
+<span class="sd">    https://gee.stac.cloud/WUtw2spmec7AM9rk6xMXUtStkMtbviDtHK?t=bands</span>
+
+<span class="sd">    A column name is a name of the column in the dataset</span>
+
+<span class="sd">    :param dataset: an NCDF4 dataset</span>
+<span class="sd">    :param variable: &quot;standard name&quot; of a variable, e.g. &quot;tmmx&quot;</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">standard_name</span> <span class="o">=</span> <span class="n">variable</span>
+    <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">var</span><span class="p">,</span><span class="s2">&quot;standard_name&quot;</span><span class="p">)</span> \
+                <span class="ow">and</span> <span class="n">var</span><span class="o">.</span><span class="n">standard_name</span> <span class="o">==</span> <span class="n">standard_name</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">var</span><span class="o">.</span><span class="n">name</span>
+    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Not found in the dataset: &quot;</span> <span class="o">+</span> <span class="n">standard_name</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_days"><a class="viewcode-back" href="../../../rasters_tools.html#dorieh.rasters.gridmet_tools.get_days">[docs]</a><span class="k">def</span> <span class="nf">get_days</span><span class="p">(</span><span class="n">dataset</span><span class="p">:</span> <span class="n">Dataset</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extracts a table fo days from NCDF4 dataset</span>
+
+<span class="sd">    :param dataset: NCDF4 dataset</span>
+<span class="sd">    :return: List, containing days</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;day&quot;</span><span class="p">][:]</span></div>
+
+
+<div class="viewcode-block" id="get_affine_transform"><a class="viewcode-back" href="../../../rasters_tools.html#dorieh.rasters.gridmet_tools.get_affine_transform">[docs]</a><span class="k">def</span> <span class="nf">get_affine_transform</span><span class="p">(</span><span class="n">nc_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">factor</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns affine transformation for a NCDF4 dataset.</span>
+
+<span class="sd">    Uses rasterio package: https://rasterio.readthedocs.io/en/latest/index.html</span>
+
+<span class="sd">    The `Affine` object is a named tuple with elements</span>
+<span class="sd">    `a, b, c, d, e, f` corresponding to the elements in</span>
+<span class="sd">    the matrix equation below, in which a pixel’s image</span>
+<span class="sd">    coordinates are `x, y` and its world coordinates are `x&#39;, y&#39;`</span>
+
+<span class="sd">    See more:</span>
+<span class="sd">    https://rasterio.readthedocs.io/en/latest/topics/georeferencing.html</span>
+
+<span class="sd">    :param factor: factor used for disaggregation, None or 0 means</span>
+<span class="sd">        no disaggregation</span>
+<span class="sd">    :param nc_file: path to file, containing dataset</span>
+<span class="sd">    :return: Instance of affine transformation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">nc_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">rio</span><span class="p">:</span>
+        <span class="n">affine</span> <span class="o">=</span> <span class="n">rio</span><span class="o">.</span><span class="n">transform</span>
+    <span class="k">if</span> <span class="n">factor</span> <span class="ow">and</span> <span class="n">factor</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">affine</span> <span class="o">=</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">Affine</span><span class="p">(</span><span class="n">affine</span><span class="o">.</span><span class="n">a</span> <span class="o">/</span> <span class="n">factor</span><span class="p">,</span>
+                                 <span class="n">affine</span><span class="o">.</span><span class="n">b</span><span class="p">,</span>
+                                 <span class="n">affine</span><span class="o">.</span><span class="n">c</span><span class="p">,</span>
+                                 <span class="n">affine</span><span class="o">.</span><span class="n">d</span><span class="p">,</span>
+                                 <span class="n">affine</span><span class="o">.</span><span class="n">e</span> <span class="o">/</span> <span class="n">factor</span><span class="p">,</span>
+                                 <span class="n">affine</span><span class="o">.</span><span class="n">f</span>
+                                 <span class="p">)</span>
+    <span class="k">return</span> <span class="n">affine</span></div>
+
+
+<div class="viewcode-block" id="disaggregate"><a class="viewcode-back" href="../../../rasters_tools.html#dorieh.rasters.gridmet_tools.disaggregate">[docs]</a><span class="k">def</span> <span class="nf">disaggregate</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">factor</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Implementation of R `disaggregate` function with method == &#39;&#39;.</span>
+
+<span class="sd">    See details:</span>
+<span class="sd">    https://www.rdocumentation.org/packages/raster/versions/3.4-5/topics/disaggregate</span>
+
+<span class="sd">    or, original source code:</span>
+
+<span class="sd">    https://github.com/r-forge/raster/blob/master/pkg/raster/R/disaggregate.R</span>
+
+<span class="sd">    :param layer:</span>
+<span class="sd">    :param factor:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">factor</span> <span class="ow">or</span> <span class="n">factor</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">layer</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">factor</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">factor</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div>
+
+
+<span class="n">geolocator</span> <span class="o">=</span> <span class="n">geopy</span><span class="o">.</span><span class="n">Nominatim</span><span class="p">(</span><span class="n">user_agent</span><span class="o">=</span><span class="s1">&#39;NSAPH&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="get_address"><a class="viewcode-back" href="../../../members/gridmet_tools.html#dorieh.rasters.gridmet_tools.get_address">[docs]</a><span class="k">def</span> <span class="nf">get_address</span><span class="p">(</span><span class="n">latitude</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">longitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+    <span class="n">location</span> <span class="o">=</span> <span class="n">geolocator</span><span class="o">.</span><span class="n">reverse</span><span class="p">((</span><span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">location</span></div>
+
+
+<div class="viewcode-block" id="estimate_optimal_downscaling_factor"><a class="viewcode-back" href="../../../members/gridmet_tools.html#dorieh.rasters.gridmet_tools.estimate_optimal_downscaling_factor">[docs]</a><span class="k">def</span> <span class="nf">estimate_optimal_downscaling_factor</span><span class="p">(</span><span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">ram</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">ram</span> <span class="o">/</span> <span class="mi">1000000000</span>
+    <span class="n">max_size</span> <span class="o">=</span> <span class="mf">50000000.0</span>
+    <span class="n">max_size</span> <span class="o">*=</span> <span class="n">x</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">max_size</span> <span class="o">/</span> <span class="n">size</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">f</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">f</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

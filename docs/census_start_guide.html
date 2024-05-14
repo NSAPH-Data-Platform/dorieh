@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Working with the census Package &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Working with the <code class="docutils literal notranslate"><span class="pre">census</span></code> Package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/census_start_guide.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="working-with-the-census-package">
+<h1>Working with the <code class="docutils literal notranslate"><span class="pre">census</span></code> Package<a class="headerlink" href="#working-with-the-census-package" title="Permalink to this heading"></a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is the old documentation that prepared by Ben, we need to find the right place and merge it into the new documentation.</p>
+</div>
+<section id="running-the-command-line-interface">
+<h2>Running the Command Line Interface<a class="headerlink" href="#running-the-command-line-interface" title="Permalink to this heading"></a></h2>
+<p>When <code class="docutils literal notranslate"><span class="pre">census</span></code> is installed, a command line utility (also named <code class="docutils literal notranslate"><span class="pre">census</span></code>)
+is automatically made available in your environment. Documentation on the CLI can be
+accessed by running:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">census</span> <span class="o">--</span><span class="n">help</span>
+</pre></div>
+</div>
+<p>An example run would look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">census</span> <span class="o">--</span><span class="n">var_file</span> <span class="n">census_vars</span><span class="o">.</span><span class="n">yml</span> <span class="o">-</span><span class="n">y</span> <span class="mi">2009</span><span class="p">:</span><span class="mi">2019</span> <span class="o">--</span><span class="n">geom</span> <span class="n">tract</span> <span class="o">-</span><span class="n">d</span> <span class="n">population</span> <span class="o">-</span><span class="n">i</span> <span class="n">x</span> <span class="o">--</span><span class="n">out</span> <span class="o">../</span><span class="n">data</span><span class="o">/</span><span class="n">census_tract_2009_2019</span><span class="o">.</span><span class="n">csv</span>
+</pre></div>
+</div>
+<p>This would take the variable definitions in <code class="docutils literal notranslate"><span class="pre">census_vars.yml</span></code> (<code class="docutils literal notranslate"><span class="pre">--var_file</span> <span class="pre">census_vars.yml</span></code>)
+, process them from the API for census tracts (<code class="docutils literal notranslate"><span class="pre">--geom</span> <span class="pre">tract</span></code>) for 2009 - 2019 (<code class="docutils literal notranslate"><span class="pre">-y</span> <span class="pre">2009:2019</span></code>),
+calculate density per square mile for the “population” variable (<code class="docutils literal notranslate"><span class="pre">-d</span> <span class="pre">population</span></code>),
+would not interpolate (<code class="docutils literal notranslate"><span class="pre">-i</span> <span class="pre">x</span></code>), and would write the created data frame to the
+path specified by <code class="docutils literal notranslate"><span class="pre">--out</span></code>.</p>
+</section>
+<section id="main-python-workflow">
+<h2>Main Python Workflow<a class="headerlink" href="#main-python-workflow" title="Permalink to this heading"></a></h2>
+<p>All main functionality for this package is contained within the <cite>DataPlan</cite> object.
+For detailed documentation on its methods, please see <span class="xref std std-ref">assemble_data.py</span>.</p>
+<p>The general workflow is as follows:</p>
+<ul>
+<li><p>Create your DataPlan Object (this one is for county data for 2000-2019):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plan</span> <span class="o">=</span> <span class="n">census</span><span class="o">.</span><span class="n">DataPlan</span><span class="p">(</span><span class="s2">&quot;census_vars.yml&quot;</span><span class="p">,</span> <span class="s2">&quot;county&quot;</span><span class="p">,</span> <span class="n">years</span> <span class="o">=</span> <span class="n">census</span><span class="o">.</span><span class="n">census_years</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">2019</span><span class="p">))</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>On creation, the object creates a plan for a series of API queries to calculate the desired
+variables based on the passed in yaml file. Details on how to structure that yaml file can be found in
+<a class="reference internal" href="census_yaml.html"><span class="doc">Census Variable File Structure</span></a>.</p>
+<ul>
+<li><p>Make the API calls:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plan</span><span class="o">.</span><span class="n">assemble_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>This tells the DataPlan object to start making and combing all the specified API calls.</p>
+<p>After this completes, the data is usable for analysis. However, it will only contain data for
+years that are available through the US census. It also will not have any densities, or other
+columns. Despite this, if you are interpolating or calculating densities, it is still
+best practice for reproducuibility to save a copy of your data at this point. You can do that
+by running</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plan</span><span class="o">.</span><span class="n">write_data</span><span class="p">(</span><span class="s2">&quot;census_uninterpolated.csv&quot;</span><span class="p">)</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>After this, we can begin interpolation.</p>
+<ul>
+<li><p>Interpolate the data:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plan</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">min_year</span> <span class="o">=</span> <span class="mi">1999</span><span class="p">,</span> <span class="n">max_year</span> <span class="o">=</span> <span class="mi">2019</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>This will interpolate missing data using a weighted moving average model missing data for each
+variable, for each geographic unit, for each year in the dataset. Since ACS data/Decennial data
+is available for counties in 2000, and in 2009 onward, this will create data for 1999, and 2001-2008.
+More information on the interpolation methods can be seen in the <code class="docutils literal notranslate"><span class="pre">nsaph_utils</span></code> package documentation.</p>
+<ul>
+<li><p>Calculate Densities:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plan</span><span class="o">.</span><span class="n">calculate_densities</span><span class="p">([</span><span class="s2">&quot;population&quot;</span><span class="p">],</span> <span class="n">sq_mi</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>This will calculate the density per square mile of the variable population within the
+assembled data set. This can take some time to run, as it needs to get the area of each geographic
+unit from the tigerweb API. Also note that due to limited data availability, the area may not
+100% correspond to the area of the year in question.</p>
+<ul>
+<li><p>Write the data:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plan</span><span class="o">.</span><span class="n">write_data</span><span class="p">(</span><span class="s2">&quot;census_interpolated.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Your data set is now complete and written to disk.</p>
+</section>
+<section id="shapefile-downloads">
+<h2>Shapefile Downloads<a class="headerlink" href="#shapefile-downloads" title="Permalink to this heading"></a></h2>
+<p>In addition to the general processing workflow, the package also includes
+a function for downloading Census geography shape files. Please see <span class="xref std std-ref">tigerweb.py</span>
+for documentation on the functions interacting with the Census geographic resources.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

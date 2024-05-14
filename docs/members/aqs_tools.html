@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Internal scripts used for download tasks &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Internal scripts used for download tasks</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/members/aqs_tools.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-dorieh.epa.aqs_tools">
+<span id="internal-scripts-used-for-download-tasks"></span><h1>Internal scripts used for download tasks<a class="headerlink" href="#module-dorieh.epa.aqs_tools" title="Permalink to this heading"></a></h1>
+<p>Python module to download EPA AQS Data hosted at <a class="reference external" href="https://www.epa.gov/aqs">https://www.epa.gov/aqs</a></p>
+<p>The module can be used as a library of functions
+to be called from other python scripts.</p>
+<p>The data is downloaded from <a class="reference external" href="https://aqs.epa.gov/aqsweb/airdata/download_files.html">https://aqs.epa.gov/aqsweb/airdata/download_files.html</a></p>
+<p>The tool adds a column containing a uniquely generated Monitor Key</p>
+<p>Probably the only method useful to external user is <code class="xref py py-func docutils literal notranslate"><span class="pre">download_aqs_data()</span></code></p>
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.epa.aqs_tools.transfer">
+<span class="sig-name descname"><span class="pre">transfer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reader</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DictReader</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">writer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DictWriter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/epa/aqs_tools.html#transfer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.epa.aqs_tools.transfer" title="Permalink to this definition"></a></dt>
+<dd><p>Specific for EPA AQS Data</p>
+<p>Rewrites the CSV content adding Monitor Key and optionally
+filtering rows by a provided list of parameter codes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.epa.aqs_tools.transfer.params.reader"></span><strong>reader</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.aqs_tools.transfer.params.reader">¶</a> – Input data as an instance of csv.DictReader</p></li>
+<li><p><span class="target" id="dorieh.epa.aqs_tools.transfer.params.writer"></span><strong>writer</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.aqs_tools.transfer.params.writer">¶</a> – Output source should be provided as csv.DictWriter</p></li>
+<li><p><span class="target" id="dorieh.epa.aqs_tools.transfer.params.flt"></span><strong>flt</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.aqs_tools.transfer.params.flt">¶</a> – Optionally, a callable function returning True
+for rows that should be written to the output and False for those
+that should be omitted</p></li>
+<li><p><span class="target" id="dorieh.epa.aqs_tools.transfer.params.header"></span><strong>header</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.aqs_tools.transfer.params.header">¶</a> – whether to first write header row</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Nothing</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.epa.aqs_tools.add_monitor_key">
+<span class="sig-name descname"><span class="pre">add_monitor_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/epa/aqs_tools.html#add_monitor_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.epa.aqs_tools.add_monitor_key" title="Permalink to this definition"></a></dt>
+<dd><p>Internal method to generate and add unique Monitor Key</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.epa.aqs_tools.add_monitor_key.params.row"></span><strong>row</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.aqs_tools.add_monitor_key.params.row">¶</a> – a row of AQS CSV file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Nothing, modifies the given row in place</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.epa.aqs_tools.download_data">
+<span class="sig-name descname"><span class="pre">download_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="io_utils.html#dorieh.utils.io_utils.DownloadTask" title="dorieh.utils.io_utils.DownloadTask"><span class="pre">DownloadTask</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/epa/aqs_tools.html#download_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.epa.aqs_tools.download_data" title="Permalink to this definition"></a></dt>
+<dd><p>A utility method to download the content of given URL to the given file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.epa.aqs_tools.download_data.params.url"></span><strong>url</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.aqs_tools.download_data.params.url">¶</a> – Source URL</p></li>
+<li><p><span class="target" id="dorieh.epa.aqs_tools.download_data.params.target"></span><strong>target</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.aqs_tools.download_data.params.target">¶</a> – Target file path</p></li>
+<li><p><span class="target" id="dorieh.epa.aqs_tools.download_data.params.parameters"></span><strong>parameters</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.aqs_tools.download_data.params.parameters">¶</a> – An optional list of EPA AQS Parameter codes to include
+in the output</p></li>
+<li><p><span class="target" id="dorieh.epa.aqs_tools.download_data.params.append"></span><strong>append</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.aqs_tools.download_data.params.append">¶</a> – whether to append to an existing file</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Nothing</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.epa.aqs_tools.destination_path">
+<span class="sig-name descname"><span class="pre">destination_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/dorieh/epa/aqs_tools.html#destination_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.epa.aqs_tools.destination_path" title="Permalink to this definition"></a></dt>
+<dd><p>A utility method to construct destination file path</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.epa.aqs_tools.destination_path.params.destination"></span><strong>destination</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.aqs_tools.destination_path.params.destination">¶</a> – Destination directory</p></li>
+<li><p><span class="target" id="dorieh.epa.aqs_tools.destination_path.params.path"></span><strong>path</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.aqs_tools.destination_path.params.path">¶</a> – Source path in URL</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Path on a file system</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.epa.aqs_tools.collect_annual_downloads">
+<span class="sig-name descname"><span class="pre">collect_annual_downloads</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contiguous_year_segment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="io_utils.html#dorieh.utils.io_utils.DownloadTask" title="dorieh.utils.io_utils.DownloadTask"><span class="pre">DownloadTask</span></a></span></span><a class="reference internal" href="../_modules/dorieh/epa/aqs_tools.html#collect_annual_downloads"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.epa.aqs_tools.collect_annual_downloads" title="Permalink to this definition"></a></dt>
+<dd><p>A utility method to collect all URLs that should be downloaded for a given
+list of years and EPA AQS parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.epa.aqs_tools.collect_annual_downloads.params.destination"></span><strong>destination</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.aqs_tools.collect_annual_downloads.params.destination">¶</a> – Destination directory for downloads</p></li>
+<li><p><span class="target" id="dorieh.epa.aqs_tools.collect_annual_downloads.params.path"></span><strong>path</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.aqs_tools.collect_annual_downloads.params.path">¶</a> – path element</p></li>
+<li><p><span class="target" id="dorieh.epa.aqs_tools.collect_annual_downloads.params.contiguous_year_segment"></span><strong>contiguous_year_segment</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.aqs_tools.collect_annual_downloads.params.contiguous_year_segment">¶</a> – a list of contiguous years taht can be
+saved in the same file</p></li>
+<li><p><span class="target" id="dorieh.epa.aqs_tools.collect_annual_downloads.params.parameters"></span><strong>parameters</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.aqs_tools.collect_annual_downloads.params.parameters">¶</a> – List of EPA AQS Parameter codes</p></li>
+<li><p><span class="target" id="dorieh.epa.aqs_tools.collect_annual_downloads.params.downloads"></span><strong>downloads</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.aqs_tools.collect_annual_downloads.params.downloads">¶</a> – The resulting collection of downloads that have to
+be performed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>downloads list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.epa.aqs_tools.collect_daily_downloads">
+<span class="sig-name descname"><span class="pre">collect_daily_downloads</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylabel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contiguous_year_segment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="io_utils.html#dorieh.utils.io_utils.DownloadTask" title="dorieh.utils.io_utils.DownloadTask"><span class="pre">DownloadTask</span></a></span></span><a class="reference internal" href="../_modules/dorieh/epa/aqs_tools.html#collect_daily_downloads"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.epa.aqs_tools.collect_daily_downloads" title="Permalink to this definition"></a></dt>
+<dd><p>A utility method to collect all URLs that should be downloaded for a given
+list of years and EPA AQS parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.epa.aqs_tools.collect_daily_downloads.params.destination"></span><strong>destination</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.aqs_tools.collect_daily_downloads.params.destination">¶</a> – Destination directory for downloads</p></li>
+<li><p><span class="target" id="dorieh.epa.aqs_tools.collect_daily_downloads.params.ylabel"></span><strong>ylabel</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.aqs_tools.collect_daily_downloads.params.ylabel">¶</a> – a label to use for years in the destination path</p></li>
+<li><p><span class="target" id="dorieh.epa.aqs_tools.collect_daily_downloads.params.contiguous_year_segment"></span><strong>contiguous_year_segment</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.aqs_tools.collect_daily_downloads.params.contiguous_year_segment">¶</a> – a list of contiguous years taht can be
+saved in the same file</p></li>
+<li><p><span class="target" id="dorieh.epa.aqs_tools.collect_daily_downloads.params.parameters"></span><strong>parameters</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.aqs_tools.collect_daily_downloads.params.parameters">¶</a> – List of EPA AQS Parameter codes</p></li>
+<li><p><span class="target" id="dorieh.epa.aqs_tools.collect_daily_downloads.params.downloads"></span><strong>downloads</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.aqs_tools.collect_daily_downloads.params.downloads">¶</a> – The resulting collection of downloads that have to
+be performed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>downloads list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.epa.aqs_tools.collect_aqs_download_tasks">
+<span class="sig-name descname"><span class="pre">collect_aqs_download_tasks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="aqs_ds_def.html#dorieh.epa.aqs_ds_def.AQSContext" title="dorieh.epa.aqs_ds_def.AQSContext"><span class="pre">AQSContext</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/epa/aqs_tools.html#collect_aqs_download_tasks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.epa.aqs_tools.collect_aqs_download_tasks" title="Permalink to this definition"></a></dt>
+<dd><p>Main entry into the library</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.epa.aqs_tools.collect_aqs_download_tasks.params.aggregation"></span><strong>aggregation</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.aqs_tools.collect_aqs_download_tasks.params.aggregation">¶</a> – Type of time aggregation: annual or daily</p></li>
+<li><p><span class="target" id="dorieh.epa.aqs_tools.collect_aqs_download_tasks.params.years"></span><strong>years</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.aqs_tools.collect_aqs_download_tasks.params.years">¶</a> – a list of years to include, if None - then all
+years are included</p></li>
+<li><p><span class="target" id="dorieh.epa.aqs_tools.collect_aqs_download_tasks.params.destination"></span><strong>destination</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.aqs_tools.collect_aqs_download_tasks.params.destination">¶</a> – Destination Directory</p></li>
+<li><p><span class="target" id="dorieh.epa.aqs_tools.collect_aqs_download_tasks.params.parameters"></span><strong>parameters</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.aqs_tools.collect_aqs_download_tasks.params.parameters">¶</a> – List of EPA AQS Parameter codes. For annual
+aggregation can be empty, in which case all data is downloaded.
+Required for daily aggregation. Can contain either integer codes, or
+mnemonic instanced of Parameter Enum or both.</p></li>
+<li><p><span class="target" id="dorieh.epa.aqs_tools.collect_aqs_download_tasks.params.merge_years"></span><strong>merge_years</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.aqs_tools.collect_aqs_download_tasks.params.merge_years">¶</a> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

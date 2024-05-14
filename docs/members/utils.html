@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The utils Module &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">The utils Module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/members/utils.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-dorieh.platform.data_model.utils">
+<span id="the-utils-module"></span><h1>The utils Module<a class="headerlink" href="#module-dorieh.platform.data_model.utils" title="Permalink to this heading"></a></h1>
+<p>API used by data modelling and data loading utilities</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.platform.data_model.utils.split">
+<span class="sig-name descname"><span class="pre">split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node)</span> <span class="pre">-&gt;</span> <span class="pre">(&lt;class</span> <span class="pre">'str'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;class</span> <span class="pre">'dict'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/data_model/utils.html#split"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.data_model.utils.split" title="Permalink to this definition"></a></dt>
+<dd><p>Given a node in an array produced from JSON/YAML structure
+returns a name and definition associated with the node</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.platform.data_model.utils.split.params.node"></span><strong>node</strong><a class="paramlink headerlink reference internal" href="#dorieh.platform.data_model.utils.split.params.node">¶</a> – an array node, usually from YAML or JSON file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a tuple consisting of a name and an array containing
+definitions</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.platform.data_model.utils.basename">
+<span class="sig-name descname"><span class="pre">basename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/data_model/utils.html#basename"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.data_model.utils.basename" title="Permalink to this definition"></a></dt>
+<dd><p>Given fully qualified table name (schema.table)
+returns just a basename of a table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.platform.data_model.utils.basename.params.table"></span><strong>table</strong><a class="paramlink headerlink reference internal" href="#dorieh.platform.data_model.utils.basename.params.table">¶</a> – a fully qualified table name</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>just the base name of the table, a piece of name after the last dot</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.platform.data_model.utils.entry_to_path">
+<span class="sig-name descname"><span class="pre">entry_to_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/dorieh/platform/data_model/utils.html#entry_to_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.data_model.utils.entry_to_path" title="Permalink to this definition"></a></dt>
+<dd><p>Returns valid path for an archive entry</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.platform.data_model.utils.entry_to_path.params.entry"></span><strong>entry</strong><a class="paramlink headerlink reference internal" href="#dorieh.platform.data_model.utils.entry_to_path.params.entry">¶</a> – an archive entry or a path to file on the file system</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>path within the arcjve or file system</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.platform.data_model.utils.CSVLikeJsonReader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CSVLikeJsonReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">returns_mapping</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/data_model/utils.html#CSVLikeJsonReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.data_model.utils.CSVLikeJsonReader" title="Permalink to this definition"></a></dt>
+<dd><p>Class, providing CSV Reader interface for JSON files.</p>
+<p>Helps abstracting reading different file types.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.data_model.utils.CSVLikeJsonReader.open">
+<span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/data_model/utils.html#CSVLikeJsonReader.open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.data_model.utils.CSVLikeJsonReader.open" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.data_model.utils.CSVLikeJsonReader.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/data_model/utils.html#CSVLikeJsonReader.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.data_model.utils.CSVLikeJsonReader.close" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.platform.data_model.utils.DataReader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DataReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffer_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quoting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">has_header</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/data_model/utils.html#DataReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.data_model.utils.DataReader" title="Permalink to this definition"></a></dt>
+<dd><p>Generalized reader for columns-structured files, such as CSV, FST and
+sas7bdat</p>
+<p>This class is Context manager and can be used with with block</p>
+<p>Example:</p>
+<dl class="simple">
+<dt>with DataReader(file_path) as reader:</dt><dd><dl class="simple">
+<dt>for row in reader.rows():</dt><dd><p>print(row)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.data_model.utils.DataReader.open_fst">
+<span class="sig-name descname"><span class="pre">open_fst</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/data_model/utils.html#DataReader.open_fst"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.data_model.utils.DataReader.open_fst" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.data_model.utils.DataReader.open_csv">
+<span class="sig-name descname"><span class="pre">open_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f=&lt;function</span> <span class="pre">DataReader.&lt;lambda&gt;&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/data_model/utils.html#DataReader.open_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.data_model.utils.DataReader.open_csv" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.data_model.utils.DataReader.open_sas7bdat">
+<span class="sig-name descname"><span class="pre">open_sas7bdat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/data_model/utils.html#DataReader.open_sas7bdat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.data_model.utils.DataReader.open_sas7bdat" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.data_model.utils.DataReader.open_fwf">
+<span class="sig-name descname"><span class="pre">open_fwf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reader</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/data_model/utils.html#DataReader.open_fwf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.data_model.utils.DataReader.open_fwf" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.data_model.utils.DataReader.open_json">
+<span class="sig-name descname"><span class="pre">open_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/data_model/utils.html#DataReader.open_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.data_model.utils.DataReader.open_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.data_model.utils.DataReader.get_path">
+<span class="sig-name descname"><span class="pre">get_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/dorieh/platform/data_model/utils.html#DataReader.get_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.data_model.utils.DataReader.get_path" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.data_model.utils.DataReader.rows">
+<span class="sig-name descname"><span class="pre">rows</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/data_model/utils.html#DataReader.rows"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.data_model.utils.DataReader.rows" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.platform.data_model.utils.regex">
+<span class="sig-name descname"><span class="pre">regex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/data_model/utils.html#regex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.data_model.utils.regex" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

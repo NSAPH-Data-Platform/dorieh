@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generator of pipelines executing containerized apps &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Generator of pipelines executing containerized apps</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/AppPipelineGenerator.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="generator-of-pipelines-executing-containerized-apps">
+<h1>Generator of pipelines executing containerized apps<a class="headerlink" href="#generator-of-pipelines-executing-containerized-apps" title="Permalink to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#introduction" id="id1">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#prerequisites" id="id2">Prerequisites</a></p>
+<ul>
+<li><p><a class="reference internal" href="#docker-or-python-virtual-environment" id="id3">Docker or Python virtual environment</a></p>
+<ul>
+<li><p><a class="reference internal" href="#option-1-docker" id="id4">Option 1: Docker</a></p></li>
+<li><p><a class="reference internal" href="#option-2-python-virtual-environment" id="id5">Option 2: Python virtual environment</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#setup-dbms-server" id="id6">Setup DBMS Server</a></p></li>
+<li><p><a class="reference internal" href="#define-connection" id="id7">Define connection</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#using-pipeline-generator" id="id8">Using pipeline generator</a></p>
+<ul>
+<li><p><a class="reference internal" href="#generate-pipeline-and-metadata" id="id9">Generate pipeline and metadata</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#execute-generated-pipeline" id="id10">Execute generated pipeline</a></p></li>
+<li><p><a class="reference internal" href="#appendix-1-metadata-description" id="id11">Appendix 1: Metadata description</a></p>
+<ul>
+<li><p><a class="reference internal" href="#file-app-config-yaml" id="id12">File app.config.yaml</a></p></li>
+<li><p><a class="reference internal" href="#file-metadata-yml" id="id13">File metadata.yml</a></p></li>
+<li><p><a class="reference internal" href="#file-dorieh-metadata-yaml" id="id14">File dorieh-metadata.yaml</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="introduction">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="https://www.hsph.harvard.edu/nsaph/">National Studies on Air Pollution and Health</a>
+organization (NSAPH) publishes containerized applications to produce
+certain types of data. These applications are published on the
+<a class="reference external" href="https://github.com/NSAPH-Data-Processing">NSAPH Data Production GitHub</a>.</p>
+<p>The Pipeline Generator generates a
+<a class="reference external" href="https://www.commonwl.org/">CWL</a> pipeline to execute the app and ingest
+the data it produces into Dorieh Data warehouse.</p>
+<p>The process of data ingestion consists of two steps:</p>
+<ol class="arabic simple">
+<li><p>Generation of the piepline for data ingestion</p></li>
+<li><p>Execution of the pipeline</p></li>
+</ol>
+</section>
+<section id="prerequisites">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Prerequisites</a><a class="headerlink" href="#prerequisites" title="Permalink to this heading"></a></h2>
+<section id="docker-or-python-virtual-environment">
+<h3><a class="toc-backref" href="#id3" role="doc-backlink">Docker or Python virtual environment</a><a class="headerlink" href="#docker-or-python-virtual-environment" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><p>You need either Option 1 or Option2, not both!</p>
+</div></blockquote>
+<section id="option-1-docker">
+<h4><a class="toc-backref" href="#id4" role="doc-backlink">Option 1: Docker</a><a class="headerlink" href="#option-1-docker" title="Permalink to this heading"></a></h4>
+<p>The first step, generation of the pipeline, has minimal requirements.
+The easiest way to generate the pipeline is to use a docker container,
+which will only requires Docker to be installed
+on the host system, where the step is executed. See
+<a class="reference external" href="https://docs.docker.com/engine/install/">Docker installation instructions</a>
+for details.</p>
+</section>
+<section id="option-2-python-virtual-environment">
+<h4><a class="toc-backref" href="#id5" role="doc-backlink">Option 2: Python virtual environment</a><a class="headerlink" href="#option-2-python-virtual-environment" title="Permalink to this heading"></a></h4>
+<p>Alternatively, <em>instead</em> of Docker one can set up a
+<a class="reference external" href="https://docs.python.org/3/library/venv.html">Python virtual environment</a>.
+Once virtual environment is set up, you should install Dorieh packages
+in it with the following command:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>pip install git+https://github.com/NSAPH-Data-Platform/nsaph-core-platform.git@develop
+</pre></div>
+</div>
+</section>
+</section>
+<section id="setup-dbms-server">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">Setup DBMS Server</a><a class="headerlink" href="#setup-dbms-server" title="Permalink to this heading"></a></h3>
+<p>Dorieh uses PostgreSQL DBMS to manage its data warehouse. The data warehouse
+is assumed to be set up and operational to ingest data. Generating
+the pipeline does not require the data warehouse.</p>
+</section>
+<section id="define-connection">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">Define connection</a><a class="headerlink" href="#define-connection" title="Permalink to this heading"></a></h3>
+<p>Dorieh uses database.ini type file to manage connections
+to data warehouse. The format described in
+<a class="reference internal" href="SampleQuery.html#create-connection-definition-file"><span class="std std-ref">documentation</span></a>.</p>
+<p>If the file with database connections does not exist, you
+need to create one. For example, named database.ini somewhere
+on your local file system.</p>
+</section>
+</section>
+<section id="using-pipeline-generator">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Using pipeline generator</a><a class="headerlink" href="#using-pipeline-generator" title="Permalink to this heading"></a></h2>
+<section id="generate-pipeline-and-metadata">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">Generate pipeline and metadata</a><a class="headerlink" href="#generate-pipeline-and-metadata" title="Permalink to this heading"></a></h3>
+<p>Generator takes 3 command line parameters:</p>
+<ol class="arabic simple">
+<li><p>GitHub URL or a local path for the containerized app. In the
+root directory of the path, generator will look for a file named
+<code class="docutils literal notranslate"><span class="pre">app.config.yaml</span></code>.</p></li>
+</ol>
+<p>If you use a local Python virtual environment, then run:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python -m dorieh.platform.apprunner.app_run_generator $GitHubURL $outputfile $branch
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python -m dorieh.platform.apprunner.app_run_generator https://github.com/NSAPH-Data-Processing/zip2zcta_master_xwalk.git pipeline.cwl master
+</pre></div>
+</div>
+<p>to generate a pipeline executing
+<a class="reference external" href="https://github.com/NSAPH-Data-Processing/zip2zcta_master_xwalk">ZIP to ZCTA Crosswalk Producer app</a>
+using <code class="docutils literal notranslate"><span class="pre">master</span></code> branch and output the result into current directory in
+a file named <code class="docutils literal notranslate"><span class="pre">pipeline.cwl</span></code></p>
+<p>Alternatively, to do the same using Docker container, execute:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>docker run -v $(pwd):/tmp/work forome/dorieh python -m dorieh.platform.apprunner.app_run_generator https://github.com/NSAPH-Data-Processing/zip2zcta_master_xwalk.git /tmp/work/pipeline.cwl master
+</pre></div>
+</div>
+<p>In both cases, the generator will produce 3 files:</p>
+<ul class="simple">
+<li><p>pipeline.cwl: main workflow file</p></li>
+<li><p>ingest.cwl: subworkflow used for data ingestion</p></li>
+<li><p>common.yaml: metadata required for ingestion. Name <code class="docutils literal notranslate"><span class="pre">common</span></code> is
+derived from <code class="docutils literal notranslate"><span class="pre">domain</span></code> key in the
+<a class="reference external" href="https://github.com/NSAPH-Data-Processing/zip2zcta_master_xwalk/blob/app-config-1/app.config.yaml">app.config.yaml</a>
+file in the app repository.</p></li>
+</ul>
+</section>
+</section>
+<section id="execute-generated-pipeline">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">Execute generated pipeline</a><a class="headerlink" href="#execute-generated-pipeline" title="Permalink to this heading"></a></h2>
+<p>If you installed Dorieh packages in your local Python virtual environment,
+you can execute the pipeline with the following command in
+the working directory, for example using CWL reference implementation
+built into Dorieh (cwl-runner).</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cwl-runner pipeline.cwl --database $path_to_your_connection_def_file --connection_name $connection_name
+</pre></div>
+</div>
+<p>for example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cwl-runner pipeline.cwl --database ../../database.ini --connection_name dorieh
+</pre></div>
+</div>
+<p>A better way would be to use a production grade CWL implementation
+such as <a class="reference external" href="https://toil.readthedocs.io/en/latest/running/cwl.html">Toil</a>.
+To do this you need to
+<a class="reference external" href="https://toil.readthedocs.io/en/latest/gettingStarted/install.html">install Toil</a>
+on your local system.</p>
+<blockquote>
+<div><p>You do not need to install Dorieh packages to execute the pipeline.
+The runtime engine will use Dorieh container where all requirements
+are preinstalled.</p>
+</div></blockquote>
+<p>For Toil, a good advice would be to first create working
+directory, e.g. named <code class="docutils literal notranslate"><span class="pre">work</span></code>. Otherwise, Toil will create a default
+directory somewhere in yoru temporary space.</p>
+<p>The command to execute the pipeline with Toil would be:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>toil-cwl-runner --retryCount 0 --cleanWorkDir never  --jobStore j1 --outdir results --workDir work  pipeline.cwl --database ../../database.ini --connection_name nsaph-docker
+</pre></div>
+</div>
+<p>Specifying <code class="docutils literal notranslate"><span class="pre">jobStore</span></code> will let you restart the pipeline from a
+point of failure if pipeline execution fails for any reason.</p>
+</section>
+<section id="appendix-1-metadata-description">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">Appendix 1: Metadata description</a><a class="headerlink" href="#appendix-1-metadata-description" title="Permalink to this heading"></a></h2>
+<section id="file-app-config-yaml">
+<h3><a class="toc-backref" href="#id12" role="doc-backlink">File app.config.yaml</a><a class="headerlink" href="#file-app-config-yaml" title="Permalink to this heading"></a></h3>
+<p>Keys:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">metadata</span></code>: a relative path to the app metadata file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dorieh-metadata</span></code>: a relative path to the metadata required to create
+a database table</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docker</span></code>: information about the docker container, including:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">image</span></code>: the tag for the container image that executes the app</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">run</span></code>: the command to be run within the container. This is an optional
+field</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">outputdir</span></code>: directory, where to look for the results of the execution
+of the app</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="file-metadata-yml">
+<h3><a class="toc-backref" href="#id13" role="doc-backlink">File metadata.yml</a><a class="headerlink" href="#file-metadata-yml" title="Permalink to this heading"></a></h3>
+<p>This is the file referenced from  app.config.yaml by <code class="docutils literal notranslate"><span class="pre">metadata</span></code>
+key.</p>
+<p>It should contain the following keys:</p>
+<ul class="simple">
+<li><p>dataset_name</p></li>
+<li><p>description</p></li>
+<li><p>fields:</p>
+<ul>
+<li><p>table</p>
+<ul>
+<li><p>columns</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Each column should have <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">type</span></code> and <code class="docutils literal notranslate"><span class="pre">description</span></code> keys.</p>
+</section>
+<section id="file-dorieh-metadata-yaml">
+<h3><a class="toc-backref" href="#id14" role="doc-backlink">File dorieh-metadata.yaml</a><a class="headerlink" href="#file-dorieh-metadata-yaml" title="Permalink to this heading"></a></h3>
+<p>This is a header for a knowledge domain that will be created.
+Detailed description is provided in the
+<a class="reference internal" href="Datamodels.html#domain"><span class="std std-ref">Data modeling section</span></a>. It is important
+to define correct values for <code class="docutils literal notranslate"><span class="pre">quoting</span></code>, <code class="docutils literal notranslate"><span class="pre">schema</span></code> and
+<code class="docutils literal notranslate"><span class="pre">primary_key</span></code> for each table.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

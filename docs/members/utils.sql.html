@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Utility functions &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Utility functions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/members/utils.sql.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="utility-functions">
+<h1>Utility functions<a class="headerlink" href="#utility-functions" title="Permalink to this heading"></a></h1>
+<div class="highlight-plpgsql notranslate"><div class="highlight"><pre><span></span><span class="c1">--  Copyright (c) 2022. Harvard University</span>
+<span class="c1">--</span>
+<span class="c1">--  Developed by Research Software Engineering,</span>
+<span class="c1">--  Faculty of Arts and Sciences, Research Computing (FAS RC)</span>
+<span class="c1">--  Author: Michael A Bouzinier</span>
+<span class="c1">--</span>
+<span class="c1">--  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1">--  you may not use this file except in compliance with the License.</span>
+<span class="c1">--  You may obtain a copy of the License at</span>
+<span class="c1">--</span>
+<span class="c1">--         http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">--</span>
+<span class="c1">--  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">--  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">--  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">--  See the License for the specific language governing permissions and</span>
+<span class="c1">--  limitations under the License.</span>
+<span class="c1">--</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">EXTENSION</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w">  </span><span class="n">hll</span><span class="p">;</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">REPLACE</span><span class="w"> </span><span class="k">FUNCTION</span><span class="w"> </span><span class="s s-Name">&quot;public&quot;</span><span class="mf">.</span><span class="s s-Name">&quot;count_rows&quot;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">schema_name</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="k">varying</span><span class="p">,</span><span class="w"> </span><span class="n">table_name</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="k">varying</span>
+<span class="p">)</span><span class="w">  </span><span class="k">RETURNS</span><span class="w"> </span><span class="nb">bigint</span>
+<span class="w">  </span><span class="k">VOLATILE</span>
+<span class="k">AS</span><span class="w"> </span><span class="s">$</span><span class="dl">body</span><span class="s">$</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="n">cnt</span><span class="w"> </span><span class="nb">bigint</span><span class="p">;</span>
+<span class="k">BEGIN</span>
+<span class="w">    </span><span class="k">EXECUTE</span><span class="w"> </span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;SELECT COUNT(*) FROM %I.%I&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">schema_name</span><span class="p">,</span><span class="w"> </span><span class="n">table_name</span><span class="p">)</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">cnt</span><span class="p">;</span>
+<span class="w">    </span><span class="k">RETURN</span><span class="w"> </span><span class="n">cnt</span><span class="p">;</span>
+<span class="k">END</span><span class="p">;</span>
+<span class="s">$</span><span class="dl">body</span><span class="s">$</span><span class="w"> </span><span class="k">LANGUAGE</span><span class="w"> </span><span class="n">plpgsql</span>
+<span class="p">;</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">REPLACE</span><span class="w"> </span><span class="k">FUNCTION</span><span class="w"> </span><span class="n">public</span><span class="mf">.</span><span class="n">count_rows</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">schema_name</span><span class="w"> </span><span class="nb">varchar</span><span class="p">,</span>
+<span class="w">    </span><span class="n">table_name</span><span class="w"> </span><span class="nb">varchar</span><span class="p">,</span>
+<span class="w">    </span><span class="n">column_name</span><span class="w"> </span><span class="nb">varchar</span><span class="p">,</span>
+<span class="w">    </span><span class="n">column_value</span><span class="w"> </span><span class="nb">INT</span>
+<span class="p">)</span><span class="w">  </span><span class="k">RETURNS</span><span class="w"> </span><span class="nb">int8</span>
+<span class="w">    </span><span class="k">VOLATILE</span>
+<span class="k">AS</span><span class="w"> </span><span class="s">$</span><span class="dl">body</span><span class="s">$</span>
+<span class="k">DECLARE</span>
+<span class="w">    </span><span class="n">cnt</span><span class="w"> </span><span class="nb">INT8</span><span class="p">;</span>
+<span class="k">BEGIN</span>
+<span class="w">    </span><span class="k">EXECUTE</span><span class="w"> </span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;SELECT COUNT(*) FROM %I.%I WHERE %I = %s&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="n">schema_name</span><span class="p">,</span>
+<span class="w">            </span><span class="n">table_name</span><span class="p">,</span>
+<span class="w">            </span><span class="n">column_name</span><span class="p">,</span>
+<span class="w">            </span><span class="n">column_value</span>
+<span class="w">        </span><span class="p">)</span>
+<span class="w">        </span><span class="k">into</span><span class="w"> </span><span class="n">cnt</span><span class="p">;</span>
+<span class="w">    </span><span class="k">RETURN</span><span class="w"> </span><span class="n">cnt</span><span class="p">;</span>
+<span class="k">END</span><span class="p">;</span>
+<span class="s">$</span><span class="dl">body</span><span class="s">$</span><span class="w"> </span><span class="k">LANGUAGE</span><span class="w"> </span><span class="n">plpgsql</span><span class="p">;</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">REPLACE</span><span class="w"> </span><span class="k">FUNCTION</span><span class="w"> </span><span class="n">public</span><span class="mf">.</span><span class="n">count_rows</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">schema_name</span><span class="w"> </span><span class="nb">varchar</span><span class="p">,</span>
+<span class="w">    </span><span class="n">table_name</span><span class="w"> </span><span class="nb">varchar</span><span class="p">,</span>
+<span class="w">    </span><span class="n">column_name</span><span class="w"> </span><span class="nb">varchar</span><span class="p">,</span>
+<span class="w">    </span><span class="n">column_value</span><span class="w"> </span><span class="nb">VARCHAR</span>
+<span class="p">)</span><span class="w">  </span><span class="k">RETURNS</span><span class="w"> </span><span class="nb">int8</span>
+<span class="w">    </span><span class="k">VOLATILE</span>
+<span class="k">AS</span><span class="w"> </span><span class="s">$</span><span class="dl">body</span><span class="s">$</span>
+<span class="k">DECLARE</span>
+<span class="w">    </span><span class="n">cnt</span><span class="w"> </span><span class="nb">INT8</span><span class="p">;</span>
+<span class="k">BEGIN</span>
+<span class="w">    </span><span class="k">EXECUTE</span><span class="w"> </span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;SELECT COUNT(*) FROM %I.%I WHERE %I = %L&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="n">schema_name</span><span class="p">,</span>
+<span class="w">            </span><span class="n">table_name</span><span class="p">,</span>
+<span class="w">            </span><span class="n">column_name</span><span class="p">,</span>
+<span class="w">            </span><span class="n">column_value</span>
+<span class="w">        </span><span class="p">)</span>
+<span class="w">        </span><span class="k">into</span><span class="w"> </span><span class="n">cnt</span><span class="p">;</span>
+<span class="w">    </span><span class="k">RETURN</span><span class="w"> </span><span class="n">cnt</span><span class="p">;</span>
+<span class="k">END</span><span class="p">;</span>
+<span class="s">$</span><span class="dl">body</span><span class="s">$</span><span class="w"> </span><span class="k">LANGUAGE</span><span class="w"> </span><span class="n">plpgsql</span><span class="p">;</span>
+
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">REPLACE</span><span class="w"> </span><span class="k">FUNCTION</span><span class="w"> </span><span class="s s-Name">&quot;public&quot;</span><span class="mf">.</span><span class="s s-Name">&quot;estimate_rows&quot;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">schema_name</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="k">varying</span><span class="p">,</span><span class="w"> </span><span class="n">table_name</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="k">varying</span>
+<span class="p">)</span><span class="w">  </span><span class="k">RETURNS</span><span class="w"> </span><span class="nb">bigint</span>
+<span class="w">  </span><span class="k">VOLATILE</span>
+<span class="k">AS</span><span class="w"> </span><span class="s">$</span><span class="dl">body</span><span class="s">$</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="n">cnt</span><span class="w"> </span><span class="nb">bigint</span><span class="p">;</span>
+<span class="k">BEGIN</span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="n">reltuples</span><span class="o">::</span><span class="nb">bigint</span>
+<span class="w">        </span><span class="k">FROM</span><span class="w"> </span><span class="n">pg_class</span>
+<span class="w">        </span><span class="k">WHERE</span><span class="w"> </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">schema_name</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;.&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">table_name</span><span class="p">)</span><span class="o">::</span><span class="n">regclass</span>
+<span class="w">        </span><span class="k">INTO</span><span class="w"> </span><span class="n">cnt</span><span class="p">;</span>
+<span class="w">    </span><span class="k">RETURN</span><span class="w"> </span><span class="n">cnt</span><span class="p">;</span>
+<span class="k">END</span><span class="p">;</span>
+<span class="s">$</span><span class="dl">body</span><span class="s">$</span><span class="w"> </span><span class="k">LANGUAGE</span><span class="w"> </span><span class="n">plpgsql</span>
+<span class="p">;</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">REPLACE</span><span class="w"> </span><span class="k">FUNCTION</span><span class="w"> </span><span class="s s-Name">&quot;public&quot;</span><span class="mf">.</span><span class="s s-Name">&quot;has_column&quot;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="k">varying</span><span class="p">,</span>
+<span class="w">    </span><span class="n">t</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="k">varying</span><span class="p">,</span>
+<span class="w">    </span><span class="n">c</span><span class="w"> </span><span class="nb">varchar</span>
+<span class="p">)</span><span class="w">  </span><span class="k">RETURNS</span><span class="w"> </span><span class="nb">VARCHAR</span>
+<span class="w">  </span><span class="k">VOLATILE</span>
+<span class="k">AS</span><span class="w"> </span><span class="s">$</span><span class="dl">body</span><span class="s">$</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="nb">BOOL</span><span class="p">;</span>
+<span class="k">BEGIN</span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="p">(</span>
+<span class="w">            </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">information_schema</span><span class="mf">.</span><span class="k">columns</span>
+<span class="w">            </span><span class="k">WHERE</span><span class="w"> </span><span class="n">table_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">table_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">column_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">e</span><span class="p">;</span>
+<span class="w">    </span><span class="k">RETURN</span><span class="w"> </span><span class="n">e</span><span class="p">;</span>
+<span class="k">END</span><span class="p">;</span>
+<span class="s">$</span><span class="dl">body</span><span class="s">$</span><span class="w"> </span><span class="k">LANGUAGE</span><span class="w"> </span><span class="n">plpgsql</span>
+<span class="p">;</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">REPLACE</span><span class="w"> </span><span class="k">FUNCTION</span><span class="w"> </span><span class="s s-Name">&quot;public&quot;</span><span class="mf">.</span><span class="s s-Name">&quot;get_year&quot;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">schema_name</span><span class="w"> </span><span class="nb">anyelement</span><span class="p">,</span><span class="w"> </span><span class="n">table_name</span><span class="w"> </span><span class="nb">anyelement</span>
+<span class="p">)</span><span class="w">  </span><span class="k">RETURNS</span><span class="w"> </span><span class="nb">VARCHAR</span>
+<span class="w">  </span><span class="k">VOLATILE</span>
+<span class="k">AS</span><span class="w"> </span><span class="s">$</span><span class="dl">body</span><span class="s">$</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="n">yr</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">;</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="nb">varchar</span><span class="p">;</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="nb">varchar</span><span class="p">;</span>
+<span class="k">BEGIN</span>
+<span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">schema_name</span><span class="o">::</span><span class="nb">varchar</span><span class="p">;</span>
+<span class="w">    </span><span class="n">t</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">table_name</span><span class="o">::</span><span class="nb">varchar</span><span class="p">;</span>
+<span class="w">    </span><span class="k">IF</span><span class="w"> </span><span class="n">public</span><span class="mf">.</span><span class="n">has_column</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;year&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">THEN</span>
+<span class="w">        </span><span class="k">EXECUTE</span><span class="w"> </span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;SELECT string_agg(DISTINCT YEAR::INT::VARCHAR, &#39;&#39;,&#39;&#39;) FROM %I.%I&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">yr</span><span class="p">;</span>
+<span class="w">        </span><span class="k">RETURN</span><span class="w"> </span><span class="n">yr</span><span class="p">;</span>
+<span class="w">    </span><span class="k">ELSIF</span><span class="w"> </span><span class="n">public</span><span class="mf">.</span><span class="n">has_column</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;observation_date&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">THEN</span>
+<span class="w">            </span><span class="k">EXECUTE</span><span class="w"> </span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;SELECT string_agg(&#39;</span><span class="w"> </span><span class="o">||</span>
+<span class="w">                           </span><span class="s1">&#39;DISTINCT EXTRACT (YEAR FROM observation_date)::INT::VARCHAR, &#39;&#39;,&#39;&#39;&#39;</span><span class="w"> </span><span class="o">||</span>
+<span class="w">                           </span><span class="s1">&#39;) FROM %I.%I&#39;</span><span class="p">,</span>
+<span class="w">                </span><span class="n">schema_name</span><span class="p">,</span><span class="w"> </span><span class="n">table_name</span><span class="p">)</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">yr</span><span class="p">;</span>
+<span class="w">            </span><span class="k">RETURN</span><span class="w"> </span><span class="n">yr</span><span class="p">;</span>
+<span class="w">    </span><span class="k">ELSE</span>
+<span class="w">        </span><span class="k">RETURN</span><span class="w"> </span><span class="k">NULL</span><span class="p">;</span>
+<span class="w">    </span><span class="k">END</span><span class="w"> </span><span class="k">IF</span><span class="p">;</span>
+<span class="k">END</span><span class="p">;</span>
+<span class="s">$</span><span class="dl">body</span><span class="s">$</span><span class="w"> </span><span class="k">LANGUAGE</span><span class="w"> </span><span class="n">plpgsql</span>
+<span class="p">;</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">REPLACE</span><span class="w"> </span><span class="k">FUNCTION</span><span class="w"> </span><span class="n">public</span><span class="mf">.</span><span class="n">zip_as_text</span><span class="p">(</span><span class="n">zip</span><span class="w"> </span><span class="nb">anyelement</span><span class="p">)</span><span class="w"> </span><span class="k">RETURNS</span><span class="w"> </span><span class="nb">VARCHAR</span>
+<span class="k">IMMUTABLE</span>
+<span class="k">LANGUAGE</span><span class="w"> </span><span class="n">plpgsql</span>
+<span class="k">AS</span><span class="w"> </span><span class="s">$</span><span class="dl">body</span><span class="s">$</span>
+<span class="k">BEGIN</span>
+<span class="w">    </span><span class="k">RETURN</span><span class="w">  </span><span class="n">btrim</span><span class="p">(</span><span class="n">to_char</span><span class="p">(</span><span class="n">zip</span><span class="o">::</span><span class="nb">INT</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;00000&#39;</span><span class="p">));</span>
+<span class="k">END</span><span class="p">;</span>
+<span class="s">$</span><span class="dl">body</span><span class="s">$</span><span class="w"> </span>
+<span class="p">;</span>
+
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">REPLACE</span><span class="w"> </span><span class="k">PROCEDURE</span><span class="w"> </span><span class="n">public</span><span class="mf">.</span><span class="n">grant_select</span><span class="p">(</span>
+<span class="w">        </span><span class="n">username</span><span class="w"> </span><span class="nb">varchar</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="k">LANGUAGE</span><span class="w"> </span><span class="n">plpgsql</span>
+<span class="k">AS</span><span class="w"> </span><span class="s">$</span><span class="dl">body</span><span class="s">$</span>
+<span class="k">DECLARE</span>
+<span class="w">    </span><span class="n">sch</span><span class="w"> </span><span class="nb">text</span><span class="p">;</span>
+<span class="k">BEGIN</span>
+<span class="w">    </span><span class="k">FOR</span><span class="w"> </span><span class="n">sch</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">nspname</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">pg_namespace</span>
+<span class="w">    </span><span class="k">LOOP</span>
+<span class="w">        </span><span class="k">EXECUTE</span><span class="w"> </span><span class="n">format</span><span class="p">(</span><span class="s">$$ GRANT SELECT ON ALL TABLES IN SCHEMA %I TO %I $$</span><span class="p">,</span><span class="w"> </span><span class="n">sch</span><span class="p">,</span><span class="w"> </span><span class="n">username</span><span class="p">);</span>
+<span class="w">        </span><span class="k">EXECUTE</span><span class="w"> </span><span class="n">format</span><span class="p">(</span><span class="s">$$ GRANT USAGE ON SCHEMA %I TO %I $$</span><span class="p">,</span><span class="w"> </span><span class="n">sch</span><span class="p">,</span><span class="w"> </span><span class="n">username</span><span class="p">);</span>
+<span class="w">    </span><span class="k">END</span><span class="w"> </span><span class="k">LOOP</span><span class="p">;</span>
+<span class="k">END</span><span class="p">;</span>
+<span class="s">$</span><span class="dl">body</span><span class="s">$</span><span class="p">;</span>
+<span class="p">;</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">REPLACE</span><span class="w"> </span><span class="k">PROCEDURE</span><span class="w"> </span><span class="n">public</span><span class="mf">.</span><span class="n">grant_access</span><span class="p">()</span>
+<span class="k">LANGUAGE</span><span class="w"> </span><span class="n">plpgsql</span>
+<span class="k">AS</span><span class="w"> </span><span class="s">$</span><span class="dl">body</span><span class="s">$</span>
+<span class="k">DECLARE</span>
+<span class="w">    </span><span class="n">is_super</span><span class="w"> </span><span class="nb">bool</span><span class="p">;</span>
+<span class="w">    </span><span class="n">username</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">;</span>
+<span class="k">BEGIN</span>
+<span class="w">    </span><span class="n">username</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s1">&#39;nsaph_admin&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">IF</span><span class="w"> </span><span class="k">CURRENT_USER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">username</span><span class="w"> </span><span class="k">THEN</span>
+<span class="w">        </span><span class="k">RETURN</span><span class="p">;</span>
+<span class="w">    </span><span class="k">END</span><span class="w"> </span><span class="k">IF</span><span class="p">;</span>
+<span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="n">usesuper</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_user</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">usename</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">CURRENT_USER</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">is_super</span><span class="p">;</span>
+<span class="w">    </span><span class="k">IF</span><span class="w"> </span><span class="n">is_super</span><span class="w"> </span><span class="k">THEN</span>
+<span class="w">        </span><span class="k">CALL</span><span class="w"> </span><span class="n">public</span><span class="mf">.</span><span class="n">grant_select</span><span class="p">(</span><span class="n">username</span><span class="p">);</span>
+<span class="w">    </span><span class="k">ELSE</span>
+<span class="w">        </span><span class="k">EXECUTE</span><span class="w"> </span><span class="n">format</span><span class="p">(</span><span class="s">$$ REASSIGN OWNED BY CURRENT_USER TO %I $$</span><span class="p">,</span><span class="w"> </span><span class="n">username</span><span class="p">);</span>
+<span class="w">    </span><span class="k">END</span><span class="w"> </span><span class="k">IF</span><span class="p">;</span>
+<span class="k">END</span><span class="p">;</span>
+<span class="s">$</span><span class="dl">body</span><span class="s">$</span><span class="p">;</span>
+<span class="p">;</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">REPLACE</span><span class="w"> </span><span class="k">PROCEDURE</span><span class="w"> </span><span class="n">public</span><span class="mf">.</span><span class="n">owner_to</span><span class="p">(</span>
+<span class="w">        </span><span class="n">username</span><span class="w"> </span><span class="nb">varchar</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="k">LANGUAGE</span><span class="w"> </span><span class="n">plpgsql</span>
+<span class="k">AS</span><span class="w"> </span><span class="s">$</span><span class="dl">body</span><span class="s">$</span>
+<span class="k">DECLARE</span>
+<span class="w">    </span><span class="n">sch</span><span class="w"> </span><span class="nb">text</span><span class="p">;</span>
+<span class="w">    </span><span class="n">tbl</span><span class="w"> </span><span class="nb">text</span><span class="p">;</span>
+<span class="k">BEGIN</span>
+<span class="w">    </span><span class="k">FOR</span><span class="w"> </span><span class="n">sch</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">nspname</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">pg_namespace</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">nspowner</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">100</span>
+<span class="w">    </span><span class="k">LOOP</span>
+<span class="w">        </span><span class="k">EXECUTE</span><span class="w"> </span><span class="n">format</span><span class="p">(</span><span class="s">$$ ALTER SCHEMA %I OWNER TO %I $$</span><span class="p">,</span><span class="w"> </span><span class="n">sch</span><span class="p">,</span><span class="w"> </span><span class="n">username</span><span class="p">);</span>
+<span class="w">        </span><span class="k">FOR</span><span class="w"> </span><span class="n">tbl</span><span class="w"> </span><span class="k">IN</span>
+<span class="w">            </span><span class="k">SELECT</span><span class="w"> </span><span class="n">tablename</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">pg_tables</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">schemaname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sch</span>
+<span class="w">        </span><span class="k">LOOP</span>
+<span class="w">            </span><span class="k">EXECUTE</span><span class="w"> </span><span class="n">format</span><span class="p">(</span><span class="s">$$ ALTER TABLE %I.%I OWNER TO %I $$</span><span class="p">,</span><span class="w"> </span><span class="n">sch</span><span class="p">,</span><span class="w"> </span><span class="n">tbl</span><span class="p">,</span><span class="w"> </span><span class="n">username</span><span class="p">);</span>
+<span class="w">        </span><span class="k">END</span><span class="w"> </span><span class="k">LOOP</span><span class="w"> </span><span class="p">;</span>
+<span class="w">        </span><span class="k">FOR</span><span class="w"> </span><span class="n">tbl</span><span class="w"> </span><span class="k">IN</span>
+<span class="w">            </span><span class="k">SELECT</span><span class="w"> </span><span class="n">viewname</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">pg_views</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">schemaname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sch</span>
+<span class="w">        </span><span class="k">LOOP</span>
+<span class="w">            </span><span class="k">EXECUTE</span><span class="w"> </span><span class="n">format</span><span class="p">(</span><span class="s">$$ ALTER VIEW %I.%I OWNER TO %I $$</span><span class="p">,</span><span class="w"> </span><span class="n">sch</span><span class="p">,</span><span class="w"> </span><span class="n">tbl</span><span class="p">,</span><span class="w"> </span><span class="n">username</span><span class="p">);</span>
+<span class="w">        </span><span class="k">END</span><span class="w"> </span><span class="k">LOOP</span><span class="w"> </span><span class="p">;</span>
+<span class="w">    </span><span class="k">END</span><span class="w"> </span><span class="k">LOOP</span><span class="p">;</span>
+<span class="k">END</span><span class="p">;</span>
+<span class="s">$</span><span class="dl">body</span><span class="s">$</span><span class="p">;</span>
+<span class="p">;</span>
+
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">REPLACE</span><span class="w"> </span><span class="k">FUNCTION</span><span class="w"> </span><span class="n">public</span><span class="mf">.</span><span class="n">hll_arr_agg</span><span class="p">(</span>
+<span class="w">    </span><span class="n">arr</span><span class="w"> </span><span class="nb">anyarray</span>
+<span class="p">)</span><span class="w"> </span><span class="k">RETURNS</span><span class="w"> </span><span class="n">HLL</span>
+<span class="k">IMMUTABLE</span>
+<span class="k">LANGUAGE</span><span class="w"> </span><span class="n">plpgsql</span>
+<span class="k">AS</span><span class="w"> </span><span class="s">$</span><span class="dl">body</span><span class="s">$</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="n">hash</span><span class="w"> </span><span class="n">HLL</span><span class="p">;</span>
+<span class="k">BEGIN</span>
+<span class="w">    </span><span class="k">SELECT</span>
+<span class="w">        </span><span class="n">hll_add_agg</span><span class="p">(</span><span class="n">hx</span><span class="p">)</span>
+<span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="k">SELECT</span>
+<span class="w">            </span><span class="n">hll_hash_any</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">hx</span>
+<span class="w">        </span><span class="k">FROM</span><span class="w"> </span><span class="p">(</span>
+<span class="w">            </span><span class="k">SELECT</span><span class="w"> </span><span class="n">UNNEST</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">x</span>
+<span class="w">        </span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">y</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">hy</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">hash</span><span class="p">;</span>
+<span class="w">    </span><span class="k">RETURN</span><span class="w"> </span><span class="n">hash</span><span class="p">;</span>
+<span class="k">END</span><span class="p">;</span>
+<span class="s">$</span><span class="dl">body</span><span class="s">$</span>
+<span class="p">;</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python Core Platform Components &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Python Core Platform Components</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/CoreLibrary.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="python-core-platform-components">
+<h1>Python Core Platform Components<a class="headerlink" href="#python-core-platform-components" title="Permalink to this heading"></a></h1>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Python Module Index</span></a></p>
+</div>
+<section id="package-nsaph">
+<h2>Package nsaph<a class="headerlink" href="#package-nsaph" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="members/platform.html"><span class="std std-doc">NSAPH Core Package-wide utilities</span></a> API to initialize logging and database connections</p></li>
+<li><p><a class="reference internal" href="members/db.html"><span class="std std-doc">db</span></a> Database connections API</p></li>
+<li><p><a class="reference internal" href="members/fips.html"><span class="std std-doc">fips</span></a> US State FIPS codes, represented as Python dictionary</p></li>
+<li><p><a class="reference internal" href="members/pg_keywords.html"><span class="std std-doc">pg_keywords</span></a> PostgreSQL keywords, e.g.
+type names, etc.</p></li>
+</ul>
+</section>
+<section id="package-dorieh-platform-data-model">
+<h2>Package dorieh.platform.data_model<a class="headerlink" href="#package-dorieh-platform-data-model" title="Permalink to this heading"></a></h2>
+<p>APIs for data modelling, loading and manipulations</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="members/domain.html"><span class="std std-doc">Domain class</span></a> Data modeling for a data domain</p></li>
+<li><p><a class="reference internal" href="members/inserter.html"><span class="doc std std-doc">Inserter</span></a> API to parallel data loader</p></li>
+<li><p><a class="reference internal" href="members/utils.html"><span class="doc std std-doc">utils</span></a> Miscellaneous data handling API</p></li>
+</ul>
+</section>
+<section id="package-dorieh-platform-loader">
+<h2>Package dorieh.platform.loader<a class="headerlink" href="#package-dorieh-platform-loader" title="Permalink to this heading"></a></h2>
+<p>Command line utilities to manipulate data</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="members/loader.html"><span class="std std-doc">Data loader base abstract API</span></a></p></li>
+<li><p><a class="reference internal" href="members/introspector.html"><span class="doc std std-doc">Data Introspector</span></a> introspects columnar data to
+infer the types of the columns</p></li>
+<li><p><a class="reference internal" href="members/data_loader.html"><span class="std std-doc">The data_loader Module</span></a> Transfers data from file(s) to the database.
+Implements parallel loading and handling multiple file formats
+(CSV, FST, JSON, SAS, FWF)</p></li>
+<li><p><a class="reference internal" href="members/project_loader.html"><span class="std std-doc">Project Loader</span></a> Recursively introspects and loads
+data directory into the database</p></li>
+<li><p><a class="reference internal" href="members/index_builder.html"><span class="doc std std-doc">Index Builder</span></a> Builds indices for a table or for all
+tables in the data domain, reporting the progress</p></li>
+<li><p><a class="reference internal" href="members/monitor.html"><span class="doc std std-doc">Database Activity Monitor</span></a> API and command line utility
+to monitor database activity</p></li>
+<li><p><a class="reference internal" href="members/vacuum.html"><span class="doc std std-doc">Vacuum</span></a> Executes VACUUM command in the database to tune
+tables for better query performance</p></li>
+<li><p><a class="reference internal" href="members/common.html"><span class="doc std std-doc">Common Configuration</span></a> Common configuration options
+for working with the database</p></li>
+<li><p><a class="reference internal" href="members/loader_config.html"><span class="doc std std-doc">Loader Configurator</span></a> Configuration options
+for data loader</p></li>
+</ul>
+</section>
+<section id="package-dorieh-platform-requests">
+<h2>Package dorieh.platform.requests<a class="headerlink" href="#package-dorieh-platform-requests" title="Permalink to this heading"></a></h2>
+<p>Attempt to tackle User requests API. Incomplete work in progress</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="members/hdf5_export.html"><span class="std std-doc">HDF5 Export</span></a> API and utility to export result
+of quering the database in HDF5 format</p></li>
+<li><p><a class="reference internal" href="members/query.html"><span class="doc std std-doc">Query class</span></a> API and utility to generate SQL query
+based on a YAML query specification</p></li>
+</ul>
+</section>
+<section id="package-dorieh-platform-utils">
+<h2>Package dorieh.platform.utils<a class="headerlink" href="#package-dorieh-platform-utils" title="Permalink to this heading"></a></h2>
+<p>Miscellaneous tools and APIs</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="members/cwl_collect_outputs.html"><span class="doc std std-doc">CWL Output collector</span></a> Command line
+utility to copy outputs from a CWL tool or sub-workflow into
+the calling workflow</p></li>
+<li><p><a class="reference internal" href="members/executors.html"><span class="doc std std-doc">Blocking Executor Pool</span></a> Blocking executor pool to
+avoid memory overflow with long queues</p></li>
+<li><p><a class="reference internal" href="members/net.html"><span class="doc std std-doc">Localhost for Airflow</span></a> Overrides host resolver for Airflow, so
+it can use localhost</p></li>
+<li><p><a class="reference internal" href="members/pg_json_dump.html"><span class="doc std std-doc">JSON to/from Table converter</span></a> A command line utility
+to import/export JSON files as database tables</p></li>
+<li><p><a class="reference internal" href="members/resources.html"><span class="doc std std-doc">Resource finder</span></a> An API to look for resources
+in Python packages</p></li>
+<li><p><a class="reference internal" href="members/sas_explorer.html"><span class="doc std std-doc">sas_explorer</span></a> A tool to print metadata of a SAS
+SAS7BDAT file</p></li>
+<li><p><a class="reference internal" href="members/ssa2fips.html"><span class="doc std std-doc">SSA to FIPS Mapping</span></a> A utility to create in-database
+mapping table between SSA and FIPS codes</p></li>
+<li><p><a class="reference internal" href="members/zip2fips.html"><span class="doc std std-doc">ZIP to FIPS mappings</span></a> A utility to download ZIP to
+FIPS mapping from HUD site</p></li>
+</ul>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Python Module Index</span></a></p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

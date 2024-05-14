@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pipeline to aggregate data from Climatology Lab &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Pipeline to aggregate data from Climatology Lab</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/pipeline/gridmet.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pipeline-to-aggregate-data-from-climatology-lab">
+<h1>Pipeline to aggregate data from Climatology Lab<a class="headerlink" href="#pipeline-to-aggregate-data-from-climatology-lab" title="Permalink to this heading"></a></h1>
+<p><a class="reference internal" href="gridmetcwl_src.html"><span class="std std-doc">Source code</span></a></p>
+<p><img alt="" src="../_images/gridmet.png" /></p>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#description" id="id1">Description</a></p></li>
+<li><p><a class="reference internal" href="#inputs" id="id2">Inputs</a></p></li>
+<li><p><a class="reference internal" href="#outputs" id="id3">Outputs</a></p></li>
+<li><p><a class="reference internal" href="#steps" id="id4">Steps</a></p></li>
+</ul>
+</nav>
+<p><strong>Workflow</strong></p>
+<section id="description">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Description</a><a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
+<p>This workflow downloads NetCDF datasets from
+<a class="reference external" href="https://www.northwestknowledge.net/metdata/data/">University of Idaho Gridded Surface Meteorological Dataset</a>,
+aggregates gridded data to daily mean values over chosen geographies
+and optionally ingests it into the database.</p>
+<p>The output of the workflow are gzipped CSV files containing
+aggregated data.</p>
+<p>Optionally, the aggregated data can be ingested into a database
+specified in the connection parameters:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">database.ini</span></code> file containing connection descriptions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">connection_name</span></code> a string referring to a section in the <code class="docutils literal notranslate"><span class="pre">database.ini</span></code>
+file, identifying specific connection to be used.</p></li>
+</ul>
+<p>The workflow can be invoked either by providing command line options
+as in the following example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>toil-cwl-runner --retryCount 1 --cleanWorkDir never \ 
+    --outdir /scratch/work/exposures/outputs \ 
+    --workDir /scratch/work/exposures \
+    gridmet.cwl \  
+    --database /opt/local/database.ini \ 
+    --connection_name dorieh \ 
+    --bands rmin rmax \ 
+    --strategy auto \ 
+    --geography zcta \ 
+    --ram 8GB
+</pre></div>
+</div>
+<p>Or, by providing a YaML file (see <a class="reference internal" href="#../test_gridmet_job"><span class="xref myst">example</span></a>)
+with similar options:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>toil-cwl-runner --retryCount 1 --cleanWorkDir never \ 
+    --outdir /scratch/work/exposures/outputs \ 
+    --workDir /scratch/work/exposures \
+    gridmet.cwl test_gridmet_job.yml 
+</pre></div>
+</div>
+</section>
+<section id="inputs">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Inputs</a><a class="headerlink" href="#inputs" title="Permalink to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Name</p></th>
+<th class="head text-left"><p>Type</p></th>
+<th class="head text-left"><p>Default</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>proxy</p></td>
+<td class="text-left"><p>string?</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p>HTTP/HTTPS Proxy if required</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>shapes</p></td>
+<td class="text-left"><p>Directory?</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p>Do we even need this parameter, as we instead downloading shapes?</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>geography</p></td>
+<td class="text-left"><p>string</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p>Type of geography: zip codes or counties Valid values: “zip”, “zcta” or “county”</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>years</p></td>
+<td class="text-left"><p>string[]</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">['1999',</span> <span class="pre">'2000',</span> <span class="pre">'2001',</span> <span class="pre">'2002',</span> <span class="pre">'2003',</span> <span class="pre">'2004',</span> <span class="pre">'2005',</span> <span class="pre">'2006',</span> <span class="pre">'2007',</span> <span class="pre">'2008',</span> <span class="pre">'2009',</span> <span class="pre">'2010',</span> <span class="pre">'2011',</span> <span class="pre">'2012',</span> <span class="pre">'2013',</span> <span class="pre">'2014',</span> <span class="pre">'2015',</span> <span class="pre">'2016',</span> <span class="pre">'2017',</span> <span class="pre">'2018',</span> <span class="pre">'2019',</span> <span class="pre">'2020']</span></code></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>bands</p></td>
+<td class="text-left"><p>string[]</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p>University of Idaho Gridded Surface Meteorological Dataset  <a class="reference external" href="https://developers.google.com/earth-engine/datasets/catalog/IDAHO_EPSCOR_GRIDMET#bands">bands</a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>strategy</p></td>
+<td class="text-left"><p>string</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">auto</span></code></p></td>
+<td class="text-left"><p><a class="reference external" href="https://nsaph-data-platform.github.io/nsaph-platform-docs/common/gridmet/doc/strategy.html">Rasterization strategy</a> used for spatial aggregation</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>ram</p></td>
+<td class="text-left"><p>string</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">2GB</span></code></p></td>
+<td class="text-left"><p>Runtime memory, available to the process. When aggregation strategy is <code class="docutils literal notranslate"><span class="pre">auto</span></code>, this value is used to calculate the optimal downscaling factor for the available resources.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>database</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p>Path to database connection file, usually database.ini</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>connection_name</p></td>
+<td class="text-left"><p>string</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p>The name of the section in the database.ini file</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>dates</p></td>
+<td class="text-left"><p>string?</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p>dates restriction, for testing purposes only</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>domain</p></td>
+<td class="text-left"><p>string</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">climate</span></code></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="outputs">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Outputs</a><a class="headerlink" href="#outputs" title="Permalink to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Name</p></th>
+<th class="head text-left"><p>Type</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>registry</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>registry_log</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>registry_err</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>data</p></td>
+<td class="text-left"><p>array</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>download_log</p></td>
+<td class="text-left"><p>array</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>download_err</p></td>
+<td class="text-left"><p>array</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>process_log</p></td>
+<td class="text-left"><p>array</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>process_err</p></td>
+<td class="text-left"><p>array</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>ingest_log</p></td>
+<td class="text-left"><p>array</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>ingest_err</p></td>
+<td class="text-left"><p>array</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>reset_log</p></td>
+<td class="text-left"><p>array</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>reset_err</p></td>
+<td class="text-left"><p>array</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>index_log</p></td>
+<td class="text-left"><p>array</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>index_err</p></td>
+<td class="text-left"><p>array</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>vacuum_log</p></td>
+<td class="text-left"><p>array</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>vacuum_err</p></td>
+<td class="text-left"><p>array</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="steps">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Steps</a><a class="headerlink" href="#steps" title="Permalink to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Name</p></th>
+<th class="head text-left"><p>Runs</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>init_db_schema</p></td>
+<td class="text-left"><p>[‘python’, ‘-m’, ‘dorieh.platform.util.psql’]</p></td>
+<td class="text-left"><p>We need to do it because of parallel creation of tables</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>make_registry</p></td>
+<td class="text-left"><p><a class="reference internal" href="build_gridmet_model.html"><span class="std std-doc">build_gridmet_model.cwl</span></a></p></td>
+<td class="text-left"><p>Writes down YAML file with the database model</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>init_tables</p></td>
+<td class="text-left"><p><a class="reference internal" href="gridmet_1.html"><span class="std std-doc">sub-workflow</span></a></p></td>
+<td class="text-left"><p>creates or recreates database tables, one for each band</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>process</p></td>
+<td class="text-left"><p><a class="reference internal" href="gridmet_one_file.html"><span class="std std-doc">gridmet_one_file.cwl</span></a></p></td>
+<td class="text-left"><p>Downloads raw data and aggregates it over shapes and time</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

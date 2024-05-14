@@ -1,0 +1,29 @@
+# census_qc.cwl
+
+
+ [Source code](census_qccwl_src.md) 
+
+
+```{contents}
+---
+local:
+---
+```
+
+**Tool**. Runs: census.do_qc
+
+## Inputs
+
+| Name    | Type   | Default                                          | Description | 
+|:--------|:-------|:-------------------------------------------------|:------------|
+| log     | File   | `{'class': 'File', 'location': 'census.log'}`    |             | 
+| in_pkl  | File   | `{'class': 'File', 'location': 'census.pkl'}`    |             | 
+| qc_file | File   | `{'class': 'File', 'location': 'census_qc.yml'}` |             | 
+| qc_log  | string | `census_qc.log`                                  |             | 
+
+## Outputs
+
+| Name   | Type | Description | 
+|:-------|:-----|:------------|
+| qc_log | File |             | 
+

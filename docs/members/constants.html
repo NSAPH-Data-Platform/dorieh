@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The constants Module &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">The constants Module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/members/constants.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-dorieh.gis.constants">
+<span id="the-constants-module"></span><h1>The constants Module<a class="headerlink" href="#module-dorieh.gis.constants" title="Permalink to this heading"></a></h1>
+<p>This module contains Enums used by configuration for
+processing of GIS information</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.gis.constants.RasterizationStrategy">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RasterizationStrategy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/gis/constants.html#RasterizationStrategy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.gis.constants.RasterizationStrategy" title="Permalink to this definition"></a></dt>
+<dd><p><a class="reference external" href="https://pythonhosted.org/rasterstats/manual.html#rasterization-strategy">Rasterization Strategy</a>
+to rasterize a vector.</p>
+<p>While <cite>downscale</cite> strategy provides the best accuracy it requires
+significantly more resources, especially RAM.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.gis.constants.RasterizationStrategy.default">
+<span class="sig-name descname"><span class="pre">default</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'default'</span></em><a class="headerlink" href="#dorieh.gis.constants.RasterizationStrategy.default" title="Permalink to this definition"></a></dt>
+<dd><p>The default strategy is to include all pixels along the line render path
+(for lines), or cells where the center point is within the polygon
+(for polygons).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.gis.constants.RasterizationStrategy.all_touched">
+<span class="sig-name descname"><span class="pre">all_touched</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'all_touched'</span></em><a class="headerlink" href="#dorieh.gis.constants.RasterizationStrategy.all_touched" title="Permalink to this definition"></a></dt>
+<dd><p>Alternate, all_touched strategy, rasterizes the geometry
+by including all pixels that it touches.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.gis.constants.RasterizationStrategy.combined">
+<span class="sig-name descname"><span class="pre">combined</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'combined'</span></em><a class="headerlink" href="#dorieh.gis.constants.RasterizationStrategy.combined" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate statistics using both default and all_touched strategy and
+combine results, e.g. using arithmetic means</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.gis.constants.RasterizationStrategy.downscale">
+<span class="sig-name descname"><span class="pre">downscale</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'downscale'</span></em><a class="headerlink" href="#dorieh.gis.constants.RasterizationStrategy.downscale" title="Permalink to this definition"></a></dt>
+<dd><p>A combination of “default” rasterization strategy with 
+affine transformation with downscaling. Downscaling factor 
+is computed based on the grid size and runtime memory available 
+to the process.</p>
+<p>Effectively, the grid is interpolated with intermediate nodes,
+increasing the number of nodes by the factor of 25 (5 x 5). Hence,
+the accuracy is better, especially for complex and small shapes,
+however, the aggregation will require 25 times more memory (RAM)
+and will run slower.</p>
+<p>See <a class="reference external" href="../../../gridmet/doc/gridmet_tools.html#gridmet.gridmet_tools.get_affine_transform">get_affine_transform</a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.gis.constants.RasterizationStrategy.auto">
+<span class="sig-name descname"><span class="pre">auto</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'auto'</span></em><a class="headerlink" href="#dorieh.gis.constants.RasterizationStrategy.auto" title="Permalink to this definition"></a></dt>
+<dd><p>A combination of “all_touched” rasterization strategy with 
+affine transformation with downscaling. Downscaling factor 
+is computed based on the grid size and runtime memory available 
+to the process.</p>
+<p>Effectively, the grid is interpolated with intermediate nodes,
+increasing the number of nodes by the factor of 25 (5 x 5). Hence,
+the accuracy is better, especially for complex and small shapes,
+however, the aggregation will require 25 times more memory (RAM)
+and will run slower.</p>
+<p>See <a class="reference external" href="../../../gridmet/doc/gridmet_tools.html#gridmet.gridmet_tools.get_affine_transform">get_affine_transform</a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.gis.constants.Geography">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Geography</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/gis/constants.html#Geography"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.gis.constants.Geography" title="Permalink to this definition"></a></dt>
+<dd><p>Type of geography</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.gis.constants.Geography.zip">
+<span class="sig-name descname"><span class="pre">zip</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'zip'</span></em><a class="headerlink" href="#dorieh.gis.constants.Geography.zip" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.gis.constants.Geography.zcta">
+<span class="sig-name descname"><span class="pre">zcta</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'zcta'</span></em><a class="headerlink" href="#dorieh.gis.constants.Geography.zcta" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.gis.constants.Geography.county">
+<span class="sig-name descname"><span class="pre">county</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'county'</span></em><a class="headerlink" href="#dorieh.gis.constants.Geography.county" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.gis.constants.Geography.custom">
+<span class="sig-name descname"><span class="pre">custom</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'custom'</span></em><a class="headerlink" href="#dorieh.gis.constants.Geography.custom" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.gis.constants.Geography.all">
+<span class="sig-name descname"><span class="pre">all</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'all'</span></em><a class="headerlink" href="#dorieh.gis.constants.Geography.all" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

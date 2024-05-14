@@ -1,0 +1,42 @@
+# census_ingest.cwl
+
+
+ [Source code](census_ingestcwl_src.md) 
+
+
+![](census_ingest.png)
+
+```{contents}
+---
+local:
+---
+```
+
+**Workflow**
+
+## Inputs
+
+| Name            | Type   | Default | Description                                            | 
+|:----------------|:-------|:--------|:-------------------------------------------------------|
+| database        | string |         | Path to database connection file, usually database.ini | 
+| connection_name | string |         | The name of the section in the database.ini file       | 
+| registry        | File   |         | registry                                               | 
+| data_files      | File[] |         | data_files                                             | 
+
+## Outputs
+
+| Name          | Type   | Description | 
+|:--------------|:-------|:------------|
+| ingest_log    | File[] |             | 
+| index_log     | File[] |             | 
+| vacuum_log    | File[] |             | 
+| ingest_errors | File[] |             | 
+| index_errors  | File[] |             | 
+| vacuum_errors | File[] |             | 
+
+## Steps
+
+| Name  | Runs                               | Description | 
+|:------|:-----------------------------------|:------------|
+| store | [sub-workflow](census_ingest_1.md) |             | 
+

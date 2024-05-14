@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dorieh.platform.data_model.inserter &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">dorieh.platform.data_model.inserter</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for dorieh.platform.data_model.inserter</h1><div class="highlight"><pre>
+<span></span><span class="c1">#  Copyright (c) 2021. Harvard University</span>
+<span class="c1">#</span>
+<span class="c1">#  Developed by Research Software Engineering,</span>
+<span class="c1">#  Faculty of Arts and Sciences, Research Computing (FAS RC)</span>
+<span class="c1">#  Author: Michael A Bouzinier</span>
+<span class="c1">#</span>
+<span class="c1">#  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1">#  you may not use this file except in compliance with the License.</span>
+<span class="c1">#  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#         http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1">#  limitations under the License.</span>
+<span class="c1">#</span>
+
+<span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">contextmanager</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span><span class="p">,</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">pyresourcepool.pyresourcepool</span> <span class="kn">import</span> <span class="n">ResourcePool</span>
+<span class="kn">from</span> <span class="nn">timeit</span> <span class="kn">import</span> <span class="n">default_timer</span> <span class="k">as</span> <span class="n">timer</span>
+
+<span class="kn">from</span> <span class="nn">sortedcontainers</span> <span class="kn">import</span> <span class="n">SortedDict</span>
+<span class="kn">from</span> <span class="nn">psycopg2.extras</span> <span class="kn">import</span> <span class="n">execute_values</span>
+
+<span class="kn">from</span> <span class="nn">dorieh.platform.data_model.domain</span> <span class="kn">import</span> <span class="n">Domain</span>
+<span class="kn">from</span> <span class="nn">dorieh.platform.data_model.utils</span> <span class="kn">import</span> <span class="n">split</span><span class="p">,</span> <span class="n">DataReader</span><span class="p">,</span> <span class="n">regex</span>
+<span class="kn">from</span> <span class="nn">dorieh.platform.pg_keywords</span> <span class="kn">import</span> <span class="n">PG_SERIAL_TYPE</span><span class="p">,</span> <span class="n">PG_SM_SERIAL_TYPE</span>
+<span class="kn">from</span> <span class="nn">dorieh.platform.util.executors</span> <span class="kn">import</span> <span class="n">BlockingThreadPoolExecutor</span>
+<span class="kn">from</span> <span class="nn">dorieh.utils.io_utils</span> <span class="kn">import</span> <span class="n">sizeof_fmt</span><span class="p">,</span> <span class="n">SpecialValues</span>
+
+<span class="n">EMPTY_LIST_SIZE</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">getsizeof</span><span class="p">([])</span>
+
+
+<div class="viewcode-block" id="compute"><a class="viewcode-back" href="../../../../members/inserter.html#dorieh.platform.data_model.inserter.compute">[docs]</a><span class="k">def</span> <span class="nf">compute</span><span class="p">(</span><span class="n">how</span><span class="p">,</span> <span class="n">row</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">how</span><span class="p">[</span><span class="s2">&quot;eval&quot;</span><span class="p">])</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">value</span></div>
+
+
+<div class="viewcode-block" id="Inserter"><a class="viewcode-back" href="../../../../members/inserter.html#dorieh.platform.data_model.inserter.Inserter">[docs]</a><span class="k">class</span> <span class="nc">Inserter</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="n">root_table_name</span><span class="p">,</span> <span class="n">reader</span><span class="p">:</span> <span class="n">DataReader</span><span class="p">,</span> <span class="n">connections</span><span class="p">,</span> <span class="n">page_size</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tables</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Inserter</span><span class="o">.</span><span class="n">_Table</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">page_size</span> <span class="o">=</span> <span class="n">page_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ready</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reader</span> <span class="o">=</span> <span class="n">reader</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">domain</span> <span class="o">=</span> <span class="n">domain</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">read_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">root_table_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="n">root_table_name</span><span class="p">,</span> <span class="n">table</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">connections</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">has_triggers</span> <span class="o">=</span> <span class="nb">any</span><span class="p">([</span><span class="n">table</span><span class="o">.</span><span class="n">audit</span> <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tables</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">has_triggers</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">connections</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;One of the tables uses triggers, only one connection can be used&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">connections</span> <span class="o">=</span> <span class="n">ResourcePool</span><span class="p">(</span><span class="n">connections</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">capacity</span> <span class="o">=</span> <span class="mi">2</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">connections</span> <span class="o">=</span> <span class="n">ResourcePool</span><span class="p">(</span><span class="n">connections</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">capacity</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">connections</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">connections</span> <span class="o">=</span> <span class="n">ResourcePool</span><span class="p">([</span><span class="n">connections</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">capacity</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timings</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timestamps</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_row</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pushed_rows</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_logged_row</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_wait_state</span> <span class="o">=</span> <span class="kc">False</span>
+
+<div class="viewcode-block" id="Inserter.prepare"><a class="viewcode-back" href="../../../../members/inserter.html#dorieh.platform.data_model.inserter.Inserter.prepare">[docs]</a>    <span class="k">def</span> <span class="nf">prepare</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">table</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">table</span><span class="p">))</span>
+        <span class="k">if</span> <span class="s2">&quot;children&quot;</span> <span class="ow">in</span> <span class="n">table</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">child_table</span> <span class="ow">in</span> <span class="n">table</span><span class="p">[</span><span class="s2">&quot;children&quot;</span><span class="p">]:</span>
+                <span class="n">child_table_def</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="s2">&quot;children&quot;</span><span class="p">][</span><span class="n">child_table</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">child_table_def</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hard_linked&quot;</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">tables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="n">child_table</span><span class="p">,</span> <span class="n">child_table_def</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ready</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tables</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">insert</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Inserter.read_batch"><a class="viewcode-back" href="../../../../members/inserter.html#dorieh.platform.data_model.inserter.Inserter.read_batch">[docs]</a>    <span class="k">def</span> <span class="nf">read_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">batch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Batch</span><span class="p">()</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_lock</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">rows</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">current_row</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">volume</span> <span class="o">+=</span> <span class="n">sys</span><span class="o">.</span><span class="n">getsizeof</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="o">-</span> <span class="n">EMPTY_LIST_SIZE</span>
+                <span class="n">is_valid</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tables</span><span class="p">:</span>
+                    <span class="n">records</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">records</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">is_valid</span> <span class="o">=</span> <span class="kc">False</span>
+                        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Illegal row #</span><span class="si">{:d}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_row</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">)))</span>
+                        <span class="k">break</span>
+                    <span class="n">batch</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">records</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">is_valid</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="n">batch</span><span class="o">.</span><span class="n">inc</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">batch</span><span class="o">.</span><span class="n">rows</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">page_size</span><span class="p">:</span>
+                    <span class="k">break</span>
+        <span class="k">return</span> <span class="n">batch</span></div>
+
+<div class="viewcode-block" id="Inserter.import_file"><a class="viewcode-back" href="../../../../members/inserter.html#dorieh.platform.data_model.inserter.Inserter.import_file">[docs]</a>    <span class="k">def</span> <span class="nf">import_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">limit</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">log_step</span> <span class="o">=</span> <span class="mi">1000000</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;Autocommit is: </span><span class="si">{}</span><span class="s2">. Page size = </span><span class="si">{:d}</span><span class="s2">. Writer threads: </span><span class="si">{:d}</span><span class="s2">. Logging progress every </span><span class="si">{:d}</span><span class="s2"> records&quot;</span>
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_autocommit</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">page_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">capacity</span><span class="p">,</span> <span class="n">log_step</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset_timer</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stamp_time</span><span class="p">(</span><span class="s2">&quot;start&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">capacity</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">max_tasks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">capacity</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">with</span> <span class="n">BlockingThreadPoolExecutor</span><span class="p">(</span><span class="n">max_queue_size</span><span class="o">=</span><span class="n">max_tasks</span><span class="p">,</span>
+                                            <span class="n">max_workers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">capacity</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                                            <span class="n">timeout</span><span class="o">=</span><span class="mi">14400</span><span class="p">)</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">in_wait_state</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">l</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loop</span><span class="p">(</span><span class="n">executor</span><span class="p">,</span> <span class="n">limit</span><span class="p">,</span> <span class="n">log_step</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">in_wait_state</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Main loop has finished. Waiting for inserter threads to finish&quot;</span><span class="p">)</span>
+                <span class="n">executor</span><span class="o">.</span><span class="n">wait_for_completion</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">l</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loop</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">limit</span><span class="p">,</span> <span class="n">log_step</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Total records imported from </span><span class="si">{}</span><span class="s2">: </span><span class="si">{:d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">get_path</span><span class="p">(),</span> <span class="n">l</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">l</span></div>
+
+    <span class="k">def</span> <span class="nf">_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">executor</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">BlockingThreadPoolExecutor</span><span class="p">],</span> <span class="n">limit</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">log_step</span> <span class="o">=</span> <span class="mi">1000000</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">l</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">l1</span> <span class="o">=</span> <span class="n">l</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">ready</span><span class="p">:</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">timer</span><span class="p">(</span><span class="s2">&quot;read&quot;</span><span class="p">):</span>
+                <span class="n">batch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_batch</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">batch</span><span class="o">.</span><span class="n">is_empty</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ready</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">l</span> <span class="o">+=</span> <span class="n">batch</span><span class="o">.</span><span class="n">rows</span>
+            <span class="k">if</span> <span class="n">batch</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">executor</span><span class="p">:</span>
+                    <span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">push</span><span class="p">,</span> <span class="n">batch</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">l</span> <span class="o">-</span> <span class="n">l1</span> <span class="o">&gt;=</span> <span class="n">log_step</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">log_progress</span><span class="p">()</span>
+                <span class="n">l1</span> <span class="o">=</span> <span class="n">l</span>
+            <span class="k">if</span> <span class="n">limit</span> <span class="ow">and</span> <span class="n">l</span> <span class="o">&gt;=</span> <span class="nb">int</span><span class="p">(</span><span class="n">limit</span><span class="p">):</span>
+                <span class="k">break</span>
+        <span class="k">return</span> <span class="n">l</span>
+
+<div class="viewcode-block" id="Inserter.push"><a class="viewcode-back" href="../../../../members/inserter.html#dorieh.platform.data_model.inserter.Inserter.push">[docs]</a>    <span class="k">def</span> <span class="nf">push</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">):</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">connections</span><span class="o">.</span><span class="n">get_resource</span><span class="p">()</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tables</span><span class="p">:</span>
+                <span class="n">records</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="n">table</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">records</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Trying to execute an empty batch&quot;</span><span class="p">)</span>
+                    <span class="k">continue</span>
+                <span class="k">with</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">timer</span><span class="p">(</span><span class="s2">&quot;store&quot;</span><span class="p">):</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_wait_state</span><span class="p">:</span>
+                            <span class="n">ts</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+                            <span class="n">tid</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">get_ident</span><span class="p">()</span>
+                            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> - </span><span class="si">{:d}</span><span class="s2">. Sending last Batch[</span><span class="si">{:d}</span><span class="s2">] to the database.&quot;</span>
+                                         <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">tid</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">records</span><span class="p">)))</span>
+                        <span class="n">execute_values</span><span class="p">(</span><span class="n">cursor</span><span class="p">,</span> <span class="n">table</span><span class="o">.</span><span class="n">insert</span><span class="p">,</span> <span class="n">records</span><span class="p">,</span> <span class="n">page_size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">records</span><span class="p">))</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_wait_state</span><span class="p">:</span>
+                            <span class="n">ts</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+                            <span class="n">tid</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">get_ident</span><span class="p">()</span>
+                            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> - </span><span class="si">{:d}</span><span class="s2">. Last Batch has been executed.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">tid</span><span class="p">))</span>
+                    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">x</span><span class="p">:</span>
+                        <span class="n">msg</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+                        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Error </span><span class="si">{}</span><span class="s2">; while executing: </span><span class="si">{}</span><span class="s2"> with </span><span class="si">{:d}</span><span class="s2"> records&quot;</span>
+                                      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">table</span><span class="o">.</span><span class="n">insert</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">records</span><span class="p">)))</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">drilldown</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">table</span><span class="o">.</span><span class="n">insert</span><span class="p">,</span> <span class="n">records</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">write_lock</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pushed_rows</span> <span class="o">+=</span> <span class="n">batch</span><span class="o">.</span><span class="n">rows</span></div>
+
+<div class="viewcode-block" id="Inserter.drilldown"><a class="viewcode-back" href="../../../../members/inserter.html#dorieh.platform.data_model.inserter.Inserter.drilldown">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">drilldown</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">sql</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">records</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">connection</span><span class="o">.</span><span class="n">autocommit</span><span class="p">:</span>
+            <span class="n">connection</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">records</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Empty records array for &quot;</span> <span class="o">+</span> <span class="n">sql</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">records</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">sql</span> <span class="o">=</span> <span class="n">sql</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;(</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])))</span>
+        <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">records</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">record</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">x</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">record</span><span class="p">])</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Drill down: error </span><span class="si">{}</span><span class="s2"> while executing: </span><span class="si">{}</span><span class="s2"> (</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">sql</span><span class="p">,</span> <span class="n">s</span><span class="p">))</span>
+                <span class="k">raise</span> <span class="n">x</span></div>
+
+<div class="viewcode-block" id="Inserter.get_autocommit"><a class="viewcode-back" href="../../../../members/inserter.html#dorieh.platform.data_model.inserter.Inserter.get_autocommit">[docs]</a>    <span class="k">def</span> <span class="nf">get_autocommit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">ac</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">connection</span><span class="o">.</span><span class="n">autocommit</span> <span class="k">for</span> <span class="n">connection</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">connections</span><span class="o">.</span><span class="n">_objects</span>
+        <span class="p">]</span>
+        <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">ac</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s2">&quot;ON&quot;</span>
+        <span class="k">if</span> <span class="nb">all</span><span class="p">([(</span><span class="ow">not</span> <span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ac</span><span class="p">]):</span>
+            <span class="k">return</span> <span class="s2">&quot;OFF&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;ON&quot;</span> <span class="k">if</span> <span class="n">a</span> <span class="k">else</span> <span class="s2">&quot;OFF&quot;</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ac</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="Inserter.log_progress"><a class="viewcode-back" href="../../../../members/inserter.html#dorieh.platform.data_model.inserter.Inserter.log_progress">[docs]</a>    <span class="k">def</span> <span class="nf">log_progress</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">t0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_timestamp</span><span class="p">(</span><span class="s2">&quot;start&quot;</span><span class="p">)</span>
+        <span class="n">t1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_timestamp</span><span class="p">(</span><span class="s2">&quot;last_logged&quot;</span><span class="p">,</span> <span class="n">t0</span><span class="p">)</span>
+        <span class="n">now</span> <span class="o">=</span> <span class="n">timer</span><span class="p">()</span>
+        <span class="n">rate1</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pushed_rows</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_logged_row</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">now</span> <span class="o">-</span> <span class="n">t1</span><span class="p">)</span>
+        <span class="n">rate</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pushed_rows</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">now</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span>
+        <span class="n">rt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_cumulative_timing</span><span class="p">(</span><span class="s2">&quot;read&quot;</span><span class="p">)</span>
+        <span class="n">st</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_cumulative_timing</span><span class="p">(</span><span class="s2">&quot;store&quot;</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">rt</span> <span class="o">+</span> <span class="n">st</span>
+        <span class="n">rts</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">rt</span><span class="p">))</span>
+        <span class="n">sts</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">st</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">capacity</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">rtl</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;</span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_timings</span><span class="p">(</span><span class="s2">&quot;read&quot;</span><span class="p">)]</span>
+            <span class="n">stl</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;</span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_timings</span><span class="p">(</span><span class="s2">&quot;store&quot;</span><span class="p">)]</span>
+            <span class="n">rts</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot; + &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">rtl</span><span class="p">),</span> <span class="n">rts</span><span class="p">)</span>
+            <span class="n">sts</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot; + &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">stl</span><span class="p">),</span> <span class="n">sts</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">write_lock</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">t1</span> <span class="o">-</span> <span class="n">now</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">120</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">last_logged_row</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pushed_rows</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">stamp_time</span><span class="p">(</span><span class="s2">&quot;last_logged&quot;</span><span class="p">)</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">get_path</span><span class="p">())</span>
+            <span class="n">sz</span> <span class="o">=</span> <span class="n">sizeof_fmt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">volume</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s2">&quot;Records imported from </span><span class="si">{}</span><span class="s2">: </span><span class="si">{:,}</span><span class="s2"> =&gt; </span><span class="si">{:,}</span><span class="s2">; rate: </span><span class="si">{:,.2f}</span><span class="s2"> rec/sec; read: </span><span class="si">{:d}</span><span class="s2">% / store: </span><span class="si">{:d}</span><span class="s2">%; size: </span><span class="si">{}</span><span class="s2">&quot;</span>
+                    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_row</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pushed_rows</span><span class="p">,</span> <span class="n">rate</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">rt</span><span class="o">*</span><span class="mi">100</span><span class="o">/</span><span class="n">t</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">st</span><span class="o">*</span><span class="mi">100</span><span class="o">/</span><span class="n">t</span><span class="p">),</span> <span class="n">sz</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                <span class="s2">&quot;Current rate: </span><span class="si">{:,.2f}</span><span class="s2"> rec/sec, time read: </span><span class="si">{}</span><span class="s2">; time store: </span><span class="si">{}</span><span class="s2">&quot;</span>
+                    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rate1</span><span class="p">,</span> <span class="n">rts</span><span class="p">,</span> <span class="n">sts</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">count</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="p">(</span>
+                    <span class="mi">0</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">count</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_row</span>
+            <span class="p">):</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Continue ingesting over the file size&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Inserter.Batch"><a class="viewcode-back" href="../../../../members/inserter.html#dorieh.platform.data_model.inserter.Inserter.Batch">[docs]</a>    <span class="k">def</span> <span class="nf">Batch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Batch</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+    <span class="k">class</span> <span class="nc">_Batch</span><span class="p">:</span>
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="n">table</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">parent</span><span class="o">.</span><span class="n">tables</span>
+            <span class="p">}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rows</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">records</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">table</span><span class="p">]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">records</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">inc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rows</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">min</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">records</span><span class="p">)</span> <span class="k">for</span> <span class="n">records</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">()])</span>
+
+        <span class="k">def</span> <span class="nf">is_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">records</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">records</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">()])</span>
+
+        <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">Inserter</span><span class="o">.</span><span class="n">_Table</span><span class="p">):</span>
+                <span class="n">item</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">name</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+
+<div class="viewcode-block" id="Inserter.Table"><a class="viewcode-back" href="../../../../members/inserter.html#dorieh.platform.data_model.inserter.Inserter.Table">[docs]</a>    <span class="k">def</span> <span class="nf">Table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+    <span class="k">class</span> <span class="nc">_Table</span><span class="p">:</span>
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reader</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="n">reader</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reader_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">get_path</span><span class="p">())</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">fqn</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">range_columns</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">no_empty_str</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">computes</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pk</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">insert</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">range</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">arrays</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">audit</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">file_column</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="s2">&quot;invalid.records&quot;</span> <span class="ow">in</span> <span class="n">table</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">audit</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="s2">&quot;invalid.records&quot;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">prepare</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">primary_key</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="s2">&quot;primary_key&quot;</span><span class="p">]</span>
+            <span class="n">columns</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="s2">&quot;columns&quot;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span> <span class="o">=</span> <span class="n">SortedDict</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">computes</span> <span class="o">=</span> <span class="n">SortedDict</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">no_empty_str</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">range_columns</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
+                <span class="n">name</span><span class="p">,</span> <span class="n">column</span> <span class="o">=</span> <span class="n">split</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+                <span class="n">source</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="n">source_index</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="s2">&quot;source&quot;</span> <span class="ow">in</span> <span class="n">column</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">column</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
+                            <span class="n">source</span> <span class="o">=</span> <span class="n">column</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">]</span>
+                        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">column</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">],</span> <span class="nb">int</span><span class="p">):</span>
+                            <span class="n">source_index</span> <span class="o">=</span> <span class="n">column</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">]</span>
+                        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">column</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                            <span class="n">t</span> <span class="o">=</span> <span class="n">column</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">][</span><span class="s2">&quot;type&quot;</span><span class="p">]</span>
+                            <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;column&quot;</span><span class="p">:</span>
+                                <span class="n">source</span> <span class="o">=</span> <span class="n">column</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">][</span><span class="s2">&quot;column&quot;</span><span class="p">]</span>
+                            <span class="k">elif</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;multi_column&quot;</span><span class="p">:</span>
+                                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">range</span><span class="p">:</span>
+                                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Multi columns require range: &quot;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
+                                <span class="n">pattern</span> <span class="o">=</span> <span class="n">column</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">][</span><span class="s2">&quot;pattern&quot;</span><span class="p">]</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">range_columns</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+                                <span class="n">_</span><span class="p">,</span> <span class="n">rng</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">range</span>
+                                <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">rng</span><span class="p">:</span>
+                                    <span class="n">source</span> <span class="o">=</span> <span class="n">pattern</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+                                    <span class="bp">self</span><span class="o">.</span><span class="n">range_columns</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+                                <span class="k">continue</span>
+                            <span class="k">elif</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;compute&quot;</span><span class="p">:</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">computes</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">column</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">]</span>
+                                <span class="k">continue</span>
+                            <span class="k">elif</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;range&quot;</span><span class="p">:</span>
+                                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">range</span><span class="p">:</span>
+                                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Only one range is supported column </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">column</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">])))</span>
+                                <span class="k">if</span> <span class="s2">&quot;values&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">column</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">]:</span>
+                                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Range must specify values for column </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">column</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">])))</span>
+                                <span class="n">values</span> <span class="o">=</span> <span class="n">column</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">][</span><span class="s2">&quot;values&quot;</span><span class="p">]</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">range</span> <span class="o">=</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+                                <span class="k">continue</span>
+                            <span class="k">elif</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;generated&quot;</span><span class="p">:</span>
+                                <span class="k">continue</span>
+                            <span class="k">elif</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;file&quot;</span><span class="p">:</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">file_column</span> <span class="o">=</span> <span class="n">name</span>
+                                <span class="k">continue</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Invalid source for column </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">column</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">])))</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Invalid source for column </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">column</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">])))</span>
+                    <span class="k">elif</span> <span class="s2">&quot;type&quot;</span> <span class="ow">in</span> <span class="n">column</span> <span class="ow">and</span> <span class="n">column</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">PG_SERIAL_TYPE</span><span class="p">,</span> <span class="n">PG_SM_SERIAL_TYPE</span><span class="p">]:</span>
+                        <span class="k">continue</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="n">f</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+                                <span class="n">source</span> <span class="o">=</span> <span class="n">f</span>
+                                <span class="k">break</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">source</span> <span class="ow">and</span> <span class="n">source_index</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Source was not found for column </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+                    <span class="k">if</span> <span class="n">Domain</span><span class="o">.</span><span class="n">is_array</span><span class="p">(</span><span class="n">column</span><span class="p">):</span>
+                        <span class="n">r</span> <span class="o">=</span> <span class="n">regex</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+                        <span class="n">i0</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+                        <span class="n">i1</span> <span class="o">=</span> <span class="mi">0</span>
+                        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">clmn</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+                            <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="n">clmn</span><span class="p">):</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+                                <span class="n">i0</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">i0</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+                                <span class="n">i1</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">arrays</span><span class="p">[</span><span class="n">i0</span><span class="p">]</span> <span class="o">=</span> <span class="n">i1</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">source</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">source_index</span><span class="p">:</span>
+                            <span class="n">source_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="n">source_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+                        <span class="k">if</span> <span class="s2">&quot;type&quot;</span> <span class="ow">in</span> <span class="n">column</span> <span class="ow">and</span> <span class="n">column</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()[:</span><span class="mi">4</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span>
+                            <span class="s2">&quot;varc&quot;</span><span class="p">,</span> <span class="s2">&quot;char&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span>
+                        <span class="p">]:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">no_empty_str</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">source_index</span><span class="p">)</span>
+
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">x</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                        <span class="s2">&quot;Invalid specification for column </span><span class="si">{}</span><span class="s2">; error: </span><span class="si">{}</span><span class="s2">&quot;</span>
+                        <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+                    <span class="p">)</span> <span class="kn">from</span> <span class="nn">x</span>
+            <span class="n">inverse_mapping</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="p">}</span>
+            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">computes</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="n">parameters</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="n">inverse_mapping</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;parameters&quot;</span><span class="p">,</span> <span class="p">[])</span>
+                <span class="p">]</span> <span class="o">+</span> <span class="p">[</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;columns&quot;</span><span class="p">,</span> <span class="p">[])</span>
+                <span class="p">]</span>
+                <span class="n">arguments</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;empty&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span>
+                    <span class="s2">&quot;row[</span><span class="si">{:d}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">parameters</span>
+                <span class="p">]</span>
+                <span class="n">code</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="s2">&quot;code&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">arguments</span><span class="p">)</span>
+                <span class="n">c</span><span class="p">[</span><span class="s2">&quot;eval&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">code</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pk</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">primary_key</span><span class="p">}</span>
+            <span class="n">cc</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">:</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cc</span><span class="p">:</span>
+                    <span class="n">cc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">cc</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">computes</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">range</span><span class="p">:</span>
+                <span class="n">cc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">range</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">cc</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">range_columns</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_column</span><span class="p">:</span>
+                <span class="n">cc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_column</span><span class="p">)</span>
+            <span class="n">column_list</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cc</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">insert</span> <span class="o">=</span> <span class="s2">&quot;INSERT INTO </span><span class="si">{table}</span><span class="s2"> (</span><span class="si">{columns}</span><span class="s2">)  VALUES </span><span class="si">%s</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">column_list</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">range</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_multi</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+            <span class="n">record</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">is_valid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">row</span><span class="p">,</span>  <span class="n">record</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">is_valid</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span>
+            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">computes</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">compute</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">computes</span><span class="p">[</span><span class="n">c</span><span class="p">],</span> <span class="n">row</span><span class="p">)</span>
+                <span class="n">record</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_column</span><span class="p">:</span>
+                <span class="n">record</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reader_path</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">record</span><span class="p">]</span>
+
+        <span class="k">def</span> <span class="nf">map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">record</span><span class="p">):</span>
+            <span class="n">array</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">array_end</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">arrays</span><span class="p">:</span>
+                    <span class="n">array</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="n">array_end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">arrays</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">is_end</span> <span class="o">=</span> <span class="n">array_end</span> <span class="o">==</span> <span class="n">i</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error for column #</span><span class="si">{:d}</span><span class="s2"> (</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                    <span class="p">)</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span>
+                        <span class="n">msg</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">While processing row: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+                    <span class="p">)</span>
+                    <span class="k">raise</span>
+                <span class="k">if</span> <span class="n">SpecialValues</span><span class="o">.</span><span class="n">is_missing</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">pk</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">audit</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="kc">False</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="k">if</span> <span class="n">array</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">record</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">array</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">is_end</span><span class="p">:</span>
+                        <span class="n">record</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+                        <span class="n">array</span> <span class="o">=</span> <span class="kc">None</span>
+                        <span class="n">array_end</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="k">def</span> <span class="nf">read_multi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">]:</span>
+            <span class="n">records</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">range_column</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">range</span>
+            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span>
+                <span class="n">record</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">is_valid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">record</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">is_valid</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">None</span>
+                <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">computes</span><span class="p">:</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="n">compute</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">computes</span><span class="p">[</span><span class="n">c</span><span class="p">],</span> <span class="n">row</span><span class="p">)</span>
+                    <span class="n">record</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="n">record</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">range_columns</span><span class="p">:</span>
+                    <span class="n">record</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">range_columns</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="n">v</span><span class="p">]])</span>
+                <span class="n">records</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">records</span>
+
+<div class="viewcode-block" id="Inserter.timer"><a class="viewcode-back" href="../../../../members/inserter.html#dorieh.platform.data_model.inserter.Inserter.timer">[docs]</a>    <span class="nd">@contextmanager</span>
+    <span class="k">def</span> <span class="nf">timer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">t0</span> <span class="o">=</span> <span class="n">timer</span><span class="p">()</span>
+        <span class="k">yield</span>
+        <span class="n">t1</span> <span class="o">=</span> <span class="n">timer</span><span class="p">()</span>
+        <span class="n">tid</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">get_ident</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">tid</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">timings</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">timings</span><span class="p">[</span><span class="n">tid</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timings</span><span class="p">[</span><span class="n">tid</span><span class="p">][</span><span class="n">context</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">timings</span><span class="p">[</span><span class="n">tid</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Inserter.get_thread_timing"><a class="viewcode-back" href="../../../../members/inserter.html#dorieh.platform.data_model.inserter.Inserter.get_thread_timing">[docs]</a>    <span class="k">def</span> <span class="nf">get_thread_timing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="n">tid</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">get_ident</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">tid</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">timings</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">timings</span><span class="p">[</span><span class="n">tid</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Inserter.get_timings"><a class="viewcode-back" href="../../../../members/inserter.html#dorieh.platform.data_model.inserter.Inserter.get_timings">[docs]</a>    <span class="k">def</span> <span class="nf">get_timings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">timings</span><span class="p">[</span><span class="n">tid</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">tid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">timings</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="Inserter.get_cumulative_timing"><a class="viewcode-back" href="../../../../members/inserter.html#dorieh.platform.data_model.inserter.Inserter.get_cumulative_timing">[docs]</a>    <span class="k">def</span> <span class="nf">get_cumulative_timing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_timings</span><span class="p">(</span><span class="n">context</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Inserter.stamp_time"><a class="viewcode-back" href="../../../../members/inserter.html#dorieh.platform.data_model.inserter.Inserter.stamp_time">[docs]</a>    <span class="k">def</span> <span class="nf">stamp_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timestamps</span><span class="p">[</span><span class="n">context</span><span class="p">]</span> <span class="o">=</span> <span class="n">timer</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Inserter.get_timestamp"><a class="viewcode-back" href="../../../../members/inserter.html#dorieh.platform.data_model.inserter.Inserter.get_timestamp">[docs]</a>    <span class="k">def</span> <span class="nf">get_timestamp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Inserter.reset_timer"><a class="viewcode-back" href="../../../../members/inserter.html#dorieh.platform.data_model.inserter.Inserter.reset_timer">[docs]</a>    <span class="k">def</span> <span class="nf">reset_timer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timings</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

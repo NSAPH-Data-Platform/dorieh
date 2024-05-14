@@ -1,0 +1,63 @@
+# Test harness for gridmet.cwl
+
+
+ [Source code](test_gridmetcwl_src.md) 
+
+
+![](test_gridmet.png)
+
+```{contents}
+---
+local:
+---
+```
+
+**Workflow**
+
+## Inputs
+
+| Name            | Type       | Default                                                                                                                                                                            | Description                                                                                                                                                  | 
+|:----------------|:-----------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| bands           | string[]   |                                                                                                                                                                                    | University of Idaho Gridded Surface Meteorological Dataset  [bands](https://developers.google.com/earth-engine/datasets/catalog/IDAHO_EPSCOR_GRIDMET#bands)  | 
+| connection_name | string     |                                                                                                                                                                                    | The name of the section in the database.ini file                                                                                                             | 
+| database        | File       |                                                                                                                                                                                    | Path to database connection file, usually database.ini                                                                                                       | 
+| dates           | string?    |                                                                                                                                                                                    | dates restriction, for testing purposes only                                                                                                                 | 
+| domain          | string     | `climate`                                                                                                                                                                          |                                                                                                                                                              | 
+| geography       | string     |                                                                                                                                                                                    | Type of geography: zip codes or counties Valid values: "zip", "zcta" or "county"                                                                             | 
+| proxy           | string?    |                                                                                                                                                                                    | HTTP/HTTPS Proxy if required                                                                                                                                 | 
+| ram             | string     | `2GB`                                                                                                                                                                              | Runtime memory, available to the process                                                                                                                     | 
+| shapes          | Directory? |                                                                                                                                                                                    | Do we even need this parameter, as we instead downloading shapes?                                                                                            | 
+| strategy        | string     | `auto`                                                                                                                                                                             | Rasterization strategy                                                                                                                                       | 
+| test_script     | ['File', 'File[]'] |                                                                                                                                                                                    | File containing SQL test script                                                                                                                              | 
+| years           | string[]   | `['1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020']` |                                                                                                                                                              | 
+
+## Outputs
+
+| Name                 | Type  | Description | 
+|:---------------------|:------|:------------|
+| execute_registry     | File  |             | 
+| execute_registry_log | File  |             | 
+| execute_registry_err | File  |             | 
+| execute_data         | array |             | 
+| execute_download_log | array |             | 
+| execute_download_err | array |             | 
+| execute_process_log  | array |             | 
+| execute_process_err  | array |             | 
+| execute_ingest_log   | array |             | 
+| execute_ingest_err   | array |             | 
+| execute_reset_log    | array |             | 
+| execute_reset_err    | array |             | 
+| execute_index_log    | array |             | 
+| execute_index_err    | array |             | 
+| execute_vacuum_log   | array |             | 
+| execute_vacuum_err   | array |             | 
+| verify_log           | File  |             | 
+| verify_errors        | File  |             | 
+
+## Steps
+
+| Name    | Runs                        | Description | 
+|:--------|:----------------------------|:------------|
+| execute | [gridmet.cwl](gridmet.md)   |             | 
+| verify  | [run_test.cwl](run_test.md) |             | 
+

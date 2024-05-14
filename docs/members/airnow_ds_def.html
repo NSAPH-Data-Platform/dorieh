@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configuration Options for EPA AirNow Package &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Configuration Options for EPA AirNow Package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/members/airnow_ds_def.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-dorieh.epa.airnow_ds_def">
+<span id="configuration-options-for-epa-airnow-package"></span><h1>Configuration Options for EPA AirNow Package<a class="headerlink" href="#module-dorieh.epa.airnow_ds_def" title="Permalink to this heading"></a></h1>
+<p>Module contains classes to describe the context in which AirNow data is downloaded</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.epa.airnow_ds_def.Parameter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Parameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/epa/airnow_ds_def.html#Parameter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.epa.airnow_ds_def.Parameter" title="Permalink to this definition"></a></dt>
+<dd><p>An Enum with mnemonic names for the most common EPA AirNow Parameter Codes
+See more at <a class="reference external" href="https://docs.airnowapi.org/Data/docs">https://docs.airnowapi.org/Data/docs</a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.epa.airnow_ds_def.Parameter.NO2">
+<span class="sig-name descname"><span class="pre">NO2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'no2'</span></em><a class="headerlink" href="#dorieh.epa.airnow_ds_def.Parameter.NO2" title="Permalink to this definition"></a></dt>
+<dd><p>NO2</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.epa.airnow_ds_def.Parameter.OZONE">
+<span class="sig-name descname"><span class="pre">OZONE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ozone'</span></em><a class="headerlink" href="#dorieh.epa.airnow_ds_def.Parameter.OZONE" title="Permalink to this definition"></a></dt>
+<dd><p>ozone</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.epa.airnow_ds_def.Parameter.PM25">
+<span class="sig-name descname"><span class="pre">PM25</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'pm25'</span></em><a class="headerlink" href="#dorieh.epa.airnow_ds_def.Parameter.PM25" title="Permalink to this definition"></a></dt>
+<dd><p>PM25</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.epa.airnow_ds_def.Parameter.PM10">
+<span class="sig-name descname"><span class="pre">PM10</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'pm10'</span></em><a class="headerlink" href="#dorieh.epa.airnow_ds_def.Parameter.PM10" title="Permalink to this definition"></a></dt>
+<dd><p>PM10</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.epa.airnow_ds_def.Parameter.CO">
+<span class="sig-name descname"><span class="pre">CO</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'co'</span></em><a class="headerlink" href="#dorieh.epa.airnow_ds_def.Parameter.CO" title="Permalink to this definition"></a></dt>
+<dd><p>co</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.epa.airnow_ds_def.Parameter.SO2">
+<span class="sig-name descname"><span class="pre">SO2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'so2'</span></em><a class="headerlink" href="#dorieh.epa.airnow_ds_def.Parameter.SO2" title="Permalink to this definition"></a></dt>
+<dd><p>SO2</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.epa.airnow_ds_def.AirNowContext">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AirNowContext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">doc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/epa/airnow_ds_def.html#AirNowContext"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.epa.airnow_ds_def.AirNowContext" title="Permalink to this definition"></a></dt>
+<dd><p>This class is part of EPA AirNow Toolkit. It allows user to define any
+parameters that are used to select what data to download,
+how to format it and where to place the results.</p>
+<p>It is a concrete subclass of :class Context:</p>
+<p>Constructor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.epa.airnow_ds_def.AirNowContext.params.doc"></span><strong>doc</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.airnow_ds_def.AirNowContext.params.doc">¶</a> – Optional argument, specifying what to print as documentation</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.epa.airnow_ds_def.AirNowContext.parameters">
+<span class="sig-name descname"><span class="pre">parameters</span></span><a class="headerlink" href="#dorieh.epa.airnow_ds_def.AirNowContext.parameters" title="Permalink to this definition"></a></dt>
+<dd><p>Parameters (variables, e.g. PM25, NO2, etc.) to download</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.epa.airnow_ds_def.AirNowContext.destination">
+<span class="sig-name descname"><span class="pre">destination</span></span><a class="headerlink" href="#dorieh.epa.airnow_ds_def.AirNowContext.destination" title="Permalink to this definition"></a></dt>
+<dd><p>Destination directory for the downloaded files</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.epa.airnow_ds_def.AirNowContext.enum">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">enum_cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dorieh.epa.airnow_ds_def.AirNowContext.enum" title="Permalink to this definition"></a></dt>
+<dd><p>A helper method to return Enum value by its name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.epa.airnow_ds_def.AirNowContext.enum.params.cls"></span><strong>cls</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.airnow_ds_def.AirNowContext.enum.params.cls">¶</a> – Enum class</p></li>
+<li><p><span class="target" id="dorieh.epa.airnow_ds_def.AirNowContext.enum.params.s"></span><strong>s</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.airnow_ds_def.AirNowContext.enum.params.s">¶</a> – name of a member in Enum class</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>value of the member</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.epa.airnow_ds_def.AirNowContext.start_date">
+<span class="sig-name descname"><span class="pre">start_date</span></span><a class="headerlink" href="#dorieh.epa.airnow_ds_def.AirNowContext.start_date" title="Permalink to this definition"></a></dt>
+<dd><p>First date in the range to download (inclusive)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.epa.airnow_ds_def.AirNowContext.years">
+<span class="sig-name descname"><span class="pre">years</span></span><a class="headerlink" href="#dorieh.epa.airnow_ds_def.AirNowContext.years" title="Permalink to this definition"></a></dt>
+<dd><p>Year or list of years to download. For example, 
+the following argument: 
+<cite>-y 1992:1995 1998 1999 2011 2015:2017</cite> will produce 
+the following list: 
+[1992,1993,1994,1995,1998,1999,2011,2015,2016,2017]</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.epa.airnow_ds_def.AirNowContext.compress">
+<span class="sig-name descname"><span class="pre">compress</span></span><a class="headerlink" href="#dorieh.epa.airnow_ds_def.AirNowContext.compress" title="Permalink to this definition"></a></dt>
+<dd><p>Specifies whether to use gzip compression for the result</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.epa.airnow_ds_def.AirNowContext.end_date">
+<span class="sig-name descname"><span class="pre">end_date</span></span><a class="headerlink" href="#dorieh.epa.airnow_ds_def.AirNowContext.end_date" title="Permalink to this definition"></a></dt>
+<dd><p>Last date in the range to download (inclusive)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.epa.airnow_ds_def.AirNowContext.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><a class="headerlink" href="#dorieh.epa.airnow_ds_def.AirNowContext.reset" title="Permalink to this definition"></a></dt>
+<dd><p>Discard previously downloaded data if exists</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.epa.airnow_ds_def.AirNowContext.qc">
+<span class="sig-name descname"><span class="pre">qc</span></span><a class="headerlink" href="#dorieh.epa.airnow_ds_def.AirNowContext.qc" title="Permalink to this definition"></a></dt>
+<dd><p>Perform basic data QC</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.epa.airnow_ds_def.AirNowContext.cfg">
+<span class="sig-name descname"><span class="pre">cfg</span></span><a class="headerlink" href="#dorieh.epa.airnow_ds_def.AirNowContext.cfg" title="Permalink to this definition"></a></dt>
+<dd><p>Optional path to config file</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.epa.airnow_ds_def.AirNowContext.shapes">
+<span class="sig-name descname"><span class="pre">shapes</span></span><a class="headerlink" href="#dorieh.epa.airnow_ds_def.AirNowContext.shapes" title="Permalink to this definition"></a></dt>
+<dd><p>Optional path to shapes directory</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.epa.airnow_ds_def.AirNowContext.api_key">
+<span class="sig-name descname"><span class="pre">api_key</span></span><a class="headerlink" href="#dorieh.epa.airnow_ds_def.AirNowContext.api_key" title="Permalink to this definition"></a></dt>
+<dd><p>AirNow API Key</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.epa.airnow_ds_def.AirNowContext.proxy">
+<span class="sig-name descname"><span class="pre">proxy</span></span><a class="headerlink" href="#dorieh.epa.airnow_ds_def.AirNowContext.proxy" title="Permalink to this definition"></a></dt>
+<dd><p>Proxy address</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.epa.airnow_ds_def.AirNowContext.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/epa/airnow_ds_def.html#AirNowContext.validate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.epa.airnow_ds_def.AirNowContext.validate" title="Permalink to this definition"></a></dt>
+<dd><p>Subclasses can override this method to implement custom handling
+of command line arguments</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.epa.airnow_ds_def.AirNowContext.validate.params.attr"></span><strong>attr</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.airnow_ds_def.AirNowContext.validate.params.attr">¶</a> – Command line argument name</p></li>
+<li><p><span class="target" id="dorieh.epa.airnow_ds_def.AirNowContext.validate.params.value"></span><strong>value</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.airnow_ds_def.AirNowContext.validate.params.value">¶</a> – Value returned by argparse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>value to use</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<section id="classes-used-internally">
+<h2>Classes used Internally<a class="headerlink" href="#classes-used-internally" title="Permalink to this heading"></a></h2>
+<section id="abstract-context">
+<h3>Abstract Context<a class="headerlink" href="#abstract-context" title="Permalink to this heading"></a></h3>
+</section>
+<section id="argument">
+<h3>Argument<a class="headerlink" href="#argument" title="Permalink to this heading"></a></h3>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

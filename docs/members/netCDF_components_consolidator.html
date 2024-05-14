@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The netCDF_components_consolidator Module &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">The netCDF_components_consolidator Module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/members/netCDF_components_consolidator.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="the-netcdf-components-consolidator-module">
+<h1>The netCDF_components_consolidator Module<a class="headerlink" href="#the-netcdf-components-consolidator-module" title="Permalink to this heading"></a></h1>
+<p>See also:</p>
+<p><a class="reference external" href="https://unidata.github.io/netcdf4-python/">https://unidata.github.io/netcdf4-python/</a>
+<a class="reference external" href="https://neetinayak.medium.com/combine-many-netcdf-files-into-a-single-file-with-python-469ba476fc14">https://neetinayak.medium.com/combine-many-netcdf-files-into-a-single-file-with-python-469ba476fc14</a>
+<a class="reference external" href="https://docs.xarray.dev/en/stable/api.html">https://docs.xarray.dev/en/stable/api.html</a></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.rasters.netCDF_components_consolidator.NetCDFDataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">NetCDFDataset</span></span><a class="reference internal" href="../_modules/dorieh/rasters/netCDF_components_consolidator.html#NetCDFDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset" title="Permalink to this definition"></a></dt>
+<dd><p>Class to combine NetCDF dataset with absolute values with
+dependent datasets containing components</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.dataset">
+<span class="sig-name descname"><span class="pre">dataset</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Dataset</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.dataset" title="Permalink to this definition"></a></dt>
+<dd><p>NetCDF Dataset that we will be modifying</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.rio_dataset">
+<span class="sig-name descname"><span class="pre">rio_dataset</span></span><a class="headerlink" href="#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.rio_dataset" title="Permalink to this definition"></a></dt>
+<dd><p>Rasterio dataset that holds metadata lost when writing NetCDF dataset</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.main_var">
+<span class="sig-name descname"><span class="pre">main_var</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.main_var" title="Permalink to this definition"></a></dt>
+<dd><p>The name of the main variable</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.percentages">
+<span class="sig-name descname"><span class="pre">percentages</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.percentages" title="Permalink to this definition"></a></dt>
+<dd><p>The names of the component variables containing percentages</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.abs_values">
+<span class="sig-name descname"><span class="pre">abs_values</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.abs_values" title="Permalink to this definition"></a></dt>
+<dd><p>The names of the component variables containing absolute values</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.open_original_dataset">
+<span class="sig-name descname"><span class="pre">open_original_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">infile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/netCDF_components_consolidator.html#NetCDFDataset.open_original_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.open_original_dataset" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.read_abs_values">
+<span class="sig-name descname"><span class="pre">read_abs_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/netCDF_components_consolidator.html#NetCDFDataset.read_abs_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.read_abs_values" title="Permalink to this definition"></a></dt>
+<dd><p>Reads the NetCDF dataset from a <a href="#id1"><span class="problematic" id="id2">*</span></a>.nc file
+Assumes that this dataset contains absolute values of
+the variable with the name provided by var parameter.</p>
+<p>Raises an exception if the variable is not None but is not present n the dataset.
+If the parameter “var” is None, checks that there is only one variable present beside “lat” and “lon”.
+Raises exception if there is more than one variable</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.read_abs_values.params.var"></span><strong>var</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.read_abs_values.params.var">¶</a> – The variable containing the absolute values of the feature of interest, e.g., “pm25”
+If None, defaults to a single variable present in teh dataset beside “lat” and “lon”</p></li>
+<li><p><span class="target" id="dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.read_abs_values.params.filename"></span><strong>filename</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.read_abs_values.params.filename">¶</a> – A path to file to read.
+Can also be a python 3 pathlib instance or the URL of an OpenDAP dataset.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p>ValueError if var is None and there is more than one variable in the dataset or, if var
+is not None and is not present in teh dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.pct_var">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pct_var</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/dorieh/rasters/netCDF_components_consolidator.html#NetCDFDataset.pct_var"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.pct_var" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.add_component">
+<span class="sig-name descname"><span class="pre">add_component</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/netCDF_components_consolidator.html#NetCDFDataset.add_component"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.add_component" title="Permalink to this definition"></a></dt>
+<dd><p>Reads the NetCDF dataset from a <a href="#id3"><span class="problematic" id="id4">*</span></a>.nc file
+Assumes that this dataset contains percentage of a component defined by
+the var parameter.</p>
+<p>Can only be called after the dataset is initialized with absolute values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.add_component.params.var"></span><strong>var</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.add_component.params.var">¶</a> – The variable containing percentage of a certain component</p></li>
+<li><p><span class="target" id="dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.add_component.params.abs_var"></span><strong>abs_var</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.add_component.params.abs_var">¶</a> – The variable name to contain absolute values of the component. If omitted,
+it is constructed from the percentage variable name either by removing ‘p’ if the
+variable starts with ‘p’ otherwise, by adding ‘<a href="#id5"><span class="problematic" id="id6">abs_</span></a>’ prefix</p></li>
+<li><p><span class="target" id="dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.add_component.params.filename"></span><strong>filename</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.add_component.params.filename">¶</a> – A path to file to read.
+Can also be a python 3 pathlib instance or the URL of an OpenDAP dataset.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p>ValueError if var is None and there is more than one variable in the dataset or, if var
+is not None and is not present in the dataset</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ValueError if the grid of the component file is incompatible with
+the gird of the existing Dataset</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p>ValueError if the absolute values have not yet been read</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.add_components">
+<span class="sig-name descname"><span class="pre">add_components</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filenames</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/netCDF_components_consolidator.html#NetCDFDataset.add_components"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.add_components" title="Permalink to this definition"></a></dt>
+<dd><p>Adds multiple components in a single call from multiple files. Assumes that
+every file given contains only one variable beside lat and lon</p>
+<p>Can only be called after the dataset is initialized with absolute values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.add_components.params.filenames"></span><strong>filenames</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.add_components.params.filenames">¶</a> – A list of file paths to read.
+Elements of the list can also be a python 3 pathlib instance or the URL of an OpenDAP dataset.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p>ValueError if there is more than one variable in any of the datasets</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ValueError if the grid of a component file is incompatible with
+the gird of the existing Dataset</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p>ValueError if the absolute values have not yet been read</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.compute_abs_values">
+<span class="sig-name descname"><span class="pre">compute_abs_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/netCDF_components_consolidator.html#NetCDFDataset.compute_abs_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.compute_abs_values" title="Permalink to this definition"></a></dt>
+<dd><p>Computes absolute values for every component present in the dataset by applying a formula.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.compute_abs_values.params.components"></span><strong>components</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.compute_abs_values.params.components">¶</a> – Array of component names</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ValueError if the absolute values have not yet been read</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.get_dataset">
+<span class="sig-name descname"><span class="pre">get_dataset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dataset</span></span></span><a class="reference internal" href="../_modules/dorieh/rasters/netCDF_components_consolidator.html#NetCDFDataset.get_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.get_dataset" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_file_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/netCDF_components_consolidator.html#NetCDFDataset.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.close" title="Permalink to this definition"></a></dt>
+<dd><p>Writes all the data to the output file and closes all temporary objects</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.rasters.netCDF_components_consolidator.main">
+<span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">infile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">components</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/netCDF_components_consolidator.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.netCDF_components_consolidator.main" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

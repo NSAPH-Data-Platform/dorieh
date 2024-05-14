@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CWL Tools and Common Workflows &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">CWL Tools and Common Workflows</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/cwl_tools.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cwl-tools-and-common-workflows">
+<h1>CWL Tools and Common Workflows<a class="headerlink" href="#cwl-tools-and-common-workflows" title="Permalink to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/add_daily_data.html">Downloader of gridMET Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/add_daily_data.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/add_daily_data.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/add_daily_data.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/add_daily_data.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/add_daily_datacwl_src.html">add_daily_data.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/add_data.html">Uploader of the gridMET Data to the database</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/add_data.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/add_data.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/add_data.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/add_datacwl_src.html">add_data.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/aggregate_daily.html">Tool aggregating a NetCDF grid file over shapes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/aggregate_daily.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/aggregate_daily.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/aggregate_daily.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/aggregate_dailycwl_src.html">aggregate_daily.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/aggregate_one_file.html">Workflow to aggregate and ingest NetCDF files for one year</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/aggregate_one_file.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/aggregate_one_file.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/aggregate_one_file.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/aggregate_one_file.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/aggregate_one_filecwl_src.html">aggregate_one_file.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/aggregate_wustl.html">Aggregates data in NetCDF file over given geographies</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/aggregate_wustl.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/aggregate_wustl.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/aggregate_wustl.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/aggregate_wustlcwl_src.html">aggregate_wustl.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/airnow.html">Full EPA AirNow Processing Pipeline (including downloading shapefiles)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/airnow.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/airnow.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/airnow.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/airnow.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/airnow_local_shapes.html">Full AirNowProcessing Pipeline (with shapefiles on local file system)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/airnow_local_shapes.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/airnow_local_shapes.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/airnow_local_shapes.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/airnow_local_shapes.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/airnow_local_shapescwl_src.html">airnow_local_shapes.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/airnowcwl_src.html">airnow.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/alter_database.html">Utility to grant read (SELECT) privilege to all users in NSAPH admin role</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/alter_database.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/alter_database.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/alter_database.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/alter_databasecwl_src.html">alter_database.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/aqs.html">Full EPA AQS Processing Pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/aqs.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/aqs.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/aqs.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/aqs.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/aqscwl_src.html">aqs.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/build_gridmet_model.html">Model YAML Writer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/build_gridmet_model.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/build_gridmet_model.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/build_gridmet_model.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/build_gridmet_modelcwl_src.html">build_gridmet_model.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/census_assemble.html">census_assemble.cwl</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/census_assemble.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/census_assemble.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/census_assemblecwl_src.html">census_assemble.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/census_density.html">census_density.cwl</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/census_density.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/census_density.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/census_densitycwl_src.html">census_density.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/census_ingest.html">census_ingest.cwl</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/census_ingest.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/census_ingest.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/census_ingest.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/census_ingest_1.html">Sub-workflow <em>store</em> from census_ingest.cwl</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/census_ingest_1.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/census_ingest_1.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/census_ingest_1.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/census_ingest_1cwl_src.html">tmpm6xeqyxbcensus_ingest.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/census_ingestcwl_src.html">census_ingest.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/census_interpolate.html">census_interpolate.cwl</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/census_interpolate.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/census_interpolate.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/census_interpolatecwl_src.html">census_interpolate.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/census_qc.html">census_qc.cwl</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/census_qc.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/census_qc.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/census_qccwl_src.html">census_qc.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/census_workflow.html">census_workflow.cwl</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/census_workflow.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/census_workflow.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/census_workflow.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/census_workflowcwl_src.html">census_workflow.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/census_write.html">census_write.cwl</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/census_write.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/census_write.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/census_writecwl_src.html">census_write.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/change_owner.html">Workflow to grant read (SELECT) privilege to all users in NSAPH admin role</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/change_owner.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/change_owner.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/change_owner.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/change_owner.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/change_ownercwl_src.html">change_owner.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/create.html">Table/View Initializer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/create.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/create.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/create.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/createcwl_src.html">create.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/download.html">Downloader of gridMET Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/download.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/download.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/download.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/download_airnow.html">Downloader of AirNow Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/download_airnow.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/download_airnow.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/download_airnow.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/download_airnowcwl_src.html">download_airnow.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/download_aqs.html">Downloader of AQS Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/download_aqs.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/download_aqs.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/download_aqs.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/download_aqscwl_src.html">download_aqs.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/downloadcwl_src.html">download.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/ensure_resource.html">Resource Loader</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/ensure_resource.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/ensure_resource.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/ensure_resource.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/ensure_resourcecwl_src.html">ensure_resource.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/expand_aqs.html">Downloader of AQS Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/expand_aqs.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/expand_aqs.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/expand_aqs.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/expand_aqscwl_src.html">expand_aqs.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/get_shapes.html">Downloader of AirNow Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/get_shapes.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/get_shapes.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/get_shapes.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/get_shapescwl_src.html">get_shapes.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/grant.html">Workflow to grant read (SELECT) privilege to all users in NSAPH admin role</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/grant.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/grant.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/grant.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/grant.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/grantcwl_src.html">grant.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet.html">Pipeline to aggregate data from Climatology Lab</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet_1.html">Sub-workflow <em>init_tables</em> from gridmet.cwl</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_1.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_1.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_1.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet_1cwl_src.html">tmpbmcvtr4ggridmet.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet_dwnl_only.html">gridMET Pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_dwnl_only.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_dwnl_only.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_dwnl_only.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_dwnl_only.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet_dwnl_only_1.html">Sub-workflow <em>process</em> from gridmet_dwnl_only.cwl</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_dwnl_only_1.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_dwnl_only_1.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_dwnl_only_1.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet_dwnl_only_1cwl_src.html">tmp7sdhhti_gridmet_dwnl_only.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet_dwnl_onlycwl_src.html">gridmet_dwnl_only.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet_local_shapes.html">gridMET Pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_local_shapes.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_local_shapes.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_local_shapes.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_local_shapes.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet_local_shapes_1.html">Sub-workflow <em>process</em> from gridmet_local_shapes.cwl</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_local_shapes_1.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_local_shapes_1.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_local_shapes_1.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet_local_shapes_1cwl_src.html">tmp948memtugridmet_local_shapes.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet_local_shapescwl_src.html">gridmet_local_shapes.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet_one_file.html">Workflow to aggregate and ingest one gridMET file in NetCDF format</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_one_file.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_one_file.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_one_file.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_one_file.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet_one_filecwl_src.html">gridmet_one_file.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmetcwl_src.html">gridmet.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/index.html">Index Builder</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/index.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/index.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/index.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/indexcwl_src.html">index.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/ingest.html">Universal uploader of the tabular data to the database</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/ingest.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/ingest.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/ingest.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/ingest_cms.html">Workflow to load Medicaid data from files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/ingest_cms.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/ingest_cms.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/ingest_cms.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/ingest_cms.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/ingest_cmscwl_src.html">ingest_cms.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/ingestcwl_src.html">ingest.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/initcoredb.html">Database initializer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/initcoredb.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/initcoredb.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/initcoredb.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/initcoredbcwl_src.html">initcoredb.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/initdb.html">Database initializer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/initdb.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/initdb.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/initdb.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/initdbcwl_src.html">initdb.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/introspect.html">Introspector for downloaded data file</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/introspect.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/introspect.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/introspect.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/introspectcwl_src.html">introspect.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/load_raw_medicaid.html">Patient Summary Loader</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/load_raw_medicaid.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/load_raw_medicaid.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/load_raw_medicaid.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/load_raw_medicaidcwl_src.html">load_raw_medicaid.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/load_raw_medicare.html">Loader for raw CMS Medicare data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/load_raw_medicare.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/load_raw_medicare.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/load_raw_medicare.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/load_raw_medicarecwl_src.html">load_raw_medicare.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/matview.html">Materialized View Creator</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/matview.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/matview.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/matview.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/matview.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/matviewcwl_src.html">matview.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/mcr2015.html">Materialized View Creator</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/mcr2015.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/mcr2015.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/mcr2015.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/mcr2015.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/mcr2015cwl_src.html">mcr2015.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/medicaid.html">Full Medicaid Processing Pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/medicaid.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/medicaid.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/medicaid.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/medicaid.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/medicaidcwl_src.html">medicaid.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/medicare.html">Medicare data ingestion and processing pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/medicare.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/medicare.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/medicare.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/medicare.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/medicare_admissions.html">Process Medicare inpatient admissions data inside the database</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/medicare_admissions.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/medicare_admissions.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/medicare_admissions.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/medicare_admissions.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/medicare_admissionscwl_src.html">medicare_admissions.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/medicare_beneficiaries.html">Medicare Beneficiaries data in-database processing pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/medicare_beneficiaries.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/medicare_beneficiaries.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/medicare_beneficiaries.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/medicare_beneficiaries.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/medicare_beneficiariescwl_src.html">medicare_beneficiaries.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/medicare_combine_tables.html">Medicare raw data federation tool</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/medicare_combine_tables.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/medicare_combine_tables.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/medicare_combine_tables.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/medicare_combine_tablescwl_src.html">medicare_combine_tables.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/medicare_qc.html">Creates helper tables for Medicare QC</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/medicare_qc.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/medicare_qc.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/medicare_qc.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/medicare_qc.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/medicare_qccwl_src.html">medicare_qc.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/medicarecwl_src.html">medicare.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/parse_fts.html">FTS Parser</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/parse_fts.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/parse_fts.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/parse_fts.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/parse_ftscwl_src.html">parse_fts.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/pm25_yearly_download.html">Pipeline to aggregate data in NetCDF format over given geographies</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/pm25_yearly_download.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/pm25_yearly_download.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/pm25_yearly_download.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/pm25_yearly_download.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/pm25_yearly_downloadcwl_src.html">pm25_yearly_download.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/reset.html">Generic Table (View/Materialized View) Initializer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/reset.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/reset.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/reset.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/resetcwl_src.html">reset.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/run_test.html">Runs an SQL Test Script, presumably generated by DBT Utility</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/run_test.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/run_test.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/run_test.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/run_testcwl_src.html">run_test.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/sample_airnow.html">Sample arguments to AirNow pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/sample_aqs.html">Sample arguments to AQS pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/sample_aqs.html#for-annual-no2-nitrogen-data">For annual NO2 (nitrogen) data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/sample_aqs.html#for-daily-pm25-small-particles-data">For daily PM25 (small particles) data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/setup_airnow.html">Prepare environment for AirNow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/setup_airnow.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/setup_airnow.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/setup_airnow.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/setup_airnowcwl_src.html">setup_airnow.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/test_airnow.html">Test harness for airnow.cwl</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/test_airnow.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/test_airnow.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/test_airnow.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/test_airnowcwl_src.html">test_airnow.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/test_aqs.html">Test harness for aqs.cwl</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/test_aqs.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/test_aqs.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/test_aqs.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/test_aqscwl_src.html">test_aqs.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/test_gridmet.html">Test harness for gridmet.cwl</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/test_gridmet.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/test_gridmet.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/test_gridmet.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/test_gridmetcwl_src.html">test_gridmet.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/test_medicaid.html">Full Medicaid Processing Pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/test_medicaid.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/test_medicaid.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/test_medicaid.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/test_medicaid.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/test_medicaidcwl_src.html">test_medicaid.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/test_pm25_yearly_download.html">Test harness for pm25_yearly_download.cwl</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/test_pm25_yearly_download.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/test_pm25_yearly_download.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/test_pm25_yearly_download.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/test_pm25_yearly_downloadcwl_src.html">test_pm25_yearly_download.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/update_medicaid.html">Full Medicaid Processing Pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/update_medicaid.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/update_medicaid.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/update_medicaid.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/update_medicaid.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/update_medicaidcwl_src.html">update_medicaid.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/vacuum.html">Table tuner tool (running VACUUM)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/vacuum.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/vacuum.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/vacuum.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/vacuumcwl_src.html">vacuum.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/verify.html">Index Builder</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/verify.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/verify.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/verify.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/verifycwl_src.html">verify.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/wustl.html">Pipeline to ingest Pollution downloaded from WashU Box</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/wustl.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/wustl.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/wustl.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/wustl.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/wustl_consolidate_components.html">wustl_consolidate_components.cwl</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/wustl_consolidate_components.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/wustl_consolidate_components.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/wustl_consolidate_components.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/wustl_consolidate_componentscwl_src.html">wustl_consolidate_components.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/wustl_file_pattern.html">Expression evaluator to format a file name for pollution files downloaded from WashU</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/wustl_file_pattern.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/wustl_file_pattern.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/wustl_file_pattern.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/wustl_file_patterncwl_src.html">wustl_file_pattern.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/wustl_one_file.html">Workflow to aggregate and ingest one file in NetCDF format</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/wustl_one_file.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/wustl_one_file.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/wustl_one_file.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/wustl_one_file.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/wustl_one_filecwl_src.html">wustl_one_file.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/wustl_one_year.html">Workflow to aggregate and ingest NetCDF files for one year</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/wustl_one_year.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/wustl_one_year.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/wustl_one_year.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/wustl_one_year.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/wustl_one_yearcwl_src.html">wustl_one_year.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/wustlcwl_src.html">wustl.cwl</a></li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

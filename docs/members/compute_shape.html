@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Observation values aggregation over shapes &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Observation values aggregation over shapes</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/members/compute_shape.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-dorieh.gis.compute_shape">
+<span id="observation-values-aggregation-over-shapes"></span><h1>Observation values aggregation over shapes<a class="headerlink" href="#module-dorieh.gis.compute_shape" title="Permalink to this heading"></a></h1>
+<p>This module processes layers of data containing geographic coordinates
+and observed values for a certain parameter (band)
+and returns records containing
+an identifier for a geographic shape and the value of the band
+aggregated over the shape.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.gis.compute_shape.Record">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prop</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/gis/compute_shape.html#Record"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.gis.compute_shape.Record" title="Permalink to this definition"></a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.gis.compute_shape.Record.value">
+<span class="sig-name descname"><span class="pre">value</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#dorieh.gis.compute_shape.Record.value" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.gis.compute_shape.Record.prop">
+<span class="sig-name descname"><span class="pre">prop</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#dorieh.gis.compute_shape.Record.prop" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.gis.compute_shape.MultiRecord">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultiRecord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prop</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/gis/compute_shape.html#MultiRecord"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.gis.compute_shape.MultiRecord" title="Permalink to this definition"></a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.gis.compute_shape.MultiRecord.values">
+<span class="sig-name descname"><span class="pre">values</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#dorieh.gis.compute_shape.MultiRecord.values" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.gis.compute_shape.MultiRecord.prop">
+<span class="sig-name descname"><span class="pre">prop</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#dorieh.gis.compute_shape.MultiRecord.prop" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.gis.compute_shape.StatsCounter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">StatsCounter</span></span><a class="reference internal" href="../_modules/dorieh/gis/compute_shape.html#StatsCounter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.gis.compute_shape.StatsCounter" title="Permalink to this definition"></a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.gis.compute_shape.StatsCounter.statistics">
+<span class="sig-name descname"><span class="pre">statistics</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'mean'</span></em><a class="headerlink" href="#dorieh.gis.compute_shape.StatsCounter.statistics" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.gis.compute_shape.StatsCounter.max_mem_used">
+<span class="sig-name descname"><span class="pre">max_mem_used</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#dorieh.gis.compute_shape.StatsCounter.max_mem_used" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.gis.compute_shape.StatsCounter.get_key_for_geography">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_key_for_geography</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shpfile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geography</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gis_constants.html#dorieh.gis.constants.Geography" title="dorieh.gis.constants.Geography"><span class="pre">Geography</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span></span></span><a class="reference internal" href="../_modules/dorieh/gis/compute_shape.html#StatsCounter.get_key_for_geography"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.gis.compute_shape.StatsCounter.get_key_for_geography" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.gis.compute_shape.StatsCounter.prepare_stats">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">prepare_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strategy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../strategy.html#dorieh.gis.constants.RasterizationStrategy" title="dorieh.gis.constants.RasterizationStrategy"><span class="pre">RasterizationStrategy</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">shpfile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">affine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Affine</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_generator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span><a class="reference internal" href="../_modules/dorieh/gis/compute_shape.html#StatsCounter.prepare_stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.gis.compute_shape.StatsCounter.prepare_stats" title="Permalink to this definition"></a></dt>
+<dd><p>Given a layer, i.e. a slice of a dataframe, and a shapefile
+returns an iterable of records, containing aggregated values
+of the observations over the shapes in the shapefile.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.gis.compute_shape.StatsCounter.prepare_stats.params.no_data"></span><strong>no_data</strong><a class="paramlink headerlink reference internal" href="#dorieh.gis.compute_shape.StatsCounter.prepare_stats.params.no_data">¶</a> – Value taht is treated as missing value</p></li>
+<li><p><span class="target" id="dorieh.gis.compute_shape.StatsCounter.prepare_stats.params.strategy"></span><strong>strategy</strong><a class="paramlink headerlink reference internal" href="#dorieh.gis.compute_shape.StatsCounter.prepare_stats.params.strategy">¶</a> – Rasterization strategy to be used</p></li>
+<li><p><span class="target" id="dorieh.gis.compute_shape.StatsCounter.prepare_stats.params.shpfile"></span><strong>shpfile</strong><a class="paramlink headerlink reference internal" href="#dorieh.gis.compute_shape.StatsCounter.prepare_stats.params.shpfile">¶</a> – A path to shapefile to be used</p></li>
+<li><p><span class="target" id="dorieh.gis.compute_shape.StatsCounter.prepare_stats.params.affine"></span><strong>affine</strong><a class="paramlink headerlink reference internal" href="#dorieh.gis.compute_shape.StatsCounter.prepare_stats.params.affine">¶</a> – An optional affine transformation to be applied to
+the coordinates</p></li>
+<li><p><span class="target" id="dorieh.gis.compute_shape.StatsCounter.prepare_stats.params.layer"></span><strong>layer</strong><a class="paramlink headerlink reference internal" href="#dorieh.gis.compute_shape.StatsCounter.prepare_stats.params.layer">¶</a> – A slice of dataframe, containing coordinates and values</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of statistics compute objects</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.gis.compute_shape.StatsCounter.process">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strategy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../strategy.html#dorieh.gis.constants.RasterizationStrategy" title="dorieh.gis.constants.RasterizationStrategy"><span class="pre">RasterizationStrategy</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">shpfile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">affine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Affine</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geography</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gis_constants.html#dorieh.gis.constants.Geography" title="dorieh.gis.constants.Geography"><span class="pre">Geography</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dorieh.gis.compute_shape.Record" title="dorieh.gis.compute_shape.Record"><span class="pre">Record</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/dorieh/gis/compute_shape.html#StatsCounter.process"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.gis.compute_shape.StatsCounter.process" title="Permalink to this definition"></a></dt>
+<dd><p>Given a layer, i.e. a slice of a dataframe, and a shapefile 
+returns an iterable of records, containing aggregated values
+of the observations over the shapes in the shapefile.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.gis.compute_shape.StatsCounter.process.params.no_data"></span><strong>no_data</strong><a class="paramlink headerlink reference internal" href="#dorieh.gis.compute_shape.StatsCounter.process.params.no_data">¶</a> – Values that is treated as missing value</p></li>
+<li><p><span class="target" id="dorieh.gis.compute_shape.StatsCounter.process.params.strategy"></span><strong>strategy</strong><a class="paramlink headerlink reference internal" href="#dorieh.gis.compute_shape.StatsCounter.process.params.strategy">¶</a> – Rasterization strategy to be used</p></li>
+<li><p><span class="target" id="dorieh.gis.compute_shape.StatsCounter.process.params.shpfile"></span><strong>shpfile</strong><a class="paramlink headerlink reference internal" href="#dorieh.gis.compute_shape.StatsCounter.process.params.shpfile">¶</a> – A path to shapefile to be used</p></li>
+<li><p><span class="target" id="dorieh.gis.compute_shape.StatsCounter.process.params.affine"></span><strong>affine</strong><a class="paramlink headerlink reference internal" href="#dorieh.gis.compute_shape.StatsCounter.process.params.affine">¶</a> – An optional affine transformation to be applied to
+the coordinates</p></li>
+<li><p><span class="target" id="dorieh.gis.compute_shape.StatsCounter.process.params.layer"></span><strong>layer</strong><a class="paramlink headerlink reference internal" href="#dorieh.gis.compute_shape.StatsCounter.process.params.layer">¶</a> – A slice of dataframe, containing coordinates and values</p></li>
+<li><p><span class="target" id="dorieh.gis.compute_shape.StatsCounter.process.params.geography"></span><strong>geography</strong><a class="paramlink headerlink reference internal" href="#dorieh.gis.compute_shape.StatsCounter.process.params.geography">¶</a> – WHat type of geography is to be used: zip codes
+or counties</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An iterable of records, containing an identifier
+of a certain shape with the aggregated value of the observation
+for this shape</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.gis.compute_shape.StatsCounter.process_layers">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">process_layers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strategy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../strategy.html#dorieh.gis.constants.RasterizationStrategy" title="dorieh.gis.constants.RasterizationStrategy"><span class="pre">RasterizationStrategy</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">shpfile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">affine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Affine</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Iterable</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geography</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gis_constants.html#dorieh.gis.constants.Geography" title="dorieh.gis.constants.Geography"><span class="pre">Geography</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dorieh.gis.compute_shape.MultiRecord" title="dorieh.gis.compute_shape.MultiRecord"><span class="pre">MultiRecord</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/dorieh/gis/compute_shape.html#StatsCounter.process_layers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.gis.compute_shape.StatsCounter.process_layers" title="Permalink to this definition"></a></dt>
+<dd><p>Given a layer, i.e. a slice of a dataframe, and a shapefile
+returns an iterable of records, containing aggregated values
+of the observations over the shapes in the shapefile.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.gis.compute_shape.StatsCounter.process_layers.params.strategy"></span><strong>strategy</strong><a class="paramlink headerlink reference internal" href="#dorieh.gis.compute_shape.StatsCounter.process_layers.params.strategy">¶</a> – Rasterization strategy to be used</p></li>
+<li><p><span class="target" id="dorieh.gis.compute_shape.StatsCounter.process_layers.params.shpfile"></span><strong>shpfile</strong><a class="paramlink headerlink reference internal" href="#dorieh.gis.compute_shape.StatsCounter.process_layers.params.shpfile">¶</a> – A path to shapefile to be used</p></li>
+<li><p><span class="target" id="dorieh.gis.compute_shape.StatsCounter.process_layers.params.affine"></span><strong>affine</strong><a class="paramlink headerlink reference internal" href="#dorieh.gis.compute_shape.StatsCounter.process_layers.params.affine">¶</a> – An optional affine transformation to be applied to
+the coordinates</p></li>
+<li><p><span class="target" id="dorieh.gis.compute_shape.StatsCounter.process_layers.params.layers"></span><strong>layers</strong><a class="paramlink headerlink reference internal" href="#dorieh.gis.compute_shape.StatsCounter.process_layers.params.layers">¶</a> – A list of slices of dataframe, containing coordinates
+and values</p></li>
+<li><p><span class="target" id="dorieh.gis.compute_shape.StatsCounter.process_layers.params.geography"></span><strong>geography</strong><a class="paramlink headerlink reference internal" href="#dorieh.gis.compute_shape.StatsCounter.process_layers.params.geography">¶</a> – WHat type of geography is to be used: zip codes
+or counties</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An iterable of records, containing an identifier
+of a certain shape with the aggregated value of the observation
+for this shape</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.gis.compute_shape.StatsCounter.process_layers_return_dict">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">process_layers_return_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strategy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../strategy.html#dorieh.gis.constants.RasterizationStrategy" title="dorieh.gis.constants.RasterizationStrategy"><span class="pre">RasterizationStrategy</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">shpfile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">affine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Affine</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Iterable</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geography</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gis_constants.html#dorieh.gis.constants.Geography" title="dorieh.gis.constants.Geography"><span class="pre">Geography</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#dorieh.gis.compute_shape.MultiRecord" title="dorieh.gis.compute_shape.MultiRecord"><span class="pre">MultiRecord</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/dorieh/gis/compute_shape.html#StatsCounter.process_layers_return_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.gis.compute_shape.StatsCounter.process_layers_return_dict" title="Permalink to this definition"></a></dt>
+<dd><p>Given a layer, i.e. a slice of a dataframe, and a shapefile
+returns an iterable of records, containing aggregated values
+of the observations over the shapes in the shapefile.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.gis.compute_shape.StatsCounter.process_layers_return_dict.params.strategy"></span><strong>strategy</strong><a class="paramlink headerlink reference internal" href="#dorieh.gis.compute_shape.StatsCounter.process_layers_return_dict.params.strategy">¶</a> – Rasterization strategy to be used</p></li>
+<li><p><span class="target" id="dorieh.gis.compute_shape.StatsCounter.process_layers_return_dict.params.shpfile"></span><strong>shpfile</strong><a class="paramlink headerlink reference internal" href="#dorieh.gis.compute_shape.StatsCounter.process_layers_return_dict.params.shpfile">¶</a> – A path to shapefile to be used</p></li>
+<li><p><span class="target" id="dorieh.gis.compute_shape.StatsCounter.process_layers_return_dict.params.affine"></span><strong>affine</strong><a class="paramlink headerlink reference internal" href="#dorieh.gis.compute_shape.StatsCounter.process_layers_return_dict.params.affine">¶</a> – An optional affine transformation to be applied to
+the coordinates</p></li>
+<li><p><span class="target" id="dorieh.gis.compute_shape.StatsCounter.process_layers_return_dict.params.layers"></span><strong>layers</strong><a class="paramlink headerlink reference internal" href="#dorieh.gis.compute_shape.StatsCounter.process_layers_return_dict.params.layers">¶</a> – A list of slices of dataframe, containing coordinates
+and values</p></li>
+<li><p><span class="target" id="dorieh.gis.compute_shape.StatsCounter.process_layers_return_dict.params.geography"></span><strong>geography</strong><a class="paramlink headerlink reference internal" href="#dorieh.gis.compute_shape.StatsCounter.process_layers_return_dict.params.geography">¶</a> – WHat type of geography is to be used: zip codes
+or counties</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A List of records, containing an identifier
+of a certain shape with the aggregated value of the observation
+for this shape</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="dorieh.gis.compute_shape.AggregationError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AggregationError</span></span><a class="reference internal" href="../_modules/dorieh/gis/compute_shape.html#AggregationError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.gis.compute_shape.AggregationError" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="dorieh.gis.compute_shape.IncompatibleArgumentsError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">IncompatibleArgumentsError</span></span><a class="reference internal" href="../_modules/dorieh/gis/compute_shape.html#IncompatibleArgumentsError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.gis.compute_shape.IncompatibleArgumentsError" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

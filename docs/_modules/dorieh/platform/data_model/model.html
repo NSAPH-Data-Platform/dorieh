@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dorieh.platform.data_model.model &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">dorieh.platform.data_model.model</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for dorieh.platform.data_model.model</h1><div class="highlight"><pre>
+<span></span><span class="c1">#  Copyright (c) 2021. Harvard University</span>
+<span class="c1">#</span>
+<span class="c1">#  Developed by Research Software Engineering,</span>
+<span class="c1">#  Faculty of Arts and Sciences, Research Computing (FAS RC)</span>
+<span class="c1">#  Author: Michael A Bouzinier</span>
+<span class="c1">#</span>
+<span class="c1">#  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1">#  you may not use this file except in compliance with the License.</span>
+<span class="c1">#  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#         http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1">#  limitations under the License.</span>
+<span class="c1">#</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">yaml</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">from</span> <span class="nn">dorieh.platform.data_model.utils</span> <span class="kn">import</span> <span class="n">regex</span>
+<span class="kn">from</span> <span class="nn">dorieh.utils.io_utils</span> <span class="kn">import</span> <span class="n">CSVFileWrapper</span><span class="p">,</span> <span class="n">basename</span><span class="p">,</span> <span class="n">fopen</span><span class="p">,</span> <span class="n">SpecialValues</span>
+<span class="kn">from</span> <span class="nn">dorieh.platform.pg_keywords</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="n">PG_MAXINT</span> <span class="o">=</span> <span class="mi">2147483647</span>
+
+<span class="n">METADATA_TYPE_KEY</span> <span class="o">=</span> <span class="s2">&quot;type&quot;</span>
+<span class="n">METADATA_TYPE_MODEL</span> <span class="o">=</span> <span class="s2">&quot;model_specification&quot;</span>
+<span class="n">INDEX_DDL_PATTERN</span> <span class="o">=</span> <span class="s2">&quot;CREATE INDEX </span><span class="si">{option}</span><span class="s2"> </span><span class="si">{name}</span><span class="s2"> ON </span><span class="si">{table}</span><span class="s2"> USING </span><span class="si">{method}</span><span class="s2"> (</span><span class="si">{column}</span><span class="s2">) </span><span class="si">{include}</span><span class="s2">;&quot;</span>
+<span class="n">UNIQUE_INDEX_DDL_PATTERN</span> <span class="o">=</span> <span class="s2">&quot;CREATE UNIQUE INDEX </span><span class="si">{option}</span><span class="s2"> </span><span class="si">{name}</span><span class="s2"> ON </span><span class="si">{table}</span><span class="s2"> USING </span><span class="si">{method}</span><span class="s2"> (</span><span class="si">{column}</span><span class="s2">);&quot;</span>
+<span class="n">INDEX_NAME_PATTERN</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{table}</span><span class="s2">_</span><span class="si">{column}</span><span class="s2">_idx&quot;</span>
+
+<span class="n">BTREE</span> <span class="o">=</span> <span class="s2">&quot;btree&quot;</span>
+<span class="c1">#HASH = &quot;hash&quot;</span>
+<span class="n">HASH</span> <span class="o">=</span> <span class="n">BTREE</span>  <span class="c1"># problem building huge hash indices</span>
+
+<span class="n">index_columns</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;date&quot;</span><span class="p">:</span><span class="n">BTREE</span><span class="p">,</span>
+    <span class="s2">&quot;fips&quot;</span><span class="p">:</span><span class="n">HASH</span><span class="p">,</span>
+    <span class="s2">&quot;monitor&quot;</span><span class="p">:</span><span class="n">HASH</span><span class="p">,</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="n">BTREE</span><span class="p">,</span>
+    <span class="s2">&quot;state&quot;</span><span class="p">:</span><span class="n">HASH</span><span class="p">,</span>
+    <span class="s2">&quot;st_abbrev&quot;</span><span class="p">:</span><span class="n">HASH</span><span class="p">,</span>
+    <span class="s2">&quot;year&quot;</span><span class="p">:</span><span class="n">BTREE</span><span class="p">,</span>
+    <span class="s2">&quot;zip&quot;</span><span class="p">:</span><span class="n">BTREE</span><span class="p">,</span>
+    <span class="s2">&quot;*.code&quot;</span><span class="p">:</span><span class="n">BTREE</span><span class="p">,</span>
+    <span class="s2">&quot;*code&quot;</span><span class="p">:</span><span class="n">BTREE</span><span class="p">,</span>
+    <span class="s2">&quot;fips*&quot;</span><span class="p">:</span> <span class="n">BTREE</span><span class="p">,</span>
+    <span class="s2">&quot;*.date&quot;</span><span class="p">:</span><span class="n">BTREE</span><span class="p">,</span>
+    <span class="s2">&quot;date_local&quot;</span><span class="p">:</span><span class="n">BTREE</span><span class="p">,</span>
+    <span class="s2">&quot;*.type&quot;</span><span class="p">:</span><span class="n">HASH</span><span class="p">,</span>
+    <span class="s2">&quot;*.name&quot;</span><span class="p">:</span><span class="n">BTREE</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="index_method"><a class="viewcode-back" href="../../../../members/model.html#dorieh.platform.data_model.model.index_method">[docs]</a><span class="k">def</span> <span class="nf">index_method</span><span class="p">(</span><span class="n">c</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">index_columns</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">&quot;*&quot;</span> <span class="ow">in</span> <span class="n">i</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">regex</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">index_columns</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">c</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">index_columns</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<span class="n">integer</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;-?\d+&quot;</span><span class="p">)</span>
+<span class="n">float_number</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;(-?\d*)\.(\d+)([e|E][-|+]?\d+)?&quot;</span><span class="p">)</span>
+<span class="n">exponent</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;(-?\d+)([e|E][-|+]?\d+)&quot;</span><span class="p">)</span>
+<span class="n">date</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;([12]\d</span><span class="si">{3}</span><span class="s2">-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))&quot;</span><span class="p">)</span>
+
+<span class="n">SET_COLUMN</span> <span class="o">=</span> <span class="s2">&quot;UPDATE </span><span class="si">{table}</span><span class="s2"> SET </span><span class="si">{column}</span><span class="s2"> = </span><span class="si">{expression}</span><span class="s2">&quot;</span>
+
+<div class="viewcode-block" id="unquote"><a class="viewcode-back" href="../../../../members/model.html#dorieh.platform.data_model.model.unquote">[docs]</a><span class="k">def</span> <span class="nf">unquote</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="load_range"><a class="viewcode-back" href="../../../../members/model.html#dorieh.platform.data_model.model.load_range">[docs]</a><span class="k">def</span> <span class="nf">load_range</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">f</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">i</span>
+    <span class="k">return</span> <span class="n">n</span></div>
+
+
+<div class="viewcode-block" id="csv_reader"><a class="viewcode-back" href="../../../../members/model.html#dorieh.platform.data_model.model.csv_reader">[docs]</a><span class="k">def</span> <span class="nf">csv_reader</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">unquote</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">unquote</span><span class="p">:</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">QUOTE_ALL</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">QUOTE_NONE</span>
+    <span class="k">return</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span>
+        <span class="n">quoting</span><span class="o">=</span><span class="n">q</span><span class="p">,</span> <span class="n">skipinitialspace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CustomColumn"><a class="viewcode-back" href="../../../../members/model.html#dorieh.platform.data_model.model.CustomColumn">[docs]</a><span class="k">class</span> <span class="nc">CustomColumn</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">extraction_method</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="nb">type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">extraction_method</span> <span class="o">=</span> <span class="n">extraction_method</span>
+
+<div class="viewcode-block" id="CustomColumn.extract_value"><a class="viewcode-back" href="../../../../members/model.html#dorieh.platform.data_model.model.CustomColumn.extract_value">[docs]</a>    <span class="k">def</span> <span class="nf">extract_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_source</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extraction_method</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extraction_method</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="n">basename</span><span class="p">(</span><span class="n">input_source</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="n">n</span><span class="p">]</span></div></div>
+
+
+<div class="viewcode-block" id="Table"><a class="viewcode-back" href="../../../../members/model.html#dorieh.platform.data_model.model.Table">[docs]</a><span class="k">class</span> <span class="nc">Table</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metadata_file</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">get_entry</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">concurrent_indices</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                 <span class="n">data_file</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">column_name_replacement</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="n">metadata</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">metadata_file</span><span class="p">:</span>
+            <span class="n">fn</span> <span class="o">=</span> <span class="n">metadata_file</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">metadata_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">fn</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;json&quot;</span><span class="p">):</span>
+                    <span class="n">metadata</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">fn</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.yaml&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">fn</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.yml&quot;</span><span class="p">):</span>
+                    <span class="n">metadata</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Unsupported file type for metadata&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">METADATA_TYPE_KEY</span><span class="p">)</span> <span class="o">==</span> <span class="n">METADATA_TYPE_MODEL</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">open_entry_function</span> <span class="o">=</span> <span class="n">get_entry</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">metadata_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+                    <span class="n">j</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">j</span><span class="p">:</span>
+                    <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">j</span><span class="p">[</span><span class="n">a</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">data_file</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span> <span class="o">=</span> <span class="n">data_file</span>
+                <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="n">metadata</span>
+        <span class="k">if</span> <span class="n">concurrent_indices</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">index_option</span> <span class="o">=</span> <span class="s2">&quot;CONCURRENTLY&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">index_option</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">data_file</span><span class="p">)</span>
+        <span class="n">file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_path</span><span class="p">)</span>
+        <span class="n">tname</span><span class="p">,</span> <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">ext</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]:</span>
+            <span class="n">tname</span><span class="p">,</span> <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">tname</span><span class="p">)</span>
+        <span class="n">tname</span> <span class="o">=</span> <span class="n">tname</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">=</span> <span class="n">tname</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">has_commas</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">quoted_values</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sql_columns</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">csv_columns</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">types</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">open_entry_function</span> <span class="o">=</span> <span class="n">get_entry</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">force_manual</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">custom_columns</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_table_ddl</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">index_ddl</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">column_map</span> <span class="o">=</span> <span class="n">column_name_replacement</span> \
+            <span class="k">if</span> <span class="n">column_name_replacement</span> <span class="k">else</span> <span class="nb">dict</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Table.save"><a class="viewcode-back" href="../../../../members/model.html#dorieh.platform.data_model.model.Table.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">to_dir</span><span class="p">):</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">to_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">+</span> <span class="s2">&quot;.json&quot;</span><span class="p">)</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="n">j</span><span class="p">[</span><span class="n">METADATA_TYPE_KEY</span><span class="p">]</span> <span class="o">=</span> <span class="n">METADATA_TYPE_MODEL</span>
+        <span class="k">for</span> <span class="n">att</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">att</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;_&#39;</span><span class="p">:</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">att</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+                    <span class="k">continue</span>
+                <span class="n">j</span><span class="p">[</span><span class="n">att</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+
+        <span class="k">with</span> <span class="nb">open</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">config</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Saved table definition to: &quot;</span> <span class="o">+</span> <span class="n">f</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Table.fopen"><a class="viewcode-back" href="../../../../members/model.html#dorieh.platform.data_model.model.Table.fopen">[docs]</a>    <span class="k">def</span> <span class="nf">fopen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">):</span>
+        <span class="n">entry</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">open_entry_function</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">entry</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">fopen</span><span class="p">(</span><span class="n">entry</span><span class="p">,</span> <span class="s2">&quot;rt&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">entry</span></div>
+
+<div class="viewcode-block" id="Table.get_index_ddl"><a class="viewcode-back" href="../../../../members/model.html#dorieh.platform.data_model.model.Table.get_index_ddl">[docs]</a>    <span class="k">def</span> <span class="nf">get_index_ddl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">method</span><span class="p">):</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">INDEX_NAME_PATTERN</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">,</span> <span class="n">column</span> <span class="o">=</span> <span class="n">column</span><span class="p">)</span>
+        <span class="n">ddl</span> <span class="o">=</span> <span class="n">INDEX_DDL_PATTERN</span> \
+            <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">option</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">index_option</span><span class="p">,</span>
+                    <span class="n">name</span> <span class="o">=</span> <span class="n">n</span><span class="p">,</span>
+                    <span class="n">table</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">,</span>
+                    <span class="n">column</span><span class="o">=</span><span class="n">column</span><span class="p">,</span>
+                    <span class="n">method</span> <span class="o">=</span> <span class="n">method</span><span class="p">,</span> <span class="n">include</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">n</span><span class="p">,</span> <span class="n">ddl</span></div>
+
+<div class="viewcode-block" id="Table.add_column"><a class="viewcode-back" href="../../../../members/model.html#dorieh.platform.data_model.model.Table.add_column">[docs]</a>    <span class="k">def</span> <span class="nf">add_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">extraction_method</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">custom_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">CustomColumn</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">extraction_method</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">extraction_method</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">force_manual</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="Table.make_column"><a class="viewcode-back" href="../../../../members/model.html#dorieh.platform.data_model.model.Table.make_column">[docs]</a>    <span class="k">def</span> <span class="nf">make_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">sql</span><span class="p">,</span> <span class="n">cursor</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">include_in_index</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">ddl</span> <span class="o">=</span> <span class="s2">&quot;ALTER TABLE </span><span class="si">{table}</span><span class="s2"> ADD </span><span class="si">{column}</span><span class="s2"> </span><span class="si">{type}</span><span class="s2">&quot;</span>\
+            <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">,</span> <span class="n">column</span> <span class="o">=</span> <span class="n">name</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">ddl</span><span class="p">)</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">ddl</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">index</span><span class="p">:</span>
+            <span class="n">idx</span><span class="p">,</span> <span class="n">ddl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_index_ddl</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">HASH</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">include_in_index</span><span class="p">:</span>
+                <span class="n">ddl</span> <span class="o">+=</span> <span class="s2">&quot; include(</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">include_in_index</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">ddl</span><span class="p">)</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">ddl</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Table.make_fips_column"><a class="viewcode-back" href="../../../../members/model.html#dorieh.platform.data_model.model.Table.make_fips_column">[docs]</a>    <span class="k">def</span> <span class="nf">make_fips_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cursor</span><span class="p">):</span>
+        <span class="n">column</span> <span class="o">=</span> <span class="s2">&quot;fips5&quot;</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;format(&#39;</span><span class="si">%2s</span><span class="s2">&#39;, state_code)&quot;</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="s2">&quot;format(&#39;</span><span class="si">%3s</span><span class="s2">&#39;, county_code)&quot;</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="s2">&quot;replace(</span><span class="si">{}</span><span class="s2"> || </span><span class="si">{}</span><span class="s2">, &#39; &#39;, &#39;0&#39;)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+        <span class="n">sql</span> <span class="o">=</span> <span class="n">SET_COLUMN</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="n">column</span><span class="p">,</span> <span class="n">expression</span><span class="o">=</span><span class="n">e</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">make_column</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">PG_STR_TYPE</span><span class="p">,</span> <span class="n">sql</span><span class="p">,</span> <span class="n">cursor</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Table.make_iso_column"><a class="viewcode-back" href="../../../../members/model.html#dorieh.platform.data_model.model.Table.make_iso_column">[docs]</a>    <span class="k">def</span> <span class="nf">make_iso_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">anchor</span><span class="p">,</span> <span class="n">cursor</span><span class="p">,</span> <span class="n">include</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add US State ISO 3166-2 code</span>
+<span class="sd">        Source: https://simplemaps.com/data/us-cities</span>
+
+<span class="sd">        :param anchor: existing column to use to calculate state iso code</span>
+<span class="sd">        :param cursor: Database cursor</span>
+<span class="sd">        :param include: Additional data (column) to include in index on the new column</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">column</span> <span class="o">=</span> <span class="s2">&quot;state_iso&quot;</span>
+        <span class="k">if</span> <span class="n">anchor</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;state_name&quot;</span><span class="p">:</span>
+            <span class="n">e</span> <span class="o">=</span> <span class="s2">&quot;(SELECT iso FROM us_states &quot;</span> \
+                <span class="s2">&quot;WHERE us_states.state_name = </span><span class="si">{}</span><span class="s2">.</span><span class="si">{}</span><span class="s2">)&quot;</span>\
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">,</span> <span class="n">anchor</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">us_iso_column</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;fips&quot;</span><span class="p">:</span> <span class="s2">&quot;county_fips&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;fips5&quot;</span><span class="p">:</span> <span class="s2">&quot;county_fips&quot;</span>
+            <span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">anchor</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="n">anchor</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+            <span class="n">e</span> <span class="o">=</span> <span class="s2">&quot;(SELECT iso FROM us_iso WHERE us_iso.</span><span class="si">{}</span><span class="s2"> = </span><span class="si">{}</span><span class="s2">.</span><span class="si">{}</span><span class="s2"> LIMIT 1)&quot;</span>\
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">us_iso_column</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">,</span> <span class="n">anchor</span><span class="p">)</span>
+        <span class="n">sql</span> <span class="o">=</span> <span class="n">SET_COLUMN</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="n">column</span><span class="p">,</span> <span class="n">expression</span><span class="o">=</span><span class="n">e</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">make_column</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">PG_STR_TYPE</span><span class="p">,</span> <span class="n">sql</span><span class="p">,</span> <span class="n">cursor</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">include_in_index</span><span class="o">=</span><span class="n">include</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Table.parse_fips12"><a class="viewcode-back" href="../../../../members/model.html#dorieh.platform.data_model.model.Table.parse_fips12">[docs]</a>    <span class="k">def</span> <span class="nf">parse_fips12</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cursor</span><span class="p">):</span>
+        <span class="n">column</span> <span class="o">=</span> <span class="s2">&quot;fips5&quot;</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="s2">&quot;CAST(substring(fips12, 1, 5) AS INTEGER)&quot;</span>
+        <span class="n">sql</span> <span class="o">=</span> <span class="n">SET_COLUMN</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="n">column</span><span class="p">,</span> <span class="n">expression</span><span class="o">=</span><span class="n">e</span><span class="p">)</span>
+        <span class="c1"># self.make_column(column, PG_STR_TYPE, sql, cursor, True)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">make_column</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="s2">&quot;INTEGER&quot;</span><span class="p">,</span> <span class="n">sql</span><span class="p">,</span> <span class="n">cursor</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Table.make_int_column"><a class="viewcode-back" href="../../../../members/model.html#dorieh.platform.data_model.model.Table.make_int_column">[docs]</a>    <span class="k">def</span> <span class="nf">make_int_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cursor</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;INTEGER&quot;</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="s2">&quot;CAST(NULLIF(REGEXP_REPLACE(</span><span class="si">{what}</span><span class="s2">, &#39;[^0-9]&#39;, &#39;&#39;,&#39;g&#39;), &#39;&#39;) AS </span><span class="si">{to}</span><span class="s2">)&quot;</span>\
+            <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">what</span><span class="o">=</span><span class="n">source</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="nb">type</span><span class="p">)</span>
+        <span class="n">sql</span> <span class="o">=</span> <span class="n">SET_COLUMN</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="n">target</span><span class="p">,</span> <span class="n">expression</span><span class="o">=</span><span class="n">e</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">make_column</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">sql</span><span class="p">,</span> <span class="n">cursor</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Table.analyze"><a class="viewcode-back" href="../../../../members/model.html#dorieh.platform.data_model.model.Table.analyze">[docs]</a>    <span class="k">def</span> <span class="nf">analyze</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entry</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">entry</span><span class="p">:</span>
+            <span class="n">entry</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Using for data analysis: &quot;</span> <span class="o">+</span> <span class="n">name</span><span class="p">(</span><span class="n">entry</span><span class="p">))</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">fopen</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span> <span class="k">as</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">reader</span> <span class="o">=</span> <span class="n">csv_reader</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+            <span class="n">row</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">csv_columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">unquote</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">row</span><span class="p">]</span>
+
+            <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">load_range</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="k">lambda</span> <span class="p">:</span> <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">reader</span><span class="p">)))</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">fopen</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span> <span class="k">as</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">reader</span> <span class="o">=</span> <span class="n">csv_reader</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+            <span class="nb">next</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>
+            <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">load_range</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="k">lambda</span> <span class="p">:</span> <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">reader</span><span class="p">)))</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">rows</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;No data in </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_path</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s1">&#39;,&#39;</span> <span class="ow">in</span> <span class="n">cell</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">has_commas</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="k">break</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">guess_types</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">lines</span><span class="p">)</span>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">sql_columns</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">csv_columns</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">c</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">sql_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Col&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">c</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">column_map</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">sql_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">column_map</span><span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">lower</span><span class="p">()])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">sql_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+
+        <span class="n">col_spec</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="se">\t</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sql_columns</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">types</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">csv_columns</span><span class="p">))</span>
+        <span class="p">]</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_columns</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sql_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">col_spec</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="se">\t</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">type</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_table_ddl</span> <span class="o">=</span> \
+            <span class="s2">&quot;CREATE TABLE </span><span class="si">{}</span><span class="se">\n</span><span class="s2"> (</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">,</span> <span class="s2">&quot;,</span><span class="se">\n\t</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">col_spec</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sql_columns</span><span class="p">:</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="n">index_method</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">m</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">index_ddl</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_index_ddl</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">m</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Table.create"><a class="viewcode-back" href="../../../../members/model.html#dorieh.platform.data_model.model.Table.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cursor</span><span class="p">):</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_table_ddl</span><span class="p">)</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_table_ddl</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Table.build_indices"><a class="viewcode-back" href="../../../../members/model.html#dorieh.platform.data_model.model.Table.build_indices">[docs]</a>    <span class="k">def</span> <span class="nf">build_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cursor</span><span class="p">,</span> <span class="n">flag</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">ddl</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">index_ddl</span><span class="p">:</span>
+            <span class="n">command</span> <span class="o">=</span> <span class="n">ddl</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">ddl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">flag</span> <span class="o">==</span> <span class="n">INDEX_REINDEX</span><span class="p">:</span>
+                <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;DROP INDEX IF EXISTS </span><span class="si">{name}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> <span class="n">sql</span><span class="p">)</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">flag</span> <span class="o">==</span> <span class="n">INDEX_INCREMENTAL</span><span class="p">:</span>
+                <span class="n">command</span> <span class="o">=</span> <span class="n">command</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;IF NOT EXISTS &quot;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">flag</span> <span class="ow">and</span> <span class="n">flag</span> <span class="o">!=</span> <span class="s2">&quot;default&quot;</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Invalid indexing flag: &quot;</span> <span class="o">+</span> <span class="n">flag</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> <span class="n">command</span><span class="p">)</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">command</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Table.drop"><a class="viewcode-back" href="../../../../members/model.html#dorieh.platform.data_model.model.Table.drop">[docs]</a>    <span class="k">def</span> <span class="nf">drop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cursor</span><span class="p">):</span>
+        <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;DROP TABLE </span><span class="si">{}</span><span class="s2"> CASCADE&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Table.type_from_metadata"><a class="viewcode-back" href="../../../../members/model.html#dorieh.platform.data_model.model.Table.type_from_metadata">[docs]</a>    <span class="k">def</span> <span class="nf">type_from_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">c_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">csv_columns</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+        <span class="n">metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span>
+        <span class="k">if</span> <span class="s2">&quot;table&quot;</span> <span class="ow">in</span> <span class="n">metadata</span><span class="p">:</span>
+            <span class="n">metadata</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;table&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="ow">in</span> <span class="n">metadata</span><span class="p">:</span>
+            <span class="n">metadata</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s2">&quot;columns&quot;</span> <span class="ow">in</span> <span class="n">metadata</span><span class="p">:</span>
+            <span class="n">metadata</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;columns&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">c_name</span> <span class="ow">in</span> <span class="n">metadata</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">metadata</span><span class="p">[</span><span class="n">c_name</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">metadata</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">metadata</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">c_name</span> <span class="ow">in</span> <span class="n">element</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">element</span><span class="p">[</span><span class="n">c_name</span><span class="p">]</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="Table.guess_types"><a class="viewcode-back" href="../../../../members/model.html#dorieh.platform.data_model.model.Table.guess_types">[docs]</a>    <span class="k">def</span> <span class="nf">guess_types</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rows</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">lines</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+            <span class="n">c_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">type_from_metadata</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+            <span class="n">precision</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">scale</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">max_val</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="n">rows</span><span class="p">[</span><span class="n">l</span><span class="p">][</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="n">v2</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="n">l</span><span class="p">][</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">date</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+                    <span class="n">t</span> <span class="o">=</span> <span class="s2">&quot;DATE&quot;</span>
+                <span class="k">elif</span> <span class="n">v2</span> <span class="o">==</span> <span class="s1">&#39;&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+                    <span class="n">t</span> <span class="o">=</span> <span class="n">PG_STR_TYPE</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">quoted_values</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">elif</span> <span class="n">SpecialValues</span><span class="o">.</span><span class="n">is_untyped</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+                    <span class="n">t</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">f</span> <span class="o">=</span> <span class="n">float_number</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">f</span><span class="p">:</span>
+                        <span class="n">t</span> <span class="o">=</span> <span class="n">PG_NUMERIC_TYPE</span>
+                        <span class="n">s</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+                        <span class="n">p</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+                        <span class="n">scale</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+                        <span class="n">precision</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">precision</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+                    <span class="k">elif</span> <span class="n">exponent</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+                        <span class="n">t</span> <span class="o">=</span> <span class="n">PG_NUMERIC_TYPE</span>
+                    <span class="k">elif</span> <span class="n">integer</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+                        <span class="n">t</span> <span class="o">=</span> <span class="n">PG_INT_TYPE</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">t</span> <span class="o">=</span> <span class="n">PG_STR_TYPE</span>
+                <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;0&quot;</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="k">if</span> <span class="n">t</span> <span class="ow">in</span> <span class="p">[</span><span class="n">PG_INT_TYPE</span><span class="p">]:</span>
+                    <span class="n">max_val</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_val</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">)))</span>
+                <span class="k">if</span> <span class="n">c_type</span> <span class="o">==</span> <span class="s2">&quot;0&quot;</span><span class="p">:</span>
+                    <span class="n">c_type</span> <span class="o">=</span> <span class="n">t</span>
+                <span class="k">elif</span> <span class="n">c_type</span> <span class="o">==</span> <span class="n">PG_NUMERIC_TYPE</span> <span class="ow">and</span> <span class="n">t</span> <span class="o">==</span> <span class="n">PG_INT_TYPE</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="k">elif</span> <span class="n">c_type</span> <span class="o">==</span> <span class="n">PG_STR_TYPE</span> <span class="ow">and</span> <span class="n">t</span> <span class="ow">in</span> <span class="p">[</span><span class="n">PG_INT_TYPE</span><span class="p">,</span> <span class="n">PG_NUMERIC_TYPE</span><span class="p">]:</span>
+                    <span class="k">continue</span>
+                <span class="k">elif</span> <span class="n">c_type</span> <span class="o">==</span> <span class="n">PG_INT_TYPE</span> <span class="ow">and</span> <span class="n">t</span> <span class="o">==</span> <span class="n">PG_NUMERIC_TYPE</span><span class="p">:</span>
+                    <span class="n">c_type</span> <span class="o">=</span> <span class="n">t</span>
+                <span class="k">elif</span> <span class="p">(</span><span class="n">c_type</span> <span class="ow">and</span> <span class="n">c_type</span> <span class="o">!=</span> <span class="n">t</span><span class="p">):</span>
+                    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Inconsistent type for column </span><span class="si">{:d}</span><span class="s2"> [</span><span class="si">{:s}</span><span class="s2">]. &quot;</span> \
+                        <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">csv_columns</span><span class="p">[</span><span class="n">c</span><span class="p">])</span>
+                    <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;Up to line </span><span class="si">{:d}</span><span class="s2">: </span><span class="si">{:s}</span><span class="s2">, for line=</span><span class="si">{:d}</span><span class="s2">: </span><span class="si">{:s}</span><span class="s2">. &quot;</span> \
+                        <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">l</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">c_type</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+                    <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;Value = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">c_type</span> <span class="o">=</span> <span class="n">t</span>
+            <span class="k">if</span> <span class="n">c_type</span> <span class="o">==</span> <span class="n">PG_INT_TYPE</span> <span class="ow">and</span> <span class="n">max_val</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">&gt;</span> <span class="n">PG_MAXINT</span><span class="p">:</span>
+                <span class="n">c_type</span> <span class="o">=</span> <span class="n">PG_BIGINT_TYPE</span>
+            <span class="k">if</span> <span class="n">c_type</span> <span class="o">==</span> <span class="n">PG_NUMERIC_TYPE</span><span class="p">:</span>
+                <span class="n">precision</span> <span class="o">+=</span> <span class="n">scale</span>
+                <span class="n">c_type</span> <span class="o">=</span> <span class="n">c_type</span> <span class="o">+</span> <span class="s2">&quot;(</span><span class="si">{:d}</span><span class="s2">,</span><span class="si">{:d}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">precision</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">scale</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">c_type</span> <span class="o">==</span> <span class="s2">&quot;0&quot;</span><span class="p">:</span>
+                <span class="n">c_type</span> <span class="o">=</span> <span class="n">PG_NUMERIC_TYPE</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">c_type</span><span class="p">:</span>
+                <span class="n">c_type</span> <span class="o">=</span> <span class="n">PG_STR_TYPE</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c_type</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="Table.add_data"><a class="viewcode-back" href="../../../../members/model.html#dorieh.platform.data_model.model.Table.add_data">[docs]</a>    <span class="k">def</span> <span class="nf">add_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cursor</span><span class="p">,</span> <span class="n">entry</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_commas</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;The CSV file contains commas, copying manually.&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">copy_data</span><span class="p">(</span><span class="n">cursor</span><span class="p">,</span> <span class="n">entry</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">quoted_values</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;The CSV file uses quoted values.&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">copy_data</span><span class="p">(</span><span class="n">cursor</span><span class="p">,</span> <span class="n">entry</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">force_manual</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Forcing manual copy of the data.&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">copy_data</span><span class="p">(</span><span class="n">cursor</span><span class="p">,</span> <span class="n">entry</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Copying data using system function.&quot;</span><span class="p">)</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">fopen</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span> <span class="k">as</span> <span class="n">data</span><span class="p">:</span>
+                <span class="k">with</span> <span class="n">CSVFileWrapper</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="k">as</span> <span class="n">csv_data</span><span class="p">:</span>
+                    <span class="n">csv_data</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+                    <span class="n">cursor</span><span class="o">.</span><span class="n">copy_from</span><span class="p">(</span><span class="n">csv_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span>
+                                     <span class="n">null</span><span class="o">=</span><span class="n">SpecialValues</span><span class="o">.</span><span class="n">NA</span><span class="p">,</span>
+                                     <span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sql_columns</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.copy_data"><a class="viewcode-back" href="../../../../members/model.html#dorieh.platform.data_model.model.Table.copy_data">[docs]</a>    <span class="k">def</span> <span class="nf">copy_data</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cursor</span><span class="p">,</span> <span class="n">input_source</span><span class="p">):</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="mi">10000</span>
+        <span class="n">insert</span> <span class="o">=</span> <span class="s2">&quot;INSERT INTO </span><span class="si">{table}</span><span class="s2"> (</span><span class="si">{columns}</span><span class="s2">) VALUES &quot;</span>\
+            <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sql_columns</span><span class="p">))</span>
+        <span class="c1">#values = &quot;({})&quot;.format(&#39;&#39;)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">fopen</span><span class="p">(</span><span class="n">input_source</span><span class="p">)</span> <span class="k">as</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">reader</span> <span class="o">=</span> <span class="n">csv_reader</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+            <span class="nb">next</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>
+            <span class="n">lines</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">chars</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">sql</span> <span class="o">=</span> <span class="n">insert</span>
+            <span class="n">t0</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+            <span class="n">t1</span> <span class="o">=</span> <span class="n">t0</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">row</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>
+                <span class="k">except</span><span class="p">(</span><span class="ne">StopIteration</span><span class="p">):</span>
+                    <span class="k">break</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+                    <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+                <span class="n">lines</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">chars</span> <span class="o">+=</span> <span class="nb">sum</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span> <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">row</span><span class="p">])</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">types</span><span class="p">)):</span>
+                    <span class="k">if</span> <span class="n">SpecialValues</span><span class="o">.</span><span class="n">is_missing</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
+                        <span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;NULL&quot;</span>
+                    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">types</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="n">PG_STR_TYPE</span><span class="p">,</span> <span class="n">PG_DATE_TYPE</span><span class="p">,</span> <span class="n">PG_TS_TYPE</span><span class="p">,</span> <span class="n">PG_TIME_TYPE</span><span class="p">]:</span>
+                        <span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;&#39;&#39;&quot;</span><span class="p">))</span>
+                    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">types</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="n">PG_INT_TYPE</span><span class="p">,</span> <span class="n">PG_BIGINT_TYPE</span><span class="p">,</span>
+                                           <span class="n">PG_NUMERIC_TYPE</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                        <span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;NULL&quot;</span>
+
+                <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_columns</span><span class="p">:</span>
+                    <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">extract_value</span><span class="p">(</span><span class="n">input_source</span><span class="p">))</span>
+                <span class="n">values</span> <span class="o">=</span> <span class="s2">&quot;(</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">row</span><span class="p">))</span>
+                <span class="n">sql</span> <span class="o">+=</span> <span class="n">values</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">lines</span> <span class="o">%</span> <span class="n">N</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+                    <span class="n">t1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_progress</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">chars</span><span class="p">,</span> <span class="n">lines</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+                    <span class="n">sql</span> <span class="o">=</span> <span class="n">insert</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">sql</span> <span class="o">+=</span> <span class="s2">&quot;,&quot;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">lines</span> <span class="o">%</span> <span class="n">N</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">sql</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;,&#39;</span><span class="p">:</span>
+                    <span class="n">sql</span> <span class="o">=</span> <span class="n">sql</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">log_progress</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">chars</span><span class="p">,</span> <span class="n">lines</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="Table.log_progress"><a class="viewcode-back" href="../../../../members/model.html#dorieh.platform.data_model.model.Table.log_progress">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">log_progress</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">chars</span><span class="p">,</span> <span class="n">lines</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">chars</span> <span class="o">&gt;</span> <span class="mi">1000000000</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{:7.2f}</span><span class="s2">G&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">chars</span> <span class="o">/</span> <span class="mf">1000000000.0</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">chars</span> <span class="o">&gt;</span> <span class="mi">1000000</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{:6.2f}</span><span class="s2">M&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">chars</span> <span class="o">/</span> <span class="mf">1000000.0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">dt1</span> <span class="o">=</span> <span class="n">t</span> <span class="o">-</span> <span class="n">t1</span>
+        <span class="n">dt0</span> <span class="o">=</span> <span class="n">t</span> <span class="o">-</span> <span class="n">t0</span>
+        <span class="n">r1</span> <span class="o">=</span> <span class="n">N</span> <span class="o">/</span> <span class="n">dt1</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span>
+        <span class="n">r0</span> <span class="o">=</span> <span class="n">lines</span> <span class="o">/</span> <span class="n">dt0</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">: Processed </span><span class="si">{:,}</span><span class="s2">/</span><span class="si">{}</span><span class="s2"> lines/chars [t=</span><span class="si">{}</span><span class="s2">(</span><span class="si">{}</span><span class="s2">), r=</span><span class="si">{:5.1f}</span><span class="s2">(</span><span class="si">{:5.1f}</span><span class="s2">) lines/sec]&quot;</span>
+              <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">lines</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">dt1</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">dt0</span><span class="p">),</span> <span class="n">r1</span><span class="p">,</span> <span class="n">r0</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">t</span></div></div>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

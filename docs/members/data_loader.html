@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The data_loader Module &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">The data_loader Module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/members/data_loader.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="the-data-loader-module">
+<h1>The data_loader Module<a class="headerlink" href="#the-data-loader-module" title="Permalink to this heading"></a></h1>
+<p>Implements parallel loading data into a PostgreSQL database.
+It is also responsible for loading DDL and creation of view,
+both virtual and materialized.</p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Usage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../DataLoader.html">NSAPH Data Loader</a></li>
+</ul>
+</div>
+<section id="module-dorieh.platform.loader.data_loader">
+<span id="api"></span><h2>API<a class="headerlink" href="#module-dorieh.platform.loader.data_loader" title="Permalink to this heading"></a></h2>
+<p>Domain Data Loader</p>
+<p>Provides Command line interface for loading data from a
+single or a set of column-formatted files
+into NSAPH PostgreSQL Database.</p>
+<p>Input (aka source) files can be either in FST or in CSV format.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.platform.loader.data_loader.DataLoader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DataLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="loader_config.html#dorieh.platform.loader.loader_config.LoaderConfig" title="dorieh.platform.loader.loader_config.LoaderConfig"><span class="pre">LoaderConfig</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/loader/data_loader.html#DataLoader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.data_loader.DataLoader" title="Permalink to this definition"></a></dt>
+<dd><p>Class for data loader</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.loader.data_loader.DataLoader.set_table">
+<span class="sig-name descname"><span class="pre">set_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/loader/data_loader.html#DataLoader.set_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.data_loader.DataLoader.set_table" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.loader.data_loader.DataLoader.print_ddl">
+<span class="sig-name descname"><span class="pre">print_ddl</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/loader/data_loader.html#DataLoader.print_ddl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.data_loader.DataLoader.print_ddl" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.loader.data_loader.DataLoader.print_table_ddl">
+<span class="sig-name descname"><span class="pre">print_table_ddl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/loader/data_loader.html#DataLoader.print_table_ddl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.data_loader.DataLoader.print_table_ddl" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.loader.data_loader.DataLoader.execute_sql">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">execute_sql</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sql</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connxn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/loader/data_loader.html#DataLoader.execute_sql"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.data_loader.DataLoader.execute_sql" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.loader.data_loader.DataLoader.insert_from_select">
+<span class="sig-name descname"><span class="pre">insert_from_select</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/loader/data_loader.html#DataLoader.insert_from_select"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.data_loader.DataLoader.insert_from_select" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.loader.data_loader.DataLoader.is_parallel">
+<span class="sig-name descname"><span class="pre">is_parallel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/dorieh/platform/loader/data_loader.html#DataLoader.is_parallel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.data_loader.DataLoader.is_parallel" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.loader.data_loader.DataLoader.get_connections">
+<span class="sig-name descname"><span class="pre">get_connections</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">connection</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/dorieh/platform/loader/data_loader.html#DataLoader.get_connections"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.data_loader.DataLoader.get_connections" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.loader.data_loader.DataLoader.get_connection">
+<span class="sig-name descname"><span class="pre">get_connection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/loader/data_loader.html#DataLoader.get_connection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.data_loader.DataLoader.get_connection" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.loader.data_loader.DataLoader.get_files">
+<span class="sig-name descname"><span class="pre">get_files</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/dorieh/platform/loader/data_loader.html#DataLoader.get_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.data_loader.DataLoader.get_files" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.loader.data_loader.DataLoader.has_been_ingested">
+<span class="sig-name descname"><span class="pre">has_been_ingested</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/loader/data_loader.html#DataLoader.has_been_ingested"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.data_loader.DataLoader.has_been_ingested" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.loader.data_loader.DataLoader.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/loader/data_loader.html#DataLoader.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.data_loader.DataLoader.reset" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.loader.data_loader.DataLoader.drop">
+<span class="sig-name descname"><span class="pre">drop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/loader/data_loader.html#DataLoader.drop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.data_loader.DataLoader.drop" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.loader.data_loader.DataLoader.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/loader/data_loader.html#DataLoader.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.data_loader.DataLoader.run" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.loader.data_loader.DataLoader.commit">
+<span class="sig-name descname"><span class="pre">commit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/loader/data_loader.html#DataLoader.commit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.data_loader.DataLoader.commit" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.loader.data_loader.DataLoader.rollback">
+<span class="sig-name descname"><span class="pre">rollback</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/loader/data_loader.html#DataLoader.rollback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.data_loader.DataLoader.rollback" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.loader.data_loader.DataLoader.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/loader/data_loader.html#DataLoader.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.data_loader.DataLoader.close" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.loader.data_loader.DataLoader.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/loader/data_loader.html#DataLoader.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.data_loader.DataLoader.load" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.loader.data_loader.DataLoader.import_data_from_file">
+<span class="sig-name descname"><span class="pre">import_data_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/loader/data_loader.html#DataLoader.import_data_from_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.data_loader.DataLoader.import_data_from_file" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-dorieh.platform.loader.common">
+<span id="configuration"></span><h2>Configuration<a class="headerlink" href="#module-dorieh.platform.loader.common" title="Permalink to this heading"></a></h2>
+<p>Common options for data manipulation</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.platform.loader.common.DBConnectionConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DBConnectionConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subclass</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/loader/common.html#DBConnectionConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.common.DBConnectionConfig" title="Permalink to this definition"></a></dt>
+<dd><p>Configuration class for connection to a database</p>
+<p>Creates a new object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.platform.loader.common.DBConnectionConfig.params.subclass"></span><strong>subclass</strong><a class="paramlink headerlink reference internal" href="#dorieh.platform.loader.common.DBConnectionConfig.params.subclass">¶</a> – A concrete class containing configuration information
+Configuration options must be defined as class memebers with names,
+starting with one ‘_’ characters and values be instances of
+:class Argument:</p></li>
+<li><p><span class="target" id="dorieh.platform.loader.common.DBConnectionConfig.params.description"></span><strong>description</strong><a class="paramlink headerlink reference internal" href="#dorieh.platform.loader.common.DBConnectionConfig.params.description">¶</a> – Optional text to use as description.
+If not specified, then it is extracted from subclass documentation</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.platform.loader.common.DBConnectionConfig.autocommit">
+<span class="sig-name descname"><span class="pre">autocommit</span></span><a class="headerlink" href="#dorieh.platform.loader.common.DBConnectionConfig.autocommit" title="Permalink to this definition"></a></dt>
+<dd><p>Use autocommit</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.platform.loader.common.DBConnectionConfig.db">
+<span class="sig-name descname"><span class="pre">db</span></span><a class="headerlink" href="#dorieh.platform.loader.common.DBConnectionConfig.db" title="Permalink to this definition"></a></dt>
+<dd><p>Path to a database connection parameters file</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.platform.loader.common.DBConnectionConfig.connection">
+<span class="sig-name descname"><span class="pre">connection</span></span><a class="headerlink" href="#dorieh.platform.loader.common.DBConnectionConfig.connection" title="Permalink to this definition"></a></dt>
+<dd><p>Section in the database connection parameters file</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.platform.loader.common.DBConnectionConfig.verbose">
+<span class="sig-name descname"><span class="pre">verbose</span></span><a class="headerlink" href="#dorieh.platform.loader.common.DBConnectionConfig.verbose" title="Permalink to this definition"></a></dt>
+<dd><p>Generate verbose output</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.platform.loader.common.DBConnectionConfig.dryrun">
+<span class="sig-name descname"><span class="pre">dryrun</span></span><a class="headerlink" href="#dorieh.platform.loader.common.DBConnectionConfig.dryrun" title="Permalink to this definition"></a></dt>
+<dd><p>Dry run: do no database modifications</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.platform.loader.common.DBTableConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DBTableConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subclass</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/loader/common.html#DBTableConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.common.DBTableConfig" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a new object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.platform.loader.common.DBTableConfig.params.subclass"></span><strong>subclass</strong><a class="paramlink headerlink reference internal" href="#dorieh.platform.loader.common.DBTableConfig.params.subclass">¶</a> – A concrete class containing configuration information
+Configuration options must be defined as class memebers with names,
+starting with one ‘_’ characters and values be instances of
+:class Argument:</p></li>
+<li><p><span class="target" id="dorieh.platform.loader.common.DBTableConfig.params.description"></span><strong>description</strong><a class="paramlink headerlink reference internal" href="#dorieh.platform.loader.common.DBTableConfig.params.description">¶</a> – Optional text to use as description.
+If not specified, then it is extracted from subclass documentation</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.platform.loader.common.DBTableConfig.table">
+<span class="sig-name descname"><span class="pre">table</span></span><a class="headerlink" href="#dorieh.platform.loader.common.DBTableConfig.table" title="Permalink to this definition"></a></dt>
+<dd><p>Name of the table to manipulate</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.platform.loader.common.CommonConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CommonConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subclass</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/loader/common.html#CommonConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.common.CommonConfig" title="Permalink to this definition"></a></dt>
+<dd><p>Abstract base class for configurators used for data loading</p>
+<p>Creates a new object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.platform.loader.common.CommonConfig.params.subclass"></span><strong>subclass</strong><a class="paramlink headerlink reference internal" href="#dorieh.platform.loader.common.CommonConfig.params.subclass">¶</a> – A concrete class containing configuration information
+Configuration options must be defined as class memebers with names,
+starting with one ‘_’ characters and values be instances of
+:class Argument:</p></li>
+<li><p><span class="target" id="dorieh.platform.loader.common.CommonConfig.params.description"></span><strong>description</strong><a class="paramlink headerlink reference internal" href="#dorieh.platform.loader.common.CommonConfig.params.description">¶</a> – Optional text to use as description.
+If not specified, then it is extracted from subclass documentation</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.platform.loader.common.CommonConfig.domain">
+<span class="sig-name descname"><span class="pre">domain</span></span><a class="headerlink" href="#dorieh.platform.loader.common.CommonConfig.domain" title="Permalink to this definition"></a></dt>
+<dd><p>Name of the domain</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.platform.loader.common.CommonConfig.registry">
+<span class="sig-name descname"><span class="pre">registry</span></span><a class="headerlink" href="#dorieh.platform.loader.common.CommonConfig.registry" title="Permalink to this definition"></a></dt>
+<dd><p>Path to domain registry. 
+Registry is a directory or an archive 
+containing YAML files with domain 
+definition. Default is to use 
+the built-in registry</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-dorieh.platform.loader.loader_config"></span><p>Domain Loader Configurator</p>
+<p>Intended to configure loading of a single or a set of column-formatted files
+into NSAPH PostgreSQL Database.
+Input (aka source) files can be either in FST or in CSV format</p>
+<p>Configurator assumes that the database schema is defined as a YAML or JSON file.
+A separate tool is available to introspect source files and infer possible
+database schema.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.platform.loader.loader_config.Parallelization">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Parallelization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/loader/loader_config.html#Parallelization"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.loader_config.Parallelization" title="Permalink to this definition"></a></dt>
+<dd><p>An enumeration.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.platform.loader.loader_config.DataLoaderAction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DataLoaderAction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/loader/loader_config.html#DataLoaderAction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.loader_config.DataLoaderAction" title="Permalink to this definition"></a></dt>
+<dd><p>An enumeration.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.platform.loader.loader_config.LoaderConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LoaderConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">doc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/loader/loader_config.html#LoaderConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.loader_config.LoaderConfig" title="Permalink to this definition"></a></dt>
+<dd><p>Configurator class for data loader</p>
+<p>Creates a new object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.platform.loader.loader_config.LoaderConfig.params.subclass"></span><strong>subclass</strong><a class="paramlink headerlink reference internal" href="#dorieh.platform.loader.loader_config.LoaderConfig.params.subclass">¶</a> – A concrete class containing configuration information
+Configuration options must be defined as class memebers with names,
+starting with one ‘_’ characters and values be instances of
+:class Argument:</p></li>
+<li><p><span class="target" id="dorieh.platform.loader.loader_config.LoaderConfig.params.description"></span><strong>description</strong><a class="paramlink headerlink reference internal" href="#dorieh.platform.loader.loader_config.LoaderConfig.params.description">¶</a> – Optional text to use as description.
+If not specified, then it is extracted from subclass documentation</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.platform.loader.loader_config.LoaderConfig.action">
+<span class="sig-name descname"><span class="pre">action</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="loader_config.html#dorieh.platform.loader.loader_config.DataLoaderAction" title="dorieh.platform.loader.loader_config.DataLoaderAction"><span class="pre">DataLoaderAction</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#dorieh.platform.loader.loader_config.LoaderConfig.action" title="Permalink to this definition"></a></dt>
+<dd><p>If this option is given, then the whole domain schema will be dropped</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.platform.loader.loader_config.LoaderConfig.data">
+<span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#dorieh.platform.loader.loader_config.LoaderConfig.data" title="Permalink to this definition"></a></dt>
+<dd><p>Path to a data file or directory. Can be a 
+single CSV, gzipped CSV or FST file or a directory recursively 
+containing CSV files. Can also be a tar, tar.gz (or tgz) or zip archive 
+containing CSV files</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.platform.loader.loader_config.LoaderConfig.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><a class="headerlink" href="#dorieh.platform.loader.loader_config.LoaderConfig.reset" title="Permalink to this definition"></a></dt>
+<dd><p>Force recreating table(s) if it/they already exist</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.platform.loader.loader_config.LoaderConfig.page">
+<span class="sig-name descname"><span class="pre">page</span></span><a class="headerlink" href="#dorieh.platform.loader.loader_config.LoaderConfig.page" title="Permalink to this definition"></a></dt>
+<dd><p>Explicit page size for the database</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.platform.loader.loader_config.LoaderConfig.log">
+<span class="sig-name descname"><span class="pre">log</span></span><a class="headerlink" href="#dorieh.platform.loader.loader_config.LoaderConfig.log" title="Permalink to this definition"></a></dt>
+<dd><p>Explicit interval for logging</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.platform.loader.loader_config.LoaderConfig.limit">
+<span class="sig-name descname"><span class="pre">limit</span></span><a class="headerlink" href="#dorieh.platform.loader.loader_config.LoaderConfig.limit" title="Permalink to this definition"></a></dt>
+<dd><p>Load at most specified number of records</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.platform.loader.loader_config.LoaderConfig.buffer">
+<span class="sig-name descname"><span class="pre">buffer</span></span><a class="headerlink" href="#dorieh.platform.loader.loader_config.LoaderConfig.buffer" title="Permalink to this definition"></a></dt>
+<dd><p>Buffer size for converting fst files</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.platform.loader.loader_config.LoaderConfig.threads">
+<span class="sig-name descname"><span class="pre">threads</span></span><a class="headerlink" href="#dorieh.platform.loader.loader_config.LoaderConfig.threads" title="Permalink to this definition"></a></dt>
+<dd><p>Number of threads writing into the database</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.platform.loader.loader_config.LoaderConfig.parallelization">
+<span class="sig-name descname"><span class="pre">parallelization</span></span><a class="headerlink" href="#dorieh.platform.loader.loader_config.LoaderConfig.parallelization" title="Permalink to this definition"></a></dt>
+<dd><p>Type of parallelization, if any</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.platform.loader.loader_config.LoaderConfig.pattern">
+<span class="sig-name descname"><span class="pre">pattern</span></span><a class="headerlink" href="#dorieh.platform.loader.loader_config.LoaderConfig.pattern" title="Permalink to this definition"></a></dt>
+<dd><p>pattern for files in a directory or an archive, 
+e.g., “**/<a href="#id1"><span class="problematic" id="id2">maxdata_</span></a>*_ps_*.csv”</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.platform.loader.loader_config.LoaderConfig.incremental">
+<span class="sig-name descname"><span class="pre">incremental</span></span><a class="headerlink" href="#dorieh.platform.loader.loader_config.LoaderConfig.incremental" title="Permalink to this definition"></a></dt>
+<dd><p>Commit every file and skip over files that 
+have already been ingested</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.platform.loader.loader_config.LoaderConfig.sloppy">
+<span class="sig-name descname"><span class="pre">sloppy</span></span><a class="headerlink" href="#dorieh.platform.loader.loader_config.LoaderConfig.sloppy" title="Permalink to this definition"></a></dt>
+<dd><p>Do not update existing tables and views</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.loader.loader_config.LoaderConfig.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/loader/loader_config.html#LoaderConfig.validate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.loader_config.LoaderConfig.validate" title="Permalink to this definition"></a></dt>
+<dd><p>Subclasses can override this method to implement custom handling
+of command line arguments</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.platform.loader.loader_config.LoaderConfig.validate.params.attr"></span><strong>attr</strong><a class="paramlink headerlink reference internal" href="#dorieh.platform.loader.loader_config.LoaderConfig.validate.params.attr">¶</a> – Command line argument name</p></li>
+<li><p><span class="target" id="dorieh.platform.loader.loader_config.LoaderConfig.validate.params.value"></span><strong>value</strong><a class="paramlink headerlink reference internal" href="#dorieh.platform.loader.loader_config.LoaderConfig.validate.params.value">¶</a> – Value returned by argparse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>value to use</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Models Specification</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Datamodels.html">Data Modelling for NSAPH Data Platform</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Datamodels.html#introduction-to-data-modelling-for-nsaph-data-platform">Introduction to data modelling for NSAPH Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Datamodels.html#domain">Domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Datamodels.html#table">Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Datamodels.html#column">Column</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Datamodels.html#multi-column-indices">Multi-column indices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Datamodels.html#generation-of-the-database-schema-ddl">Generation of the database schema (DDL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Datamodels.html#indexing-policies">Indexing policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Datamodels.html#linking-with-nomenclature">Linking with nomenclature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Datamodels.html#ingesting-data">Ingesting data</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

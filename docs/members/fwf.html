@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The fwf Module &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">The fwf Module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/members/fwf.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-dorieh.utils.fwf">
+<span id="the-fwf-module"></span><h1>The fwf Module<a class="headerlink" href="#module-dorieh.utils.fwf" title="Permalink to this heading"></a></h1>
+<p>A reader for fixed width files (FWF) produced by SAS providing the same
+interface as <a class="reference external" href="https://docs.python.org/3/library/csv.html">CSV reader</a>.</p>
+<p>Each record is returned
+in a way similar to the standard CSV reader, either as a list of objects
+or as a dictionary, where keys are column headers.</p>
+<p>To read the file, the application mus supply a list of columns.
+If a file is produced by SAS the columns are usually described in File
+Transfer Summary (FTS) file. However, FTS files are non-standard,
+therefore a universal parser for FTS files is not feasible to supply.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.utils.fwf.FWFColumn">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FWFColumn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/fwf.html#FWFColumn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.fwf.FWFColumn" title="Permalink to this definition"></a></dt>
+<dd><p>A class describing a column of a fixed width (FWF) file</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.utils.fwf.FWFColumn.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#dorieh.utils.fwf.FWFColumn.name" title="Permalink to this definition"></a></dt>
+<dd><p>Name (header) of the column</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.utils.fwf.FWFColumn.type">
+<span class="sig-name descname"><span class="pre">type</span></span><a class="headerlink" href="#dorieh.utils.fwf.FWFColumn.type" title="Permalink to this definition"></a></dt>
+<dd><p>Type of the column. Supported types: NUM, CHAR, DATE</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.utils.fwf.FWFColumn.ord">
+<span class="sig-name descname"><span class="pre">ord</span></span><a class="headerlink" href="#dorieh.utils.fwf.FWFColumn.ord" title="Permalink to this definition"></a></dt>
+<dd><p>Ordinal number for the column</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.utils.fwf.FWFColumn.start">
+<span class="sig-name descname"><span class="pre">start</span></span><a class="headerlink" href="#dorieh.utils.fwf.FWFColumn.start" title="Permalink to this definition"></a></dt>
+<dd><p>Starting position for the column (in bytes)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.utils.fwf.FWFColumn.length">
+<span class="sig-name descname"><span class="pre">length</span></span><a class="headerlink" href="#dorieh.utils.fwf.FWFColumn.length" title="Permalink to this definition"></a></dt>
+<dd><p>Length of the column (in bytes)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.utils.fwf.FWFColumn.end">
+<span class="sig-name descname"><span class="pre">end</span></span><a class="headerlink" href="#dorieh.utils.fwf.FWFColumn.end" title="Permalink to this definition"></a></dt>
+<dd><p>Ending  position for the column (in bytes)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.utils.fwf.FWFColumn.d">
+<span class="sig-name descname"><span class="pre">d</span></span><a class="headerlink" href="#dorieh.utils.fwf.FWFColumn.d" title="Permalink to this definition"></a></dt>
+<dd><p>Scale of the column for floating point numbers</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.utils.fwf.FWFMeta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FWFMeta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">record_len</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dorieh.utils.fwf.FWFColumn" title="dorieh.utils.fwf.FWFColumn"><span class="pre">FWFColumn</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/fwf.html#FWFMeta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.fwf.FWFMeta" title="Permalink to this definition"></a></dt>
+<dd><p>Metadata for the FWF file</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.utils.fwf.FWFMeta.rlen">
+<span class="sig-name descname"><span class="pre">rlen</span></span><a class="headerlink" href="#dorieh.utils.fwf.FWFMeta.rlen" title="Permalink to this definition"></a></dt>
+<dd><p>Record length, i.e. the length in bytes of the block for one record</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.utils.fwf.FWFMeta.ncol">
+<span class="sig-name descname"><span class="pre">ncol</span></span><a class="headerlink" href="#dorieh.utils.fwf.FWFMeta.ncol" title="Permalink to this definition"></a></dt>
+<dd><p>Number of columns</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.utils.fwf.FWFMeta.nrows">
+<span class="sig-name descname"><span class="pre">nrows</span></span><a class="headerlink" href="#dorieh.utils.fwf.FWFMeta.nrows" title="Permalink to this definition"></a></dt>
+<dd><p>Number of rows, if given in the file descriptor (can be None)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.utils.fwf.FWFMeta.size">
+<span class="sig-name descname"><span class="pre">size</span></span><a class="headerlink" href="#dorieh.utils.fwf.FWFMeta.size" title="Permalink to this definition"></a></dt>
+<dd><p>File size in bytes</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.utils.fwf.FWFMeta.path">
+<span class="sig-name descname"><span class="pre">path</span></span><a class="headerlink" href="#dorieh.utils.fwf.FWFMeta.path" title="Permalink to this definition"></a></dt>
+<dd><p>Physical path to the file on the file system</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.utils.fwf.FWFMeta.columns">
+<span class="sig-name descname"><span class="pre">columns</span></span><a class="headerlink" href="#dorieh.utils.fwf.FWFMeta.columns" title="Permalink to this definition"></a></dt>
+<dd><p>A list of FWFColumn instances, describing each column</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.utils.fwf.FWFReader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FWFReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dorieh.utils.fwf.FWFMeta" title="dorieh.utils.fwf.FWFMeta"><span class="pre">FWFMeta</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">ret_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/fwf.html#FWFReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.fwf.FWFReader" title="Permalink to this definition"></a></dt>
+<dd><p>Fixed width files (FWF) reader. Returns records in the same way
+as standard CSV reader. Can return each record as either ;ist of values or
+a dictionary with column headers as keys.</p>
+<p>Constructor
+:param _sphinx_paramlinks_dorieh.utils.fwf.FWFReader.meta: an instance of FWFMeta
+:param _sphinx_paramlinks_dorieh.utils.fwf.FWFReader.ret_dict: boolean value, denoting whether to return each record</p>
+<blockquote>
+<div><p>as a dictionary</p>
+</div></blockquote>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.utils.fwf.FWFReader.good_lines">
+<span class="sig-name descname"><span class="pre">good_lines</span></span><a class="headerlink" href="#dorieh.utils.fwf.FWFReader.good_lines" title="Permalink to this definition"></a></dt>
+<dd><p>Number of successfully read records</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.utils.fwf.FWFReader.bad_lines">
+<span class="sig-name descname"><span class="pre">bad_lines</span></span><a class="headerlink" href="#dorieh.utils.fwf.FWFReader.bad_lines" title="Permalink to this definition"></a></dt>
+<dd><p>Number of records that have failed parsing</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.utils.fwf.FWFReader.column_names">
+<span class="sig-name descname"><span class="pre">column_names</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/dorieh/utils/fwf.html#FWFReader.column_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.fwf.FWFReader.column_names" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.utils.fwf.FWFReader.open">
+<span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/fwf.html#FWFReader.open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.fwf.FWFReader.open" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.utils.fwf.FWFReader.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/fwf.html#FWFReader.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.fwf.FWFReader.close" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.utils.fwf.FWFReader.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/fwf.html#FWFReader.validate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.fwf.FWFReader.validate" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.utils.fwf.FWFReader.read_record">
+<span class="sig-name descname"><span class="pre">read_record</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/fwf.html#FWFReader.read_record"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.fwf.FWFReader.read_record" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.utils.fwf.FWFReader.next">
+<span class="sig-name descname"><span class="pre">next</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/fwf.html#FWFReader.next"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.fwf.FWFReader.next" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.utils.fwf.FWFReader.on_parse_exception">
+<span class="sig-name descname"><span class="pre">on_parse_exception</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/fwf.html#FWFReader.on_parse_exception"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.fwf.FWFReader.on_parse_exception" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="dorieh.utils.fwf.FTSParseException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FTSParseException</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/fwf.html#FTSParseException"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.fwf.FTSParseException" title="Permalink to this definition"></a></dt>
+<dd><p>Exception raised when a record cannot be parsed</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

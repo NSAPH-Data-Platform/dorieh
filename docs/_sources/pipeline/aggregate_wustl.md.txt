@@ -1,0 +1,50 @@
+# Aggregates data in NetCDF file over given geographies
+
+
+ [Source code](aggregate_wustlcwl_src.md) 
+
+
+```{contents}
+---
+local:
+---
+```
+
+**Tool**. Runs: dorieh.rasters.file_processors.wustl_file_processor
+
+## Description
+
+This tool aggregates data in NetCDF or GeoTiff file over provided shapes
+(zip codes or counties). It produces mean values over shape.
+
+The tool expects one value for every variable in every grid node. 
+The variables are expected to be formatted as they are for 
+[Atmospheric Composition Analysis Group of Washington University](https://sites.wustl.edu/acag/datasets/surface-pm2-5/)
+
+See also [aggregate_daily.cwl](aggregate_daily) - a tool, that expects 
+multiple (daily) values at every grid node.
+
+
+## Inputs
+
+| Name        | Type       | Default                              | Description                                                                     | 
+|:------------|:-----------|:-------------------------------------|:--------------------------------------------------------------------------------|
+| strategy    | string     | `downscale`                          | Rasterization strategy                                                          | 
+| ram         | string     | `2GB`                                | Runtime memory, available to the process                                        | 
+| shapes_dir  | Directory? |                                      |                                                                                 | 
+| band        | string[]   |                                      |                                                                                 | 
+| geography   | string     |                                      | Type of geography: zip codes or counties                                        | 
+| netcdf_data | File       |                                      | Path to downloaded file                                                         | 
+| shape_files | File[]?    |                                      | Paths to shape files                                                            | 
+| output_type | string[]   | `['aggregation', 'data_dictionary']` | What to output as the result of executing the tool                              | 
+| table       | string?    |                                      | Optional name ot the table where the aggregated data will be eventually stored  | 
+
+## Outputs
+
+| Name            | Type   | Description                                                                                                                                               | 
+|:----------------|:-------|:----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| log             | File   |                                                                                                                                                           | 
+| csv_data        | File   | The output CSV file, containing mean values of the given variable over given geographies. Each line contains date, geo id (zip or county FIPS) and value  | 
+| data_dictionary | File   | Data dictionary for teh aggregated data                                                                                                                   | 
+| errors          | stderr |                                                                                                                                                           | 
+

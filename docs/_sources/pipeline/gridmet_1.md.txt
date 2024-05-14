@@ -1,0 +1,42 @@
+# Sub-workflow *init_tables* from gridmet.cwl
+
+
+ [Source code](gridmet_1cwl_src.md) 
+
+
+![](gridmet_1.png)
+
+```{contents}
+---
+local:
+---
+```
+
+**Workflow**
+
+## Inputs
+
+| Name            | Type   | Default | Description | 
+|:----------------|:-------|:--------|:------------|
+| connection_name | string |         |             | 
+| database        | File   |         |             | 
+| domain          | string |         |             | 
+| registry        | File   |         |             | 
+| table           | string |         |             | 
+
+## Outputs
+
+| Name      | Type | Description | 
+|:----------|:-----|:------------|
+| index_err | File |             | 
+| index_log | File |             | 
+| reset_err | File |             | 
+| reset_log | File |             | 
+
+## Steps
+
+| Name  | Runs                  | Description | 
+|:------|:----------------------|:------------|
+| index | [index.cwl](index.md) |             | 
+| reset | [reset.cwl](reset.md) |             | 
+

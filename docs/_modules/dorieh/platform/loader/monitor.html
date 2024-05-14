@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dorieh.platform.loader.monitor &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../loader.html">dorieh.platform.loader</a></li>
+      <li class="breadcrumb-item active">dorieh.platform.loader.monitor</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for dorieh.platform.loader.monitor</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">A utility that prints the statistics about</span>
+<span class="sd">currently running indexing processes</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1">#  Copyright (c) 2021. Harvard University</span>
+<span class="c1">#</span>
+<span class="c1">#  Developed by Research Software Engineering,</span>
+<span class="c1">#  Faculty of Arts and Sciences, Research Computing (FAS RC)</span>
+<span class="c1">#  Author: Michael A Bouzinier</span>
+<span class="c1">#</span>
+<span class="c1">#  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1">#  you may not use this file except in compliance with the License.</span>
+<span class="c1">#  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#         http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1">#  limitations under the License.</span>
+<span class="c1">#</span>
+
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Callable</span>
+<span class="kn">from</span> <span class="nn">psycopg2.extras</span> <span class="kn">import</span> <span class="n">RealDictCursor</span>
+
+<span class="kn">from</span> <span class="nn">dorieh.platform.db</span> <span class="kn">import</span> <span class="n">Connection</span>
+<span class="kn">from</span> <span class="nn">dorieh.platform.loader.common</span> <span class="kn">import</span> <span class="n">DBConnectionConfig</span>
+<span class="kn">from</span> <span class="nn">dorieh.utils.context</span> <span class="kn">import</span> <span class="n">Argument</span><span class="p">,</span> <span class="n">Cardinality</span>
+
+<span class="n">INDEX_MON_SQL12</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    SELECT </span>
+<span class="s2">      now()::TIME(0),</span>
+<span class="s2">      p.command, </span>
+<span class="s2">      a.query, </span>
+<span class="s2">      p.phase, </span>
+<span class="s2">      p.blocks_total, </span>
+<span class="s2">      p.blocks_done, </span>
+<span class="s2">      p.tuples_total, </span>
+<span class="s2">      p.tuples_done,</span>
+<span class="s2">      p.pid</span>
+<span class="s2">    FROM pg_stat_progress_create_index p </span>
+<span class="s2">    JOIN pg_stat_activity a ON p.pid = a.pid</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">INDEX_MON_SQL11</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    SELECT </span>
+<span class="s2">      now()::TIME(0), </span>
+<span class="s2">      a.query,</span>
+<span class="s2">      a.state</span>
+<span class="s2">    FROM pg_stat_activity a</span>
+<span class="s2">    WHERE a.query LIKE &#39;CREATE%INDEX%&#39; </span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<span class="n">ACTIVITY_QUERY</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT </span>
+<span class="s2">    &quot;datname&quot;, </span>
+<span class="s2">    &quot;pid&quot;, </span>
+<span class="s2">    &quot;leader_pid&quot;, </span>
+<span class="s2">    &quot;usename&quot;, </span>
+<span class="s2">    &quot;application_name&quot;, </span>
+<span class="s2">    &quot;client_addr&quot;, </span>
+<span class="s2">    &quot;backend_start&quot;, </span>
+<span class="s2">    &quot;xact_start&quot;,</span>
+<span class="s2">    &quot;backend_xid&quot;, </span>
+<span class="s2">    &quot;query_start&quot;, </span>
+<span class="s2">    &quot;state_change&quot;, </span>
+<span class="s2">    &quot;wait_event_type&quot;, </span>
+<span class="s2">    &quot;wait_event&quot;, </span>
+<span class="s2">    &quot;state&quot;, </span>
+<span class="s2">    &quot;backend_xmin&quot;, </span>
+<span class="s2">    &quot;query&quot;</span>
+<span class="s2">FROM </span>
+<span class="s2">    &quot;pg_catalog&quot;.&quot;pg_stat_activity&quot;</span>
+
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">LOCK_QUERY</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT blocked_locks.pid     AS blocked_pid,</span>
+<span class="s2">         blocked_activity.usename  AS blocked_user,</span>
+<span class="s2">         blocking_locks.pid     AS blocking_pid,</span>
+<span class="s2">         blocking_activity.usename AS blocking_user,</span>
+<span class="s2">         blocked_activity.application_name AS blocked_application,</span>
+<span class="s2">         blocking_activity.application_name AS blocking_application</span>
+<span class="s2">FROM  pg_catalog.pg_locks         blocked_locks</span>
+<span class="s2">    JOIN pg_catalog.pg_stat_activity blocked_activity  </span>
+<span class="s2">        ON blocked_activity.pid = blocked_locks.pid</span>
+<span class="s2">    JOIN pg_catalog.pg_locks         blocking_locks </span>
+<span class="s2">        ON blocking_locks.locktype = blocked_locks.locktype</span>
+<span class="s2">            AND blocking_locks.DATABASE IS NOT DISTINCT FROM blocked_locks.DATABASE</span>
+<span class="s2">            AND blocking_locks.relation IS NOT DISTINCT FROM blocked_locks.relation</span>
+<span class="s2">            AND blocking_locks.page IS NOT DISTINCT FROM blocked_locks.page</span>
+<span class="s2">            AND blocking_locks.tuple IS NOT DISTINCT FROM blocked_locks.tuple</span>
+<span class="s2">            AND blocking_locks.virtualxid IS NOT DISTINCT FROM blocked_locks.virtualxid</span>
+<span class="s2">            AND blocking_locks.transactionid IS NOT DISTINCT FROM blocked_locks.transactionid</span>
+<span class="s2">            AND blocking_locks.classid IS NOT DISTINCT FROM blocked_locks.classid</span>
+<span class="s2">            AND blocking_locks.objid IS NOT DISTINCT FROM blocked_locks.objid</span>
+<span class="s2">            AND blocking_locks.objsubid IS NOT DISTINCT FROM blocked_locks.objsubid</span>
+<span class="s2">            AND blocking_locks.pid != blocked_locks.pid</span>
+<span class="s2">    JOIN pg_catalog.pg_stat_activity blocking_activity </span>
+<span class="s2">        ON blocking_activity.pid = blocking_locks.pid</span>
+<span class="s2">WHERE </span>
+<span class="s2">    NOT blocked_locks.GRANTED;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<span class="n">ACTIVITY_BY_PID</span> <span class="o">=</span> <span class="n">ACTIVITY_QUERY</span> <span class="o">+</span> <span class="s2">&quot;WHERE pid = </span><span class="si">{pid}</span><span class="s2"> or leader_pid = </span><span class="si">{pid}</span><span class="s2">&quot;</span>
+<span class="n">ACTIVITY_BY_DB</span> <span class="o">=</span> <span class="n">ACTIVITY_QUERY</span> <span class="o">+</span> <span class="s2">&quot;WHERE datname = &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span>
+
+
+<div class="viewcode-block" id="Lock"><a class="viewcode-back" href="../../../../members/monitor.html#dorieh.platform.loader.monitor.Lock">[docs]</a><span class="k">class</span> <span class="nc">Lock</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">List</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">blocked_pid</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">blocking_pid</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">blocked_user</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">blocking_user</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">blocked_app</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">blocking_app</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">[</span><span class="si">{:d}</span><span class="s2">] is blocked by </span><span class="si">{}</span><span class="s2">@</span><span class="si">{}</span><span class="s2">[</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">blocked_app</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">blocked_pid</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">blocking_user</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">blocking_app</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">blocking_pid</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="DBMonitorConfig"><a class="viewcode-back" href="../../../../members/monitor.html#dorieh.platform.loader.monitor.DBMonitorConfig">[docs]</a><span class="k">class</span> <span class="nc">DBMonitorConfig</span><span class="p">(</span><span class="n">DBConnectionConfig</span><span class="p">):</span>
+    <span class="n">_pid</span> <span class="o">=</span> <span class="n">Argument</span><span class="p">(</span><span class="s2">&quot;pid&quot;</span><span class="p">,</span>
+        <span class="n">help</span> <span class="o">=</span> <span class="s2">&quot;Display monitoring information only for selected process ids&quot;</span><span class="p">,</span>
+        <span class="nb">type</span> <span class="o">=</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">required</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">aliases</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">],</span>
+        <span class="n">default</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">cardinality</span> <span class="o">=</span> <span class="n">Cardinality</span><span class="o">.</span><span class="n">multiple</span>
+    <span class="p">)</span>
+
+    <span class="n">_state</span> <span class="o">=</span> <span class="n">Argument</span><span class="p">(</span><span class="s2">&quot;state&quot;</span><span class="p">,</span>
+        <span class="n">help</span> <span class="o">=</span> <span class="s2">&quot;Show only processes in the given state&quot;</span><span class="p">,</span>
+        <span class="nb">type</span> <span class="o">=</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">required</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">cardinality</span> <span class="o">=</span> <span class="n">Cardinality</span><span class="o">.</span><span class="n">single</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subclass</span><span class="p">,</span> <span class="n">doc</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pid</span><span class="p">:</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; process id list &#39;&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Display only processes in the given state &#39;&#39;&#39;</span>
+
+        <span class="k">if</span> <span class="n">subclass</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">DBMonitorConfig</span><span class="p">,</span> <span class="n">doc</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">subclass</span><span class="p">,</span> <span class="n">doc</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_attrs</span> <span class="o">+=</span> <span class="p">[</span>
+                <span class="n">attr</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">DBMonitorConfig</span><span class="o">.</span><span class="vm">__dict__</span>
+                <span class="k">if</span> <span class="n">attr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;_&#39;</span> <span class="ow">and</span> <span class="n">attr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;_&#39;</span>
+            <span class="p">]</span></div>
+
+<div class="viewcode-block" id="DBActivityMonitor"><a class="viewcode-back" href="../../../../members/monitor.html#dorieh.platform.loader.monitor.DBActivityMonitor">[docs]</a><span class="k">class</span> <span class="nc">DBActivityMonitor</span><span class="p">:</span>
+<div class="viewcode-block" id="DBActivityMonitor.get_instance"><a class="viewcode-back" href="../../../../members/monitor.html#dorieh.platform.loader.monitor.DBActivityMonitor.get_instance">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_instance</span> <span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">DBConnectionConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DBMonitorConfig</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">DBMonitorConfig</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">context</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">DBConnectionConfig</span><span class="p">):</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="n">DBMonitorConfig</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="vm">__doc__</span><span class="p">)</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">connection</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">connection</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">db</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">db</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">verbose</span>
+            <span class="k">return</span> <span class="n">obj</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+            <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> cannot be cast to DBMonitorConfig&quot;</span>
+            <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">context</span><span class="p">))</span>
+        <span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">DBConnectionConfig</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">context</span><span class="p">:</span>
+            <span class="n">context</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_instance</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">context</span> <span class="o">=</span> <span class="n">DBMonitorConfig</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="vm">__doc__</span><span class="p">)</span><span class="o">.</span><span class="n">instantiate</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span> <span class="o">=</span> <span class="n">context</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connection</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="n">Lock</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+<div class="viewcode-block" id="DBActivityMonitor.run"><a class="viewcode-back" href="../../../../members/monitor.html#dorieh.platform.loader.monitor.DBActivityMonitor.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_blocks</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">lock</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">lock</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_indexing_progress</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">pid</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">pid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">pid</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_activity</span><span class="p">(</span><span class="n">pid</span><span class="p">):</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_activity</span><span class="p">():</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_connect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connection</span> <span class="o">=</span> <span class="n">Connection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">db</span><span class="p">,</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">connection</span><span class="p">,</span>
+                        <span class="n">silent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                        <span class="n">app_name_postfix</span><span class="o">=</span><span class="s2">&quot;.monitor&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+
+<div class="viewcode-block" id="DBActivityMonitor.get_blocks"><a class="viewcode-back" href="../../../../members/monitor.html#dorieh.platform.loader.monitor.DBActivityMonitor.get_blocks">[docs]</a>    <span class="k">def</span> <span class="nf">get_blocks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connect</span><span class="p">()</span> <span class="k">as</span> <span class="n">cnxn</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cnxn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">LOCK_QUERY</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cursor</span><span class="p">:</span>
+                    <span class="n">lock</span> <span class="o">=</span> <span class="n">Lock</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">[</span><span class="n">lock</span><span class="o">.</span><span class="n">blocked_pid</span><span class="p">]</span> <span class="o">=</span> <span class="n">lock</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="DBActivityMonitor.get_indexing_progress"><a class="viewcode-back" href="../../../../members/monitor.html#dorieh.platform.loader.monitor.DBActivityMonitor.get_indexing_progress">[docs]</a>    <span class="k">def</span> <span class="nf">get_indexing_progress</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connect</span><span class="p">()</span> <span class="k">as</span> <span class="n">cnxn</span><span class="p">:</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">cnxn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+            <span class="n">version</span> <span class="o">=</span> <span class="n">cnxn</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">server_version</span>
+            <span class="k">if</span> <span class="n">version</span> <span class="o">&gt;</span> <span class="mi">120000</span><span class="p">:</span>
+                <span class="n">sql</span> <span class="o">=</span> <span class="n">INDEX_MON_SQL12</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">sql</span> <span class="o">=</span> <span class="n">INDEX_MON_SQL11</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+            <span class="n">msgs</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cursor</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">version</span> <span class="o">&gt;</span> <span class="mi">120000</span><span class="p">:</span>
+                    <span class="n">t</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">c</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="n">q</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">):]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">q</span><span class="p">:</span>
+                        <span class="n">n</span> <span class="o">=</span> <span class="s2">&quot;None&quot;</span>
+                        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">q</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;IF&quot;</span><span class="p">,</span> <span class="s2">&quot;NOT&quot;</span><span class="p">,</span> <span class="s2">&quot;EXISTS&quot;</span><span class="p">]:</span>
+                                <span class="n">n</span> <span class="o">=</span> <span class="n">x</span>
+                                <span class="k">break</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">n</span> <span class="o">=</span> <span class="s2">&quot;?&quot;</span>
+                    <span class="n">p</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+                    <span class="n">b</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">*</span> <span class="mf">100.0</span> <span class="o">/</span> <span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="k">else</span> <span class="mi">0</span>
+                    <span class="n">tp</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">*</span> <span class="mf">100.0</span> <span class="o">/</span> <span class="n">row</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="k">else</span> <span class="mi">0</span>
+                    <span class="n">pid</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
+                    <span class="n">msgs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">] </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">. Blocks: </span><span class="si">{:2.0f}</span><span class="s2">%, Tuples: </span><span class="si">{:2.0f}</span><span class="s2">%. PID = </span><span class="si">{:d}</span><span class="s2">&quot;</span>
+                        <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">p</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tp</span><span class="p">,</span> <span class="n">pid</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">t</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">q</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                    <span class="n">s</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                    <span class="n">msgs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">] </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">q</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">msgs</span></div>
+
+<div class="viewcode-block" id="DBActivityMonitor.get_activity"><a class="viewcode-back" href="../../../../members/monitor.html#dorieh.platform.loader.monitor.DBActivityMonitor.get_activity">[docs]</a>    <span class="k">def</span> <span class="nf">get_activity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="n">msgs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">leaders</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">workers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connect</span><span class="p">()</span> <span class="k">as</span> <span class="n">c</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">c</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT now()&quot;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cursor</span><span class="p">:</span>
+                    <span class="n">now</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="k">break</span>
+            <span class="k">with</span> <span class="n">c</span><span class="o">.</span><span class="n">cursor</span><span class="p">(</span><span class="n">cursor_factory</span><span class="o">=</span><span class="n">RealDictCursor</span><span class="p">)</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">pid</span><span class="p">:</span>
+                    <span class="n">sql</span> <span class="o">=</span> <span class="n">ACTIVITY_BY_PID</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pid</span> <span class="o">=</span> <span class="n">pid</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">db</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;database&quot;</span><span class="p">]</span>
+                    <span class="n">sql</span> <span class="o">=</span> <span class="n">ACTIVITY_BY_DB</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">db</span><span class="p">)</span>
+                <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">verbose</span><span class="p">):</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cursor</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;leader_pid&quot;</span><span class="p">]:</span>
+                        <span class="n">workers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">leaders</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="p">[</span><span class="n">leaders</span><span class="p">,</span> <span class="n">workers</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">state</span><span class="p">:</span>
+                        <span class="k">continue</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+                    <span class="n">activity</span> <span class="o">=</span> <span class="n">Activity</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">,</span> <span class="n">now</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">activity</span> <span class="o">=</span> <span class="n">Activity</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">,</span> <span class="n">now</span><span class="p">)</span>
+                <span class="n">msgs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">activity</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">msgs</span></div>
+
+<div class="viewcode-block" id="DBActivityMonitor.execute"><a class="viewcode-back" href="../../../../members/monitor.html#dorieh.platform.loader.monitor.DBActivityMonitor.execute">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="n">what</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">on_monitor</span><span class="p">:</span> <span class="n">Callable</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">what</span><span class="p">)</span>
+        <span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">step</span> <span class="o">=</span> <span class="mi">100</span>
+        <span class="k">while</span> <span class="n">x</span><span class="o">.</span><span class="n">is_alive</span><span class="p">():</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+            <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">%</span> <span class="n">step</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">on_monitor</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">100000</span><span class="p">:</span>
+                    <span class="n">step</span> <span class="o">=</span> <span class="mi">6000</span>
+                <span class="k">elif</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">10000</span><span class="p">:</span>
+                    <span class="n">step</span> <span class="o">=</span> <span class="mi">600</span>
+        <span class="n">x</span><span class="o">.</span><span class="n">join</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="DBActivityMonitor.log_activity"><a class="viewcode-back" href="../../../../members/monitor.html#dorieh.platform.loader.monitor.DBActivityMonitor.log_activity">[docs]</a>    <span class="k">def</span> <span class="nf">log_activity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pid</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="n">activity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_activity</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="n">activity</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="k">return</span></div></div>
+
+
+<div class="viewcode-block" id="Activity"><a class="viewcode-back" href="../../../../members/monitor.html#dorieh.platform.loader.monitor.Activity">[docs]</a><span class="k">class</span> <span class="nc">Activity</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">activity</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">known_blocks</span><span class="p">,</span> <span class="n">now</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">msg_len</span><span class="o">=</span><span class="mi">32</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">now</span> <span class="o">=</span> <span class="n">now</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">msg_len</span> <span class="o">=</span> <span class="n">msg_len</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">database</span> <span class="o">=</span> <span class="n">activity</span><span class="p">[</span><span class="s2">&quot;datname&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pid</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">activity</span><span class="p">[</span><span class="s2">&quot;pid&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">leader</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">activity</span><span class="p">[</span><span class="s2">&quot;leader_pid&quot;</span><span class="p">])</span> <span class="k">if</span> <span class="n">activity</span><span class="p">[</span><span class="s2">&quot;leader_pid&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">activity</span><span class="p">[</span><span class="s2">&quot;application_name&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">activity</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">activity</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;wait&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">blocked_by</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="s2">&quot;wait&quot;</span> <span class="ow">or</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="s2">&quot;active&quot;</span>
+            <span class="ow">and</span> <span class="n">activity</span><span class="p">[</span><span class="s2">&quot;wait_event_type&quot;</span><span class="p">]</span>
+            <span class="ow">and</span> <span class="n">activity</span><span class="p">[</span><span class="s2">&quot;wait_event&quot;</span><span class="p">]</span>
+        <span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">wait</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> waiting for </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">activity</span><span class="p">[</span><span class="s2">&quot;wait_event&quot;</span><span class="p">],</span> <span class="n">activity</span><span class="p">[</span><span class="s2">&quot;wait_event_type&quot;</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pid</span> <span class="ow">in</span> <span class="n">known_blocks</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">blocked_by</span> <span class="o">=</span> <span class="s2">&quot; [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">known_blocks</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">pid</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">wait</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xid</span> <span class="o">=</span> <span class="n">activity</span><span class="p">[</span><span class="s2">&quot;backend_xid&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_transaction</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">xid</span> <span class="k">else</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">query</span> <span class="o">=</span> <span class="n">activity</span><span class="p">[</span><span class="s2">&quot;query&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">activity</span><span class="p">[</span><span class="s2">&quot;backend_start&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last</span> <span class="o">=</span> <span class="n">activity</span><span class="p">[</span><span class="s2">&quot;state_change&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_transaction</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">xact_start</span> <span class="o">=</span> <span class="n">activity</span><span class="p">[</span><span class="s2">&quot;xact_start&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">xact_start</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">query_start</span> <span class="o">=</span> <span class="n">activity</span><span class="p">[</span><span class="s2">&quot;query_start&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">query_start</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{:d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pid</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">leader</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot; &lt;= </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">leader</span><span class="p">)</span>
+        <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot; </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="p">:</span>
+                <span class="n">app</span> <span class="o">=</span> <span class="s2">&quot; [</span><span class="si">{}</span><span class="s2">:</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">app</span> <span class="o">=</span> <span class="s2">&quot; [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">)</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="n">app</span>
+        <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;. Started at </span><span class="si">{}</span><span class="s2">, running for </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">),</span>
+            <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">now</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_transaction</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;. Transaction </span><span class="si">{}</span><span class="s2"> started at </span><span class="si">{}</span><span class="s2">, running </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">xid</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xact_start</span><span class="p">),</span>
+                <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">now</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">xact_start</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">wait</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">now</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">last</span><span class="p">:</span>
+                <span class="n">wait_duration</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">now</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">last</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">wait_duration</span> <span class="o">=</span> <span class="s2">&quot;Unknown&quot;</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;. </span><span class="si">{}</span><span class="s2"> from </span><span class="si">{}</span><span class="s2"> for </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">wait</span><span class="o">.</span><span class="n">capitalize</span><span class="p">(),</span>
+                <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">last</span><span class="p">),</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">wait_duration</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">blocked_by</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">blocked_by</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">msg_len</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;. Executing: </span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;. Executing: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">msg_len</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">msg</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">DBActivityMonitor</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

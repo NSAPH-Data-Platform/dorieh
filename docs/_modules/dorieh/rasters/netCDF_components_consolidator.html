@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dorieh.rasters.netCDF_components_consolidator &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">dorieh.rasters.netCDF_components_consolidator</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for dorieh.rasters.netCDF_components_consolidator</h1><div class="highlight"><pre>
+<span></span><span class="c1">#  Copyright (c) 2023. Harvard University</span>
+<span class="c1">#</span>
+<span class="c1">#  Developed by Research Software Engineering,</span>
+<span class="c1">#  Harvard University Research Computing</span>
+<span class="c1">#  and The Harvard T.H. Chan School of Public Health</span>
+<span class="c1">#  Authors: Michael A Bouzinier, Kezia Irene, Michelle Audirac</span>
+<span class="c1">#</span>
+<span class="c1">#  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1">#  you may not use this file except in compliance with the License.</span>
+<span class="c1">#  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#         http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1">#  limitations under the License.</span>
+<span class="c1">#</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  Given a NetCDF file with absolute values (e.g., for PM25) and a set of</span>
+<span class="sd">  NetCDF files containing percentage values for individual components,</span>
+<span class="sd">  this tool consolidates all data into a single NetCDF file with both</span>
+<span class="sd">  percentages and absolute values for all components.</span>
+
+<span class="sd">See also:</span>
+
+<span class="sd">https://unidata.github.io/netcdf4-python/</span>
+<span class="sd">https://neetinayak.medium.com/combine-many-netcdf-files-into-a-single-file-with-python-469ba476fc14</span>
+<span class="sd">https://docs.xarray.dev/en/stable/api.html</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">rasterio</span>
+<span class="kn">import</span> <span class="nn">rioxarray</span>
+<span class="kn">import</span> <span class="nn">xarray</span>
+<span class="kn">from</span> <span class="nn">netCDF4</span> <span class="kn">import</span> <span class="n">Dataset</span>
+
+
+<span class="c1">#from dorieh.platform import init_logging</span>
+
+
+<div class="viewcode-block" id="NetCDFDataset"><a class="viewcode-back" href="../../../members/netCDF_components_consolidator.html#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset">[docs]</a><span class="k">class</span> <span class="nc">NetCDFDataset</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class to combine NetCDF dataset with absolute values with</span>
+<span class="sd">    dependent datasets containing components</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dataset</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;NetCDF Dataset that we will be modifying&#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rio_dataset</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Rasterio dataset that holds metadata lost when writing NetCDF dataset&#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main_var</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;The name of the main variable&#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">components_list</span> <span class="o">=</span> <span class="p">[]</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">percentages</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;The names of the component variables containing percentages&#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">abs_values</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;The names of the component variables containing absolute values&#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">absolute_values_read</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temp_output</span> <span class="o">=</span> <span class="kc">None</span>
+        
+        <span class="k">return</span>
+    
+<div class="viewcode-block" id="NetCDFDataset.open_original_dataset"><a class="viewcode-back" href="../../../members/netCDF_components_consolidator.html#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.open_original_dataset">[docs]</a>    <span class="k">def</span> <span class="nf">open_original_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">infile</span><span class="p">):</span>
+        <span class="n">_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">temp_output</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkstemp</span><span class="p">()</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">temp_output</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_output</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r+&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rio_dataset</span> <span class="o">=</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">infile</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="NetCDFDataset.read_abs_values"><a class="viewcode-back" href="../../../members/netCDF_components_consolidator.html#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.read_abs_values">[docs]</a>    <span class="k">def</span> <span class="nf">read_abs_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">var</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reads the NetCDF dataset from a *.nc file</span>
+<span class="sd">        Assumes that this dataset contains absolute values of</span>
+<span class="sd">        the variable with the name provided by var parameter.</span>
+
+<span class="sd">        Raises an exception if the variable is not None but is not present n the dataset.</span>
+<span class="sd">        If the parameter &quot;var&quot; is None, checks that there is only one variable present beside &quot;lat&quot; and &quot;lon&quot;.</span>
+<span class="sd">        Raises exception if there is more than one variable</span>
+
+<span class="sd">        :param var: The variable containing the absolute values of the feature of interest, e.g., &quot;pm25&quot;</span>
+<span class="sd">            If None, defaults to a single variable present in teh dataset beside &quot;lat&quot; and &quot;lon&quot;</span>
+<span class="sd">        :param filename: A path to file to read.</span>
+<span class="sd">            Can also be a python 3 pathlib instance or the URL of an OpenDAP dataset.</span>
+<span class="sd">        :raises: ValueError if var is None and there is more than one variable in the dataset or, if var</span>
+<span class="sd">            is not None and is not present in teh dataset</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Create a Dataset variable for the file</span>
+
+        <span class="c1"># Create new netcdf file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">open_original_dataset</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+        <span class="c1"># If var is None, check that there is only one variable present beside &quot;lat&quot; and &quot;lon&quot;</span>
+        <span class="k">if</span> <span class="n">var</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">variables</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="n">variables</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;LAT&quot;</span><span class="p">)</span>
+            <span class="n">variables</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;LON&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">variables</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;If var is None, there must be exactly one &quot;</span>
+                    <span class="s2">&quot;variable besides &#39;lat&#39; and &#39;lon&#39;.&quot;</span>
+                <span class="p">)</span>
+
+            <span class="c1"># Get the variable name</span>
+            <span class="n">var</span> <span class="o">=</span> <span class="n">variables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># Check that the specified variable is present in the dataset</span>
+        <span class="k">if</span> <span class="n">var</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The variable &#39;</span><span class="si">%s</span><span class="s2">&#39; is not present in the dataset.&quot;</span> <span class="o">%</span> <span class="n">var</span><span class="p">)</span>
+
+        <span class="c1"># Get the absolute values of the specified variable</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">abs_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">var</span><span class="p">][:]</span>
+
+        <span class="c1"># Assign the units from the old dataset to the new dataset</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">absolute_values_read</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main_var</span> <span class="o">=</span> <span class="n">var</span> 
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Done with read_abs_values&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">var</span></div>
+
+<div class="viewcode-block" id="NetCDFDataset.pct_var"><a class="viewcode-back" href="../../../members/netCDF_components_consolidator.html#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.pct_var">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">pct_var</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">var</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">var</span> <span class="o">+</span> <span class="s1">&#39;p&#39;</span></div>
+
+<div class="viewcode-block" id="NetCDFDataset.add_component"><a class="viewcode-back" href="../../../members/netCDF_components_consolidator.html#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.add_component">[docs]</a>    <span class="k">def</span> <span class="nf">add_component</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">var</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reads the NetCDF dataset from a *.nc file</span>
+<span class="sd">        Assumes that this dataset contains percentage of a component defined by</span>
+<span class="sd">        the var parameter.</span>
+
+<span class="sd">        Can only be called after the dataset is initialized with absolute values.</span>
+
+<span class="sd">        :param var: The variable containing percentage of a certain component</span>
+<span class="sd">        :param abs_var: The variable name to contain absolute values of the component. If omitted,</span>
+<span class="sd">            it is constructed from the percentage variable name either by removing &#39;p&#39; if the</span>
+<span class="sd">            variable starts with &#39;p&#39; otherwise, by adding &#39;abs_&#39; prefix</span>
+<span class="sd">        :param filename: A path to file to read.</span>
+<span class="sd">            Can also be a python 3 pathlib instance or the URL of an OpenDAP dataset.</span>
+<span class="sd">        :raises: ValueError if var is None and there is more than one variable in the dataset or, if var</span>
+<span class="sd">            is not None and is not present in the dataset</span>
+<span class="sd">        :raises: ValueError if the grid of the component file is incompatible with</span>
+<span class="sd">            the gird of the existing Dataset</span>
+<span class="sd">        :raises: ValueError if the absolute values have not yet been read</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Check if absolute values have been read</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">absolute_values_read</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The absolute values have not been read yet.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Read the NetCDF dataset from the file</span>
+        <span class="n">component_pct_dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;New dataset variables: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">component_pct_dataset</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+
+        <span class="c1"># If var is None, check that there is only one variable present beside &quot;lat&quot; and &quot;lon&quot;</span>
+        <span class="k">if</span> <span class="n">var</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">variables</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">component_pct_dataset</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="n">variables</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;LAT&quot;</span><span class="p">)</span>
+            <span class="n">variables</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;LON&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">variables</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;If var is None, there must be exactly one variable besides &#39;lat&#39; and &#39;lon&#39;.&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Get the variable name</span>
+            <span class="n">var</span> <span class="o">=</span> <span class="n">variables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;These are the variables of the components: &quot;</span> <span class="o">+</span> <span class="n">var</span><span class="p">)</span>
+            
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components_list</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">components_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Shape: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">component_pct_dataset</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+
+        
+        <span class="c1"># Check if the grid of the component file is compatible with the grid of the existing Dataset</span>
+        <span class="k">if</span> <span class="n">component_pct_dataset</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">main_var</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The grid of the component file is incompatible with the grid of the existing Dataset.&quot;</span><span class="p">)</span>
+
+        
+        <span class="c1"># Create a new variable in the dataset to store the component data</span>
+        <span class="n">component_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pct_var</span><span class="p">(</span><span class="n">var</span><span class="p">),</span> <span class="s1">&#39;f4&#39;</span><span class="p">,</span> <span class="n">component_pct_dataset</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">dimensions</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Add the component data to the dataset</span>
+        <span class="n">component_out</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">component_pct_dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">var</span><span class="p">][:]</span>
+        <span class="c1"># Add units to the variable</span>
+        <span class="n">component_out</span><span class="o">.</span><span class="n">units</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">main_var</span><span class="p">]</span><span class="o">.</span><span class="n">units</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;All components have been added&quot;</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="NetCDFDataset.add_components"><a class="viewcode-back" href="../../../members/netCDF_components_consolidator.html#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.add_components">[docs]</a>    <span class="k">def</span> <span class="nf">add_components</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filenames</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds multiple components in a single call from multiple files. Assumes that</span>
+<span class="sd">        every file given contains only one variable beside lat and lon</span>
+
+<span class="sd">        Can only be called after the dataset is initialized with absolute values.</span>
+
+<span class="sd">        :param filenames:  A list of file paths to read.</span>
+<span class="sd">            Elements of the list can also be a python 3 pathlib instance or the URL of an OpenDAP dataset.</span>
+<span class="sd">        :raises: ValueError if there is more than one variable in any of the datasets</span>
+<span class="sd">        :raises: ValueError if the grid of a component file is incompatible with</span>
+<span class="sd">            the gird of the existing Dataset</span>
+<span class="sd">        :raises: ValueError if the absolute values have not yet been read</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+            <span class="c1"># Check if absolute values have been read</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">absolute_values_read</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The absolute values have not been read yet.&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
+            <span class="c1"># Read the NetCDF dataset from the file</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Adding components from: &quot;</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;This is the dataset after adding components:&quot;</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">))</span>
+             
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="NetCDFDataset.compute_abs_values"><a class="viewcode-back" href="../../../members/netCDF_components_consolidator.html#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.compute_abs_values">[docs]</a>    <span class="k">def</span> <span class="nf">compute_abs_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Computes absolute values for every component present in the dataset by applying a formula.</span>
+
+<span class="sd">        :param components: Array of component names</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        :raises: ValueError if the absolute values have not yet been read</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check if absolute values have been read</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">absolute_values_read</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The absolute values have not been read yet.&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">component</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components_list</span><span class="p">:</span>
+            <span class="c1"># Compute the absolute values for the component</span>
+            <span class="n">component_array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">pct_var</span><span class="p">(</span><span class="n">component</span><span class="p">)][:]</span>
+            <span class="n">component_array</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">nan_to_num</span><span class="p">(</span>
+                <span class="n">component_array</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">nan</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">posinf</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">neginf</span><span class="o">=</span><span class="mi">0</span>
+            <span class="p">)</span>
+            <span class="n">modified_values</span> <span class="o">=</span> <span class="n">component_array</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">main_var</span><span class="p">][:]</span> <span class="o">/</span> <span class="mi">100</span>
+
+            <span class="c1"># Create a new variable in the output dataset for the modified values</span>
+            <span class="n">modified_variable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span>
+                <span class="n">component</span><span class="p">,</span> <span class="s1">&#39;f4&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;LAT&#39;</span><span class="p">,</span> <span class="s1">&#39;LON&#39;</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">modified_variable</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">modified_values</span><span class="p">[:]</span>
+            <span class="c1"># Add units to the variable</span>
+            <span class="n">modified_variable</span><span class="o">.</span><span class="n">units</span> <span class="o">=</span> <span class="s2">&quot;ug/m3&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Final dataset: &quot;</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">))</span>
+        <span class="k">return</span></div>
+    
+<div class="viewcode-block" id="NetCDFDataset.get_dataset"><a class="viewcode-back" href="../../../members/netCDF_components_consolidator.html#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.get_dataset">[docs]</a>    <span class="k">def</span> <span class="nf">get_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dataset</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span></div>
+
+<div class="viewcode-block" id="NetCDFDataset.close"><a class="viewcode-back" href="../../../members/netCDF_components_consolidator.html#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_file_name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes all the data to the output file and closes all temporary objects</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Save the current state of the dataset to a new file</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">sync</span><span class="p">()</span>
+        <span class="k">with</span> <span class="n">xarray</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_output</span><span class="p">)</span> <span class="k">as</span> <span class="n">rds</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">rds</span><span class="o">.</span><span class="n">variables</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">var</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components_list</span><span class="p">:</span>
+                    <span class="n">rds</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="o">=</span> <span class="n">rds</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">rds</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">)</span>
+            <span class="n">rds</span><span class="o">.</span><span class="n">rio</span><span class="o">.</span><span class="n">write_crs</span><span class="p">(</span><span class="mi">4326</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">rds</span><span class="o">.</span><span class="n">rio</span><span class="o">.</span><span class="n">write_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rio_dataset</span><span class="o">.</span><span class="n">transform</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">rds</span><span class="o">.</span><span class="n">rio</span><span class="o">.</span><span class="n">to_raster</span><span class="p">(</span><span class="n">output_file_name</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">rio_dataset</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_output</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temp_output</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rio_dataset</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Created: &quot;</span> <span class="o">+</span> <span class="n">output_file_name</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructs string representation of the NetCDF dataset, with variable names and dimensional information</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Get the variable names in the dataset</span>
+        <span class="n">variable_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+        <span class="c1"># Construct the string representation</span>
+        <span class="n">str_repr</span> <span class="o">=</span> <span class="s2">&quot;NetCDF Dataset:</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">str_repr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">variable_names</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">str_repr</span></div>
+
+
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../../members/netCDF_components_consolidator.html#dorieh.rasters.netCDF_components_consolidator.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">infile</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">components</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">outfile</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">outfile</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">base</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">infile</span><span class="p">)</span>
+        <span class="n">base</span> <span class="o">+=</span> <span class="s2">&quot;_with_components&quot;</span>
+        <span class="n">outfile</span> <span class="o">=</span> <span class="n">base</span> <span class="o">+</span> <span class="s1">&#39;.tif&#39;</span>
+    <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">outfile</span><span class="p">):</span>
+        <span class="n">basename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">infile</span><span class="p">)</span>
+        <span class="n">base</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">basename</span><span class="p">)</span>
+        <span class="n">basename</span> <span class="o">=</span> <span class="n">base</span> <span class="o">+</span> <span class="s1">&#39;.tif&#39;</span>
+        <span class="n">outfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="n">basename</span><span class="p">)</span>
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">NetCDFDataset</span><span class="p">()</span>
+    <span class="c1">#print(&quot;testing&quot;)</span>
+    <span class="n">ds</span><span class="o">.</span><span class="n">read_abs_values</span><span class="p">(</span><span class="n">infile</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ds</span><span class="p">))</span>
+    <span class="n">ds</span><span class="o">.</span><span class="n">add_components</span><span class="p">(</span><span class="n">components</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ds</span><span class="p">))</span>
+    <span class="n">ds</span><span class="o">.</span><span class="n">compute_abs_values</span><span class="p">()</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ds</span><span class="p">))</span>
+    <span class="n">ds</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">outfile</span><span class="p">)</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="c1">#init_logging(level=logging.INFO, name=&quot;NetCDF&quot;)</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span> <span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Tool to combine components into a single NetCDF file&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--input&quot;</span><span class="p">,</span> <span class="s2">&quot;-in&quot;</span><span class="p">,</span> <span class="s2">&quot;-i&quot;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Path to the main NetCDF file containing absolute values&quot;</span><span class="p">,</span>
+                        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--components&quot;</span><span class="p">,</span> <span class="s2">&quot;-c&quot;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Path to the NetCDF files containing components&quot;</span><span class="p">,</span>
+                        <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span>
+                        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--output&quot;</span><span class="p">,</span> <span class="s2">&quot;-out&quot;</span><span class="p">,</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Path to the file with the combined dataset&quot;</span><span class="p">,</span>
+                        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--verbose&quot;</span><span class="p">,</span> <span class="s2">&quot;-v&quot;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Verbosity level&quot;</span><span class="p">,</span>
+                        <span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">verbose</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">args</span><span class="o">.</span><span class="n">verbose</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+
+    <span class="n">main</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">input</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">components</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

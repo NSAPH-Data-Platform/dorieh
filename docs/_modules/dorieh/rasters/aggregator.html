@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dorieh.rasters.aggregator &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">dorieh.rasters.aggregator</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for dorieh.rasters.aggregator</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">API to aggregate data over shapes</span>
+
+<span class="sd">The Aggregator class expects a netCDF dataset, containing 3 variables:</span>
+<span class="sd">value, latitude and longitude</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1">#  Copyright (c) 2022. Harvard University</span>
+<span class="c1">#</span>
+<span class="c1">#  Developed by Research Software Engineering,</span>
+<span class="c1">#  Faculty of Arts and Sciences, Research Computing (FAS RC)</span>
+<span class="c1">#  Author: Michael A Bouzinier</span>
+<span class="c1">#</span>
+<span class="c1">#  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1">#  you may not use this file except in compliance with the License.</span>
+<span class="c1">#  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#         http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1">#  limitations under the License.</span>
+<span class="c1">#</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Any</span>
+
+<span class="kn">from</span> <span class="nn">dorieh.rasters.netCDF_tools</span> <span class="kn">import</span> <span class="n">NCViewer</span>
+<span class="kn">from</span> <span class="nn">dorieh.rasters.prof</span> <span class="kn">import</span> <span class="n">ProfilingData</span>
+<span class="kn">from</span> <span class="nn">dorieh.utils.profile_utils</span> <span class="kn">import</span> <span class="n">qmem</span>
+
+<span class="kn">import</span> <span class="nn">rasterio</span>
+<span class="kn">from</span> <span class="nn">netCDF4</span> <span class="kn">import</span> <span class="n">Dataset</span>
+<span class="kn">from</span> <span class="nn">dorieh.platform</span> <span class="kn">import</span> <span class="n">init_logging</span>
+<span class="kn">from</span> <span class="nn">dorieh.platform.pg_keywords</span> <span class="kn">import</span> <span class="n">PG_NUMERIC_TYPE</span><span class="p">,</span> <span class="n">PG_STR_TYPE</span><span class="p">,</span> \
+    <span class="n">PG_INT_TYPE</span>
+<span class="kn">from</span> <span class="nn">dorieh.gis.compute_shape</span> <span class="kn">import</span> <span class="n">StatsCounter</span>
+<span class="kn">from</span> <span class="nn">dorieh.gis.constants</span> <span class="kn">import</span> <span class="n">RasterizationStrategy</span><span class="p">,</span> <span class="n">Geography</span>
+<span class="kn">from</span> <span class="nn">dorieh.utils.io_utils</span> <span class="kn">import</span> <span class="n">fopen</span><span class="p">,</span> <span class="n">CSVWriter</span><span class="p">,</span> <span class="n">Collector</span><span class="p">,</span> <span class="n">sizeof_fmt</span>
+
+<span class="kn">from</span> <span class="nn">dorieh.rasters.gridmet_tools</span> <span class="kn">import</span> <span class="n">get_affine_transform</span><span class="p">,</span> <span class="n">disaggregate</span><span class="p">,</span> \
+    <span class="n">estimate_optimal_downscaling_factor</span>
+
+
+<div class="viewcode-block" id="Aggregator"><a class="viewcode-back" href="../../../members/aggregator.html#dorieh.rasters.aggregator.Aggregator">[docs]</a><span class="k">class</span> <span class="nc">Aggregator</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">infile</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">variable</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">outfile</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                 <span class="n">strategy</span><span class="p">:</span> <span class="n">RasterizationStrategy</span><span class="p">,</span> <span class="n">shapefile</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                 <span class="n">geography</span><span class="p">:</span> <span class="n">Geography</span><span class="p">,</span>
+                 <span class="n">extra_columns</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">ram</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param infile: Path to file with raster data to be aggregated.</span>
+<span class="sd">            Can be either NetCDF or GeoTiff file</span>
+<span class="sd">        :param variable: Name of variable or variables that need to be</span>
+<span class="sd">            aggregated</span>
+<span class="sd">        :param outfile: Path to the output &quot;csv.gz&quot; file</span>
+<span class="sd">        :param strategy: Rasterization strategy</span>
+<span class="sd">        :param shapefile: Path to shapefile with polygons</span>
+<span class="sd">        :param geography: What kind of geography: US Counties or ZIP/ZCTA codes</span>
+<span class="sd">        :param extra_columns: if we need to add any extra columns to the CSV</span>
+<span class="sd">        :param ram: Runtime memory available to the process</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">infile</span> <span class="o">=</span> <span class="n">infile</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outfile</span> <span class="o">=</span> <span class="n">outfile</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">factor</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">affine</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">:</span> <span class="n">Dataset</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">aggr_variables</span> <span class="o">=</span> <span class="n">variable</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">aggr_variables</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">variable</span><span class="p">)]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">shapefile</span> <span class="o">=</span> <span class="n">shapefile</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">geography</span> <span class="o">=</span> <span class="n">geography</span>
+        <span class="k">if</span> <span class="n">extra_columns</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">extra_headers</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_values</span> <span class="o">=</span> <span class="n">extra_columns</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">extra_headers</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_values</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">missing_value</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ram</span> <span class="o">=</span> <span class="n">ram</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_strategy</span><span class="p">(</span><span class="n">strategy</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">perf</span> <span class="o">=</span> <span class="n">ProfilingData</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Aggregator.set_strategy"><a class="viewcode-back" href="../../../members/aggregator.html#dorieh.rasters.aggregator.Aggregator.set_strategy">[docs]</a>    <span class="k">def</span> <span class="nf">set_strategy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strategy</span><span class="p">:</span> <span class="n">RasterizationStrategy</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span> <span class="o">=</span> <span class="n">strategy</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span> <span class="ow">in</span> <span class="p">[</span>
+            <span class="n">RasterizationStrategy</span><span class="o">.</span><span class="n">default</span><span class="p">,</span> <span class="n">RasterizationStrategy</span><span class="o">.</span><span class="n">all_touched</span>
+        <span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">factor</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">set_factor</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">set_factor</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">ram</span> <span class="o">=</span> <span class="nb">int</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ram</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">aggr_variables</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">on_set_strategy</span><span class="p">(</span><span class="n">ram</span><span class="p">,</span> <span class="n">set_factor</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Aggregator.on_set_strategy"><a class="viewcode-back" href="../../../members/aggregator.html#dorieh.rasters.aggregator.Aggregator.on_set_strategy">[docs]</a>    <span class="k">def</span> <span class="nf">on_set_strategy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ram</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">set_factor</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="Aggregator.prepare"><a class="viewcode-back" href="../../../members/aggregator.html#dorieh.rasters.aggregator.Aggregator.prepare">[docs]</a>    <span class="k">def</span> <span class="nf">prepare</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">affine</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">affine</span> <span class="o">=</span> <span class="n">get_affine_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">infile</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">factor</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> =&gt; </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">infile</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">outfile</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
+        <span class="n">variables</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_dataset_variables</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggr_variables</span><span class="p">:</span>
+                <span class="k">return</span>
+        <span class="n">lv</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggr_variables</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">lv</span><span class="p">:</span>
+                <span class="n">idx</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">aggr_variables</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+                <span class="k">return</span>
+
+        <span class="n">vvv</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">variables</span> <span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">]]</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Variable </span><span class="si">{}</span><span class="s2"> not found in the file </span><span class="si">{}</span><span class="s2">. Available variables: </span><span class="si">{}</span><span class="s2">&quot;</span>
+            <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">aggr_variables</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">infile</span><span class="p">,</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">vvv</span><span class="p">))</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="Aggregator.open"><a class="viewcode-back" href="../../../members/aggregator.html#dorieh.rasters.aggregator.Aggregator.open">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="Aggregator.get_dataset_variables"><a class="viewcode-back" href="../../../members/aggregator.html#dorieh.rasters.aggregator.Aggregator.get_dataset_variables">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_dataset_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="Aggregator.get_layer"><a class="viewcode-back" href="../../../members/aggregator.html#dorieh.rasters.aggregator.Aggregator.get_layer">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_layer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="Aggregator.get_header"><a class="viewcode-back" href="../../../members/aggregator.html#dorieh.rasters.aggregator.Aggregator.get_header">[docs]</a>    <span class="k">def</span> <span class="nf">get_header</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geography</span><span class="o">.</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggr_variables</span> <span class="o">+</span> <span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_headers</span><span class="p">:</span>
+            <span class="n">headers</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_headers</span>
+        <span class="k">return</span> <span class="n">headers</span></div>
+
+<div class="viewcode-block" id="Aggregator.write_header"><a class="viewcode-back" href="../../../members/aggregator.html#dorieh.rasters.aggregator.Aggregator.write_header">[docs]</a>    <span class="k">def</span> <span class="nf">write_header</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">fopen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outfile</span><span class="p">,</span> <span class="s2">&quot;wt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out</span><span class="p">:</span>
+            <span class="n">writer</span> <span class="o">=</span> <span class="n">CSVWriter</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+            <span class="n">headers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_header</span><span class="p">()</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">outfile</span></div>
+
+<div class="viewcode-block" id="Aggregator.get_registry"><a class="viewcode-back" href="../../../members/aggregator.html#dorieh.rasters.aggregator.Aggregator.get_registry">[docs]</a>    <span class="k">def</span> <span class="nf">get_registry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">table_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                     <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="n">t0</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">description</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Dorieh data model for aggregation of a grid&quot;</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geography</span><span class="o">.</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">domain</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">domain_name</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;schema&quot;</span><span class="p">:</span> <span class="n">domain_name</span><span class="p">,</span>
+                <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="s2">&quot;all&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
+                <span class="s2">&quot;header&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&quot;quoting&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+                <span class="s2">&quot;tables&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{</span><span class="n">var</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">PG_NUMERIC_TYPE</span>
+            <span class="p">}}</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggr_variables</span>
+        <span class="p">]</span>
+        <span class="n">columns</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="n">key</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">PG_STR_TYPE</span><span class="p">,</span>
+            <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="kc">True</span>
+        <span class="p">}})</span>
+        <span class="n">pk</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_headers</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extra_headers</span><span class="p">)):</span>
+                <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_headers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+                    <span class="n">t</span> <span class="o">=</span> <span class="n">PG_INT_TYPE</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">t</span> <span class="o">=</span> <span class="n">PG_STR_TYPE</span>
+                <span class="n">columns</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="n">c</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">t</span><span class="p">,</span>
+                    <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="kc">True</span>
+                <span class="p">}})</span>
+                <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;year&quot;</span><span class="p">:</span>
+                    <span class="n">pk</span> <span class="o">=</span> <span class="p">[</span><span class="n">key</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span>
+
+        <span class="n">table</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;columns&quot;</span><span class="p">:</span> <span class="n">columns</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="n">pk</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">table</span><span class="p">[</span><span class="s2">&quot;primary_key&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pk</span>
+
+        <span class="n">domain</span><span class="p">[</span><span class="n">domain_name</span><span class="p">][</span><span class="s2">&quot;tables&quot;</span><span class="p">][</span><span class="n">table_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">table</span>
+
+        <span class="n">m</span> <span class="o">=</span> <span class="n">qmem</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">perf</span><span class="o">.</span><span class="n">update_mem_time</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">domain</span></div>
+
+<div class="viewcode-block" id="Aggregator.execute"><a class="viewcode-back" href="../../../members/aggregator.html#dorieh.rasters.aggregator.Aggregator.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;wt&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Executes computational task</span>
+
+<span class="sd">        :param mode: mode to use opening result file</span>
+<span class="sd">        :type mode: str</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">prepare</span><span class="p">()</span>
+        <span class="k">if</span> <span class="s1">&#39;a&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mode</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write_header</span><span class="p">()</span>
+            <span class="k">if</span> <span class="s1">&#39;t&#39;</span> <span class="ow">in</span> <span class="n">mode</span><span class="p">:</span>
+                <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;at&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;a&#39;</span>
+        <span class="k">with</span> <span class="n">fopen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outfile</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span> <span class="k">as</span> <span class="n">out</span><span class="p">:</span>
+            <span class="n">writer</span> <span class="o">=</span> <span class="n">CSVWriter</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">collect_data</span><span class="p">(</span><span class="n">writer</span><span class="p">)</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">qmem</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">perf</span><span class="o">.</span><span class="n">update_mem_only</span><span class="p">(</span><span class="n">m</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Aggregator.collect_data"><a class="viewcode-back" href="../../../members/aggregator.html#dorieh.rasters.aggregator.Aggregator.collect_data">[docs]</a>    <span class="k">def</span> <span class="nf">collect_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collector</span><span class="p">:</span> <span class="n">Collector</span><span class="p">):</span>
+        <span class="n">t0</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">layers</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get_layer</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggr_variables</span><span class="p">]</span>
+        <span class="n">t1</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">collector</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span>
+        <span class="n">collector</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+        <span class="n">t3</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot; </span><span class="se">\t</span><span class="si">{}</span><span class="s2"> [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">t3</span> <span class="o">-</span> <span class="n">t1</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="p">)))</span></div>
+
+<div class="viewcode-block" id="Aggregator.downscale"><a class="viewcode-back" href="../../../members/aggregator.html#dorieh.rasters.aggregator.Aggregator.downscale">[docs]</a>    <span class="k">def</span> <span class="nf">downscale</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layer</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">factor</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Downscaling by the factor of &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">factor</span><span class="p">))</span>
+            <span class="n">layer</span> <span class="o">=</span> <span class="n">disaggregate</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">factor</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">layer</span> <span class="o">=</span> <span class="n">layer</span><span class="p">[:]</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">qmem</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">perf</span><span class="o">.</span><span class="n">update_mem_only</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">layer</span></div>
+
+<div class="viewcode-block" id="Aggregator.compute"><a class="viewcode-back" href="../../../members/aggregator.html#dorieh.rasters.aggregator.Aggregator.compute">[docs]</a>    <span class="k">def</span> <span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">writer</span><span class="p">:</span> <span class="n">Collector</span><span class="p">,</span> <span class="n">layers</span><span class="p">):</span>
+        <span class="n">fid</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">infile</span><span class="p">))</span>
+        <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">shape</span> <span class="o">=</span> <span class="n">layers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">:</span><span class="si">%s</span><span class="s2">:strategy=</span><span class="si">%s</span><span class="s2">:</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">: layer shape </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">geography</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">aggr_variables</span><span class="p">,</span>
+            <span class="n">fid</span><span class="p">,</span>
+            <span class="nb">str</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">factor</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">perf</span><span class="o">.</span><span class="n">factor</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">perf</span><span class="o">.</span><span class="n">factor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">factor</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">layers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">layers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">perf</span><span class="o">.</span><span class="n">shape_x</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">perf</span><span class="o">.</span><span class="n">shape_x</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="k">if</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">perf</span><span class="o">.</span><span class="n">shape_y</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">perf</span><span class="o">.</span><span class="n">shape_y</span> <span class="o">=</span> <span class="n">y</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">layers</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">layer</span> <span class="o">=</span> <span class="n">layers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">StatsCounter</span><span class="o">.</span><span class="n">process</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">shapefile</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span>
+                    <span class="n">layer</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">geography</span>
+            <span class="p">):</span>
+                <span class="n">row</span> <span class="o">=</span> <span class="p">[</span><span class="n">record</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">record</span><span class="o">.</span><span class="n">prop</span><span class="p">]</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_values</span><span class="p">:</span>
+                    <span class="n">row</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_values</span>
+                <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">StatsCounter</span><span class="o">.</span><span class="n">process_layers</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">shapefile</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span>
+                    <span class="n">layers</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">geography</span>
+            <span class="p">):</span>
+                <span class="n">row</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">record</span><span class="o">.</span><span class="n">values</span><span class="p">]</span>
+                <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">record</span><span class="o">.</span><span class="n">prop</span><span class="p">)</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_values</span><span class="p">:</span>
+                    <span class="n">row</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_values</span>
+                <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        <span class="n">dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">now</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">perf</span><span class="o">.</span><span class="n">update_mem_time</span><span class="p">(</span><span class="n">StatsCounter</span><span class="o">.</span><span class="n">max_mem_used</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2"> completed in </span><span class="si">%s</span><span class="s2">, memory used: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()),</span>
+            <span class="n">fid</span><span class="p">,</span>
+            <span class="n">dt</span><span class="p">,</span>
+            <span class="n">sizeof_fmt</span><span class="p">(</span><span class="n">StatsCounter</span><span class="o">.</span><span class="n">max_mem_used</span><span class="p">)</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="NetCDFAggregator"><a class="viewcode-back" href="../../../members/aggregator.html#dorieh.rasters.aggregator.NetCDFAggregator">[docs]</a><span class="k">class</span> <span class="nc">NetCDFAggregator</span><span class="p">(</span><span class="n">Aggregator</span><span class="p">):</span>
+<div class="viewcode-block" id="NetCDFAggregator.open"><a class="viewcode-back" href="../../../members/aggregator.html#dorieh.rasters.aggregator.NetCDFAggregator.open">[docs]</a>    <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">infile</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="NetCDFAggregator.get_dataset_variables"><a class="viewcode-back" href="../../../members/aggregator.html#dorieh.rasters.aggregator.NetCDFAggregator.get_dataset_variables">[docs]</a>    <span class="k">def</span> <span class="nf">get_dataset_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="NetCDFAggregator.get_layer"><a class="viewcode-back" href="../../../members/aggregator.html#dorieh.rasters.aggregator.NetCDFAggregator.get_layer">[docs]</a>    <span class="k">def</span> <span class="nf">get_layer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Extracting layer: &quot;</span> <span class="o">+</span> <span class="n">var</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">downscale</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">[</span><span class="n">var</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="NetCDFAggregator.on_set_strategy"><a class="viewcode-back" href="../../../members/aggregator.html#dorieh.rasters.aggregator.NetCDFAggregator.on_set_strategy">[docs]</a>    <span class="k">def</span> <span class="nf">on_set_strategy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ram</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">set_factor</span><span class="p">):</span>
+        <span class="n">viewer</span> <span class="o">=</span> <span class="n">NCViewer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">infile</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">viewer</span><span class="o">.</span><span class="n">missing_value</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">missing_value</span> <span class="o">=</span> <span class="n">viewer</span><span class="o">.</span><span class="n">missing_value</span>
+        <span class="k">if</span> <span class="n">set_factor</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">factor</span> <span class="o">=</span> <span class="n">viewer</span><span class="o">.</span><span class="n">get_optimal_downscaling_factor</span><span class="p">(</span><span class="n">ram</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="GeoTiffAggregator"><a class="viewcode-back" href="../../../members/aggregator.html#dorieh.rasters.aggregator.GeoTiffAggregator">[docs]</a><span class="k">class</span> <span class="nc">GeoTiffAggregator</span><span class="p">(</span><span class="n">Aggregator</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">infile</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">variable</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">outfile</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                 <span class="n">strategy</span><span class="p">:</span> <span class="n">RasterizationStrategy</span><span class="p">,</span> <span class="n">shapefile</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                 <span class="n">geography</span><span class="p">:</span> <span class="n">Geography</span><span class="p">,</span>
+                 <span class="n">extra_columns</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">ram</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">outfile</span><span class="p">,</span> <span class="n">strategy</span><span class="p">,</span> <span class="n">shapefile</span><span class="p">,</span>
+                         <span class="n">geography</span><span class="p">,</span> <span class="n">extra_columns</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">array</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="GeoTiffAggregator.open"><a class="viewcode-back" href="../../../members/aggregator.html#dorieh.rasters.aggregator.GeoTiffAggregator.open">[docs]</a>    <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span> <span class="o">=</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">infile</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">read</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="GeoTiffAggregator.get_dataset_variables"><a class="viewcode-back" href="../../../members/aggregator.html#dorieh.rasters.aggregator.GeoTiffAggregator.get_dataset_variables">[docs]</a>    <span class="k">def</span> <span class="nf">get_dataset_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">descriptions</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="GeoTiffAggregator.get_layer"><a class="viewcode-back" href="../../../members/aggregator.html#dorieh.rasters.aggregator.GeoTiffAggregator.get_layer">[docs]</a>    <span class="k">def</span> <span class="nf">get_layer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Extracting layer: &quot;</span> <span class="o">+</span> <span class="n">var</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">var</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">descriptions</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Variable </span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s1"> is not in the dataset&#39;</span><span class="p">)</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">descriptions</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">downscale</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">array</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="GeoTiffAggregator.on_set_strategy"><a class="viewcode-back" href="../../../members/aggregator.html#dorieh.rasters.aggregator.GeoTiffAggregator.on_set_strategy">[docs]</a>    <span class="k">def</span> <span class="nf">on_set_strategy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ram</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">set_factor</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span> <span class="o">=</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">infile</span><span class="p">)</span>
+        <span class="n">grid_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">set_factor</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">factor</span> <span class="o">=</span> <span class="n">estimate_optimal_downscaling_factor</span><span class="p">(</span><span class="n">grid_size</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span></div></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">init_logging</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+    <span class="n">fn</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">fn</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.nc&quot;</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;NetCDF file is expected (extension .nc)&quot;</span><span class="p">)</span>
+    <span class="n">sf</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">of</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
+    <span class="n">of</span> <span class="o">+=</span> <span class="s2">&quot;.csv.gz&quot;</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">NetCDFAggregator</span><span class="p">(</span>
+        <span class="n">infile</span><span class="o">=</span><span class="n">fn</span><span class="p">,</span>
+        <span class="n">variable</span><span class="o">=</span><span class="s2">&quot;PM25&quot;</span><span class="p">,</span>
+        <span class="n">outfile</span><span class="o">=</span><span class="n">of</span><span class="p">,</span>
+        <span class="n">strategy</span><span class="o">=</span><span class="n">RasterizationStrategy</span><span class="o">.</span><span class="n">downscale</span><span class="p">,</span>
+        <span class="n">shapefile</span><span class="o">=</span><span class="n">sf</span><span class="p">,</span>
+        <span class="n">geography</span><span class="o">=</span><span class="n">Geography</span><span class="o">.</span><span class="n">county</span><span class="p">,</span>
+        <span class="n">extra_columns</span><span class="o">=</span><span class="p">([</span><span class="s2">&quot;Year&quot;</span><span class="p">,</span> <span class="s2">&quot;Month&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;2018&quot;</span><span class="p">,</span> <span class="s2">&quot;12&quot;</span><span class="p">])</span>
+    <span class="p">)</span>
+    <span class="n">a</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All Done&quot;</span><span class="p">)</span>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

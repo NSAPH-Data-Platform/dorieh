@@ -1,0 +1,43 @@
+# Workflow to grant read (SELECT) privilege to all users in NSAPH admin role
+
+
+ [Source code](change_ownercwl_src.md) 
+
+
+![](change_owner.png)
+
+```{contents}
+---
+local:
+---
+```
+
+**Workflow**
+
+## Description
+
+This workflow executes an SQL statement in the database to
+This is a wrapper around the tool to be called from Airflow DAG.
+
+
+## Inputs
+
+| Name            | Type   | Default       | Description                                            | 
+|:----------------|:-------|:--------------|:-------------------------------------------------------|
+| database        | File   |               | Path to database connection file, usually database.ini | 
+| connection_name | string |               | The name of the section in the database.ini file       | 
+| owner           | string | `nsaph_admin` |                                                        | 
+
+## Outputs
+
+| Name      | Type | Description | 
+|:----------|:-----|:------------|
+| grant_log | File |             | 
+| grant_err | File |             | 
+
+## Steps
+
+| Name  | Runs                                    | Description                                                                           | 
+|:------|:----------------------------------------|:--------------------------------------------------------------------------------------|
+| grant | [alter_database.cwl](alter_database.md) | Grants read access to the members of NSAPH group for newly created or updated tables  | 
+

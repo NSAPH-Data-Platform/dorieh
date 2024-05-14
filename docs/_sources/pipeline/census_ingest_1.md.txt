@@ -1,0 +1,45 @@
+# Sub-workflow *store* from census_ingest.cwl
+
+
+ [Source code](census_ingest_1cwl_src.md) 
+
+
+![](census_ingest_1.png)
+
+```{contents}
+---
+local:
+---
+```
+
+**Workflow**
+
+## Inputs
+
+| Name       | Type   | Default | Description | 
+|:-----------|:-------|:--------|:------------|
+| connection | string |         |             | 
+| data       | File   |         |             | 
+| db         | string |         |             | 
+| schema     | File   |         |             | 
+| table      | string |         |             | 
+
+## Outputs
+
+| Name       | Type | Description | 
+|:-----------|:-----|:------------|
+| index_err  | File |             | 
+| index_log  | File |             | 
+| ingest_err | File |             | 
+| ingest_log | File |             | 
+| vacuum_err | File |             | 
+| vacuum_log | File |             | 
+
+## Steps
+
+| Name   | Runs                    | Description                    | 
+|:-------|:------------------------|:-------------------------------|
+| index  | [index.cwl](index.md)   |                                | 
+| ingest | [ingest.cwl](ingest.md) | Uploads data into the database | 
+| vacuum | [vacuum.cwl](vacuum.md) |                                | 
+

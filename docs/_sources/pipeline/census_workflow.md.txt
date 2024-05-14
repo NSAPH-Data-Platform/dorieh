@@ -1,0 +1,86 @@
+# census_workflow.cwl
+
+
+ [Source code](census_workflowcwl_src.md) 
+
+
+![](census_workflow.png)
+
+```{contents}
+---
+local:
+---
+```
+
+**Workflow**
+
+## Inputs
+
+| Name                  | Type     | Default | Description                                            | 
+|:----------------------|:---------|:--------|:-------------------------------------------------------|
+| api_key               | string   |         | api_key                                                | 
+| http_proxy            | string   |         |                                                        | 
+| var_file              | File     |         |                                                        | 
+| geometry              | string   |         | geometry                                               | 
+| years                 | string   |         | years                                                  | 
+| interpolate_years     | string   |         | interpolate_years                                      | 
+| log                   | string   |         | log                                                    | 
+| state                 | string   |         | state                                                  | 
+| county                | string   |         | county                                                 | 
+| density_vars          | string[] |         | density_vars                                           | 
+| assemble_pkl          | string   |         | assemble_pkl                                           | 
+| interpolate_pkl       | string   |         | interpolate_pkl                                        | 
+| density_interp_pkl    | string   |         | density_interp_pkl                                     | 
+| density_no_interp_pkl | string   |         | density_no_interp_pkl                                  | 
+| interp_out            | string   |         | interp_out                                             | 
+| interp_tablename      | string   |         | interp_tablename                                       | 
+| interp_schema         | string   |         | interp_schema                                          | 
+| no_interp_out         | string   |         | no_interp_out                                          | 
+| no_interp_tablename   | string   |         | no_interp_tablename                                    | 
+| no_interp_schema      | string   |         | no_interp_schema                                       | 
+| qc_file               | File     |         | qc_file                                                | 
+| interp_qc_log         | string   |         | interp_qc_log                                          | 
+| no_interp_qc_log      | string   |         | no_interp_qc_log                                       | 
+| database              | string   |         | Path to database connection file, usually database.ini | 
+| connection_name       | string   |         | The name of the section in the database.ini file       | 
+| table                 | string   |         |                                                        | 
+
+## Outputs
+
+| Name                  | Type   | Description | 
+|:----------------------|:-------|:------------|
+| assemble_pkl          | File   |             | 
+| log                   | File   |             | 
+| interp_pkl            | File   |             | 
+| density_no_interp_pkl | File   |             | 
+| density_interp_pkl    | File   |             | 
+| interp_qc_log         | File   |             | 
+| no_interp_qc_log      | File   |             | 
+| interp_data           | File[] |             | 
+| interp_schema         | File   |             | 
+| no_interp_data        | File[] |             | 
+| no_interp_schema      | File   |             | 
+| ingest_log            | File   |             | 
+| index_log             | File   |             | 
+| vacuum_log            | File   |             | 
+| ingest_errors         | File   |             | 
+| index_errors          | File   |             | 
+| vacuum_errors         | File   |             | 
+
+## Steps
+
+| Name              | Runs                                            | Description                    | 
+|:------------------|:------------------------------------------------|:-------------------------------|
+| make_log          | touch                                           |                                | 
+| assemble          | [census_assemble.cwl](census_assemble.md)       |                                | 
+| interpolate       | [census_interpolate.cwl](census_interpolate.md) |                                | 
+| no_interp_density | [census_density.cwl](census_density.md)         |                                | 
+| interp_density    | [census_density.cwl](census_density.md)         |                                | 
+| no_interp_qc      | [census_qc.cwl](census_qc.md)                   |                                | 
+| interp_qc         | [census_qc.cwl](census_qc.md)                   |                                | 
+| write_interp      | [census_write.cwl](census_write.md)             |                                | 
+| write_no_interp   | [census_write.cwl](census_write.md)             |                                | 
+| ingest            | [ingest.cwl](ingest.md)                         | Uploads data into the database | 
+| index             | [index.cwl](index.md)                           |                                | 
+| vacuum            | [vacuum.cwl](vacuum.md)                         |                                | 
+

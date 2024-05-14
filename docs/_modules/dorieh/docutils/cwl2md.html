@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dorieh.docutils.cwl2md &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">dorieh.docutils.cwl2md</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for dorieh.docutils.cwl2md</h1><div class="highlight"><pre>
+<span></span><span class="c1">#  Copyright (c) 2021. Harvard University</span>
+<span class="c1">#</span>
+<span class="c1">#  Developed by Research Software Engineering,</span>
+<span class="c1">#  Faculty of Arts and Sciences, Research Computing (FAS RC)</span>
+<span class="c1">#  Authors: Michael Bouzinier, Eugene Pokidov</span>
+<span class="c1">#</span>
+<span class="c1">#  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1">#  you may not use this file except in compliance with the License.</span>
+<span class="c1">#  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#         http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1">#  limitations under the License.</span>
+<span class="c1">#</span>
+
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">import</span> <span class="nn">yaml</span>
+
+<span class="kn">from</span> <span class="nn">dorieh.docutils.md_creator</span> <span class="kn">import</span> <span class="n">MDCreator</span>
+
+
+<span class="n">cwl_src_template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;---</span>
+<span class="s2">orphan: true</span>
+<span class="s2">---</span>
+
+<span class="s2"># </span><span class="si">{name}</span>
+
+<span class="s2">```</span><span class="si">{literalinclude}</span><span class="s2"> ../../src/cwl/</span><span class="si">{path}</span>
+<span class="s2">---</span>
+<span class="s2">language: yaml</span>
+<span class="s2">---</span>
+<span class="s2">```</span>
+
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;script&#39;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">())</span>
+
+<span class="n">arg_parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Convert CWL files into Markdown&#39;</span><span class="p">)</span>
+<span class="n">arg_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s1">&#39;-i&#39;</span><span class="p">,</span> <span class="s1">&#39;--input-dir&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;input_dir&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;An input dir with CWL files&#39;</span>
+<span class="p">)</span>
+<span class="n">arg_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="s1">&#39;--output-dir&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;output_dir&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;An output dir for Markdown files&#39;</span>
+<span class="p">)</span>
+<span class="n">arg_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-v&#39;</span><span class="p">,</span> <span class="s1">&#39;--verbose&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;verbose&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;An extended logging&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="CWLParser"><a class="viewcode-back" href="../../../members/cwl2md.html#dorieh.docutils.cwl2md.CWLParser">[docs]</a><span class="k">class</span> <span class="nc">CWLParser</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">image_file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">output_file_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input_file_path</span> <span class="o">=</span> <span class="n">input_file_path</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_file_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">cwl_file</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">raw_content</span> <span class="o">=</span> <span class="n">cwl_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">yaml_content</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">raw_content</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_file_path</span> <span class="o">=</span> <span class="n">output_file_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image_file_path</span> <span class="o">=</span> <span class="n">image_file_path</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">md_file</span> <span class="o">=</span> <span class="n">MDCreator</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">output_file_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sub_workflow_counter</span> <span class="o">=</span> <span class="mi">0</span>
+
+<div class="viewcode-block" id="CWLParser.parse"><a class="viewcode-back" href="../../../members/cwl2md.html#dorieh.docutils.cwl2md.CWLParser.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_title</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_source</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_image</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_contents</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_header</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_docs</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_inputs</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_outputs</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_steps</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">md_file</span><span class="o">.</span><span class="n">save</span><span class="p">()</span></div>
+
+    <span class="k">def</span> <span class="nf">_add_title</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_find_title</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">raw_content</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_filename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_file_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.md&#39;</span><span class="p">,</span> <span class="s1">&#39;.cwl&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">md_file</span><span class="o">.</span><span class="n">add_header</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_add_source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">of</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_file_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.md&quot;</span><span class="p">,</span> <span class="s2">&quot;cwl_src.md&quot;</span><span class="p">)</span>
+        <span class="n">inf</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_file_path</span><span class="p">)</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">cwl_src_template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span>
+                                          <span class="n">literalinclude</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{literalinclude}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">of</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out</span><span class="p">:</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">md_file</span><span class="o">.</span><span class="n">add_text</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> [Source code](</span><span class="si">{}</span><span class="s2">) </span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">of</span><span class="p">)</span>
+        <span class="p">))</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_find_title</span><span class="p">(</span><span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">content</span><span class="o">.</span><span class="n">splitlines</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;###&#39;</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;###&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_get_filename</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">file_path</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_add_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">contents</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;```</span><span class="si">{contents}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;---&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;local:&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;---&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;```&#39;</span><span class="p">,</span>
+        <span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">md_file</span><span class="o">.</span><span class="n">add_text</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">contents</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_add_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s1">&#39;workflow&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">yaml_content</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="k">return</span>
+
+        <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;cwl-runner --print-dot </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">input_file_path</span><span class="si">}</span><span class="s1"> | dot -Tpng &gt; </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">image_file_path</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">image_file_path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">md_file</span><span class="o">.</span><span class="n">add_image</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_add_header</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s2">&quot;expressiontool&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">yaml_content</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="n">header</span> <span class="o">=</span> <span class="s1">&#39;**JavaScript Tool** &#39;</span>
+        <span class="k">elif</span> <span class="s1">&#39;tool&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">yaml_content</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="n">header</span> <span class="o">=</span> <span class="s1">&#39;**Tool**. Runs: &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_tool</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">yaml_content</span><span class="p">[</span><span class="s1">&#39;baseCommand&#39;</span><span class="p">]))</span>
+        <span class="k">elif</span> <span class="s1">&#39;workflow&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">yaml_content</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="n">header</span> <span class="o">=</span> <span class="s1">&#39;**Workflow**&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">header</span> <span class="o">=</span> <span class="s1">&#39;**Unknown class**&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">md_file</span><span class="o">.</span><span class="n">add_text</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_extract_tool</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_command</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">tool</span> <span class="o">=</span> <span class="n">base_command</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;[&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;]&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">pp</span> <span class="o">=</span> <span class="n">tool</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+        <span class="n">docroot</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;../../../nsaph_utils&quot;</span><span class="p">,</span> <span class="s2">&quot;..&quot;</span><span class="p">,</span> <span class="s2">&quot;..&quot;</span><span class="p">)</span>
+        <span class="n">docpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;doc&quot;</span><span class="p">,</span> <span class="s2">&quot;members&quot;</span><span class="p">)</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_file_path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">pp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;nsaph&quot;</span><span class="p">:</span>
+            <span class="n">docdir</span> <span class="o">=</span> <span class="s2">&quot;core-platform&quot;</span>
+        <span class="k">elif</span> <span class="n">pp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;nsaph_utils&quot;</span><span class="p">:</span>
+            <span class="n">docdir</span> <span class="o">=</span> <span class="s2">&quot;utils&quot;</span>
+        <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span> <span class="p">,</span><span class="n">docroot</span><span class="p">,</span> <span class="n">pp</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+            <span class="n">docdir</span> <span class="o">=</span> <span class="n">pp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">tool</span>
+        <span class="n">doc</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">docroot</span><span class="p">,</span> <span class="n">docdir</span><span class="p">,</span> <span class="n">docpath</span><span class="p">,</span> <span class="n">pp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;[</span><span class="si">{</span><span class="n">tool</span><span class="si">}</span><span class="s1">](</span><span class="si">{</span><span class="n">doc</span><span class="si">}</span><span class="s1">)&#39;</span>
+
+    <span class="k">def</span> <span class="nf">_add_docs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s1">&#39;doc&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">yaml_content</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">md_file</span><span class="o">.</span><span class="n">add_header</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;Description&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">md_file</span><span class="o">.</span><span class="n">add_text</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">yaml_content</span><span class="p">[</span><span class="s1">&#39;doc&#39;</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">_add_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">md_file</span><span class="o">.</span><span class="n">add_header</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;Inputs&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Type&#39;</span><span class="p">,</span> <span class="s1">&#39;Default&#39;</span><span class="p">,</span> <span class="s1">&#39;Description&#39;</span><span class="p">)]</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">arg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">yaml_content</span><span class="p">[</span><span class="s1">&#39;inputs&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">doc</span> <span class="o">=</span> <span class="n">tp</span> <span class="o">=</span> <span class="n">df</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">doc</span> <span class="o">=</span> <span class="n">name</span>
+                <span class="n">tp</span> <span class="o">=</span> <span class="n">arg</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+                <span class="n">df</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="n">doc</span> <span class="o">=</span> <span class="n">arg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;doc&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+                <span class="n">tp</span> <span class="o">=</span> <span class="n">arg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;string&#39;</span><span class="p">)</span>
+                <span class="n">df</span> <span class="o">=</span> <span class="n">arg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+            <span class="n">df</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;`</span><span class="si">{</span><span class="n">df</span><span class="si">}</span><span class="s1">`&#39;</span> <span class="k">if</span> <span class="n">df</span> <span class="k">else</span> <span class="s1">&#39; &#39;</span>
+
+            <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">name</span><span class="p">,</span> <span class="n">tp</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">doc</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">md_file</span><span class="o">.</span><span class="n">add_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_add_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">md_file</span><span class="o">.</span><span class="n">add_header</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;Outputs&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Type&#39;</span><span class="p">,</span> <span class="s1">&#39;Description&#39;</span><span class="p">)]</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">arg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">yaml_content</span><span class="p">[</span><span class="s1">&#39;outputs&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">doc</span> <span class="o">=</span> <span class="n">arg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;doc&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+            <span class="n">tp</span> <span class="o">=</span> <span class="n">arg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;string&#39;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">tp</span> <span class="o">=</span> <span class="n">tp</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="n">tp</span> <span class="o">=</span> <span class="n">tp</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span>
+
+            <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">name</span><span class="p">,</span> <span class="n">tp</span><span class="p">,</span> <span class="n">doc</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">md_file</span><span class="o">.</span><span class="n">add_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_add_steps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s1">&#39;steps&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">yaml_content</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">md_file</span><span class="o">.</span><span class="n">add_header</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;Steps&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Runs&#39;</span><span class="p">,</span> <span class="s1">&#39;Description&#39;</span><span class="p">)]</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">yaml_content</span><span class="p">[</span><span class="s1">&#39;steps&#39;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+                <span class="n">arg</span> <span class="o">=</span> <span class="n">item</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">item</span>
+                <span class="n">arg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">yaml_content</span><span class="p">[</span><span class="s1">&#39;steps&#39;</span><span class="p">][</span><span class="n">name</span><span class="p">]</span>
+
+            <span class="n">doc</span> <span class="o">=</span> <span class="n">arg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;doc&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+            <span class="n">runs</span> <span class="o">=</span> <span class="n">arg</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">runs</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">ref_uri</span> <span class="o">=</span> <span class="n">runs</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.cwl&#39;</span><span class="p">,</span> <span class="s1">&#39;.md&#39;</span><span class="p">)</span>
+                <span class="n">target</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;[</span><span class="si">{</span><span class="n">runs</span><span class="si">}</span><span class="s1">](</span><span class="si">{</span><span class="n">ref_uri</span><span class="si">}</span><span class="s1">)&#39;</span>
+            <span class="k">elif</span> <span class="n">runs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;class&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;workflow&#39;</span><span class="p">:</span>
+                <span class="n">file_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_sub_workflow</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">runs</span><span class="p">)</span>
+                <span class="n">target</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;[sub-workflow](</span><span class="si">{</span><span class="n">file_name</span><span class="si">}</span><span class="s2">)&quot;</span>
+            <span class="k">elif</span> <span class="n">runs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;class&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;expressiontool&#39;</span><span class="p">:</span>
+                <span class="n">target</span> <span class="o">=</span> <span class="s2">&quot;Evaluates JavaScript expression&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">target</span> <span class="o">=</span> <span class="n">runs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;baseCommand&#39;</span><span class="p">,</span> <span class="s1">&#39;command&#39;</span><span class="p">)</span>
+
+            <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">name</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">doc</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">md_file</span><span class="o">.</span><span class="n">add_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_handle_sub_workflow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">workflow_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">prepared_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="o">**</span><span class="n">data</span><span class="p">,</span>
+            <span class="s1">&#39;cwlVersion&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">yaml_content</span><span class="p">[</span><span class="s1">&#39;cwlVersion&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;requirements&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">yaml_content</span><span class="p">[</span><span class="s1">&#39;requirements&#39;</span><span class="p">],</span>
+        <span class="p">}</span>
+        <span class="n">pipeline_file_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_filename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_file_path</span><span class="p">)</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;### Sub-workflow *</span><span class="si">{</span><span class="n">workflow_name</span><span class="si">}</span><span class="s1">* from </span><span class="si">{</span><span class="n">pipeline_file_name</span><span class="si">}</span><span class="s1"> </span><span class="se">\n\n</span><span class="s1">&#39;</span>
+
+        <span class="n">source_dir</span><span class="p">,</span> <span class="n">basename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_file_path</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w+&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="n">source_dir</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="n">basename</span><span class="p">)</span> <span class="k">as</span> <span class="n">temp_file</span><span class="p">:</span>
+            <span class="n">temp_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
+            <span class="n">yaml</span><span class="o">.</span><span class="n">safe_dump</span><span class="p">(</span><span class="n">prepared_data</span><span class="p">,</span> <span class="n">temp_file</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">sub_workflow_counter</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">output_file_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_file_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.md&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">sub_workflow_counter</span><span class="si">}</span><span class="s1">.md&#39;</span><span class="p">)</span>
+            <span class="n">image_file_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_file_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.md&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">sub_workflow_counter</span><span class="si">}</span><span class="s1">.png&#39;</span><span class="p">)</span>
+
+            <span class="n">CWLParser</span><span class="p">(</span><span class="n">temp_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">output_file_path</span><span class="p">,</span> <span class="n">image_file_path</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_filename</span><span class="p">(</span><span class="n">output_file_path</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../../members/cwl2md.html#dorieh.docutils.cwl2md.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">arg_parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">input_dir</span><span class="p">):</span>
+        <span class="n">cwl_files</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">input_dir</span><span class="p">),</span> <span class="n">file_name</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">file_name</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">input_dir</span><span class="p">)</span>
+        <span class="p">]</span>
+    <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">input_dir</span><span class="p">):</span>
+        <span class="n">cwl_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">args</span><span class="o">.</span><span class="n">input_dir</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No such file or directory: &quot;</span> <span class="o">+</span> <span class="n">args</span><span class="o">.</span><span class="n">input_dir</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">input_file_path</span> <span class="ow">in</span> <span class="n">cwl_files</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">input_file_path</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;.cwl&#39;</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="n">file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">input_file_path</span><span class="p">)</span>
+        <span class="n">output_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">output_dir</span><span class="p">),</span> <span class="n">file_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.cwl&#39;</span><span class="p">,</span> <span class="s1">&#39;.md&#39;</span><span class="p">))</span>
+        <span class="n">image_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">output_dir</span><span class="p">),</span> <span class="n">file_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.cwl&#39;</span><span class="p">,</span> <span class="s1">&#39;.png&#39;</span><span class="p">))</span>
+
+        <span class="n">CWLParser</span><span class="p">(</span><span class="n">input_file_path</span><span class="p">,</span> <span class="n">output_file_path</span><span class="p">,</span> <span class="n">image_file_path</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dorieh.platform.loader.data_loader &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../loader.html">dorieh.platform.loader</a></li>
+      <li class="breadcrumb-item active">dorieh.platform.loader.data_loader</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for dorieh.platform.loader.data_loader</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Domain Data Loader</span>
+
+<span class="sd">Provides Command line interface for loading data from a</span>
+<span class="sd">single or a set of column-formatted files</span>
+<span class="sd">into NSAPH PostgreSQL Database.</span>
+
+<span class="sd">Input (aka source) files can be either in FST or in CSV format.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1">#  Copyright (c) 2021. Harvard University</span>
+<span class="c1">#</span>
+<span class="c1">#  Developed by Research Software Engineering,</span>
+<span class="c1">#  Faculty of Arts and Sciences, Research Computing (FAS RC)</span>
+<span class="c1">#  Author: Michael A Bouzinier</span>
+<span class="c1">#</span>
+<span class="c1">#  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1">#  you may not use this file except in compliance with the License.</span>
+<span class="c1">#  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#         http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1">#  limitations under the License.</span>
+<span class="c1">#</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">fnmatch</span>
+
+<span class="kn">from</span> <span class="nn">dorieh.platform.loader.index_builder</span> <span class="kn">import</span> <span class="n">IndexBuilder</span>
+<span class="kn">from</span> <span class="nn">psycopg2.extensions</span> <span class="kn">import</span> <span class="n">connection</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Any</span>
+
+<span class="kn">from</span> <span class="nn">dorieh.platform</span> <span class="kn">import</span> <span class="n">ORIGINAL_FILE_COLUMN</span>
+<span class="kn">from</span> <span class="nn">dorieh.platform.data_model.inserter</span> <span class="kn">import</span> <span class="n">Inserter</span>
+<span class="kn">from</span> <span class="nn">dorieh.platform.data_model.utils</span> <span class="kn">import</span> <span class="n">DataReader</span><span class="p">,</span> <span class="n">entry_to_path</span>
+<span class="kn">from</span> <span class="nn">dorieh.platform.loader</span> <span class="kn">import</span> <span class="n">LoaderBase</span>
+<span class="kn">from</span> <span class="nn">dorieh.platform.loader.loader_config</span> <span class="kn">import</span> <span class="n">LoaderConfig</span><span class="p">,</span> <span class="n">Parallelization</span><span class="p">,</span> \
+    <span class="n">DataLoaderAction</span>
+<span class="kn">from</span> <span class="nn">dorieh.platform.operations.domain_operations</span> <span class="kn">import</span> <span class="n">DomainOperations</span>
+<span class="kn">from</span> <span class="nn">dorieh.utils.io_utils</span> <span class="kn">import</span> <span class="n">get_entries</span><span class="p">,</span> <span class="n">is_dir</span><span class="p">,</span> <span class="n">sizeof_fmt</span><span class="p">,</span> <span class="n">fopen</span>
+
+
+<div class="viewcode-block" id="DataLoader"><a class="viewcode-back" href="../../../../members/data_loader.html#dorieh.platform.loader.data_loader.DataLoader">[docs]</a><span class="k">class</span> <span class="nc">DataLoader</span><span class="p">(</span><span class="n">LoaderBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class for data loader</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LoaderConfig</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">context</span><span class="p">:</span>
+            <span class="n">context</span> <span class="o">=</span> <span class="n">LoaderConfig</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span><span class="o">.</span><span class="n">instantiate</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="p">:</span> <span class="n">LoaderConfig</span> <span class="o">=</span> <span class="n">context</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">page</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">page</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_step</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">log</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_connections</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">csv_delimiter</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">incremental</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">autocommit</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Incompatible arguments: autocommit is &quot;</span>
+                             <span class="o">+</span> <span class="s2">&quot;incompatible with incremental loading&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">action</span> <span class="o">==</span> <span class="n">DataLoaderAction</span><span class="o">.</span><span class="n">drop</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Drop is incompatible with other arguments&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_table</span><span class="p">()</span>
+        <span class="k">return</span>
+
+<div class="viewcode-block" id="DataLoader.set_table"><a class="viewcode-back" href="../../../../members/data_loader.html#dorieh.platform.loader.data_loader.DataLoader.set_table">[docs]</a>    <span class="k">def</span> <span class="nf">set_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">table</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">=</span> <span class="n">table</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">:</span>
+            <span class="n">nc</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">list_columns</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">))</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">has_hard_linked_children</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">)</span> <span class="ow">or</span> <span class="n">nc</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">page</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">page</span> <span class="o">=</span> <span class="mi">100</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_step</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">log_step</span> <span class="o">=</span> <span class="mi">10000</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">page</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">page</span> <span class="o">=</span> <span class="mi">1000</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_step</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">log_step</span> <span class="o">=</span> <span class="mi">1000000</span></div>
+
+<div class="viewcode-block" id="DataLoader.print_ddl"><a class="viewcode-back" href="../../../../members/data_loader.html#dorieh.platform.loader.data_loader.DataLoader.print_ddl">[docs]</a>    <span class="k">def</span> <span class="nf">print_ddl</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">ddl</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">ddl</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">ddl</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">ddl</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">indices</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">ddl</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataLoader.print_table_ddl"><a class="viewcode-back" href="../../../../members/data_loader.html#dorieh.platform.loader.data_loader.DataLoader.print_table_ddl">[docs]</a>    <span class="k">def</span> <span class="nf">print_table_ddl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">fqn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">fqn</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">ddl</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">ddl_by_table</span><span class="p">[</span><span class="n">fqn</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">ddl</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">ddl</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">indices_by_table</span><span class="p">[</span><span class="n">fqn</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">ddl</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataLoader.execute_sql"><a class="viewcode-back" href="../../../../members/data_loader.html#dorieh.platform.loader.data_loader.DataLoader.execute_sql">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">execute_sql</span><span class="p">(</span><span class="n">sql</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">connxn</span><span class="p">):</span>
+        <span class="k">with</span> <span class="p">(</span><span class="n">connxn</span><span class="o">.</span><span class="n">cursor</span><span class="p">())</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataLoader.insert_from_select"><a class="viewcode-back" href="../../../../members/data_loader.html#dorieh.platform.loader.data_loader.DataLoader.insert_from_select">[docs]</a>    <span class="k">def</span> <span class="nf">insert_from_select</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">table</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Table name is required for INSERT FROM SELECT&quot;</span><span class="p">)</span>
+        <span class="n">sql</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">generate_insert_from_select</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">table</span><span class="p">,</span>
+                                                      <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">limit</span><span class="p">)</span>
+        <span class="n">act</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">dryrun</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">act</span><span class="p">:</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connect</span><span class="p">()</span> <span class="k">as</span> <span class="n">connxn</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">execute_with_monitor</span><span class="p">(</span>
+                    <span class="n">what</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute_sql</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">connxn</span><span class="p">),</span>
+                    <span class="n">connxn</span><span class="o">=</span><span class="n">connxn</span>
+                <span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">exception</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">exception</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="DataLoader.is_parallel"><a class="viewcode-back" href="../../../../members/data_loader.html#dorieh.platform.loader.data_loader.DataLoader.is_parallel">[docs]</a>    <span class="k">def</span> <span class="nf">is_parallel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">threads</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">parallelization</span> <span class="o">==</span> <span class="n">Parallelization</span><span class="o">.</span><span class="n">none</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="DataLoader.get_connections"><a class="viewcode-back" href="../../../../members/data_loader.html#dorieh.platform.loader.data_loader.DataLoader.get_connections">[docs]</a>    <span class="k">def</span> <span class="nf">get_connections</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">connection</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connections</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_parallel</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_connections</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_connect</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">threads</span><span class="p">)</span>
+                <span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_connections</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_connect</span><span class="p">()]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connections</span></div>
+
+<div class="viewcode-block" id="DataLoader.get_connection"><a class="viewcode-back" href="../../../../members/data_loader.html#dorieh.platform.loader.data_loader.DataLoader.get_connection">[docs]</a>    <span class="k">def</span> <span class="nf">get_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_connections</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="DataLoader.get_files"><a class="viewcode-back" href="../../../../members/data_loader.html#dorieh.platform.loader.data_loader.DataLoader.get_files">[docs]</a>    <span class="k">def</span> <span class="nf">get_files</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span><span class="n">Callable</span><span class="p">]]:</span>
+        <span class="n">objects</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">is_dir</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+                <span class="n">objects</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">path</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">e</span><span class="p">:</span> <span class="n">fopen</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="s2">&quot;rt&quot;</span><span class="p">)))</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">pattern</span><span class="p">:</span>
+                <span class="n">ptn</span> <span class="o">=</span> <span class="s2">&quot;using pattern </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">pattern</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ptn</span> <span class="o">=</span> <span class="s2">&quot;(all entries)&quot;</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s2">&quot;Looking for relevant entries in </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span>
+                <span class="nb">format</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">ptn</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">entries</span><span class="p">,</span> <span class="n">f</span> <span class="o">=</span> <span class="n">get_entries</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">pattern</span><span class="p">:</span>
+                <span class="n">objects</span> <span class="o">+=</span> <span class="p">[(</span><span class="n">e</span><span class="p">,</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">entries</span><span class="p">]</span>
+                <span class="k">continue</span>
+            <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">entries</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                    <span class="n">name</span> <span class="o">=</span> <span class="n">e</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">name</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">name</span>
+                <span class="k">for</span> <span class="n">pattern</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">pattern</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">fnmatch</span><span class="o">.</span><span class="n">fnmatch</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
+                        <span class="n">objects</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">))</span>
+                        <span class="k">break</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">objects</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;WARNING: no entries have been found&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">objects</span></div>
+
+<div class="viewcode-block" id="DataLoader.has_been_ingested"><a class="viewcode-back" href="../../../../members/data_loader.html#dorieh.platform.loader.data_loader.DataLoader.has_been_ingested">[docs]</a>    <span class="k">def</span> <span class="nf">has_been_ingested</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">table</span><span class="p">):</span>
+        <span class="n">tfqn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">fqn</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+        <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;SELECT 1 FROM </span><span class="si">{}</span><span class="s2"> WHERE </span><span class="si">{}</span><span class="s2"> = &#39;</span><span class="si">{}</span><span class="s2">&#39; LIMIT 1&quot;</span>\
+            <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tfqn</span><span class="p">,</span> <span class="n">ORIGINAL_FILE_COLUMN</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_connection</span><span class="p">()</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+            <span class="n">exists</span> <span class="o">=</span> <span class="nb">len</span><span class="p">([</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">cursor</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="n">exists</span></div>
+
+<div class="viewcode-block" id="DataLoader.reset"><a class="viewcode-back" href="../../../../members/data_loader.html#dorieh.platform.loader.data_loader.DataLoader.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">reset</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connect</span><span class="p">()</span> <span class="k">as</span> <span class="n">connxn</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">sloppy</span><span class="p">:</span>
+                    <span class="n">tables</span> <span class="o">=</span> <span class="n">DomainOperations</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">,</span> <span class="n">connxn</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">:</span>
+                        <span class="n">IndexBuilder</span><span class="o">.</span><span class="n">drop_all</span><span class="p">(</span><span class="n">connxn</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">schema</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">execute_with_monitor</span><span class="p">(</span>
+                    <span class="k">lambda</span><span class="p">:</span> <span class="n">DomainOperations</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">connxn</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">],</span> <span class="n">ex_handler</span><span class="o">=</span><span class="bp">self</span><span class="p">),</span>
+                    <span class="n">connxn</span><span class="o">=</span><span class="n">connxn</span>
+                <span class="p">)</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">exception</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">connxn</span><span class="o">.</span><span class="n">isolation_level</span>
+                    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">oe</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">exception</span> <span class="o">=</span> <span class="n">oe</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">exception</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">exception</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s2">&quot;Exception resetting table </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">))</span>
+            <span class="k">raise</span></div>
+
+<div class="viewcode-block" id="DataLoader.drop"><a class="viewcode-back" href="../../../../members/data_loader.html#dorieh.platform.loader.data_loader.DataLoader.drop">[docs]</a>    <span class="k">def</span> <span class="nf">drop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">schema</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">schema</span>
+        <span class="n">act</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">dryrun</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connect</span><span class="p">()</span> <span class="k">as</span> <span class="n">connxn</span><span class="p">:</span>
+            <span class="k">with</span> <span class="p">(</span><span class="n">connxn</span><span class="o">.</span><span class="n">cursor</span><span class="p">())</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+                <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;DROP SCHEMA IF EXISTS </span><span class="si">{}</span><span class="s2"> CASCADE&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">schema</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">act</span><span class="p">:</span>
+                    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+            <span class="n">IndexBuilder</span><span class="o">.</span><span class="n">drop_all</span><span class="p">(</span><span class="n">connxn</span><span class="p">,</span> <span class="n">schema</span><span class="p">,</span> <span class="n">act</span> <span class="o">=</span> <span class="n">act</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataLoader.run"><a class="viewcode-back" href="../../../../members/data_loader.html#dorieh.platform.loader.data_loader.DataLoader.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">action</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="n">DataLoaderAction</span><span class="o">.</span><span class="n">load</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="n">DataLoaderAction</span><span class="o">.</span><span class="n">print</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">action</span> <span class="o">==</span> <span class="n">DataLoaderAction</span><span class="o">.</span><span class="n">drop</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">action</span> <span class="o">==</span> <span class="n">DataLoaderAction</span><span class="o">.</span><span class="n">insert</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">insert_from_select</span><span class="p">()</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">table</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_ddl</span><span class="p">()</span>
+            <span class="k">return</span>
+        <span class="n">acted</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">reset</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">dryrun</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_table_ddl</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">table</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+            <span class="n">acted</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">action</span> <span class="o">==</span> <span class="n">DataLoaderAction</span><span class="o">.</span><span class="n">load</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+            <span class="n">acted</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">acted</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No action has been specified&quot;</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="DataLoader.commit"><a class="viewcode-back" href="../../../../members/data_loader.html#dorieh.platform.loader.data_loader.DataLoader.commit">[docs]</a>    <span class="k">def</span> <span class="nf">commit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">autocommit</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connections</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">cxn</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connections</span><span class="p">:</span>
+                <span class="n">cxn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="DataLoader.rollback"><a class="viewcode-back" href="../../../../members/data_loader.html#dorieh.platform.loader.data_loader.DataLoader.rollback">[docs]</a>    <span class="k">def</span> <span class="nf">rollback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">cxn</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connections</span><span class="p">:</span>
+            <span class="n">cxn</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="DataLoader.close"><a class="viewcode-back" href="../../../../members/data_loader.html#dorieh.platform.loader.data_loader.DataLoader.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connections</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">for</span> <span class="n">cxn</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connections</span><span class="p">:</span>
+            <span class="n">cxn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_connections</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="DataLoader.load"><a class="viewcode-back" href="../../../../members/data_loader.html#dorieh.platform.loader.data_loader.DataLoader.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Processing: &quot;</span> <span class="o">+</span> <span class="s1">&#39;; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_files</span><span class="p">():</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">incremental</span><span class="p">:</span>
+                        <span class="n">ff</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">entry_to_path</span><span class="p">(</span><span class="n">entry</span><span class="p">))</span>
+                        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Checking if </span><span class="si">{}</span><span class="s2"> has been already ingested.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ff</span><span class="p">))</span>
+                        <span class="n">exists</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_been_ingested</span><span class="p">(</span><span class="n">ff</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">table</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">exists</span><span class="p">:</span>
+                            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Skipping already imported file &quot;</span> <span class="o">+</span> <span class="n">ff</span><span class="p">)</span>
+                            <span class="k">continue</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Importing: &quot;</span> <span class="o">+</span> <span class="n">entry_to_path</span><span class="p">(</span><span class="n">entry</span><span class="p">))</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">import_data_from_file</span><span class="p">(</span><span class="n">data_file</span><span class="o">=</span><span class="n">entry</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">incremental</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+                        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Committed: &quot;</span> <span class="o">+</span> <span class="n">entry_to_path</span><span class="p">(</span><span class="n">entry</span><span class="p">))</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">x</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s2">&quot;Exception: &quot;</span> <span class="o">+</span> <span class="n">entry_to_path</span><span class="p">(</span><span class="n">entry</span><span class="p">))</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">incremental</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+                        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Rolled back and skipped: &quot;</span> <span class="o">+</span> <span class="n">entry_to_path</span><span class="p">(</span><span class="n">entry</span><span class="p">))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="n">x</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="DataLoader.import_data_from_file"><a class="viewcode-back" href="../../../../members/data_loader.html#dorieh.platform.loader.data_loader.DataLoader.import_data_from_file">[docs]</a>    <span class="k">def</span> <span class="nf">import_data_from_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_file</span><span class="p">):</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span>
+        <span class="n">buffer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">buffer</span>
+        <span class="n">limit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">limit</span>
+        <span class="n">connections</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_connections</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="s2">&quot;quoting&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">):</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;quoting&quot;</span><span class="p">)</span>
+            <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">h</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">domain_columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">list_source_columns</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">DataReader</span><span class="p">(</span><span class="n">data_file</span><span class="p">,</span>
+                        <span class="n">buffer_size</span><span class="o">=</span><span class="n">buffer</span><span class="p">,</span>
+                        <span class="n">quoting</span><span class="o">=</span><span class="n">q</span><span class="p">,</span>
+                        <span class="n">has_header</span><span class="o">=</span><span class="n">h</span><span class="p">,</span>
+                        <span class="n">columns</span><span class="o">=</span><span class="n">domain_columns</span><span class="p">,</span>
+                        <span class="n">delimiter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">csv_delimiter</span><span class="p">)</span> <span class="k">as</span> <span class="n">reader</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">reader</span><span class="o">.</span><span class="n">count</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">reader</span><span class="o">.</span><span class="n">size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;File size: </span><span class="si">{}</span><span class="s2">; Row count: </span><span class="si">{:,}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">sizeof_fmt</span><span class="p">(</span><span class="n">reader</span><span class="o">.</span><span class="n">size</span><span class="p">),</span>
+                    <span class="n">reader</span><span class="o">.</span><span class="n">count</span> <span class="k">if</span> <span class="n">reader</span><span class="o">.</span><span class="n">count</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="n">inserter</span> <span class="o">=</span> <span class="n">Inserter</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span>
+                <span class="n">table</span><span class="p">,</span>
+                <span class="n">reader</span><span class="p">,</span>
+                <span class="n">connections</span><span class="p">,</span>
+                <span class="n">page_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">page</span>
+            <span class="p">)</span>
+            <span class="n">inserter</span><span class="o">.</span><span class="n">import_file</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="n">limit</span><span class="p">,</span> <span class="n">log_step</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">log_step</span><span class="p">)</span>
+        <span class="k">return</span></div></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">()</span>
+    <span class="n">loader</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>medicaid.cwl &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">medicaid.cwl</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/pipeline/medicaidcwl_src.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="medicaid-cwl">
+<h1>medicaid.cwl<a class="headerlink" href="#medicaid-cwl" title="Permalink to this heading"></a></h1>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1">#!/usr/bin/env cwl-runner</span>
+<span class="c1">### Full Medicaid Processing Pipeline</span>
+<span class="c1">#  Copyright (c) 2021. Harvard University</span>
+<span class="c1">#</span>
+<span class="c1">#  Developed by Research Software Engineering,</span>
+<span class="c1">#  Faculty of Arts and Sciences, Research Computing (FAS RC)</span>
+<span class="c1">#  Author: Michael A Bouzinier</span>
+<span class="c1">#</span>
+<span class="c1">#  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1">#  you may not use this file except in compliance with the License.</span>
+<span class="c1">#  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#         http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1">#  limitations under the License.</span>
+<span class="c1">#</span>
+
+<span class="nt">cwlVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1.2</span>
+<span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Workflow</span>
+
+<span class="nt">requirements</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">SubworkflowFeatureRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="w">  </span><span class="nt">StepInputExpressionRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="w">  </span><span class="nt">InlineJavascriptRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+
+<span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">  </span><span class="no">This workflow ingests Medicaid data, provided by</span>
+<span class="w">  </span><span class="no">Centers for Medicare &amp; Medicaid Services (CMS)</span>
+<span class="w">  </span><span class="no">to researches. The expected input format is</span>
+<span class="w">  </span><span class="no">Medicaid Analytic eXtract (MAX) data.</span>
+
+<span class="w">  </span><span class="no">The workflow parses File transfer summary (FTS) files,</span>
+<span class="w">  </span><span class="no">loads the raw data into a PostgreSQL DBMS and then processes</span>
+<span class="w">  </span><span class="no">the data to prepare it for using by NSAPH researches.</span>
+<span class="w">  </span><span class="no">See [documentation](../Medicaid.md) for detailed</span>
+<span class="w">  </span><span class="no">information.</span>
+
+<span class="nt">inputs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">database</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Path to database connection file, usually database.ini</span>
+<span class="w">  </span><span class="nt">connection_name</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The name of the section in the database.ini file</span>
+<span class="w">  </span><span class="nt">input</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Directory</span>
+<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">      </span><span class="no">A path to directory, containing unpacked CMS</span>
+<span class="w">      </span><span class="no">files. The tool will recursively look for data files</span>
+<span class="w">      </span><span class="no">according to provided pattern</span>
+
+<span class="nt">steps</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">states</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ensure_resource.cwl</span>
+<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">      </span><span class="no">Ensures the presence of `us_states` table in the database.</span>
+<span class="w">      </span><span class="no">The table contains mapping between state names, ids</span>
+<span class="w">      </span><span class="no">(two letter abbreviations), FIPS codes and</span>
+<span class="w">      </span><span class="no">[ISO-3166-2 codes](https://en.wikipedia.org/wiki/ISO_3166-2)</span>
+<span class="w">    </span><span class="nt">in</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
+<span class="w">      </span><span class="nt">connection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection_name</span>
+<span class="w">      </span><span class="nt">table</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;us_states&quot;</span>
+<span class="w">    </span><span class="nt">out</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">log</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">iso</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ensure_resource.cwl</span>
+<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">      </span><span class="no">Ensures the presence of `us_iso` table in the database.</span>
+<span class="w">      </span><span class="no">The table provides a mapping between states, counties and zip</span>
+<span class="w">      </span><span class="no">codes. It contains FIPS and</span>
+<span class="w">      </span><span class="no">[ISO-3166-2 codes](https://en.wikipedia.org/wiki/ISO_3166-2)</span>
+<span class="w">    </span><span class="nt">in</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
+<span class="w">      </span><span class="nt">connection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection_name</span>
+<span class="w">      </span><span class="nt">table</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;us_iso&quot;</span>
+<span class="w">    </span><span class="nt">out</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">log</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">fts</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">parse_fts.cwl</span>
+<span class="w">    </span><span class="nt">in</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input</span>
+<span class="w">      </span><span class="nt">output</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cms.yaml</span>
+<span class="w">    </span><span class="nt">out</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">log</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">model</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">errors</span><span class="p p-Indicator">]</span>
+
+<span class="w">  </span><span class="nt">load_ps</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ingest_cms.cwl</span>
+<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Loads Patient Summaries</span>
+<span class="w">    </span><span class="nt">in</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">registry</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fts/model</span>
+<span class="w">      </span><span class="nt">domain</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;cms&quot;</span>
+<span class="w">      </span><span class="nt">table</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ps&quot;</span>
+<span class="w">      </span><span class="nt">input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input</span>
+<span class="w">      </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
+<span class="w">      </span><span class="nt">connection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection_name</span>
+<span class="w">      </span><span class="nt">incremental</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$(true)</span>
+<span class="w">    </span><span class="nt">out</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reset_log</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_log</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">index_log</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vacuum_log</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reset_err</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_err</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">index_err</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vacuum_err</span>
+
+<span class="w">  </span><span class="nt">load_ip</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ingest_cms.cwl</span>
+<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Loads inpatient admissions</span>
+<span class="w">    </span><span class="nt">in</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">depends_on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_ps/vacuum_log</span>
+<span class="w">      </span><span class="nt">registry</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fts/model</span>
+<span class="w">      </span><span class="nt">domain</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;cms&quot;</span>
+<span class="w">      </span><span class="nt">table</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ip&quot;</span>
+<span class="w">      </span><span class="nt">input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input</span>
+<span class="w">      </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
+<span class="w">      </span><span class="nt">connection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection_name</span>
+<span class="w">      </span><span class="nt">incremental</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$(true)</span>
+<span class="w">    </span><span class="nt">out</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reset_log</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_log</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">index_log</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vacuum_log</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reset_err</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_err</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">index_err</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vacuum_err</span>
+
+<span class="w">  </span><span class="nt">create_beneficiaries</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">matview.cwl</span>
+<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creates `Beneficiaries` Table</span>
+<span class="w">    </span><span class="nt">in</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">depends_on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_ip/vacuum_log</span>
+<span class="w">      </span><span class="nt">table</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;beneficiaries&quot;</span>
+<span class="w">      </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
+<span class="w">      </span><span class="nt">connection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection_name</span>
+<span class="w">    </span><span class="nt">out</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_log</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">index_log</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vacuum_log</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_err</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">index_err</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vacuum_err</span>
+
+<span class="w">  </span><span class="nt">create_monthly_view</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">matview.cwl</span>
+<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creates internally used `Monthly View`</span>
+<span class="w">    </span><span class="nt">in</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">depends_on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_beneficiaries/vacuum_log</span>
+<span class="w">      </span><span class="nt">table</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;monthly&quot;</span>
+<span class="w">      </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
+<span class="w">      </span><span class="nt">connection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection_name</span>
+<span class="w">    </span><span class="nt">out</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_log</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">index_log</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vacuum_log</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_err</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">index_err</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vacuum_err</span>
+
+<span class="w">  </span><span class="nt">create_enrollments</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">matview.cwl</span>
+<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creates `Enrollment` Table</span>
+<span class="w">    </span><span class="nt">in</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">depends_on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_monthly_view/vacuum_log</span>
+<span class="w">      </span><span class="nt">table</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;enrollments&quot;</span>
+<span class="w">      </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
+<span class="w">      </span><span class="nt">connection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection_name</span>
+<span class="w">    </span><span class="nt">out</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_log</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">index_log</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vacuum_log</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_err</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">index_err</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vacuum_err</span>
+
+<span class="w">  </span><span class="nt">prepare_eligibility</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create.cwl</span>
+<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">      </span><span class="no">Creates `_Eligibility` View,</span>
+<span class="w">      </span><span class="no">prerequisit for creation of Eligibility table</span>
+<span class="w">    </span><span class="nt">in</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">depends_on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_enrollments/vacuum_log</span>
+<span class="w">      </span><span class="nt">table</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;_eligibility&quot;</span>
+<span class="w">      </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
+<span class="w">      </span><span class="nt">connection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection_name</span>
+<span class="w">    </span><span class="nt">out</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">log</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">errors</span>
+
+<span class="w">  </span><span class="nt">create_eligibility</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">matview.cwl</span>
+<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creates `Eligibility` Table</span>
+<span class="w">    </span><span class="nt">in</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">depends_on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prepare_eligibility/log</span>
+<span class="w">      </span><span class="nt">table</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;eligibility&quot;</span>
+<span class="w">      </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
+<span class="w">      </span><span class="nt">connection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection_name</span>
+<span class="w">    </span><span class="nt">out</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_log</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">index_log</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vacuum_log</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_err</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">index_err</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vacuum_err</span>
+
+<span class="w">  </span><span class="nt">load_admissions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ingest_cms.cwl</span>
+<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Processes and loads inpatient admissions</span>
+<span class="w">    </span><span class="nt">in</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">depends_on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_eligibility/vacuum_log</span>
+<span class="w">      </span><span class="nt">domain</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;medicaid&quot;</span>
+<span class="w">      </span><span class="nt">table</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;admissions&quot;</span>
+<span class="w">      </span><span class="nt">input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input</span>
+<span class="w">      </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
+<span class="w">      </span><span class="nt">connection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection_name</span>
+<span class="w">      </span><span class="nt">incremental</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$(true)</span>
+<span class="w">    </span><span class="nt">out</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reset_log</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_log</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">index_log</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vacuum_log</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reset_err</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_err</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">index_err</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vacuum_err</span>
+
+<span class="nt">outputs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">resource1_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">states/log</span>
+<span class="w">  </span><span class="nt">resource2_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">iso/log</span>
+<span class="w">  </span><span class="nt">parse_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File?</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fts/log</span>
+
+<span class="w">  </span><span class="nt">ps_reset_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_ps/reset_log</span>
+<span class="w">  </span><span class="nt">ps_create_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_ps/create_log</span>
+<span class="w">  </span><span class="nt">ps_index_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_ps/index_log</span>
+<span class="w">  </span><span class="nt">ps_vacuum_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_ps/vacuum_log</span>
+<span class="w">  </span><span class="nt">ip_reset_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_ip/reset_log</span>
+<span class="w">  </span><span class="nt">ip_create_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_ip/create_log</span>
+<span class="w">  </span><span class="nt">ip_index_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_ip/index_log</span>
+<span class="w">  </span><span class="nt">ip_vacuum_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_ip/vacuum_log</span>
+
+<span class="w">  </span><span class="nt">ben_create_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_beneficiaries/create_log</span>
+<span class="w">  </span><span class="nt">ben_index_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_beneficiaries/index_log</span>
+<span class="w">  </span><span class="nt">ben_vacuum_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_beneficiaries/vacuum_log</span>
+<span class="w">  </span><span class="nt">mnth_create_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_monthly_view/create_log</span>
+<span class="w">  </span><span class="nt">mnth_index_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_monthly_view/index_log</span>
+<span class="w">  </span><span class="nt">mnth_vacuum_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_monthly_view/vacuum_log</span>
+<span class="w">  </span><span class="nt">enrlm_create_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_enrollments/create_log</span>
+<span class="w">  </span><span class="nt">enrlm_index_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_enrollments/index_log</span>
+<span class="w">  </span><span class="nt">enrlm_vacuum_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_enrollments/vacuum_log</span>
+<span class="w">  </span><span class="nt">elgb_prepare_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prepare_eligibility/log</span>
+<span class="w">  </span><span class="nt">elgb_create_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_eligibility/create_log</span>
+<span class="w">  </span><span class="nt">elgb_index_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_eligibility/index_log</span>
+<span class="w">  </span><span class="nt">elgb_vacuum_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_eligibility/vacuum_log</span>
+
+<span class="w">  </span><span class="nt">admissions_reset_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_admissions/reset_log</span>
+<span class="w">  </span><span class="nt">admissions_create_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_admissions/create_log</span>
+<span class="w">  </span><span class="nt">admissions_index_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_admissions/index_log</span>
+<span class="w">  </span><span class="nt">admissions_vacuum_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_admissions/vacuum_log</span>
+
+<span class="c1">## ERROR LOGS ###########################################</span>
+
+<span class="w">  </span><span class="nt">parse_err</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fts/errors</span>
+
+<span class="w">  </span><span class="nt">ps_reset_err</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_ps/reset_err</span>
+<span class="w">  </span><span class="nt">ps_create_err</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_ps/create_err</span>
+<span class="w">  </span><span class="nt">ps_index_err</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_ps/index_err</span>
+<span class="w">  </span><span class="nt">ps_vacuum_err</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_ps/vacuum_err</span>
+<span class="w">  </span><span class="nt">ip_reset_err</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_ip/reset_err</span>
+<span class="w">  </span><span class="nt">ip_create_err</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_ip/create_err</span>
+<span class="w">  </span><span class="nt">ip_index_err</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_ip/index_err</span>
+<span class="w">  </span><span class="nt">ip_vacuum_err</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_ip/vacuum_err</span>
+
+
+<span class="w">  </span><span class="nt">ben_create_err</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_beneficiaries/create_err</span>
+<span class="w">  </span><span class="nt">ben_index_err</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_beneficiaries/index_err</span>
+<span class="w">  </span><span class="nt">ben_vacuum_err</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_beneficiaries/vacuum_err</span>
+<span class="w">  </span><span class="nt">mnth_create_err</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_monthly_view/create_err</span>
+<span class="w">  </span><span class="nt">mnth_index_err</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_monthly_view/index_err</span>
+<span class="w">  </span><span class="nt">mnth_vacuum_err</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_monthly_view/vacuum_err</span>
+<span class="w">  </span><span class="nt">enrlm_create_err</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_enrollments/create_err</span>
+<span class="w">  </span><span class="nt">enrlm_index_err</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_enrollments/index_err</span>
+<span class="w">  </span><span class="nt">enrlm_vacuum_err</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_enrollments/vacuum_err</span>
+<span class="w">  </span><span class="nt">elgb_create_err</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_eligibility/create_err</span>
+<span class="w">  </span><span class="nt">elgb_prepare_err</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prepare_eligibility/errors</span>
+<span class="w">  </span><span class="nt">elgb_index_err</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_eligibility/index_err</span>
+<span class="w">  </span><span class="nt">elgb_vacuum_err</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create_eligibility/vacuum_err</span>
+<span class="w">  </span><span class="nt">admissions_reset_err</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_admissions/reset_err</span>
+<span class="w">  </span><span class="nt">admissions_create_err</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_admissions/create_err</span>
+<span class="w">  </span><span class="nt">admissions_index_err</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_admissions/index_err</span>
+<span class="w">  </span><span class="nt">admissions_vacuum_err</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_admissions/vacuum_err</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

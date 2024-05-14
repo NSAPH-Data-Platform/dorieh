@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Modelling for NSAPH Data Platform &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Data Modelling for NSAPH Data Platform</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Datamodels.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="data-modelling-for-nsaph-data-platform">
+<h1>Data Modelling for NSAPH Data Platform<a class="headerlink" href="#data-modelling-for-nsaph-data-platform" title="Permalink to this heading"></a></h1>
+<p><strong>How data models are defined and handled</strong></p>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#introduction-to-data-modelling-for-nsaph-data-platform" id="id1">Introduction to data modelling for NSAPH Data Platform</a></p></li>
+<li><p><a class="reference internal" href="#domain" id="id2">Domain</a></p></li>
+<li><p><a class="reference internal" href="#table" id="id3">Table</a></p>
+<ul>
+<li><p><a class="reference internal" href="#create-statement" id="id4">Create statement</a></p></li>
+<li><p><a class="reference internal" href="#invalid-record" id="id5">Invalid Record</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#column" id="id6">Column</a></p>
+<ul>
+<li><p><a class="reference internal" href="#source" id="id7">Source</a></p></li>
+<li><p><a class="reference internal" href="#generated-columns" id="id8">Generated columns</a></p></li>
+<li><p><a class="reference internal" href="#computed-columns" id="id9">Computed columns</a></p></li>
+<li><p><a class="reference internal" href="#file-columns" id="id10">File columns</a></p></li>
+<li><p><a class="reference internal" href="#record-columns" id="id11">Record columns</a></p></li>
+<li><p><a class="reference internal" href="#transposing-columns" id="id12">Transposing columns</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#multi-column-indices" id="id13">Multi-column indices</a></p></li>
+<li><p><a class="reference internal" href="#generation-of-the-database-schema-ddl" id="id14">Generation of the database schema (DDL)</a></p></li>
+<li><p><a class="reference internal" href="#indexing-policies" id="id15">Indexing policies</a></p></li>
+<li><p><a class="reference internal" href="#linking-with-nomenclature" id="id16">Linking with nomenclature</a></p>
+<ul>
+<li><p><a class="reference internal" href="#us-states" id="id17">US States</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#ingesting-data" id="id18">Ingesting data</a></p></li>
+</ul>
+</nav>
+<section id="introduction-to-data-modelling-for-nsaph-data-platform">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Introduction to data modelling for NSAPH Data Platform</a><a class="headerlink" href="#introduction-to-data-modelling-for-nsaph-data-platform" title="Permalink to this heading"></a></h2>
+<p>Data models consist of database tables, relations between them
+(e.g. foreign keys), indices and conventions that govern things
+like namings and roles of specific columns.</p>
+<p>We assume that a model is defined for a specific knowledge domain.
+Between domains, data can be linked based on the naming conventions
+for columns. For instance, a column named <code class="docutils literal notranslate"><span class="pre">zipcode</span></code> means the US zip
+code in any domain and thus can be used for linkages and aggregations.</p>
+<p>Currently, we are in the process of defining data models for the
+following domains</p>
+<ul class="simple">
+<li><p>Medicaid</p></li>
+<li><p>EPA</p></li>
+<li><p>Census</p></li>
+<li><p>Gridmet</p></li>
+</ul>
+</section>
+<section id="domain">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Domain</a><a class="headerlink" href="#domain" title="Permalink to this heading"></a></h2>
+<p>Handling domains is implemented by the
+<a class="reference internal" href="members/domain.html"><span class="doc std std-doc">Domain</span></a> class.</p>
+<p>For each domain, its data model is defined by a YAML file in
+the <code class="docutils literal notranslate"><span class="pre">src/yml</span></code> directory.</p>
+<p>Each model is represented by a “forest”: a set of treelike
+structures of tables. It can contain one or several root tables</p>
+<p>Domain should be the first entry in the YAML file:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">my_domain</span><span class="p">:</span>
+</pre></div>
+</div>
+<p>The following parameters can be defined fro domain:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Required?</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>schema</p></td>
+<td><p>yes</p></td>
+<td><p>Database schema, in which all tables are generated</p></td>
+</tr>
+<tr class="row-odd"><td><p>schema.audit</p></td>
+<td><p>no</p></td>
+<td><p>Database schema for tables containing audit logs of data ingestion, including corrupted, duplicate and inconsistent records</p></td>
+</tr>
+<tr class="row-even"><td><p>index</p></td>
+<td><p>no</p></td>
+<td><p>Default indexing policy for this domain. This policy is used for tables that do not define their own indexing policy</p></td>
+</tr>
+<tr class="row-odd"><td><p>tables</p></td>
+<td><p>yes</p></td>
+<td><p>list of table definitions</p></td>
+</tr>
+<tr class="row-even"><td><p>description</p></td>
+<td><p>no</p></td>
+<td><p>description of this domain to be included in auto-generated documentation</p></td>
+</tr>
+<tr class="row-odd"><td><p>reference</p></td>
+<td><p>no</p></td>
+<td><p>URL with external documentation</p></td>
+</tr>
+<tr class="row-even"><td><p>header</p></td>
+<td><p>no</p></td>
+<td><p>Boolean value, passed to CSV loader. Describes input source rather than data model itself</p></td>
+</tr>
+<tr class="row-odd"><td><p>quoting</p></td>
+<td><p>no</p></td>
+<td><p>One of the following values: QUOTE_MINIMAL (or MINIMAL), QUOTE_ALL (or ALL), QUOTE_NONNUMERIC (or NONNUMERIC), QUOTE_NONE (or NONE), passed to CSV loader. Describes input source rather than data model itself. Numeric values are accepted for compatibility (QUOTE_MINIMAL=0, QUOTE_ALL=1, QUOTE_NONNUMERIC=2, QUOTE_NONE=3)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="table">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Table</a><a class="headerlink" href="#table" title="Permalink to this heading"></a></h2>
+<p>The following parameters can be defined for a table:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Required?</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>type</p></td>
+<td><p>no</p></td>
+<td><p>view / table</p></td>
+</tr>
+<tr class="row-odd"><td><p>hard_linked</p></td>
+<td><p>no</p></td>
+<td><p>Denotes that the table is an integral part of parent table rather than a separate table with a many-to-one relationship to the parent table</p></td>
+</tr>
+<tr class="row-even"><td><p>columns</p></td>
+<td><p>yes</p></td>
+<td><p>list of column definitions</p></td>
+</tr>
+<tr class="row-odd"><td><p>indices or indexes</p></td>
+<td><p>yes</p></td>
+<td><p>dictionary of multi-column indices</p></td>
+</tr>
+<tr class="row-even"><td><p>primary_key</p></td>
+<td><p>yes</p></td>
+<td><p>list of column names included in the table primary key</p></td>
+</tr>
+<tr class="row-odd"><td><p>children</p></td>
+<td><p>no</p></td>
+<td><p>list of table definitions for child tables of this table</p></td>
+</tr>
+<tr class="row-even"><td><p>description</p></td>
+<td><p>no</p></td>
+<td><p>description of this domain to be included in auto-generated documentation</p></td>
+</tr>
+<tr class="row-odd"><td><p>reference</p></td>
+<td><p>no</p></td>
+<td><p>URL with external documentation</p></td>
+</tr>
+<tr class="row-even"><td><p>invalid.records</p></td>
+<td><p>no</p></td>
+<td><p><a class="reference internal" href="#invalid-record">action</a> to be performed upon encountering an invalid record (corrupted, incomplete, duplicate, etc.)</p></td>
+</tr>
+<tr class="row-odd"><td><p>create</p></td>
+<td><p>no</p></td>
+<td><p>If the table or view should be created from existing database objects, see <a class="reference internal" href="#create-statement">detailed description</a></p></td>
+</tr>
+</tbody>
+</table>
+<section id="create-statement">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Create statement</a><a class="headerlink" href="#create-statement" title="Permalink to this heading"></a></h3>
+<p>Describes how a table or a view should be created.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Required?</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>type</p></td>
+<td><p>no</p></td>
+<td><p>view / table</p></td>
+</tr>
+<tr class="row-odd"><td><p>select</p></td>
+<td><p>no</p></td>
+<td><p>columns to put in <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> clause of CREATE statement</p></td>
+</tr>
+<tr class="row-even"><td><p>from</p></td>
+<td><p>no</p></td>
+<td><p>What to put into <code class="docutils literal notranslate"><span class="pre">FROM</span></code> clause</p></td>
+</tr>
+<tr class="row-odd"><td><p>group by</p></td>
+<td><p>no</p></td>
+<td><p>What to put into <code class="docutils literal notranslate"><span class="pre">GROUP</span> <span class="pre">BY</span></code> clause</p></td>
+</tr>
+<tr class="row-even"><td><p>populate</p></td>
+<td><p>no, default is <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+<td><p>If <code class="docutils literal notranslate"><span class="pre">False</span></code>, then a condition that can never be satisfied will be added as <code class="docutils literal notranslate"><span class="pre">WHERE</span></code> clause, ehnce an empty table will be created that can be populated later. This is mostly used when additional triggers needed for population process.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="invalid-record">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Invalid Record</a><a class="headerlink" href="#invalid-record" title="Permalink to this heading"></a></h3>
+<p>By default, an exception is raised if an invalid
+record is encountered during data ingestion. However,
+it is possible to override this behaviour by instructing
+the data loader to either ignore such records or put them
+in a special audit table.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Required?</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>action</p></td>
+<td><p>yes</p></td>
+<td><p>Action to be performed: <code class="docutils literal notranslate"><span class="pre">INSERT</span></code> or <code class="docutils literal notranslate"><span class="pre">IGNORE</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>target</p></td>
+<td><p>yes/no</p></td>
+<td><p>For action INSERT - a target table</p></td>
+</tr>
+<tr class="row-even"><td><p>description</p></td>
+<td><p>no</p></td>
+<td><p>description of this domain to be included in auto-generated documentation</p></td>
+</tr>
+<tr class="row-odd"><td><p>reference</p></td>
+<td><p>no</p></td>
+<td><p>URL with external documentation</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="column">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Column</a><a class="headerlink" href="#column" title="Permalink to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Required?</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>type</p></td>
+<td><p>yes</p></td>
+<td><p>Database type</p></td>
+</tr>
+<tr class="row-odd"><td><p>source</p></td>
+<td><p>no</p></td>
+<td><p><a class="reference internal" href="#source">source</a> of the data</p></td>
+</tr>
+<tr class="row-even"><td><p>requires</p></td>
+<td><p>no</p></td>
+<td><p>List of tables and views required to compute this column. Should be used if <code class="docutils literal notranslate"><span class="pre">source</span></code> is a SQL statement referencing other tables.</p></td>
+</tr>
+<tr class="row-odd"><td><p>index</p></td>
+<td><p>no</p></td>
+<td><p>Override default to build an index based on this column. Possible values: true/false/dictionary, specifying index name and/or parameters</p></td>
+</tr>
+<tr class="row-even"><td><p>description</p></td>
+<td><p>no</p></td>
+<td><p>description of this domain to be included in auto-generated documentation</p></td>
+</tr>
+<tr class="row-odd"><td><p>reference</p></td>
+<td><p>no</p></td>
+<td><p>URL with external documentation</p></td>
+</tr>
+</tbody>
+</table>
+<p>Beside “normal” columns, when the value is
+directly taken from a column in a tabular input source,
+there are three types of special columns:</p>
+<ul class="simple">
+<li><p>Computed columns</p></li>
+<li><p>Generated columns</p></li>
+<li><p>Transposed columns (i.e., when multiple columns of a single record are converted to multiple records)</p></li>
+</ul>
+<p>Special columns must have their <code class="docutils literal notranslate"><span class="pre">source</span></code> defined. If a column
+name in input source is different from a column name in the
+database, such column also must define <code class="docutils literal notranslate"><span class="pre">source</span></code>.</p>
+<section id="source">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">Source</a><a class="headerlink" href="#source" title="Permalink to this heading"></a></h3>
+<p>Source must be defined for special columns and for columns
+with the name in the database different from the name
+in the input source.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Required?</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>column name</p></td>
+<td><p>no</p></td>
+<td><p>A column name in the incoming tabular data</p></td>
+</tr>
+<tr class="row-odd"><td><p>type</p></td>
+<td><p>no</p></td>
+<td><p>Types: <code class="docutils literal notranslate"><span class="pre">generated</span></code>, <code class="docutils literal notranslate"><span class="pre">multi_column</span></code>, <code class="docutils literal notranslate"><span class="pre">range</span></code>, <code class="docutils literal notranslate"><span class="pre">compute</span></code>, <code class="docutils literal notranslate"><span class="pre">file</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>range</p></td>
+<td><p>no</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>code</p></td>
+<td><p>no</p></td>
+<td><p>Code for generated and computed columns</p></td>
+</tr>
+<tr class="row-even"><td><p>columns</p></td>
+<td><p>no</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>parameters</p></td>
+<td><p>no</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="generated-columns">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">Generated columns</a><a class="headerlink" href="#generated-columns" title="Permalink to this heading"></a></h3>
+<p>Generated columns are columns that are not present in the source
+(e.g. CSV or FST file) but whose value
+is automatically computed using other columns values,
+or another deterministic expression <strong>inside the database</strong>.</p>
+<p>From <a class="reference external" href="https://www.postgresql.org/docs/current/ddl-generated-columns.html">PostgreSQL Documentation</a>:</p>
+<blockquote>
+<div><p>Theoretically, generated columns are for columns
+what a view is for tables. There are two kinds of
+generated columns: stored and virtual. A stored
+generated column is computed when it is written
+(inserted or updated) and occupies storage as if
+it were a normal column. A virtual generated column
+occupies no storage and is computed when it is read.
+Thus, a virtual generated column is similar to a
+view and a stored generated column is similar to a
+materialized view (except that it is always updated automatically).</p>
+</div></blockquote>
+<blockquote>
+<div><p>However, <strong>PostgreSQL currently implements only STORED generated columns</strong>.</p>
+</div></blockquote>
+</section>
+<section id="computed-columns">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">Computed columns</a><a class="headerlink" href="#computed-columns" title="Permalink to this heading"></a></h3>
+<p>Computed columns are columns that are not present in the source
+(e.g. CSV or FST file) but whose value is computed
+using provided Python code by the Universal Database Loader.
+They use the values of other columns in the same record and can call
+out to standard Python functions.</p>
+<p>The columns used for computation are listed in either <code class="docutils literal notranslate"><span class="pre">columns</span></code>
+or <code class="docutils literal notranslate"><span class="pre">parameters</span></code> sections. Column names are names of the original
+columns in the data file. To reference columns in the
+database use parameters.
+Referenced them by a number in curly brackets in the compute code.</p>
+<p>Here is an example of a computed column:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">admission_date</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;DATE&quot;</span>
+<span class="w">    </span><span class="nt">source</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;compute&quot;</span>
+<span class="w">        </span><span class="nt">columns</span><span class="p">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;ADMSN_DT&quot;</span>
+<span class="w">        </span><span class="nt">code</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;datetime.strptime({1},</span><span class="nv"> </span><span class="s">&#39;%Y%m%d&#39;).date()&quot;</span>
+</pre></div>
+</div>
+<p>Here in <code class="docutils literal notranslate"><span class="pre">code</span></code> the pattern <code class="docutils literal notranslate"><span class="pre">{1}</span></code> is replaced with the name of the
+first (and only) column in the list: <code class="docutils literal notranslate"><span class="pre">ADMSN_DT</span></code>.</p>
+<p>Another example, using database columns:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">fips5</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">source</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;compute&quot;</span>
+<span class="w">      </span><span class="nt">parameters</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">state</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">residence_county</span>
+<span class="w">      </span><span class="nt">code</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fips_dict[{1}]</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">1000</span><span class="nv"> </span><span class="s">+</span><span class="nv"> </span><span class="s">int({2})&quot;</span>
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">{1}</span></code> references the value that would be inserted into the
+table column <code class="docutils literal notranslate"><span class="pre">state</span></code> and <code class="docutils literal notranslate"><span class="pre">{2}</span></code> references the value that
+would be inserted into the table column <code class="docutils literal notranslate"><span class="pre">residence_county</span></code>.</p>
+</section>
+<section id="file-columns">
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">File columns</a><a class="headerlink" href="#file-columns" title="Permalink to this heading"></a></h3>
+<p>File columns are of type <code class="docutils literal notranslate"><span class="pre">file</span></code>. They store the name of the file,
+from which the data has been ingested.</p>
+</section>
+<section id="record-columns">
+<h3><a class="toc-backref" href="#id11" role="doc-backlink">Record columns</a><a class="headerlink" href="#record-columns" title="Permalink to this heading"></a></h3>
+<p>Record columns are of type <code class="docutils literal notranslate"><span class="pre">record</span></code>. They store the sequential
+index of the record (line number) in the file,
+from which the data has been ingested.</p>
+</section>
+<section id="transposing-columns">
+<h3><a class="toc-backref" href="#id12" role="doc-backlink">Transposing columns</a><a class="headerlink" href="#transposing-columns" title="Permalink to this heading"></a></h3>
+</section>
+</section>
+<section id="multi-column-indices">
+<h2><a class="toc-backref" href="#id13" role="doc-backlink">Multi-column indices</a><a class="headerlink" href="#multi-column-indices" title="Permalink to this heading"></a></h2>
+<p>Multi-column indices of a table are defined in <code class="docutils literal notranslate"><span class="pre">indices</span></code> section
+(spelling <code class="docutils literal notranslate"><span class="pre">indexes</span></code> is also acceptable). This is a dictionary with an
+index name as a key and its definition as the value. At the very minimum,
+the definition should include the list of the columns to be used in the
+index.</p>
+<p>Index definition can also include
+<a class="reference external" href="https://www.postgresql.org/docs/current/indexes-types.html">index type</a>
+(e.g. btree, hash, etc.)  and data to be included with the index.</p>
+</section>
+<section id="generation-of-the-database-schema-ddl">
+<h2><a class="toc-backref" href="#id14" role="doc-backlink">Generation of the database schema (DDL)</a><a class="headerlink" href="#generation-of-the-database-schema-ddl" title="Permalink to this heading"></a></h2>
+<p>From a domain YAML file, the database schema is
+generated in the form of PostgreSQL dialect of DDL.</p>
+<p>The main class responsible for the generation of DDL is
+<a class="reference internal" href="members/domain.html"><span class="doc std std-doc">Domain</span></a></p>
+</section>
+<section id="indexing-policies">
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">Indexing policies</a><a class="headerlink" href="#indexing-policies" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>explicit</strong>. Indices are only created for columns that define an index</p></li>
+<li><p><strong>all</strong> Indices are only created for all columns</p></li>
+<li><p><strong>selected</strong> Indices are only created for columns matching certain pattern
+(defined in <code class="docutils literal notranslate"><span class="pre">index_columns</span></code> variable of <a class="reference internal" href="members/model.html"><span class="doc std std-doc">model</span></a>) module</p></li>
+<li><p><strong>unless excluded</strong> Indices are only created for all columns not explicitly excluded</p></li>
+</ul>
+</section>
+<section id="linking-with-nomenclature">
+<h2><a class="toc-backref" href="#id16" role="doc-backlink">Linking with nomenclature</a><a class="headerlink" href="#linking-with-nomenclature" title="Permalink to this heading"></a></h2>
+<section id="us-states">
+<h3><a class="toc-backref" href="#id17" role="doc-backlink">US States</a><a class="headerlink" href="#us-states" title="Permalink to this heading"></a></h3>
+<p>Database includes a table with codes for US states. It is taken from:</p>
+<p><a class="reference external" href="https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/technical/nra/nri/results/?cid=nrcs143_013696">https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/technical/nra/nri/results/?cid=nrcs143_013696</a></p>
+<p>The data leaves locally in <a class="reference internal" href="members/fips.html"><span class="doc std std-doc">fips.py</span></a></p>
+<p>County codes:</p>
+<p><a class="reference external" href="https://www.nber.org/research/data/ssa-federal-information-processing-series-fips-state-and-county-crosswalk">https://www.nber.org/research/data/ssa-federal-information-processing-series-fips-state-and-county-crosswalk</a></p>
+</section>
+</section>
+<section id="ingesting-data">
+<h2><a class="toc-backref" href="#id18" role="doc-backlink">Ingesting data</a><a class="headerlink" href="#ingesting-data" title="Permalink to this heading"></a></h2>
+<p>The following command ingests data into a table and all hard-linked
+child tables:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    usage: python -u -m dorieh.platform.data_model.model2 [-h] [--domain DOMAIN]
+                [--table TABLE] [--data DATA]
+                [--reset] [--autocommit] [--db DB] [--connection CONNECTION]
+                [--page PAGE] [--log LOG] [--limit LIMIT] [--buffer BUFFER]
+                [--threads THREADS]
+
+    optional arguments:
+    -h, --help              show this help message and exit
+    --domain DOMAIN         Name of the domain
+    --table TABLE, -t TABLE Name of the table to load data into
+    --data DATA             Path to a data file or directory. Can be a single CSV,
+                            gzipped CSV or FST file or a directory recursively
+                            containing CSV files. Can also be a tar, tar.gz (or
+                            tgz) or zip archive containing CSV files
+    --pattern PATTERN       pattern for files in a directory or an archive, e.g.
+                            `**/maxdata_*_ps_*.csv`
+    --reset                 Force recreating table(s) if it/they already exist
+    --incremental           Commit every file and skip over files that have
+                            already been ingested
+    --autocommit            Use autocommit
+    --db DB                 Path to a database connection parameters file
+    --connection CONNECTION Section in the database connection parameters file
+    --page PAGE             Explicit page size for the database
+    --log LOG               Explicit interval for logging
+    --limit LIMIT           Load at most specified number of records
+    --buffer BUFFER         Buffer size for converting fst files
+    --threads THREADS       Number of threads writing into the database
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

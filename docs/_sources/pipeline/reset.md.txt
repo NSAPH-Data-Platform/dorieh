@@ -1,0 +1,36 @@
+# Generic Table (View/Materialized View) Initializer
+
+
+ [Source code](resetcwl_src.md) 
+
+
+```{contents}
+---
+local:
+---
+```
+
+**Tool**. Runs: dorieh.platform.loader.data_loader
+
+## Description
+
+This tool drops the tables and deletes all previous data from the database
+
+
+## Inputs
+
+| Name            | Type    | Default | Description                                            | 
+|:----------------|:--------|:--------|:-------------------------------------------------------|
+| registry        | File?   |         | A path to the data model file                          | 
+| domain          | string  |         | the name of the domain                                 | 
+| table           | string? | `ps`    | the name of the table being deleted                    | 
+| database        | File    |         | Path to database connection file, usually database.ini | 
+| connection_name | string  |         | The name of the section in the database.ini file       | 
+
+## Outputs
+
+| Name   | Type   | Description | 
+|:-------|:-------|:------------|
+| log    | File   |             | 
+| errors | stderr |             | 
+

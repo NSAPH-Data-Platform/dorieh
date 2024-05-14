@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The task Module &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">The task Module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/members/task.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-dorieh.rasters.task">
+<span id="the-task-module"></span><h1>The task Module<a class="headerlink" href="#module-dorieh.rasters.task" title="Permalink to this heading"></a></h1>
+<p>This module contains classes used to define, schedule and execute
+long running computations used by gridMET pipelines</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.rasters.task.count_lines">
+<span class="sig-name descname"><span class="pre">count_lines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#count_lines"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.count_lines" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.rasters.task.quote">
+<span class="sig-name descname"><span class="pre">quote</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#quote"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.quote" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.rasters.task.Parallel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Parallel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#Parallel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.Parallel" title="Permalink to this definition"></a></dt>
+<dd><p>An enumeration.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.task.Parallel.points">
+<span class="sig-name descname"><span class="pre">points</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'points'</span></em><a class="headerlink" href="#dorieh.rasters.task.Parallel.points" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.task.Parallel.bands">
+<span class="sig-name descname"><span class="pre">bands</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'bands'</span></em><a class="headerlink" href="#dorieh.rasters.task.Parallel.bands" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.task.Parallel.days">
+<span class="sig-name descname"><span class="pre">days</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'days'</span></em><a class="headerlink" href="#dorieh.rasters.task.Parallel.days" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.rasters.task.Collector">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Collector</span></span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#Collector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.Collector" title="Permalink to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.task.Collector.writerow">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">writerow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#Collector.writerow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.Collector.writerow" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.task.Collector.flush">
+<span class="sig-name descname"><span class="pre">flush</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#Collector.flush"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.Collector.flush" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.rasters.task.CSVWriter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CSVWriter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out_stream</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#CSVWriter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.CSVWriter" title="Permalink to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.task.CSVWriter.writerow">
+<span class="sig-name descname"><span class="pre">writerow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#CSVWriter.writerow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.CSVWriter.writerow" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.task.CSVWriter.flush">
+<span class="sig-name descname"><span class="pre">flush</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#CSVWriter.flush"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.CSVWriter.flush" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.rasters.task.ListCollector">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ListCollector</span></span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#ListCollector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.ListCollector" title="Permalink to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.task.ListCollector.writerow">
+<span class="sig-name descname"><span class="pre">writerow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#ListCollector.writerow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.ListCollector.writerow" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.task.ListCollector.get_result">
+<span class="sig-name descname"><span class="pre">get_result</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#ListCollector.get_result"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.ListCollector.get_result" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.rasters.task.ComputeGridmetTask">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ComputeGridmetTask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="config.html#dorieh.rasters.config.GridmetVariable" title="dorieh.rasters.config.GridmetVariable"><span class="pre">GridmetVariable</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">infile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_filter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ram</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#ComputeGridmetTask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.ComputeGridmetTask" title="Permalink to this definition"></a></dt>
+<dd><p>An abstract class for a computational task that processes data in
+<a class="reference external" href="https://www.unidata.ucar.edu/software/netcdf/">Unidata netCDF (Version 4) format</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.rasters.task.ComputeGridmetTask.params.ram"></span><strong>ram</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputeGridmetTask.params.ram">¶</a> – </p></li>
+<li><p><span class="target" id="dorieh.rasters.task.ComputeGridmetTask.params.date_filter"></span><strong>date_filter</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputeGridmetTask.params.date_filter">¶</a> – </p></li>
+<li><p><span class="target" id="dorieh.rasters.task.ComputeGridmetTask.params.year"></span><strong>year</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputeGridmetTask.params.year">¶</a> – year</p></li>
+<li><p><span class="target" id="dorieh.rasters.task.ComputeGridmetTask.params.variable"></span><strong>variable</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputeGridmetTask.params.variable">¶</a> – Gridemt band (variable)</p></li>
+<li><p><span class="target" id="dorieh.rasters.task.ComputeGridmetTask.params.infile"></span><strong>infile</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputeGridmetTask.params.infile">¶</a> – File with source data in  NCDF4 format</p></li>
+<li><p><span class="target" id="dorieh.rasters.task.ComputeGridmetTask.params.outfile"></span><strong>outfile</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputeGridmetTask.params.outfile">¶</a> – Resulting CSV file</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.task.ComputeGridmetTask.origin">
+<span class="sig-name descname"><span class="pre">origin</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">datetime.date(1900,</span> <span class="pre">1,</span> <span class="pre">1)</span></em><a class="headerlink" href="#dorieh.rasters.task.ComputeGridmetTask.origin" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.task.ComputeGridmetTask.get_variable">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="config.html#dorieh.rasters.config.GridmetVariable" title="dorieh.rasters.config.GridmetVariable"><span class="pre">GridmetVariable</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#ComputeGridmetTask.get_variable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.ComputeGridmetTask.get_variable" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.task.ComputeGridmetTask.get_key">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_key</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#ComputeGridmetTask.get_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.ComputeGridmetTask.get_key" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.task.ComputeGridmetTask.get_days">
+<span class="sig-name descname"><span class="pre">get_days</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#ComputeGridmetTask.get_days"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.ComputeGridmetTask.get_days" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.task.ComputeGridmetTask.prepare">
+<span class="sig-name descname"><span class="pre">prepare</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#ComputeGridmetTask.prepare"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.ComputeGridmetTask.prepare" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.task.ComputeGridmetTask.on_prepare">
+<span class="sig-name descname"><span class="pre">on_prepare</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#ComputeGridmetTask.on_prepare"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.ComputeGridmetTask.on_prepare" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.task.ComputeGridmetTask.execute">
+<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'wt'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#ComputeGridmetTask.execute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.ComputeGridmetTask.execute" title="Permalink to this definition"></a></dt>
+<dd><p>Executes computational task</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.rasters.task.ComputeGridmetTask.execute.params.mode"></span><strong>mode</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputeGridmetTask.execute.params.mode">¶</a> (<em>str</em>) – mode to use opening result file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.task.ComputeGridmetTask.collect_data">
+<span class="sig-name descname"><span class="pre">collect_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">days</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dorieh.rasters.task.Collector" title="dorieh.rasters.task.Collector"><span class="pre">Collector</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#ComputeGridmetTask.collect_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.ComputeGridmetTask.collect_data" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.task.ComputeGridmetTask.compute_one_day">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">compute_one_day</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">writer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dorieh.rasters.task.Collector" title="dorieh.rasters.task.Collector"><span class="pre">Collector</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#ComputeGridmetTask.compute_one_day"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.ComputeGridmetTask.compute_one_day" title="Permalink to this definition"></a></dt>
+<dd><p>Computes required statistics for a single day.
+This method is called by <cite>execute()</cite> and is implemented in
+specific subclasses</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.rasters.task.ComputeGridmetTask.compute_one_day.params.writer"></span><strong>writer</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputeGridmetTask.compute_one_day.params.writer">¶</a> – CSV Writer to output the result</p></li>
+<li><p><span class="target" id="dorieh.rasters.task.ComputeGridmetTask.compute_one_day.params.day"></span><strong>day</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputeGridmetTask.compute_one_day.params.day">¶</a> – day</p></li>
+<li><p><span class="target" id="dorieh.rasters.task.ComputeGridmetTask.compute_one_day.params.layer"></span><strong>layer</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputeGridmetTask.compute_one_day.params.layer">¶</a> – layer, corresponding to the day</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Nothing</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.task.ComputeGridmetTask.to_date">
+<span class="sig-name descname"><span class="pre">to_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">date</span></span></span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#ComputeGridmetTask.to_date"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.ComputeGridmetTask.to_date" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.rasters.task.ComputeShapesTask">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ComputeShapesTask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="config.html#dorieh.rasters.config.GridmetVariable" title="dorieh.rasters.config.GridmetVariable"><span class="pre">GridmetVariable</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">infile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strategy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../strategy.html#dorieh.gis.constants.RasterizationStrategy" title="dorieh.gis.constants.RasterizationStrategy"><span class="pre">RasterizationStrategy</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">shapefile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geography</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gis_constants.html#dorieh.gis.constants.Geography" title="dorieh.gis.constants.Geography"><span class="pre">Geography</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_filter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ram</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#ComputeShapesTask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.ComputeShapesTask" title="Permalink to this definition"></a></dt>
+<dd><p>Class describes a compute task to aggregate data over geography shapes</p>
+<p>The data is expected in
+.. _Unidata netCDF (Version 4) format: <a class="reference external" href="https://www.unidata.ucar.edu/software/netcdf/">https://www.unidata.ucar.edu/software/netcdf/</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.rasters.task.ComputeShapesTask.params.ram"></span><strong>ram</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputeShapesTask.params.ram">¶</a> – </p></li>
+<li><p><span class="target" id="dorieh.rasters.task.ComputeShapesTask.params.date_filter"></span><strong>date_filter</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputeShapesTask.params.date_filter">¶</a> – </p></li>
+<li><p><span class="target" id="dorieh.rasters.task.ComputeShapesTask.params.year"></span><strong>year</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputeShapesTask.params.year">¶</a> – year</p></li>
+<li><p><span class="target" id="dorieh.rasters.task.ComputeShapesTask.params.variable"></span><strong>variable</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputeShapesTask.params.variable">¶</a> – gridMET band (variable)</p></li>
+<li><p><span class="target" id="dorieh.rasters.task.ComputeShapesTask.params.infile"></span><strong>infile</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputeShapesTask.params.infile">¶</a> – File with source data in  NCDF4 format</p></li>
+<li><p><span class="target" id="dorieh.rasters.task.ComputeShapesTask.params.outfile"></span><strong>outfile</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputeShapesTask.params.outfile">¶</a> – Resulting CSV file</p></li>
+<li><p><span class="target" id="dorieh.rasters.task.ComputeShapesTask.params.strategy"></span><strong>strategy</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputeShapesTask.params.strategy">¶</a> – Rasterization strategy to use</p></li>
+<li><p><span class="target" id="dorieh.rasters.task.ComputeShapesTask.params.shapefile"></span><strong>shapefile</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputeShapesTask.params.shapefile">¶</a> – Shapefile for used collection of geographies</p></li>
+<li><p><span class="target" id="dorieh.rasters.task.ComputeShapesTask.params.geography"></span><strong>geography</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputeShapesTask.params.geography">¶</a> – Type of geography, e.g. zip code or county</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.task.ComputeShapesTask.on_prepare">
+<span class="sig-name descname"><span class="pre">on_prepare</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#ComputeShapesTask.on_prepare"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.ComputeShapesTask.on_prepare" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.task.ComputeShapesTask.get_key">
+<span class="sig-name descname"><span class="pre">get_key</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#ComputeShapesTask.get_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.ComputeShapesTask.get_key" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.task.ComputeShapesTask.compute_one_day">
+<span class="sig-name descname"><span class="pre">compute_one_day</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">writer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dorieh.rasters.task.Collector" title="dorieh.rasters.task.Collector"><span class="pre">Collector</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#ComputeShapesTask.compute_one_day"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.ComputeShapesTask.compute_one_day" title="Permalink to this definition"></a></dt>
+<dd><p>Computes required statistics for a single day.
+This method is called by <cite>execute()</cite> and is implemented in
+specific subclasses</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.rasters.task.ComputeShapesTask.compute_one_day.params.writer"></span><strong>writer</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputeShapesTask.compute_one_day.params.writer">¶</a> – CSV Writer to output the result</p></li>
+<li><p><span class="target" id="dorieh.rasters.task.ComputeShapesTask.compute_one_day.params.day"></span><strong>day</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputeShapesTask.compute_one_day.params.day">¶</a> – day</p></li>
+<li><p><span class="target" id="dorieh.rasters.task.ComputeShapesTask.compute_one_day.params.layer"></span><strong>layer</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputeShapesTask.compute_one_day.params.layer">¶</a> – layer, corresponding to the day</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Nothing</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.rasters.task.ComputePointsTask">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ComputePointsTask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="config.html#dorieh.rasters.config.GridmetVariable" title="dorieh.rasters.config.GridmetVariable"><span class="pre">GridmetVariable</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">infile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coordinates</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_filter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ram</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#ComputePointsTask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.ComputePointsTask" title="Permalink to this definition"></a></dt>
+<dd><p>Class describes a compute task to assign data to a collection of points</p>
+<p>The data is expected in
+.. _Unidata netCDF (Version 4) format: <a class="reference external" href="https://www.unidata.ucar.edu/software/netcdf/">https://www.unidata.ucar.edu/software/netcdf/</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.rasters.task.ComputePointsTask.params.ram"></span><strong>ram</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputePointsTask.params.ram">¶</a> – </p></li>
+<li><p><span class="target" id="dorieh.rasters.task.ComputePointsTask.params.year"></span><strong>year</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputePointsTask.params.year">¶</a> – year</p></li>
+<li><p><span class="target" id="dorieh.rasters.task.ComputePointsTask.params.variable"></span><strong>variable</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputePointsTask.params.variable">¶</a> – Gridemt band (variable)</p></li>
+<li><p><span class="target" id="dorieh.rasters.task.ComputePointsTask.params.infile"></span><strong>infile</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputePointsTask.params.infile">¶</a> – File with source data in  NCDF4 format</p></li>
+<li><p><span class="target" id="dorieh.rasters.task.ComputePointsTask.params.outfile"></span><strong>outfile</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputePointsTask.params.outfile">¶</a> – Resulting CSV file</p></li>
+<li><p><span class="target" id="dorieh.rasters.task.ComputePointsTask.params.points_file"></span><strong>points_file</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputePointsTask.params.points_file">¶</a> – path to a file containing coordinates of points
+in csv format.</p></li>
+<li><p><span class="target" id="dorieh.rasters.task.ComputePointsTask.params.coordinates"></span><strong>coordinates</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputePointsTask.params.coordinates">¶</a> – A two element list of column names in csv
+corresponding to coordinates</p></li>
+<li><p><span class="target" id="dorieh.rasters.task.ComputePointsTask.params.metadata"></span><strong>metadata</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputePointsTask.params.metadata">¶</a> – A list of column names in csv that should be
+interpreted as metadata (e.g. ZIP, site_id, etc.)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.task.ComputePointsTask.force_standard_api">
+<span class="sig-name descname"><span class="pre">force_standard_api</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#dorieh.rasters.task.ComputePointsTask.force_standard_api" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.task.ComputePointsTask.get_key">
+<span class="sig-name descname"><span class="pre">get_key</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#ComputePointsTask.get_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.ComputePointsTask.get_key" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.task.ComputePointsTask.on_prepare">
+<span class="sig-name descname"><span class="pre">on_prepare</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#ComputePointsTask.on_prepare"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.ComputePointsTask.on_prepare" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.task.ComputePointsTask.make_point">
+<span class="sig-name descname"><span class="pre">make_point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="geometry.html#dorieh.gis.geometry.PointInRaster" title="dorieh.gis.geometry.PointInRaster"><span class="pre">PointInRaster</span></a></span></span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#ComputePointsTask.make_point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.ComputePointsTask.make_point" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.task.ComputePointsTask.execute">
+<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'w'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#ComputePointsTask.execute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.ComputePointsTask.execute" title="Permalink to this definition"></a></dt>
+<dd><p>Executes computational task</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.rasters.task.ComputePointsTask.execute.params.mode"></span><strong>mode</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputePointsTask.execute.params.mode">¶</a> (<em>str</em>) – mode to use opening result file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.task.ComputePointsTask.compute_one_day">
+<span class="sig-name descname"><span class="pre">compute_one_day</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">writer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dorieh.rasters.task.Collector" title="dorieh.rasters.task.Collector"><span class="pre">Collector</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#ComputePointsTask.compute_one_day"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.ComputePointsTask.compute_one_day" title="Permalink to this definition"></a></dt>
+<dd><p>Computes required statistics for a single day.
+This method is called by <cite>execute()</cite> and is implemented in
+specific subclasses</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.rasters.task.ComputePointsTask.compute_one_day.params.writer"></span><strong>writer</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputePointsTask.compute_one_day.params.writer">¶</a> – CSV Writer to output the result</p></li>
+<li><p><span class="target" id="dorieh.rasters.task.ComputePointsTask.compute_one_day.params.day"></span><strong>day</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputePointsTask.compute_one_day.params.day">¶</a> – day</p></li>
+<li><p><span class="target" id="dorieh.rasters.task.ComputePointsTask.compute_one_day.params.layer"></span><strong>layer</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.ComputePointsTask.compute_one_day.params.layer">¶</a> – layer, corresponding to the day</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Nothing</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.rasters.task.DownloadGridmetTask">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DownloadGridmetTask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="config.html#dorieh.rasters.config.GridmetVariable" title="dorieh.rasters.config.GridmetVariable"><span class="pre">GridmetVariable</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#DownloadGridmetTask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.DownloadGridmetTask" title="Permalink to this definition"></a></dt>
+<dd><p>Task to download source file in NCDF4 format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.rasters.task.DownloadGridmetTask.params.year"></span><strong>year</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.DownloadGridmetTask.params.year">¶</a> – year</p></li>
+<li><p><span class="target" id="dorieh.rasters.task.DownloadGridmetTask.params.variable"></span><strong>variable</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.DownloadGridmetTask.params.variable">¶</a> – Gridmet band (variable)</p></li>
+<li><p><span class="target" id="dorieh.rasters.task.DownloadGridmetTask.params.destination"></span><strong>destination</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.DownloadGridmetTask.params.destination">¶</a> – Destination directory for all downloads</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.task.DownloadGridmetTask.BLOCK_SIZE">
+<span class="sig-name descname"><span class="pre">BLOCK_SIZE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">65536</span></em><a class="headerlink" href="#dorieh.rasters.task.DownloadGridmetTask.BLOCK_SIZE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.task.DownloadGridmetTask.get_url">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="config.html#dorieh.rasters.config.GridmetVariable" title="dorieh.rasters.config.GridmetVariable"><span class="pre">GridmetVariable</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#DownloadGridmetTask.get_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.DownloadGridmetTask.get_url" title="Permalink to this definition"></a></dt>
+<dd><p>Constructs URL given a year and band</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.rasters.task.DownloadGridmetTask.get_url.params.year"></span><strong>year</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.DownloadGridmetTask.get_url.params.year">¶</a> – year</p></li>
+<li><p><span class="target" id="dorieh.rasters.task.DownloadGridmetTask.get_url.params.variable"></span><strong>variable</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.DownloadGridmetTask.get_url.params.variable">¶</a> – Gridmet band (variable)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>URL for download</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.task.DownloadGridmetTask.target">
+<span class="sig-name descname"><span class="pre">target</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#DownloadGridmetTask.target"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.DownloadGridmetTask.target" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>File path for downloaded data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.task.DownloadGridmetTask.execute">
+<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#DownloadGridmetTask.execute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.DownloadGridmetTask.execute" title="Permalink to this definition"></a></dt>
+<dd><p>Executes the task
+:return: None</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.rasters.task.GridmetTask">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GridmetTask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="config.html#dorieh.rasters.config.GridMETContext" title="dorieh.rasters.config.GridMETContext"><span class="pre">GridMETContext</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="config.html#dorieh.rasters.config.GridmetVariable" title="dorieh.rasters.config.GridmetVariable"><span class="pre">GridmetVariable</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#GridmetTask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.GridmetTask" title="Permalink to this definition"></a></dt>
+<dd><p>Defines a task to download and process data for a single year and variable
+Instances of this class can be used to parallelize processing</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.rasters.task.GridmetTask.params.context"></span><strong>context</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.GridmetTask.params.context">¶</a> – Configuration object for the pipeline</p></li>
+<li><p><span class="target" id="dorieh.rasters.task.GridmetTask.params.year"></span><strong>year</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.GridmetTask.params.year">¶</a> – year</p></li>
+<li><p><span class="target" id="dorieh.rasters.task.GridmetTask.params.variable"></span><strong>variable</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.GridmetTask.params.variable">¶</a> – gridMET band (variable)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.task.GridmetTask.destination_file_name">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">destination_file_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="config.html#dorieh.rasters.config.GridMETContext" title="dorieh.rasters.config.GridMETContext"><span class="pre">GridMETContext</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="config.html#dorieh.rasters.config.GridmetVariable" title="dorieh.rasters.config.GridmetVariable"><span class="pre">GridmetVariable</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#GridmetTask.destination_file_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.GridmetTask.destination_file_name" title="Permalink to this definition"></a></dt>
+<dd><p>Constructs a file name for a given set of parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.rasters.task.GridmetTask.destination_file_name.params.context"></span><strong>context</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.GridmetTask.destination_file_name.params.context">¶</a> – Configuration object for the pipeline</p></li>
+<li><p><span class="target" id="dorieh.rasters.task.GridmetTask.destination_file_name.params.year"></span><strong>year</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.GridmetTask.destination_file_name.params.year">¶</a> – year</p></li>
+<li><p><span class="target" id="dorieh.rasters.task.GridmetTask.destination_file_name.params.variable"></span><strong>variable</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.GridmetTask.destination_file_name.params.variable">¶</a> – Gridmet band (variable)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><cite>variable_geography_year.csv[.gz]</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.task.GridmetTask.find_shape_file">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">find_shape_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="config.html#dorieh.rasters.config.GridMETContext" title="dorieh.rasters.config.GridMETContext"><span class="pre">GridMETContext</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../shapes.html#dorieh.rasters.config.Shape" title="dorieh.rasters.config.Shape"><span class="pre">Shape</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#GridmetTask.find_shape_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.GridmetTask.find_shape_file" title="Permalink to this definition"></a></dt>
+<dd><p>Finds shapefile for a given type of geographies for the
+closest available year</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.rasters.task.GridmetTask.find_shape_file.params.context"></span><strong>context</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.GridmetTask.find_shape_file.params.context">¶</a> – Configuration object for the pipeline</p></li>
+<li><p><span class="target" id="dorieh.rasters.task.GridmetTask.find_shape_file.params.year"></span><strong>year</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.GridmetTask.find_shape_file.params.year">¶</a> – year</p></li>
+<li><p><span class="target" id="dorieh.rasters.task.GridmetTask.find_shape_file.params.shape"></span><strong>shape</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.task.GridmetTask.find_shape_file.params.shape">¶</a> – Shape type</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a shape file for a given year if it exists or for the latest
+year before the given</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.task.GridmetTask.execute">
+<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/task.html#GridmetTask.execute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.task.GridmetTask.execute" title="Permalink to this definition"></a></dt>
+<dd><p>Executes the task. First the download subtask is executed unless
+the corresponding file has already been downloaded. Then the compute
+tasks are executed</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

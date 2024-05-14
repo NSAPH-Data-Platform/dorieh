@@ -1,0 +1,60 @@
+# Test harness for pm25_yearly_download.cwl
+
+
+ [Source code](test_pm25_yearly_downloadcwl_src.md) 
+
+
+![](test_pm25_yearly_download.png)
+
+```{contents}
+---
+local:
+---
+```
+
+**Workflow**
+
+## Inputs
+
+| Name                  | Type      | Default                                                                                                        | Description                                                                                                                                                                                                                                                                                                                                                                                                                   | 
+|:----------------------|:----------|:---------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| component             | string[]  | `['BC', 'NH4', 'NIT', 'OM', 'SO4', 'SOIL', 'SS']`                                                              | Optional components provided as percentages in a separate set  of netCDF files                                                                                                                                                                                                                                                                                                                                                | 
+| connection_name       | string    |                                                                                                                | The name of the section in the database.ini file or a literal `None` to skip over database ingestion step                                                                                                                                                                                                                                                                                                                     | 
+| database              | File      | `{'class': 'File', 'path': 'database.ini'}`                                                                    | Path to database connection file, usually database.ini.  This argument is ignored if `connection_name` == `None`                                                                                                                                                                                                                                                                                                              | 
+| downloads             | Directory |                                                                                                                | Local or AWS bucket folder containing netCDF grid files, downloaded  and unpacked from Washington University in St. Louis (WUSTL) Box site. Annual and monthly data repositories are described in [WUSTL Atmospheric Composition Analysis Group](https://sites.wustl.edu/acag/datasets/surface-pm2-5/).  The annual data for PM2.5 is also available in  a Harvard URC AWS Bucket: `s3://nsaph-public/data/exposures/wustl/`  | 
+| geography             | string    |                                                                                                                | Type of geography: zip codes or counties Supported values: "zip", "zcta" or "county"                                                                                                                                                                                                                                                                                                                                          | 
+| proxy                 | string?   |                                                                                                                | HTTP/HTTPS Proxy if required                                                                                                                                                                                                                                                                                                                                                                                                  | 
+| ram                   | string    | `2GB`                                                                                                          | Runtime memory, available to the process                                                                                                                                                                                                                                                                                                                                                                                      | 
+| shape_file_collection | string    | `tiger`                                                                                                        | [Collection of shapefiles](https://www2.census.gov/geo/tiger),  either GENZ or TIGER                                                                                                                                                                                                                                                                                                                                          | 
+| strategy              | string    | `auto`                                                                                                         | Rasterization strategy, see [documentation](https://nsaph-data-platform.github.io/nsaph-platform-docs/common/gridmet/doc/strategy.html) for the list of supported values and explanations                                                                                                                                                                                                                                     | 
+| table                 | string    | `pm25_aggregated`                                                                                              | The name of the table to store teh aggregated data in                                                                                                                                                                                                                                                                                                                                                                         | 
+| test_script           | File      |                                                                                                                | File containing SQL test script                                                                                                                                                                                                                                                                                                                                                                                               | 
+| variable              | string    | `PM25`                                                                                                         | The main variable that is being aggregated over shapes. We have tested the pipeline for PM25                                                                                                                                                                                                                                                                                                                                  | 
+| years                 | int[]     | `[2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017]` |                                                                                                                                                                                                                                                                                                                                                                                                                               | 
+
+## Outputs
+
+| Name                      | Type   | Description | 
+|:--------------------------|:-------|:------------|
+| execute_aggregate_data    | File[] |             | 
+| execute_data_dictionary   | File   |             | 
+| execute_consolidated_data | File[] |             | 
+| execute_shapes            | array  |             | 
+| execute_aggregate_log     | array  |             | 
+| execute_aggregate_err     | File[] |             | 
+| execute_ingest_log        | File   |             | 
+| execute_index_log         | File   |             | 
+| execute_vacuum_log        | File   |             | 
+| execute_ingest_err        | File   |             | 
+| execute_index_err         | File   |             | 
+| execute_vacuum_err        | File   |             | 
+| verify_log                | File   |             | 
+| verify_errors             | File   |             | 
+
+## Steps
+
+| Name    | Runs                                                | Description | 
+|:--------|:----------------------------------------------------|:------------|
+| execute | [pm25_yearly_download.cwl](pm25_yearly_download.md) |             | 
+| verify  | [run_test.cwl](run_test.md)                         |             | 
+

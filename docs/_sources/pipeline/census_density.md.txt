@@ -1,0 +1,30 @@
+# census_density.cwl
+
+
+ [Source code](census_densitycwl_src.md) 
+
+
+```{contents}
+---
+local:
+---
+```
+
+**Tool**. Runs: census.calculate_density
+
+## Inputs
+
+| Name       | Type     | Default                                       | Description | 
+|:-----------|:---------|:----------------------------------------------|:------------|
+| http_proxy | string   |                                               |             | 
+| densities  | string[] | `['population']`                              |             | 
+| log        | File     | `{'class': 'File', 'location': 'census.log'}` |             | 
+| in_pkl     | File     | `{'class': 'File', 'location': 'census.pkl'}` |             | 
+| out_pkl    | string   | `census_densities.pkl`                        |             | 
+
+## Outputs
+
+| Name | Type | Description | 
+|:-----|:-----|:------------|
+| pkl  | File |             | 
+

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Utility to generate test queries &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Utility to generate test queries</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/members/dbt_runner.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="utility-to-generate-test-queries">
+<h1>Utility to generate test queries<a class="headerlink" href="#utility-to-generate-test-queries" title="Permalink to this heading"></a></h1>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt>python -m dorieh.platform.dbt.dbt_runner [-h] –script SCRIPT [SCRIPT …]</dt><dd><p>[–autocommit] [–db DB] [–connection CONNECTION]
+[–verbose] [–table TABLE]</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl>
+<dt>Options:</dt><dd><dl class="option-list">
+<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
+<dd><p>show this help message and exit</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>–script SCRIPT [SCRIPT …], -s SCRIPT [SCRIPT …]</dt><dd><p>Path to the file(s) containing test scripts. When
+generating test, the file is used to output the
+script, while when running the tests, the scripts from
+the specified files are executed</p>
+</dd>
+</dl>
+<dl class="option-list">
+<dt><kbd><span class="option">--autocommit</span></kbd></dt>
+<dd><p>Use autocommit, default: False</p>
+</dd>
+<dt><kbd><span class="option">--db <var>DB</var></span>, <span class="option">--database <var>DB</var></span></kbd></dt>
+<dd><p>Path to a database connection parameters file,
+default: database.ini</p>
+</dd>
+<dt><kbd><span class="option">--connection <var>CONNECTION</var></span>, <span class="option">--connection_name <var>CONNECTION</var></span></kbd></dt>
+<dd><p>Section in the database connection parameters file,
+default: nsaph2</p>
+</dd>
+<dt><kbd><span class="option">--verbose</span></kbd></dt>
+<dd><p>Verbose output, default: False</p>
+</dd>
+<dt><kbd><span class="option">--table <var>TABLE</var></span>, <span class="option">-t <var>TABLE</var></span></kbd></dt>
+<dd><p>Name of the table to manipulate, default: None</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="module-dorieh.platform.dbt.dbt_runner">
+<span id="details"></span><h2>Details<a class="headerlink" href="#module-dorieh.platform.dbt.dbt_runner" title="Permalink to this heading"></a></h2>
+<p>A utility that executes test cases generated by <cite>dorieh.platform.dbt.create_test.py</cite>
+tool.</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="dorieh.platform.dbt.dbt_runner.TestFailedError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TestFailedError</span></span><a class="reference internal" href="../_modules/dorieh/platform/dbt/dbt_runner.html#TestFailedError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.dbt.dbt_runner.TestFailedError" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.platform.dbt.dbt_runner.DBTRunner">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DBTRunner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="dbt_config.html#dorieh.platform.dbt.dbt_config.DBTConfig" title="dorieh.platform.dbt.dbt_config.DBTConfig"><span class="pre">DBTConfig</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/dbt/dbt_runner.html#DBTRunner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.dbt.dbt_runner.DBTRunner" title="Permalink to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.dbt.dbt_runner.DBTRunner.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/dbt/dbt_runner.html#DBTRunner.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.dbt.dbt_runner.DBTRunner.reset" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.dbt.dbt_runner.DBTRunner.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/dbt/dbt_runner.html#DBTRunner.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.dbt.dbt_runner.DBTRunner.run" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.dbt.dbt_runner.DBTRunner.run_script">
+<span class="sig-name descname"><span class="pre">run_script</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">script</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cnxn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/dbt/dbt_runner.html#DBTRunner.run_script"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.dbt.dbt_runner.DBTRunner.run_script" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.dbt.dbt_runner.DBTRunner.report_row">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">report_row</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lengths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/dorieh/platform/dbt/dbt_runner.html#DBTRunner.report_row"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.dbt.dbt_runner.DBTRunner.report_row" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.dbt.dbt_runner.DBTRunner.test">
+<span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/dbt/dbt_runner.html#DBTRunner.test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.dbt.dbt_runner.DBTRunner.test" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

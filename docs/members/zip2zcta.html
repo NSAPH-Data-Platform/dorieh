@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The zip2zcta Module &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">The zip2zcta Module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/members/zip2zcta.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-dorieh.platform.crosswalks.zip2zcta">
+<span id="the-zip2zcta-module"></span><h1>The zip2zcta Module<a class="headerlink" href="#module-dorieh.platform.crosswalks.zip2zcta" title="Permalink to this heading"></a></h1>
+<p>Utility to download crosswalk files from <a class="reference external" href="https://udsmapper.org/zip-code-to-zcta-crosswalk/">https://udsmapper.org/zip-code-to-zcta-crosswalk/</a></p>
+<p>Alternative source could be:
+[Census Reporter](<a class="reference external" href="https://github.com/censusreporter/acs-aggregate/blob/master/crosswalks/zip_to_zcta/ZIP_ZCTA_README.md">https://github.com/censusreporter/acs-aggregate/blob/master/crosswalks/zip_to_zcta/ZIP_ZCTA_README.md</a>)</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.platform.crosswalks.zip2zcta.XReader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">XReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_to_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/crosswalks/zip2zcta.html#XReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.crosswalks.zip2zcta.XReader" title="Permalink to this definition"></a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.platform.crosswalks.zip2zcta.XReader.COLUMNS">
+<span class="sig-name descname"><span class="pre">COLUMNS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['ZIP_CODE',</span> <span class="pre">'PO_NAME',</span> <span class="pre">'STATE',</span> <span class="pre">'ZIP_TYPE',</span> <span class="pre">'ZCTA',</span> <span class="pre">'zip_join_type']</span></em><a class="headerlink" href="#dorieh.platform.crosswalks.zip2zcta.XReader.COLUMNS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.platform.crosswalks.zip2zcta.XReader.ignored_columns">
+<span class="sig-name descname"><span class="pre">ignored_columns</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'ENC_ZIP',</span> <span class="pre">'OBJECTID',</span> <span class="pre">'ReportingYear',</span> <span class="pre">'StateName'}</span></em><a class="headerlink" href="#dorieh.platform.crosswalks.zip2zcta.XReader.ignored_columns" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.platform.crosswalks.zip2zcta.XReader.column_map">
+<span class="sig-name descname"><span class="pre">column_map</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'CityName':</span> <span class="pre">'PO_NAME',</span> <span class="pre">'StateAbbr':</span> <span class="pre">'STATE',</span> <span class="pre">'ZCTA_USE':</span> <span class="pre">'ZCTA',</span> <span class="pre">'ZIP':</span> <span class="pre">'ZIP_CODE',</span> <span class="pre">'ZIPType':</span> <span class="pre">'ZIP_TYPE',</span> <span class="pre">'Zip_join_type':</span> <span class="pre">'zip_join_type'}</span></em><a class="headerlink" href="#dorieh.platform.crosswalks.zip2zcta.XReader.column_map" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.crosswalks.zip2zcta.XReader.get_year">
+<span class="sig-name descname"><span class="pre">get_year</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/crosswalks/zip2zcta.html#XReader.get_year"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.crosswalks.zip2zcta.XReader.get_year" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.crosswalks.zip2zcta.XReader.ensure_join_type">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ensure_join_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/crosswalks/zip2zcta.html#XReader.ensure_join_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.crosswalks.zip2zcta.XReader.ensure_join_type" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.crosswalks.zip2zcta.XReader.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/dorieh/platform/crosswalks/zip2zcta.html#XReader.read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.crosswalks.zip2zcta.XReader.read" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.crosswalks.zip2zcta.XReader.map">
+<span class="sig-name descname"><span class="pre">map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/dorieh/platform/crosswalks/zip2zcta.html#XReader.map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.crosswalks.zip2zcta.XReader.map" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.crosswalks.zip2zcta.XReader.read_xls">
+<span class="sig-name descname"><span class="pre">read_xls</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/dorieh/platform/crosswalks/zip2zcta.html#XReader.read_xls"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.crosswalks.zip2zcta.XReader.read_xls" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.platform.crosswalks.zip2zcta.Importer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Importer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arguments</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/crosswalks/zip2zcta.html#Importer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.crosswalks.zip2zcta.Importer" title="Permalink to this definition"></a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.platform.crosswalks.zip2zcta.Importer.URL_PATTERN">
+<span class="sig-name descname"><span class="pre">URL_PATTERN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'https://udsmapper.org/wp-content/uploads/2022/10/Z{ip}CodetoZCTACrosswalk{year}UDS.xls{x}'</span></em><a class="headerlink" href="#dorieh.platform.crosswalks.zip2zcta.Importer.URL_PATTERN" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.platform.crosswalks.zip2zcta.Importer.YEARS">
+<span class="sig-name descname"><span class="pre">YEARS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[2009,</span> <span class="pre">2010,</span> <span class="pre">2011,</span> <span class="pre">2012,</span> <span class="pre">2013,</span> <span class="pre">2014,</span> <span class="pre">2015,</span> <span class="pre">2016,</span> <span class="pre">2017,</span> <span class="pre">2018,</span> <span class="pre">2019,</span> <span class="pre">2020,</span> <span class="pre">2021]</span></em><a class="headerlink" href="#dorieh.platform.crosswalks.zip2zcta.Importer.YEARS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.platform.crosswalks.zip2zcta.Importer.TABLE">
+<span class="sig-name descname"><span class="pre">TABLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'public.zip2zcta'</span></em><a class="headerlink" href="#dorieh.platform.crosswalks.zip2zcta.Importer.TABLE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.crosswalks.zip2zcta.Importer.download">
+<span class="sig-name descname"><span class="pre">download</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/dorieh/platform/crosswalks/zip2zcta.html#Importer.download"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.crosswalks.zip2zcta.Importer.download" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.crosswalks.zip2zcta.Importer.process">
+<span class="sig-name descname"><span class="pre">process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/crosswalks/zip2zcta.html#Importer.process"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.crosswalks.zip2zcta.Importer.process" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.crosswalks.zip2zcta.Importer.drop">
+<span class="sig-name descname"><span class="pre">drop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/crosswalks/zip2zcta.html#Importer.drop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.crosswalks.zip2zcta.Importer.drop" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.crosswalks.zip2zcta.Importer.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/crosswalks/zip2zcta.html#Importer.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.crosswalks.zip2zcta.Importer.create" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.crosswalks.zip2zcta.Importer.populate">
+<span class="sig-name descname"><span class="pre">populate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_to_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/crosswalks/zip2zcta.html#Importer.populate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.crosswalks.zip2zcta.Importer.populate" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.crosswalks.zip2zcta.Importer.vacuum">
+<span class="sig-name descname"><span class="pre">vacuum</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/crosswalks/zip2zcta.html#Importer.vacuum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.crosswalks.zip2zcta.Importer.vacuum" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.crosswalks.zip2zcta.Importer.ingest">
+<span class="sig-name descname"><span class="pre">ingest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_to_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/crosswalks/zip2zcta.html#Importer.ingest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.crosswalks.zip2zcta.Importer.ingest" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.platform.crosswalks.zip2zcta.Importer.execute_db_update">
+<span class="sig-name descname"><span class="pre">execute_db_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sql</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/crosswalks/zip2zcta.html#Importer.execute_db_update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.crosswalks.zip2zcta.Importer.execute_db_update" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

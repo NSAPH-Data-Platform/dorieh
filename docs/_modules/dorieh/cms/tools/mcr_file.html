@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dorieh.cms.tools.mcr_file &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">dorieh.cms.tools.mcr_file</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for dorieh.cms.tools.mcr_file</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Module used for converting CMS DAT files to CSV</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1">#  Copyright (c) 2021-2022. Harvard University</span>
+<span class="c1">#</span>
+<span class="c1">#  Developed by Research Software Engineering,</span>
+<span class="c1">#  Faculty of Arts and Sciences, Research Computing (FAS RC)</span>
+<span class="c1">#  Author: Michael A Bouzinier</span>
+<span class="c1">#</span>
+<span class="c1">#  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1">#  you may not use this file except in compliance with the License.</span>
+<span class="c1">#  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#         http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1">#  limitations under the License.</span>
+
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">gzip</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+
+<span class="kn">from</span> <span class="nn">dateutil</span> <span class="kn">import</span> <span class="n">parser</span> <span class="k">as</span> <span class="n">date_parser</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+
+
+<div class="viewcode-block" id="log"><a class="viewcode-back" href="../../../../members/mcr_file.html#dorieh.cms.tools.mcr_file.log">[docs]</a><span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;run.log&quot;</span><span class="p">,</span> <span class="s2">&quot;at&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">w</span><span class="p">:</span>
+        <span class="n">w</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="width"><a class="viewcode-back" href="../../../../members/mcr_file.html#dorieh.cms.tools.mcr_file.width">[docs]</a><span class="k">def</span> <span class="nf">width</span><span class="p">(</span><span class="n">s</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+    <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MedparParseException"><a class="viewcode-back" href="../../../../members/mcr_file.html#dorieh.cms.tools.mcr_file.MedparParseException">[docs]</a><span class="k">class</span> <span class="nc">MedparParseException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Exception raised if data in a DAT file cannot be parsed</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MedparParseException</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">pos</span></div>
+
+
+<div class="viewcode-block" id="ColumnAttribute"><a class="viewcode-back" href="../../../../members/mcr_file.html#dorieh.cms.tools.mcr_file.ColumnAttribute">[docs]</a><span class="k">class</span> <span class="nc">ColumnAttribute</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Attribute of a column as described in the FTS file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">conv</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">start</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="n">end</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv</span> <span class="o">=</span> <span class="n">conv</span>
+
+<div class="viewcode-block" id="ColumnAttribute.arg"><a class="viewcode-back" href="../../../../members/mcr_file.html#dorieh.cms.tools.mcr_file.ColumnAttribute.arg">[docs]</a>    <span class="k">def</span> <span class="nf">arg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span></div></div>
+
+
+<div class="viewcode-block" id="ColumnDef"><a class="viewcode-back" href="../../../../members/mcr_file.html#dorieh.cms.tools.mcr_file.ColumnDef">[docs]</a><span class="k">class</span> <span class="nc">ColumnDef</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Column definition as described in the FTS file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="n">pattern</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span> <span class="o">==</span> <span class="mi">7</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">fields</span><span class="p">)):</span>
+            <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">fields</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">]:</span>
+                <span class="n">f</span> <span class="o">=</span> <span class="nb">int</span>
+            <span class="k">elif</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span>
+                <span class="n">f</span> <span class="o">=</span> <span class="n">width</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">f</span> <span class="o">=</span> <span class="nb">str</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ColumnAttribute</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">c</span><span class="o">+</span><span class="n">l</span><span class="p">,</span> <span class="n">f</span><span class="p">))</span>
+            <span class="n">c</span> <span class="o">+=</span> <span class="n">l</span> <span class="o">+</span> <span class="mi">1</span>
+
+<div class="viewcode-block" id="ColumnDef.read"><a class="viewcode-back" href="../../../../members/mcr_file.html#dorieh.cms.tools.mcr_file.ColumnDef.read">[docs]</a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+        <span class="n">attrs</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">Column</span><span class="p">(</span><span class="o">*</span><span class="n">attrs</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Column"><a class="viewcode-back" href="../../../../members/mcr_file.html#dorieh.cms.tools.mcr_file.Column">[docs]</a><span class="k">class</span> <span class="nc">Column</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class representing column metadata required for generating</span>
+<span class="sd">    database schema</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">ord</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">long_name</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">short_name</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">desc</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">short_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="n">long_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="nb">type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ord</span> <span class="o">=</span> <span class="nb">ord</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">start</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">=</span> <span class="n">width</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">desc</span> <span class="o">=</span> <span class="n">desc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">=</span> <span class="n">width</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">: [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__str__</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MedicareFile"><a class="viewcode-back" href="../../../../members/mcr_file.html#dorieh.cms.tools.mcr_file.MedicareFile">[docs]</a><span class="k">class</span> <span class="nc">MedicareFile</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class to manipulate a single CMS DAT file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dir_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                 <span class="n">year</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dest</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dir</span> <span class="o">=</span> <span class="n">dir_path</span>
+        <span class="k">if</span> <span class="n">dest</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dest</span><span class="p">):</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">dest</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dest</span> <span class="o">=</span> <span class="n">dest</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dest</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dir</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fts</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;fts&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">csv</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dest</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;csv.gz&quot;</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fts</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Not found: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">fts</span><span class="p">)</span>
+
+        <span class="n">pattern</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">*.dat&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dat</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="p">,</span> <span class="n">pattern</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">line_length</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+        <span class="n">block_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;Exact File Record Length (Bytes in Variable Block)&quot;</span><span class="p">]</span>
+        <span class="n">block_size</span> <span class="o">=</span> <span class="n">block_size</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="s1">&#39;,&#39;</span> <span class="ow">in</span> <span class="n">block_size</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">] Stripping commas: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fts</span><span class="p">,</span> <span class="n">block_size</span><span class="p">))</span>
+            <span class="n">block_size</span> <span class="o">=</span> <span class="n">block_size</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">block_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">block_size</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">year</span><span class="p">:</span>
+            <span class="n">year</span> <span class="o">=</span> <span class="n">name</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">year</span> <span class="o">=</span> <span class="n">year</span>
+
+<div class="viewcode-block" id="MedicareFile.init"><a class="viewcode-back" href="../../../../members/mcr_file.html#dorieh.cms.tools.mcr_file.MedicareFile.init">[docs]</a>    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fts</span><span class="p">)</span> <span class="k">as</span> <span class="n">fts</span><span class="p">:</span>
+            <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">fts</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)):</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;---&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="s1">&#39;------------------&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="k">if</span> <span class="s1">&#39;:&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                    <span class="n">x</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="n">cdef</span> <span class="o">=</span> <span class="n">ColumnDef</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="k">if</span> <span class="s1">&#39;End of Document&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+                    <span class="k">break</span>
+                <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;Note:&quot;</span><span class="p">):</span>
+                    <span class="k">break</span>
+                <span class="n">column</span> <span class="o">=</span> <span class="n">cdef</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">column</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">column</span></div>
+
+<div class="viewcode-block" id="MedicareFile.read_record"><a class="viewcode-back" href="../../../../members/mcr_file.html#dorieh.cms.tools.mcr_file.MedicareFile.read_record">[docs]</a>    <span class="k">def</span> <span class="nf">read_record</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">ln</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reads one record from DAT file</span>
+
+<span class="sd">        :param data: a slice of raw data from DAT file</span>
+<span class="sd">        :param ln:  line number, used for reporting</span>
+<span class="sd">        :return: Record data as list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">exception_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">pieces</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">column</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+            <span class="n">pieces</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="o">.</span><span class="n">start</span><span class="p">:</span><span class="n">column</span><span class="o">.</span><span class="n">end</span><span class="p">]</span>
+        <span class="n">record</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">column</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">pieces</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">column</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;NUM&quot;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">column</span><span class="o">.</span><span class="n">d</span><span class="p">:</span>
+                    <span class="n">val</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="n">val</span><span class="p">:</span>
+                        <span class="n">record</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">record</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">column</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;DATE&quot;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+                        <span class="n">record</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">date_parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">record</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">record</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">x</span><span class="p">:</span>
+                <span class="n">log</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:d}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">[</span><span class="si">{:d}</span><span class="s2">]: - </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">ln</span><span class="p">,</span> <span class="n">column</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">column</span><span class="o">.</span><span class="n">ord</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+                <span class="p">)</span>
+                <span class="n">record</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+                <span class="n">exception_count</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">exception_count</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+                    <span class="n">log</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                    <span class="k">raise</span> <span class="n">MedparParseException</span><span class="p">(</span><span class="s2">&quot;Too meany exceptions&quot;</span><span class="p">,</span> <span class="n">column</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">record</span></div>
+
+<div class="viewcode-block" id="MedicareFile.validate"><a class="viewcode-back" href="../../../../members/mcr_file.html#dorieh.cms.tools.mcr_file.MedicareFile.validate">[docs]</a>    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Asserts that the given record is consistent with</span>
+<span class="sd">        the file from which it is read. </span>
+
+<span class="sd">        :param record: Record</span>
+<span class="sd">        :return:   None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">yc</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="s2">&quot;BENE_ENROLLMT_REF_YR&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">yc</span> <span class="o">=</span> <span class="s2">&quot;BENE_ENROLLMT_REF_YR&quot;</span>
+        <span class="k">if</span> <span class="s2">&quot;MEDPAR_YR_NUM&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">yc</span> <span class="o">=</span> <span class="s2">&quot;MEDPAR_YR_NUM&quot;</span>
+        <span class="k">if</span> <span class="n">yc</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="s2">&quot;Year column was not found in FTS&quot;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">record</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">yc</span><span class="p">]</span><span class="o">.</span><span class="n">ord</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">year</span></div>
+
+<div class="viewcode-block" id="MedicareFile.count_lines_in_source"><a class="viewcode-back" href="../../../../members/mcr_file.html#dorieh.cms.tools.mcr_file.MedicareFile.count_lines_in_source">[docs]</a>    <span class="k">def</span> <span class="nf">count_lines_in_source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Counts number of lines in the original DAT file</span>
+
+<span class="sd">        :return: number of lines</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">lines</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">blocks</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">bts</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">t1</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">t0</span> <span class="o">=</span> <span class="n">t1</span>
+        <span class="k">for</span> <span class="n">dat</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dat</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t0</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span> <span class="n">dat</span><span class="p">))</span>
+            <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dat</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">source</span><span class="p">:</span>
+                <span class="k">while</span> <span class="n">source</span><span class="o">.</span><span class="n">readable</span><span class="p">():</span>
+                    <span class="n">chunk</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1024</span><span class="o">*</span><span class="mi">1024</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="k">break</span>
+                    <span class="n">blocks</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">bts</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+                    <span class="n">n</span> <span class="o">=</span> <span class="n">chunk</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="n">counter</span> <span class="o">+=</span> <span class="n">n</span>
+                    <span class="n">t2</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+                    <span class="n">elapsed</span> <span class="o">=</span> <span class="n">t2</span> <span class="o">-</span> <span class="n">t1</span>
+                    <span class="k">if</span> <span class="n">elapsed</span> <span class="o">&gt;</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+                        <span class="n">t1</span> <span class="o">=</span> <span class="n">t2</span>
+                        <span class="nb">print</span><span class="p">(</span>
+                            <span class="p">(</span>
+                                <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> running for </span><span class="si">{}</span><span class="s2">. Blocks = </span><span class="si">{:,}</span><span class="s2">, lines = </span><span class="si">{:,}</span><span class="s2">&quot;</span>
+                                <span class="o">+</span> <span class="s2">&quot;, bytes = </span><span class="si">{:,}</span><span class="s2">&quot;</span>
+                            <span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dat</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">t2</span> <span class="o">-</span> <span class="n">t0</span><span class="p">),</span> <span class="n">blocks</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">bts</span><span class="p">)</span>
+                        <span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">: </span><span class="si">{:d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">dat</span><span class="p">),</span> <span class="n">counter</span><span class="p">))</span>
+            <span class="n">lines</span> <span class="o">+=</span> <span class="n">counter</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">[Total]: </span><span class="si">{:d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">lines</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">lines</span></div>
+
+<div class="viewcode-block" id="MedicareFile.count_lines_in_dest"><a class="viewcode-back" href="../../../../members/mcr_file.html#dorieh.cms.tools.mcr_file.MedicareFile.count_lines_in_dest">[docs]</a>    <span class="k">def</span> <span class="nf">count_lines_in_dest</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Counts number of lines in the resulting CSV file</span>
+
+<span class="sd">        :return: number of lines</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">lines</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">csv</span><span class="p">):</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">with</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">csv</span><span class="p">,</span> <span class="s2">&quot;rt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">out</span><span class="p">:</span>
+                <span class="n">lines</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">: </span><span class="si">{:d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">csv</span><span class="p">,</span> <span class="n">lines</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">lines</span></div>
+
+<div class="viewcode-block" id="MedicareFile.status"><a class="viewcode-back" href="../../../../members/mcr_file.html#dorieh.cms.tools.mcr_file.MedicareFile.status">[docs]</a>    <span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks if a given DAT file has been successfully converted to CSV</span>
+
+<span class="sd">        :return: Value of the status of the conversion</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">csv</span><span class="p">):</span>
+                <span class="k">return</span> <span class="s2">&quot;NONE&quot;</span>
+            <span class="n">l2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">count_lines_in_dest</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">l2</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;EMPTY&quot;</span>
+            <span class="n">l1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">count_lines_in_source</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">l1</span> <span class="o">!=</span> <span class="n">l2</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;MISMATCH: </span><span class="si">{:d}</span><span class="s2">=&gt;</span><span class="si">{:d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s2">&quot;READY&quot;</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">x</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fts</span><span class="p">)</span>
+            <span class="n">traceback</span><span class="o">.</span><span class="n">print_exception</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s2">&quot;ERROR: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MedicareFile.status_message"><a class="viewcode-back" href="../../../../members/mcr_file.html#dorieh.cms.tools.mcr_file.MedicareFile.status_message">[docs]</a>    <span class="k">def</span> <span class="nf">status_message</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks if a given DAT file has been successfully converted to CSV</span>
+
+<span class="sd">        :return: Message, containing the status of the conversion</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fts</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="MedicareFile.export"><a class="viewcode-back" href="../../../../members/mcr_file.html#dorieh.cms.tools.mcr_file.MedicareFile.export">[docs]</a>    <span class="k">def</span> <span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Performs actual conversion</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dir</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dest</span><span class="p">:</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fts</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dest</span><span class="p">)</span>
+        <span class="n">t1</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">t0</span> <span class="o">=</span> <span class="n">t1</span>
+        <span class="k">with</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">csv</span><span class="p">,</span> <span class="s2">&quot;wt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out</span><span class="p">:</span>
+            <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">quoting</span><span class="o">=</span><span class="n">csv</span><span class="o">.</span><span class="n">QUOTE_MINIMAL</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">dat</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dat</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">dat</span><span class="p">)</span>
+                <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">good</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">bad_lines</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">remainder</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dat</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">source</span><span class="p">:</span>
+                    <span class="k">while</span> <span class="n">source</span><span class="o">.</span><span class="n">readable</span><span class="p">():</span>
+                        <span class="n">l</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">block_size</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">remainder</span><span class="p">)</span> <span class="o">+</span> <span class="mi">100</span>
+                        <span class="n">block</span> <span class="o">=</span> <span class="n">remainder</span> <span class="o">+</span> <span class="n">source</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">block</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">block_size</span><span class="p">:</span>
+                            <span class="k">break</span>
+                        <span class="n">idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">block_size</span>
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="n">record</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_record</span><span class="p">(</span><span class="n">block</span><span class="p">[:</span><span class="n">idx</span><span class="p">],</span> <span class="n">counter</span><span class="p">)</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+                            <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+                            <span class="n">good</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="k">except</span> <span class="n">MedparParseException</span> <span class="k">as</span> <span class="n">x</span><span class="p">:</span>
+                            <span class="n">log</span><span class="p">(</span><span class="s2">&quot;Line = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">counter</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">pos</span><span class="p">))</span>
+                            <span class="n">bad_lines</span> <span class="o">+=</span> <span class="mi">1</span>
+                            <span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+                            <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">pos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">block_size</span><span class="p">):</span>
+                                <span class="k">if</span> <span class="n">block</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">13</span><span class="p">]:</span>
+                                    <span class="k">break</span>
+                        <span class="k">except</span> <span class="ne">AssertionError</span> <span class="k">as</span> <span class="n">x</span><span class="p">:</span>
+                            <span class="n">log</span><span class="p">(</span><span class="s2">&quot;Line = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">counter</span><span class="p">))</span>
+                            <span class="n">bad_lines</span> <span class="o">+=</span> <span class="mi">1</span>
+                            <span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+                        <span class="k">while</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">block</span><span class="p">)</span> <span class="ow">and</span> <span class="n">block</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">13</span><span class="p">]:</span>
+                            <span class="n">idx</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="n">remainder</span> <span class="o">=</span> <span class="n">block</span><span class="p">[</span><span class="n">idx</span><span class="p">:]</span>
+                        <span class="n">block</span> <span class="o">=</span> <span class="kc">None</span>
+                        <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="n">counter</span><span class="o">%</span><span class="mi">100000</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="n">t2</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+                            <span class="n">t1</span> <span class="o">=</span> <span class="n">t2</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">[</span><span class="si">{}</span><span class="s2">]: </span><span class="si">{:,}</span><span class="s2">/</span><span class="si">{:,}</span><span class="s2">/</span><span class="si">{:,}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                <span class="n">dat</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">t2</span> <span class="o">-</span> <span class="n">t0</span><span class="p">),</span>
+                                <span class="n">counter</span><span class="p">,</span> <span class="n">good</span><span class="p">,</span> <span class="n">bad_lines</span>
+                            <span class="p">))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> processed. Bad lines: </span><span class="si">{:,}</span><span class="s2">&quot;</span>
+                      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fts</span><span class="p">,</span> <span class="n">bad_lines</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="MedicareFile.info"><a class="viewcode-back" href="../../../../members/mcr_file.html#dorieh.cms.tools.mcr_file.MedicareFile.info">[docs]</a>    <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Prints info about the DAT file (metadata) to standard output</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="p">[</span>
+            <span class="s2">&quot;Columns in File&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Exact File Record Length (Bytes in Variable Block)&quot;</span>
+        <span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="n">s</span><span class="p">]))</span>
+
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:d}</span><span class="s2"> - </span><span class="si">{}</span><span class="s2"> - </span><span class="si">{}</span><span class="s2"> - </span><span class="si">{:d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">ord</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">start</span><span class="p">))</span></div></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">MedicareFile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span> <span class="s2">&quot;medpar_all_file_res000017155_req007087_2015&quot;</span><span class="p">)</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">export</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

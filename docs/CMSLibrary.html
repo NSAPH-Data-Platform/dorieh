@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python package to manipulate health (CMS) data &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Python package to manipulate health (CMS) data</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/CMSLibrary.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="python-package-to-manipulate-health-cms-data">
+<h1>Python package to manipulate health (CMS) data<a class="headerlink" href="#python-package-to-manipulate-health-cms-data" title="Permalink to this heading"></a></h1>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Python Module Index</span></a></p>
+</div>
+<section id="package-cms">
+<h2>Package cms<a class="headerlink" href="#package-cms" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="members/fts2yaml.html"><span class="std std-doc">fts2yaml</span></a> is a generic
+parser for <a class="reference internal" href="#parsing-fts">FTS</a> format for both Medicaid and Medicare.</p></li>
+<li><p><a class="reference internal" href="members/create_schema_config.html"><span class="std std-doc">create_schema_config</span></a> is used
+to interpret options to introspect raw files or parse FTS</p></li>
+<li><p><a class="reference internal" href="members/registry.html"><span class="std std-doc">registry</span></a> Command line tool to create and/or update
+data models for raw CMS data (See
+<a class="reference internal" href="members/create_schema_config.html"><span class="std std-doc">create_schema_config</span></a> for options)</p></li>
+<li><p><a class="reference internal" href="members/random_selector.html"><span class="std std-doc">random_selector</span></a> Selects random lines
+from a CSV-like file</p></li>
+<li><p><a class="reference internal" href="members/mcr_create_test_data.html"><span class="doc std std-doc">random_selector</span></a> Selects random lines
+from a set of CMS files described by an <a class="reference internal" href="fts.html"><span class="doc std std-doc">FTS file</span></a></p></li>
+<li><p><a class="reference internal" href="members/mcr_data_loader.html"><span class="std std-doc">medicare data loader</span></a>  Subclass of generic
+<a class="reference internal" href="#../../core-platform/doc/members/data_loader.rst"><span class="xref myst">Data Loader</span></a>
+aware of the raw Medicare CMS
+data structure. Matches FTS and DAT files.</p></li>
+</ul>
+</section>
+<section id="package-dorieh-cms-tools">
+<h2>Package dorieh.cms.tools<a class="headerlink" href="#package-dorieh-cms-tools" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="members/mcr_create_test_data.html"><span class="doc std std-doc">CMS Test data generator</span></a> Selects random lines
+from a set of CMS files described by an <a class="reference internal" href="fts.html"><span class="doc std std-doc">FTS file</span></a></p></li>
+<li><p><a class="reference internal" href="members/mcr_combine_tables.html"><span class="std std-doc">mcr_combine_tables</span></a> Command-line
+tool to combine disparate tables with raw medicare CMS data
+into a single consolidated view.
+See <a class="reference internal" href="Medicare.html#combining-raw-files-into-a-single-view"><span class="std std-ref">details</span></a></p></li>
+<li><p><a class="reference internal" href="members/medpar_converter.html"><span class="std std-doc">medpar_converter</span></a> Converter for CMS <code class="docutils literal notranslate"><span class="pre">DAT</span></code>
+files described by <code class="docutils literal notranslate"><span class="pre">FTS</span></code> to <code class="docutils literal notranslate"><span class="pre">CSV</span></code></p></li>
+<li><p><a class="reference internal" href="members/mcr_file.html"><span class="std std-doc">mcr_file</span></a> Module to manipulate with a single
+Medicare CMS DAT file</p></li>
+<li><p><a class="reference internal" href="members/mcr_fts2csv.html"><span class="std std-doc">mcr_fts2csv</span></a> Simple converter from FWF format to CSV</p></li>
+<li><p><a class="reference internal" href="members/mcr_fts2db.html"><span class="std std-doc">mcr_fts2db</span></a> Loader of FWF data into the database</p></li>
+<li><p><a class="reference internal" href="members/mcr_registry.html"><span class="std std-doc">mcr_registry</span></a> Common content for the
+Medicare data model YAML file</p></li>
+<li><p><a class="reference internal" href="members/mcr_sas.html"><span class="std std-doc">mcr_sas</span></a> Abstract class to look for and process
+Medicare files from 1999 to 2010</p></li>
+<li><p><a class="reference internal" href="members/mcr_sas2db.html"><span class="std std-doc">mcr_sas2db</span></a> Loader looks for SAS 7BDAT files</p></li>
+<li><p><a class="reference internal" href="members/mcr_sas2yaml.html"><span class="std std-doc">mcr_sas2yaml</span></a> Introspector for SAS 7BDAT
+files, generating
+<a class="reference internal" href="#../../core-platform/doc/Datamodels.md"><span class="xref myst">YAML data model</span></a> for each file</p></li>
+</ul>
+<blockquote>
+<div><blockquote>
+<div><blockquote>
+<div><p>This package contains code that was written to try to extract
+corrupted medicare data for 2015. Ultimately, this attempt
+was unsuccessful.</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Python Module Index</span></a></p>
+</div>
+</section>
+<section id="additional-details">
+<h2>Additional details<a class="headerlink" href="#additional-details" title="Permalink to this heading"></a></h2>
+<section id="parsing-fts">
+<h3>Parsing FTS<a class="headerlink" href="#parsing-fts" title="Permalink to this heading"></a></h3>
+<p>File transfer summary (FTS) document contains information about
+the data extract. These are plain text files containing
+information such as the number of
+columns in the data extract, number of rows and the size of the
+data file. The FTS document provides the
+starting positions, the length and the generic format of
+each of the column (such as character, numeric or date)</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

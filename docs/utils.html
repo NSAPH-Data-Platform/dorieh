@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dorieh Utilities (Python package) &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Dorieh Utilities (Python package)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/utils.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dorieh-utilities-python-package">
+<h1>Dorieh Utilities (Python package)<a class="headerlink" href="#dorieh-utilities-python-package" title="Permalink to this heading"></a></h1>
+<p><a class="reference internal" href="home.html"><span class="doc std std-doc">Documentation Home</span></a></p>
+<p>There are open questions about how best to structure this package that we can address
+(i.e. do we do multiple modules within this module, 1 single module, etc).</p>
+<section id="overview-of-utilities">
+<h2>Overview of Utilities<a class="headerlink" href="#overview-of-utilities" title="Permalink to this heading"></a></h2>
+<p>The dorieh.utils package is intended to hold python
+code that will be useful
+across multiple portions of the Dorieh pipelines.</p>
+<p>The included utilities are developed to be as independent of
+specific infrastructure and execution environment as possible.</p>
+<p>Included utilities:</p>
+<ul class="simple">
+<li><p>Interpolation code</p></li>
+<li><p>Reading FST files from Python <a class="reference internal" href="members/pyfst.html"><span class="doc std std-doc">The pyfst Module</span></a></p></li>
+<li><p>Reading FWF files <a class="reference internal" href="members/fwf.html"><span class="doc std std-doc">The fwf Module</span></a></p></li>
+<li><p>various I/O wrappers <a class="reference internal" href="members/io_utils.html"><span class="doc std std-doc">The io_utils Module</span></a></p></li>
+<li><p>An API and CLI framework <a class="reference internal" href="members/context.html"><span class="doc std std-doc">The context Module</span></a></p></li>
+<li><p>QC Framework</p></li>
+</ul>
+</section>
+<section id="current-development">
+<h2>Current Development<a class="headerlink" href="#current-development" title="Permalink to this heading"></a></h2>
+<p>Updated 2/26/2021, Ben Sabath</p>
+<ul class="simple">
+<li><p>Interpolatation code: We have re-implemented the logic used for the
+initial moving average interpolation used in the R based pipelines.
+Developing better metholdologies remains to be done. Based on spot checks
+the results match those from the previous version.</p></li>
+</ul>
+</section>
+<section id="todo">
+<h2>TODO<a class="headerlink" href="#todo" title="Permalink to this heading"></a></h2>
+<p>Updated 2/26/2021, Ben Sabath</p>
+<ul class="simple">
+<li><p>Generic <code class="docutils literal notranslate"><span class="pre">Data</span></code> object that other NSAPH modules can inherit from.</p></li>
+<li><p>Creation of list of other useful general features</p></li>
+<li><p>Review of already done development to see what would make sense to port to this package</p></li>
+</ul>
+</section>
+<section id="documentation-indices">
+<span id="utils-indices"></span><h2>Documentation Indices<a class="headerlink" href="#documentation-indices" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

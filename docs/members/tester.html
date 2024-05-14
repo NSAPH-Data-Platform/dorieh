@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The tester Module &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">The tester Module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/members/tester.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-dorieh.utils.qc.tester">
+<span id="the-tester-module"></span><h1>The tester Module<a class="headerlink" href="#module-dorieh.utils.qc.tester" title="Permalink to this heading"></a></h1>
+<p>Generic object for testing for data quality issues.</p>
+<p>Tester class contains list of tests to run on data. Tests contain a variable name, a condition, and a severity</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.utils.qc.tester.Condition">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Condition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/qc/tester.html#Condition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.qc.tester.Condition" title="Permalink to this definition"></a></dt>
+<dd><p>An enumeration.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.utils.qc.tester.Condition.less_than">
+<span class="sig-name descname"><span class="pre">less_than</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'lt'</span></em><a class="headerlink" href="#dorieh.utils.qc.tester.Condition.less_than" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.utils.qc.tester.Condition.greater_than">
+<span class="sig-name descname"><span class="pre">greater_than</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'gt'</span></em><a class="headerlink" href="#dorieh.utils.qc.tester.Condition.greater_than" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.utils.qc.tester.Condition.data_type">
+<span class="sig-name descname"><span class="pre">data_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'dtype'</span></em><a class="headerlink" href="#dorieh.utils.qc.tester.Condition.data_type" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.utils.qc.tester.Condition.no_missing">
+<span class="sig-name descname"><span class="pre">no_missing</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'no_nan'</span></em><a class="headerlink" href="#dorieh.utils.qc.tester.Condition.no_missing" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.utils.qc.tester.Condition.count_missing">
+<span class="sig-name descname"><span class="pre">count_missing</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'count_nan'</span></em><a class="headerlink" href="#dorieh.utils.qc.tester.Condition.count_missing" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.utils.qc.tester.Severity">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Severity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/qc/tester.html#Severity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.qc.tester.Severity" title="Permalink to this definition"></a></dt>
+<dd><p>An enumeration.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.utils.qc.tester.Severity.debug">
+<span class="sig-name descname"><span class="pre">debug</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></em><a class="headerlink" href="#dorieh.utils.qc.tester.Severity.debug" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.utils.qc.tester.Severity.info">
+<span class="sig-name descname"><span class="pre">info</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">20</span></em><a class="headerlink" href="#dorieh.utils.qc.tester.Severity.info" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.utils.qc.tester.Severity.warning">
+<span class="sig-name descname"><span class="pre">warning</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">30</span></em><a class="headerlink" href="#dorieh.utils.qc.tester.Severity.warning" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.utils.qc.tester.Severity.error">
+<span class="sig-name descname"><span class="pre">error</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">40</span></em><a class="headerlink" href="#dorieh.utils.qc.tester.Severity.error" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.utils.qc.tester.Severity.critical">
+<span class="sig-name descname"><span class="pre">critical</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">50</span></em><a class="headerlink" href="#dorieh.utils.qc.tester.Severity.critical" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="dorieh.utils.qc.tester.ExpectationError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ExpectationError</span></span><a class="reference internal" href="../_modules/dorieh/utils/qc/tester.html#ExpectationError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.qc.tester.ExpectationError" title="Permalink to this definition"></a></dt>
+<dd><p>Error for when an expected value to a condition cannot be valid</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.utils.qc.tester.Test">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">severity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/qc/tester.html#Test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.qc.tester.Test" title="Permalink to this definition"></a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.utils.qc.tester.Test.val">
+<span class="sig-name descname"><span class="pre">val</span></span><a class="headerlink" href="#dorieh.utils.qc.tester.Test.val" title="Permalink to this definition"></a></dt>
+<dd><p>Value to compare against, can be excluded for a <code class="docutils literal notranslate"><span class="pre">no_missing</span></code> check</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.utils.qc.tester.Test.check">
+<span class="sig-name descname"><span class="pre">check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/qc/tester.html#Test.check"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.qc.tester.Test.check" title="Permalink to this definition"></a></dt>
+<dd><p>Check variable of input dataframe to see if it meets conditions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.utils.qc.tester.Test.check.params.df"></span><strong>df</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.qc.tester.Test.check.params.df">¶</a> – Pandas data frame</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>boolean of if the data passed the test</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.utils.qc.tester.Tester">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Tester</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaml_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/qc/tester.html#Tester"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.qc.tester.Tester" title="Permalink to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="dorieh.utils.qc.tester.Tester.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dorieh.utils.qc.tester.Test" title="dorieh.utils.qc.tester.Test"><span class="pre">Test</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/qc/tester.html#Tester.add"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.qc.tester.Tester.add" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.utils.qc.tester.Tester.load_yaml">
+<span class="sig-name descname"><span class="pre">load_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">yaml_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/qc/tester.html#Tester.load_yaml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.qc.tester.Tester.load_yaml" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.utils.qc.tester.Tester.check">
+<span class="sig-name descname"><span class="pre">check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/qc/tester.html#Tester.check"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.qc.tester.Tester.check" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

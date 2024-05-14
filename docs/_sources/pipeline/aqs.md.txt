@@ -1,0 +1,77 @@
+# Full EPA AQS Processing Pipeline
+
+
+ [Source code](aqscwl_src.md) 
+
+
+![](aqs.png)
+
+```{contents}
+---
+local:
+---
+```
+
+**Workflow**
+
+## Description
+
+This workflow downloads AQS data from the government
+servers, introspects it to infer the database schema
+and ingests the data into the database
+
+Example run:
+```shell
+cwl-runner aqs.cwl sample_aqs_annual.yml
+```
+
+See [sample_aqs_annual.yml](sample_aqs.md)
+
+Or
+
+```shell
+cwl-runner /opt/airflow/project/epa/src/cwl/aqs.cwl --database /opt/airflow/project/database.ini --connection_name nsaph2 --agregation annual --parameter_code PM25 --table pm25_annual --proxy $HTTP_PROXY
+```
+
+
+## Inputs
+
+| Name            | Type     | Default | Description                                                                                                                                                    | 
+|:----------------|:---------|:--------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| proxy           | string?  |         | HTTP/HTTPS Proxy if required                                                                                                                                   | 
+| database        | File     |         | Path to database connection file, usually database.ini                                                                                                         | 
+| connection_name | string   |         | The name of the section in the database.ini file                                                                                                               | 
+| aggregation     | string   |         |                                                                                                                                                                | 
+| parameter_code  | string   |         | Parameter code. Either a numeric code (e.g. 88101, 44201) or symbolic name (e.g. PM25, NO2). See more: [AQS Code List](https://www.epa.gov/aqs/aqs-code-list)  | 
+| table           | string   |         | Name of the table to be created in the database                                                                                                                | 
+| years           | string[] |         | Years to download                                                                                                                                              | 
+
+## Outputs
+
+| Name           | Type | Description | 
+|:---------------|:-----|:------------|
+| initdb_log     | File |             | 
+| expand_log     | File |             | 
+| introspect_log | File |             | 
+| ingest_log     | File |             | 
+| index_log      | File |             | 
+| vacuum_log     | File |             | 
+| data           | File |             | 
+| model          | File |             | 
+| introspect_err | File |             | 
+| ingest_err     | File |             | 
+| index_err      | File |             | 
+| vacuum_err     | File |             | 
+
+## Steps
+
+| Name       | Runs                                | Description                                                | 
+|:-----------|:------------------------------------|:-----------------------------------------------------------|
+| initdb     | [initcoredb.cwl](initcoredb.md)     | Ensure that database utilities are at their latest version | 
+| download   | [download_aqs.cwl](download_aqs.md) |                                                            | 
+| expand     | [expand_aqs.cwl](expand_aqs.md)     |                                                            | 
+| introspect | [introspect.cwl](introspect.md)     |                                                            | 
+| ingest     | [ingest.cwl](ingest.md)             | Uploads data into the database                             | 
+| index      | [index.cwl](index.md)               |                                                            | 
+| vacuum     | [vacuum.cwl](vacuum.md)             |                                                            | 
+

@@ -1,0 +1,34 @@
+# census_assemble.cwl
+
+
+ [Source code](census_assemblecwl_src.md) 
+
+
+```{contents}
+---
+local:
+---
+```
+
+**Tool**. Runs: census.cli
+
+## Inputs
+
+| Name       | Type    | Default                                       | Description | 
+|:-----------|:--------|:----------------------------------------------|:------------|
+| http_proxy | string  |                                               |             | 
+| api_key    | string  |                                               |             | 
+| var_file   | File    |                                               |             | 
+| geometry   | string  |                                               |             | 
+| years      | string  | `1999:2019`                                   |             | 
+| log        | File    | `{'class': 'File', 'location': 'census.log'}` |             | 
+| pkl_file   | string  | `census.pkl`                                  |             | 
+| state      | string? |                                               |             | 
+| county     | string? |                                               |             | 
+
+## Outputs
+
+| Name | Type | Description | 
+|:-----|:-----|:------------|
+| pkl  | File |             | 
+

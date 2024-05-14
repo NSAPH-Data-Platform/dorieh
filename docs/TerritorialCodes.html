@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mapping between different territorial codes &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Mapping between different territorial codes</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/TerritorialCodes.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mapping-between-different-territorial-codes">
+<h1>Mapping between different territorial codes<a class="headerlink" href="#mapping-between-different-territorial-codes" title="Permalink to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#code-systems" id="id1">Code systems</a></p></li>
+<li><p><a class="reference internal" href="#mapping-sources" id="id2">Mapping sources</a></p></li>
+<li><p><a class="reference internal" href="#python-and-sql-code" id="id3">Python and SQL Code</a></p></li>
+<li><p><a class="reference internal" href="#tables-and-functions" id="id4">Tables and Functions</a></p>
+<ul>
+<li><p><a class="reference internal" href="#tables" id="id5">Tables</a></p></li>
+<li><p><a class="reference internal" href="#functions" id="id6">Functions</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="code-systems">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Code systems</a><a class="headerlink" href="#code-systems" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>United States Postal Service (USPS)</p>
+<ul>
+<li><p>ZIP codes</p></li>
+</ul>
+</li>
+<li><p>Federal Information Processing Standard (FIPS) codes</p>
+<ul>
+<li><p>States</p></li>
+<li><p>Counties</p></li>
+</ul>
+</li>
+<li><p>Social Security Administration (SSA) Codes</p>
+<ul>
+<li><p>States</p></li>
+<li><p>Counties</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="mapping-sources">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Mapping sources</a><a class="headerlink" href="#mapping-sources" title="Permalink to this heading"></a></h2>
+<p>Mapping between FIPS and SSA codes is available from
+<a class="reference external" href="https://www.nber.org/research/data/ssa-federal-information-processing-series-fips-state-and-county-crosswalk">National Bureau of Economic Research (NBER)</a></p>
+<p>Mapping between FIPS and ZIP codes we have taken from
+United States Department of Housing and Urban Development (HUD)
+Office of Policy Development and Research (PD&amp;R)
+<a class="reference external" href="https://www.huduser.gov/portal/datasets/usps_crosswalk.html">ZIP crosswalk files</a></p>
+</section>
+<section id="python-and-sql-code">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Python and SQL Code</a><a class="headerlink" href="#python-and-sql-code" title="Permalink to this heading"></a></h2>
+<p>Two utilities are provided to downloaded mapping files from
+sources and load them into the database:</p>
+<ul class="simple">
+<li><p>Python module to download and ingest NBER FIPS &lt;-&gt; SSA mapping files:
+<a class="reference internal" href="members/ssa2fips.html"><span class="doc std std-doc">ssa2fips</span></a></p></li>
+<li><p>Python module to download and ingest HUD ZIP to FIPS mappings:
+<a class="reference internal" href="members/zip2fips.html"><span class="doc std std-doc">zip2fips</span></a></p></li>
+<li><p>DDL for HUD ZIP to FIPS mappings:
+<a class="reference internal" href="members/hud_zip2fips.html"><span class="doc std std-doc">hud_zip2fips.ddl</span></a></p></li>
+<li><p>SQL to create direct ZIP =&gt; FIPS lookup table and helper functions:
+<a class="reference internal" href="members/zip2fips.sql.html"><span class="doc std std-doc">zip2fips.sql</span></a></p></li>
+</ul>
+</section>
+<section id="tables-and-functions">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Tables and Functions</a><a class="headerlink" href="#tables-and-functions" title="Permalink to this heading"></a></h2>
+<p>All tables and functions are in schema “public”.</p>
+<section id="tables">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Tables</a><a class="headerlink" href="#tables" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ssa</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hud_zip2fips</span></code></p></li>
+<li><p>MATERIALIZED VIEW <code class="docutils literal notranslate"><span class="pre">public.zip2fips</span></code> for direct lookups</p></li>
+</ul>
+</section>
+<section id="functions">
+<span id="territorial-codes-functions"></span><h3><a class="toc-backref" href="#id6" role="doc-backlink">Functions</a><a class="headerlink" href="#functions" title="Permalink to this heading"></a></h3>
+<p>The functions below are defined in <a class="reference internal" href="members/zip2fips.sql.html"><span class="doc std std-doc">zip2fips.sql</span></a>
+and used to map zip codes to county FIPS codes or to validate that a given
+combination of zip code and county code exists.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public.zip_to_fips(year</span> <span class="pre">int,</span> <span class="pre">zip</span> <span class="pre">int)</span> <span class="pre">RETURNS</span> <span class="pre">int</span></code>. This function
+looks for all counties that intersected the provided zip code area in
+the given year. The intersecting counties are then sorted
+by the ratio of county residential addresses within the zip code area:
+the number of residential addresses in the intersection of the<br />
+ZIP code area and the county divided by the total number
+of residential addresses in the entire ZIP. The
+county with the highest ratio is selected as the return value. The FIPS
+code for such county is returned as an integer (e.g., 12).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public.zip_to_fips3(year</span> <span class="pre">int,</span> <span class="pre">zip</span> <span class="pre">int)</span> <span class="pre">RETURNS</span> <span class="pre">varchar(3)</span></code> - the same as
+the above, but return value is a 3-character string (<code class="docutils literal notranslate"><span class="pre">VARCHAR(3)</span></code>)
+padded by zeros (e.g., ‘012’).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public.is_zip_to_fips_exact(year</span> <span class="pre">int,</span> <span class="pre">zip</span> <span class="pre">int)</span> <span class="pre">RETURNS</span> <span class="pre">bool</span></code> returns
+<code class="docutils literal notranslate"><span class="pre">true</span></code> if county fips code can be unambiguously inferred from the given
+zip code in the given year, <code class="docutils literal notranslate"><span class="pre">false</span></code> otherwise. In particular this function
+return <code class="docutils literal notranslate"><span class="pre">false</span></code> if a <code class="docutils literal notranslate"><span class="pre">year</span></code> is missing from mapping files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public.validate_zip_fips(zip</span> <span class="pre">int,</span> <span class="pre">fips2</span> <span class="pre">varchar,</span> <span class="pre">fips3</span> <span class="pre">varchar)</span> <span class="pre">RETURNS</span> <span class="pre">bool</span></code>
+returns true if a given combination of the codes is a valid combination,
+i.e. if there are exist (or ever existed) any residential, business or
+other addresses in the given state and county that have the
+given zip code.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

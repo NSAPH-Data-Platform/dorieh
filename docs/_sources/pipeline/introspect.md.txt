@@ -1,0 +1,37 @@
+# Introspector for downloaded data file
+
+
+ [Source code](introspectcwl_src.md) 
+
+
+```{contents}
+---
+local:
+---
+```
+
+**Tool**. Runs: dorieh.epa.registry
+
+## Description
+
+This tool examines a directory with downlaoded
+EPA data and generates a table defintion
+
+
+## Inputs
+
+| Name       | Type   | Default | Description                                                      | 
+|:-----------|:-------|:--------|:-----------------------------------------------------------------|
+| input      | File   |         | A path the downloaded data file                                  | 
+| output     | string |         | A path to a file name with EPA data model                        | 
+| table      | string |         | the name of the table to be created                              | 
+| depends_on | File?  |         | a special field used to enforce dependencies and execution order | 
+
+## Outputs
+
+| Name   | Type   | Description | 
+|:-------|:-------|:------------|
+| log    | File   |             | 
+| model  | File   |             | 
+| errors | stderr |             | 
+

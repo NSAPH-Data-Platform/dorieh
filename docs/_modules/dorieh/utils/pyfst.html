@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dorieh.utils.pyfst &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">dorieh.utils.pyfst</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for dorieh.utils.pyfst</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">A reader for `FST files &lt;https://www.fstpackage.org/&gt;`_</span>
+<span class="sd">providing the same</span>
+<span class="sd">interface as `CSV reader &lt;https://docs.python.org/3/library/csv.html&gt;`_.</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="c1">#  Copyright (c) 2021. Harvard University</span>
+<span class="c1">#</span>
+<span class="c1">#  Developed by Research Software Engineering,</span>
+<span class="c1">#  Faculty of Arts and Sciences, Research Computing (FAS RC)</span>
+<span class="c1">#  Author: Michael A Bouzinier</span>
+<span class="c1">#</span>
+<span class="c1">#  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1">#  you may not use this file except in compliance with the License.</span>
+<span class="c1">#  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#         http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1">#  limitations under the License.</span>
+<span class="c1">#</span>
+
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">rpy2.robjects</span> <span class="k">as</span> <span class="nn">robjects</span>
+    <span class="kn">import</span> <span class="nn">rpy2.robjects.packages</span> <span class="k">as</span> <span class="nn">rpackages</span>
+    <span class="kn">from</span> <span class="nn">rpy2.rinterface</span> <span class="kn">import</span> <span class="n">NULL</span>
+    <span class="kn">from</span> <span class="nn">rpy2.robjects</span> <span class="kn">import</span> <span class="n">DataFrame</span>
+    <span class="kn">from</span> <span class="nn">rpy2.robjects.vectors</span> <span class="kn">import</span> <span class="n">DateVector</span>
+
+
+    <span class="n">EPOCH</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">1970</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">toordinal</span><span class="p">()</span>
+
+
+    <span class="k">def</span> <span class="nf">choose_cran_mirror</span><span class="p">():</span>
+        <span class="n">utils</span> <span class="o">=</span> <span class="n">rpackages</span><span class="o">.</span><span class="n">importr</span><span class="p">(</span><span class="s1">&#39;utils&#39;</span><span class="p">)</span>
+        <span class="c1">#mirrors = utils.getCRANmirrors()</span>
+        <span class="n">utils</span><span class="o">.</span><span class="n">chooseCRANmirror</span><span class="p">(</span><span class="n">ind</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">utils</span>
+
+
+    <span class="k">def</span> <span class="nf">ensure_packages</span><span class="p">():</span>
+        <span class="n">utils</span> <span class="o">=</span> <span class="n">choose_cran_mirror</span><span class="p">()</span>
+        <span class="n">packages</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;fst&quot;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">packages</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">rpackages</span><span class="o">.</span><span class="n">isinstalled</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+                <span class="n">utils</span><span class="o">.</span><span class="n">install_packages</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+            <span class="n">rpackages</span><span class="o">.</span><span class="n">importr</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="k">return</span>
+
+
+    <span class="k">def</span> <span class="nf">read_fst</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">DataFrame</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="n">ensure_packages</span><span class="p">()</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">robjects</span><span class="o">.</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;read_fst&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">start</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">end</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">NULL</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">complete</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">elif</span> <span class="n">df</span><span class="o">.</span><span class="n">nrow</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">):</span>
+                <span class="n">complete</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">complete</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="n">complete</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="n">df</span><span class="p">,</span> <span class="n">complete</span>
+
+
+    <span class="k">def</span> <span class="nf">vector2list</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">DateVector</span><span class="o">.</span><span class="n">isrinstance</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">fromordinal</span><span class="p">(</span><span class="n">EPOCH</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">))</span> <span class="k">if</span> <span class="n">d</span> <span class="o">==</span> <span class="n">d</span> <span class="k">else</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">v</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+
+    <span class="k">class</span> <span class="nc">FSTReader</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Class providing CSV-like interface for FST files</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">buffer_size</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">,</span> <span class="n">returns_mapping</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.fst&quot;</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Unknown format of file &quot;</span> <span class="o">+</span> <span class="n">path</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">buffer_size</span> <span class="o">=</span> <span class="n">buffer_size</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pointer</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">last</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">first</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">complete</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">returns_mapping</span> <span class="o">=</span> <span class="n">returns_mapping</span>
+
+        <span class="k">def</span> <span class="nf">read_next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">first</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pointer</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">first</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer_size</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="n">df</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">complete</span> <span class="o">=</span> <span class="n">read_fst</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">last</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pointer</span> <span class="o">+</span> <span class="n">df</span><span class="o">.</span><span class="n">nrow</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="n">df</span><span class="o">.</span><span class="n">colnames</span><span class="p">[</span><span class="n">c</span><span class="p">]:</span> <span class="n">vector2list</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">c</span><span class="p">])</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">ncol</span><span class="p">)</span>
+            <span class="p">}</span>
+
+        <span class="k">def</span> <span class="nf">current</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pointer</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">last</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">complete</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">None</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">read_next</span><span class="p">()</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pointer</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">last</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">None</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pointer</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">first</span>
+
+        <span class="k">def</span> <span class="nf">current_row</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">]:</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">r</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span>
+            <span class="n">row</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">column</span><span class="p">][</span><span class="n">r</span><span class="p">]</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span>
+            <span class="p">]</span>
+            <span class="k">return</span> <span class="n">row</span>
+
+        <span class="k">def</span> <span class="nf">current_mapping</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">r</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span>
+            <span class="n">row</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="n">column</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">column</span><span class="p">][</span><span class="n">r</span><span class="p">]</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="n">row</span>
+
+        <span class="k">def</span> <span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">returns_mapping</span><span class="p">:</span>
+                <span class="n">row</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_mapping</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">row</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_row</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">row</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">StopIteration</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pointer</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="n">row</span>
+
+        <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pointer</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">complete</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">def</span> <span class="nf">rewind</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pointer</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pointer</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">read_next</span><span class="p">()</span>
+
+        <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rewind</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">read_next</span><span class="p">()</span>
+
+        <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span>
+<span class="k">except</span><span class="p">:</span>
+<div class="viewcode-block" id="FSTReader"><a class="viewcode-back" href="../../../members/pyfst.html#dorieh.utils.pyfst.FSTReader">[docs]</a>    <span class="k">class</span> <span class="nc">FSTReader</span><span class="p">:</span>
+        <span class="k">def</span> <span class="fm">__int__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;FSTReader requires R environment&quot;</span><span class="p">)</span></div>
+
+<span class="c1">### END</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

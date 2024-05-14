@@ -1,0 +1,35 @@
+# Prepare environment for AirNow
+
+
+ [Source code](setup_airnowcwl_src.md) 
+
+
+```{contents}
+---
+local:
+---
+```
+
+**Tool**. Runs: dorieh.epa.airnow_setup
+
+## Description
+
+This tool prepares environemnt for AirNow download
+It checks that AirNow API key is provided and installs
+zip and county shape files if necessary
+
+
+## Inputs
+
+| Name      | Type       | Default | Description | 
+|:----------|:-----------|:--------|:------------|
+| api-key   | string     |         |             | 
+| shape_dir | Directory? |         |             | 
+
+## Outputs
+
+| Name   | Type   | Description | 
+|:-------|:-------|:------------|
+| shapes | File[] |             | 
+| log    | stdout |             | 
+

@@ -1,0 +1,41 @@
+# Loader for raw CMS Medicare data
+
+
+ [Source code](load_raw_medicarecwl_src.md) 
+
+
+```{contents}
+---
+local:
+---
+```
+
+**Tool**. Runs: dorieh.cms.tools.mcr_fts2db
+
+## Description
+
+This tool loads CMS Medicare data from *.dat files accompanied by FTS
+files, describing their metadata
+
+
+## Inputs
+
+| Name            | Type      | Default  | Description                                                                                                                      | 
+|:----------------|:----------|:---------|:---------------------------------------------------------------------------------------------------------------------------------|
+| database        | File      |          | Path to database connection file, usually database.ini                                                                           | 
+| connection_name | string    |          | The name of the section in the database.ini file                                                                                 | 
+| input           | Directory |          | A path to directory, containing unpacked CMS files. The tool will recursively look for data files according to provided pattern  | 
+| threads         | int       | `4`      | number of threads, concurrently writing into the database                                                                        | 
+| page_size       | int       | `1000`   | explicit page size for the database                                                                                              | 
+| log_frequency   | long      | `100000` | informational logging occurs every specified number of records                                                                   | 
+| limit           | long?     |          | if specified, the process will stop after ingesting the specified number of records                                              | 
+| depends_on      | File?     |          | a special field used to enforce dependencies and execution order                                                                 | 
+
+## Outputs
+
+| Name     | Type   | Description | 
+|:---------|:-------|:------------|
+| log      | File   |             | 
+| registry | File   |             | 
+| err      | stderr |             | 
+

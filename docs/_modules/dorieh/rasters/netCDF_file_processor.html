@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dorieh.rasters.netCDF_file_processor &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">dorieh.rasters.netCDF_file_processor</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for dorieh.rasters.netCDF_file_processor</h1><div class="highlight"><pre>
+<span></span>
+<span class="c1">#  Copyright (c) 2023.  Harvard University</span>
+<span class="c1">#</span>
+<span class="c1">#   Developed by Research Software Engineering,</span>
+<span class="c1">#   Harvard University Research Computing and Data (RCD) Services.</span>
+<span class="c1">#</span>
+<span class="c1">#   Author: Michael A Bouzinier</span>
+<span class="c1">#</span>
+<span class="c1">#   Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1">#   you may not use this file except in compliance with the License.</span>
+<span class="c1">#   You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#          http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1">#  limitations under the License.</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">An entry point to a command line utility aggregating grid data</span>
+<span class="sd">provided as NetCDF file over a set of shape files, assigning</span>
+<span class="sd">labels defined in the shape files to the aggregated values</span>
+
+
+<span class="sd">`see https://www.unidata.ucar.edu/software/netcdf/`__</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Dict</span>
+
+<span class="kn">import</span> <span class="nn">yaml</span>
+
+<span class="kn">from</span> <span class="nn">dorieh.rasters.gridmet_tools</span> <span class="kn">import</span> <span class="n">find_shape_file</span>
+<span class="kn">from</span> <span class="nn">dorieh.platform</span> <span class="kn">import</span> <span class="n">init_logging</span>
+<span class="kn">from</span> <span class="nn">dorieh.gis.compute_shape</span> <span class="kn">import</span> <span class="n">StatsCounter</span>
+
+<span class="kn">from</span> <span class="nn">dorieh.rasters.config</span> <span class="kn">import</span> <span class="n">GridContext</span><span class="p">,</span> <span class="n">OutputType</span>
+<span class="kn">from</span> <span class="nn">dorieh.rasters.aggregator</span> <span class="kn">import</span> <span class="n">Aggregator</span><span class="p">,</span> <span class="n">GeoTiffAggregator</span><span class="p">,</span> <span class="n">NetCDFAggregator</span>
+
+<div class="viewcode-block" id="NetCDFFile"><a class="viewcode-back" href="../../../members/netCDF_file_processor.html#dorieh.rasters.netCDF_file_processor.NetCDFFile">[docs]</a><span class="k">class</span> <span class="nc">NetCDFFile</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">GridContext</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a new instance</span>
+
+<span class="sd">        :param context: An optional GridmetContext object, if not specified,</span>
+<span class="sd">            then it is constructed from the command line arguments</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">context</span><span class="p">:</span>
+            <span class="n">context</span> <span class="o">=</span> <span class="n">GridContext</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="vm">__doc__</span><span class="p">)</span><span class="o">.</span><span class="n">instantiate</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span> <span class="o">=</span> <span class="n">context</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_type</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">log</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">raw_downloads</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">init_logging</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;aggr-&quot;</span> <span class="o">+</span> <span class="n">log</span><span class="p">,</span>
+            <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aggregator</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Aggregator</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">infile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">raw_downloads</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">extra_columns</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">StatsCounter</span><span class="o">.</span><span class="n">statistics</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">statistics</span>
+        <span class="k">return</span>
+
+<div class="viewcode-block" id="NetCDFFile.on_prepare"><a class="viewcode-back" href="../../../members/netCDF_file_processor.html#dorieh.rasters.netCDF_file_processor.NetCDFFile.on_prepare">[docs]</a>    <span class="k">def</span> <span class="nf">on_prepare</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method can be overwritten by subclasses</span>
+<span class="sd">        to configure proper aggregation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="NetCDFFile.get_aggregation_year"><a class="viewcode-back" href="../../../members/netCDF_file_processor.html#dorieh.rasters.netCDF_file_processor.NetCDFFile.get_aggregation_year">[docs]</a>    <span class="k">def</span> <span class="nf">get_aggregation_year</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">years</span></div>
+
+<div class="viewcode-block" id="NetCDFFile.prepare"><a class="viewcode-back" href="../../../members/netCDF_file_processor.html#dorieh.rasters.netCDF_file_processor.NetCDFFile.prepare">[docs]</a>    <span class="k">def</span> <span class="nf">prepare</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">infile</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.nc&quot;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">file_type</span> <span class="o">=</span> <span class="s2">&quot;nc&quot;</span>
+            <span class="n">aggregator</span> <span class="o">=</span> <span class="n">NetCDFAggregator</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">infile</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.tif&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">infile</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.tiff&quot;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">file_type</span> <span class="o">=</span> <span class="s1">&#39;tiff&#39;</span>
+            <span class="n">aggregator</span> <span class="o">=</span> <span class="n">GeoTiffAggregator</span>
+        <span class="k">elif</span> <span class="n">OutputType</span><span class="o">.</span><span class="n">aggregation</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">output</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">file_type</span> <span class="o">=</span> <span class="s2">&quot;nc&quot;</span>
+            <span class="n">aggregator</span> <span class="o">=</span> <span class="n">NetCDFAggregator</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;NetCDF file is expected (extension .nc)&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">on_prepare</span><span class="p">()</span>
+        <span class="n">of</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">infile</span><span class="p">))</span>
+        <span class="n">of</span> <span class="o">+=</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">geography</span><span class="o">.</span><span class="n">value</span> <span class="o">+</span> <span class="s2">&quot;.csv&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">destination</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">destination</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">of</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">destination</span><span class="p">,</span> <span class="n">of</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">compress</span><span class="p">:</span>
+            <span class="n">of</span> <span class="o">+=</span> <span class="s2">&quot;.gz&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">shape_files</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">shapes_dir</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">shape_files</span> <span class="o">=</span> <span class="n">find_shape_file</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">shapes_dir</span><span class="p">,</span>
+                <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_aggregation_year</span><span class="p">()),</span>
+                <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">geography</span><span class="o">.</span><span class="n">value</span><span class="p">),</span>
+                <span class="s2">&quot;polygon&quot;</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">shape_files</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Shape type is required and only one &quot;</span>
+                             <span class="s2">&quot;shape type is allowed for aggregation.&quot;</span>
+                             <span class="s2">&quot;len(self.context.shape_files)=</span><span class="si">{:d}</span><span class="s2">&quot;</span>
+                             <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">shape_files</span><span class="p">)))</span>
+        <span class="n">shape_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">shape_files</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">variables</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">variable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">variables</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No variables are specified&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aggregator</span> <span class="o">=</span> <span class="n">aggregator</span><span class="p">(</span>
+            <span class="n">infile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">infile</span><span class="p">,</span>
+            <span class="n">variable</span><span class="o">=</span><span class="n">variable</span><span class="p">,</span>
+            <span class="n">outfile</span><span class="o">=</span><span class="n">of</span><span class="p">,</span>
+            <span class="n">strategy</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">,</span>
+            <span class="n">shapefile</span><span class="o">=</span><span class="n">shape_file</span><span class="p">,</span>
+            <span class="n">geography</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">geography</span><span class="p">,</span>
+            <span class="n">extra_columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">extra_columns</span><span class="p">,</span>
+            <span class="n">ram</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">ram</span>
+        <span class="p">)</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="NetCDFFile.get_domain_name"><a class="viewcode-back" href="../../../members/netCDF_file_processor.html#dorieh.rasters.netCDF_file_processor.NetCDFFile.get_domain_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_domain_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;exposures&quot;</span></div>
+
+<div class="viewcode-block" id="NetCDFFile.get_table_name"><a class="viewcode-back" href="../../../members/netCDF_file_processor.html#dorieh.rasters.netCDF_file_processor.NetCDFFile.get_table_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_table_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">table</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>  <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">table</span>
+        <span class="n">of</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">aggregator</span><span class="o">.</span><span class="n">outfile</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">of</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="NetCDFFile.execute"><a class="viewcode-back" href="../../../members/netCDF_file_processor.html#dorieh.rasters.netCDF_file_processor.NetCDFFile.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">OutputType</span><span class="o">.</span><span class="n">aggregation</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">output</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">infile</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">aggregator</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="s2">&quot;Aggregation of data from </span><span class="si">{}</span><span class="s2"> by </span><span class="si">{}</span><span class="s2"> has been executed. &quot;</span>
+                    <span class="s2">&quot;Output: </span><span class="si">{}</span><span class="s2">&quot;</span>
+                        <span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">infile</span><span class="p">,</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">geography</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">aggregator</span><span class="o">.</span><span class="n">outfile</span>
+                <span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">of</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggregator</span><span class="o">.</span><span class="n">write_header</span><span class="p">()</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Input file was not found. Created empty file: </span><span class="si">{}</span><span class="s2">&quot;</span>
+                             <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">of</span><span class="p">)))</span>
+        <span class="k">if</span> <span class="n">OutputType</span><span class="o">.</span><span class="n">data_dictionary</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">output</span><span class="p">:</span>
+            <span class="n">registry</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_registry</span><span class="p">()</span>
+            <span class="n">of</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">destination</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_domain_name</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;.yaml&quot;</span>
+            <span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span> <span class="p">(</span><span class="n">of</span><span class="p">,</span> <span class="s2">&quot;wt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out</span><span class="p">:</span>
+                <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">registry</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Created data dictionary: &quot;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">of</span><span class="p">))</span>
+        <span class="c1"># Info:</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aggregator</span><span class="o">.</span><span class="n">perf</span><span class="o">.</span><span class="n">total_time</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aggregator</span><span class="o">.</span><span class="n">perf</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;Resources: &quot;</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="NetCDFFile.get_registry"><a class="viewcode-back" href="../../../members/netCDF_file_processor.html#dorieh.rasters.netCDF_file_processor.NetCDFFile.get_registry">[docs]</a>    <span class="k">def</span> <span class="nf">get_registry</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggregator</span><span class="o">.</span><span class="n">get_registry</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_domain_name</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_table_name</span><span class="p">(),</span>
+            <span class="n">description</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">description</span>
+        <span class="p">)</span></div></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">task</span> <span class="o">=</span> <span class="n">NetCDFFile</span><span class="p">()</span>
+    <span class="n">task</span><span class="o">.</span><span class="n">prepare</span><span class="p">()</span>
+    <span class="n">task</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

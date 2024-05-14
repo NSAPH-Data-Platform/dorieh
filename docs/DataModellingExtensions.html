@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Extensions used for creating federated view of different years &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Extensions used for creating federated view of different years</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/DataModellingExtensions.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="extensions-used-for-creating-federated-view-of-different-years">
+<h1>Extensions used for creating federated view of different years<a class="headerlink" href="#extensions-used-for-creating-federated-view-of-different-years" title="Permalink to this heading"></a></h1>
+<section id="general">
+<h2>General<a class="headerlink" href="#general" title="Permalink to this heading"></a></h2>
+<p>See <a class="reference internal" href="#../../core-platform/doc/Datamodels.md#invalid-record"><span class="xref myst">General Data Modeling</span></a></p>
+<p>Used by <a class="reference internal" href="members/mcr_combine_tables.html"><span class="doc std std-doc">The mcr_combine_tables Module</span></a></p>
+</section>
+<section id="combining-multiple-sources-and-optional-columns">
+<h2>Combining multiple sources and optional columns<a class="headerlink" href="#combining-multiple-sources-and-optional-columns" title="Permalink to this heading"></a></h2>
+<p>Source can be an array of columns rather than one column.</p>
+<p>The following block will define a column named <code class="docutils literal notranslate"><span class="pre">ssa3</span></code>. The tool
+will look for columns named either <code class="docutils literal notranslate"><span class="pre">cnty_cd</span></code>, or <code class="docutils literal notranslate"><span class="pre">bene_county_cd</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">ssa_county</span></code> to map to the new <code class="docutils literal notranslate"><span class="pre">ssa3</span></code> column. If neither of these three columns
+is found, a new column will be created and filled with NULL values.</p>
+<p>Without <code class="docutils literal notranslate"><span class="pre">optional:</span> <span class="pre">true</span></code>, if an appropriate source column is not found,
+an exception will be raised.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">ssa3</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">optional</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Social Security Administration (SSA) three digit code for county</span>
+<span class="w">    </span><span class="nt">reference</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://www.nber.org/research/data/ssa-federal-information-processing-series-fips-state-and-county-crosswalk</span>
+<span class="w">    </span><span class="nt">source</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cnty_cd</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bene_county_cd</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ssa_county</span>
+</pre></div>
+</div>
+</section>
+<section id="exclude">
+<h2>Exclude<a class="headerlink" href="#exclude" title="Permalink to this heading"></a></h2>
+<p>Using <code class="docutils literal notranslate"><span class="pre">exclude</span></code> can exclude certain tables matching patern from teh federated
+view.</p>
+<p>The following example creates a view by combining all tables matching either
+<code class="docutils literal notranslate"><span class="pre">cms.mbsf_ab*</span></code> or <code class="docutils literal notranslate"><span class="pre">cms.mcr_bene_*</span></code> pattern, but excluding the table named
+<code class="docutils literal notranslate"><span class="pre">mbsf_ab_2015</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">ps</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">create</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">view</span>
+<span class="w">    </span><span class="nt">from</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cms.mbsf_ab*</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cms.mcr_bene_*</span>
+<span class="w">    </span><span class="nt">exclude</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mbsf_ab_2015</span>
+</pre></div>
+</div>
+</section>
+<section id="cast">
+<h2>Cast<a class="headerlink" href="#cast" title="Permalink to this heading"></a></h2>
+<p>It is possible to define custom casts from one type to another. When tables
+to be combined into a single view have columns containing corresponding data
+but of different types, it is possible to cast all of them to the same type.</p>
+<p>In the following example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">dob</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">date</span>
+<span class="w">    </span><span class="nt">cast</span><span class="p">:</span>
+<span class="w">      </span><span class="s">&quot;character</span><span class="nv"> </span><span class="s">varying&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;public.parse_date({column_name})&quot;</span>
+<span class="w">      </span><span class="nt">numeric</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;to_date(to_char({column_name},</span><span class="nv"> </span><span class="s">&#39;00000000&#39;),</span><span class="nv"> </span><span class="s">&#39;YYYYMMDD&#39;)&quot;</span>
+<span class="w">      </span><span class="nt">*</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nv">column_name</span><span class="p p-Indicator">}</span><span class="l l-Scalar l-Scalar-Plain">::DATE</span>
+</pre></div>
+</div>
+<ul>
+<li><p>If a source column is of type <code class="docutils literal notranslate"><span class="pre">DATE</span></code>, it will be left as is</p></li>
+<li><p>If the source column is of numeric type, the code</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>to_date(to_char({column_name}, &#39;00000000&#39;), &#39;YYYYMMDD&#39;)
+</pre></div>
+</div>
+<p>will be used to transform the source value</p>
+</li>
+<li><p>If the source column has type <code class="docutils literal notranslate"><span class="pre">character</span> <span class="pre">varying</span></code>, then the function
+<code class="docutils literal notranslate"><span class="pre">public.parse_date</span></code> will be called to transform the value</p></li>
+<li><p>For all other types a simple PostgreSQL cast will be attempted</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

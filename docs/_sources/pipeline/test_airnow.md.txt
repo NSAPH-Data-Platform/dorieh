@@ -1,0 +1,52 @@
+# Test harness for airnow.cwl
+
+
+ [Source code](test_airnowcwl_src.md) 
+
+
+![](test_airnow.png)
+
+```{contents}
+---
+local:
+---
+```
+
+**Workflow**
+
+## Inputs
+
+| Name            | Type    | Default | Description                                                                                                                                                    | 
+|:----------------|:--------|:--------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| api-key         | string  |         | API key for AirNow                                                                                                                                             | 
+| connection_name | string  |         | The name of the section in the database.ini file                                                                                                               | 
+| database        | File    |         | Path to database connection file, usually database.ini                                                                                                         | 
+| from            | string  |         | Start date for downolading, in YYYY-MM-DD format                                                                                                               | 
+| parameter_code  | string  |         | Parameter code. Either a numeric code (e.g. 88101, 44201) or symbolic name (e.g. PM25, NO2). See more: [AQS Code List](https://www.epa.gov/aqs/aqs-code-list)  | 
+| proxy           | string? |         | HTTP/HTTPS Proxy if required                                                                                                                                   | 
+| table           | string  |         | Name of the table to be created in the database                                                                                                                | 
+| test_script     | File    |         | File containing SQL test script                                                                                                                                | 
+| to              | string  |         | End date for downolading, in YYYY-MM-DD format                                                                                                                 | 
+| year            | int     |         |                                                                                                                                                                | 
+
+## Outputs
+
+| Name                  | Type   | Description | 
+|:----------------------|:-------|:------------|
+| execute_shapes_data   | File[] |             | 
+| execute_download_log  | File   |             | 
+| execute_ingest_log    | File   |             | 
+| execute_index_log     | File   |             | 
+| execute_vacuum_log    | File   |             | 
+| execute_download_data | File   |             | 
+| execute_model         | File   |             | 
+| verify_log            | File   |             | 
+| verify_errors         | File   |             | 
+
+## Steps
+
+| Name    | Runs                        | Description | 
+|:--------|:----------------------------|:------------|
+| execute | [airnow.cwl](airnow.md)     |             | 
+| verify  | [run_test.cwl](run_test.md) |             | 
+

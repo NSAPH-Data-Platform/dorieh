@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dorieh.gis.constants &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">dorieh.gis.constants</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for dorieh.gis.constants</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module contains Enums used by configuration for</span>
+<span class="sd">processing of GIS information</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+
+
+<div class="viewcode-block" id="RasterizationStrategy"><a class="viewcode-back" href="../../../strategy.html#dorieh.gis.constants.RasterizationStrategy">[docs]</a><span class="k">class</span> <span class="nc">RasterizationStrategy</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    `Rasterization Strategy  &lt;https://pythonhosted.org/rasterstats/manual.html#rasterization-strategy&gt;`_</span>
+<span class="sd">    to rasterize a vector.</span>
+
+<span class="sd">    While `downscale` strategy provides the best accuracy it requires</span>
+<span class="sd">    significantly more resources, especially RAM.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">default</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The default strategy is to include all pixels along the line render path</span>
+<span class="sd">    (for lines), or cells where the center point is within the polygon</span>
+<span class="sd">    (for polygons).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">all_touched</span> <span class="o">=</span> <span class="s1">&#39;all_touched&#39;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Alternate, all_touched strategy, rasterizes the geometry</span>
+<span class="sd">    by including all pixels that it touches.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">combined</span> <span class="o">=</span> <span class="s1">&#39;combined&#39;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate statistics using both default and all_touched strategy and</span>
+<span class="sd">    combine results, e.g. using arithmetic means</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">downscale</span> <span class="o">=</span> <span class="s1">&#39;downscale&#39;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A combination of &quot;default&quot; rasterization strategy with </span>
+<span class="sd">    affine transformation with downscaling. Downscaling factor </span>
+<span class="sd">    is computed based on the grid size and runtime memory available </span>
+<span class="sd">    to the process. </span>
+<span class="sd">    </span>
+<span class="sd">    Effectively, the grid is interpolated with intermediate nodes,</span>
+<span class="sd">    increasing the number of nodes by the factor of 25 (5 x 5). Hence,</span>
+<span class="sd">    the accuracy is better, especially for complex and small shapes,</span>
+<span class="sd">    however, the aggregation will require 25 times more memory (RAM)</span>
+<span class="sd">    and will run slower.</span>
+<span class="sd">    </span>
+<span class="sd">    See `get_affine_transform &lt;../../../gridmet/doc/gridmet_tools.html#gridmet.gridmet_tools.get_affine_transform&gt;`_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">auto</span> <span class="o">=</span> <span class="s1">&#39;auto&#39;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A combination of &quot;all_touched&quot; rasterization strategy with </span>
+<span class="sd">    affine transformation with downscaling. Downscaling factor </span>
+<span class="sd">    is computed based on the grid size and runtime memory available </span>
+<span class="sd">    to the process. </span>
+<span class="sd">    </span>
+<span class="sd">    Effectively, the grid is interpolated with intermediate nodes,</span>
+<span class="sd">    increasing the number of nodes by the factor of 25 (5 x 5). Hence,</span>
+<span class="sd">    the accuracy is better, especially for complex and small shapes,</span>
+<span class="sd">    however, the aggregation will require 25 times more memory (RAM)</span>
+<span class="sd">    and will run slower.</span>
+<span class="sd">    </span>
+<span class="sd">    See `get_affine_transform &lt;../../../gridmet/doc/gridmet_tools.html#gridmet.gridmet_tools.get_affine_transform&gt;`_</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="Geography"><a class="viewcode-back" href="../../../members/gis_constants.html#dorieh.gis.constants.Geography">[docs]</a><span class="k">class</span> <span class="nc">Geography</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Type of geography&quot;&quot;&quot;</span>
+    <span class="nb">zip</span> <span class="o">=</span> <span class="s1">&#39;zip&#39;</span>
+    <span class="n">zcta</span> <span class="o">=</span> <span class="s1">&#39;zcta&#39;</span>
+    <span class="n">county</span> <span class="o">=</span> <span class="s1">&#39;county&#39;</span>
+    <span class="n">custom</span> <span class="o">=</span> <span class="s1">&#39;custom&#39;</span>
+    <span class="nb">all</span>    <span class="o">=</span> <span class="s1">&#39;all&#39;</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

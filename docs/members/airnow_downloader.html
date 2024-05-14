@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Downloader for AirNow &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Downloader for AirNow</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/members/airnow_downloader.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-dorieh.epa.airnow_downloader">
+<span id="downloader-for-airnow"></span><h1>Downloader for AirNow<a class="headerlink" href="#module-dorieh.epa.airnow_downloader" title="Permalink to this heading"></a></h1>
+<p>Toolkit and API for downloading AirNow</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.epa.airnow_downloader.AirNowDownloader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AirNowDownloader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="airnow_ds_def.html#dorieh.epa.airnow_ds_def.AirNowContext" title="dorieh.epa.airnow_ds_def.AirNowContext"><span class="pre">AirNowContext</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/epa/airnow_downloader.html#AirNowDownloader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.epa.airnow_downloader.AirNowDownloader" title="Permalink to this definition"></a></dt>
+<dd><p>Main class to download AirNow data</p>
+<p>Constructor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.epa.airnow_downloader.AirNowDownloader.params.target"></span><strong>target</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.airnow_downloader.AirNowDownloader.params.target">¶</a> – File name, where downloaded data is saved.
+If file name includes substring “.json”, then the data is saved in
+JSON format, otherwise it is saved as CSV. If target is not
+specified (None), then the data is not saved to file but is
+returned to the caller. The latter mode is useful for testing.</p></li>
+<li><p><span class="target" id="dorieh.epa.airnow_downloader.AirNowDownloader.params.parameter"></span><strong>parameter</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.airnow_downloader.AirNowDownloader.params.parameter">¶</a> – <p>Comma-separated list of parameters to download.
+In practice because of AirNow API limitations, if more than
+one parameter is specified, a runtime error will occur.
+Possible values:</p>
+<blockquote>
+<div><ul>
+<li><p>Ozone (O3, ozone)</p></li>
+<li><p>PM2.5 (pm25)</p></li>
+<li><p>PM10 (pm10)</p></li>
+<li><p>CO (co)</p></li>
+<li><p>NO2 (no2)</p></li>
+<li><p>SO2 (so2)</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><span class="target" id="dorieh.epa.airnow_downloader.AirNowDownloader.params.api_key"></span><strong>api_key</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.airnow_downloader.AirNowDownloader.params.api_key">¶</a> – Optional API Key to use with AirNow api. If not
+specified, then it is searched in a file named <cite>.airnow.yaml</cite>
+or <cite>.airnow.json</cite> first in working directory and then in user’s
+home directory</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.epa.airnow_downloader.AirNowDownloader.download">
+<span class="sig-name descname"><span class="pre">download</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">requested_date</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/dorieh/epa/airnow_downloader.html#AirNowDownloader.download"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.epa.airnow_downloader.AirNowDownloader.download" title="Permalink to this definition"></a></dt>
+<dd><p>Download data for a date</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.epa.airnow_downloader.AirNowDownloader.download.params.requested_date"></span><strong>requested_date</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.airnow_downloader.AirNowDownloader.download.params.requested_date">¶</a> – date to be downloaded</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>If target has been specified, then this method returns
+the target file name, otherwise it returns a list of dictionaries
+where each dictionary is structured as JSON, with column names
+serving as keys</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.epa.airnow_downloader.AirNowDownloader.dump_csv">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dump_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rows</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/epa/airnow_downloader.html#AirNowDownloader.dump_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.epa.airnow_downloader.AirNowDownloader.dump_csv" title="Permalink to this definition"></a></dt>
+<dd><p>Internal method used by download
+Dumps rows as CSV file</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.epa.airnow_downloader.AirNowDownloader.write_csv_header">
+<span class="sig-name descname"><span class="pre">write_csv_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/epa/airnow_downloader.html#AirNowDownloader.write_csv_header"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.epa.airnow_downloader.AirNowDownloader.write_csv_header" title="Permalink to this definition"></a></dt>
+<dd><p>Internal method used by download
+Writes CSV file ehader</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.epa.airnow_downloader.AirNowDownloader.process">
+<span class="sig-name descname"><span class="pre">process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/dorieh/epa/airnow_downloader.html#AirNowDownloader.process"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.epa.airnow_downloader.AirNowDownloader.process" title="Permalink to this definition"></a></dt>
+<dd><p>Internal method</p>
+<p>Aggregates hourly data into day’s averages and joins with geographic
+information such as state, county, zip code.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.epa.airnow_downloader.AirNowDownloader.process.params.content"></span><strong>content</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.airnow_downloader.AirNowDownloader.process.params.content">¶</a> – Raw content received from AirNow API call
+see: <a class="reference external" href="https://docs.airnowapi.org/Data/docs">https://docs.airnowapi.org/Data/docs</a></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of dictinaries, where each row is represented as a
+dictionary, with column names serving as keys</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.epa.airnow_downloader.AirNowDownloader.download_range">
+<span class="sig-name descname"><span class="pre">download_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">datetime.date(2024,</span> <span class="pre">5,</span> <span class="pre">13)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/epa/airnow_downloader.html#AirNowDownloader.download_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.epa.airnow_downloader.AirNowDownloader.download_range" title="Permalink to this definition"></a></dt>
+<dd><p>Downloads data for a range of dates. To invoke this method the
+application must have specified a target file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.epa.airnow_downloader.AirNowDownloader.download_range.params.start_date"></span><strong>start_date</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.airnow_downloader.AirNowDownloader.download_range.params.start_date">¶</a> – First date in the range to download (inclusive)</p></li>
+<li><p><span class="target" id="dorieh.epa.airnow_downloader.AirNowDownloader.download_range.params.end_date"></span><strong>end_date</strong><a class="paramlink headerlink reference internal" href="#dorieh.epa.airnow_downloader.AirNowDownloader.download_range.params.end_date">¶</a> – Last date in the range to download (inclusive)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

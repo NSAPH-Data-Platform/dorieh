@@ -1,0 +1,98 @@
+# Full Medicaid Processing Pipeline
+
+
+ [Source code](test_medicaidcwl_src.md) 
+
+
+![](test_medicaid.png)
+
+```{contents}
+---
+local:
+---
+```
+
+**Workflow**
+
+## Description
+
+This workflow ingests a small random subset of Medicaid MAX data
+and verifies counts
+
+
+## Inputs
+
+| Name            | Type      | Default                                                                           | Description                                            | 
+|:----------------|:----------|:----------------------------------------------------------------------------------|:-------------------------------------------------------|
+| database        | File      | `{'class': 'File', 'location': '/opt/airflow/project/database.ini'}`              | Path to database connection file, usually database.ini | 
+| connection_name | string    | `nsaph_test`                                                                      | The name of the section in the database.ini file       | 
+| input           | Directory | `{'class': 'Directory', 'location': '/data/incoming/medicaid/mini_random_data/'}` |                                                        | 
+
+## Outputs
+
+| Name                  | Type | Description | 
+|:----------------------|:-----|:------------|
+| verification_log      | File |             | 
+| verification_err      | File |             | 
+| resource1_log         | File |             | 
+| resource2_log         | File |             | 
+| parse_log             | File |             | 
+| ps_reset_log          | File |             | 
+| ps_create_log         | File |             | 
+| ps_index_log          | File |             | 
+| ps_vacuum_log         | File |             | 
+| ip_reset_log          | File |             | 
+| ip_create_log         | File |             | 
+| ip_index_log          | File |             | 
+| ip_vacuum_log         | File |             | 
+| ben_create_log        | File |             | 
+| ben_index_log         | File |             | 
+| ben_vacuum_log        | File |             | 
+| mnth_create_log       | File |             | 
+| mnth_index_log        | File |             | 
+| mnth_vacuum_log       | File |             | 
+| enrlm_create_log      | File |             | 
+| enrlm_index_log       | File |             | 
+| enrlm_vacuum_log      | File |             | 
+| elgb_prepare_log      | File |             | 
+| elgb_create_log       | File |             | 
+| elgb_index_log        | File |             | 
+| elgb_vacuum_log       | File |             | 
+| admissions_reset_log  | File |             | 
+| admissions_create_log | File |             | 
+| admissions_index_log  | File |             | 
+| admissions_vacuum_log | File |             | 
+| parse_err             | File |             | 
+| ps_reset_err          | File |             | 
+| ps_create_err         | File |             | 
+| ps_index_err          | File |             | 
+| ps_vacuum_err         | File |             | 
+| ip_reset_err          | File |             | 
+| ip_create_err         | File |             | 
+| ip_index_err          | File |             | 
+| ip_vacuum_err         | File |             | 
+| ben_create_err        | File |             | 
+| ben_index_err         | File |             | 
+| ben_vacuum_err        | File |             | 
+| mnth_create_err       | File |             | 
+| mnth_index_err        | File |             | 
+| mnth_vacuum_err       | File |             | 
+| enrlm_create_err      | File |             | 
+| enrlm_index_err       | File |             | 
+| enrlm_vacuum_err      | File |             | 
+| elgb_create_err       | File |             | 
+| elgb_prepare_err      | File |             | 
+| elgb_index_err        | File |             | 
+| elgb_vacuum_err       | File |             | 
+| admissions_reset_err  | File |             | 
+| admissions_create_err | File |             | 
+| admissions_index_err  | File |             | 
+| admissions_vacuum_err | File |             | 
+
+## Steps
+
+| Name    | Runs                        | Description | 
+|:--------|:----------------------------|:------------|
+| process | [medicaid.cwl](medicaid.md) |             | 
+| verify  | [verify.cwl](verify.md)     |             | 
+

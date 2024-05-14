@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dorieh.utils.qc.tester &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">dorieh.utils.qc.tester</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for dorieh.utils.qc.tester</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Generic object for testing for data quality issues.</span>
+
+<span class="sd">Tester class contains list of tests to run on data. Tests contain a variable name, a condition, and a severity</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1">#  Copyright (c) 2021. Harvard University</span>
+<span class="c1">#</span>
+<span class="c1">#  Developed by Research Software Engineering,</span>
+<span class="c1">#  Faculty of Arts and Sciences, Research Computing (FAS RC)</span>
+<span class="c1">#  Author: Ben Sabath</span>
+<span class="c1">#</span>
+<span class="c1">#  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1">#  you may not use this file except in compliance with the License.</span>
+<span class="c1">#  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#         http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1">#  limitations under the License.</span>
+<span class="c1">#</span>
+
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">auto</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">yaml</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+
+<div class="viewcode-block" id="Condition"><a class="viewcode-back" href="../../../../members/tester.html#dorieh.utils.qc.tester.Condition">[docs]</a><span class="k">class</span> <span class="nc">Condition</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+
+    <span class="n">less_than</span> <span class="o">=</span> <span class="s2">&quot;lt&quot;</span>
+    <span class="n">greater_than</span> <span class="o">=</span> <span class="s2">&quot;gt&quot;</span>
+    <span class="n">data_type</span> <span class="o">=</span> <span class="s2">&quot;dtype&quot;</span>
+    <span class="n">no_missing</span> <span class="o">=</span> <span class="s2">&quot;no_nan&quot;</span>
+    <span class="n">count_missing</span> <span class="o">=</span> <span class="s2">&quot;count_nan&quot;</span></div>
+
+
+<div class="viewcode-block" id="Severity"><a class="viewcode-back" href="../../../../members/tester.html#dorieh.utils.qc.tester.Severity">[docs]</a><span class="k">class</span> <span class="nc">Severity</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+
+    <span class="n">debug</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span>
+    <span class="n">info</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span>
+    <span class="n">warning</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span>
+    <span class="n">critical</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">CRITICAL</span></div>
+
+<div class="viewcode-block" id="ExpectationError"><a class="viewcode-back" href="../../../../members/tester.html#dorieh.utils.qc.tester.ExpectationError">[docs]</a><span class="k">class</span> <span class="nc">ExpectationError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Error for when an expected value to a condition cannot be valid</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="Test"><a class="viewcode-back" href="../../../../members/tester.html#dorieh.utils.qc.tester.Test">[docs]</a><span class="k">class</span> <span class="nc">Test</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="n">severity</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">logger</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variable</span> <span class="o">=</span> <span class="n">variable</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">condition</span> <span class="o">=</span> <span class="n">condition</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Value to compare against, can be excluded for a ``no_missing`` check</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">severity</span> <span class="o">=</span> <span class="n">severity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">condition</span><span class="o">.</span><span class="n">value</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">val</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+=</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">logger</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__logger</span> <span class="o">=</span> <span class="n">logger</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span> <span class="o">+</span> <span class="s2">&quot;.Test.&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_test</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">expectation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_construct_expectation</span><span class="p">()</span>
+
+
+    <span class="k">def</span> <span class="nf">_validate_test</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Confirm that inputs define a valid test</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">condition</span> <span class="o">==</span> <span class="n">Condition</span><span class="o">.</span><span class="n">count_missing</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ExpectationError</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;: Count Missing conditions must expect at least 0 missing rows&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_construct_expectation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Phrase test expectation in words</span>
+<span class="sd">        :return: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">out</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">severity</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> <span class="s2">&quot;For variable &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">condition</span> <span class="o">==</span> <span class="n">Condition</span><span class="o">.</span><span class="n">count_missing</span><span class="p">:</span>
+            <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;less than &quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="si">%2.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;% missing&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;less than &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">val</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; values missing&quot;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">condition</span> <span class="o">==</span> <span class="n">Condition</span><span class="o">.</span><span class="n">no_missing</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;no missing values&quot;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">condition</span> <span class="o">==</span> <span class="n">Condition</span><span class="o">.</span><span class="n">data_type</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;all values are &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">val</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">condition</span> <span class="o">==</span> <span class="n">Condition</span><span class="o">.</span><span class="n">greater_than</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;all values greater than &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">condition</span> <span class="o">==</span> <span class="n">Condition</span><span class="o">.</span><span class="n">less_than</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;all values less than &quot;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">out</span>
+
+
+
+<div class="viewcode-block" id="Test.check"><a class="viewcode-back" href="../../../../members/tester.html#dorieh.utils.qc.tester.Test.check">[docs]</a>    <span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check variable of input dataframe to see if it meets conditions</span>
+
+<span class="sd">        :param df: Pandas data frame</span>
+<span class="sd">        :return: boolean of if the data passed the test</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">message</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">condition</span> <span class="o">==</span> <span class="n">Condition</span><span class="o">.</span><span class="n">count_missing</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="p">]))</span>
+            <span class="k">if</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># assume expectation is a %age</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">count</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">val</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span>
+                    <span class="n">message</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">expectation</span> <span class="o">+</span> <span class="s2">&quot;. &quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="si">%2.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">count</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span> <span class="o">+</span> \
+                              <span class="s2">&quot;% missing values observed for &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">count</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">val</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span>
+                    <span class="n">message</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">expectation</span> <span class="o">+</span> <span class="s2">&quot;. &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">)</span> <span class="o">+</span> \
+                              <span class="s2">&quot; missing values observed for &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span>
+
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">condition</span> <span class="o">==</span> <span class="n">Condition</span><span class="o">.</span><span class="n">data_type</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="p">])</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">val</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">condition</span> <span class="o">==</span> <span class="n">Condition</span><span class="o">.</span><span class="n">less_than</span><span class="p">:</span>
+                <span class="n">count</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="p">]</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">condition</span> <span class="o">==</span> <span class="n">Condition</span><span class="o">.</span><span class="n">greater_than</span><span class="p">:</span>
+                <span class="n">count</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">condition</span> <span class="o">==</span> <span class="n">Condition</span><span class="o">.</span><span class="n">no_missing</span><span class="p">:</span>
+                <span class="n">count</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="p">]))</span>
+
+            <span class="n">result</span> <span class="o">=</span> <span class="n">count</span> <span class="o">==</span> <span class="mi">0</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span>
+                <span class="n">message</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">expectation</span> <span class="o">+</span> <span class="s2">&quot;. check failed. &quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="si">%2.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">count</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span> <span class="o">+</span> \
+                          <span class="s2">&quot;</span><span class="si">% o</span><span class="s2">f observations with invalid values.&quot;</span>
+
+        <span class="k">if</span> <span class="n">message</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">severity</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span></div></div>
+
+
+<div class="viewcode-block" id="Tester"><a class="viewcode-back" href="../../../../members/tester.html#dorieh.utils.qc.tester.Tester">[docs]</a><span class="k">class</span> <span class="nc">Tester</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">yaml_file</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span> <span class="o">+</span> <span class="s2">&quot;.Tester.&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tests</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">yaml_file</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">load_yaml</span><span class="p">(</span><span class="n">yaml_file</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Tester.add"><a class="viewcode-back" href="../../../../members/tester.html#dorieh.utils.qc.tester.Tester.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="n">Test</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tests</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Tester.load_yaml"><a class="viewcode-back" href="../../../../members/tester.html#dorieh.utils.qc.tester.Tester.load_yaml">[docs]</a>    <span class="k">def</span> <span class="nf">load_yaml</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">yaml_file</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">yaml_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">test_list</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">Loader</span><span class="o">=</span><span class="n">yaml</span><span class="o">.</span><span class="n">FullLoader</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">test_list</span><span class="p">:</span>
+            <span class="n">item</span><span class="p">[</span><span class="s1">&#39;condition&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Condition</span><span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;condition&#39;</span><span class="p">]]</span>
+            <span class="n">item</span><span class="p">[</span><span class="s1">&#39;severity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Severity</span><span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;severity&#39;</span><span class="p">]]</span>
+            <span class="n">item</span><span class="p">[</span><span class="s1">&#39;logger&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Test</span><span class="p">(</span><span class="o">**</span><span class="n">item</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Tester.check"><a class="viewcode-back" href="../../../../members/tester.html#dorieh.utils.qc.tester.Tester.check">[docs]</a>    <span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">num_tests</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">num_failures</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tests</span><span class="p">:</span>
+            <span class="n">num_tests</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">out</span> <span class="ow">and</span> <span class="n">result</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span>
+                <span class="n">num_failures</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">passes</span> <span class="o">=</span> <span class="n">num_tests</span> <span class="o">-</span> <span class="n">num_failures</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;All Tests Completed. Out of &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">num_tests</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; tests: &quot;</span> <span class="o">+</span>
+                          <span class="nb">str</span><span class="p">(</span><span class="n">passes</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; passed and &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">num_failures</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; failed.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

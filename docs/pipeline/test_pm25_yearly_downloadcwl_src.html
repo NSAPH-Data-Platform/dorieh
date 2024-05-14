@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>test_pm25_yearly_download.cwl &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">test_pm25_yearly_download.cwl</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/pipeline/test_pm25_yearly_downloadcwl_src.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="test-pm25-yearly-download-cwl">
+<h1>test_pm25_yearly_download.cwl<a class="headerlink" href="#test-pm25-yearly-download-cwl" title="Permalink to this heading"></a></h1>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1">#!/usr/bin/env cwl-runner</span>
+<span class="c1">### Test harness for pm25_yearly_download.cwl</span>
+
+<span class="nt">cwlVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1.2</span>
+<span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Workflow</span>
+
+<span class="nt">requirements</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">InlineJavascriptRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="w">  </span><span class="nt">MultipleInputFeatureRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="w">  </span><span class="nt">ScatterFeatureRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="w">  </span><span class="nt">StepInputExpressionRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="w">  </span><span class="nt">SubworkflowFeatureRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+
+
+<span class="c1"># All inputs of original pipeline, remove what is not needed</span>
+<span class="nt">inputs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">component</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">default</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">BC</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NH4</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NIT</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OM</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SO4</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SOIL</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SS</span>
+<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Optional</span><span class="nv"> </span><span class="s">components</span><span class="nv"> </span><span class="s">provided</span><span class="nv"> </span><span class="s">as</span><span class="nv"> </span><span class="s">percentages</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">separate</span><span class="nv"> </span><span class="s">set</span><span class="nv"> </span><span class="s">\nof</span><span class="nv"> </span><span class="s">netCDF\</span>
+<span class="w">      </span><span class="s">\ files\n&quot;</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string[]</span>
+<span class="w">  </span><span class="nt">connection_name</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;The</span><span class="nv"> </span><span class="s">name</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">section</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">database.ini</span><span class="nv"> </span><span class="s">file</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">literal</span>
+
+<span class="w">      </span><span class="s">`None`</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">skip</span><span class="nv"> </span><span class="s">over</span><span class="nv"> </span><span class="s">database</span><span class="nv"> </span><span class="s">ingestion</span><span class="nv"> </span><span class="s">step</span>
+
+<span class="w">      </span><span class="s">&#39;</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">  </span><span class="nt">database</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">default</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database.ini</span>
+<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Path</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">database</span><span class="nv"> </span><span class="s">connection</span><span class="nv"> </span><span class="s">file,</span><span class="nv"> </span><span class="s">usually</span><span class="nv"> </span><span class="s">database.ini.</span><span class="nv"> </span><span class="s">\nThis</span><span class="nv"> </span><span class="s">argument\</span>
+<span class="w">      </span><span class="s">\ is</span><span class="nv"> </span><span class="s">ignored</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">`connection_name`</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">`None`\n&quot;</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">  </span><span class="nt">downloads</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Local</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">AWS</span><span class="nv"> </span><span class="s">bucket</span><span class="nv"> </span><span class="s">folder</span><span class="nv"> </span><span class="s">containing</span><span class="nv"> </span><span class="s">netCDF</span><span class="nv"> </span><span class="s">grid</span><span class="nv"> </span><span class="s">files,</span><span class="nv"> </span><span class="s">downloaded</span><span class="nv"> </span><span class="s">\nand\</span>
+<span class="w">      </span><span class="s">\ unpacked</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">Washington</span><span class="nv"> </span><span class="s">University</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">St.</span><span class="nv"> </span><span class="s">Louis</span><span class="nv"> </span><span class="s">(WUSTL)</span><span class="nv"> </span><span class="s">Box\nsite.</span><span class="nv"> </span><span class="s">Annual\</span>
+<span class="w">      </span><span class="s">\ and</span><span class="nv"> </span><span class="s">monthly</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">repositories</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">described</span><span class="nv"> </span><span class="s">in\n[WUSTL</span><span class="nv"> </span><span class="s">Atmospheric</span><span class="nv"> </span><span class="s">Composition\</span>
+<span class="w">      </span><span class="s">\ Analysis</span><span class="nv"> </span><span class="s">Group](https://sites.wustl.edu/acag/datasets/surface-pm2-5/).\n\n\</span>
+<span class="w">      </span><span class="s">The</span><span class="nv"> </span><span class="s">annual</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">PM2.5</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">also</span><span class="nv"> </span><span class="s">available</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">\na</span><span class="nv"> </span><span class="s">Harvard</span><span class="nv"> </span><span class="s">URC</span><span class="nv"> </span><span class="s">AWS</span><span class="nv"> </span><span class="s">Bucket:</span><span class="nv"> </span><span class="s">`s3://nsaph-public/data/exposures/wustl/`\n&quot;</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Directory</span>
+<span class="w">  </span><span class="nt">geography</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Type</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">geography:</span><span class="nv"> </span><span class="s">zip</span><span class="nv"> </span><span class="s">codes</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">counties</span>
+
+<span class="w">      </span><span class="s">Supported</span><span class="nv"> </span><span class="s">values:</span><span class="nv"> </span><span class="s">&quot;zip&quot;,</span><span class="nv"> </span><span class="s">&quot;zcta&quot;</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">&quot;county&quot;</span>
+
+<span class="w">      </span><span class="s">&#39;</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">  </span><span class="nt">proxy</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HTTP/HTTPS Proxy if required</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string?</span>
+<span class="w">  </span><span class="nt">ram</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2GB</span>
+<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Runtime memory, available to the process</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">  </span><span class="nt">shape_file_collection</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tiger</span>
+<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;[Collection</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">shapefiles](https://www2.census.gov/geo/tiger),</span><span class="nv"> </span><span class="s">\neither\</span>
+<span class="w">      </span><span class="s">\ GENZ</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">TIGER\n&quot;</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">  </span><span class="nt">strategy</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">auto</span>
+<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Rasterization</span><span class="nv"> </span><span class="s">strategy,</span><span class="nv"> </span><span class="s">see</span>
+
+<span class="w">      </span><span class="s">[documentation](https://nsaph-data-platform.github.io/nsaph-platform-docs/common/gridmet/doc/strategy.html)</span>
+
+<span class="w">      </span><span class="s">for</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">list</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">supported</span><span class="nv"> </span><span class="s">values</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">explanations</span>
+
+<span class="w">      </span><span class="s">&#39;</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">  </span><span class="nt">table</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pm25_aggregated</span>
+<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The name of the table to store teh aggregated data in</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">  </span><span class="nt">test_script</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File containing SQL test script</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">  </span><span class="nt">variable</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PM25</span>
+<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;The</span><span class="nv"> </span><span class="s">main</span><span class="nv"> </span><span class="s">variable</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">being</span><span class="nv"> </span><span class="s">aggregated</span><span class="nv"> </span><span class="s">over</span><span class="nv"> </span><span class="s">shapes.</span><span class="nv"> </span><span class="s">We</span><span class="nv"> </span><span class="s">have</span><span class="nv"> </span><span class="s">tested</span>
+
+<span class="w">      </span><span class="s">the</span><span class="nv"> </span><span class="s">pipeline</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">PM25</span>
+
+<span class="w">      </span><span class="s">&#39;</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">  </span><span class="nt">years</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">default</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2000</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2001</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2002</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2003</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2004</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2005</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2006</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2007</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2008</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2009</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2010</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2011</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2012</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2013</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2014</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2015</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2016</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2017</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">int[]</span>
+
+
+<span class="nt">steps</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">execute</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pm25_yearly_download.cwl</span>
+<span class="w">    </span><span class="nt">in</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">proxy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">proxy</span>
+<span class="w">      </span><span class="nt">downloads</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">downloads</span>
+<span class="w">      </span><span class="nt">geography</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">geography</span>
+<span class="w">      </span><span class="nt">years</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">years</span>
+<span class="w">      </span><span class="nt">variable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable</span>
+<span class="w">      </span><span class="nt">component</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">component</span>
+<span class="w">      </span><span class="nt">strategy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">strategy</span>
+<span class="w">      </span><span class="nt">ram</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ram</span>
+<span class="w">      </span><span class="nt">shape_file_collection</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">shape_file_collection</span>
+<span class="w">      </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
+<span class="w">      </span><span class="nt">connection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection_name</span>
+<span class="w">      </span><span class="nt">table</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">table</span>
+<span class="w">    </span><span class="nt">out</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">aggregate_data</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data_dictionary</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">consolidated_data</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">shapes</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">aggregate_log</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">aggregate_err</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ingest_log</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">index_log</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vacuum_log</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ingest_err</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">index_err</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vacuum_err</span>
+
+<span class="w">  </span><span class="nt">verify</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">run_test.cwl</span>
+<span class="w">    </span><span class="nt">in</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
+<span class="w">      </span><span class="nt">connection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection_name</span>
+<span class="w">      </span><span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test_script</span>
+<span class="w">      </span><span class="nt">depends_on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/vacuum_err</span>
+<span class="w">    </span><span class="nt">out</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">log</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">errors</span>
+
+<span class="nt">outputs</span><span class="p">:</span>
+<span class="c1">## Generated by nsaph/util/cwl_collect_outputs.py from pm25_yearly_download.cwl:</span>
+<span class="w">  </span><span class="nt">execute_aggregate_data</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File[]</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/aggregate_data</span>
+<span class="w">  </span><span class="nt">execute_data_dictionary</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/data_dictionary</span>
+<span class="w">  </span><span class="nt">execute_consolidated_data</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File[]</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/consolidated_data</span>
+<span class="w">  </span><span class="nt">execute_shapes</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="s">&#39;type&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;array&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;items&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="s">&#39;type&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;array&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;items&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;File&#39;</span><span class="p p-Indicator">]}}</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/shapes</span>
+<span class="w">  </span><span class="nt">execute_aggregate_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="s">&#39;type&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;array&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;items&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;Any&#39;</span><span class="p p-Indicator">}</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/aggregate_log</span>
+<span class="w">  </span><span class="nt">execute_aggregate_err</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File[]</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/aggregate_err</span>
+<span class="w">  </span><span class="nt">execute_ingest_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/ingest_log</span>
+<span class="w">  </span><span class="nt">execute_index_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/index_log</span>
+<span class="w">  </span><span class="nt">execute_vacuum_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/vacuum_log</span>
+<span class="w">  </span><span class="nt">execute_ingest_err</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/ingest_err</span>
+<span class="w">  </span><span class="nt">execute_index_err</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/index_err</span>
+<span class="w">  </span><span class="nt">execute_vacuum_err</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/vacuum_err</span>
+<span class="c1">## Generated by nsaph/util/cwl_collect_outputs.py from run_test.cwl:</span>
+<span class="w">  </span><span class="nt">verify_log</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">verify/log</span>
+<span class="w">  </span><span class="nt">verify_errors</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">verify/errors</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

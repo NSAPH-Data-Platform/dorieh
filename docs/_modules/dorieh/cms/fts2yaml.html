@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dorieh.cms.fts2yaml &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">dorieh.cms.fts2yaml</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for dorieh.cms.fts2yaml</h1><div class="highlight"><pre>
+<span></span><span class="c1">#  Copyright (c) 2021. Harvard University</span>
+<span class="c1">#</span>
+<span class="c1">#  Developed by Research Software Engineering,</span>
+<span class="c1">#  Faculty of Arts and Sciences, Research Computing (FAS RC)</span>
+<span class="c1">#  Author: Michael A Bouzinier</span>
+<span class="c1">#</span>
+<span class="c1">#  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1">#  you may not use this file except in compliance with the License.</span>
+<span class="c1">#  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#         http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1">#  limitations under the License.</span>
+<span class="c1">#</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Parse utilities for File Transfer Summary (FTS) files generated by SAS.</span>
+
+<span class="sd">Tries to recognize a type of a medicare or a medicaid CMS file and</span>
+<span class="sd">extract metadata</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Dict</span>
+
+<span class="kn">import</span> <span class="nn">yaml</span>
+
+<span class="kn">from</span> <span class="nn">dorieh.platform</span> <span class="kn">import</span> <span class="n">ORIGINAL_FILE_COLUMN</span>
+<span class="kn">from</span> <span class="nn">dorieh.utils.fwf</span> <span class="kn">import</span> <span class="n">FWFColumn</span><span class="p">,</span> <span class="n">FWFMeta</span>
+<span class="kn">from</span> <span class="nn">dorieh.utils.io_utils</span> <span class="kn">import</span> <span class="n">fopen</span>
+<span class="kn">from</span> <span class="nn">dorieh.platform.pg_keywords</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="n">MEDICARE_FILE_TYPES</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;mbsf_abcd&quot;</span><span class="p">,</span> <span class="s2">&quot;mbsf_ab&quot;</span><span class="p">,</span> <span class="s2">&quot;mbsf_d&quot;</span><span class="p">,</span> <span class="s2">&quot;medpar&quot;</span><span class="p">]</span>
+<span class="sd">&#39;&#39;&#39;Known medicare file types&#39;&#39;&#39;</span>
+
+
+<span class="n">MEDICARE_KEY_COLUMNS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;BENE_ID&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">&quot;STATE&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;STATE_CD&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;YEAR&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;RFRNC_YR&quot;</span><span class="p">,</span> <span class="s2">&quot;MEDPAR_YR_NUM&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;ZIP&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;BENE_ZIP&quot;</span><span class="p">,</span> <span class="s2">&quot;ZIP_CD&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="mcr_type"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.mcr_type">[docs]</a><span class="k">def</span> <span class="nf">mcr_type</span><span class="p">(</span><span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Tries to guess medicare file type by its name</span>
+
+<span class="sd">    :param file_name: Name of the file</span>
+<span class="sd">    :return: string denoting file type</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">MEDICARE_FILE_TYPES</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">file_name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">t</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unsupported Medicare file type: &quot;</span> <span class="o">+</span> <span class="n">file_name</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="width"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.width">[docs]</a><span class="k">def</span> <span class="nf">width</span><span class="p">(</span><span class="n">s</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parses width of a numeric column as  described in FTS file</span>
+
+<span class="sd">    :param s: String from FTS file, describing column width</span>
+<span class="sd">    :return: A tuple, with fist element specifying total column width and</span>
+<span class="sd">        the second a number of digits after decimal point</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ColumnAttribute"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.ColumnAttribute">[docs]</a><span class="k">class</span> <span class="nc">ColumnAttribute</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Column attribute as read from FTS</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">conv</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">start</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="n">end</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv</span> <span class="o">=</span> <span class="n">conv</span>
+
+<div class="viewcode-block" id="ColumnAttribute.arg"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.ColumnAttribute.arg">[docs]</a>    <span class="k">def</span> <span class="nf">arg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span></div>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;[</span><span class="si">{:d}</span><span class="s2">:</span><span class="si">{:d}</span><span class="s2">] </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="ColumnReader"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.ColumnReader">[docs]</a><span class="k">class</span> <span class="nc">ColumnReader</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reads columns section of an FTS file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">constructor</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">constructor</span> <span class="o">=</span> <span class="n">constructor</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="n">pattern</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span> <span class="o">==</span> <span class="n">constructor</span><span class="o">.</span><span class="n">nattrs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">fields</span><span class="p">)):</span>
+            <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">fields</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="n">constructor</span><span class="o">.</span><span class="n">conv</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ColumnAttribute</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">c</span><span class="o">+</span><span class="n">l</span><span class="p">,</span> <span class="n">f</span><span class="p">))</span>
+            <span class="n">c</span> <span class="o">+=</span> <span class="n">l</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="ColumnReader.read"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.ColumnReader.read">[docs]</a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+        <span class="n">attrs</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">constructor</span><span class="p">(</span><span class="o">*</span><span class="n">attrs</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="FTSColumn"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.FTSColumn">[docs]</a><span class="k">class</span> <span class="nc">FTSColumn</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Metadata object for a column described in FTS file</span>
+
+<span class="sd">    A column can be either a CSV or fixed width (fwf) column</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="FTSColumn.conv"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.FTSColumn.conv">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">conv</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Conversion function that should be applied to</span>
+<span class="sd">        the i-th attribute of a column</span>
+
+<span class="sd">        :param i: attribute ordinal in the column description</span>
+<span class="sd">        :return: Callable function</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">]:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="nb">int</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="nb">str</span>
+        <span class="k">return</span> <span class="n">f</span></div>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">c_type</span><span class="p">,</span> <span class="n">c_format</span><span class="p">,</span> <span class="n">c_width</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">column</span> <span class="o">=</span> <span class="n">column</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">c_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">=</span> <span class="n">c_format</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">c_width</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">label</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_input</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_attrs</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">attr</span> <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="k">if</span> <span class="n">attr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;_&#39;</span>
+        <span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">FTSColumn</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">o</span> <span class="ow">is</span> <span class="bp">self</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attrs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{:d}</span><span class="s2">: </span><span class="si">{}</span><span class="s2"> [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">column</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
+
+<div class="viewcode-block" id="FTSColumn.analyze_format"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.FTSColumn.analyze_format">[docs]</a>    <span class="k">def</span> <span class="nf">analyze_format</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+                <span class="n">fmt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span>
+                <span class="n">can_be_numeric</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">fmt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+                <span class="n">can_be_numeric</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">fmt</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+                <span class="n">w</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">w</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">scale</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">scale</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">w</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">w</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">:</span>
+                <span class="n">scale</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">scale</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">can_be_numeric</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="n">can_be_numeric</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">w</span></div>
+
+<div class="viewcode-block" id="FTSColumn.to_sql_type"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.FTSColumn.to_sql_type">[docs]</a>    <span class="k">def</span> <span class="nf">to_sql_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        SQL Type of the column</span>
+<span class="sd">        :return: SQL type of the column</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="ow">in</span> <span class="p">[</span><span class="n">PG_SERIAL_TYPE</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="n">t</span>
+
+        <span class="n">can_be_numeric</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">wdt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">analyze_format</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;CHAR&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">(</span><span class="si">{:d}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">PG_STR_TYPE</span><span class="p">,</span> <span class="n">wdt</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;NUM&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">can_be_numeric</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">(</span><span class="si">{:d}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">PG_STR_TYPE</span><span class="p">,</span> <span class="n">wdt</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">scale</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">(</span><span class="si">{:d}</span><span class="s2">,</span><span class="si">{:d}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">PG_NUMERIC_TYPE</span><span class="p">,</span> <span class="n">wdt</span><span class="p">,</span> <span class="n">scale</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">PG_INT_TYPE</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;DATE&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">PG_DATE_TYPE</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Unexpected column type: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="FTSColumn.get_description"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.FTSColumn.get_description">[docs]</a>    <span class="k">def</span> <span class="nf">get_description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">,</span>
+            <span class="s2">&quot;original_type&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span>
+            <span class="s2">&quot;width&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span>
+        <span class="p">}</span></div>
+
+<div class="viewcode-block" id="FTSColumn.to_dict"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.FTSColumn.to_dict">[docs]</a>    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_sql_type</span><span class="p">(),</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_description</span><span class="p">()</span>
+        <span class="p">}</span></div>
+
+<div class="viewcode-block" id="FTSColumn.to_fwf_column"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.FTSColumn.to_fwf_column">[docs]</a>    <span class="k">def</span> <span class="nf">to_fwf_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FWFColumn</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a description of a fixed width (fwf) column required to create</span>
+<span class="sd">        a FWF reader</span>
+
+<span class="sd">        :param pos: starting position of the column in a record</span>
+<span class="sd">        :return: A descriptor for FWF column</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">_</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">analyze_format</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">FWFColumn</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">column</span><span class="p">,</span>
+            <span class="nb">type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span>
+            <span class="n">order</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">,</span>
+            <span class="n">start</span><span class="o">=</span><span class="n">pos</span><span class="p">,</span>
+            <span class="n">width</span> <span class="o">=</span> <span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">scale</span><span class="p">)</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="AliasColumn"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.AliasColumn">[docs]</a><span class="k">class</span> <span class="nc">AliasColumn</span><span class="p">(</span><span class="n">FTSColumn</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Subclass describing a column not present in the original data but</span>
+<span class="sd">    that should be generated in the corresponding  database table</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alias</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="n">FTSColumn</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">column</span><span class="o">.</span><span class="n">order</span><span class="p">,</span> <span class="n">alias</span><span class="p">,</span>
+                         <span class="n">column</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">column</span><span class="o">.</span><span class="n">format</span><span class="p">,</span>
+                         <span class="n">column</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">column</span><span class="o">.</span><span class="n">label</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target</span> <span class="o">=</span> <span class="n">column</span><span class="o">.</span><span class="n">column</span>
+        <span class="k">return</span>
+
+<div class="viewcode-block" id="AliasColumn.to_dict"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.AliasColumn.to_dict">[docs]</a>    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+        <span class="n">d</span><span class="p">[</span><span class="s2">&quot;index&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">d</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;generated&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="s2">&quot;GENERATED ALWAYS AS (</span><span class="si">{}</span><span class="s2">) STORED&quot;</span>
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<div class="viewcode-block" id="MedicaidFTSColumn"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.MedicaidFTSColumn">[docs]</a><span class="k">class</span> <span class="nc">MedicaidFTSColumn</span><span class="p">(</span><span class="n">FTSColumn</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Subclass for a column in medicaid files</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">nattrs</span> <span class="o">=</span> <span class="mi">6</span></div>
+
+
+<div class="viewcode-block" id="MedicareFTSColumn"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.MedicareFTSColumn">[docs]</a><span class="k">class</span> <span class="nc">MedicareFTSColumn</span><span class="p">(</span><span class="n">FTSColumn</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Subclass for a column in medicare files</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">nattrs</span> <span class="o">=</span> <span class="mi">7</span>
+
+<div class="viewcode-block" id="MedicareFTSColumn.conv"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.MedicareFTSColumn.conv">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">conv</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">]:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="nb">int</span>
+        <span class="k">elif</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="nb">float</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="nb">str</span>
+        <span class="k">return</span> <span class="n">f</span></div>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">long_name</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">short_name</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">desc</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">order</span><span class="p">,</span>
+            <span class="n">column</span><span class="o">=</span><span class="n">short_name</span><span class="p">,</span>
+            <span class="n">c_type</span><span class="o">=</span><span class="nb">type</span><span class="p">,</span>
+            <span class="n">c_width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
+            <span class="n">c_format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="n">desc</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="n">long_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">start</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">raise</span>
+
+<div class="viewcode-block" id="MedicareFTSColumn.get_description"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.MedicareFTSColumn.get_description">[docs]</a>    <span class="k">def</span> <span class="nf">get_description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">desc</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_description</span><span class="p">()</span>
+        <span class="n">desc</span><span class="p">[</span><span class="s2">&quot;long_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">long_name</span>
+        <span class="k">return</span> <span class="n">desc</span></div></div>
+
+
+<span class="k">class</span> <span class="nc">CMSFTS</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Abstract class for Medicaid and Medicare files from dorieh.cms</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">common_indices</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="s2">&quot;BENE_ID&quot;</span><span class="p">,</span>
+                <span class="n">ORIGINAL_FILE_COLUMN</span>
+            <span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">type_of_data</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param type_of_data: Can be either `ps` for personal summary or</span>
+<span class="sd">            `ip` for inpatient admissions data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">table_type</span> <span class="o">=</span> <span class="n">type_of_data</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table_name</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">common_indices</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">FTSColumn</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pk</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">constructor</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pattern</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">read_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">fopen</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s2">&quot;rt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fts</span><span class="p">:</span>
+            <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">fts</span><span class="p">]</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">column_reader</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)):</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;---&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="s1">&#39;------------------&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="n">column_reader</span> <span class="o">=</span> <span class="n">ColumnReader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">constructor</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="s1">&#39;:&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="k">continue</span>
+
+        <span class="k">if</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="n">i</span> <span class="ow">or</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Column definitions are not found in </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+
+        <span class="n">columns</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;Note:&quot;</span><span class="p">):</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="s2">&quot;End&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="n">column</span> <span class="o">=</span> <span class="n">column_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            <span class="n">columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">on_after_read_file</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">columns</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Reconciliation required: </span><span class="si">{}</span><span class="s2">, number of columns&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">columns</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">columns</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Reconciliation required: </span><span class="si">{}</span><span class="s2">, column: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">columns</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+
+    <span class="k">def</span> <span class="nf">on_after_read_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">FTSColumn</span><span class="p">]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Callback function</span>
+
+<span class="sd">        :param columns: columns read from FTS file</span>
+<span class="sd">        :return:  nothing</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_file_column</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">add_record_column</span><span class="p">(</span><span class="n">columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">FTSColumn</span><span class="p">]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds a RECORD column, to uniquely identify a record in the database.</span>
+<span class="sd">        A column is of type SERIAL, i.e. auto-incremented</span>
+
+<span class="sd">        :param columns:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">column</span> <span class="o">=</span> <span class="n">FTSColumn</span><span class="p">(</span>
+            <span class="n">order</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="n">column</span><span class="o">=</span><span class="s2">&quot;RECORD&quot;</span><span class="p">,</span>
+            <span class="n">c_type</span><span class="o">=</span><span class="n">PG_SERIAL_TYPE</span><span class="p">,</span>
+            <span class="n">c_format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">c_width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Record number in the file&quot;</span>
+        <span class="p">)</span>
+        <span class="n">column</span><span class="o">.</span><span class="n">is_input</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">add_file_column</span><span class="p">(</span><span class="n">columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">FTSColumn</span><span class="p">]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds a column containing the name of original file, from which the data</span>
+<span class="sd">        has been read</span>
+
+<span class="sd">        :param columns:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">column</span> <span class="o">=</span> <span class="n">FTSColumn</span><span class="p">(</span>
+            <span class="n">order</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="n">column</span><span class="o">=</span><span class="n">ORIGINAL_FILE_COLUMN</span><span class="p">,</span>
+            <span class="n">c_type</span><span class="o">=</span><span class="s2">&quot;CHAR&quot;</span><span class="p">,</span>
+            <span class="n">c_format</span><span class="o">=</span><span class="s2">&quot;128&quot;</span><span class="p">,</span>
+            <span class="n">c_width</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;RESDAC original file name&quot;</span>
+        <span class="p">)</span>
+        <span class="n">column</span><span class="o">.</span><span class="n">is_input</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">column_to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="n">FTSColumn</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a column as a dictionary object that can be added to</span>
+<span class="sd">        YAML data model</span>
+<span class="sd">        :param c: a column as parsed from FTS</span>
+<span class="sd">        :return: dictionary</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">d</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">column</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">:</span>
+            <span class="n">d</span><span class="p">[</span><span class="s2">&quot;index&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">column</span> <span class="o">==</span> <span class="n">ORIGINAL_FILE_COLUMN</span><span class="p">:</span>
+            <span class="n">d</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;file&quot;</span>
+            <span class="p">}</span>
+            <span class="n">d</span><span class="p">[</span><span class="s2">&quot;index&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;required_before_loading_data&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+        <span class="k">return</span> <span class="n">d</span>
+
+    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns full metadata for the file as a dictionary</span>
+<span class="sd">        to be included in the YAML data model used to</span>
+<span class="sd">        generate DDL for the corresponding table</span>
+
+<span class="sd">        :return:    dictionary</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">table</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="n">tname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">table_name</span> \
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">table_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">table_type</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="n">t</span><span class="p">[</span><span class="s2">&quot;columns&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="n">c</span><span class="o">.</span><span class="n">column</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">column_to_dict</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+            <span class="p">}</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span>
+        <span class="p">]</span>
+        <span class="n">t</span><span class="p">[</span><span class="s2">&quot;primary_key&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pk</span>
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="s2">&quot;indices&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">t</span><span class="p">:</span>
+                <span class="n">t</span><span class="p">[</span><span class="s2">&quot;indices&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+            <span class="n">t</span><span class="p">[</span><span class="s2">&quot;indices&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+
+        <span class="n">table</span><span class="p">[</span><span class="n">tname</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span>
+        <span class="k">return</span> <span class="n">table</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">v2i</span><span class="p">(</span><span class="n">v</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">to_fwf_meta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FWFMeta</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns metadata required to read the file if</span>
+<span class="sd">        it is a fixed width file</span>
+
+<span class="sd">        :param data_path:</span>
+<span class="sd">        :return: Metadata as required by FWF reader</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;Exact File Record Length (Bytes in Variable Block)&quot;</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">:</span>
+            <span class="n">record_len</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">v2i</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="s2">&quot;Record Length is undefined&quot;</span><span class="p">)</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;Exact File Size in Bytes with 512 Blocksize&quot;</span>
+        <span class="n">fsize</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">v2i</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;Exact File Quantity (Rows)&quot;</span>
+        <span class="n">nrows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">v2i</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">columns</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">c</span><span class="o">.</span><span class="n">is_input</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">fwf_column</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">to_fwf_column</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+            <span class="n">columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fwf_column</span><span class="p">)</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="n">fwf_column</span><span class="o">.</span><span class="n">end</span>
+        <span class="k">return</span> <span class="n">FWFMeta</span><span class="p">(</span>
+            <span class="n">path</span><span class="o">=</span><span class="n">data_path</span><span class="p">,</span>
+            <span class="n">record_len</span><span class="o">=</span><span class="n">record_len</span><span class="p">,</span>
+            <span class="n">size</span><span class="o">=</span><span class="n">fsize</span><span class="p">,</span>
+            <span class="n">number_of_rows</span><span class="o">=</span><span class="n">nrows</span><span class="p">,</span>
+            <span class="n">columns</span><span class="o">=</span><span class="n">columns</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">print_yaml</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">root_dir</span><span class="p">)</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">table</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="MedicaidFTS"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.MedicaidFTS">[docs]</a><span class="k">class</span> <span class="nc">MedicaidFTS</span><span class="p">(</span><span class="n">CMSFTS</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Subclass describing Medicaid data file (usually, CSV)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">medicaid_indices</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="s2">&quot;EL_DOB&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;EL_SEX_CD&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;EL_DOD&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;EL_RACE_ETHNCY_CD&quot;</span>
+            <span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">type_of_data</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">type_of_data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">constructor</span> <span class="o">=</span> <span class="n">MedicaidFTSColumn</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">table_type</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;ps&quot;</span><span class="p">,</span> <span class="s2">&quot;ip&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pattern</span> <span class="o">=</span> <span class="s2">&quot;**/maxdata_</span><span class="si">{}</span><span class="s2">_*.fts&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">type_of_data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">indices</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">medicaid_indices</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">table_type</span> <span class="o">==</span> <span class="s2">&quot;ps&quot;</span><span class="p">:</span>
+            <span class="n">year_column</span> <span class="o">=</span> <span class="s2">&quot;MAX_YR_DT&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pk</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;MSIS_ID&quot;</span><span class="p">,</span> <span class="s2">&quot;STATE_CD&quot;</span><span class="p">,</span> <span class="n">year_column</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">indices</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pk</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;EL_AGE_GRP_CD&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">year_column</span> <span class="o">=</span> <span class="s2">&quot;YR_NUM&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pk</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;FILE&quot;</span><span class="p">,</span> <span class="s2">&quot;RECORD&quot;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">indices</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">&quot;MSIS_ID&quot;</span><span class="p">,</span> <span class="s2">&quot;STATE_CD&quot;</span><span class="p">,</span> <span class="n">year_column</span><span class="p">,</span> <span class="s2">&quot;RECORD&quot;</span><span class="p">]</span>
+
+<div class="viewcode-block" id="MedicaidFTS.init"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.MedicaidFTS.init">[docs]</a>    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">pattern</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">pattern</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pattern</span>
+        <span class="n">files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="MedicaidFTS.on_after_read_file"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.MedicaidFTS.on_after_read_file">[docs]</a>    <span class="k">def</span> <span class="nf">on_after_read_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">FTSColumn</span><span class="p">]):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">on_after_read_file</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">table_type</span> <span class="o">==</span> <span class="s2">&quot;ip&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_record_column</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="MedicareFTS"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.MedicareFTS">[docs]</a><span class="k">class</span> <span class="nc">MedicareFTS</span><span class="p">(</span><span class="n">CMSFTS</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Subclass describing Medicare data file (usually, FWF dat file)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">type_of_data</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">type_of_data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">constructor</span> <span class="o">=</span> <span class="n">MedicareFTSColumn</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">table_type</span> <span class="ow">in</span> <span class="n">MEDICARE_FILE_TYPES</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pattern</span> <span class="o">=</span> <span class="s2">&quot;**/</span><span class="si">{}</span><span class="s2">_*.fts&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">type_of_data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key_columns</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="n">FTSColumn</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">key</span><span class="p">:</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">MEDICARE_KEY_COLUMNS</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pk</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;FILE&quot;</span><span class="p">,</span> <span class="s2">&quot;RECORD&quot;</span><span class="p">]</span>
+        <span class="k">return</span>
+
+<div class="viewcode-block" id="MedicareFTS.init"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.MedicareFTS.init">[docs]</a>    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fts_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">ydir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">fts_path</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table_name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">table_type</span><span class="p">,</span> <span class="n">ydir</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fts_path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="MedicareFTS.on_after_read_file"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.MedicareFTS.on_after_read_file">[docs]</a>    <span class="k">def</span> <span class="nf">on_after_read_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">FTSColumn</span><span class="p">]):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">on_after_read_file</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_record_column</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_key_columns</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_indices</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MedicareFTS.check_key_columns"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.MedicareFTS.check_key_columns">[docs]</a>    <span class="k">def</span> <span class="nf">check_key_columns</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">FTSColumn</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">MEDICARE_KEY_COLUMNS</span><span class="p">:</span>
+                <span class="n">candidates</span> <span class="o">=</span> <span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">+</span> <span class="n">MEDICARE_KEY_COLUMNS</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">column</span><span class="o">.</span><span class="n">column</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_columns</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                            <span class="s2">&quot;Duplicate column candidate for &quot;</span> <span class="o">+</span> <span class="n">key</span>
+                        <span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">key_columns</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">column</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;BENE_ID&quot;</span><span class="p">,</span> <span class="s2">&quot;YEAR&quot;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_columns</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Missing </span><span class="si">{}</span><span class="s2"> column for </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">key</span><span class="p">,</span>  <span class="bp">self</span><span class="o">.</span><span class="n">table_type</span>
+                <span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">table_type</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;mbsf_ab&quot;</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">MEDICARE_KEY_COLUMNS</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_columns</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Missing </span><span class="si">{}</span><span class="s2"> column for </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">key</span><span class="p">,</span>  <span class="bp">self</span><span class="o">.</span><span class="n">table_type</span>
+                    <span class="p">))</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="MedicareFTS.add_indices"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.MedicareFTS.add_indices">[docs]</a>    <span class="k">def</span> <span class="nf">add_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">FTSColumn</span><span class="p">]):</span>
+        <span class="n">p_idx_columns</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">MEDICARE_KEY_COLUMNS</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_columns</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">c</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;BENE_ID&quot;</span><span class="p">,</span> <span class="s2">&quot;YEAR&quot;</span><span class="p">]:</span>
+                <span class="n">p_idx_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">table_type</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;mbsf_ab&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;STATE&quot;</span><span class="p">]:</span>
+                <span class="n">p_idx_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">column</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">c</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">AliasColumn</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;primary&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;columns&quot;</span><span class="p">:</span> <span class="n">p_idx_columns</span><span class="p">}})</span></div></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="n">MedicaidFTS</span><span class="p">(</span><span class="s2">&quot;ps&quot;</span><span class="p">)</span>
+    <span class="n">source</span><span class="o">.</span><span class="n">print_yaml</span><span class="p">()</span>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

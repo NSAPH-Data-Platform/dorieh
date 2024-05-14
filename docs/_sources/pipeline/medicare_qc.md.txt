@@ -1,0 +1,60 @@
+# Creates helper tables for Medicare QC
+
+
+ [Source code](medicare_qccwl_src.md) 
+
+
+![](medicare_qc.png)
+
+```{contents}
+---
+local:
+---
+```
+
+**Workflow**
+
+## Description
+
+This workflow creates helper tables to be used in Quality Checks (QC)
+for Medicare data
+
+
+## Inputs
+
+| Name            | Type   | Default | Description                                                      | 
+|:----------------|:-------|:--------|:-----------------------------------------------------------------|
+| database        | File   |         | Path to database connection file, usually database.ini           | 
+| connection_name | string |         | The name of the section in the database.ini file                 | 
+| depends_on      | File?  |         | a special field used to enforce dependencies and execution order | 
+
+## Outputs
+
+| Name                    | Type | Description | 
+|:------------------------|:-----|:------------|
+| ev_create_log           | File |             | 
+| ev_create_err           | File |             | 
+| av_create_log           | File |             | 
+| av_create_err           | File |             | 
+| enrollmen343_create_log | File |             | 
+| enrollmen343_index_log  | File |             | 
+| enrollmen343_vacuum_log | File |             | 
+| enrollmen343_create_err | File |             | 
+| enrollmen343_index_err  | File |             | 
+| enrollmen343_vacuum_err | File |             | 
+| admission697_create_log | File |             | 
+| admission697_index_log  | File |             | 
+| admission697_vacuum_log | File |             | 
+| admission697_create_err | File |             | 
+| admission697_index_err  | File |             | 
+| admission697_vacuum_err | File |             | 
+
+## Steps
+
+| Name                        | Runs                      | Description                                                                                         | 
+|:----------------------------|:--------------------------|:----------------------------------------------------------------------------------------------------|
+| create_enrl_qc_view         | [create.cwl](create.md)   | Creates a joined view with Beneficiaries and Enrollments tables                                     | 
+| create_adm_qc_view          | [create.cwl](create.md)   | Creates a union of admissions validated records and records discarded because of validation issues  | 
+| create_enrollments_qc_table | [matview.cwl](matview.md) | Creates a table with aggregate data for beneficiaries and enrollments                               | 
+| create_admissions_qc_table  | [matview.cwl](matview.md) | Creates a table with aggregate data for inpatient admissions                                        | 
+

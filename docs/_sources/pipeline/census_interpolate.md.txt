@@ -1,0 +1,29 @@
+# census_interpolate.cwl
+
+
+ [Source code](census_interpolatecwl_src.md) 
+
+
+```{contents}
+---
+local:
+---
+```
+
+**Tool**. Runs: census.interpolate_data
+
+## Inputs
+
+| Name        | Type   | Default                                       | Description | 
+|:------------|:-------|:----------------------------------------------|:------------|
+| interpolate | string | `1999:2019`                                   |             | 
+| log         | File   | `{'class': 'File', 'location': 'census.log'}` |             | 
+| in_pkl      | File   | `{'class': 'File', 'location': 'census.pkl'}` |             | 
+| out_pkl     | string | `census_interpolated.pkl`                     |             | 
+
+## Outputs
+
+| Name | Type | Description | 
+|:-----|:-----|:------------|
+| pkl  | File |             | 
+

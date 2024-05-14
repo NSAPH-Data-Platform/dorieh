@@ -1,0 +1,31 @@
+# census_write.cwl
+
+
+ [Source code](census_writecwl_src.md) 
+
+
+```{contents}
+---
+local:
+---
+```
+
+**Tool**. Runs: census.write_data
+
+## Inputs
+
+| Name        | Type    | Default                                       | Description | 
+|:------------|:--------|:----------------------------------------------|:------------|
+| log         | File    | `{'class': 'File', 'location': 'census.log'}` |             | 
+| in_pkl      | File    | `{'class': 'File', 'location': 'census.pkl'}` |             | 
+| out_file    | string  | `census.csv`                                  |             | 
+| schema_name | string  | `census_schema.yml`                           |             | 
+| table_name  | string? |                                               |             | 
+
+## Outputs
+
+| Name   | Type   | Description | 
+|:-------|:-------|:------------|
+| data   | File[] |             | 
+| schema | File   |             | 
+

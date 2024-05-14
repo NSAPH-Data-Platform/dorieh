@@ -1,0 +1,34 @@
+# Expression evaluator to format a file name for pollution files downloaded from WashU
+
+
+ [Source code](wustl_file_patterncwl_src.md) 
+
+
+```{contents}
+---
+local:
+---
+```
+
+**JavaScript Tool** 
+
+## Description
+
+Given input directory, variable (band), year and month,
+evaluates the expected file name for the input data
+
+
+## Inputs
+
+| Name      | Type      | Default | Description | 
+|:----------|:----------|:--------|:------------|
+| downloads | Directory |         |             | 
+| year      | int       |         |             | 
+| variables | string[]  |         |             | 
+
+## Outputs
+
+| Name         | Type   | Description | 
+|:-------------|:-------|:------------|
+| netcdf_files | File[] |             | 
+

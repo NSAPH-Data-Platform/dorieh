@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EPA Toolkit Usage &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">EPA Toolkit Usage</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/epa_usage.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="epa-toolkit-usage">
+<h1>EPA Toolkit Usage<a class="headerlink" href="#epa-toolkit-usage" title="Permalink to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#aqs-usage" id="id1">AQS Usage</a></p></li>
+<li><p><a class="reference internal" href="#airnow-usage" id="id2">AirNow Usage</a></p></li>
+</ul>
+</nav>
+<section id="aqs-usage">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">AQS Usage</a><a class="headerlink" href="#aqs-usage" title="Permalink to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    python -m dorieh.epa.aqs [-h] 
+        [--years [YEARS ...]] 
+        [--aggregation {annual,daily}] 
+        --parameters PARAMETERS [PARAMETERS ...] 
+        --destination DESTINATION 
+        [--merge_years]
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      --years [YEARS ...], -y [YEARS ...]
+                            Year or list of years to download. For example, the
+                            following argument: `-y 1992:1995 1998 1999 2011
+                            2015:2017` will produce the following list:
+                            [1992,1993,1994,1995,1998,1999,2011,2015,2016,2017],
+                            default: 1990:2020
+      --aggregation {annual,daily}, -a {annual,daily}
+                            Whether to use annual or daily aggregation, default:
+                            annual
+      --parameters PARAMETERS [PARAMETERS ...], -p PARAMETERS [PARAMETERS ...]
+                            Parameter(s) to download, allowed mnemonic names:
+                            NO2,OZONE,PM25,MAX_TEMP,MIN_TEMP or integer codes.
+                            Example: `-p NO2 44201` will download Ozone and NO2.
+                            Required for daily data, for annual data defaults to
+                            all.
+      --destination DESTINATION, --dest DESTINATION, -d DESTINATION
+                            Destination directory for the downloaded files
+      --merge_years         Concatenate consecutive years in one file, default:
+                            False
+</pre></div>
+</div>
+</section>
+<section id="airnow-usage">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">AirNow Usage</a><a class="headerlink" href="#airnow-usage" title="Permalink to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    python -m dorieh.epa.airnow  
+       [-h] --parameters
+       {no2,ozone,pm25,pm10,co,so2,NO2,OZONE,PM25,PM10,CO,SO2}
+       [{no2,ozone,pm25,pm10,co,so2,NO2,OZONE,PM25,PM10,CO,SO2} ...]
+       [--destination DESTINATION] --start_date START_DATE --end_date END_DATE
+       [--reset] [--qc] [--cfg CFG] [--shapes SHAPES [SHAPES ...]]
+       [--api_key API_KEY] [--years [YEARS [YEARS ...]]] [--compress]
+
+    optional arguments:
+      -h, --help            show this help message and exit
+      --parameters {no2,ozone,pm25,pm10,co,so2,NO2,OZONE,PM25,PM10,CO,SO2} [{no2,ozone,pm25,pm10,co,so2,NO2,OZONE,PM25,PM10,CO,SO2} ...], -p {no2,ozone,pm25,pm10,co,so2,NO2,OZONE,PM25,PM10,CO,SO2} [{no2,ozone,pm25,pm10,co,so2,NO2,OZONE,PM25,PM10,CO,SO2} ...]
+                            EPA AirNow Parameter Codes
+      --destination DESTINATION, --dest DESTINATION, -d DESTINATION
+                            Destination directory for the downloaded files,
+                            default: None
+      --start_date START_DATE, --start-date START_DATE, --from START_DATE
+                            First date in the range to download (inclusive)
+      --end_date END_DATE, --end-date END_DATE, --to END_DATE
+                            Last date in the range to download (inclusive)
+      --reset               Discard previously downloaded data if exists, default:
+                            True
+      --qc                  Perform basic data QC, default: True
+      --cfg CFG             An optional path to config file, default: None
+      --shapes SHAPES [SHAPES ...]
+                            An optional path to shape files, default: None
+      --api_key API_KEY     AirNow API Key, default: None
+      --years [YEARS [YEARS ...]], -y [YEARS [YEARS ...]]
+                            Year or list of years to download. For example, the
+                            following argument: `-y 1992:1995 1998 1999 2011
+                            2015:2017` will produce the following list:
+                            [1992,1993,1994,1995,1998,1999,2011,2015,2016,2017] ,
+                            default: 1990:2020
+      --compress, -c        Use gzip compression for the result, default: True
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

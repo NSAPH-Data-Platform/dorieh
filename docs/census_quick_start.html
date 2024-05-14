@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quick Start &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Quick Start</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/census_quick_start.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="quick-start">
+<h1>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this heading"></a></h1>
+<p>Set up your environment (or activate it) using <a class="reference internal" href="census_env_set_up.html#setting-up-environment"><span class="std std-ref">Setting Up Environment</span></a> section.</p>
+<p>Census data comes from different resources, and they may have a different formats in different years. The current supported source of data includes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">acs</span></code>  American Community Survey</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dec</span></code>  Data collected by the decennial census</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pums</span></code> Public use microdata sample (has not been implemented.)</p></li>
+</ul>
+</div></blockquote>
+<p>The users need to get familiar with these data sources and their variables and tables names for each year. In the <code class="docutils literal notranslate"><span class="pre">census</span></code> package, one can check the available variables based on the provided year and data source.</p>
+<p>For example, in the following code we want to see all available variables for <cite>acs1</cite> dataset in 2011.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">census.census_info</span> <span class="kn">import</span> <span class="n">get_varlist</span>
+
+<span class="n">varlist</span> <span class="o">=</span> <span class="n">get_varlist</span><span class="p">(</span><span class="mi">2011</span><span class="p">,</span> <span class="s2">&quot;acs1&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">Number</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">downloaded</span><span class="w"> </span><span class="n">variables</span><span class="si">:</span><span class="s2"> len(varlist)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;List of first 10 variables: &quot;</span><span class="p">)</span>
+<span class="n">varlist</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The results are according to the following:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Number of downloaded variables: 34450</span>
+<span class="go">List of first 10 variables:</span>
+<span class="go">[&#39;B19001B_014E&#39;,</span>
+<span class="go"> &#39;C02014_002E&#39;,</span>
+<span class="go"> &#39;B23023_070E&#39;,</span>
+<span class="go"> &#39;B07007PR_019E&#39;,</span>
+<span class="go"> &#39;B19101A_004E&#39;,</span>
+<span class="go"> &#39;B24022_061E&#39;,</span>
+<span class="go"> &#39;B19001B_013E&#39;,</span>
+<span class="go"> &#39;C02014_003E&#39;,</span>
+<span class="go"> &#39;B07007PR_018E&#39;]</span>
+</pre></div>
+</div>
+<p>There are 34450 different variables for acs1 data set in 2011. You can google “census acs1 2011 variable_name” to get more information about the variable, or you can use the following link pattern to see more information about the data.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">https://api.census.gov/data/2011/acs/acs1/variables/B23023_070E.json</span>
+</pre></div>
+</div>
+<p>And as you can see, this variable is</p>
+<blockquote>
+<div><p><cite>estimate of total females with a disability worked in the past 12 months! Usually worked 1 to 14 hours per week!!48 and 49 weeks.</cite></p>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please note that selecting the correct variables for the research is beyond the scope of this package and this documentation. This package will work the best when you know what you need to download.</p>
+</div>
+<p>After deciding what variables you want to download, you need to create <code class="docutils literal notranslate"><span class="pre">census_vars.yml</span></code> file (read more <a class="reference internal" href="census_yaml.html"><span class="doc">Census Variable File Structure</span></a>). Here is an example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">hispanic_count:</span>
+<span class="go">    2000:</span>
+<span class="go">        census:</span>
+<span class="go">            num: P004002</span>
+</pre></div>
+</div>
+<p>Let’s say we want to download and review hispanic_count in 2000, for each state. We can use the following code to get the results.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">yaml</span>
+<span class="kn">import</span> <span class="nn">census</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;census_vars.yml&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">yaml_dict</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">Loader</span><span class="o">=</span><span class="n">yaml</span><span class="o">.</span><span class="n">FullLoader</span><span class="p">)</span>
+
+<span class="n">my_var</span> <span class="o">=</span> <span class="n">census</span><span class="o">.</span><span class="n">VariableDev</span><span class="p">(</span><span class="s2">&quot;count_hispanic&quot;</span><span class="p">,</span> <span class="n">yaml_dict</span><span class="p">[</span><span class="s2">&quot;hispanic_count&quot;</span><span class="p">][</span><span class="mi">2000</span><span class="p">])</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">my_var</span><span class="o">.</span><span class="n">do_query</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="s2">&quot;state&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please note that the best way to download data is using <code class="docutils literal notranslate"><span class="pre">DataPlan</span></code> class. These are some internal examples to become familiar with the package.</p>
+</div>
+<p>Now, let’s say we want to download the same data with <code class="docutils literal notranslate"><span class="pre">DataPlan</span></code> class. DataPlan has numerous methods to conduct different analyses and filters on data.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">census</span>
+
+<span class="n">plan</span> <span class="o">=</span> <span class="n">census</span><span class="o">.</span><span class="n">DataPlan</span><span class="p">(</span><span class="s2">&quot;census_myvar_test.yml&quot;</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="s2">&quot;state&quot;</span><span class="p">,</span> <span class="n">years</span><span class="o">=</span><span class="n">census</span><span class="o">.</span><span class="n">census_years</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span><span class="mi">2000</span><span class="p">))</span>
+<span class="n">plan</span><span class="o">.</span><span class="n">assemble_data</span><span class="p">()</span>
+<span class="n">plan</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>If you take a look at the results, you will see that the column names are according to your request rather than the original table on Census API.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">state  year  hispanic_count</span>
+<span class="go">01     2000  75830</span>
+<span class="go">02     2000  25852</span>
+<span class="go">04     2000  1295617</span>
+<span class="go">05     2000  86866</span>
+<span class="go">06     2000  10966556</span>
+</pre></div>
+</div>
+<p>Now, if we want to compute the percentage of Hispanic population we can change the yaml file according to the following:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">hispanic_pct:</span>
+<span class="go">2000:</span>
+<span class="go">    census:</span>
+<span class="go">        num: P004002</span>
+<span class="go">        den: P001001</span>
+</pre></div>
+</div>
+<p>And rerun the plan:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">census</span>
+
+<span class="n">plan</span> <span class="o">=</span> <span class="n">census</span><span class="o">.</span><span class="n">DataPlan</span><span class="p">(</span><span class="s2">&quot;census_myvar_test.yml&quot;</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="s2">&quot;state&quot;</span><span class="p">,</span> <span class="n">years</span><span class="o">=</span><span class="n">census</span><span class="o">.</span><span class="n">census_years</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span><span class="mi">2000</span><span class="p">))</span>
+<span class="n">plan</span><span class="o">.</span><span class="n">assemble_data</span><span class="p">()</span>
+<span class="n">plan</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This time we get the following results:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">state  year  hispanic_count</span>
+<span class="go">01     2000  0.017052</span>
+<span class="go">02     2000  0.041236</span>
+<span class="go">04     2000  0.252526</span>
+<span class="go">05     2000  0.032493</span>
+<span class="go">06     2000  0.323768</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

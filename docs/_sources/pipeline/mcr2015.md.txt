@@ -1,0 +1,50 @@
+# Materialized View Creator
+
+
+ [Source code](mcr2015cwl_src.md) 
+
+
+![](mcr2015.png)
+
+```{contents}
+---
+local:
+---
+```
+
+**Workflow**
+
+## Description
+
+This tool is a shortcut to create a materialized view and build
+all indices associated with the view
+
+
+## Inputs
+
+| Name            | Type   | Default | Description                                                      | 
+|:----------------|:-------|:--------|:-----------------------------------------------------------------|
+| database        | File   |         | Path to database connection file, usually database.ini           | 
+| connection_name | string |         | The name of the section in the database.ini file                 | 
+| input           | File?  |         |                                                                  | 
+| depends_on      | File?  |         | a special field used to enforce dependencies and execution order | 
+
+## Outputs
+
+| Name       | Type | Description | 
+|:-----------|:-----|:------------|
+| create_log | File |             | 
+| index_log  | File |             | 
+| vacuum_log | File |             | 
+| create_err | File |             | 
+| index_err  | File |             | 
+| vacuum_err | File |             | 
+
+## Steps
+
+| Name   | Runs                    | Description                       | 
+|:-------|:------------------------|:----------------------------------|
+| create | [create.cwl](create.md) | Load 2015 data (processed by Yun) | 
+| index  | [index.cwl](index.md)   | Build indices                     | 
+| vacuum | [vacuum.cwl](vacuum.md) | Vacuum the view                   | 
+

@@ -1,0 +1,53 @@
+# Tool aggregating a NetCDF grid file over shapes
+
+
+ [Source code](aggregate_dailycwl_src.md) 
+
+
+```{contents}
+---
+local:
+---
+```
+
+**Tool**. Runs: -mdorieh.rasters.launcher
+
+## Description
+
+This tool preprocesses a NetCDF (.nc) file and aggregates gridded data 
+over shapes (zip codes or counties) and time. It produces daily mean values.
+The tool expects daily values in teh grid nodes.
+
+The tool expects multiple (daily) values for one variable in every grid node. 
+The variables are expected to be formatted as they are in 
+[University of Idaho Gridded Surface Meteorological Dataset](https://developers.google.com/earth-engine/datasets/catalog/IDAHO_EPSCOR_GRIDMET#description)
+
+See also [aggregate_wustl.cwl](aggregate_wustl) for aggregating
+single variable values with multiple variables in every node as formatted
+by [Atmospheric Composition Analysis Group of Washington University](https://sites.wustl.edu/acag/datasets/surface-pm2-5/)
+
+
+## Inputs
+
+| Name        | Type       | Default     | Description                                                                                             | 
+|:------------|:-----------|:------------|:--------------------------------------------------------------------------------------------------------|
+| proxy       | string?    |             | HTTP/HTTPS Proxy if required                                                                            | 
+| strategy    | string     | `downscale` | Rasterization strategy                                                                                  | 
+| ram         | string     | `2GB`       | Runtime memory, available to the process                                                                | 
+| shapes      | Directory? |             |                                                                                                         | 
+| geography   | string     |             | Type of geography: zip codes or counties                                                                | 
+| year        | string     |             | Year to process                                                                                         | 
+| month       | int?       |             | Optional month to process                                                                               | 
+| band        | string     |             | [Gridmet Band](https://developers.google.com/earth-engine/datasets/catalog/IDAHO_EPSCOR_GRIDMET#bands)  | 
+| dates       | string?    |             | dates restriction, for testing purposes only                                                            | 
+| input       | File       |             | Downloaded file                                                                                         | 
+| shape_files | File[]     |             | Paths to shape files                                                                                    | 
+
+## Outputs
+
+| Name   | Type   | Description                                                                                                                                                       | 
+|:-------|:-------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| log    | File   |                                                                                                                                                                   | 
+| data   | File   | The output CSV file, containing daily means of the given gridMET variable over given geographies. Each line contains date, geo id (zip or county FIPS) and value  | 
+| errors | stderr |                                                                                                                                                                   | 
+

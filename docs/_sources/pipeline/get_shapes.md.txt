@@ -1,0 +1,34 @@
+# Downloader of AirNow Data
+
+
+ [Source code](get_shapescwl_src.md) 
+
+
+```{contents}
+---
+local:
+---
+```
+
+**Tool**. Runs: dorieh.gis.shapes_downloader
+
+## Description
+
+This tool downloads Shape files from US Census website
+
+
+## Inputs
+
+| Name       | Type    | Default | Description                                                                           | 
+|:-----------|:--------|:--------|:--------------------------------------------------------------------------------------|
+| proxy      | string? |         | HTTP/HTTPS Proxy if required                                                          | 
+| year       | string  |         | Calendar year, for which we are downloading shape file                                | 
+| geo        | string  |         | geography type, zip, zcta or county                                                   | 
+| collection | string  | `tiger` | [Collection of shapefiles](https://www2.census.gov/geo/tiger),  either GENZ or TIGER  | 
+
+## Outputs
+
+| Name        | Type   | Description | 
+|:------------|:-------|:------------|
+| shape_files | File[] |             | 
+

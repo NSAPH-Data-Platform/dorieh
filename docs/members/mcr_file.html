@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The mcr_file Module &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">The mcr_file Module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/members/mcr_file.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-dorieh.cms.tools.mcr_file">
+<span id="the-mcr-file-module"></span><h1>The mcr_file Module<a class="headerlink" href="#module-dorieh.cms.tools.mcr_file" title="Permalink to this heading"></a></h1>
+<p>Module used for converting CMS DAT files to CSV</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.cms.tools.mcr_file.log">
+<span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/tools/mcr_file.html#log"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.tools.mcr_file.log" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.cms.tools.mcr_file.width">
+<span class="sig-name descname"><span class="pre">width</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/tools/mcr_file.html#width"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.tools.mcr_file.width" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="dorieh.cms.tools.mcr_file.MedparParseException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MedparParseException</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/tools/mcr_file.html#MedparParseException"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.tools.mcr_file.MedparParseException" title="Permalink to this definition"></a></dt>
+<dd><p>Exception raised if data in a DAT file cannot be parsed</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.cms.tools.mcr_file.ColumnAttribute">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ColumnAttribute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conv</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/tools/mcr_file.html#ColumnAttribute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.tools.mcr_file.ColumnAttribute" title="Permalink to this definition"></a></dt>
+<dd><p>Attribute of a column as described in the FTS file</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.cms.tools.mcr_file.ColumnAttribute.arg">
+<span class="sig-name descname"><span class="pre">arg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/tools/mcr_file.html#ColumnAttribute.arg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.tools.mcr_file.ColumnAttribute.arg" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.cms.tools.mcr_file.ColumnDef">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ColumnDef</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/tools/mcr_file.html#ColumnDef"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.tools.mcr_file.ColumnDef" title="Permalink to this definition"></a></dt>
+<dd><p>Column definition as described in the FTS file</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.cms.tools.mcr_file.ColumnDef.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/tools/mcr_file.html#ColumnDef.read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.tools.mcr_file.ColumnDef.read" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.cms.tools.mcr_file.Column">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Column</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ord</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">long_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">short_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">desc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/tools/mcr_file.html#Column"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.tools.mcr_file.Column" title="Permalink to this definition"></a></dt>
+<dd><p>Class representing column metadata required for generating
+database schema</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.cms.tools.mcr_file.MedicareFile">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MedicareFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/tools/mcr_file.html#MedicareFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.tools.mcr_file.MedicareFile" title="Permalink to this definition"></a></dt>
+<dd><p>Class to manipulate a single CMS DAT file</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.cms.tools.mcr_file.MedicareFile.init">
+<span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/tools/mcr_file.html#MedicareFile.init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.tools.mcr_file.MedicareFile.init" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.cms.tools.mcr_file.MedicareFile.read_record">
+<span class="sig-name descname"><span class="pre">read_record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ln</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span><a class="reference internal" href="../_modules/dorieh/cms/tools/mcr_file.html#MedicareFile.read_record"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.tools.mcr_file.MedicareFile.read_record" title="Permalink to this definition"></a></dt>
+<dd><p>Reads one record from DAT file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.cms.tools.mcr_file.MedicareFile.read_record.params.data"></span><strong>data</strong><a class="paramlink headerlink reference internal" href="#dorieh.cms.tools.mcr_file.MedicareFile.read_record.params.data">¶</a> – a slice of raw data from DAT file</p></li>
+<li><p><span class="target" id="dorieh.cms.tools.mcr_file.MedicareFile.read_record.params.ln"></span><strong>ln</strong><a class="paramlink headerlink reference internal" href="#dorieh.cms.tools.mcr_file.MedicareFile.read_record.params.ln">¶</a> – line number, used for reporting</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Record data as list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.cms.tools.mcr_file.MedicareFile.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/tools/mcr_file.html#MedicareFile.validate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.tools.mcr_file.MedicareFile.validate" title="Permalink to this definition"></a></dt>
+<dd><p>Asserts that the given record is consistent with
+the file from which it is read.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.cms.tools.mcr_file.MedicareFile.validate.params.record"></span><strong>record</strong><a class="paramlink headerlink reference internal" href="#dorieh.cms.tools.mcr_file.MedicareFile.validate.params.record">¶</a> – Record</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.cms.tools.mcr_file.MedicareFile.count_lines_in_source">
+<span class="sig-name descname"><span class="pre">count_lines_in_source</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/tools/mcr_file.html#MedicareFile.count_lines_in_source"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.tools.mcr_file.MedicareFile.count_lines_in_source" title="Permalink to this definition"></a></dt>
+<dd><p>Counts number of lines in the original DAT file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>number of lines</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.cms.tools.mcr_file.MedicareFile.count_lines_in_dest">
+<span class="sig-name descname"><span class="pre">count_lines_in_dest</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/tools/mcr_file.html#MedicareFile.count_lines_in_dest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.tools.mcr_file.MedicareFile.count_lines_in_dest" title="Permalink to this definition"></a></dt>
+<dd><p>Counts number of lines in the resulting CSV file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>number of lines</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.cms.tools.mcr_file.MedicareFile.status">
+<span class="sig-name descname"><span class="pre">status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/dorieh/cms/tools/mcr_file.html#MedicareFile.status"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.tools.mcr_file.MedicareFile.status" title="Permalink to this definition"></a></dt>
+<dd><p>Checks if a given DAT file has been successfully converted to CSV</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Value of the status of the conversion</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.cms.tools.mcr_file.MedicareFile.status_message">
+<span class="sig-name descname"><span class="pre">status_message</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/tools/mcr_file.html#MedicareFile.status_message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.tools.mcr_file.MedicareFile.status_message" title="Permalink to this definition"></a></dt>
+<dd><p>Checks if a given DAT file has been successfully converted to CSV</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Message, containing the status of the conversion</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.cms.tools.mcr_file.MedicareFile.export">
+<span class="sig-name descname"><span class="pre">export</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/tools/mcr_file.html#MedicareFile.export"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.tools.mcr_file.MedicareFile.export" title="Permalink to this definition"></a></dt>
+<dd><p>Performs actual conversion</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.cms.tools.mcr_file.MedicareFile.info">
+<span class="sig-name descname"><span class="pre">info</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/tools/mcr_file.html#MedicareFile.info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.tools.mcr_file.MedicareFile.info" title="Permalink to this definition"></a></dt>
+<dd><p>Prints info about the DAT file (metadata) to standard output</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

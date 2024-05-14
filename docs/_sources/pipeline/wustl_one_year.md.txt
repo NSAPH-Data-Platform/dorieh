@@ -1,0 +1,59 @@
+# Workflow to aggregate and ingest NetCDF files for one year
+
+
+ [Source code](wustl_one_yearcwl_src.md) 
+
+
+![](wustl_one_year.png)
+
+```{contents}
+---
+local:
+---
+```
+
+**Workflow**
+
+## Description
+
+Sub-workflow to aggregate and ingest NetCDF files for one year over a given
+geography (zip codes or counties) and ingest the
+aggregated data into the database. Before aggregation, downloads
+shape files fo this year from US Census website
+
+
+## Inputs
+
+| Name                  | Type      | Default | Description                                                                           | 
+|:----------------------|:----------|:--------|:--------------------------------------------------------------------------------------|
+| depends_on            | Any?      |         |                                                                                       | 
+| proxy                 | string?   |         | HTTP/HTTPS Proxy if required                                                          | 
+| downloads             | Directory |         |                                                                                       | 
+| geography             | string    |         |                                                                                       | 
+| shape_file_collection | string    | `tiger` | [Collection of shapefiles](https://www2.census.gov/geo/tiger),  either GENZ or TIGER  | 
+| table                 | string    |         |                                                                                       | 
+| band                  | string    | `pm25`  |                                                                                       | 
+| months                | int[]     |         |                                                                                       | 
+| year                  | int       |         |                                                                                       | 
+| strategy              | string    |         | Rasterization strategy                                                                | 
+| ram                   | string    | `2GB`   | Runtime memory, available to the process                                              | 
+| database              | File      |         |                                                                                       | 
+| connection_name       | string    |         |                                                                                       | 
+
+## Outputs
+
+| Name           | Type   | Description | 
+|:---------------|:-------|:------------|
+| aggregate_data | File[] |             | 
+| aggregate_log  | File[] |             | 
+| aggregate_err  | File[] |             | 
+| ingest_log     | File[] |             | 
+| ingest_err     | File[] |             | 
+
+## Steps
+
+| Name          | Runs                                    | Description                          | 
+|:--------------|:----------------------------------------|:-------------------------------------|
+| get_shapes    | [get_shapes.cwl](get_shapes.md)         |                                      | 
+| process_files | [wustl_one_file.cwl](wustl_one_file.md) | Aggregates and ingests relvant files | 
+

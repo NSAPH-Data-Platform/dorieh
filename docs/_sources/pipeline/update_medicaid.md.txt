@@ -1,0 +1,75 @@
+# Full Medicaid Processing Pipeline
+
+
+ [Source code](update_medicaidcwl_src.md) 
+
+
+![](update_medicaid.png)
+
+```{contents}
+---
+local:
+---
+```
+
+**Workflow**
+
+## Description
+
+This workflow prcoesses already ingested Medicaid data
+See [documentation](../Medicaid.md) for detailed
+information.
+
+
+## Inputs
+
+| Name            | Type   | Default | Description                                            | 
+|:----------------|:-------|:--------|:-------------------------------------------------------|
+| database        | File   |         | Path to database connection file, usually database.ini | 
+| connection_name | string |         | The name of the section in the database.ini file       | 
+| registry        | File   |         |                                                        | 
+
+## Outputs
+
+| Name             | Type | Description | 
+|:-----------------|:-----|:------------|
+| ps_index_log     | File |             | 
+| ps_vacuum_log    | File |             | 
+| ben_create_log   | File |             | 
+| ben_index_log    | File |             | 
+| ben_vacuum_log   | File |             | 
+| mnth_create_log  | File |             | 
+| mnth_index_log   | File |             | 
+| mnth_vacuum_log  | File |             | 
+| enrlm_create_log | File |             | 
+| enrlm_index_log  | File |             | 
+| enrlm_vacuum_log | File |             | 
+| elgb_create_log  | File |             | 
+| elgb_index_log   | File |             | 
+| elgb_vacuum_log  | File |             | 
+| ps_index_err     | File |             | 
+| ps_vacuum_err    | File |             | 
+| ben_create_err   | File |             | 
+| ben_index_err    | File |             | 
+| ben_vacuum_err   | File |             | 
+| mnth_create_err  | File |             | 
+| mnth_index_err   | File |             | 
+| mnth_vacuum_err  | File |             | 
+| enrlm_create_err | File |             | 
+| enrlm_index_err  | File |             | 
+| enrlm_vacuum_err | File |             | 
+| elgb_create_err  | File |             | 
+| elgb_index_err   | File |             | 
+| elgb_vacuum_err  | File |             | 
+
+## Steps
+
+| Name                 | Runs                      | Description                            | 
+|:---------------------|:--------------------------|:---------------------------------------|
+| index_ps             | [index.cwl](index.md)     |                                        | 
+| vacuum_ps            | [vacuum.cwl](vacuum.md)   |                                        | 
+| create_beneficiaries | [matview.cwl](matview.md) | Creates `Beneficiaries` Table          | 
+| create_monthly_view  | [matview.cwl](matview.md) | Creates internally used `Monthly View` | 
+| create_enrollments   | [matview.cwl](matview.md) | Creates `Enrollment` Table             | 
+| create_eligibility   | [matview.cwl](matview.md) | Creates `Eligibility` Table            | 
+

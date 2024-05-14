@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dorieh.platform.requests.query &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">dorieh.platform.requests.query</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for dorieh.platform.requests.query</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Utility to generate SQL query based on a YAML query specification</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="c1">#  Copyright (c) 2021. Harvard University</span>
+<span class="c1">#</span>
+<span class="c1">#  Developed by Research Software Engineering,</span>
+<span class="c1">#  Faculty of Arts and Sciences, Research Computing (FAS RC)</span>
+<span class="c1">#  Author: Michael A Bouzinier</span>
+<span class="c1">#</span>
+<span class="c1">#  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1">#  you may not use this file except in compliance with the License.</span>
+<span class="c1">#  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#         http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1">#  limitations under the License.</span>
+<span class="c1">#</span>
+
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Set</span>
+
+<span class="kn">import</span> <span class="nn">yaml</span>
+<span class="kn">from</span> <span class="nn">dorieh.utils.io_utils</span> <span class="kn">import</span> <span class="n">as_dict</span>
+
+<span class="kn">from</span> <span class="nn">dorieh.platform</span> <span class="kn">import</span> <span class="n">init_logging</span>
+<span class="kn">from</span> <span class="nn">dorieh.platform.db</span> <span class="kn">import</span> <span class="n">Connection</span><span class="p">,</span> <span class="n">ResultSetDeprecated</span>
+
+
+<div class="viewcode-block" id="fqn"><a class="viewcode-back" href="../../../../members/query.html#dorieh.platform.requests.query.fqn">[docs]</a><span class="k">def</span> <span class="nf">fqn</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">t</span></div>
+    <span class="c1">#return &#39;&quot;public&quot;.&quot;{}&quot;&#39;.format(t)</span>
+
+
+<div class="viewcode-block" id="Query"><a class="viewcode-back" href="../../../../members/query.html#dorieh.platform.requests.query.Query">[docs]</a><span class="k">class</span> <span class="nc">Query</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class providing the API to generate SQL from a user request</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_request</span><span class="p">,</span> <span class="n">connection</span><span class="p">):</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">as_dict</span><span class="p">(</span><span class="n">user_request</span><span class="p">)</span>
+        <span class="n">src</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="n">registry_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="s2">&quot;yml&quot;</span><span class="p">,</span> <span class="s2">&quot;gridmet.yaml&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">registry_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">rf</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">registry</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">rf</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">request</span> <span class="o">=</span> <span class="n">request</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">Connection</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">connection</span> <span class="o">=</span> <span class="n">connection</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">connection</span> <span class="o">=</span> <span class="n">Connection</span><span class="p">(</span><span class="o">*</span><span class="n">connection</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cursor</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sql</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Generated SQL&#39;&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="Query.execute"><a class="viewcode-back" href="../../../../members/query.html#dorieh.platform.requests.query.Query.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sql</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ResultSetDeprecated</span><span class="p">(</span><span class="n">cursor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cursor</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Query.prepare"><a class="viewcode-back" href="../../../../members/query.html#dorieh.platform.requests.query.Query.prepare">[docs]</a>    <span class="k">def</span> <span class="nf">prepare</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates SQL. Result is stored as a class member sql</span>
+
+<span class="sd">        :return:  None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">connection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">get_database_types</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sql</span> <span class="o">=</span> <span class="n">generate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">registry</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prepare</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="find_tables"><a class="viewcode-back" href="../../../../members/query.html#dorieh.platform.requests.query.find_tables">[docs]</a><span class="k">def</span> <span class="nf">find_tables</span><span class="p">(</span><span class="n">column</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tables</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="n">children</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">:</span>
+        <span class="n">tdef</span> <span class="o">=</span> <span class="n">tables</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">tdef</span><span class="p">[</span><span class="s2">&quot;columns&quot;</span><span class="p">]:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">&quot;children&quot;</span> <span class="ow">in</span> <span class="n">tdef</span><span class="p">:</span>
+            <span class="n">children</span> <span class="o">=</span> <span class="n">tdef</span><span class="p">[</span><span class="s2">&quot;children&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">result</span>
+    <span class="k">if</span> <span class="n">children</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">find_tables</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">children</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Column named </span><span class="si">{}</span><span class="s2"> is not found in any of the defined tables&quot;</span>
+                    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">column</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="generate_select"><a class="viewcode-back" href="../../../../members/query.html#dorieh.platform.requests.query.generate_select">[docs]</a><span class="k">def</span> <span class="nf">generate_select</span><span class="p">(</span><span class="n">variables</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">select</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">.</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">]</span>
+    <span class="k">return</span> <span class="s2">&quot;SELECT </span><span class="se">\n\t</span><span class="s2">&quot;</span> <span class="o">+</span>  <span class="s2">&quot;,</span><span class="se">\n\t</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">select</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span></div>
+
+
+<div class="viewcode-block" id="collect_tables"><a class="viewcode-back" href="../../../../members/query.html#dorieh.platform.requests.query.collect_tables">[docs]</a><span class="k">def</span> <span class="nf">collect_tables</span><span class="p">(</span><span class="n">source</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">tables</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Dict</span><span class="p">):</span>
+    <span class="n">join_columns</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">source</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">[</span><span class="n">t</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">join_columns</span><span class="p">:</span>
+                <span class="n">join_columns</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">join_columns</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">t</span><span class="p">}</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">[</span><span class="n">t</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">join_columns</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">join_columns</span><span class="p">[</span><span class="n">c</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">for</span> <span class="n">t2</span> <span class="ow">in</span> <span class="n">join_columns</span><span class="p">[</span><span class="n">c</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">t2</span> <span class="o">!=</span> <span class="n">t</span><span class="p">:</span>
+                    <span class="n">result</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">c</span><span class="p">,</span> <span class="n">t2</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">&quot;children&quot;</span> <span class="ow">in</span> <span class="n">source</span><span class="p">[</span><span class="n">t</span><span class="p">]:</span>
+            <span class="n">child_tables</span> <span class="o">=</span> <span class="n">source</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="s2">&quot;children&quot;</span><span class="p">]</span>
+            <span class="n">children_result</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+            <span class="n">collect_tables</span><span class="p">(</span><span class="n">child_tables</span><span class="p">,</span> <span class="n">tables</span><span class="p">,</span> <span class="n">children_result</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">children_result</span><span class="p">:</span>
+                <span class="n">parent</span> <span class="o">=</span> <span class="n">child_tables</span><span class="p">[</span><span class="n">child</span><span class="p">][</span><span class="s2">&quot;parent&quot;</span><span class="p">]</span>
+                <span class="n">children_result</span><span class="p">[</span><span class="n">child</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">parent</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">children_result</span><span class="p">)</span>
+    <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="generate_from"><a class="viewcode-back" href="../../../../members/query.html#dorieh.platform.requests.query.generate_from">[docs]</a><span class="k">def</span> <span class="nf">generate_from</span><span class="p">(</span><span class="n">variables</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">aux</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">variables</span><span class="p">)</span>
+    <span class="n">columns</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">aux</span><span class="p">)</span>
+    <span class="n">tables</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">columns</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span> <span class="nb">set</span><span class="p">()</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">columns</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">[</span><span class="n">c</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">:</span>
+                <span class="n">tables</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+    <span class="n">from_tables</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+    <span class="n">collect_tables</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">tables</span><span class="p">,</span> <span class="n">from_tables</span><span class="p">)</span>
+    <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;FROM </span><span class="se">\n\t</span><span class="s2">&quot;</span>
+    <span class="n">from_elements</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">tt</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">from_tables</span><span class="p">:</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="n">fqn</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">joins</span> <span class="o">=</span> <span class="n">from_tables</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">joins</span><span class="p">:</span>
+            <span class="n">element</span> <span class="o">+=</span> <span class="s2">&quot; ON &quot;</span>
+            <span class="n">join_clause</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">join</span> <span class="ow">in</span> <span class="n">joins</span><span class="p">:</span>
+                <span class="n">c</span><span class="p">,</span> <span class="n">t2</span> <span class="o">=</span> <span class="n">join</span>
+                <span class="k">if</span> <span class="n">t2</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">tt</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="n">join_clause</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{t1}</span><span class="s2">.</span><span class="si">{c}</span><span class="s2"> = </span><span class="si">{t2}</span><span class="s2">.</span><span class="si">{c}</span><span class="s2">&quot;</span>
+                                   <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t1</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">t2</span><span class="o">=</span><span class="n">t2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">c</span><span class="p">))</span>
+            <span class="n">element</span> <span class="o">+=</span> <span class="s2">&quot; AND &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">join_clause</span><span class="p">)</span>
+        <span class="n">tt</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">from_elements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+    <span class="n">sql</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n\t</span><span class="s2">   JOIN &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">from_elements</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sql</span></div>
+
+
+<div class="viewcode-block" id="generate_where"><a class="viewcode-back" href="../../../../members/query.html#dorieh.platform.requests.query.generate_where">[docs]</a><span class="k">def</span> <span class="nf">generate_where</span><span class="p">(</span><span class="n">variables</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">tables</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">used_tables</span><span class="p">:</span> <span class="n">Set</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">where</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">:</span>
+        <span class="n">tt</span> <span class="o">=</span> <span class="n">find_tables</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">tables</span><span class="p">)</span>
+        <span class="n">tt</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tt</span> <span class="k">if</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">used_tables</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">tt</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;System Error&quot;</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">tt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">expr</span> <span class="o">=</span> <span class="n">variables</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">condition</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">.</span><span class="si">{}</span><span class="s2"> = &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">expr</span><span class="p">)</span>
+            <span class="n">where</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">condition</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;&#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">expr</span><span class="p">])</span>
+            <span class="n">condition</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">.</span><span class="si">{}</span><span class="s2"> IN (</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+            <span class="n">where</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">condition</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">expr</span><span class="p">:</span>
+                <span class="n">e</span> <span class="o">=</span> <span class="n">expr</span><span class="p">[</span><span class="n">field</span><span class="p">]</span>
+                <span class="n">condition</span> <span class="o">=</span> <span class="s2">&quot;EXTRACT (</span><span class="si">{}</span><span class="s2"> FROM </span><span class="si">{}</span><span class="s2">.</span><span class="si">{}</span><span class="s2">) = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">field</span><span class="p">,</span>
+                                                                  <span class="n">t</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+                <span class="n">where</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">condition</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;WHERE </span><span class="se">\n\t</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n\t</span><span class="s2">AND &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">where</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span></div>
+
+
+<div class="viewcode-block" id="all_tables"><a class="viewcode-back" href="../../../../members/query.html#dorieh.platform.requests.query.all_tables">[docs]</a><span class="k">def</span> <span class="nf">all_tables</span><span class="p">(</span><span class="n">variables</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">:</span>
+    <span class="n">tables</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+            <span class="n">tables</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tables</span></div>
+
+
+<div class="viewcode-block" id="reduce_tables"><a class="viewcode-back" href="../../../../members/query.html#dorieh.platform.requests.query.reduce_tables">[docs]</a><span class="k">def</span> <span class="nf">reduce_tables</span><span class="p">(</span><span class="n">variables</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="n">tables</span> <span class="o">=</span> <span class="n">all_tables</span><span class="p">(</span><span class="n">variables</span><span class="p">)</span>
+    <span class="n">reduced</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">:</span>
+        <span class="n">required</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">t</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="n">v</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">required</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">break</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">required</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+                    <span class="n">variables</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+                    <span class="n">reduced</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="n">reduced</span><span class="p">:</span>
+        <span class="n">reduced</span> <span class="o">=</span> <span class="n">reduce_tables</span><span class="p">(</span><span class="n">variables</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">reduced</span></div>
+
+
+<div class="viewcode-block" id="generate_order_by"><a class="viewcode-back" href="../../../../members/query.html#dorieh.platform.requests.query.generate_order_by">[docs]</a><span class="k">def</span> <span class="nf">generate_order_by</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">group</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="s2">&quot;package&quot;</span> <span class="ow">in</span> <span class="n">request</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">&quot;group&quot;</span> <span class="ow">in</span> <span class="n">request</span><span class="p">[</span><span class="s2">&quot;package&quot;</span><span class="p">]:</span>
+            <span class="n">group</span> <span class="o">=</span> <span class="n">request</span><span class="p">[</span><span class="s2">&quot;package&quot;</span><span class="p">][</span><span class="s2">&quot;group&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">group</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">ORDER BY </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">ORDER BY </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">group</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Invalid specification for grouping: &quot;</span><span class="o">.</span>
+                        <span class="nb">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">group</span><span class="p">)))</span></div>
+
+
+<div class="viewcode-block" id="generate"><a class="viewcode-back" href="../../../../members/query.html#dorieh.platform.requests.query.generate">[docs]</a><span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">):</span>
+    <span class="n">source_name</span> <span class="o">=</span> <span class="n">user</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">]</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="n">system</span><span class="p">[</span><span class="n">source_name</span><span class="p">]</span>
+
+    <span class="n">variables</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">user</span><span class="p">[</span><span class="s2">&quot;variables&quot;</span><span class="p">]:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">find_tables</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">source</span><span class="p">[</span><span class="s2">&quot;tables&quot;</span><span class="p">])</span>
+        <span class="n">variables</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span>
+    <span class="n">reduce_tables</span><span class="p">(</span><span class="n">variables</span><span class="p">)</span>
+
+    <span class="n">select</span> <span class="o">=</span> <span class="n">generate_select</span><span class="p">(</span><span class="n">variables</span><span class="p">)</span>
+    <span class="n">tables</span> <span class="o">=</span> <span class="n">all_tables</span><span class="p">(</span><span class="n">variables</span><span class="p">)</span>
+    <span class="n">filters</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">user</span><span class="p">[</span><span class="s2">&quot;restrict&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">find_tables</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">source</span><span class="p">[</span><span class="s2">&quot;tables&quot;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">tables</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">filters</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span>
+    <span class="n">reduce_tables</span><span class="p">(</span><span class="n">filters</span><span class="p">)</span>
+    <span class="n">tables</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">all_tables</span><span class="p">(</span><span class="n">filters</span><span class="p">))</span>
+    <span class="n">source_tables</span> <span class="o">=</span> <span class="n">source</span><span class="p">[</span><span class="s2">&quot;tables&quot;</span><span class="p">]</span>
+
+    <span class="n">from_clause</span> <span class="o">=</span> <span class="n">generate_from</span><span class="p">(</span><span class="n">variables</span><span class="p">,</span> <span class="n">filters</span><span class="p">,</span> <span class="n">source_tables</span><span class="p">)</span>
+    <span class="n">where</span> <span class="o">=</span> <span class="n">generate_where</span><span class="p">(</span><span class="n">user</span><span class="p">[</span><span class="s2">&quot;restrict&quot;</span><span class="p">],</span> <span class="n">source_tables</span><span class="p">,</span> <span class="n">tables</span><span class="p">)</span>
+    <span class="n">order_by</span> <span class="o">=</span> <span class="n">generate_order_by</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+
+    <span class="n">sql</span> <span class="o">=</span> <span class="n">select</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">from_clause</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">where</span> <span class="o">+</span> <span class="n">order_by</span>
+    <span class="k">return</span> <span class="n">sql</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">init_logging</span><span class="p">()</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span> <span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Create table and load data&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--request&quot;</span><span class="p">,</span> <span class="s2">&quot;-r&quot;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Path to a YAML file containing user request&quot;</span><span class="p">,</span>
+                        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--db&quot;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Path to a database connection parameters file&quot;</span><span class="p">,</span>
+                        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;database.ini&quot;</span><span class="p">,</span>
+                        <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--section&quot;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Section in the database connection parameters file&quot;</span><span class="p">,</span>
+                        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;postgresql&quot;</span><span class="p">,</span>
+                        <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span><span class="o">.</span><span class="n">request</span><span class="p">:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+        <span class="n">args</span><span class="o">.</span><span class="n">request</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s2">&quot;../../../yml/ellen.yaml&quot;</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">Query</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">request</span><span class="p">,</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">db</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">section</span><span class="p">))</span> <span class="k">as</span> <span class="n">q</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">sql</span><span class="p">)</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">rs</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rs</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Count rows: </span><span class="si">{:d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">count</span><span class="p">))</span>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

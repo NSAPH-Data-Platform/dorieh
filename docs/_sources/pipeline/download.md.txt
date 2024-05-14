@@ -1,0 +1,35 @@
+# Downloader of gridMET Data
+
+
+ [Source code](downloadcwl_src.md) 
+
+
+```{contents}
+---
+local:
+---
+```
+
+**Tool**. Runs: wget
+
+## Description
+
+This tool downloads gridMET data from Atmospheric Composition Analysis Group
+
+
+## Inputs
+
+| Name  | Type    | Default | Description                                                                                             | 
+|:------|:--------|:--------|:--------------------------------------------------------------------------------------------------------|
+| proxy | string? |         | HTTP/HTTPS Proxy if required                                                                            | 
+| year  | string  |         | Year to process                                                                                         | 
+| band  | string  |         | [Gridmet Band](https://developers.google.com/earth-engine/datasets/catalog/IDAHO_EPSCOR_GRIDMET#bands)  | 
+
+## Outputs
+
+| Name   | Type   | Description | 
+|:-------|:-------|:------------|
+| log    | File   |             | 
+| data   | File   |             | 
+| errors | stderr |             | 
+

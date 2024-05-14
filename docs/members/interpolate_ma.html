@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The interpolate_ma Module &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">The interpolate_ma Module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/members/interpolate_ma.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-dorieh.utils.interpolation.interpolate_ma">
+<span id="the-interpolate-ma-module"></span><h1>The interpolate_ma Module<a class="headerlink" href="#module-dorieh.utils.interpolation.interpolate_ma" title="Permalink to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.utils.interpolation.interpolate_ma.interpolate_ma">
+<span class="sig-name descname"><span class="pre">interpolate_ma</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_vec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/interpolation/interpolate_ma.html#interpolate_ma"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.interpolation.interpolate_ma.interpolate_ma" title="Permalink to this definition"></a></dt>
+<dd><p>Python implementation of the logic described in the function located at:
+<a class="reference external" href="https://github.com/SteffenMoritz/imputeTS/blob/master/R/na_ma.R">https://github.com/SteffenMoritz/imputeTS/blob/master/R/na_ma.R</a></p>
+<p>If all inputs are missing, we return only missing values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.utils.interpolation.interpolate_ma.interpolate_ma.params.num_vec"></span><strong>num_vec</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.interpolation.interpolate_ma.interpolate_ma.params.num_vec">¶</a> – Numeric vector with some missing values</p></li>
+<li><p><span class="target" id="dorieh.utils.interpolation.interpolate_ma.interpolate_ma.params.k"></span><strong>k</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.interpolation.interpolate_ma.interpolate_ma.params.k">¶</a> – minimum number of observations on each side of hte missing value to include in the
+weighted mean.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a np.array where the missing values have been replaced by new values calculated from a
+rolling average imputation method.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.utils.interpolation.interpolate_ma.get_indices">
+<span class="sig-name descname"><span class="pre">get_indices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/interpolation/interpolate_ma.html#get_indices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.interpolation.interpolate_ma.get_indices" title="Permalink to this definition"></a></dt>
+<dd><p>Return a range object of the indices to be used to calculate a rolling mean
+If the window defined by <code class="docutils literal notranslate"><span class="pre">k</span></code> doesn’t contain at least 2 non-missing values,
+k is increased by one until the window has at least two non-missing values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.utils.interpolation.interpolate_ma.get_indices.params.vec"></span><strong>vec</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.interpolation.interpolate_ma.get_indices.params.vec">¶</a> – np.array with missing data</p></li>
+<li><p><span class="target" id="dorieh.utils.interpolation.interpolate_ma.get_indices.params.k"></span><strong>k</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.interpolation.interpolate_ma.get_indices.params.k">¶</a> – minimum window on either side</p></li>
+<li><p><span class="target" id="dorieh.utils.interpolation.interpolate_ma.get_indices.params.index"></span><strong>index</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.interpolation.interpolate_ma.get_indices.params.index">¶</a> – Index to center the window around</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.array containing the indices defining the window</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.utils.interpolation.interpolate_ma.calc_weights">
+<span class="sig-name descname"><span class="pre">calc_weights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/interpolation/interpolate_ma.html#calc_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.interpolation.interpolate_ma.calc_weights" title="Permalink to this definition"></a></dt>
+<dd><p>Create an array of weights for an array of indices, with the weight decreasing exponentially with distance
+from index of interest <code class="docutils literal notranslate"><span class="pre">i</span></code>. Indices pointing to missing data have their weight set to 0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.utils.interpolation.interpolate_ma.calc_weights.params.vec"></span><strong>vec</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.interpolation.interpolate_ma.calc_weights.params.vec">¶</a> – np.array of data being interpolated, known to have missingness.</p></li>
+<li><p><span class="target" id="dorieh.utils.interpolation.interpolate_ma.calc_weights.params.indices"></span><strong>indices</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.interpolation.interpolate_ma.calc_weights.params.indices">¶</a> – array of indices generated by <code class="docutils literal notranslate"><span class="pre">get_indicies</span></code> for index <code class="docutils literal notranslate"><span class="pre">i</span></code>.</p></li>
+<li><p><span class="target" id="dorieh.utils.interpolation.interpolate_ma.calc_weights.params.i"></span><strong>i</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.interpolation.interpolate_ma.calc_weights.params.i">¶</a> – index of a value to be replaced by a weighted mean of nearby values</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.array of weights</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

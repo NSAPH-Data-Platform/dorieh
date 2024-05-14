@@ -1,0 +1,60 @@
+# Process Medicare inpatient admissions data inside the database
+
+
+ [Source code](medicare_admissionscwl_src.md) 
+
+
+![](medicare_admissions.png)
+
+```{contents}
+---
+local:
+---
+```
+
+**Workflow**
+
+## Description
+
+This workflow processes raw Medicare  admissions (aka Medpar or inpatient
+admissions - ip) data. The assumed initial state
+is that raw data (medpar files) are already in the database. We assume
+that the data for each year is in a separate table. The first step
+combines these disparate tables into a single view, creating uniform
+columns.
+
+
+## Inputs
+
+| Name            | Type    | Default | Description                                                      | 
+|:----------------|:--------|:--------|:-----------------------------------------------------------------|
+| database        | File    |         | Path to database connection file, usually database.ini           | 
+| connection_name | string  |         | The name of the section in the database.ini file                 | 
+| limit           | string? |         | limit number of records processed (for debugging)                | 
+| depends_on      | File?   |         | a special field used to enforce dependencies and execution order | 
+
+## Outputs
+
+| Name             | Type | Description | 
+|:-----------------|:-----|:------------|
+| ip_create_log    | File |             | 
+| ip_create_err    | File |             | 
+| adm_create_log   | File |             | 
+| adm_create_err   | File |             | 
+| adm_populate_log | File |             | 
+| adm_populate_err | File |             | 
+| adm_index_log    | File |             | 
+| adm_index_err    | File |             | 
+| adm_vacuum_log   | File |             | 
+| adm_vacuum_err   | File |             | 
+
+## Steps
+
+| Name                      | Runs                                                      | Description                                                                                                    | 
+|:--------------------------|:----------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------|
+| create_ip                 | [medicare_combine_tables.cwl](medicare_combine_tables.md) | Combines patient summaries from disparate summary tables (one table per year) into a single view: medicare.ip  | 
+| create_admissions_table   | [create.cwl](create.md)                                   | Create empty admissions table based on medicare.ip view                                                        | 
+| populate_admissions_table | [create.cwl](create.md)                                   | Creates `Admisssions` Table from the view                                                                      | 
+| index_admissions_table    | [index.cwl](index.md)                                     | Build indices                                                                                                  | 
+| vacuum_admissions_table   | [vacuum.cwl](vacuum.md)                                   | Vacuum the view                                                                                                | 
+

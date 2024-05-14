@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Setting Up Environment &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Setting Up Environment</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/census_env_set_up.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="setting-up-environment">
+<h1>Setting Up Environment<a class="headerlink" href="#setting-up-environment" title="Permalink to this heading"></a></h1>
+<p>Here are the steps for setting up the environment. Please make sure that you have <a class="reference external" href="https://docs.anaconda.com/anaconda/install/index.html">anaconda</a> installed on your system. You can also install <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">miniconda</a>, which is the lightweight version of anaconda. On HPC systmes you may need to load the modules. Developers environment requires extra packages and libraries to surpport generating documentation.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Researchers: use <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code></p></li>
+<li><p>Developers: use <code class="docutils literal notranslate"><span class="pre">environment_dev.yml</span></code></p></li>
+</ul>
+</div></blockquote>
+<p>The following exmaples are based on <cite>environment_dev.yml</cite> file.</p>
+<section id="setting-up-a-new-environment">
+<h2>Setting up a new environment<a class="headerlink" href="#setting-up-a-new-environment" title="Permalink to this heading"></a></h2>
+<p>If you have not set up any environment for the project, you need to create a new environment. The following command will generate a new environment using the <cite>environment_dev.yml</cite> file.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>your_env_name<span class="w"> </span>--file<span class="w"> </span>environment_dev.yml
+</pre></div>
+</div>
+</section>
+<section id="updating-an-existing-environment">
+<h2>Updating an existing environment<a class="headerlink" href="#updating-an-existing-environment" title="Permalink to this heading"></a></h2>
+<p>If you have set up the environment and you want to make sure that it is the latest version, you can use the following command.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>conda<span class="w"> </span>env<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>your_env_name<span class="w"> </span>--file<span class="w"> </span>environment_dev.yml
+</pre></div>
+</div>
+<p>After setting up the environment, you need to install the <cite>census</cite> package.</p>
+</section>
+<section id="installing-census">
+<h2>Installing census<a class="headerlink" href="#installing-census" title="Permalink to this heading"></a></h2>
+<p>Navigate to the package folder and use the following code to install the package.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip3<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">-e</span></code> flag installs the package in the development mode. As a result, you do not need to reintall the package by chaning the code.</p>
+</section>
+<section id="installing-nsaph-utils">
+<h2>Installing nsaph_utils<a class="headerlink" href="#installing-nsaph-utils" title="Permalink to this heading"></a></h2>
+<p>The package is dependent on the <cite>nsaph_utils</cite> package. This package is not available on CRAN or PyPI. You need to get the source code from the <a class="reference external" href="https://gitlab-int.rc.fas.harvard.edu/rse/francesca_dominici/tools/nsaph_utils">Gitlab repository</a> and install it similar to the <cite>census</cite> package.
+You can skip <cite>-e</cite> flag. While inside the package folder, you can run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip3<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
+<section id="setting-up-census-api-key">
+<h2>Setting up Census API Key<a class="headerlink" href="#setting-up-census-api-key" title="Permalink to this heading"></a></h2>
+<p>In order to interact with the US Census API at scale, you’ll a Census API
+key. You can get one <a class="reference external" href="https://api.census.gov/data/key_signup.html">here</a>. Once
+you have your key, you’ll need to add it to your environment. You can either do that
+through <code class="docutils literal notranslate"><span class="pre">conda</span></code> (<code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">config</span> <span class="pre">vars</span> <span class="pre">set</span> <span class="pre">CENSUS_API_KEY=&lt;your</span> <span class="pre">key&gt;</span></code>), setting
+the key directly in your <code class="docutils literal notranslate"><span class="pre">.rc</span></code> file, or by using the <code class="docutils literal notranslate"><span class="pre">get_census.set_api_key</span></code> function
+(this only affects your current session, and isn’t permanent).</p>
+</section>
+<section id="registering-the-conda-kernal">
+<h2>Registering the Conda Kernal<a class="headerlink" href="#registering-the-conda-kernal" title="Permalink to this heading"></a></h2>
+<p>If you plan onn testing the package using Jupyter Notebook, you need to register the package using the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>conda<span class="w"> </span>activate<span class="w"> </span>your_env_name
+<span class="gp">$ </span>python3<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--name<span class="w"> </span>your_env_name
+</pre></div>
+</div>
+</section>
+<section id="updating-the-environment-recipe">
+<h2>Updating the Environment Recipe<a class="headerlink" href="#updating-the-environment-recipe" title="Permalink to this heading"></a></h2>
+<p>If you added new features to the package which is dependent on a library that is not available in the current environment, you need to update the environment recipe. While the conda environment is activated, use the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>conda<span class="w"> </span>env<span class="w"> </span><span class="nb">export</span><span class="w"> </span>&gt;<span class="w"> </span>environment_dev.yml
+</pre></div>
+</div>
+<p>Make sure to manually remove <cite>name</cite> and <cite>prefix</cite> sections as well as <cite>census</cite> and <cite>nsaph_utils</cite> from the dependencies section in the <cite>.yml</cite> file.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Processing Pipelines &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Python Packages Included in the Platform" href="packages.html" />
+    <link rel="prev" title="Data Domains" href="domains.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Data Processing Pipelines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-pipelines">Running Pipelines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tested-runners">Tested runners</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#providing-parameters-to-the-pipelines">Providing parameters to the pipelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-toil">Using Toil</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-pipelines">Testing pipelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-python-dependencies">Installing Python dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#published-and-tested-pipelines">Published and tested pipelines</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Data Processing Pipelines</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/pipelines.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="data-processing-pipelines">
+<h1>Data Processing Pipelines<a class="headerlink" href="#data-processing-pipelines" title="Permalink to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#introduction" id="id1">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#running-pipelines" id="id2">Running Pipelines</a></p>
+<ul>
+<li><p><a class="reference internal" href="#tested-runners" id="id3">Tested runners</a></p></li>
+<li><p><a class="reference internal" href="#providing-parameters-to-the-pipelines" id="id4">Providing parameters to the pipelines</a></p></li>
+<li><p><a class="reference internal" href="#using-toil" id="id5">Using Toil</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#testing-pipelines" id="id6">Testing pipelines</a></p></li>
+<li><p><a class="reference internal" href="#installing-python-dependencies" id="id7">Installing Python dependencies</a></p></li>
+<li><p><a class="reference internal" href="#published-and-tested-pipelines" id="id8">Published and tested pipelines</a></p></li>
+</ul>
+</nav>
+<section id="introduction">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<p>For the majority of computational studies, their data acquisition workflow can
+be represented as a data processing pipeline. A data processing pipeline
+consists of steps, each step being either a script, a binary executable, or a
+specific data transformation within a data warehouse. Some steps are dependent
+on the results of other steps. Therefore, every workflow can be represented as a
+directed acyclic graph (DAG), where steps are the nodes of the graph and
+dependencies are its edges. Pipeline topologies are complex as they provide for
+massive parallelization and multiple dependencies. When pipeline logic is
+expressed in a procedural programming language, the result is a very convoluted
+program that is economically ineffective to maintain. Fortunately, alternatives
+to procedural languages have been proposed and are widely used.</p>
+<p>To the full extent both repeatability and reproducibility of data processing
+pipelines is addressed by special descriptive domain specific languages (DSL).
+Three such languages have been developed by different communities that work
+primarily in bioinformatics. The most widely adopted is
+<a class="reference external" href="https://www.commonwl.org/">Common Workflow Language (CWL)</a>,
+the most popular in terms of studies that use it, the number of
+published workflows and the number of runtime platforms supporting execution of
+the workflows defined in CWL. The pipelines we publish here are all written
+in CWL.</p>
+<p>Descriptive workflow languages focus on explicit definition of the pipeline
+topology and insulation of the topology, inputs, requirements and outputs from
+the actual processing algorithms. Developed primarily by bioinformatics
+communities and mostly used by bioinformatics projects they expect the inputs to
+be in a few well-defined formats and orchestrate the work of a limited set of
+known tools. In other areas, for example, in population health research, the
+data comes from much more diverse sources, in diverse and often incompatible
+formats. Therefore, many steps (nodes in the pipeline topology) will be
+responsible for various data transformation operations.</p>
+</section>
+<section id="running-pipelines">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Running Pipelines</a><a class="headerlink" href="#running-pipelines" title="Permalink to this heading"></a></h2>
+<section id="tested-runners">
+<h3><a class="toc-backref" href="#id3" role="doc-backlink">Tested runners</a><a class="headerlink" href="#tested-runners" title="Permalink to this heading"></a></h3>
+<p>CWL is “write once run anywhere” language. If a piepline one has developed
+runs on the developer’s laptop it is more or less guaranteed it will run
+in any on-prem cluster or cloud environment, provided a runner supporting
+a given environment is used. One can find the list of currently
+supported runners in
+<a class="reference external" href="https://www.commonwl.org/implementations/">CWL Implementations</a> page.</p>
+<p>We have used cwltool, CWL-Airflow and Toil in our development
+and production. Toil’s output is a little too verbose, but it has
+great features like ability to restart a pipeline from a failed
+step (even after minor corrections) and native support for AWS Batch.
+CWL-Airflow provides a nice graphical user interface.</p>
+<p>See <a class="reference external" href="https://toil.readthedocs.io/en/latest/">Toil documentation</a>
+for some details of running CWL workflows.</p>
+</section>
+<section id="providing-parameters-to-the-pipelines">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Providing parameters to the pipelines</a><a class="headerlink" href="#providing-parameters-to-the-pipelines" title="Permalink to this heading"></a></h3>
+<p>Parameters can be provided either as command line options
+with two dashes <code class="docutils literal notranslate"><span class="pre">--</span></code> or in YaML or JSON file.</p>
+<p>Note, that when using a YaML file, files and directories
+have to be specified in the following way:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">my_file</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/path/to/data.nc</span>
+<span class="w">  </span><span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="nt">my_directory</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/path/to/data/downloads</span>
+<span class="w">  </span><span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Directory</span>
+</pre></div>
+</div>
+</section>
+<section id="using-toil">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Using Toil</a><a class="headerlink" href="#using-toil" title="Permalink to this heading"></a></h3>
+<p>A few hints if you are using Toil:</p>
+<ol class="arabic">
+<li><p>Install Toil with aws and cwl options:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> pip install toil[aws,cwl]
+</pre></div>
+</div>
+</li>
+<li><p>If you want to be able to restart a pipeline from a failed step you need to
+provide <code class="docutils literal notranslate"><span class="pre">--jobStore</span></code> option. To restart - give exactly the same options
+adding <code class="docutils literal notranslate"><span class="pre">--restart</span></code></p></li>
+</ol>
+<p>Here is an example of a command to execute a pipeline:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>toil-cwl-runner<span class="w"> </span>--retryCount<span class="w"> </span><span class="m">1</span><span class="w"> </span>--cleanWorkDir<span class="w"> </span>never<span class="w"> </span><span class="se">\ </span>
+<span class="w">  </span>--outdir<span class="w"> </span>/scratch/work/exposures/outputs<span class="w"> </span><span class="se">\ </span>
+<span class="w">  </span>--workDir<span class="w"> </span>/scratch/work/exposures<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--jobStore<span class="w"> </span>/scratch/work/someDir123
+<span class="w">  </span>pm25_yearly_download.cwl<span class="w"> </span>test_exposure_job.yml<span class="w"> </span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="testing-pipelines">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Testing pipelines</a><a class="headerlink" href="#testing-pipelines" title="Permalink to this heading"></a></h2>
+<p>Pipelines can be tested using included
+<a class="reference internal" href="#common/core-platform/doc/DBT"><span class="xref myst">DBT Pipeline Testing Framework</span></a></p>
+</section>
+<section id="installing-python-dependencies">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Installing Python dependencies</a><a class="headerlink" href="#installing-python-dependencies" title="Permalink to this heading"></a></h2>
+<p>The following requirements.txt file can be used to fetch all
+Python packages included in the platform.</p>
+</section>
+<section id="published-and-tested-pipelines">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Published and tested pipelines</a><a class="headerlink" href="#published-and-tested-pipelines" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="domains.html" class="btn btn-neutral float-left" title="Data Domains" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="packages.html" class="btn btn-neutral float-right" title="Python Packages Included in the Platform" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

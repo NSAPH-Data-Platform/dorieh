@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Census Variable File Structure &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Census Variable File Structure</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/census_yaml.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="census-variable-file-structure">
+<h1>Census Variable File Structure<a class="headerlink" href="#census-variable-file-structure" title="Permalink to this heading"></a></h1>
+<p>The variables used to create the census data using the <code class="docutils literal notranslate"><span class="pre">get_census</span></code>
+package must be formally described in a yaml file. Each variable is defined by a top
+level entry in this file. The format for a variable is as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">var_name</span><span class="o">&gt;</span><span class="p">:</span>
+    <span class="o">&lt;</span><span class="n">year</span><span class="o">&gt;</span><span class="p">:</span>
+        <span class="o">&lt;</span><span class="n">source</span><span class="o">&gt;</span><span class="p">:</span>
+            <span class="n">num</span><span class="p">:</span>
+                 <span class="o">-</span> <span class="o">&lt;</span><span class="n">numerator_variable_1</span><span class="o">&gt;</span>
+                 <span class="o">-</span> <span class="o">&lt;</span><span class="n">numerator_variable_2</span><span class="o">&gt;</span>
+            <span class="p">[</span><span class="n">den</span><span class="p">]:</span>
+                 <span class="o">-</span> <span class="o">&lt;</span><span class="n">denominator_variable_1</span><span class="o">&gt;</span>
+                 <span class="o">-</span> <span class="o">&lt;</span><span class="n">denominator_variable_2</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>These descriptions provide instructions to the code on which variables
+to ask for from which api and how to calculate the desired variable from
+the information available in the API.</p>
+<section id="field-definitions">
+<h2>Field Definitions<a class="headerlink" href="#field-definitions" title="Permalink to this heading"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><cite>var_name</cite>: The user chosen name for a variable</p></li>
+<li><p><cite>year</cite>: Which year the specification should be used for. The code
+uses the specification for the closest year to the input year that
+is current with or after the input year.</p></li>
+<li><p><cite>source</cite>: This should be either “census” or “acs”. If it is census,
+the code knows to make the call for this variable from the decennial
+census, and if acs the code uses the 5 year ACS data. As a reminder,
+decennial census data is available in 2000 and 2010, and ACS data is
+available 2009-2018. Some variables present in the 2000 census are
+not available in the 2010 decennial census.</p></li>
+<li><p><cite>num</cite>: This field should always be named “num”. All variables listed
+in this field are summed and divided by the sum of the <cite>den</cite>
+variables. If no <cite>den</cite> field is present, the sum of these fields
+will be the value reported for the variable</p></li>
+<li><p><cite>den</cite>: An optional field. This must always be named <cite>den</cite>. The
+variables listed here are summed, and then the sum of the numerator
+variables is divided by this to produce the final reported value.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<ul>
+<li><p>% of the population that is Black,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">blk_pct</span><span class="p">:</span>
+   <span class="mi">2000</span><span class="p">:</span>
+       <span class="n">census</span><span class="p">:</span>
+           <span class="n">num</span><span class="p">:</span> <span class="n">P007003</span>
+           <span class="n">den</span><span class="p">:</span> <span class="n">P007001</span>
+   <span class="mi">2009</span><span class="p">:</span>
+       <span class="n">acs</span><span class="p">:</span>
+           <span class="n">num</span><span class="p">:</span> <span class="n">B02001_003</span>
+           <span class="n">den</span><span class="p">:</span> <span class="n">B02001_001</span>
+   <span class="mi">2010</span><span class="p">:</span>
+       <span class="n">census</span><span class="p">:</span>
+           <span class="n">num</span><span class="p">:</span> <span class="n">P006003</span>
+           <span class="n">den</span><span class="p">:</span> <span class="n">P006001</span>
+   <span class="mi">2018</span><span class="p">:</span>
+       <span class="n">acs</span><span class="p">:</span>
+           <span class="n">num</span><span class="p">:</span> <span class="n">B02001_003</span>
+           <span class="n">den</span><span class="p">:</span> <span class="n">B02001_001</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Here a variable named <code class="docutils literal notranslate"><span class="pre">blk_pct</span></code> will be created. In 2000, the census
+data will be used, and the variable will be calculated as
+<code class="docutils literal notranslate"><span class="pre">P007003/P007001</span></code>. In 2009, ACS data will be used, and the variable will
+be calculated as <code class="docutils literal notranslate"><span class="pre">B02001_003/B02001_001</span></code>. In 2010, back the the census
+data and the variable will be calculated as <code class="docutils literal notranslate"><span class="pre">P007003/P007001</span></code>. Then
+finally, from 2011-2018, ACS data will be used and the variable will be
+calculated as <code class="docutils literal notranslate"><span class="pre">B02001_003/B02001_001</span></code>.</p>
+<ul>
+<li><p>Median Household Income:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">median_household_income</span><span class="p">:</span>
+    <span class="mi">2000</span><span class="p">:</span>
+        <span class="n">census</span><span class="p">:</span>
+            <span class="n">num</span><span class="p">:</span> <span class="n">P053001</span>
+    <span class="mi">2018</span><span class="p">:</span>
+        <span class="n">acs</span><span class="p">:</span>
+            <span class="n">num</span><span class="p">:</span> <span class="n">B19013_001</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Here a variable named <code class="docutils literal notranslate"><span class="pre">median_household_income</span></code> will be created. Note
+the lack of a denominator. In 2000, the census variable <code class="docutils literal notranslate"><span class="pre">P053001</span></code> is
+reported. This value was missing from the 2010 census, so from 2009-2018
+the acs variable <code class="docutils literal notranslate"><span class="pre">B19013_001</span></code> will be used instead.</p>
+</section>
+<section id="skipping-years-for-a-variable">
+<h2>Skipping years for a Variable<a class="headerlink" href="#skipping-years-for-a-variable" title="Permalink to this heading"></a></h2>
+<p>Sometimes, you may want to skip getting data for a variable for a given year.
+The most common reason to do this is when working with ZCTAs. ZCTA level data
+is not available from the 5 year ACS (acs5) for 2009 and 2010, despite the acs5 being
+available in those years. To further complicate things, ZCTAs are available for the
+decennial census in 2010. If you do not provide instructions on how to handles those
+years and you try to query the ACS for ZCTAs, you query will hit an error and fail.</p>
+<p>To handle this, instead of specifying a data set in your variable for a given year,
+you can instead write “<code class="docutils literal notranslate"><span class="pre">skip</span></code>” for that year.</p>
+<p>For example, a file trying to get ZCTA level poverty rates
+and population might look something like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">population</span><span class="p">:</span>
+    <span class="mi">2000</span><span class="p">:</span>
+        <span class="n">census</span><span class="p">:</span>
+            <span class="n">num</span><span class="p">:</span> <span class="n">P001001</span>
+    <span class="mi">2009</span><span class="p">:</span> <span class="n">skip</span>
+    <span class="mi">2010</span><span class="p">:</span>
+        <span class="n">census</span><span class="p">:</span>
+            <span class="n">num</span><span class="p">:</span> <span class="n">P001001</span>
+    <span class="mi">2018</span><span class="p">:</span>
+        <span class="n">acs</span><span class="p">:</span>
+            <span class="n">num</span><span class="p">:</span> <span class="n">B01001_001</span>
+<span class="n">poverty</span><span class="p">:</span>
+    <span class="mi">2000</span><span class="p">:</span>
+        <span class="n">census</span><span class="p">:</span>
+            <span class="n">num</span><span class="p">:</span>
+                <span class="o">-</span> <span class="n">P087002</span>
+            <span class="n">den</span><span class="p">:</span>
+                <span class="o">-</span> <span class="n">P087001</span>
+    <span class="mi">2010</span><span class="p">:</span> <span class="n">skip</span>
+    <span class="mi">2018</span><span class="p">:</span>
+        <span class="n">acs</span><span class="p">:</span>
+            <span class="n">num</span><span class="p">:</span>
+                <span class="o">-</span> <span class="n">B17001_002</span>
+            <span class="n">den</span><span class="p">:</span>
+                <span class="o">-</span> <span class="n">B17001_001</span>
+</pre></div>
+</div>
+<p>For <code class="docutils literal notranslate"><span class="pre">population</span></code>, only 2009 will be skipped, but for <code class="docutils literal notranslate"><span class="pre">poverty</span></code>,
+2009 and 2010 will be skipped.</p>
+</section>
+<section id="census-variable-documentation">
+<h2>Census Variable Documentation<a class="headerlink" href="#census-variable-documentation" title="Permalink to this heading"></a></h2>
+<p>Assembling these files will require reading through the census variable documentation,
+which can be quite tedious, especially when trying to figure out how to assemble more
+complex estimates. Links to this documentation can be found here:</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>2000 Census:</dt><dd><ul>
+<li><p>SF1 (Whole US sample, not all questions asked):
+<a class="reference external" href="https://api.census.gov/data/2000/sf1/variables.html">https://api.census.gov/data/2000/sf1/variables.html</a></p></li>
+<li><p>SF3 (more detailed, smaller sample):
+<a class="reference external" href="https://www.census.gov/data/developers/data-sets/decennial-census.2000.html">https://www.census.gov/data/developers/data-sets/decennial-census.2000.html</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>2010 Census (because of course they’re not consistent):</dt><dd><ul>
+<li><p>SF1: <a class="reference external" href="https://api.census.gov/data/2010/dec/sf1/variables.html">https://api.census.gov/data/2010/dec/sf1/variables.html</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>ACS List: <a class="reference external" href="https://www.census.gov/data/developers/data-sets/acs-5year.html">https://www.census.gov/data/developers/data-sets/acs-5year.html</a></p></li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

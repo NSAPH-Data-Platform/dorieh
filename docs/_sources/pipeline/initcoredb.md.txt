@@ -1,0 +1,35 @@
+# Database initializer
+
+
+ [Source code](initcoredbcwl_src.md) 
+
+
+```{contents}
+---
+local:
+---
+```
+
+**Tool**. Runs: dorieh.platform.util.init_core_db
+
+## Description
+
+This tool ensures that PgPL/SQL functions are updated to the latest
+version inside the database. It also loads mapping between Zip codes,
+SSA codes and FIPS codes
+
+
+## Inputs
+
+| Name            | Type   | Default | Description                                            | 
+|:----------------|:-------|:--------|:-------------------------------------------------------|
+| database        | File   |         | Path to database connection file, usually database.ini | 
+| connection_name | string |         | The name of the section in the database.ini file       | 
+
+## Outputs
+
+| Name | Type   | Description | 
+|:-----|:-------|:------------|
+| log  | stdout |             | 
+| err  | stderr |             | 
+

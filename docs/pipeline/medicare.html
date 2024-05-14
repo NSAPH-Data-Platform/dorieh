@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Medicare data ingestion and processing pipeline &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Medicare data ingestion and processing pipeline</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/pipeline/medicare.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="medicare-data-ingestion-and-processing-pipeline">
+<h1>Medicare data ingestion and processing pipeline<a class="headerlink" href="#medicare-data-ingestion-and-processing-pipeline" title="Permalink to this heading"></a></h1>
+<p><a class="reference internal" href="medicarecwl_src.html"><span class="std std-doc">Source code</span></a></p>
+<p><img alt="" src="../_images/medicare.png" /></p>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#description" id="id1">Description</a></p></li>
+<li><p><a class="reference internal" href="#inputs" id="id2">Inputs</a></p></li>
+<li><p><a class="reference internal" href="#outputs" id="id3">Outputs</a></p></li>
+<li><p><a class="reference internal" href="#steps" id="id4">Steps</a></p></li>
+</ul>
+</nav>
+<p><strong>Workflow</strong></p>
+<section id="description">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Description</a><a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
+<p>This workflow processes raw Medicare data. We assume that the data
+for each year is in a separate set of SAS DAT files accompanied by FTS.
+For each year we expect at least
+two tables: patient summary and inpatient admissions.</p>
+<blockquote>
+<div><p>NB: Input files must be organized within the dicrectory given in
+the <code class="docutils literal notranslate"><span class="pre">input</span></code> parameter in a certain way. Immediate parent folder for
+each file should be named as the year of the data it contains. Example:</p>
+</div></blockquote>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>data/
+  a/
+    b/
+      2011/
+      2013/
+    d/
+      2017/
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="../Medicare.html"><span class="doc std std-doc">Medicare Files Handling</span></a> for data processing details.</p>
+</section>
+<section id="inputs">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Inputs</a><a class="headerlink" href="#inputs" title="Permalink to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Name</p></th>
+<th class="head text-left"><p>Type</p></th>
+<th class="head text-left"><p>Default</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>database</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p>Path to database connection file, usually database.ini</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>connection_name</p></td>
+<td class="text-left"><p>string</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p>The name of the section in the database.ini file</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>input</p></td>
+<td class="text-left"><p>Directory</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p>A path to directory, containing folders with unpacked CMS files. The tool will recursively look for data files according to provided pattern. Immediate parent folder for each file should be named as the year of the data it contains, e.g. a/b/c/2017/mbsf_abcd_xyzacdfrtwe_request12345.fts</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="outputs">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Outputs</a><a class="headerlink" href="#outputs" title="Permalink to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Name</p></th>
+<th class="head text-left"><p>Type</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>initdb_log</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>initdb_err</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>load_raw_log</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>load_raw_err</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>registry</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>d_create_log</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>d_create_err</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>d_index_log</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>d_index_err</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>d_vacuum_log</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>d_vacuum_err</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>ps_create_log</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>ps_create_err</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>ps2_create_log</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>ps2_create_err</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>bene_view_log</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>bene_view_err</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>bene_table_create_log</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>bene_table_index_log</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>bene_table_vacuum_log</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>bene_table_create_err</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>bene_table_index_err</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>bene_table_vacuum_err</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>enrlm_view_log</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>enrlm_view_err</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>enrlm_table_create_log</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>enrlm_table_index_log</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>enrlm_table_vacuum_log</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>enrlm_table_create_err</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>enrlm_table_index_err</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>enrlm_table_vacuum_err</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>ip_create_log</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>ip_create_err</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>adm_create_log</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>adm_create_err</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>adm_populate_log</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>adm_populate_err</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>adm_index_log</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>adm_index_err</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>adm_vacuum_log</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>adm_vacuum_err</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>qc_ev_create_log</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>qc_ev_create_err</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>qc_av_create_log</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>qc_av_create_err</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>qc_enrollmen343_create_log</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>qc_enrollmen343_index_log</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>qc_enrollmen343_vacuum_log</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>qc_enrollmen343_create_err</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>qc_enrollmen343_index_err</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>qc_enrollmen343_vacuum_err</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>qc_admission697_create_log</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>qc_admission697_index_log</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>qc_admission697_vacuum_log</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>qc_admission697_create_err</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>qc_admission697_index_err</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>qc_admission697_vacuum_err</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>grant_log</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>grant_err</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="steps">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Steps</a><a class="headerlink" href="#steps" title="Permalink to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Name</p></th>
+<th class="head text-left"><p>Runs</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>initdb</p></td>
+<td class="text-left"><p><a class="reference internal" href="initdb.html"><span class="std std-doc">initdb.cwl</span></a></p></td>
+<td class="text-left"><p>Ensure that database utilities are at their latest version</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>load_raw_data</p></td>
+<td class="text-left"><p><a class="reference internal" href="load_raw_medicare.html"><span class="std std-doc">load_raw_medicare.cwl</span></a></p></td>
+<td class="text-left"><p>Load raw CMS Medicare data into the database</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>enrollments</p></td>
+<td class="text-left"><p><a class="reference internal" href="medicare_beneficiaries.html"><span class="std std-doc">medicare_beneficiaries.cwl</span></a></p></td>
+<td class="text-left"><p>Process beneficiaries enrollment data</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>admissions</p></td>
+<td class="text-left"><p><a class="reference internal" href="medicare_admissions.html"><span class="std std-doc">medicare_admissions.cwl</span></a></p></td>
+<td class="text-left"><p>Process medicare inpatient admissions (aka Medpar) data</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>qc</p></td>
+<td class="text-left"><p><a class="reference internal" href="medicare_qc.html"><span class="std std-doc">medicare_qc.cwl</span></a></p></td>
+<td class="text-left"><p>Build QC Tables</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>grant</p></td>
+<td class="text-left"><p><a class="reference internal" href="alter_database.html"><span class="std std-doc">alter_database.cwl</span></a></p></td>
+<td class="text-left"><p>Grants read access to the members of NSAPH group for newly created or updated tables</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+# Pipeline to aggregate data from Climatology Lab
+
+
+ [Source code](gridmetcwl_src.md) 
+
+
+![](gridmet.png)
+
+```{contents}
+---
+local:
+---
+```
+
+**Workflow**
+
+## Description
+
+This workflow downloads NetCDF datasets from 
+[University of Idaho Gridded Surface Meteorological Dataset](https://www.northwestknowledge.net/metdata/data/), 
+aggregates gridded data to daily mean values over chosen geographies
+and optionally ingests it into the database.
+
+The output of the workflow are gzipped CSV files containing
+aggregated data. 
+
+Optionally, the aggregated data can be ingested into a database
+specified in the connection parameters:
+
+* `database.ini` file containing connection descriptions
+* `connection_name` a string referring to a section in the `database.ini`
+   file, identifying specific connection to be used.
+
+The workflow can be invoked either by providing command line options 
+as in the following example:
+
+    toil-cwl-runner --retryCount 1 --cleanWorkDir never \ 
+        --outdir /scratch/work/exposures/outputs \ 
+        --workDir /scratch/work/exposures \
+        gridmet.cwl \  
+        --database /opt/local/database.ini \ 
+        --connection_name dorieh \ 
+        --bands rmin rmax \ 
+        --strategy auto \ 
+        --geography zcta \ 
+        --ram 8GB
+
+Or, by providing a YaML file (see [example](../test_gridmet_job)) 
+with similar options:
+
+    toil-cwl-runner --retryCount 1 --cleanWorkDir never \ 
+        --outdir /scratch/work/exposures/outputs \ 
+        --workDir /scratch/work/exposures \
+        gridmet.cwl test_gridmet_job.yml 
+
+
+## Inputs
+
+| Name            | Type       | Default                                                                                                                                                                            | Description                                                                                                                                                                  | 
+|:----------------|:-----------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| proxy           | string?    |                                                                                                                                                                                    | HTTP/HTTPS Proxy if required                                                                                                                                                 | 
+| shapes          | Directory? |                                                                                                                                                                                    | Do we even need this parameter, as we instead downloading shapes?                                                                                                            | 
+| geography       | string     |                                                                                                                                                                                    | Type of geography: zip codes or counties Valid values: "zip", "zcta" or "county"                                                                                             | 
+| years           | string[]   | `['1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020']` |                                                                                                                                                                              | 
+| bands           | string[]   |                                                                                                                                                                                    | University of Idaho Gridded Surface Meteorological Dataset  [bands](https://developers.google.com/earth-engine/datasets/catalog/IDAHO_EPSCOR_GRIDMET#bands)                  | 
+| strategy        | string     | `auto`                                                                                                                                                                             | [Rasterization strategy](https://nsaph-data-platform.github.io/nsaph-platform-docs/common/gridmet/doc/strategy.html) used for spatial aggregation                            | 
+| ram             | string     | `2GB`                                                                                                                                                                              | Runtime memory, available to the process. When aggregation strategy is `auto`, this value is used to calculate the optimal downscaling factor for the available resources.   | 
+| database        | File       |                                                                                                                                                                                    | Path to database connection file, usually database.ini                                                                                                                       | 
+| connection_name | string     |                                                                                                                                                                                    | The name of the section in the database.ini file                                                                                                                             | 
+| dates           | string?    |                                                                                                                                                                                    | dates restriction, for testing purposes only                                                                                                                                 | 
+| domain          | string     | `climate`                                                                                                                                                                          |                                                                                                                                                                              | 
+
+## Outputs
+
+| Name         | Type  | Description | 
+|:-------------|:------|:------------|
+| registry     | File  |             | 
+| registry_log | File  |             | 
+| registry_err | File  |             | 
+| data         | array |             | 
+| download_log | array |             | 
+| download_err | array |             | 
+| process_log  | array |             | 
+| process_err  | array |             | 
+| ingest_log   | array |             | 
+| ingest_err   | array |             | 
+| reset_log    | array |             | 
+| reset_err    | array |             | 
+| index_log    | array |             | 
+| index_err    | array |             | 
+| vacuum_log   | array |             | 
+| vacuum_err   | array |             | 
+
+## Steps
+
+| Name           | Runs                                              | Description                                               | 
+|:---------------|:--------------------------------------------------|:----------------------------------------------------------|
+| init_db_schema | ['python', '-m', 'dorieh.platform.util.psql']     | We need to do it because of parallel creation of tables   | 
+| make_registry  | [build_gridmet_model.cwl](build_gridmet_model.md) | Writes down YAML file with the database model             | 
+| init_tables    | [sub-workflow](gridmet_1.md)                      | creates or recreates database tables, one for each band   | 
+| process        | [gridmet_one_file.cwl](gridmet_one_file.md)       | Downloads raw data and aggregates it over shapes and time | 
+

@@ -1,0 +1,113 @@
+# Full Medicaid Processing Pipeline
+
+
+ [Source code](medicaidcwl_src.md) 
+
+
+![](medicaid.png)
+
+```{contents}
+---
+local:
+---
+```
+
+**Workflow**
+
+## Description
+
+This workflow ingests Medicaid data, provided by
+Centers for Medicare & Medicaid Services (CMS)
+to researches. The expected input format is
+Medicaid Analytic eXtract (MAX) data.
+
+The workflow parses File transfer summary (FTS) files,
+loads the raw data into a PostgreSQL DBMS and then processes
+the data to prepare it for using by NSAPH researches.
+See [documentation](../Medicaid.md) for detailed
+information.
+
+
+## Inputs
+
+| Name            | Type      | Default | Description                                                                                                                      | 
+|:----------------|:----------|:--------|:---------------------------------------------------------------------------------------------------------------------------------|
+| database        | File      |         | Path to database connection file, usually database.ini                                                                           | 
+| connection_name | string    |         | The name of the section in the database.ini file                                                                                 | 
+| input           | Directory |         | A path to directory, containing unpacked CMS files. The tool will recursively look for data files according to provided pattern  | 
+
+## Outputs
+
+| Name                  | Type | Description | 
+|:----------------------|:-----|:------------|
+| resource1_log         | File |             | 
+| resource2_log         | File |             | 
+| parse_log             | File |             | 
+| ps_reset_log          | File |             | 
+| ps_create_log         | File |             | 
+| ps_index_log          | File |             | 
+| ps_vacuum_log         | File |             | 
+| ip_reset_log          | File |             | 
+| ip_create_log         | File |             | 
+| ip_index_log          | File |             | 
+| ip_vacuum_log         | File |             | 
+| ben_create_log        | File |             | 
+| ben_index_log         | File |             | 
+| ben_vacuum_log        | File |             | 
+| mnth_create_log       | File |             | 
+| mnth_index_log        | File |             | 
+| mnth_vacuum_log       | File |             | 
+| enrlm_create_log      | File |             | 
+| enrlm_index_log       | File |             | 
+| enrlm_vacuum_log      | File |             | 
+| elgb_prepare_log      | File |             | 
+| elgb_create_log       | File |             | 
+| elgb_index_log        | File |             | 
+| elgb_vacuum_log       | File |             | 
+| admissions_reset_log  | File |             | 
+| admissions_create_log | File |             | 
+| admissions_index_log  | File |             | 
+| admissions_vacuum_log | File |             | 
+| parse_err             | File |             | 
+| ps_reset_err          | File |             | 
+| ps_create_err         | File |             | 
+| ps_index_err          | File |             | 
+| ps_vacuum_err         | File |             | 
+| ip_reset_err          | File |             | 
+| ip_create_err         | File |             | 
+| ip_index_err          | File |             | 
+| ip_vacuum_err         | File |             | 
+| ben_create_err        | File |             | 
+| ben_index_err         | File |             | 
+| ben_vacuum_err        | File |             | 
+| mnth_create_err       | File |             | 
+| mnth_index_err        | File |             | 
+| mnth_vacuum_err       | File |             | 
+| enrlm_create_err      | File |             | 
+| enrlm_index_err       | File |             | 
+| enrlm_vacuum_err      | File |             | 
+| elgb_create_err       | File |             | 
+| elgb_prepare_err      | File |             | 
+| elgb_index_err        | File |             | 
+| elgb_vacuum_err       | File |             | 
+| admissions_reset_err  | File |             | 
+| admissions_create_err | File |             | 
+| admissions_index_err  | File |             | 
+| admissions_vacuum_err | File |             | 
+
+## Steps
+
+| Name                 | Runs                                      | Description                                                                                                                                                                                                             | 
+|:---------------------|:------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| states               | [ensure_resource.cwl](ensure_resource.md) | Ensures the presence of `us_states` table in the database. The table contains mapping between state names, ids (two letter abbreviations), FIPS codes and [ISO-3166-2 codes](https://en.wikipedia.org/wiki/ISO_3166-2)  | 
+| iso                  | [ensure_resource.cwl](ensure_resource.md) | Ensures the presence of `us_iso` table in the database. The table provides a mapping between states, counties and zip codes. It contains FIPS and [ISO-3166-2 codes](https://en.wikipedia.org/wiki/ISO_3166-2)          | 
+| fts                  | [parse_fts.cwl](parse_fts.md)             |                                                                                                                                                                                                                         | 
+| load_ps              | [ingest_cms.cwl](ingest_cms.md)           | Loads Patient Summaries                                                                                                                                                                                                 | 
+| load_ip              | [ingest_cms.cwl](ingest_cms.md)           | Loads inpatient admissions                                                                                                                                                                                              | 
+| create_beneficiaries | [matview.cwl](matview.md)                 | Creates `Beneficiaries` Table                                                                                                                                                                                           | 
+| create_monthly_view  | [matview.cwl](matview.md)                 | Creates internally used `Monthly View`                                                                                                                                                                                  | 
+| create_enrollments   | [matview.cwl](matview.md)                 | Creates `Enrollment` Table                                                                                                                                                                                              | 
+| prepare_eligibility  | [create.cwl](create.md)                   | Creates `_Eligibility` View, prerequisit for creation of Eligibility table                                                                                                                                              | 
+| create_eligibility   | [matview.cwl](matview.md)                 | Creates `Eligibility` Table                                                                                                                                                                                             | 
+| load_admissions      | [ingest_cms.cwl](ingest_cms.md)           | Processes and loads inpatient admissions                                                                                                                                                                                | 
+

@@ -1,0 +1,60 @@
+# Downloader of gridMET Data
+
+
+ [Source code](add_daily_datacwl_src.md) 
+
+
+![](add_daily_data.png)
+
+```{contents}
+---
+local:
+---
+```
+
+**Workflow**
+
+## Description
+
+This tool preprocesses gridMET to aggregate over shapes
+(zip codes or counties) and time. It produces daily mean values
+
+
+## Inputs
+
+| Name            | Type       | Default     | Description                                                                                             | 
+|:----------------|:-----------|:------------|:--------------------------------------------------------------------------------------------------------|
+| proxy           | string?    |             | HTTP/HTTPS Proxy if required                                                                            | 
+| strategy        | string     | `downscale` | Rasterization strategy                                                                                  | 
+| ram             | string     | `2GB`       | Runtime memory, available to the process                                                                | 
+| shapes          | Directory? |             |                                                                                                         | 
+| geography       | string     |             | Type of geography: zip codes or counties                                                                | 
+| year            | string     |             | Year to process                                                                                         | 
+| month           | int?       |             | If given, then process just one month                                                                   | 
+| band            | string     |             | [Gridmet Band](https://developers.google.com/earth-engine/datasets/catalog/IDAHO_EPSCOR_GRIDMET#bands)  | 
+| dates           | string?    |             | dates restriction, for testing purposes only                                                            | 
+| input           | File       |             | Downloaded file                                                                                         | 
+| shape_files     | File[]     |             | Paths to shape files                                                                                    | 
+| domain          | string     |             |                                                                                                         | 
+| table           | string     |             |                                                                                                         | 
+| database        | File       |             |                                                                                                         | 
+| connection_name | string     |             |                                                                                                         | 
+| registry        | File       |             |                                                                                                         | 
+
+## Outputs
+
+| Name             | Type | Description | 
+|:-----------------|:-----|:------------|
+| aggregate_log    | File |             | 
+| data             | File |             | 
+| aggregate_errors | File |             | 
+| ingest_log       | File |             | 
+| ingest_errors    | File |             | 
+
+## Steps
+
+| Name      | Runs                                      | Description                    | 
+|:----------|:------------------------------------------|:-------------------------------|
+| aggregate | [aggregate_daily.cwl](aggregate_daily.md) |                                | 
+| ingest    | [add_data.cwl](add_data.md)               | Uploads data into the database | 
+

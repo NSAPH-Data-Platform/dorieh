@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The aggregator Module &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">The aggregator Module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/members/aggregator.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-dorieh.rasters.aggregator">
+<span id="the-aggregator-module"></span><h1>The aggregator Module<a class="headerlink" href="#module-dorieh.rasters.aggregator" title="Permalink to this heading"></a></h1>
+<p>API to aggregate data over shapes</p>
+<p>The Aggregator class expects a netCDF dataset, containing 3 variables:
+value, latitude and longitude</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.rasters.aggregator.Aggregator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Aggregator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">infile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strategy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../strategy.html#dorieh.gis.constants.RasterizationStrategy" title="dorieh.gis.constants.RasterizationStrategy"><span class="pre">RasterizationStrategy</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">shapefile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geography</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gis_constants.html#dorieh.gis.constants.Geography" title="dorieh.gis.constants.Geography"><span class="pre">Geography</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ram</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/aggregator.html#Aggregator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.aggregator.Aggregator" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.rasters.aggregator.Aggregator.params.infile"></span><strong>infile</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.aggregator.Aggregator.params.infile">¶</a> – Path to file with raster data to be aggregated.
+Can be either NetCDF or GeoTiff file</p></li>
+<li><p><span class="target" id="dorieh.rasters.aggregator.Aggregator.params.variable"></span><strong>variable</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.aggregator.Aggregator.params.variable">¶</a> – Name of variable or variables that need to be
+aggregated</p></li>
+<li><p><span class="target" id="dorieh.rasters.aggregator.Aggregator.params.outfile"></span><strong>outfile</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.aggregator.Aggregator.params.outfile">¶</a> – Path to the output “csv.gz” file</p></li>
+<li><p><span class="target" id="dorieh.rasters.aggregator.Aggregator.params.strategy"></span><strong>strategy</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.aggregator.Aggregator.params.strategy">¶</a> – Rasterization strategy</p></li>
+<li><p><span class="target" id="dorieh.rasters.aggregator.Aggregator.params.shapefile"></span><strong>shapefile</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.aggregator.Aggregator.params.shapefile">¶</a> – Path to shapefile with polygons</p></li>
+<li><p><span class="target" id="dorieh.rasters.aggregator.Aggregator.params.geography"></span><strong>geography</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.aggregator.Aggregator.params.geography">¶</a> – What kind of geography: US Counties or ZIP/ZCTA codes</p></li>
+<li><p><span class="target" id="dorieh.rasters.aggregator.Aggregator.params.extra_columns"></span><strong>extra_columns</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.aggregator.Aggregator.params.extra_columns">¶</a> – if we need to add any extra columns to the CSV</p></li>
+<li><p><span class="target" id="dorieh.rasters.aggregator.Aggregator.params.ram"></span><strong>ram</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.aggregator.Aggregator.params.ram">¶</a> – Runtime memory available to the process</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.aggregator.Aggregator.set_strategy">
+<span class="sig-name descname"><span class="pre">set_strategy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strategy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../strategy.html#dorieh.gis.constants.RasterizationStrategy" title="dorieh.gis.constants.RasterizationStrategy"><span class="pre">RasterizationStrategy</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/aggregator.html#Aggregator.set_strategy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.aggregator.Aggregator.set_strategy" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.aggregator.Aggregator.on_set_strategy">
+<span class="sig-name descname"><span class="pre">on_set_strategy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ram</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/aggregator.html#Aggregator.on_set_strategy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.aggregator.Aggregator.on_set_strategy" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.aggregator.Aggregator.prepare">
+<span class="sig-name descname"><span class="pre">prepare</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/aggregator.html#Aggregator.prepare"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.aggregator.Aggregator.prepare" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.aggregator.Aggregator.open">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/aggregator.html#Aggregator.open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.aggregator.Aggregator.open" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.aggregator.Aggregator.get_dataset_variables">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_dataset_variables</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/dorieh/rasters/aggregator.html#Aggregator.get_dataset_variables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.aggregator.Aggregator.get_dataset_variables" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.aggregator.Aggregator.get_layer">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_layer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/aggregator.html#Aggregator.get_layer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.aggregator.Aggregator.get_layer" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.aggregator.Aggregator.get_header">
+<span class="sig-name descname"><span class="pre">get_header</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/dorieh/rasters/aggregator.html#Aggregator.get_header"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.aggregator.Aggregator.get_header" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.aggregator.Aggregator.write_header">
+<span class="sig-name descname"><span class="pre">write_header</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/aggregator.html#Aggregator.write_header"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.aggregator.Aggregator.write_header" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.aggregator.Aggregator.get_registry">
+<span class="sig-name descname"><span class="pre">get_registry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/aggregator.html#Aggregator.get_registry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.aggregator.Aggregator.get_registry" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.aggregator.Aggregator.execute">
+<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'wt'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/aggregator.html#Aggregator.execute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.aggregator.Aggregator.execute" title="Permalink to this definition"></a></dt>
+<dd><p>Executes computational task</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.rasters.aggregator.Aggregator.execute.params.mode"></span><strong>mode</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.aggregator.Aggregator.execute.params.mode">¶</a> (<em>str</em>) – mode to use opening result file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.aggregator.Aggregator.collect_data">
+<span class="sig-name descname"><span class="pre">collect_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="io_utils.html#dorieh.utils.io_utils.Collector" title="dorieh.utils.io_utils.Collector"><span class="pre">Collector</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/aggregator.html#Aggregator.collect_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.aggregator.Aggregator.collect_data" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.aggregator.Aggregator.downscale">
+<span class="sig-name descname"><span class="pre">downscale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/aggregator.html#Aggregator.downscale"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.aggregator.Aggregator.downscale" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.aggregator.Aggregator.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">writer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="io_utils.html#dorieh.utils.io_utils.Collector" title="dorieh.utils.io_utils.Collector"><span class="pre">Collector</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">layers</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/aggregator.html#Aggregator.compute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.aggregator.Aggregator.compute" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.rasters.aggregator.NetCDFAggregator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">NetCDFAggregator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">infile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strategy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../strategy.html#dorieh.gis.constants.RasterizationStrategy" title="dorieh.gis.constants.RasterizationStrategy"><span class="pre">RasterizationStrategy</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">shapefile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geography</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gis_constants.html#dorieh.gis.constants.Geography" title="dorieh.gis.constants.Geography"><span class="pre">Geography</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ram</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/aggregator.html#NetCDFAggregator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.aggregator.NetCDFAggregator" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.rasters.aggregator.NetCDFAggregator.params.infile"></span><strong>infile</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.aggregator.NetCDFAggregator.params.infile">¶</a> – Path to file with raster data to be aggregated.
+Can be either NetCDF or GeoTiff file</p></li>
+<li><p><span class="target" id="dorieh.rasters.aggregator.NetCDFAggregator.params.variable"></span><strong>variable</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.aggregator.NetCDFAggregator.params.variable">¶</a> – Name of variable or variables that need to be
+aggregated</p></li>
+<li><p><span class="target" id="dorieh.rasters.aggregator.NetCDFAggregator.params.outfile"></span><strong>outfile</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.aggregator.NetCDFAggregator.params.outfile">¶</a> – Path to the output “csv.gz” file</p></li>
+<li><p><span class="target" id="dorieh.rasters.aggregator.NetCDFAggregator.params.strategy"></span><strong>strategy</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.aggregator.NetCDFAggregator.params.strategy">¶</a> – Rasterization strategy</p></li>
+<li><p><span class="target" id="dorieh.rasters.aggregator.NetCDFAggregator.params.shapefile"></span><strong>shapefile</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.aggregator.NetCDFAggregator.params.shapefile">¶</a> – Path to shapefile with polygons</p></li>
+<li><p><span class="target" id="dorieh.rasters.aggregator.NetCDFAggregator.params.geography"></span><strong>geography</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.aggregator.NetCDFAggregator.params.geography">¶</a> – What kind of geography: US Counties or ZIP/ZCTA codes</p></li>
+<li><p><span class="target" id="dorieh.rasters.aggregator.NetCDFAggregator.params.extra_columns"></span><strong>extra_columns</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.aggregator.NetCDFAggregator.params.extra_columns">¶</a> – if we need to add any extra columns to the CSV</p></li>
+<li><p><span class="target" id="dorieh.rasters.aggregator.NetCDFAggregator.params.ram"></span><strong>ram</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.aggregator.NetCDFAggregator.params.ram">¶</a> – Runtime memory available to the process</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.aggregator.NetCDFAggregator.open">
+<span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/aggregator.html#NetCDFAggregator.open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.aggregator.NetCDFAggregator.open" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.aggregator.NetCDFAggregator.get_dataset_variables">
+<span class="sig-name descname"><span class="pre">get_dataset_variables</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/dorieh/rasters/aggregator.html#NetCDFAggregator.get_dataset_variables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.aggregator.NetCDFAggregator.get_dataset_variables" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.aggregator.NetCDFAggregator.get_layer">
+<span class="sig-name descname"><span class="pre">get_layer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/aggregator.html#NetCDFAggregator.get_layer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.aggregator.NetCDFAggregator.get_layer" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.aggregator.NetCDFAggregator.on_set_strategy">
+<span class="sig-name descname"><span class="pre">on_set_strategy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ram</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_factor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/aggregator.html#NetCDFAggregator.on_set_strategy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.aggregator.NetCDFAggregator.on_set_strategy" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.rasters.aggregator.GeoTiffAggregator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GeoTiffAggregator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">infile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strategy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../strategy.html#dorieh.gis.constants.RasterizationStrategy" title="dorieh.gis.constants.RasterizationStrategy"><span class="pre">RasterizationStrategy</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">shapefile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geography</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gis_constants.html#dorieh.gis.constants.Geography" title="dorieh.gis.constants.Geography"><span class="pre">Geography</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ram</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/aggregator.html#GeoTiffAggregator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.aggregator.GeoTiffAggregator" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.rasters.aggregator.GeoTiffAggregator.params.infile"></span><strong>infile</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.aggregator.GeoTiffAggregator.params.infile">¶</a> – Path to file with raster data to be aggregated.
+Can be either NetCDF or GeoTiff file</p></li>
+<li><p><span class="target" id="dorieh.rasters.aggregator.GeoTiffAggregator.params.variable"></span><strong>variable</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.aggregator.GeoTiffAggregator.params.variable">¶</a> – Name of variable or variables that need to be
+aggregated</p></li>
+<li><p><span class="target" id="dorieh.rasters.aggregator.GeoTiffAggregator.params.outfile"></span><strong>outfile</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.aggregator.GeoTiffAggregator.params.outfile">¶</a> – Path to the output “csv.gz” file</p></li>
+<li><p><span class="target" id="dorieh.rasters.aggregator.GeoTiffAggregator.params.strategy"></span><strong>strategy</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.aggregator.GeoTiffAggregator.params.strategy">¶</a> – Rasterization strategy</p></li>
+<li><p><span class="target" id="dorieh.rasters.aggregator.GeoTiffAggregator.params.shapefile"></span><strong>shapefile</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.aggregator.GeoTiffAggregator.params.shapefile">¶</a> – Path to shapefile with polygons</p></li>
+<li><p><span class="target" id="dorieh.rasters.aggregator.GeoTiffAggregator.params.geography"></span><strong>geography</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.aggregator.GeoTiffAggregator.params.geography">¶</a> – What kind of geography: US Counties or ZIP/ZCTA codes</p></li>
+<li><p><span class="target" id="dorieh.rasters.aggregator.GeoTiffAggregator.params.extra_columns"></span><strong>extra_columns</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.aggregator.GeoTiffAggregator.params.extra_columns">¶</a> – if we need to add any extra columns to the CSV</p></li>
+<li><p><span class="target" id="dorieh.rasters.aggregator.GeoTiffAggregator.params.ram"></span><strong>ram</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.aggregator.GeoTiffAggregator.params.ram">¶</a> – Runtime memory available to the process</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.aggregator.GeoTiffAggregator.open">
+<span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/aggregator.html#GeoTiffAggregator.open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.aggregator.GeoTiffAggregator.open" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.aggregator.GeoTiffAggregator.get_dataset_variables">
+<span class="sig-name descname"><span class="pre">get_dataset_variables</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/dorieh/rasters/aggregator.html#GeoTiffAggregator.get_dataset_variables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.aggregator.GeoTiffAggregator.get_dataset_variables" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.aggregator.GeoTiffAggregator.get_layer">
+<span class="sig-name descname"><span class="pre">get_layer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/aggregator.html#GeoTiffAggregator.get_layer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.aggregator.GeoTiffAggregator.get_layer" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.aggregator.GeoTiffAggregator.on_set_strategy">
+<span class="sig-name descname"><span class="pre">on_set_strategy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ram</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_factor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/aggregator.html#GeoTiffAggregator.on_set_strategy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.aggregator.GeoTiffAggregator.on_set_strategy" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

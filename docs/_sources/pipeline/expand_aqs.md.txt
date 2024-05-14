@@ -1,0 +1,33 @@
+# Downloader of AQS Data
+
+
+ [Source code](expand_aqscwl_src.md) 
+
+
+```{contents}
+---
+local:
+---
+```
+
+**Tool**. Runs: dorieh.epa.aqs_expand
+
+## Description
+
+This tool downloads AQS data from EPA website
+
+
+## Inputs
+
+| Name           | Type   | Default | Description                                                                                                                                                    | 
+|:---------------|:-------|:--------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| input          | File[] |         | A path the downloaded data file                                                                                                                                | 
+| parameter_code | string |         | Parameter code. Either a numeric code (e.g. 88101, 44201) or symbolic name (e.g. PM25, NO2). See more: [AQS Code List](https://www.epa.gov/aqs/aqs-code-list)  | 
+
+## Outputs
+
+| Name | Type | Description | 
+|:-----|:-----|:------------|
+| log  | File |             | 
+| data | File |             | 
+

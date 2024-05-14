@@ -1,0 +1,40 @@
+# Sub-workflow *process* from gridmet_dwnl_only.cwl
+
+
+ [Source code](gridmet_dwnl_only_1cwl_src.md) 
+
+
+![](gridmet_dwnl_only_1.png)
+
+```{contents}
+---
+local:
+---
+```
+
+**Workflow**
+
+## Inputs
+
+| Name      | Type      | Default | Description | 
+|:----------|:----------|:--------|:------------|
+| band      | string    |         |             | 
+| geography | string    |         |             | 
+| proxy     | string?   |         |             | 
+| shapes    | Directory |         |             | 
+| years     | string[]  |         |             | 
+
+## Outputs
+
+| Name         | Type   | Description | 
+|:-------------|:-------|:------------|
+| data         | File[] |             | 
+| download_err | File[] |             | 
+| download_log | File[] |             | 
+
+## Steps
+
+| Name     | Runs                        | Description                  | 
+|:---------|:----------------------------|:-----------------------------|
+| download | [download.cwl](download.md) | Downloads and processes data | 
+

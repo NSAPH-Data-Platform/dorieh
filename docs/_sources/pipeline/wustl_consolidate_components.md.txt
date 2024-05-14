@@ -1,0 +1,37 @@
+# wustl_consolidate_components.cwl
+
+
+ [Source code](wustl_consolidate_componentscwl_src.md) 
+
+
+```{contents}
+---
+local:
+---
+```
+
+**Tool**. Runs: -mdorieh.rasters.netCDF_components_consolidator
+
+## Description
+
+Given a NetCDF file with absolute values (e.g., for PM25) and a set of 
+NetCDF files containing percentage values for individual components,  
+this tool consolidates all data into a single NetCDF file with both
+percentages and absolute values for all components.
+
+
+## Inputs
+
+| Name       | Type   | Default | Description                                  | 
+|:-----------|:-------|:--------|:---------------------------------------------|
+| abs_values | File[] |         | Path to downloaded file with absolute values | 
+| components | File[] |         | Paths to component files                     | 
+
+## Outputs
+
+| Name              | Type   | Description                                                                  | 
+|:------------------|:-------|:-----------------------------------------------------------------------------|
+| log               | File   |                                                                              | 
+| consolidated_data | File   | The output NetCDF file, containing absolute values for the given components  | 
+| errors            | stderr |                                                                              | 
+

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Querying Medicaid Data &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Querying Medicaid Data</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/QueringMedicaid.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="querying-medicaid-data">
+<h1>Querying Medicaid Data<a class="headerlink" href="#querying-medicaid-data" title="Permalink to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#querying-diagnoses" id="id1">Querying diagnoses</a></p>
+<ul>
+<li><p><a class="reference internal" href="#listing-patients" id="id2">Listing patients</a></p></li>
+<li><p><a class="reference internal" href="#problem-no-wildcarding" id="id3">Problem: no wildcarding</a></p></li>
+<li><p><a class="reference internal" href="#calculating-numbers" id="id4">Calculating numbers</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="querying-diagnoses">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Querying diagnoses</a><a class="headerlink" href="#querying-diagnoses" title="Permalink to this heading"></a></h2>
+<blockquote>
+<div><p>Querying by diagnoses might be expensive.
+Use EXPLAIN to understand and optimize your queries
+See
+<a class="reference internal" href="#../../core-platform/doc/SampleQuery.md#using-explain-to-optimize-queries"><span class="xref myst">SampleQuery</span></a>.</p>
+</div></blockquote>
+<section id="listing-patients">
+<h3><a class="toc-backref" href="#id2" role="doc-backlink">Listing patients</a><a class="headerlink" href="#listing-patients" title="Permalink to this heading"></a></h3>
+<p>The following sample lists all patient hospitalized with specified diagnosis
+codes. The code can be either primary or secondary diagnosis.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>SELECT 
+    state, 
+    zip,
+    YEAR, 
+    age(admission_date::timestamp, dob::timestamp) as bene_age, 
+    admission_date, 
+    discharge_date, 
+    diagnosis, 
+    file, 
+    bene_id 
+FROM 
+    medicaid.admissions 
+        natural join medicaid.enrollments
+        natural join medicaid.beneficiaries
+WHERE 
+    diagnosis &amp;&amp; ARRAY[&#39;29620&#39;::varchar, &#39;29633&#39;::varchar]
+    AND EXTRACT (YEAR FROM age(admission_date::timestamp, dob::timestamp)) 
+        BETWEEN 10 and 18
+</pre></div>
+</div>
+<p>This query uses array operator <code class="docutils literal notranslate"><span class="pre">&amp;&amp;</span></code>.
+See <a class="reference external" href="https://www.postgresql.org/docs/13/functions-array.html">documentation</a>
+to understand how it works.
+It also uses two conditions in WHERE clause:</p>
+<ul class="simple">
+<li><p>Diagnosis has to be one of those listed (ICD9 29620 or 29633)</p></li>
+<li><p>Age at a date of admission has to be between 10 and 18 years.</p></li>
+</ul>
+</section>
+<section id="problem-no-wildcarding">
+<h3><a class="toc-backref" href="#id3" role="doc-backlink">Problem: no wildcarding</a><a class="headerlink" href="#problem-no-wildcarding" title="Permalink to this heading"></a></h3>
+<p>Here we encounter to one of the problems.
+The  syntax above (based on array operators) does not support wildcards.
+You must write all the ICD codes explicitly,
+something like this ‘2962*’ or ‘2962%’ will not fly.
+You technically can get around this with UNNEST function,
+but then the index built on<br />
+diagnosis column will not be used and query performance might become horrible.</p>
+<p>One solution can be to write a Python program that will generate the query
+explicitly listing all required ICD codes, i.e. ‘2962’, ‘29620’,’29621’, etc.
+You would need to download ICD9 data for it, e.g. from
+<a class="reference external" href="https://www.nlm.nih.gov/research/umls/index.html">UMLS</a> website.</p>
+</section>
+<section id="calculating-numbers">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Calculating numbers</a><a class="headerlink" href="#calculating-numbers" title="Permalink to this heading"></a></h3>
+<p>Instead of listing patients we can just calculate the number of those patients
+that are of interest to us, without seeing individual records. This is done
+through aggregate queries.</p>
+<p>If we want to calculate hospitalizations in every zip code for every year
+separately, we can use the following query:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>SELECT
+    zip,
+    year,
+    count(*) as enrollees,
+    COUNT(*) FILTER (
+        WHERE bene_id IN (
+            SELECT bene_id 
+            FROM medicaid.admissions natural join medicaid.beneficiaries
+            WHERE 
+                diagnosis &amp;&amp; ARRAY[&#39;2962&#39;::varchar, &#39;2963&#39;::varchar]
+                AND EXTRACT (
+                    YEAR FROM age(admission_date::timestamp, dob::timestamp)
+                ) BETWEEN 10 and 18
+        )
+    )  AS hospitalized  
+FROM 
+    medicaid.enrollments
+    
+GROUP BY
+    year, 
+    zip    
+ORDER BY 
+    year, 
+    zip    
+</pre></div>
+</div>
+<p>This query uses an
+<a class="reference external" href="https://www.postgresql.org/docs/13/functions-array.html">array operator</a>
+and
+<a class="reference external" href="https://www.postgresql.org/docs/13/sql-expressions.html#SYNTAX-AGGREGATES">FILTER clause</a>.</p>
+<p>This query calculates the number of all people enrolled in Medicaid in a certain
+zip code. Instead you might want to calculate just those whos age is between 10
+and 18 years. To do this you should use FILTER clause to calculate enrollees
+similar to how it is used to calculate hospitalized patients.</p>
+<p>Now, to calculate hospitalizations in every Zip code over all years:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>SELECT
+    zip,
+    count(*) as enrollees,
+    COUNT(*) FILTER (
+        WHERE bene_id IN (
+            SELECT bene_id 
+            FROM medicaid.admissions natural join medicaid.beneficiaries
+            WHERE 
+                diagnosis &amp;&amp; ARRAY[&#39;2962&#39;::varchar, &#39;2963&#39;::varchar]
+                AND EXTRACT (
+                    YEAR FROM age(admission_date::timestamp, dob::timestamp)
+                ) BETWEEN 10 and 18
+        )
+    )  AS hospitalized  
+FROM 
+    medicaid.enrollments
+    
+GROUP BY
+    zip    
+ORDER BY 
+    3 desc, 
+    zip    
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

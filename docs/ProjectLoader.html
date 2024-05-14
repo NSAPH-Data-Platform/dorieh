@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project (Directory) Loading Utility &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Project (Directory) Loading Utility</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/ProjectLoader.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="project-directory-loading-utility">
+<h1>Project (Directory) Loading Utility<a class="headerlink" href="#project-directory-loading-utility" title="Permalink to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview" id="id1">Overview</a></p></li>
+<li><p><a class="reference internal" href="#configuration-options" id="id2">Configuration options</a></p></li>
+<li><p><a class="reference internal" href="#usage-from-command-line" id="id3">Usage from command line</a></p></li>
+<li><p><a class="reference internal" href="#sample-command" id="id4">Sample command</a></p></li>
+<li><p><a class="reference internal" href="#dry-runs-introspect-only" id="id5">Dry runs (introspect only)</a></p></li>
+<li><p><a class="reference internal" href="#api-usage" id="id6">API Usage</a></p></li>
+</ul>
+</nav>
+<section id="overview">
+<span id="project-loader-overview"></span><h2><a class="toc-backref" href="#id1" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p><a class="reference internal" href="members/project_loader.html"><span class="doc std std-doc">Project Loader</span></a>
+is a command line tool to introspect and ingest into a database
+a directory, containing CSV (or CSV-like, e.g. FST, JSON, SAS, etc.) files.
+The directory can be structured, e.g. have nested subdirectories. All files
+matching a certain name pattern at any nested subdirectory level
+are included in the data set. It can also load a single file if a file
+rather than a directory is given as <code class="docutils literal notranslate"><span class="pre">--data</span></code> argument.</p>
+<p>In the database, a schema is crated based on the given project name.
+For each file in the data set a table is created. The name
+of the table is constructed from the relative path of the
+incoming data file with OS path separators (e.g. ‘/’) being
+replaced with underscores (‘_’).</p>
+<p>It might be a good idea, before actually ingesting data into the database to
+do a <a class="reference internal" href="#dry-runs-introspect-only">dry run</a> and visually examine the
+database schema created by Introspection utility.</p>
+<p>Loading into the database is performed using
+<a class="reference internal" href="members/data_loader.html"><span class="doc std std-doc">Data Loader</span></a> functionality.</p>
+</section>
+<section id="configuration-options">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Configuration options</a><a class="headerlink" href="#configuration-options" title="Permalink to this heading"></a></h2>
+<p>Configuration options are provided by
+<a class="reference internal" href="members/loader_config.html"><span class="doc std std-doc">LoaderConfig</span></a> object.
+Usually, they are provided as command line arguments but can also be provided
+via an API call.</p>
+<p>Some configuration options can be provided in the registry YAML
+file. By default, if registry does not exist, a new YAML file
+will be created with the following parameters:</p>
+<ul class="simple">
+<li><p>header:  True ## i.e. CSV files are expected to have header line</p></li>
+<li><p>quoting: QUOTE_MINIMAL, ## i.e. only strings with whitespaces are
+expected to be quoted</p></li>
+<li><p>index:   “unless excluded”  ## We will build indices for every column
+unless it is explicitly excluded</p></li>
+</ul>
+<p>See <a class="reference internal" href="Datamodels.html#domain"><span class="std std-ref">Domain options</span></a> for the descriptions
+of these parameters.</p>
+<p>When a registry file is created it can be manually edited by user. The
+manual modifications will be preserved for subsequent runs.</p>
+</section>
+<section id="usage-from-command-line">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Usage from command line</a><a class="headerlink" href="#usage-from-command-line" title="Permalink to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    python -u -m dorieh.platform.loader.project_loader
+        [-h] [--drop]
+        [--data DATA [DATA ...]]
+        [--pattern PATTERN [PATTERN ...]]
+        [--reset]
+        [--incremental]
+        [--sloppy]
+        [--page PAGE]
+        [--log LOG]
+        [--limit LIMIT]
+        [--buffer BUFFER]
+        [--threads THREADS]
+        [--parallelization {lines,files,none}]
+        [--dryrun]
+        [--autocommit]
+        [--db DB]
+        [--connection CONNECTION]
+        [--verbose]
+        [--table TABLE]
+        --domain DOMAIN
+        [--registry REGISTRY]
+
+    optional arguments:
+      -h, --help            show this help message and exit
+      --drop                Drops domain schema, default: False
+      --data DATA [DATA ...]
+                            Path to a data file or directory. Can be a single CSV,
+                            gzipped CSV or FST file or a directory recursively
+                            containing CSV files. Can also be a tar, tar.gz (or
+                            tgz) or zip archive containing CSV files, default:
+                            None
+      --pattern PATTERN [PATTERN ...]
+                            pattern for files in a directory or an archive, e.g.
+                            `**/maxdata_*_ps_*.csv`, default: None
+      --reset               Force recreating table(s) if it/they already exist,
+                            default: False
+      --incremental         Commit every file and skip over files that have
+                            already been ingested, default: False
+      --sloppy              Do not update existing tables, default: False
+      --page PAGE           Explicit page size for the database, default: None
+      --log LOG             Explicit interval for logging, default: None
+      --limit LIMIT         Load at most specified number of records, default:
+                            None
+      --buffer BUFFER       Buffer size for converting fst files, default: None
+      --threads THREADS     Number of threads writing into the database, default:
+                            1
+      --parallelization {lines,files,none}
+                            Type of parallelization, if any, default: lines
+      --dryrun              Dry run: do not load any data, default: False
+      --autocommit          Use autocommit, default: False
+      --db DB               Path to a database connection parameters file,
+                            default: database.ini
+      --connection CONNECTION
+                            Section in the database connection parameters file,
+                            default: nsaph2
+      --verbose             Verbose output, default: False
+      --table TABLE, -t TABLE
+                            Name of the table to manipulate, default: None
+      --domain DOMAIN       Name of the domain
+      --registry REGISTRY   Path to domain registry. Registry is a directory or an
+                            archive containing YAML files with domain definition.
+                            Default is to use the built-in registry, default: None
+</pre></div>
+</div>
+</section>
+<section id="sample-command">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Sample command</a><a class="headerlink" href="#sample-command" title="Permalink to this heading"></a></h2>
+<p>The following command creates a schema named <code class="docutils literal notranslate"><span class="pre">my_schema</span></code> and loads
+tables from all files with extension <code class="docutils literal notranslate"><span class="pre">.csv</span></code> found recursively under the
+directory <code class="docutils literal notranslate"><span class="pre">/data/incoming/valuable/data/</span></code>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python -u -m dorieh.platform.loader.project_loader --domain my_schema --data /data/incoming/valuable/data/ --registry my_temp_schema.yaml --reset --pattern *.csv --db database.ini --connection postgres
+</pre></div>
+</div>
+<p>It uses <code class="docutils literal notranslate"><span class="pre">database.ini</span></code> file in the current directory
+(where the program is started) and a section named <code class="docutils literal notranslate"><span class="pre">postgres</span></code> inside it.
+It creates temporary file
+<code class="docutils literal notranslate"><span class="pre">my_temp_schema.yaml</span></code> also in the current directory. If such a file
+already exists, it will be loaded and the settings found in it will override
+the defaults. Option <code class="docutils literal notranslate"><span class="pre">--reset</span></code> would delete all existing tables with
+the same names and recreate them.</p>
+<p>The following is the same command but with parallel execution using 4
+threads writing into the database and with increased page size for writing
+into the database. It is optimized for hosts with more RAM.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python -u -m dorieh.platform.loader.project_loader --domain my_schema --data /data/incoming/valuable/data/ --reset --registry my_temp_schema.yaml --pattern *.csv --db database.ini --connection postgres --threads 4 --page 10000
+</pre></div>
+</div>
+<p>To load a single file one can use a command like this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python -u -m dorieh.platform.loader.project_loader --domain my_schema --data /data/incoming/valuable/test_file.csv --registry my_temp_schema.yaml --reset --db database.ini --connection postgres
+</pre></div>
+</div>
+</section>
+<section id="dry-runs-introspect-only">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Dry runs (introspect only)</a><a class="headerlink" href="#dry-runs-introspect-only" title="Permalink to this heading"></a></h2>
+<p>To just introspect files in a directory and generate YAML schema for
+the project (see <a class="reference internal" href="Datamodels.html"><span class="doc std std-doc">domain schema specification</span></a> for
+the description of the format) without modifications in the database,
+use dry run. On the command line, just give :code:<code class="docutils literal notranslate"><span class="pre">--dryrun</span></code> option.</p>
+<p>Dry run will create “registry” file that can be manually examined and
+modified. The following command described <a class="reference internal" href="#sample-command">above</a>
+will perform dry run:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python -u -m dorieh.platform.loader.project_loader --domain my_schema --data /data/incoming/valuable/data/ --registry my_temp_schema.yaml --dryrun --pattern *.csv 
+</pre></div>
+</div>
+<p>This command will create file named <code class="docutils literal notranslate"><span class="pre">my_temp_schema.yaml</span></code>.</p>
+</section>
+<section id="api-usage">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">API Usage</a><a class="headerlink" href="#api-usage" title="Permalink to this heading"></a></h2>
+<p>Example of API usage retrieving command line arguments:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">loader</span> <span class="o">=</span> <span class="n">ProjectLoader</span><span class="p">()</span>
+    <span class="n">loader</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>More advanced usage:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">config</span> <span class="o">=</span> <span class="n">LoaderConfig</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span><span class="o">.</span><span class="n">instantiate</span><span class="p">()</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">pattern</span> <span class="o">=</span> <span class="s2">&quot;**/*.csv.gz&quot;</span>
+    <span class="n">loader</span> <span class="o">=</span> <span class="n">ProjectLoader</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+    <span class="n">loader</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

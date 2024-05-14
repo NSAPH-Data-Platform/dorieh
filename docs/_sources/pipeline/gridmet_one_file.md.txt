@@ -1,0 +1,66 @@
+# Workflow to aggregate and ingest one gridMET file in NetCDF format
+
+
+ [Source code](gridmet_one_filecwl_src.md) 
+
+
+![](gridmet_one_file.png)
+
+```{contents}
+---
+local:
+---
+```
+
+**Workflow**
+
+## Description
+
+Sub-workflow that aggregates a single NetCDF file over a given
+geography (zip codes or counties) and ingest the
+aggregated data into the database
+
+
+## Inputs
+
+| Name            | Type       | Default                                   | Description                              | 
+|:----------------|:-----------|:------------------------------------------|:-----------------------------------------|
+| depends_on      | Any?       |                                           |                                          | 
+| proxy           | string?    |                                           |                                          | 
+| model           | File       |                                           |                                          | 
+| shapes          | Directory? |                                           |                                          | 
+| geography       | string     |                                           |                                          | 
+| year            | string     |                                           |                                          | 
+| band            | string     |                                           |                                          | 
+| domain          | string     |                                           |                                          | 
+| table           | string     |                                           |                                          | 
+| database        | File       |                                           |                                          | 
+| connection_name | string     |                                           |                                          | 
+| dates           | string?    |                                           |                                          | 
+| strategy        | string     |                                           |                                          | 
+| ram             | string     | `2GB`                                     | Runtime memory, available to the process | 
+| months          | int[]      | `[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]` |                                          | 
+
+## Outputs
+
+| Name                      | Type   | Description | 
+|:--------------------------|:-------|:------------|
+| download_log              | File   |             | 
+| download_err              | File   |             | 
+| add_data_aggregate_log    | File[] |             | 
+| add_data_data             | File[] |             | 
+| add_data_aggregate_errors | File[] |             | 
+| add_data_ingest_log       | File[] |             | 
+| add_data_ingest_errors    | File[] |             | 
+| vacuum_log                | File   |             | 
+| vacuum_err                | File   |             | 
+
+## Steps
+
+| Name       | Runs                                    | Description    | 
+|:-----------|:----------------------------------------|:---------------|
+| download   | [download.cwl](download.md)             | Downloads data | 
+| get_shapes | [get_shapes.cwl](get_shapes.md)         |                | 
+| add_data   | [add_daily_data.cwl](add_daily_data.md) | Processes data | 
+| vacuum     | [vacuum.cwl](vacuum.md)                 |                | 
+

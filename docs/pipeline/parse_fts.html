@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FTS Parser &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">FTS Parser</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/pipeline/parse_fts.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="fts-parser">
+<h1>FTS Parser<a class="headerlink" href="#fts-parser" title="Permalink to this heading"></a></h1>
+<p><a class="reference internal" href="parse_ftscwl_src.html"><span class="std std-doc">Source code</span></a></p>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#description" id="id1">Description</a></p></li>
+<li><p><a class="reference internal" href="#inputs" id="id2">Inputs</a></p></li>
+<li><p><a class="reference internal" href="#outputs" id="id3">Outputs</a></p></li>
+</ul>
+</nav>
+<p><strong>Tool</strong>. Runs: dorieh.cms.registry</p>
+<section id="description">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Description</a><a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
+<p>This tool examines a directory with raw CMS data, looking
+for File Transfer Summary (FTS) files. It examnines each
+FTS file under directory (recursively) and creates a unified
+data model for input raw CMS data. If any FTS files for
+different years are incompatible with one another, a
+warning is reported. However, so far we found that all years
+are compatible.</p>
+</section>
+<section id="inputs">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Inputs</a><a class="headerlink" href="#inputs" title="Permalink to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Name</p></th>
+<th class="head text-left"><p>Type</p></th>
+<th class="head text-left"><p>Default</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>input</p></td>
+<td class="text-left"><p>Directory</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p>A path to directory, containing unpacked CMS files. The tool will recursively look in subdirectories for FTS files</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>output</p></td>
+<td class="text-left"><p>string</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">cms.yaml</span></code></p></td>
+<td class="text-left"><p>A path to a file name with resulting data model</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="outputs">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Outputs</a><a class="headerlink" href="#outputs" title="Permalink to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Name</p></th>
+<th class="head text-left"><p>Type</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>log</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>model</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>errors</p></td>
+<td class="text-left"><p>stderr</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

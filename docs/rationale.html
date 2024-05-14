@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why Data Platform and what does it do? &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Data Domains" href="domains.html" />
+    <link rel="prev" title="NSAPH Data Platform: Documentation Home" href="home.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">What is Data Platform</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#why-we-need-a-data-platform">Why we need a Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#architecture">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#supported-programming-languages-and-tools">Supported Programming Languages and Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#development-mode">Development Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#where-it-can-be-deployed">Where it can be deployed</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Why Data Platform and what does it do?</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/rationale.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="why-data-platform-and-what-does-it-do">
+<h1>Why Data Platform and what does it do?<a class="headerlink" href="#why-data-platform-and-what-does-it-do" title="Permalink to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#why-we-need-a-data-platform" id="id1">Why we need a Data Platform</a></p></li>
+<li><p><a class="reference internal" href="#architecture" id="id2">Architecture</a></p></li>
+<li><p><a class="reference internal" href="#supported-programming-languages-and-tools" id="id3">Supported Programming Languages and Tools</a></p></li>
+<li><p><a class="reference internal" href="#development-mode" id="id4">Development Mode</a></p></li>
+<li><p><a class="reference internal" href="#where-it-can-be-deployed" id="id5">Where it can be deployed</a></p></li>
+</ul>
+</nav>
+<section id="why-we-need-a-data-platform">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Why we need a Data Platform</a><a class="headerlink" href="#why-we-need-a-data-platform" title="Permalink to this heading"></a></h2>
+<p>Reproducible research is a keystone of modern scientific work. In data
+engineering for data science it presents a challenge on two sides. On the one
+hand, data is often retrieved from public and proprietary data sources that are
+being continuously updated, requiring special attention to ensure that for
+reproducibility purposes the same exact data sources are used. On the other
+hand, data processing involves heavy floating-point computations which are very
+sensitive to the exact computational environment. Differing operating systems
+and/or versions of the tools and libraries might affect the result. Several
+scientific communities proposed various standards to define portable
+reproducible data processing workflows, with Common Workflow Language (CWL) [1]
+having the widest adoption in both commercial and academic settings. CWL can be
+used to define pipelines in imperative rather than procedural ways.
+Reproducibility challenges are exacerbated when the research involves healthcare
+data that is inherently confidential and cannot be shared publicly to ensure
+reproducibility. A possible solution to this problem is to share infrastructure
+instead, making an option for institutions to reproduce each other’s results on
+their own data in compliance with their own data usage agreements. In this
+setting Infrastructure as Code (IaC) provides a handy way to ensure that the
+infrastructure is identical during data processing.</p>
+</section>
+<section id="architecture">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Architecture</a><a class="headerlink" href="#architecture" title="Permalink to this heading"></a></h2>
+<p>The data platform is based on a combination of an IaC approach and CWL. Besides
+tools written in widely used languages such as Python, C/C++ and Java, it also
+supports tools written in R and PL/pgSQL, making it, to the best of our
+knowledge, one of the first deployment-ready platforms appropriate for ETL/ELT
+pipelines. Out of the four open-source production-ready CWL implementations, we
+have selected CWL-Airflow to take advantage of the excellent user interface
+allowing for the control of the actual execution process. The data is eventually
+stored in a PostgreSQL DBMS; many processing steps are being run inside the
+database itself. The data platform is deployed as a set of Docker containers
+orchestrated by Docker-Compose. Conda (package manager) environment files and
+Python requirements are used to build Docker containers satisfying the
+dependencies. Specific parameters can be customized via environment files and
+shell script callbacks.</p>
+<p>One of the most important features of the data platform is support for advanced
+security. We assume that the platform resides behind a strict firewall without
+direct access to the Internet.</p>
+<p>We use Git submodules to describe project dependencies and fetch all the code to
+the local system before building the Docker containers.</p>
+</section>
+<section id="supported-programming-languages-and-tools">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Supported Programming Languages and Tools</a><a class="headerlink" href="#supported-programming-languages-and-tools" title="Permalink to this heading"></a></h2>
+<p>The execution environment requires a PostgreSQL database to function. While DBMS
+can be automatically installed as a separate Docker container, it makes little
+sense with a production database that is usually administered separately.
+Therefore, a connection to an external DBMS server can be specified as an
+alternative to the built-in containerized option. Optionally, we support Conda
+package manager as a runtime environment, hence, individual CWL tools can be
+written in the R programming language. We also support commands that are
+executed inside PostgreSQL database, with tools written in one of the languages
+supported by PostgreSQL runtime including PL/pgSQL. Other languages supported
+for in-database data manipulation include PL/Tcl, PL/Perl, PL/TclU, PL/PerlU,
+and PL/PythonU. Such tools can be executed either through a Python wrapper or
+using psql utility that is by default installed in all containers. It is
+possible to pre-build multiple Conda environments and/or multiple Python virtual
+environments in all of the containers. One of the defined environments can be
+designated as default, though individual workflows have an option to select a
+different environment for their execution.</p>
+</section>
+<section id="development-mode">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Development Mode</a><a class="headerlink" href="#development-mode" title="Permalink to this heading"></a></h2>
+<p>In addition to production mode, the platform is designed to be used in
+development mode. To enable development mode, users can define user projects and
+place them in a special project subdirectory. User projects can be either
+connected as Git submodules or copied to project subdirectory with any other
+utility. They are automatically prebuilt into all of the runtime containers but
+can also be updated in the running containers without rebuilding. We use user
+projects to define specific pipelines.</p>
+</section>
+<section id="where-it-can-be-deployed">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Where it can be deployed</a><a class="headerlink" href="#where-it-can-be-deployed" title="Permalink to this heading"></a></h2>
+<p>The platform has been deployed in the Harvard University’s FAS RC
+high-performance computing (HPC) cluster on CentOS 7, on various versions of
+Ubuntu and in the RedHat OpenShift cluster on IBM Cloud. At FAS RC, we use
+Puppet to provision specific resources, while on IBM cloud, resource
+provisioning is done with Terraform.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="home.html" class="btn btn-neutral float-left" title="NSAPH Data Platform: Documentation Home" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="domains.html" class="btn btn-neutral float-right" title="Data Domains" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

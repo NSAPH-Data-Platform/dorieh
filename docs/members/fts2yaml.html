@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parser for FTS files that accompany CMS data from ResDac &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Parser for FTS files that accompany CMS data from ResDac</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/members/fts2yaml.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="parser-for-fts-files-that-accompany-cms-data-from-resdac">
+<h1>Parser for FTS files that accompany CMS data from ResDac<a class="headerlink" href="#parser-for-fts-files-that-accompany-cms-data-from-resdac" title="Permalink to this heading"></a></h1>
+<p>See also <a class="reference external" href="../../../../fts.html">What is FTS</a>  for more details about FTS</p>
+<nav class="contents local" id="table-of-contents">
+<p class="topic-title">Table of Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#abstract-class-for-cms-fts-file" id="id1">Abstract class for CMS FTS file</a></p></li>
+<li><p><a class="reference internal" href="#concrete-subclass-describing-medicare-fts-file" id="id2">Concrete subclass describing Medicare FTS file</a></p></li>
+<li><p><a class="reference internal" href="#concrete-subclass-describing-medicaid-fts-file" id="id3">Concrete subclass describing Medicaid FTS file</a></p></li>
+<li><p><a class="reference internal" href="#abstract-class-describing-a-column-in-a-cms-data-file" id="id4">Abstract class describing a column in a CMS data file</a></p></li>
+<li><p><a class="reference internal" href="#concrete-subclass-describing-a-column-in-a-medicare-data-file" id="id5">Concrete subclass describing a column in a Medicare data file</a></p></li>
+<li><p><a class="reference internal" href="#concrete-subclass-describing-a-column-in-a-medicaid-data-file" id="id6">Concrete subclass describing a column in a Medicaid data file</a></p></li>
+<li><p><a class="reference internal" href="#concrete-subclass-describing-a-column-not-present-in-the-original-data-but-that-should-be-generated-in-the-database" id="id7">Concrete subclass describing a column not present in the original data but that should be generated in the database</a></p></li>
+<li><p><a class="reference internal" href="#helper-classes" id="id8">Helper Classes</a></p></li>
+<li><p><a class="reference internal" href="#helper-functions" id="id9">Helper Functions</a></p></li>
+</ul>
+</nav>
+<p>The parser tries to recognize a type of a medicare or a medicaid CMS file and
+extract metadata</p>
+<section id="abstract-class-for-cms-fts-file">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Abstract class for CMS FTS file</a><a class="headerlink" href="#abstract-class-for-cms-fts-file" title="Permalink to this heading"></a></h2>
+</section>
+<section id="concrete-subclass-describing-medicare-fts-file">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Concrete subclass describing Medicare FTS file</a><a class="headerlink" href="#concrete-subclass-describing-medicare-fts-file" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.cms.fts2yaml.MedicareFTS">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MedicareFTS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type_of_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/fts2yaml.html#MedicareFTS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.fts2yaml.MedicareFTS" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">CMSFTS</span></code></p>
+<p>Subclass describing Medicare data file (usually, FWF dat file)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.cms.fts2yaml.MedicareFTS.params.type_of_data"></span><strong>type_of_data</strong><a class="paramlink headerlink reference internal" href="#dorieh.cms.fts2yaml.MedicareFTS.params.type_of_data">¶</a> – Can be either <cite>ps</cite> for personal summary or
+<cite>ip</cite> for inpatient admissions data</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.cms.fts2yaml.MedicareFTS.init">
+<span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fts_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/fts2yaml.html#MedicareFTS.init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.fts2yaml.MedicareFTS.init" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.cms.fts2yaml.MedicareFTS.on_after_read_file">
+<span class="sig-name descname"><span class="pre">on_after_read_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dorieh.cms.fts2yaml.FTSColumn" title="dorieh.cms.fts2yaml.FTSColumn"><span class="pre">FTSColumn</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/fts2yaml.html#MedicareFTS.on_after_read_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.fts2yaml.MedicareFTS.on_after_read_file" title="Permalink to this definition"></a></dt>
+<dd><p>Callback function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.cms.fts2yaml.MedicareFTS.on_after_read_file.params.columns"></span><strong>columns</strong><a class="paramlink headerlink reference internal" href="#dorieh.cms.fts2yaml.MedicareFTS.on_after_read_file.params.columns">¶</a> – columns read from FTS file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>nothing</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.cms.fts2yaml.MedicareFTS.check_key_columns">
+<span class="sig-name descname"><span class="pre">check_key_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dorieh.cms.fts2yaml.FTSColumn" title="dorieh.cms.fts2yaml.FTSColumn"><span class="pre">FTSColumn</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/fts2yaml.html#MedicareFTS.check_key_columns"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.fts2yaml.MedicareFTS.check_key_columns" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.cms.fts2yaml.MedicareFTS.add_indices">
+<span class="sig-name descname"><span class="pre">add_indices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dorieh.cms.fts2yaml.FTSColumn" title="dorieh.cms.fts2yaml.FTSColumn"><span class="pre">FTSColumn</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/fts2yaml.html#MedicareFTS.add_indices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.fts2yaml.MedicareFTS.add_indices" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="concrete-subclass-describing-medicaid-fts-file">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Concrete subclass describing Medicaid FTS file</a><a class="headerlink" href="#concrete-subclass-describing-medicaid-fts-file" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.cms.fts2yaml.MedicaidFTS">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MedicaidFTS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type_of_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/fts2yaml.html#MedicaidFTS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.fts2yaml.MedicaidFTS" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">CMSFTS</span></code></p>
+<p>Subclass describing Medicaid data file (usually, CSV)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.cms.fts2yaml.MedicaidFTS.params.type_of_data"></span><strong>type_of_data</strong><a class="paramlink headerlink reference internal" href="#dorieh.cms.fts2yaml.MedicaidFTS.params.type_of_data">¶</a> – Can be either <cite>ps</cite> for personal summary or
+<cite>ip</cite> for inpatient admissions data</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.cms.fts2yaml.MedicaidFTS.medicaid_indices">
+<span class="sig-name descname"><span class="pre">medicaid_indices</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['EL_DOB',</span> <span class="pre">'EL_SEX_CD',</span> <span class="pre">'EL_DOD',</span> <span class="pre">'EL_RACE_ETHNCY_CD']</span></em><a class="headerlink" href="#dorieh.cms.fts2yaml.MedicaidFTS.medicaid_indices" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.cms.fts2yaml.MedicaidFTS.init">
+<span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/fts2yaml.html#MedicaidFTS.init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.fts2yaml.MedicaidFTS.init" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.cms.fts2yaml.MedicaidFTS.on_after_read_file">
+<span class="sig-name descname"><span class="pre">on_after_read_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dorieh.cms.fts2yaml.FTSColumn" title="dorieh.cms.fts2yaml.FTSColumn"><span class="pre">FTSColumn</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/fts2yaml.html#MedicaidFTS.on_after_read_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.fts2yaml.MedicaidFTS.on_after_read_file" title="Permalink to this definition"></a></dt>
+<dd><p>Callback function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.cms.fts2yaml.MedicaidFTS.on_after_read_file.params.columns"></span><strong>columns</strong><a class="paramlink headerlink reference internal" href="#dorieh.cms.fts2yaml.MedicaidFTS.on_after_read_file.params.columns">¶</a> – columns read from FTS file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>nothing</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="abstract-class-describing-a-column-in-a-cms-data-file">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Abstract class describing a column in a CMS data file</a><a class="headerlink" href="#abstract-class-describing-a-column-in-a-cms-data-file" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.cms.fts2yaml.FTSColumn">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FTSColumn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_format</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/fts2yaml.html#FTSColumn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.fts2yaml.FTSColumn" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Metadata object for a column described in FTS file</p>
+<p>A column can be either a CSV or fixed width (fwf) column</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.cms.fts2yaml.FTSColumn.conv">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">conv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/fts2yaml.html#FTSColumn.conv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.fts2yaml.FTSColumn.conv" title="Permalink to this definition"></a></dt>
+<dd><p>Conversion function that should be applied to
+the i-th attribute of a column</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.cms.fts2yaml.FTSColumn.conv.params.i"></span><strong>i</strong><a class="paramlink headerlink reference internal" href="#dorieh.cms.fts2yaml.FTSColumn.conv.params.i">¶</a> – attribute ordinal in the column description</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Callable function</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.cms.fts2yaml.FTSColumn.analyze_format">
+<span class="sig-name descname"><span class="pre">analyze_format</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/fts2yaml.html#FTSColumn.analyze_format"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.fts2yaml.FTSColumn.analyze_format" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.cms.fts2yaml.FTSColumn.to_sql_type">
+<span class="sig-name descname"><span class="pre">to_sql_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/fts2yaml.html#FTSColumn.to_sql_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.fts2yaml.FTSColumn.to_sql_type" title="Permalink to this definition"></a></dt>
+<dd><p>SQL Type of the column
+:return: SQL type of the column</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.cms.fts2yaml.FTSColumn.get_description">
+<span class="sig-name descname"><span class="pre">get_description</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/fts2yaml.html#FTSColumn.get_description"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.fts2yaml.FTSColumn.get_description" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.cms.fts2yaml.FTSColumn.to_dict">
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/fts2yaml.html#FTSColumn.to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.fts2yaml.FTSColumn.to_dict" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.cms.fts2yaml.FTSColumn.to_fwf_column">
+<span class="sig-name descname"><span class="pre">to_fwf_column</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="fwf.html#dorieh.utils.fwf.FWFColumn" title="dorieh.utils.fwf.FWFColumn"><span class="pre">FWFColumn</span></a></span></span><a class="reference internal" href="../_modules/dorieh/cms/fts2yaml.html#FTSColumn.to_fwf_column"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.fts2yaml.FTSColumn.to_fwf_column" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a description of a fixed width (fwf) column required to create
+a FWF reader</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.cms.fts2yaml.FTSColumn.to_fwf_column.params.pos"></span><strong>pos</strong><a class="paramlink headerlink reference internal" href="#dorieh.cms.fts2yaml.FTSColumn.to_fwf_column.params.pos">¶</a> – starting position of the column in a record</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A descriptor for FWF column</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="concrete-subclass-describing-a-column-in-a-medicare-data-file">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Concrete subclass describing a column in a Medicare data file</a><a class="headerlink" href="#concrete-subclass-describing-a-column-in-a-medicare-data-file" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.cms.fts2yaml.MedicareFTSColumn">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MedicareFTSColumn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">long_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">short_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">desc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/fts2yaml.html#MedicareFTSColumn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.fts2yaml.MedicareFTSColumn" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dorieh.cms.fts2yaml.FTSColumn" title="dorieh.cms.fts2yaml.FTSColumn"><code class="xref py py-class docutils literal notranslate"><span class="pre">FTSColumn</span></code></a></p>
+<p>Subclass for a column in medicare files</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.cms.fts2yaml.MedicareFTSColumn.nattrs">
+<span class="sig-name descname"><span class="pre">nattrs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">7</span></em><a class="headerlink" href="#dorieh.cms.fts2yaml.MedicareFTSColumn.nattrs" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.cms.fts2yaml.MedicareFTSColumn.conv">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">conv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/fts2yaml.html#MedicareFTSColumn.conv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.fts2yaml.MedicareFTSColumn.conv" title="Permalink to this definition"></a></dt>
+<dd><p>Conversion function that should be applied to
+the i-th attribute of a column</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.cms.fts2yaml.MedicareFTSColumn.conv.params.i"></span><strong>i</strong><a class="paramlink headerlink reference internal" href="#dorieh.cms.fts2yaml.MedicareFTSColumn.conv.params.i">¶</a> – attribute ordinal in the column description</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Callable function</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.cms.fts2yaml.MedicareFTSColumn.get_description">
+<span class="sig-name descname"><span class="pre">get_description</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/fts2yaml.html#MedicareFTSColumn.get_description"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.fts2yaml.MedicareFTSColumn.get_description" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="concrete-subclass-describing-a-column-in-a-medicaid-data-file">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Concrete subclass describing a column in a Medicaid data file</a><a class="headerlink" href="#concrete-subclass-describing-a-column-in-a-medicaid-data-file" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.cms.fts2yaml.MedicaidFTSColumn">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MedicaidFTSColumn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_format</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/fts2yaml.html#MedicaidFTSColumn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.fts2yaml.MedicaidFTSColumn" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dorieh.cms.fts2yaml.FTSColumn" title="dorieh.cms.fts2yaml.FTSColumn"><code class="xref py py-class docutils literal notranslate"><span class="pre">FTSColumn</span></code></a></p>
+<p>Subclass for a column in medicaid files</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.cms.fts2yaml.MedicaidFTSColumn.nattrs">
+<span class="sig-name descname"><span class="pre">nattrs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></em><a class="headerlink" href="#dorieh.cms.fts2yaml.MedicaidFTSColumn.nattrs" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="concrete-subclass-describing-a-column-not-present-in-the-original-data-but-that-should-be-generated-in-the-database">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Concrete subclass describing a column not present in the original data but that should be generated in the database</a><a class="headerlink" href="#concrete-subclass-describing-a-column-not-present-in-the-original-data-but-that-should-be-generated-in-the-database" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.cms.fts2yaml.AliasColumn">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AliasColumn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dorieh.cms.fts2yaml.FTSColumn" title="dorieh.cms.fts2yaml.FTSColumn"><span class="pre">FTSColumn</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/fts2yaml.html#AliasColumn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.fts2yaml.AliasColumn" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dorieh.cms.fts2yaml.FTSColumn" title="dorieh.cms.fts2yaml.FTSColumn"><code class="xref py py-class docutils literal notranslate"><span class="pre">FTSColumn</span></code></a></p>
+<p>Subclass describing a column not present in the original data but
+that should be generated in the corresponding  database table</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.cms.fts2yaml.AliasColumn.to_dict">
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/fts2yaml.html#AliasColumn.to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.fts2yaml.AliasColumn.to_dict" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="helper-classes">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Helper Classes</a><a class="headerlink" href="#helper-classes" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.cms.fts2yaml.ColumnReader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ColumnReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">constructor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/fts2yaml.html#ColumnReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.fts2yaml.ColumnReader" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Reads columns section of an FTS file</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.cms.fts2yaml.ColumnReader.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/fts2yaml.html#ColumnReader.read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.fts2yaml.ColumnReader.read" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.cms.fts2yaml.ColumnAttribute">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ColumnAttribute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conv</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/fts2yaml.html#ColumnAttribute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.fts2yaml.ColumnAttribute" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Column attribute as read from FTS</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.cms.fts2yaml.ColumnAttribute.arg">
+<span class="sig-name descname"><span class="pre">arg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/fts2yaml.html#ColumnAttribute.arg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.fts2yaml.ColumnAttribute.arg" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="helper-functions">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">Helper Functions</a><a class="headerlink" href="#helper-functions" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.cms.fts2yaml.mcr_type">
+<span class="sig-name descname"><span class="pre">mcr_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/dorieh/cms/fts2yaml.html#mcr_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.fts2yaml.mcr_type" title="Permalink to this definition"></a></dt>
+<dd><p>Tries to guess medicare file type by its name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.cms.fts2yaml.mcr_type.params.file_name"></span><strong>file_name</strong><a class="paramlink headerlink reference internal" href="#dorieh.cms.fts2yaml.mcr_type.params.file_name">¶</a> – Name of the file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>string denoting file type</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.cms.fts2yaml.width">
+<span class="sig-name descname"><span class="pre">width</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/cms/fts2yaml.html#width"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.cms.fts2yaml.width" title="Permalink to this definition"></a></dt>
+<dd><p>Parses width of a numeric column as  described in FTS file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.cms.fts2yaml.width.params.s"></span><strong>s</strong><a class="paramlink headerlink reference internal" href="#dorieh.cms.fts2yaml.width.params.s">¶</a> – String from FTS file, describing column width</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple, with fist element specifying total column width and
+the second a number of digits after decimal point</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
