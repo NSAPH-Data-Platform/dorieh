@@ -22,7 +22,7 @@ copyright = '2021, Harvard University'
 author = 'Michael A Bouzinier'
 
 # The full version, including alpha/beta/rc tags
-release = '0.0.2'
+release = '0.0.1'
 
 
 # -- General configuration ---------------------------------------------------
@@ -50,7 +50,7 @@ templates_path = ['_templates']
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', '.nsaph', 'notes', 'venv']
-include_patterns = ['**/doc/*', '**/doc/members/*', '**/doc/pipeline/*', '*.md']
+include_patterns = ['**']
 
 html_static_path = ['_static']
 html_css_files = [

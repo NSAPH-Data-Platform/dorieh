@@ -28,7 +28,20 @@ do
 done
 
 git checkout "${doc_source_branch}"
+if [ $? -ne 0 ]
+then
+  echo "Failed to checkout documentation branch: ${doc_source_branch}"
+  exit 1
+fi
+
 git merge "${branch}"
+if [ $? -ne 0 ]
+then
+  echo "Failed to merge latest changes into the documentation branch: ${doc_source_branch}"
+  exit 1
+fi
+
+
 pip install -r doc-requirements.txt
 pip install .
 pip uninstall markupsafe
