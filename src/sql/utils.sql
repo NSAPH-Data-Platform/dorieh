@@ -19,6 +19,13 @@
 
 CREATE EXTENSION IF NOT EXISTS  hll;
 
+CREATE SCHEMA IF NOT EXISTS metadata;
+CREATE TABLE IF NOT EXISTS metadata.log (
+    update_timestamp TIMESTAMP GENERATED ALWAYS AS ( NOW() ) STORED,
+    ddl VARCHAR(32000),
+    version VARCHAR(1024)
+);
+
 CREATE OR REPLACE FUNCTION "public"."count_rows" (
     schema_name character varying, table_name character varying
 )  RETURNS bigint

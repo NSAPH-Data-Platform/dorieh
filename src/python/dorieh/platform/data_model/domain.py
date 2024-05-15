@@ -42,6 +42,7 @@ from dorieh.platform.data_model.utils import basename, split
 from dorieh.platform.data_model.model import index_method, INDEX_NAME_PATTERN, \
     INDEX_DDL_PATTERN, UNIQUE_INDEX_DDL_PATTERN
 from dorieh.platform.pg_keywords import PG_TXT_TYPE, HLL_HASHVAL, HLL
+from dorieh.version import get_version
 
 CONSTRAINTS = [
     "CONSTRAINT",
@@ -499,6 +500,10 @@ class Domain:
         if object_type != "view":
             self.add_column_indices(table, columns)
         self.add_multi_column_indices(table, definition)
+
+        comment = f"CREATED BY Dorieh: {get_version()}"
+        comment_sql = f"COMMENT ON TABLE {table} IS '{comment}'"
+        self.append_ddl(comment_sql)
 
         if "children" in definition:
             children = {t: definition["children"][t] for t in definition["children"]}
