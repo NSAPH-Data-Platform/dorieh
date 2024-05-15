@@ -138,6 +138,8 @@ class TableFingerprint:
                     t = CType.numeric
                 elif c[1] in ['date']:
                     t = CType.date
+                elif c[1] in ['USER-DEFINED']:
+                    continue
                 else:
                     t = CType.text
                 dc = 1024*1024*1024
@@ -209,6 +211,9 @@ class TableFingerprint:
                 cursor.execute(sql)
                 for row in cursor:
                     v = row[0]
+        if v is None:
+            condition = f"({sql}) IS NULL"
+            return self.test_case_sql(name, test, condition)
         if v >= 0:
             v1 = 0.99 * float(v)
             v2 = 1.01 * float(v)
