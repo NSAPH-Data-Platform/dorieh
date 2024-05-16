@@ -300,6 +300,15 @@ medicare:
               - admsn_day_cd
               - admsnday
 
+        - admsn_type_cd:
+            type: CHAR(1)
+            source:
+              - ip_admsn_type_cd
+              - type_adm
+              - medpar_ip_admsn_type_cd
+            cast:
+              '*': "{column_name}::VARCHAR"
+
         - src_admsn_cd:
             type: CHAR(1)
             source:
@@ -392,6 +401,46 @@ medicare:
               - mdcr_pmt_amt
               - pmt_amt
               - medpar_mdcr_pmt_amt
+
+        - bene_blood_ddctbl_amt:
+            reference: "https://resdac.org/cms-data/variables/beneficiarys-liability-blood-deductible-stay"
+            description: |
+              The amount of money (rounded to whole dollars) identified as the beneficiary's liability for the blood deductible for the stay.
+            type: NUMERIC
+            source:
+              - bene_blood_ddctbl_amt
+              - blddedam
+              - medpar_bene_blood_ddctbl_amt
+
+        - bene_prmry_pyr_amt:
+            reference: "https://resdac.org/cms-data/variables/primary-payer-paid-amount"
+            description: |
+              The amount of payment (rounded to whole dollars) made on behalf of the beneficiary by a primary payer other than Medicare, which has been applied to the covered Medicare charges for the stay.
+            type: NUMERIC
+            source:
+              - bene_prmry_pyr_amt
+              - prpayamt
+              - medpar_bene_prmry_pyr_amt
+
+        - bene_ip_ddctbl_amt:
+            reference: "https://resdac.org/cms-data/variables/beneficiarys-liability-deductible-stay"
+            description: |
+              The amount of money (rounded to whole dollars) identified as the beneficiary's liability for the inpatient deductible for the stay.
+            type: NUMERIC
+            source:
+              - bene_ip_ddctbl_amt
+              - ded_amt
+              - medpar_bene_ip_ddctbl_amt
+
+        - bene_pta_coinsrnc_amt:
+            reference: "https://resdac.org/cms-data/variables/beneficiarys-liability-part-coinsurance-stay"
+            description: |
+              The amount of money (rounded to whole dollars) identified as the beneficiary's liability for part A coinsurance for the stay.
+            type: NUMERIC
+            source:
+              - bene_pta_coinsrnc_amt
+              - coin_amt
+              - medpar_bene_pta_coinsrnc_amt
 
     _ps:
       description: internal intermediate view adding some data conversions
@@ -722,6 +771,7 @@ medicare:
                   adm_day_of_week,
                   dschrgcd,
                   dschrg_dstntn_cd,
+                  admsn_type_cd,
                   src_admsn_cd,
                   btrim(diag1) As primary_diagnosis,
                   array_remove(ARRAY[
@@ -755,7 +805,11 @@ medicare:
                   drg_price_amt,
                   drg_outlier_pmt_amt,
                   pass_thru_amt,
-                  mdcr_pmt_amt 
+                  mdcr_pmt_amt,
+                  bene_blood_ddctbl_amt,
+                  bene_prmry_pyr_amt,
+                  bene_ip_ddctbl_amt,
+                  bene_pta_coinsrnc_amt
 
                 from: ip
                 populate: false
