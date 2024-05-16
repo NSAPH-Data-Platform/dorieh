@@ -171,7 +171,7 @@ class TableFingerprint:
             test_case = self.test_exact(s1, c.name, "count distinct")
             self.test_cases.append(test_case)
         if c.type in [CType.text, CType.categorical]:
-            s2 = f"SELECT MD5(string_agg({c.name}::varchar, '')) FROM {self.fqtn}"
+            s2 = f"SELECT MD5(string_agg({c.name}::varchar, '' order by {c.name})) FROM {self.fqtn}"
             test_case = self.test_exact(s2, c.name, "MD5 value")
             self.test_cases.append(test_case)
         if c.type in [CType.numeric, CType.integral]:

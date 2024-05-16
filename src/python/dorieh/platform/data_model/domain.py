@@ -428,7 +428,7 @@ class Domain:
                 ]
             elif "nullable group by" in create:
                 group_by = ','.join(create["nullable group by"])
-                create_table += "\nGROUP BY {columns}\n".format(columns=group_by)
+                create_table += "\nGROUP BY {columns};\n".format(columns=group_by)
             else:
                 create_table = create_table.strip() + ';'
         else:
@@ -502,8 +502,8 @@ class Domain:
         self.add_multi_column_indices(table, definition)
 
         comment = f"CREATED BY Dorieh: {get_version()}"
-        comment_sql = f"COMMENT ON TABLE {table} IS '{comment}'"
-        self.append_ddl(comment_sql)
+        comment_sql = f"COMMENT ON {object_type} {table} IS '{comment}';"
+        self.append_ddl(table, comment_sql)
 
         if "children" in definition:
             children = {t: definition["children"][t] for t in definition["children"]}

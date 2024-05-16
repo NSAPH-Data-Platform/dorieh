@@ -40,13 +40,18 @@
 #  limitations under the License.
 #
 import json
+import sys
 from importlib.metadata import version, distribution
 
 
 PACKAGE_NAME = "dorieh"
+VERSION = None
 
 
 def get_version() -> str:
+    global VERSION
+    if VERSION:
+        return VERSION
     package_version = None
     url = None
     sha = None
@@ -61,25 +66,30 @@ def get_version() -> str:
             data = json.loads(url_json)
             if "url" in data:
                 url = data["url"]
-            if "vcs_info" in data:
+            if sha is None and "vcs_info" in data:
                 vcs_info = data["vcs_info"]
                 if "commit_id" in vcs_info:
                     sha = vcs_info["commit_id"]
     except:
         pass
     if not sha:
+        stdout = sys.stdout
+        sys.stdout = open('/dev/null', 'w')
         try:
             import git
-            repo = git.Repo(search_parent_directories=True)
+            #sys.stdout = stdout
+            repo = git.Repo(path=__file__, search_parent_directories=True)
             sha = repo.head.object.hexsha
-        except:
+        except Exception as x:
             pass
+        sys.stdout = stdout
     info = {
         "version": package_version,
         "url": url,
         "sha": sha
     }
-    return json.dumps(info)
+    VERSION = json.dumps(info)
+    return VERSION
 
 
 def main():

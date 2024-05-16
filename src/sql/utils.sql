@@ -20,8 +20,19 @@
 CREATE EXTENSION IF NOT EXISTS  hll;
 
 CREATE SCHEMA IF NOT EXISTS metadata;
+CREATE OR REPLACE FUNCTION metadata.stamp (
+)   RETURNS timestamp
+    IMMUTABLE
+LANGUAGE plpgsql
+AS $body$
+BEGIN
+    RETURN NOW();
+END
+$body$
+;
+
 CREATE TABLE IF NOT EXISTS metadata.log (
-    update_timestamp TIMESTAMP GENERATED ALWAYS AS ( NOW() ) STORED,
+    update_timestamp TIMESTAMP GENERATED ALWAYS AS ( metadata.stamp() ) STORED,
     ddl VARCHAR(32000),
     version VARCHAR(1024)
 );
