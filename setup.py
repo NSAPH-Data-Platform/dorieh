@@ -7,7 +7,7 @@ with open("README.md", "r") as readme:
 
 setup(
     name='dorieh',
-    version="0.0.8",
+    version="0.0.9",
     url='https://github.com/NSAPH-Data-Platform/dorieh',
     license='Apache 2.0',
     author='Michael A Bouzinier',
@@ -20,7 +20,8 @@ setup(
             'cwl2md=dorieh.docutils.cwl2md:main',
             'copy_section=dorieh.docutils.copy_section:main',
             'collector=dorieh.docutils.collector:main',
-            'dorieh_version=dorieh.version:main'
+            'dorieh_version=dorieh.version:main',
+            'validate_domain=dorieh.platform.loader.validator:main'
         ],
     },
     packages=find_packages(where='./src/python') + [
