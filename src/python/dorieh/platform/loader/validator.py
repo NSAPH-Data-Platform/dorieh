@@ -3,5 +3,10 @@ import sys
 
 from dorieh.platform.loader import LoaderBase
 
-if __name__ == '__main__':
+
+def main():
     LoaderBase.get_domain(sys.argv[1])
+
+
+if __name__ == '__main__':
+    main()
