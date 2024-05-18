@@ -104,14 +104,14 @@ in a special audit table.
 
 ## Column
 
-| Parameter   | Required? | Description                                                                                                                              |
-|-------------|-----------|------------------------------------------------------------------------------------------------------------------------------------------|
-| type        | yes       | Database type                                                                                                                            |
-| source      | no        | [source](#source) of the data                                                                                                            |
-| requires    | no        | List of tables and views required to compute this column. Should be used if `source` is a SQL statement referencing other tables.        |
-| index       | no        | Override default to build an index based on this column. Possible values: true/false/dictionary, specifying index name and/or parameters |
-| description | no        | description of this domain to be included in auto-generated documentation                                                                |
-| reference   | no        | URL with external documentation                                                                                                          |
+| Parameter   | Required? | Description                                                                                                                       |
+|-------------|-----------|-----------------------------------------------------------------------------------------------------------------------------------|
+| type        | yes       | Database type                                                                                                                     |
+| source      | no        | [source](#source) of the data                                                                                                     |
+| requires    | no        | List of tables and views required to compute this column. Should be used if `source` is a SQL statement referencing other tables. |
+| index       | no        | Override default to build an index based on this column. Possible values: true/false/dictionary. See [index](#index)              |
+| description | no        | description of this domain to be included in auto-generated documentation                                                         |
+| reference   | no        | URL with external documentation                                                                                                   |
 
 Beside "normal" columns, when the value is
 directly taken from a column in a tabular input source,
@@ -139,6 +139,21 @@ in the input source.
 | code        | no        | Code for generated and computed columns                        |
 | columns     | no        |                                                                |
 | parameters  | no        |                                                                |
+                   
+
+### Index
+
+The value for `index` key can be a simple boolean `true` or `false`. If additional parameters 
+are required, the value can be a dictionary with the following keys. For the explanation
+of options like *using* or *include*, see 
+[PostgreSQL Documentation](https://www.postgresql.org/docs/current/sql-createindex.html).
+
+| Parameter                    | Required? | Description                                                                                                                                                                                             |
+|------------------------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| name                         | no        | A custom index name, if omitted the name will be generated                                                                                                                                              |
+| using                        | no        | The indexing method, the default is BTREE                                                                                                                                                               |
+| include                      | no        | Additional columns to include with index                                                                                                                                                                |
+| required_before_loading_data | no        | Adding this key tells the generator that this index must be created before the table is populated. Otherwise, to improve performance, indices might be created after a table is popualted with all data |
 
 
 ### Generated columns
@@ -221,6 +236,30 @@ index of the record (line number) in the file,
 from which the data has been ingested.
 
 ### Transposing columns
+                                          
+Columns can be unnested (aka exploded) or collapsed. 
+
+Exploding might be for example, useful if there is a separate column for every month. 
+The easiest way to do it is to combine these monthly columns into an array and then 
+use `unnest` function.
+
+### Wildcards
+
+To make it easier to work with similarly named columns, Dorieh supports wildcards.
+Wildcard expression starts with `$` followed by a single letter. Values are provided 
+in square braces that follow a wildcard. 
+
+Example:
+
+```yaml
+  - diag[$n=1:25]:
+      type: varchar
+      optional: true
+      source:
+        - dgnscd$n
+```
+
+Will be expanded to 25 columns named `diag1`, `diag2`, `diag25`.
 
 ## Multi-column indices
 
@@ -233,6 +272,31 @@ index.
 Index definition can also include
 [index type](https://www.postgresql.org/docs/current/indexes-types.html)
 (e.g. btree, hash, etc.)  and data to be included with the index.
+
+| Parameter | Required? | Description                                         |
+|-----------|-----------|-----------------------------------------------------|
+| columns   | yes       | A list of columns to include in the index           |
+| using     | no        | The indexing method, the default is BTREE           |
+| include   | no        | Additional columns to include with index            |
+| unique    | no        | Specifies that the index defines a unique constrain |
+                                                      
+Example:
+
+ ```yaml
+    indices:
+      adm_ys_idx:
+        columns:
+          - state
+          - year
+      adm_ys_iso_idx:
+        columns:
+          - state_iso
+          - year
+        include:
+          - bene
+```
+
+
 
 ## Generation of the database schema (DDL)
 

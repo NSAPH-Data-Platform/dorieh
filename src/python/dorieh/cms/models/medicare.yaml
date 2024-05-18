@@ -814,6 +814,8 @@ medicare:
                 from: ip
                 populate: false
               columns:
+                - quality:
+                    type: "VARCHAR(12) DEFAULT 'PASS'"
                 - admission_year:
                     type: "INT"
                     source:
