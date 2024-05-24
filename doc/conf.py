@@ -3,6 +3,8 @@
 # This file only contains a selection of the most common options. For a full
 # list see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
+import os
+import sys
 
 # -- Path setup --------------------------------------------------------------
 
@@ -14,11 +16,12 @@
 add_module_names = False
 autoclass_content = 'both'
 autodoc_member_order = 'bysource'
+sys.path.insert(0, os.path.abspath('../src/python'))
 
 # -- Project information -----------------------------------------------------
 
 project = 'Dorieh Data Platform'
-copyright = '2021, Harvard University'
+copyright = '2021-2024, Harvard University'
 author = 'Michael A Bouzinier'
 
 # The full version, including alpha/beta/rc tags
