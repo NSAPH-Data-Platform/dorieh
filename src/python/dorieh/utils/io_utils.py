@@ -452,7 +452,7 @@ def get_entries(path: str) -> Tuple[List,Callable]:
 
     :param path: path to a directory or an archive
     :return: Tuple with the list of entry names and a method
-    to open these entries for reading
+        to open these entries for reading
 
     """
 

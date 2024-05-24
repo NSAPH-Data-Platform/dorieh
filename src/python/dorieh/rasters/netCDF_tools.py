@@ -2,6 +2,7 @@
 Reads a NetCDF file (*.nc) and prints some information
 about it
 """
+
 #  Copyright (c) 2021. Harvard University
 #
 #  Developed by Research Software Engineering,
@@ -20,6 +21,7 @@ about it
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 #
+
 import sys
 from typing import List, Tuple, Dict
 

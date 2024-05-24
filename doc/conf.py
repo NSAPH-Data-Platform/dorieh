@@ -17,6 +17,7 @@ add_module_names = False
 autoclass_content = 'both'
 autodoc_member_order = 'bysource'
 sys.path.insert(0, os.path.abspath('../src/python'))
+sys.path.insert(0, os.path.abspath('src/python'))
 
 # -- Project information -----------------------------------------------------
 
