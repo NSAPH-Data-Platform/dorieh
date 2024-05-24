@@ -51,6 +51,7 @@
 <li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBT.html">Database Testing Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
@@ -1196,8 +1197,6 @@
         <li><a href="members/geometry.html#module-dorieh.gis.geometry">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     dorieh.gis.shapes_downloader
 
@@ -1205,6 +1204,8 @@
         <li><a href="members/shapes_downloader.html#module-dorieh.gis.shapes_downloader">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     dorieh.platform.adi
 
@@ -1413,6 +1414,13 @@
 
       <ul>
         <li><a href="members/vacuum.html#module-dorieh.platform.loader.vacuum">module</a>
+</li>
+      </ul></li>
+      <li>
+    dorieh.platform.loader.validator
+
+      <ul>
+        <li><a href="members/validator.html#module-dorieh.platform.loader.validator">module</a>
 </li>
       </ul></li>
       <li>
@@ -1653,6 +1661,13 @@
         <li><a href="members/tester.html#module-dorieh.utils.qc.tester">module</a>
 </li>
       </ul></li>
+      <li>
+    dorieh.version
+
+      <ul>
+        <li><a href="members/version.html#module-dorieh.version">module</a>
+</li>
+      </ul></li>
       <li><a href="members/airnow_downloader.html#dorieh.epa.airnow_downloader.AirNowDownloader.download">download() (AirNowDownloader method)</a>
 
       <ul>
@@ -1768,6 +1783,8 @@
       <li><a href="gridmet_bands.html#dorieh.rasters.config.GridmetVariable.erc">erc (GridmetVariable attribute)</a>, <a href="members/config.html#dorieh.rasters.config.GridmetVariable.erc">[1]</a>
 </li>
       <li><a href="members/tester.html#dorieh.utils.qc.tester.Severity.error">error (Severity attribute)</a>
+</li>
+      <li><a href="members/domain_operations.html#dorieh.platform.operations.domain_operations.escape">escape() (in module dorieh.platform.operations.domain_operations)</a>
 </li>
       <li><a href="members/gridmet_tools.html#dorieh.rasters.gridmet_tools.estimate_optimal_downscaling_factor">estimate_optimal_downscaling_factor() (in module dorieh.rasters.gridmet_tools)</a>
 </li>
@@ -2007,7 +2024,11 @@
 <h2 id="G">G</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="members/domain.html#dorieh.platform.data_model.domain.Domain.gen_insert_on_validation_failure">gen_insert_on_validation_failure() (Domain method)</a>
+</li>
       <li><a href="members/netCDF_tools.html#dorieh.rasters.netCDF_tools.NCViewer.gen_random_dimensions">gen_random_dimensions() (NCViewer method)</a>
+</li>
+      <li><a href="members/domain.html#dorieh.platform.data_model.domain.Domain.gen_update_quality">gen_update_quality() (Domain method)</a>
 </li>
       <li><a href="members/gen_dbt_cwl.html#dorieh.platform.dbt.gen_dbt_cwl.CWLTestGenerator.generate">generate() (CWLTestGenerator method)</a>
 
@@ -2161,10 +2182,10 @@
       </ul></li>
       <li><a href="members/census_info.html#dorieh.census.census_info.get_endpoint">get_endpoint() (in module dorieh.census.census_info)</a>
 </li>
-      <li><a href="members/io_utils.html#dorieh.utils.io_utils.get_entries">get_entries() (in module dorieh.utils.io_utils)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="members/io_utils.html#dorieh.utils.io_utils.get_entries">get_entries() (in module dorieh.utils.io_utils)</a>
+</li>
       <li><a href="members/data_loader.html#dorieh.platform.loader.data_loader.DataLoader.get_files">get_files() (DataLoader method)</a>
 
       <ul>
@@ -2292,6 +2313,8 @@
 </li>
       </ul></li>
       <li><a href="members/census_info.html#dorieh.census.census_info.get_varlist">get_varlist() (in module dorieh.census.census_info)</a>
+</li>
+      <li><a href="members/version.html#dorieh.version.get_version">get_version() (in module dorieh.version)</a>
 </li>
       <li><a href="members/cwl_generator.html#dorieh.platform.util.cwl_generator.CWLGenerator.get_work_dir">get_work_dir() (CWLGenerator method)</a>
 </li>
@@ -2529,6 +2552,8 @@
 </li>
       <li><a href="members/data_loader.html#dorieh.platform.loader.data_loader.DataLoader.is_parallel">is_parallel() (DataLoader method)</a>
 </li>
+      <li><a href="members/domain.html#dorieh.platform.data_model.domain.Domain.is_populate_on_create">is_populate_on_create() (Domain method)</a>
+</li>
       <li><a href="members/io_utils.html#dorieh.utils.io_utils.is_readme">is_readme() (in module dorieh.utils.io_utils)</a>
 </li>
       <li><a href="members/project_loader.html#dorieh.platform.loader.project_loader.is_relative_to">is_relative_to() (in module dorieh.platform.loader.project_loader)</a>
@@ -2708,9 +2733,13 @@
 </li>
         <li><a href="members/cwl2md.html#dorieh.docutils.cwl2md.main">(in module dorieh.docutils.cwl2md)</a>
 </li>
+        <li><a href="members/validator.html#dorieh.platform.loader.validator.main">(in module dorieh.platform.loader.validator)</a>
+</li>
         <li><a href="members/launcher.html#dorieh.rasters.launcher.main">(in module dorieh.rasters.launcher)</a>
 </li>
         <li><a href="members/netCDF_components_consolidator.html#dorieh.rasters.netCDF_components_consolidator.main">(in module dorieh.rasters.netCDF_components_consolidator)</a>
+</li>
+        <li><a href="members/version.html#dorieh.version.main">(in module dorieh.version)</a>
 </li>
       </ul></li>
       <li><a href="members/netCDF_components_consolidator.html#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.main_var">main_var (NetCDFDataset attribute)</a>
@@ -2967,6 +2996,8 @@
 </li>
         <li><a href="members/vacuum.html#module-dorieh.platform.loader.vacuum">dorieh.platform.loader.vacuum</a>
 </li>
+        <li><a href="members/validator.html#module-dorieh.platform.loader.validator">dorieh.platform.loader.validator</a>
+</li>
         <li><a href="members/domain_operations.html#module-dorieh.platform.operations.domain_operations">dorieh.platform.operations.domain_operations</a>
 </li>
         <li><a href="members/pg_keywords.html#module-dorieh.platform.pg_keywords">dorieh.platform.pg_keywords</a>
@@ -3034,6 +3065,8 @@
         <li><a href="members/pyfst.html#module-dorieh.utils.pyfst">dorieh.utils.pyfst</a>
 </li>
         <li><a href="members/tester.html#module-dorieh.utils.qc.tester">dorieh.utils.qc.tester</a>
+</li>
+        <li><a href="members/version.html#module-dorieh.version">dorieh.version</a>
 </li>
       </ul></li>
   </ul></td>

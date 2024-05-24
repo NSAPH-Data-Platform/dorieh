@@ -22,7 +22,9 @@
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="FTS Parser" href="pipeline/parse_fts.html" />
+    <link rel="prev" title="Importing Medicaid Data Processed by the Legacy Pipeline" href="LegacyMedicaid.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,13 +47,42 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
-<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="domains.html">Data Domains</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="cms.html">Health</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="LegacyMedicaid.html">Importing Medicaid Data Processed by the Legacy Pipeline</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Handling Medicaid data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pipeline/parse_fts.html">FTS Parser</a></li>
+<li class="toctree-l4"><a class="reference internal" href="members/create_schema_config.html">The create_schema_config Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="members/medicaid_yaml.html">Medicaid.yaml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pipeline/ingest.html">Universal uploader of the tabular data to the database</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pipeline/medicaid.html">Full Medicaid Processing Pipeline</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#legacy-pipeline">Legacy Pipeline</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#importing-raw-data">Importing raw data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#processing-data">Processing data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#data-model">Data Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pipeline">Pipeline</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sample-user-request">Sample user request:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Medicare.html">Medicare Files Handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="QueringMedicaid.html">Querying Medicaid Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cms.html#overview-of-health-data-medicare-and-medicaid">Overview of health data (Medicare and Medicaid)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cms.html#project-structure">Project Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cms.html#documentation-indices">Documentation Indices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="epa.html">Pollution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="census.html">Demographics</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBT.html">Database Testing Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
@@ -71,6 +102,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="domains.html">Data Domains</a></li>
+          <li class="breadcrumb-item"><a href="cms.html">Dorieh CMS Package (manipulating with Health Data)</a></li>
       <li class="breadcrumb-item active">Handling Medicaid data</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/Medicaid.md.txt" rel="nofollow"> View page source</a>
@@ -422,7 +455,10 @@ admission and discharge dates and ICD codes.</p>
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="LegacyMedicaid.html" class="btn btn-neutral float-left" title="Importing Medicaid Data Processed by the Legacy Pipeline" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pipeline/parse_fts.html" class="btn btn-neutral float-right" title="FTS Parser" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

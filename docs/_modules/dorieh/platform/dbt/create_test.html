@@ -51,6 +51,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../pipelines.html">Data Processing Pipelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../packages.html">Python Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../DBT.html">Database Testing Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../adding_data.html">Adding more data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Terms and Acronyms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../docindices.html">Indices</a></li>
@@ -221,6 +222,8 @@
                     <span class="n">t</span> <span class="o">=</span> <span class="n">CType</span><span class="o">.</span><span class="n">numeric</span>
                 <span class="k">elif</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]:</span>
                     <span class="n">t</span> <span class="o">=</span> <span class="n">CType</span><span class="o">.</span><span class="n">date</span>
+                <span class="k">elif</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;USER-DEFINED&#39;</span><span class="p">]:</span>
+                    <span class="k">continue</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">t</span> <span class="o">=</span> <span class="n">CType</span><span class="o">.</span><span class="n">text</span>
                 <span class="n">dc</span> <span class="o">=</span> <span class="mi">1024</span><span class="o">*</span><span class="mi">1024</span><span class="o">*</span><span class="mi">1024</span>
@@ -252,7 +255,7 @@
             <span class="n">test_case</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_exact</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;count distinct&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">test_cases</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test_case</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="p">[</span><span class="n">CType</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">CType</span><span class="o">.</span><span class="n">categorical</span><span class="p">]:</span>
-            <span class="n">s2</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;SELECT MD5(string_agg(</span><span class="si">{</span><span class="n">c</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">::varchar, &#39;&#39;)) FROM </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">fqtn</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">s2</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;SELECT MD5(string_agg(</span><span class="si">{</span><span class="n">c</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">::varchar, &#39;&#39; order by </span><span class="si">{</span><span class="n">c</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">)) FROM </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">fqtn</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="n">test_case</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_exact</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;MD5 value&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">test_cases</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test_case</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="p">[</span><span class="n">CType</span><span class="o">.</span><span class="n">numeric</span><span class="p">,</span> <span class="n">CType</span><span class="o">.</span><span class="n">integral</span><span class="p">]:</span>
@@ -292,6 +295,9 @@
                 <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cursor</span><span class="p">:</span>
                     <span class="n">v</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">condition</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">sql</span><span class="si">}</span><span class="s2">) IS NULL&quot;</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_case_sql</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">condition</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">v</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">v1</span> <span class="o">=</span> <span class="mf">0.99</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
             <span class="n">v2</span> <span class="o">=</span> <span class="mf">1.01</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>

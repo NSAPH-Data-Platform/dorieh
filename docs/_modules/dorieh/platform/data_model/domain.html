@@ -51,6 +51,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../pipelines.html">Data Processing Pipelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../packages.html">Python Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../DBT.html">Database Testing Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../adding_data.html">Adding more data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Terms and Acronyms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../docindices.html">Indices</a></li>
@@ -125,6 +126,7 @@
 <span class="kn">from</span> <span class="nn">dorieh.platform.data_model.model</span> <span class="kn">import</span> <span class="n">index_method</span><span class="p">,</span> <span class="n">INDEX_NAME_PATTERN</span><span class="p">,</span> \
     <span class="n">INDEX_DDL_PATTERN</span><span class="p">,</span> <span class="n">UNIQUE_INDEX_DDL_PATTERN</span>
 <span class="kn">from</span> <span class="nn">dorieh.platform.pg_keywords</span> <span class="kn">import</span> <span class="n">PG_TXT_TYPE</span><span class="p">,</span> <span class="n">HLL_HASHVAL</span><span class="p">,</span> <span class="n">HLL</span>
+<span class="kn">from</span> <span class="nn">dorieh.version</span> <span class="kn">import</span> <span class="n">get_version</span>
 
 <span class="n">CONSTRAINTS</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;CONSTRAINT&quot;</span><span class="p">,</span>
@@ -148,8 +150,10 @@
 <span class="s2">                VALUES (</span><span class="si">{values}</span><span class="s2">, &#39;</span><span class="si">{reason}</span><span class="s2">&#39;);&quot;&quot;&quot;</span>
 
 <span class="n">VALIDATION_PROC</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">CREATE OR REPLACE FUNCTION </span><span class="si">{schema}</span><span class="s2">.validate_</span><span class="si">{source}</span><span class="s2">() RETURNS TRIGGER AS $</span><span class="si">{schema}</span><span class="s2">_</span><span class="si">{source}</span><span class="s2">_validation$</span>
+<span class="s2">CREATE OR REPLACE FUNCTION </span><span class="si">{schema}</span><span class="s2">.validate_</span><span class="si">{source}</span><span class="s2">() RETURNS TRIGGER </span>
 <span class="s2">-- Validate foreign key for </span><span class="si">{schema}</span><span class="s2">.</span><span class="si">{source}</span>
+<span class="s2">AS $body$</span>
+<span class="s2">    DECLARE rctid tid;</span>
 <span class="s2">    BEGIN</span>
 <span class="s2">        IF (</span><span class="si">{condition_pk}</span><span class="s2">) THEN</span>
 <span class="s2">            </span><span class="si">{action_pk}</span>
@@ -174,12 +178,31 @@
 <span class="s2">        RETURN NEW;</span>
 <span class="s2">    END;</span>
 <span class="s2"> </span>
-<span class="s2">$</span><span class="si">{schema}</span><span class="s2">_</span><span class="si">{source}</span><span class="s2">_validation$ LANGUAGE plpgsql;</span>
+<span class="s2">$body$ LANGUAGE plpgsql;</span>
 <span class="s2">&quot;&quot;&quot;</span>
 
 <span class="n">VALIDATION_TRIGGER</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    CREATE TRIGGER </span><span class="si">{schema}</span><span class="s2">_</span><span class="si">{name}</span><span class="s2">_validation BEFORE INSERT ON </span><span class="si">{table}</span>
 <span class="s2">        FOR EACH ROW EXECUTE FUNCTION </span><span class="si">{schema}</span><span class="s2">.validate_</span><span class="si">{name}</span><span class="s2">();</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<span class="n">DUP_CHECK</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">            SELECT </span>
+<span class="s2">                ctid </span>
+<span class="s2">            FROM </span><span class="si">{table}</span><span class="s2"> AS t </span>
+<span class="s2">            WHERE </span><span class="si">{condition}</span><span class="s2"> </span>
+<span class="s2">            INTO rctid;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">QUALITY_UPDATE</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">UPDATE </span><span class="si">{table}</span>
+<span class="s2">SET quality = &#39;</span><span class="si">{reason}</span><span class="s2">&#39;</span>
+<span class="s2">WHERE</span>
+<span class="s2">    ctid IN (</span>
+<span class="s2">        SELECT refctid FROM </span><span class="si">{target}</span><span class="s2"> WHERE reason = &#39;</span><span class="si">{reason}</span><span class="s2">&#39;</span>
+<span class="s2">    )</span>
+<span class="s2">;</span>
 <span class="s2">&quot;&quot;&quot;</span>
 
 
@@ -510,7 +533,7 @@
                 <span class="p">]</span>
             <span class="k">elif</span> <span class="s2">&quot;nullable group by&quot;</span> <span class="ow">in</span> <span class="n">create</span><span class="p">:</span>
                 <span class="n">group_by</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">create</span><span class="p">[</span><span class="s2">&quot;nullable group by&quot;</span><span class="p">])</span>
-                <span class="n">create_table</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">GROUP BY </span><span class="si">{columns}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">group_by</span><span class="p">)</span>
+                <span class="n">create_table</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">GROUP BY </span><span class="si">{columns}</span><span class="s2">;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">group_by</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">create_table</span> <span class="o">=</span> <span class="n">create_table</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;;&#39;</span>
         <span class="k">else</span><span class="p">:</span>
@@ -545,12 +568,15 @@
                             <span class="k">if</span> <span class="s2">&quot;CONSTRAINT&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">f</span> <span class="ow">and</span> <span class="s2">&quot;PRIMARY KEY&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">f</span>
                     <span class="p">]</span>
                 <span class="n">ff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;REASON VARCHAR(16)&quot;</span><span class="p">)</span>
+                <span class="n">ff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;REFCTID TID&quot;</span><span class="p">)</span>
                 <span class="n">ff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP &quot;</span><span class="p">)</span>
                 <span class="n">create_table</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_table</span><span class="p">(</span><span class="n">t2</span><span class="p">)</span> <span class="o">+</span> \
                     <span class="s2">&quot; (</span><span class="se">\n\t</span><span class="si">{features}</span><span class="se">\n</span><span class="s2">);&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">features</span><span class="o">=</span><span class="s2">&quot;,</span><span class="se">\n\t</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ff</span><span class="p">))</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">append_ddl</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">create_table</span><span class="p">)</span>
                 <span class="n">ddl</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_index_ddl</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span> <span class="s2">&quot;REASON&quot;</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">add_index_by_ddl</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">ddl</span><span class="p">)</span>
+                <span class="n">ddl</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_index_ddl</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span> <span class="s2">&quot;REFCTID&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">append_ddl</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">ddl</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
                     <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">need_index</span><span class="p">(</span><span class="n">column</span><span class="p">):</span>
                         <span class="k">continue</span>
@@ -582,6 +608,10 @@
         <span class="k">if</span> <span class="n">object_type</span> <span class="o">!=</span> <span class="s2">&quot;view&quot;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">add_column_indices</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">columns</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">add_multi_column_indices</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">definition</span><span class="p">)</span>
+
+        <span class="n">comment</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;CREATED BY Dorieh: </span><span class="si">{</span><span class="n">get_version</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">comment_sql</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;COMMENT ON </span><span class="si">{</span><span class="n">object_type</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">table</span><span class="si">}</span><span class="s2"> IS &#39;</span><span class="si">{</span><span class="n">comment</span><span class="si">}</span><span class="s2">&#39;;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">append_ddl</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">comment_sql</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="s2">&quot;children&quot;</span> <span class="ow">in</span> <span class="n">definition</span><span class="p">:</span>
             <span class="n">children</span> <span class="o">=</span> <span class="p">{</span><span class="n">t</span><span class="p">:</span> <span class="n">definition</span><span class="p">[</span><span class="s2">&quot;children&quot;</span><span class="p">][</span><span class="n">t</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">definition</span><span class="p">[</span><span class="s2">&quot;children&quot;</span><span class="p">]}</span>
@@ -629,7 +659,15 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unsupported limit: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">limit</span><span class="p">))</span>
         <span class="n">sql</span> <span class="o">+=</span> <span class="s2">&quot;;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">sql</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gen_update_quality</span><span class="p">(</span><span class="n">table</span><span class="o">=</span><span class="n">table</span><span class="p">,</span> <span class="n">reasons</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;DUPLICATE&quot;</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">sql</span></div>
+
+<div class="viewcode-block" id="Domain.is_populate_on_create"><a class="viewcode-back" href="../../../../members/domain.html#dorieh.platform.data_model.domain.Domain.is_populate_on_create">[docs]</a>    <span class="k">def</span> <span class="nf">is_populate_on_create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="n">definition</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+        <span class="n">create</span> <span class="o">=</span> <span class="n">definition</span><span class="p">[</span><span class="s2">&quot;create&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s2">&quot;populate&quot;</span> <span class="ow">in</span> <span class="n">create</span> <span class="ow">and</span> <span class="n">create</span><span class="p">[</span><span class="s2">&quot;populate&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
 
 <div class="viewcode-block" id="Domain.create_object_from"><a class="viewcode-back" href="../../../../members/domain.html#dorieh.platform.data_model.domain.Domain.create_object_from">[docs]</a>    <span class="k">def</span> <span class="nf">create_object_from</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">definition</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">obj_type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="n">create</span> <span class="o">=</span> <span class="n">definition</span><span class="p">[</span><span class="s2">&quot;create&quot;</span><span class="p">]</span>
@@ -653,7 +691,7 @@
                     <span class="k">if</span> <span class="ow">not</span> <span class="n">is_constraint</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
             <span class="p">]</span>
             <span class="n">select</span> <span class="o">+=</span> <span class="s2">&quot;,</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;,</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">add_columns</span><span class="p">)</span>
-        <span class="k">if</span> <span class="s2">&quot;populate&quot;</span> <span class="ow">in</span> <span class="n">create</span> <span class="ow">and</span> <span class="n">create</span><span class="p">[</span><span class="s2">&quot;populate&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_populate_on_create</span><span class="p">(</span><span class="n">table</span><span class="p">):</span>
             <span class="n">condition</span> <span class="o">=</span> <span class="s2">&quot;WHERE 1 = 0&quot;</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">condition</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
@@ -979,26 +1017,47 @@
         <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;This method is deprecated&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">DomainOperations</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">list_of_tables</span><span class="p">)</span></div>
 
+<div class="viewcode-block" id="Domain.gen_insert_on_validation_failure"><a class="viewcode-back" href="../../../../members/domain.html#dorieh.platform.data_model.domain.Domain.gen_insert_on_validation_failure">[docs]</a>    <span class="k">def</span> <span class="nf">gen_insert_on_validation_failure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">conditions</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="n">cc</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
+            <span class="n">name</span><span class="p">,</span> <span class="n">definition</span> <span class="o">=</span> <span class="n">split</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_generated</span><span class="p">(</span><span class="n">definition</span><span class="p">):</span>
+                <span class="n">cc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">vv</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;NEW.</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cc</span><span class="p">]</span>
+        <span class="n">reason</span> <span class="o">=</span> <span class="s2">&quot;DUPLICATE&quot;</span>
+        <span class="n">sel_dup</span> <span class="o">=</span> <span class="n">DUP_CHECK</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span><span class="o">=</span><span class="n">table</span><span class="p">,</span> <span class="n">condition</span> <span class="o">=</span> <span class="n">conditions</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">ins_dup</span> <span class="o">=</span> <span class="n">AUDIT_INSERT</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">target</span><span class="o">=</span><span class="n">target</span><span class="p">,</span>
+            <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cc</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;REFCTID&quot;</span><span class="p">]),</span>
+            <span class="n">values</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">vv</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;rctid&quot;</span><span class="p">]),</span>
+            <span class="n">reason</span><span class="o">=</span><span class="n">reason</span><span class="p">)</span>
+        <span class="n">action_dup</span> <span class="o">=</span> <span class="n">sel_dup</span> <span class="o">+</span> <span class="n">ins_dup</span>
+        <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">action_dup</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span>
+            <span class="n">AUDIT_INSERT</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">target</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cc</span><span class="p">),</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">vv</span><span class="p">),</span> <span class="n">reason</span><span class="o">=</span><span class="n">r</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;FOREIGN KEY&quot;</span><span class="p">,</span> <span class="s2">&quot;PRIMARY KEY&quot;</span><span class="p">]</span>
+        <span class="p">]</span>
+        <span class="k">return</span> <span class="n">actions</span></div>
+
+<div class="viewcode-block" id="Domain.gen_update_quality"><a class="viewcode-back" href="../../../../members/domain.html#dorieh.platform.data_model.domain.Domain.gen_update_quality">[docs]</a>    <span class="k">def</span> <span class="nf">gen_update_quality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">reasons</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">definition</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">&quot;invalid.records&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">definition</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">validation</span> <span class="o">=</span> <span class="n">definition</span><span class="p">[</span><span class="s2">&quot;invalid.records&quot;</span><span class="p">]</span>
+        <span class="n">action</span> <span class="o">=</span> <span class="n">validation</span><span class="p">[</span><span class="s2">&quot;action&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">t2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">spillover_table</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">definition</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">action</span> <span class="o">!=</span> <span class="s2">&quot;insert&quot;</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">t2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">statements</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">reason</span> <span class="ow">in</span> <span class="n">reasons</span><span class="p">:</span>
+            <span class="n">sql</span> <span class="o">=</span> <span class="n">QUALITY_UPDATE</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="n">reason</span><span class="p">,</span> <span class="n">table</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fqn</span><span class="p">(</span><span class="n">table</span><span class="p">),</span> <span class="n">target</span><span class="o">=</span><span class="n">t2</span><span class="p">)</span>
+            <span class="n">statements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">statements</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="Domain.add_fk_validation"><a class="viewcode-back" href="../../../../members/domain.html#dorieh.platform.data_model.domain.Domain.add_fk_validation">[docs]</a>    <span class="k">def</span> <span class="nf">add_fk_validation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">pk</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">pt</span><span class="p">,</span> <span class="n">fk_columns</span><span class="p">):</span>
         <span class="n">columns_as_dict</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
             <span class="n">name</span><span class="p">,</span> <span class="n">definition</span> <span class="o">=</span> <span class="n">split</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
             <span class="n">columns_as_dict</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">definition</span>
-        <span class="k">if</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;insert&quot;</span><span class="p">:</span>
-            <span class="n">cc</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
-                <span class="n">name</span><span class="p">,</span> <span class="n">definition</span> <span class="o">=</span> <span class="n">split</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_generated</span><span class="p">(</span><span class="n">definition</span><span class="p">):</span>
-                    <span class="n">cc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-            <span class="n">vv</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;NEW.</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cc</span><span class="p">]</span>
-            <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span>
-                <span class="n">AUDIT_INSERT</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">target</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cc</span><span class="p">),</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">vv</span><span class="p">),</span> <span class="n">reason</span><span class="o">=</span><span class="n">r</span><span class="p">)</span>
-                <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;DUPLICATE&quot;</span><span class="p">,</span> <span class="s2">&quot;FOREIGN KEY&quot;</span><span class="p">,</span> <span class="s2">&quot;PRIMARY KEY&quot;</span><span class="p">]</span>
-            <span class="p">]</span>
-        <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;ignore&quot;</span><span class="p">:</span>
-            <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Invalid action on validation for table </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">action</span><span class="p">))</span>
         <span class="n">conditions</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">constraint</span> <span class="ow">in</span> <span class="p">[</span><span class="n">pk</span><span class="p">,</span> <span class="n">fk_columns</span><span class="p">]:</span>
             <span class="n">cols</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1011,6 +1070,12 @@
                     <span class="n">cols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;NEW.</span><span class="si">{c}</span><span class="s2"> = t.</span><span class="si">{c}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="n">c</span><span class="p">))</span>
             <span class="n">conditions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\t\t\t\t</span><span class="s2">AND &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cols</span><span class="p">))</span>
         <span class="n">conditions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\t\t\t\t</span><span class="s2">OR &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;NEW.</span><span class="si">{c}</span><span class="s2"> IS NULL &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">pk</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;insert&quot;</span><span class="p">:</span>
+            <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gen_insert_on_validation_failure</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">conditions</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;ignore&quot;</span><span class="p">:</span>
+            <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Invalid action on validation for table </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">action</span><span class="p">))</span>
         <span class="c1"># OR NEW.{c} = &#39;&#39;</span>
         <span class="n">t</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
 
@@ -1022,6 +1087,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">append_ddl</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">sql</span><span class="p">)</span>
         <span class="n">sql</span> <span class="o">=</span> <span class="n">VALIDATION_TRIGGER</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">schema</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">table</span><span class="o">=</span><span class="n">table</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">append_ddl</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">sql</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_populate_on_create</span><span class="p">(</span><span class="n">table</span><span class="p">):</span>
+            <span class="n">sql</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gen_update_quality</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">reasons</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;DUPLICATE&quot;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">append_ddl</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">sql</span><span class="p">)</span>
         <span class="k">return</span></div>
 
 <div class="viewcode-block" id="Domain.parse_wildcard_column_spec"><a class="viewcode-back" href="../../../../members/domain.html#dorieh.platform.data_model.domain.Domain.parse_wildcard_column_spec">[docs]</a>    <span class="nd">@classmethod</span>

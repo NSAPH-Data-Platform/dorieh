@@ -51,6 +51,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../pipelines.html">Data Processing Pipelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../packages.html">Python Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../DBT.html">Database Testing Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../adding_data.html">Adding more data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Terms and Acronyms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../docindices.html">Indices</a></li>
@@ -211,7 +212,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">blocked_app</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">blocked_pid</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">blocking_user</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">blocking_app</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">blocking_pid</span>
         <span class="p">)</span>
-        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span></div>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s2">]&quot;</span></div>
 
 
 

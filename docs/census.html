@@ -22,7 +22,9 @@
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="About" href="census_about.html" />
+    <link rel="prev" title="wustl.cwl" href="pipeline/wustlcwl_src.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,13 +47,46 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
-<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="domains.html">Data Domains</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cms.html">Health</a></li>
+<li class="toctree-l2"><a class="reference internal" href="epa.html">Pollution</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Demographics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="census_about.html">About</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_env_set_up.html">Setting Up Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_quick_start.html">Quick Start</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_yaml.html">Census Variable File Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_cached_data.html">Stored Data Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_modules.html">Modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_glossary.html">Glossary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_start_guide.html">Working with the <code class="docutils literal notranslate"><span class="pre">census</span></code> Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_assemble.html">census_assemble.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_assemblecwl_src.html">census_assemble.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_density.html">census_density.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_densitycwl_src.html">census_density.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_ingest.html">census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_ingest_1.html">Sub-workflow <em>store</em> from census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_ingest_1cwl_src.html">tmp88mqywumcensus_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_ingestcwl_src.html">census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_interpolate.html">census_interpolate.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_interpolatecwl_src.html">census_interpolate.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_qc.html">census_qc.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_qccwl_src.html">census_qc.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_workflow.html">census_workflow.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_workflowcwl_src.html">census_workflow.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_write.html">census_write.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_writecwl_src.html">census_write.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBT.html">Database Testing Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
@@ -71,6 +106,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="domains.html">Data Domains</a></li>
       <li class="breadcrumb-item active">NSAPH Census Pipelines</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/census.rst.txt" rel="nofollow"> View page source</a>
@@ -86,10 +122,25 @@
 <p>The <cite>census</cite> package provides an interface with US Census Data, including the main API, some functionality for working with the TigerWeb API,
 and the FTP site for Tiger Shapefile Downloads. This package also includes a command line interface to enable quick running of standard workflows.</p>
 <div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="census_about.html">About</a></li>
+</ul>
 </div>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Researchers</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="census_env_set_up.html">Setting Up Environment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="census_env_set_up.html#setting-up-a-new-environment">Setting up a new environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="census_env_set_up.html#updating-an-existing-environment">Updating an existing environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="census_env_set_up.html#installing-census">Installing census</a></li>
+<li class="toctree-l2"><a class="reference internal" href="census_env_set_up.html#installing-nsaph-utils">Installing nsaph_utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="census_env_set_up.html#setting-up-census-api-key">Setting up Census API Key</a></li>
+<li class="toctree-l2"><a class="reference internal" href="census_env_set_up.html#registering-the-conda-kernal">Registering the Conda Kernal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="census_env_set_up.html#updating-the-environment-recipe">Updating the Environment Recipe</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="census_quick_start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="census_yaml.html">Census Variable File Structure</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="census_yaml.html#field-definitions">Field Definitions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="census_yaml.html#examples">Examples</a></li>
@@ -97,17 +148,26 @@ and the FTP site for Tiger Shapefile Downloads. This package also includes a com
 <li class="toctree-l2"><a class="reference internal" href="census_yaml.html#census-variable-documentation">Census Variable Documentation</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="census_cached_data.html">Stored Data Files</a></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Developers</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and acronyms used in this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="census_modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="census_glossary.html">Glossary</a></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Old Doc</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="census_start_guide.html">Working with the <code class="docutils literal notranslate"><span class="pre">census</span></code> Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="census_start_guide.html#running-the-command-line-interface">Running the Command Line Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="census_start_guide.html#main-python-workflow">Main Python Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="census_start_guide.html#shapefile-downloads">Shapefile Downloads</a></li>
+</ul>
+</li>
+</ul>
 </div>
 <div class="toctree-wrapper compound">
 </div>
@@ -123,7 +183,10 @@ and the FTP site for Tiger Shapefile Downloads. This package also includes a com
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pipeline/wustlcwl_src.html" class="btn btn-neutral float-left" title="wustl.cwl" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="census_about.html" class="btn btn-neutral float-right" title="About" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

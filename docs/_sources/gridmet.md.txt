@@ -1,6 +1,8 @@
-# Computational Utilities for working with raster files
+# Computational Utilities for working with gridMET data
 
-[Documentation Home](https://nsaph-data-platform.github.io/nsaph-platform-docs/home.html)
+<!-- TODO ->
+
+[Documentation Home](home)
 
 
 ```{contents}

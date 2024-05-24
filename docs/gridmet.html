@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Computational Utilities for working with gridMET data &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBT.html">Database Testing Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Computational Utilities for working with gridMET data</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/gridmet.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="computational-utilities-for-working-with-gridmet-data">
+<h1>Computational Utilities for working with gridMET data<a class="headerlink" href="#computational-utilities-for-working-with-gridmet-data" title="Permalink to this heading"></a></h1>
+<!-- TODO ->
+
+[Documentation Home](home)
+
+
+```{contents}
+---
+local:
+---
+```
+
+## What is gridMET?
+
+gridMET is a dataset of daily high-spatial resolution (~4-km, 1/24th degree)
+surface meteorological data covering the contiguous US from 1979-yesterday.
+The data are also known and cited as METDATA.
+
+Executing pipelines from this package require a collection of shape files
+corresponding to geographies for which data is aggregated
+(for example, zip code areas or counties).
+
+The data has to be placed in the following directory structure:
+`${year}/${geo_type: zip|county|etc.}/${shape:point|polygon}/`
+
+Which geography is used is defined by `geography` argument that defaults
+to "zip". Only actually used geographies must have their shape files
+for the years actually used.
+
+## Using command line gridMET utility 
+
+```
+    usage: dorieh.rasters.py [-h] --variable
+                      {bi,erc,etr,fm100,fm1000,pet,pr,rmax,rmin,sph,srad,th,tmmn,tmmx,vpd,vs}
+                      [{bi,erc,etr,fm100,fm1000,pet,pr,rmax,rmin,sph,srad,th,tmmn,tmmx,vpd,vs} ...]
+                      [--strategy {default,all_touched,combined}]
+                      [--destination DESTINATION] [--downloads DOWNLOADS]
+                      [--geography GEOGRAPHY] [--shapes_dir SHAPES_DIR]
+                      [--shapes [SHAPES [SHAPES ...]]]
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      --years [YEARS [YEARS ...]], -y [YEARS [YEARS ...]]
+                            Year or list of years to download. For example, the
+                            following argument: `-y 1992:1995 1998 1999 2011
+                            2015:2017` will produce the following list:
+                            [1992,1993,1994,1995,1998,1999,2011,2015,2016,2017] ,
+                            default: 1990:2020
+      --compress, -c        Use gzip compression for the result, default: True
+      --variables {bi,erc,etr,fm100,fm1000,pet,pr,rmax,rmin,sph,srad,th,tmmn,tmmx,vpd,vs} [{bi,erc,etr,fm100,fm1000,pet,pr,rmax,rmin,sph,srad,th,tmmn,tmmx,vpd,vs} ...], --var {bi,erc,etr,fm100,fm1000,pet,pr,rmax,rmin,sph,srad,th,tmmn,tmmx,vpd,vs} [{bi,erc,etr,fm100,fm1000,pet,pr,rmax,rmin,sph,srad,th,tmmn,tmmx,vpd,vs} ...]
+                            Gridmet bands or variables
+      --strategy {default,all_touched,combined,downscale}, -s {default,all_touched,combined,downscale}
+                            Rasterization Strategy, default: default
+      --destination DESTINATION, --dest DESTINATION, -d DESTINATION
+                            Destination directory for the processed files,
+                            default: data/processed
+      --raw_downloads RAW_DOWNLOADS
+                            Directory for downloaded raw files, default:
+                            data/downloads
+      --geography {zip,county,custom}
+                            The type of geographic area over which we aggregate
+                            data, default: zip
+      --shapes_dir SHAPES_DIR
+                            Directory containing shape files for geographies.
+                            Directory structure is expected to be:
+                            .../${year}/${geo_type}/{point|polygon}/, default:
+                            shapes
+      --shapes [{point,polygon} [{point,polygon} ...]]
+                            Type of shapes to aggregate over, default: ['polygon']
+      --points POINTS       Path to CSV file containing points, default:
+      --coordinates COORDINATES [COORDINATES ...], --xy COORDINATES [COORDINATES ...], --coord COORDINATES [COORDINATES ...]
+                            Column names for coordinates, default:
+      --metadata METADATA [METADATA ...], -m METADATA [METADATA ...], --meta METADATA [METADATA ...]
+                            Column names for metadata, default:
+```
+
+## Example
+
+One can try it on `nsaph-sandbox01.rc.fas.harvard.edu` changing to folder:
+`/data/projects/gridmet/`
+
+and running the following command (do not forget `-u` option, or you 
+will not be able to see the progress):
+
+```shell
+source /home/nsaph/projects/tools/gridmet/.gridmet/bin/activate && PYTHONPATH=/home/nsaph/projects/tools/gridmet/src/python python -u -m gridmet --var tmmx -y 2001 --shapes_dir shapes/zip_shape_files --strategy downscale
+```
+
+The results can be then found in `data/processed` folder
+
+## Python modules
+
+```{toctree}
+---
+maxdepth: 2
+glob:
+---
+python_components
+```
+
+## CWL pipelines and tools
+
+```{toctree}
+---
+maxdepth: 2
+glob:
+---
+pipeline/*
+```
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

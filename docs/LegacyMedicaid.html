@@ -22,7 +22,9 @@
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Handling Medicaid data" href="Medicaid.html" />
+    <link rel="prev" title="Dorieh CMS Package (manipulating with Health Data)" href="cms.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,13 +47,33 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
-<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="domains.html">Data Domains</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="cms.html">Health</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Importing Medicaid Data Processed by the Legacy Pipeline</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#status-of-this-document">Status of this Document</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#links-to-legacy-documentation">Links to Legacy Documentation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples-of-ingestion-of-processed-data">Examples of ingestion of processed data:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Medicaid.html">Handling Medicaid data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Medicare.html">Medicare Files Handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="QueringMedicaid.html">Querying Medicaid Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cms.html#overview-of-health-data-medicare-and-medicaid">Overview of health data (Medicare and Medicaid)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cms.html#project-structure">Project Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cms.html#documentation-indices">Documentation Indices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="epa.html">Pollution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="census.html">Demographics</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBT.html">Database Testing Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
@@ -71,6 +93,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="domains.html">Data Domains</a></li>
+          <li class="breadcrumb-item"><a href="cms.html">Dorieh CMS Package (manipulating with Health Data)</a></li>
       <li class="breadcrumb-item active">Importing Medicaid Data Processed by the Legacy Pipeline</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/LegacyMedicaid.md.txt" rel="nofollow"> View page source</a>
@@ -287,7 +311,10 @@ done
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cms.html" class="btn btn-neutral float-left" title="Dorieh CMS Package (manipulating with Health Data)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Medicaid.html" class="btn btn-neutral float-right" title="Handling Medicaid data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
