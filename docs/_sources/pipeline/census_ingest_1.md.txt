@@ -20,7 +20,7 @@ local:
 |:-----------|:-------|:--------|:------------|
 | connection | string |         |             | 
 | data       | File   |         |             | 
-| db         | string |         |             | 
+| db         | File   |         |             | 
 | schema     | File   |         |             | 
 | table      | string |         |             | 
 

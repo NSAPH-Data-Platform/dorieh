@@ -87,8 +87,49 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="the-interpolate-data-module">
-<h1>The interpolate_data Module<a class="headerlink" href="#the-interpolate-data-module" title="Permalink to this heading"></a></h1>
+  <section id="module-dorieh.census.interpolate_data">
+<span id="the-interpolate-data-module"></span><h1>The interpolate_data Module<a class="headerlink" href="#module-dorieh.census.interpolate_data" title="Permalink to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.census.interpolate_data.CensusInterpolateContext">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CensusInterpolateContext</span></span><a class="reference internal" href="../_modules/dorieh/census/interpolate_data.html#CensusInterpolateContext"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.census.interpolate_data.CensusInterpolateContext" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a new object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.census.interpolate_data.CensusInterpolateContext.params.subclass"></span><strong>subclass</strong><a class="paramlink headerlink reference internal" href="#dorieh.census.interpolate_data.CensusInterpolateContext.params.subclass">¶</a> – A concrete class containing configuration information
+Configuration options must be defined as class memebers with names,
+starting with one ‘_’ characters and values be instances of
+:class Argument:</p></li>
+<li><p><span class="target" id="dorieh.census.interpolate_data.CensusInterpolateContext.params.description"></span><strong>description</strong><a class="paramlink headerlink reference internal" href="#dorieh.census.interpolate_data.CensusInterpolateContext.params.description">¶</a> – Optional text to use as description.
+If not specified, then it is extracted from subclass documentation</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.census.interpolate_data.CensusInterpolateContext.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/census/interpolate_data.html#CensusInterpolateContext.validate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.census.interpolate_data.CensusInterpolateContext.validate" title="Permalink to this definition"></a></dt>
+<dd><p>Subclasses can override this method to implement custom handling
+of command line arguments</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.census.interpolate_data.CensusInterpolateContext.validate.params.attr"></span><strong>attr</strong><a class="paramlink headerlink reference internal" href="#dorieh.census.interpolate_data.CensusInterpolateContext.validate.params.attr">¶</a> – Command line argument name</p></li>
+<li><p><span class="target" id="dorieh.census.interpolate_data.CensusInterpolateContext.validate.params.value"></span><strong>value</strong><a class="paramlink headerlink reference internal" href="#dorieh.census.interpolate_data.CensusInterpolateContext.validate.params.value">¶</a> – Value returned by argparse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>value to use</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.census.interpolate_data.initialize_logging">
+<span class="sig-name descname"><span class="pre">initialize_logging</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/census/interpolate_data.html#initialize_logging"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.census.interpolate_data.initialize_logging" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
 </section>
 
 

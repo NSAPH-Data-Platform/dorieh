@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dorieh.census.assemble_data &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../DBT.html">Database Testing Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">dorieh.census.assemble_data</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for dorieh.census.assemble_data</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">assemble_data.py</span>
+<span class="sd">=======================================</span>
+<span class="sd">Core module for assembling a census plan</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1">#  Copyright (c) 2022. Harvard University</span>
+<span class="c1">#</span>
+<span class="c1">#  Developed by Harvard T.H. Chan School of Public Health</span>
+<span class="c1">#  (HSPH) and Research Software Engineering,</span>
+<span class="c1">#  Faculty of Arts and Sciences, Research Computing (FAS RC)</span>
+<span class="c1">#  Author: Ben Sabath (https://github.com/mbsabath)</span>
+<span class="c1">#</span>
+<span class="c1">#  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1">#  you may not use this file except in compliance with the License.</span>
+<span class="c1">#  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#         http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1">#  limitations under the License.</span>
+<span class="c1">#</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="kn">import</span> <span class="nn">yaml</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">dorieh.utils.qc</span> <span class="k">as</span> <span class="nn">qc</span>
+<span class="kn">import</span> <span class="nn">dorieh.utils.interpolation</span>  <span class="k">as</span> <span class="nn">interpolation</span>
+
+<span class="kn">from</span> <span class="nn">.data</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="kn">import</span> <span class="n">CensusException</span>
+<span class="kn">from</span> <span class="nn">.tigerweb</span> <span class="kn">import</span> <span class="n">get_area</span>
+<span class="kn">from</span> <span class="nn">.census_info</span> <span class="kn">import</span> <span class="n">census_years</span>
+<span class="kn">from</span> <span class="nn">.query</span> <span class="kn">import</span> <span class="n">get_census_data</span><span class="p">,</span> <span class="n">_clean_acs_vars</span>
+
+<div class="viewcode-block" id="DataPlan"><a class="viewcode-back" href="../../../members/assemble_data.html#dorieh.census.assemble_data.DataPlan">[docs]</a><span class="k">class</span> <span class="nc">DataPlan</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A class containing information on how to create a desired set of census data.</span>
+
+<span class="sd">    Inputs for initializing a DataPlan object from a census yaml document</span>
+
+<span class="sd">    :yaml_path: path to a yaml file. Structure defined in :doc:`census_yaml`</span>
+<span class="sd">    :geometry: which census geography this plan is for</span>
+<span class="sd">    :years: The list of years to query data from. The census_years() function can calculate which years in your timeframe of interest can be queried for the decennial and 5 year acs data. Note that this may not apply for the ACS1 or other data. That function may be updated in the future, but for now creating lists of years besides the defaults is left as an exercise for the interested reader.</span>
+<span class="sd">    :state: 2 digit FIPS code of the state you want to limit the query to (i.e. &quot;06&quot; for CA)</span>
+<span class="sd">    :county: 3 digit FIPS code of the county you want to include. Requires state to be specified</span>
+
+<span class="sd">    Members:</span>
+
+<span class="sd">    * ``geometry``: which census geography this plan is for</span>
+<span class="sd">    * ``years``: The ``list`` of years that the data should be queried for</span>
+<span class="sd">    * ``state``: 2 digit FIPS code of the state you want to limit the query to (i.e. &quot;06&quot; for CA)</span>
+<span class="sd">    * ``county``: 3 digit FIPS code of the county you want to include. Requires state to be specified</span>
+<span class="sd">    * ``plan``: A ``dict`` with keys of years, storing lists of ``VariableDef`` objects defining the variables to be calculated for that year. Created from a yaml file. Structure defined in :doc:`census_yaml`</span>
+<span class="sd">    * ``data``: A pandas data frame created based on the defined data plan. only exists after the ``DataPlan.assemble_data()`` method is called.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">supported_out_formats</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;csv&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">yaml_path</span><span class="p">,</span> <span class="n">geometry</span><span class="p">,</span> <span class="n">years</span><span class="o">=</span><span class="n">census_years</span><span class="p">(),</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">county</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        initialize a DataPlan object from a census yaml document</span>
+
+<span class="sd">        :param yaml_path: path to a yaml file. Structure defined in :doc:`census_yaml`</span>
+<span class="sd">        :param geometry: which census geography this plan is for</span>
+<span class="sd">        :param years: The list of years to query data from. The census_years() function can</span>
+<span class="sd">            calculate which years in your timeframe of interest can be queried for the decennial and</span>
+<span class="sd">            5 year acs data. Note that this may not apply for the ACS1 or other data. That function may be</span>
+<span class="sd">            updated in the future, but for now creating lists of years besides the defaults is left as an exercise</span>
+<span class="sd">            for the interested reader.</span>
+<span class="sd">        :param state: 2 digit FIPS code of the state you want to limit the query to (i.e. &quot;06&quot; for CA)</span>
+<span class="sd">        :param county: 3 digit FIPS code of the county you want to include. Requires state to be specified</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span> <span class="o">=</span> <span class="n">geometry</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span> <span class="o">+</span> <span class="s2">&quot;.DataPlan.&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">years</span> <span class="o">=</span> <span class="n">years</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">years</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">years</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">years</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">county</span> <span class="o">=</span> <span class="n">county</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">plan</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_yaml_to_dict</span><span class="p">(</span><span class="n">yaml_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__has_missing</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_yaml_to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">yaml_path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert a yaml file detailing how to get census variables in to a</span>
+<span class="sd">        dictionary. Handles the issue of forward counting years to make future</span>
+<span class="sd">        code readable.</span>
+
+<span class="sd">        Yaml structure defined in :doc:`census_yaml`</span>
+
+<span class="sd">        :param yaml_path:</span>
+<span class="sd">        :return: dictionary</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Read in Raw YAML</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">yaml_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">yaml_dict</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">Loader</span><span class="o">=</span><span class="n">yaml</span><span class="o">.</span><span class="n">FullLoader</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">years</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">plan</span><span class="p">[</span><span class="n">year</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">varname</span> <span class="ow">in</span> <span class="n">yaml_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">plan_year</span> <span class="o">=</span> <span class="n">_find_year</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">yaml_dict</span><span class="p">[</span><span class="n">varname</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+                <span class="k">if</span> <span class="n">plan_year</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="k">if</span> <span class="n">yaml_dict</span><span class="p">[</span><span class="n">varname</span><span class="p">][</span><span class="n">plan_year</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;skip&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">plan</span><span class="p">[</span><span class="n">year</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">VariableDef</span><span class="p">(</span><span class="n">varname</span><span class="p">,</span>
+                     <span class="n">yaml_dict</span><span class="p">[</span><span class="n">varname</span><span class="p">][</span><span class="n">plan_year</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">__logger</span><span class="p">))</span>
+
+<div class="viewcode-block" id="DataPlan.assemble_data"><a class="viewcode-back" href="../../../members/assemble_data.html#dorieh.census.assemble_data.DataPlan.assemble_data">[docs]</a>    <span class="k">def</span> <span class="nf">assemble_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a data frame for each geoid , for each year, with each variable as defined in the data plan</span>
+
+<span class="sd">        :return: Assembled data frame stored in self.data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Clear in case this has been run previously</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Beginning Census Data Acquisition&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">years</span><span class="p">:</span>
+            <span class="n">year_data</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plan</span><span class="p">[</span><span class="n">year</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="k">for</span> <span class="n">var_def</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">plan</span><span class="p">[</span><span class="n">year</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Processing &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">var_def</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                <span class="n">var_data</span> <span class="o">=</span> <span class="n">var_def</span><span class="o">.</span><span class="n">calculate_var</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">county</span><span class="p">)</span>
+                <span class="n">join_vars</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">var_data</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">difference</span><span class="p">([</span><span class="n">var_def</span><span class="o">.</span><span class="n">name</span><span class="p">]))</span>
+
+                <span class="k">if</span> <span class="n">year_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">year_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">join_vars</span><span class="p">)</span>
+
+                <span class="n">year_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">year_data</span><span class="p">,</span> <span class="n">var_data</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;outer&quot;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="n">join_vars</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">year_data</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">year_data</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataPlan.get_var_names"><a class="viewcode-back" href="../../../members/assemble_data.html#dorieh.census.assemble_data.DataPlan.get_var_names">[docs]</a>    <span class="k">def</span> <span class="nf">get_var_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a list containing all the variable names that are created in the data plan</span>
+
+<span class="sd">        :return: List of strings</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">var_names</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">plan</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">var_names</span><span class="o">.</span><span class="n">update</span><span class="p">([</span><span class="n">var_def</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">var_def</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">plan</span><span class="p">[</span><span class="n">year</span><span class="p">]])</span>
+
+        <span class="c1"># Add in density columns</span>
+        <span class="n">var_names</span><span class="o">.</span><span class="n">update</span><span class="p">([</span><span class="n">column</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="s2">&quot;_density&quot;</span> <span class="ow">in</span> <span class="n">column</span><span class="p">])</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">var_names</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataPlan.add_geoid"><a class="viewcode-back" href="../../../members/assemble_data.html#dorieh.census.assemble_data.DataPlan.add_geoid">[docs]</a>    <span class="k">def</span> <span class="nf">add_geoid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        add a single column named &#39;geoid&#39; to self.data combining all portions of a data sets geographical identifiers</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># handle known cases, then try a naive method</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span> <span class="o">==</span> <span class="s2">&quot;county&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;geoid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;state&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;county&#39;</span><span class="p">]</span>
+
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span> <span class="o">==</span> <span class="s2">&quot;tract&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;geoid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;state&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;county&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;tract&#39;</span><span class="p">]</span>
+
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span> <span class="o">==</span> <span class="s2">&quot;block group&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;geoid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;state&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;county&#39;</span><span class="p">]</span> <span class="o">+</span> \
+                                 <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;tract&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;block group&#39;</span><span class="p">]</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">geo_vars</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_var_names</span><span class="p">()</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]))</span>
+
+            <span class="c1"># assume that all geo_vars are string columns (should be the case with census data)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;geoid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="k">for</span> <span class="n">geo_var</span> <span class="ow">in</span> <span class="n">geo_vars</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;geoid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;geoid&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">geo_var</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="DataPlan.adjust_geo_fields"><a class="viewcode-back" href="../../../members/assemble_data.html#dorieh.census.assemble_data.DataPlan.adjust_geo_fields">[docs]</a>    <span class="k">def</span> <span class="nf">adjust_geo_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds geo columns to standardize it&#39;s set</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span> <span class="o">==</span> <span class="s2">&quot;zcta&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;zcta&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;zip code tabulation area&#39;</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="DataPlan.create_missingness"><a class="viewcode-back" href="../../../members/assemble_data.html#dorieh.census.assemble_data.DataPlan.create_missingness">[docs]</a>    <span class="k">def</span> <span class="nf">create_missingness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_year</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_year</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a row for all combinations of geospatial ID and year</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">min_year</span><span class="p">:</span>
+            <span class="n">min_year</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">years</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">max_year</span><span class="p">:</span>
+            <span class="n">max_year</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">years</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__has_missing</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Can&#39;t create missingness, Missing values already created.&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="s2">&quot;geoid&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_geoid</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">adjust_geo_fields</span><span class="p">()</span>
+
+        <span class="n">all_vals</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">min_year</span><span class="p">,</span> <span class="n">max_year</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                                 <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">geoid</span><span class="o">.</span><span class="n">unique</span><span class="p">()],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;geoid&#39;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">all_vals</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;geoid&#39;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__has_missing</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="DataPlan.write_data"><a class="viewcode-back" href="../../../members/assemble_data.html#dorieh.census.assemble_data.DataPlan.write_data">[docs]</a>    <span class="k">def</span> <span class="nf">write_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">file_type</span><span class="o">=</span><span class="s2">&quot;csv&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Write data  out to a file. Default method is to write out to csv. new methods can be implemented in the future.</span>
+
+<span class="sd">        :param path: Path to write the data to</span>
+<span class="sd">        :param file_type: Method to output data, currently only implemented for csv files</span>
+<span class="sd">        :return: None, writes data to disk.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">file_type</span> <span class="o">==</span> <span class="s2">&quot;csv&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Can&#39;t output file, No Method currently implemented for file type: &quot;</span> <span class="o">+</span> <span class="n">file_type</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+    <span class="c1"># noinspection PyDefaultArgument</span>
+<div class="viewcode-block" id="DataPlan.calculate_densities"><a class="viewcode-back" href="../../../members/assemble_data.html#dorieh.census.assemble_data.DataPlan.calculate_densities">[docs]</a>    <span class="k">def</span> <span class="nf">calculate_densities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;population&quot;</span><span class="p">],</span> <span class="n">sq_mi</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Divide specified variables by area</span>
+<span class="sd">        :param variables: List of variables to calculate densities for</span>
+<span class="sd">        :param sq_mi: Should denisties be calculated per square mile? If false, calculated per square meter</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span> <span class="o">==</span> <span class="s2">&quot;block group&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;No support currently added for block group densities, skipping densities&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="s2">&quot;geoid&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_geoid</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">adjust_geo_fields</span><span class="p">()</span>
+
+        <span class="n">areas</span> <span class="o">=</span> <span class="n">get_area</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span> <span class="n">sq_mi</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">areas</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;geoid&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">:</span>
+            <span class="n">new_varname</span> <span class="o">=</span> <span class="n">variable</span> <span class="o">+</span> <span class="s2">&quot;_density&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">new_varname</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;arealand&#39;</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;arealand&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;geoid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;geoid&#39;</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataPlan.interpolate"><a class="viewcode-back" href="../../../members/assemble_data.html#dorieh.census.assemble_data.DataPlan.interpolate">[docs]</a>    <span class="k">def</span> <span class="nf">interpolate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;ma&quot;</span><span class="p">,</span> <span class="n">min_year</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_year</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fill in values</span>
+<span class="sd">        :param method: Interpolation method to use</span>
+<span class="sd">        :param min_year: Minimum year to interpolate</span>
+<span class="sd">        :param max_year: Maximum year to interpolate</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">interpolation</span><span class="o">.</span><span class="n">IMPLEMENTED_METHODS</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s2">&quot;Can&#39;t interpolate, Invalid Interpretation Method&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">CensusException</span><span class="p">(</span><span class="s2">&quot;Invalid Interpretation Method&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">min_year</span><span class="p">:</span>
+            <span class="n">min_year</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">years</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">max_year</span><span class="p">:</span>
+            <span class="n">max_year</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">years</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__has_missing</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">create_missingness</span><span class="p">(</span><span class="n">min_year</span><span class="p">,</span> <span class="n">max_year</span><span class="p">)</span>
+
+        <span class="n">interpolation</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_var_names</span><span class="p">(),</span> <span class="n">method</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;geoid&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataPlan.quality_check"><a class="viewcode-back" href="../../../members/assemble_data.html#dorieh.census.assemble_data.DataPlan.quality_check">[docs]</a>    <span class="k">def</span> <span class="nf">quality_check</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test self.data for the checks defined in the test file</span>
+<span class="sd">        :param test_file: path to a yaml file defining tests per the quality check paradigm in dorieh.utils.qc</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;census_&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">years</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">years</span><span class="p">))</span>
+        <span class="n">census_tester</span> <span class="o">=</span> <span class="n">qc</span><span class="o">.</span><span class="n">Tester</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">yaml_file</span><span class="o">=</span><span class="n">test_file</span><span class="p">)</span>
+        <span class="n">census_tester</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_schema_dict_old</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return a dictionary containing the names and data types of variables that would be loaded in to a database.</span>
+<span class="sd">        Structured as a dictionary to enable writing to either yaml of json</span>
+<span class="sd">        :return: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s2">&quot;geoid&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_geoid</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">adjust_geo_fields</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_name</span><span class="p">:</span>
+            <span class="n">table_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span>
+
+        <span class="n">out_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;geoid&quot;</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_var_names</span><span class="p">()</span>
+        <span class="n">col_dicts</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">out_cols</span><span class="p">:</span>
+            <span class="n">col_dicts</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">_get_sql_type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">])}</span>
+
+        <span class="n">out</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="n">out</span><span class="p">[</span><span class="n">table_name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="n">out</span><span class="p">[</span><span class="n">table_name</span><span class="p">][</span><span class="s2">&quot;columns&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">col_dicts</span>
+        <span class="n">out</span><span class="p">[</span><span class="n">table_name</span><span class="p">][</span><span class="s2">&quot;primary_key&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;geoid&quot;</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">out</span>
+
+    <span class="k">def</span> <span class="nf">_schema_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s2">&quot;geoid&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_geoid</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">adjust_geo_fields</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_name</span><span class="p">:</span>
+            <span class="n">table_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span>
+
+        <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;census&quot;</span>
+        <span class="n">out_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;geoid&quot;</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_var_names</span><span class="p">()</span>
+        <span class="n">domain</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">name</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;schema&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+                <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="s2">&quot;all&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;NSAPH data model for Census&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;header&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&quot;quoting&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+                <span class="s2">&quot;tables&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="n">table_name</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;columns&quot;</span><span class="p">:</span> <span class="p">[</span>
+                            <span class="p">{</span>
+                                <span class="n">col</span><span class="p">:</span> <span class="p">{</span>
+                                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">_get_sql_type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+                                <span class="p">}</span>
+                            <span class="p">}</span>
+                            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">out_cols</span>
+                        <span class="p">],</span>
+                        <span class="s2">&quot;primary_key&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;geoid&quot;</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">],</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">domain</span>
+
+<div class="viewcode-block" id="DataPlan.write_schema"><a class="viewcode-back" href="../../../members/assemble_data.html#dorieh.census.assemble_data.DataPlan.write_schema">[docs]</a>    <span class="k">def</span> <span class="nf">write_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">table_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Write out a yaml file describing the data schema</span>
+<span class="sd">        :param filename: path to write to</span>
+<span class="sd">        :param table_name: Name of the table for the schema</span>
+<span class="sd">        :return: True</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">filename</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">table_name</span><span class="p">:</span>
+                <span class="n">filename</span> <span class="o">=</span> <span class="n">table_name</span> <span class="o">+</span> <span class="s2">&quot;_schema.yml&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;census_&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span> <span class="o">+</span> <span class="s2">&quot;_schema.yml&quot;</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">ff</span><span class="p">:</span>
+            <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_schema_dict</span><span class="p">(</span><span class="n">table_name</span><span class="p">),</span> <span class="n">ff</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="VariableDef"><a class="viewcode-back" href="../../../members/assemble_data.html#dorieh.census.assemble_data.VariableDef">[docs]</a><span class="k">class</span> <span class="nc">VariableDef</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Structured way of representing what we need to know for a variable.</span>
+<span class="sd">    Members:</span>
+<span class="sd">    * ``dataset``: a string. The data set used to calculate a variable, should be dec, acs1, acs5, or pums</span>
+<span class="sd">    * ``num``: a list, the names of variables that make up the numerator</span>
+<span class="sd">    * ``den``: a list, the names of the variables that make up the denominator. Can be missing</span>
+<span class="sd">    * ``has_den``: a boolean, indicates whether or not there is a denominator.</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">var_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">log</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">Logger</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">log</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span> <span class="o">+</span> <span class="s2">&quot;.VariableDef.&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__logger</span> <span class="o">=</span> <span class="n">log</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">var_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num</span> <span class="o">=</span> <span class="n">var_dict</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">][</span><span class="s1">&#39;num&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">num</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">num</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="s1">&#39;den&#39;</span> <span class="ow">in</span> <span class="n">var_dict</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">has_den</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">den</span> <span class="o">=</span> <span class="n">var_dict</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">][</span><span class="s1">&#39;den&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">den</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">den</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">den</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">has_den</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">den</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">if</span> <span class="s2">&quot;acs&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_make_acs_vars</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_make_acs_vars</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">_clean_acs_vars</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_den</span><span class="p">:</span>
+            <span class="n">_clean_acs_vars</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">den</span><span class="p">)</span>
+
+<div class="viewcode-block" id="VariableDef.get_vars"><a class="viewcode-back" href="../../../members/assemble_data.html#dorieh.census.assemble_data.VariableDef.get_vars">[docs]</a>    <span class="k">def</span> <span class="nf">get_vars</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: a union of all census variables needed for this variable</span>
+
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">()</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">den</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="VariableDef.do_query"><a class="viewcode-back" href="../../../members/assemble_data.html#dorieh.census.assemble_data.VariableDef.do_query">[docs]</a>    <span class="k">def</span> <span class="nf">do_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">geometry</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">county</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Run the query defined by the contained variables</span>
+<span class="sd">        :param geometry: census geometry to query</span>
+<span class="sd">        :param year: year of data to query</span>
+<span class="sd">        :param state: 2 Digit Fips code of state to limit the query to</span>
+<span class="sd">        :param county: 3 Digit county code to limit the query to, must be used with state</span>
+<span class="sd">        :return: data frame of all census variables specified by the query</span>
+
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">geometry</span> <span class="o">==</span> <span class="s2">&quot;tract&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_do_query_tract</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">geometry</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">county</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">geometry</span> <span class="o">==</span> <span class="s2">&quot;block group&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_do_query_block_group</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">geometry</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">county</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">get_census_data</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_vars</span><span class="p">(),</span> <span class="n">geometry</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">,</span> <span class="n">county</span><span class="o">=</span><span class="n">county</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_do_query_tract</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">geometry</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">county</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># If state is specified, pull for just that state</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">get_census_data</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_vars</span><span class="p">(),</span> <span class="n">geometry</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">,</span> <span class="n">county</span><span class="o">=</span><span class="n">county</span><span class="p">)</span>
+
+        <span class="c1"># Otherwise loop over all states</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">state_codes</span> <span class="o">=</span> <span class="n">load_state_codes</span><span class="p">()</span>
+        <span class="n">num_queries</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">state_codes</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+            <span class="n">num_queries</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Running query &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">num_queries</span><span class="p">)</span>  <span class="o">+</span> <span class="s2">&quot; of &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">state_codes</span><span class="o">.</span><span class="n">index</span><span class="p">)))</span>
+            <span class="n">state_data</span> <span class="o">=</span> <span class="n">get_census_data</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_vars</span><span class="p">(),</span> <span class="n">geometry</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;state&#39;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">out</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="n">state_data</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state_data</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span>
+
+    <span class="k">def</span> <span class="nf">_do_query_block_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">geometry</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">county</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># if state and county are specified</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">county_codes</span> <span class="o">=</span> <span class="n">load_county_codes</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">county</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">get_census_data</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_vars</span><span class="p">(),</span> <span class="n">geometry</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">,</span> <span class="n">county</span><span class="o">=</span><span class="n">county</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># iterate over all counties in the state</span>
+                <span class="n">county_codes</span> <span class="o">=</span> <span class="n">county_codes</span><span class="p">[</span><span class="n">county_codes</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="n">state</span><span class="p">]</span>
+
+        <span class="c1"># iterate over all counties and states</span>
+        <span class="n">num_queries</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">county_codes</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+            <span class="n">num_queries</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Running query &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">num_queries</span><span class="p">)</span>  <span class="o">+</span> <span class="s2">&quot; of &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">county_codes</span><span class="o">.</span><span class="n">index</span><span class="p">)))</span>
+            <span class="n">county_data</span> <span class="o">=</span> <span class="n">get_census_data</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_vars</span><span class="p">(),</span> <span class="n">geometry</span><span class="p">,</span>
+                                          <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;state&#39;</span><span class="p">],</span> <span class="n">county</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;county&#39;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">out</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="n">county_data</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">county_data</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span>
+
+<div class="viewcode-block" id="VariableDef.calculate_var"><a class="viewcode-back" href="../../../members/assemble_data.html#dorieh.census.assemble_data.VariableDef.calculate_var">[docs]</a>    <span class="k">def</span> <span class="nf">calculate_var</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">geometry</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">county</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Query the required data from the census, then calculate the variable defined</span>
+<span class="sd">        :param year: year of data to query</span>
+<span class="sd">        :param geometry: census geometry to query</span>
+<span class="sd">        :param state: 2 Digit Fips code of state to limit the query to</span>
+<span class="sd">        :param county: 3 Digit county code to limit the query to, must be used with state</span>
+<span class="sd">        :return: a data frame with one column of the calcualted variable and the census geography columns</span>
+
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">do_query</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">geometry</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">county</span><span class="p">)</span>
+
+        <span class="c1"># calculate numerator</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">num_var</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">num</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;num&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">data</span><span class="p">[</span><span class="n">num_var</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_den</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;den&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">den_var</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">den</span><span class="p">:</span>
+                <span class="n">data</span><span class="p">[</span><span class="s1">&#39;den&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">data</span><span class="p">[</span><span class="n">den_var</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_den</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;num&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;den&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;num&#39;</span><span class="p">]</span>
+
+        <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_vars</span><span class="p">(),</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">&quot;num&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_den</span><span class="p">:</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">&quot;den&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">data</span></div>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;Name: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;Dataset: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;Num: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_den</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;Den: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">den</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">out</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="s2">&quot;&lt;&quot;</span>
+        <span class="n">out</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span>
+        <span class="n">out</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span> <span class="o">+</span> <span class="s2">&quot;&gt;&quot;</span>
+
+        <span class="k">return</span> <span class="n">out</span></div>
+
+
+<span class="k">def</span> <span class="nf">_find_year</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">year_list</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Internal helper function, not exported. Returns the first</span>
+<span class="sd">    year in the list greater or equal to the year</span>
+<span class="sd">    :param year: year of interest</span>
+<span class="sd">    :param year_list:list: list of years, likely from a yaml census list</span>
+<span class="sd">    :return: first year greater than or equal to &quot;year&quot; in &quot;year_list&quot;</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">year_list</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>  <span class="c1"># Should be sorted, but just in case</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">year_list</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">year</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">i</span>
+
+
+<span class="k">def</span> <span class="nf">_get_sql_type</span><span class="p">(</span><span class="n">col</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    given a numpy array, return the POSTGRES data type needed for that column as a string</span>
+<span class="sd">    :param col: a numpy array</span>
+<span class="sd">    :return: string of sql type</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">col</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;FLOAT4&quot;</span>
+    <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">col</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;INT&quot;</span>
+    <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">col</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">max_len</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="n">col</span><span class="p">))</span>
+        <span class="k">return</span> <span class="s2">&quot;VARCHAR(&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">max_len</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">CensusException</span><span class="p">(</span><span class="s2">&quot;unexpected column type in data&quot;</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

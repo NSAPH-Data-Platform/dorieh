@@ -87,8 +87,54 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="the-cli-module">
-<h1>The cli Module<a class="headerlink" href="#the-cli-module" title="Permalink to this heading"></a></h1>
+  <section id="module-dorieh.census.cli">
+<span id="the-cli-module"></span><h1>The cli Module<a class="headerlink" href="#module-dorieh.census.cli" title="Permalink to this heading"></a></h1>
+<section id="fst2csv-py">
+<h2>fst2csv.py<a class="headerlink" href="#fst2csv-py" title="Permalink to this heading"></a></h2>
+<p>Command Line Interface for the census python package</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.census.cli.CensusContext">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CensusContext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">doc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/census/cli.html#CensusContext"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.census.cli.CensusContext" title="Permalink to this definition"></a></dt>
+<dd><p>Context object supporting the CLI functionality of this package</p>
+<p>Creates a new object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.census.cli.CensusContext.params.subclass"></span><strong>subclass</strong><a class="paramlink headerlink reference internal" href="#dorieh.census.cli.CensusContext.params.subclass">¶</a> – A concrete class containing configuration information
+Configuration options must be defined as class memebers with names,
+starting with one ‘_’ characters and values be instances of
+:class Argument:</p></li>
+<li><p><span class="target" id="dorieh.census.cli.CensusContext.params.description"></span><strong>description</strong><a class="paramlink headerlink reference internal" href="#dorieh.census.cli.CensusContext.params.description">¶</a> – Optional text to use as description.
+If not specified, then it is extracted from subclass documentation</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.census.cli.CensusContext.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/census/cli.html#CensusContext.validate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.census.cli.CensusContext.validate" title="Permalink to this definition"></a></dt>
+<dd><p>Subclasses can override this method to implement custom handling
+of command line arguments</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.census.cli.CensusContext.validate.params.attr"></span><strong>attr</strong><a class="paramlink headerlink reference internal" href="#dorieh.census.cli.CensusContext.validate.params.attr">¶</a> – Command line argument name</p></li>
+<li><p><span class="target" id="dorieh.census.cli.CensusContext.validate.params.value"></span><strong>value</strong><a class="paramlink headerlink reference internal" href="#dorieh.census.cli.CensusContext.validate.params.value">¶</a> – Value returned by argparse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>value to use</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.census.cli.census_cli">
+<span class="sig-name descname"><span class="pre">census_cli</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/census/cli.html#census_cli"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.census.cli.census_cli" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
 </section>
 
 

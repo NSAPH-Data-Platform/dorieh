@@ -11,16 +11,16 @@ Classes used Internally
 Abstract Context
 ^^^^^^^^^^^^^^^^
 
-.. autoclass:: nsaph_utils.utils.context.Context
+.. autoclass:: dorieh.utils.context.Context
    :members:
 
 Argument
 ^^^^^^^^
-.. autoclass:: nsaph_utils.utils.context.Argument
+.. autoclass:: dorieh.utils.context.Argument
    :members:
 
 Argument Cardinality Enum
 ^^^^^^^^^^^^^^^^^^^^^^^^^
-.. autoclass:: nsaph_utils.utils.context.Cardinality
+.. autoclass:: dorieh.utils.context.Cardinality
    :members:
 

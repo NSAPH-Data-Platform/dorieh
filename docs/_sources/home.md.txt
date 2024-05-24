@@ -146,8 +146,4 @@ Build instructions.
 To integrate Markdown with [Sphinx](https://www.sphinx-doc.org/en/master/) 
 processing we use [MyST Parser](https://jupyterbook.org/en/stable/content/myst.html). 
 
-Documentation utilities are contained in 
-[nsaph-utils](https://github.com/NSAPH-Data-Platform/nsaph-utils)
-in 
-[docutils](https://github.com/NSAPH-Data-Platform/nsaph-utils/tree/master/nsaph_utils/docutils)
-package. 
+See [Documentation Utilities](docutils) package. 

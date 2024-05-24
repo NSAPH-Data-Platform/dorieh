@@ -51,7 +51,7 @@ def initialize_logging(log: str):
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     handler.setFormatter(formatter)
 
-    logger = logging.getLogger("nsaph_utils")
+    logger = logging.getLogger("dorieh.utils")
     logger.addHandler(handler)
     logger.setLevel(logging.DEBUG)
 

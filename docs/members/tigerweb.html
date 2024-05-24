@@ -87,8 +87,52 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="the-tigerweb-module">
-<h1>The tigerweb Module<a class="headerlink" href="#the-tigerweb-module" title="Permalink to this heading"></a></h1>
+  <section id="module-dorieh.census.tigerweb">
+<span id="the-tigerweb-module"></span><h1>The tigerweb Module<a class="headerlink" href="#module-dorieh.census.tigerweb" title="Permalink to this heading"></a></h1>
+<section id="tigerweb-py">
+<h2>tigerweb.py<a class="headerlink" href="#tigerweb-py" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>Code for interacting with the Census TIGERWEb API, query area and download shape</dt><dd><p>files.</p>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.census.tigerweb.get_area">
+<span class="sig-name descname"><span class="pre">get_area</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sq_mi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/census/tigerweb.html#get_area"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.census.tigerweb.get_area" title="Permalink to this definition"></a></dt>
+<dd><p>Create a data frame of Census GEOIDs and Area. Due to the Tigerweb API’s limiting of
+the number of features per query to 100,000, block groups aren’t currently supported through this wrapper.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.census.tigerweb.get_area.params.geometry"></span><strong>geometry</strong><a class="paramlink headerlink reference internal" href="#dorieh.census.tigerweb.get_area.params.geometry">¶</a> – type of census geometry to use</p></li>
+<li><p><span class="target" id="dorieh.census.tigerweb.get_area.params.sq_mi"></span><strong>sq_mi</strong><a class="paramlink headerlink reference internal" href="#dorieh.census.tigerweb.get_area.params.sq_mi">¶</a> – Should areas be converted to square miles?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>pandas data frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.census.tigerweb.download_geometry">
+<span class="sig-name descname"><span class="pre">download_geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2019</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/census/tigerweb.html#download_geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.census.tigerweb.download_geometry" title="Permalink to this definition"></a></dt>
+<dd><p>Get spatial information for a census geometry in geojson format and save it to disk</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.census.tigerweb.download_geometry.params.geometry"></span><strong>geometry</strong><a class="paramlink headerlink reference internal" href="#dorieh.census.tigerweb.download_geometry.params.geometry">¶</a> – type of census geometry to use</p></li>
+<li><p><span class="target" id="dorieh.census.tigerweb.download_geometry.params.year"></span><strong>year</strong><a class="paramlink headerlink reference internal" href="#dorieh.census.tigerweb.download_geometry.params.year">¶</a> – Year to get geometry for</p></li>
+<li><p><span class="target" id="dorieh.census.tigerweb.download_geometry.params.out_dir"></span><strong>out_dir</strong><a class="paramlink headerlink reference internal" href="#dorieh.census.tigerweb.download_geometry.params.out_dir">¶</a> – Directory to save downloaded files in. Note that due to requiring multiple
+downloads, tract and block group downloads will create a directory if no out_dir is defined.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None, downloads files only</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
 </section>
 
 

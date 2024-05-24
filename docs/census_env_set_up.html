@@ -52,6 +52,7 @@
 <li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="domains.html">Data Domains</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="cms.html">Health</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gridmet.html">Climate</a></li>
 <li class="toctree-l2"><a class="reference internal" href="epa.html">Pollution</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="census.html">Demographics</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="census_about.html">About</a></li>
@@ -59,7 +60,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#setting-up-a-new-environment">Setting up a new environment</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#updating-an-existing-environment">Updating an existing environment</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#installing-census">Installing census</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#installing-nsaph-utils">Installing nsaph_utils</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#setting-up-census-api-key">Setting up Census API Key</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#registering-the-conda-kernal">Registering the Conda Kernal</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#updating-the-environment-recipe">Updating the Environment Recipe</a></li>
@@ -77,7 +77,7 @@
 <li class="toctree-l3"><a class="reference internal" href="pipeline/census_densitycwl_src.html">census_density.cwl</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pipeline/census_ingest.html">census_ingest.cwl</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pipeline/census_ingest_1.html">Sub-workflow <em>store</em> from census_ingest.cwl</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pipeline/census_ingest_1cwl_src.html">tmp88mqywumcensus_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_ingest_1cwl_src.html">tmpq669y4w1census_ingest.cwl</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pipeline/census_ingestcwl_src.html">census_ingest.cwl</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pipeline/census_interpolate.html">census_interpolate.cwl</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pipeline/census_interpolatecwl_src.html">census_interpolate.cwl</a></li>
@@ -160,14 +160,6 @@
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">-e</span></code> flag installs the package in the development mode. As a result, you do not need to reintall the package by chaning the code.</p>
 </section>
-<section id="installing-nsaph-utils">
-<h2>Installing nsaph_utils<a class="headerlink" href="#installing-nsaph-utils" title="Permalink to this heading"></a></h2>
-<p>The package is dependent on the <cite>nsaph_utils</cite> package. This package is not available on CRAN or PyPI. You need to get the source code from the <a class="reference external" href="https://gitlab-int.rc.fas.harvard.edu/rse/francesca_dominici/tools/nsaph_utils">Gitlab repository</a> and install it similar to the <cite>census</cite> package.
-You can skip <cite>-e</cite> flag. While inside the package folder, you can run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip3<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
-</pre></div>
-</div>
-</section>
 <section id="setting-up-census-api-key">
 <h2>Setting up Census API Key<a class="headerlink" href="#setting-up-census-api-key" title="Permalink to this heading"></a></h2>
 <p>In order to interact with the US Census API at scale, you’ll a Census API
@@ -191,7 +183,8 @@ the key directly in your <code class="docutils literal notranslate"><span class=
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>conda<span class="w"> </span>env<span class="w"> </span><span class="nb">export</span><span class="w"> </span>&gt;<span class="w"> </span>environment_dev.yml
 </pre></div>
 </div>
-<p>Make sure to manually remove <cite>name</cite> and <cite>prefix</cite> sections as well as <cite>census</cite> and <cite>nsaph_utils</cite> from the dependencies section in the <cite>.yml</cite> file.</p>
+<p>Make sure to manually remove <cite>name</cite> and <cite>prefix</cite> sections as well as <cite>dorieh</cite>
+from the dependencies section in the <cite>.yml</cite> file.</p>
 </section>
 </section>
 

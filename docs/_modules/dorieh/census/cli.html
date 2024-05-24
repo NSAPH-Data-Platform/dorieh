@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dorieh.census.cli &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../DBT.html">Database Testing Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">dorieh.census.cli</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for dorieh.census.cli</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">fst2csv.py</span>
+<span class="sd">====================================================</span>
+<span class="sd">Command Line Interface for the census python package</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1">#  Copyright (c) 2022. Harvard University</span>
+<span class="c1">#</span>
+<span class="c1">#  Developed by Harvard T.H. Chan School of Public Health</span>
+<span class="c1">#  (HSPH) and Research Software Engineering,</span>
+<span class="c1">#  Faculty of Arts and Sciences, Research Computing (FAS RC)</span>
+<span class="c1">#  Author: Ben Sabath (https://github.com/mbsabath)</span>
+<span class="c1">#</span>
+<span class="c1">#  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1">#  you may not use this file except in compliance with the License.</span>
+<span class="c1">#  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#         http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1">#  limitations under the License.</span>
+<span class="c1">#</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">from</span> <span class="nn">dorieh.utils.context</span> <span class="kn">import</span> <span class="n">Context</span><span class="p">,</span> <span class="n">Argument</span><span class="p">,</span> <span class="n">Cardinality</span>
+
+<span class="kn">from</span> <span class="nn">.assemble_data</span> <span class="kn">import</span> <span class="n">DataPlan</span>
+<span class="kn">from</span> <span class="nn">.census_info</span> <span class="kn">import</span> <span class="n">census_years</span>
+<span class="kn">from</span> <span class="nn">.query</span> <span class="kn">import</span> <span class="n">SUPPORTED_GEOMETRIES</span>
+
+
+<div class="viewcode-block" id="CensusContext"><a class="viewcode-back" href="../../../members/cli.html#dorieh.census.cli.CensusContext">[docs]</a><span class="k">class</span> <span class="nc">CensusContext</span><span class="p">(</span><span class="n">Context</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Context object supporting the CLI functionality of this package</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_var_file</span> <span class="o">=</span> <span class="n">Argument</span><span class="p">(</span><span class="s2">&quot;var_file&quot;</span><span class="p">,</span>
+                         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Path to yaml file specifying census variables&quot;</span><span class="p">,</span>
+                         <span class="n">aliases</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;vars&quot;</span><span class="p">],</span>
+                         <span class="n">cardinality</span><span class="o">=</span><span class="n">Cardinality</span><span class="o">.</span><span class="n">single</span><span class="p">,</span>
+                         <span class="p">)</span>
+    <span class="n">_geometry</span> <span class="o">=</span> <span class="n">Argument</span><span class="p">(</span><span class="s2">&quot;geometry&quot;</span><span class="p">,</span>
+                         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Geographic Resolution to download census data at&quot;</span><span class="p">,</span>
+                         <span class="n">aliases</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;geom&quot;</span><span class="p">],</span>
+                         <span class="n">cardinality</span><span class="o">=</span><span class="n">Cardinality</span><span class="o">.</span><span class="n">single</span><span class="p">,</span>
+                         <span class="n">valid_values</span><span class="o">=</span><span class="n">SUPPORTED_GEOMETRIES</span>
+                         <span class="p">)</span>
+    <span class="n">_state</span> <span class="o">=</span> <span class="n">Argument</span><span class="p">(</span><span class="s2">&quot;state&quot;</span><span class="p">,</span>
+                      <span class="n">help</span><span class="o">=</span><span class="s1">&#39;2 digit FIPS code of the state you want to limit the query to (i.e. &quot;06&quot; for CA)&#39;</span><span class="p">,</span>
+                      <span class="n">cardinality</span><span class="o">=</span><span class="n">Cardinality</span><span class="o">.</span><span class="n">single</span><span class="p">,</span>
+                      <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                      <span class="n">required</span><span class="o">=</span><span class="kc">False</span>
+                      <span class="p">)</span>
+    <span class="n">_densities</span> <span class="o">=</span> <span class="n">Argument</span><span class="p">(</span><span class="s2">&quot;densities&quot;</span><span class="p">,</span>
+                          <span class="n">aliases</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;d&#39;</span><span class="p">],</span>
+                          <span class="n">help</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;Names of variables to calculate denisity per square mile for. If ommitted, </span>
+<span class="s2">                              density calculation will be skipped. To calculate population density, assuming</span>
+<span class="s2">                              population is stored in a variable named &#39;population&#39;, the option would be specified</span>
+<span class="s2">                              -d population&quot;&quot;&quot;</span><span class="p">,</span>
+                          <span class="n">cardinality</span><span class="o">=</span><span class="n">Cardinality</span><span class="o">.</span><span class="n">multiple</span><span class="p">,</span>
+                          <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                          <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">_county</span> <span class="o">=</span> <span class="n">Argument</span><span class="p">(</span><span class="s2">&quot;county&quot;</span><span class="p">,</span>
+                       <span class="n">help</span><span class="o">=</span><span class="s2">&quot;3 digit FIPS code of the county you want to include. Requires state to be specified&quot;</span><span class="p">,</span>
+                       <span class="n">cardinality</span><span class="o">=</span><span class="n">Cardinality</span><span class="o">.</span><span class="n">single</span><span class="p">,</span>
+                       <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                       <span class="n">required</span><span class="o">=</span><span class="kc">False</span>
+                       <span class="p">)</span>
+    <span class="n">_interpolate</span> <span class="o">=</span> <span class="n">Argument</span><span class="p">(</span><span class="s2">&quot;interpolate&quot;</span><span class="p">,</span>
+                            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;Years to interpolate for. Takes min year + max year formatted </span>
+<span class="s2">                            as &lt;min_year&gt;:&lt;max_year&gt;. Enter &#39;x&#39; to skip interpolation&quot;&quot;&quot;</span><span class="p">,</span>
+                            <span class="n">aliases</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;i&quot;</span><span class="p">],</span>
+                            <span class="n">cardinality</span><span class="o">=</span><span class="n">Cardinality</span><span class="o">.</span><span class="n">single</span><span class="p">,</span>
+                            <span class="n">default</span><span class="o">=</span><span class="s2">&quot;1999:2019&quot;</span><span class="p">,</span>
+                            <span class="p">)</span>
+    <span class="n">_out_file</span> <span class="o">=</span> <span class="n">Argument</span><span class="p">(</span><span class="s2">&quot;out_file&quot;</span><span class="p">,</span>
+                         <span class="n">aliases</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">],</span>
+                         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;name of file to write output to&quot;</span><span class="p">,</span>
+                         <span class="n">cardinality</span><span class="o">=</span><span class="n">Cardinality</span><span class="o">.</span><span class="n">single</span><span class="p">,</span>
+                         <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">_out_format</span> <span class="o">=</span> <span class="n">Argument</span><span class="p">(</span><span class="s2">&quot;out_format&quot;</span><span class="p">,</span>
+                           <span class="n">help</span><span class="o">=</span><span class="s2">&quot;file format to store output as.&quot;</span><span class="p">,</span>
+                           <span class="n">default</span><span class="o">=</span><span class="s2">&quot;csv&quot;</span><span class="p">,</span>
+                           <span class="n">cardinality</span><span class="o">=</span><span class="n">Cardinality</span><span class="o">.</span><span class="n">single</span><span class="p">,</span>
+                           <span class="n">valid_values</span><span class="o">=</span><span class="n">DataPlan</span><span class="o">.</span><span class="n">supported_out_formats</span><span class="p">)</span>
+    <span class="n">_years</span> <span class="o">=</span> <span class="n">Argument</span><span class="p">(</span><span class="s2">&quot;years&quot;</span><span class="p">,</span>
+                      <span class="n">aliases</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">],</span>
+                      <span class="n">help</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                      Year or list of years to download. For example, </span>
+<span class="s2">                      the following argument: </span>
+<span class="s2">                      `-y 1992:1995 1998 1999 2011 2015:2017` will produce </span>
+<span class="s2">                      the following list: </span>
+<span class="s2">                      [1992,1993,1994,1995,1998,1999,2011,2015,2016,2017]</span>
+<span class="s2">                      </span>
+<span class="s2">                      Note that in the census module CLI, only the minimum and maximum year passed are used</span>
+<span class="s2">                      and are passed to census.census_years() to ensure that only years that are available are used.</span>
+<span class="s2">                      Additional variable level year control is determined by the variable specification yaml file. </span>
+<span class="s2">                      &quot;&quot;&quot;</span><span class="p">,</span>
+                      <span class="n">cardinality</span><span class="o">=</span><span class="n">Cardinality</span><span class="o">.</span><span class="n">multiple</span><span class="p">,</span>
+                      <span class="n">default</span><span class="o">=</span><span class="s2">&quot;2000:2019&quot;</span>
+                      <span class="p">)</span>
+    <span class="n">_quality_check</span> <span class="o">=</span> <span class="n">Argument</span><span class="p">(</span><span class="s2">&quot;quality_check&quot;</span><span class="p">,</span>
+                              <span class="n">aliases</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;qc&quot;</span><span class="p">],</span>
+                              <span class="n">help</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                              Path to a yaml file specifying the checks to be run on the data. Yaml file should be </span>
+<span class="s2">                              structured per the paradigm used by dorieh.utils.qc</span>
+<span class="s2">                              &quot;&quot;&quot;</span><span class="p">,</span>
+                              <span class="n">cardinality</span><span class="o">=</span><span class="n">Cardinality</span><span class="o">.</span><span class="n">single</span><span class="p">,</span>
+                              <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                              <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">_log</span> <span class="o">=</span> <span class="n">Argument</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">,</span>
+                    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                    Path to output log file. If you want logging info to print on the screen, enter &quot;screen&quot;.</span>
+<span class="s2">                    &quot;&quot;&quot;</span><span class="p">,</span>
+                    <span class="n">cardinality</span><span class="o">=</span><span class="n">Cardinality</span><span class="o">.</span><span class="n">single</span><span class="p">,</span>
+                    <span class="n">default</span><span class="o">=</span><span class="s2">&quot;census.log&quot;</span><span class="p">)</span>
+    <span class="n">_debug</span> <span class="o">=</span> <span class="n">Argument</span><span class="p">(</span><span class="s2">&quot;debug&quot;</span><span class="p">,</span>
+                      <span class="n">help</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                      Boolean. If included, debug level messages will be logged. Otherwise defaults to &quot;info&quot; level.</span>
+<span class="s2">                      &quot;&quot;&quot;</span><span class="p">,</span>
+                      <span class="nb">type</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">_pkl_file</span> <span class="o">=</span> <span class="n">Argument</span><span class="p">(</span><span class="s2">&quot;pkl_file&quot;</span><span class="p">,</span>
+                         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Path to temporary pkl file&quot;</span><span class="p">,</span>
+                         <span class="n">cardinality</span><span class="o">=</span><span class="n">Cardinality</span><span class="o">.</span><span class="n">single</span><span class="p">,</span>
+                         <span class="n">default</span><span class="o">=</span><span class="s2">&quot;census.pkl&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_file</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">county</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">densities</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interpolate</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out_file</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out_format</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">quality_check</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pkl_file</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">CensusContext</span><span class="p">,</span> <span class="n">doc</span><span class="p">)</span>
+
+<div class="viewcode-block" id="CensusContext.validate"><a class="viewcode-back" href="../../../members/cli.html#dorieh.census.cli.CensusContext.validate">[docs]</a>    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">attr</span> <span class="o">==</span> <span class="s2">&quot;interpolate&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;x&quot;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+                <span class="n">out</span><span class="p">[</span><span class="s2">&quot;min&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">out</span><span class="p">[</span><span class="s2">&quot;max&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="k">return</span> <span class="n">out</span>
+
+        <span class="k">return</span> <span class="n">value</span></div></div>
+
+
+<div class="viewcode-block" id="census_cli"><a class="viewcode-back" href="../../../members/cli.html#dorieh.census.cli.census_cli">[docs]</a><span class="k">def</span> <span class="nf">census_cli</span><span class="p">():</span>
+
+    <span class="n">context</span> <span class="o">=</span> <span class="n">CensusContext</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span><span class="o">.</span><span class="n">instantiate</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
+        <span class="n">level</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">level</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span>
+
+    <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">log</span> <span class="o">==</span> <span class="s2">&quot;screen&quot;</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">log</span><span class="p">,</span> <span class="n">level</span> <span class="o">=</span> <span class="n">level</span><span class="p">)</span>
+
+    <span class="n">census</span> <span class="o">=</span> <span class="n">DataPlan</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">var_file</span><span class="p">,</span>
+                      <span class="n">context</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span>
+                      <span class="n">years</span><span class="o">=</span><span class="n">census_years</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">years</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">years</span><span class="p">)),</span>
+                      <span class="n">state</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">state</span><span class="p">,</span>
+                      <span class="n">county</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">county</span><span class="p">)</span>
+    <span class="n">census</span><span class="o">.</span><span class="n">assemble_data</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">interpolate</span><span class="p">:</span>
+        <span class="n">census</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">min_year</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">interpolate</span><span class="p">[</span><span class="s2">&quot;min&quot;</span><span class="p">],</span> <span class="n">max_year</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">interpolate</span><span class="p">[</span><span class="s2">&quot;max&quot;</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">densities</span><span class="p">:</span>
+        <span class="n">census</span><span class="o">.</span><span class="n">calculate_densities</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">densities</span><span class="p">)</span>
+
+    <span class="n">census</span><span class="o">.</span><span class="n">write_data</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">out_file</span><span class="p">,</span> <span class="n">file_type</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">out_format</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">quality_check</span><span class="p">:</span>
+        <span class="n">census</span><span class="o">.</span><span class="n">quality_check</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">quality_check</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">pkl_file</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">census</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">census_cli</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

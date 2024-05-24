@@ -239,6 +239,282 @@ mnemonic instanced of Parameter Enum or both.</p></li>
 </dl>
 </dd></dl>
 
+<span class="target" id="module-dorieh.utils.io_utils"></span><dl class="py function">
+<dt class="sig sig-object py" id="dorieh.utils.io_utils.as_stream">
+<span class="sig-name descname"><span class="pre">as_stream</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'.csv'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/io_utils.html#as_stream"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.io_utils.as_stream" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the content of URL as a stream. In case the content is in zip
+format (excluding gzip) creates a temporary file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.utils.io_utils.as_stream.params.mode"></span><strong>mode</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.io_utils.as_stream.params.mode">¶</a> – optional parameter to specify desirable mode: text or binary.
+Possible values: ‘t’ or ‘b’</p></li>
+<li><p><span class="target" id="dorieh.utils.io_utils.as_stream.params.params"></span><strong>params</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.io_utils.as_stream.params.params">¶</a> – Optional. A dictionary, list of tuples or bytes
+to send as a query string.</p></li>
+<li><p><span class="target" id="dorieh.utils.io_utils.as_stream.params.url"></span><strong>url</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.io_utils.as_stream.params.url">¶</a> – URL</p></li>
+<li><p><span class="target" id="dorieh.utils.io_utils.as_stream.params.extension"></span><strong>extension</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.io_utils.as_stream.params.extension">¶</a> – optional, when the content is zip-encoded, the extension
+of the zip entry to return</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Content of the URL or a zip entry</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.utils.io_utils.as_content">
+<span class="sig-name descname"><span class="pre">as_content</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/io_utils.html#as_content"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.io_utils.as_content" title="Permalink to this definition"></a></dt>
+<dd><p>Returns byte or text block with URL content</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.utils.io_utils.as_content.params.url"></span><strong>url</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.io_utils.as_content.params.url">¶</a> – URL</p></li>
+<li><p><span class="target" id="dorieh.utils.io_utils.as_content.params.params"></span><strong>params</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.io_utils.as_content.params.params">¶</a> – Optional. A dictionary, list of tuples or bytes
+to send as a query string.</p></li>
+<li><p><span class="target" id="dorieh.utils.io_utils.as_content.params.mode"></span><strong>mode</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.io_utils.as_content.params.mode">¶</a> – optional parameter to specify desirable return format:
+text or binary. Possible values: ‘t’ or ‘b’, default is binary</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Content of the URL</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.utils.io_utils.as_csv_reader">
+<span class="sig-name descname"><span class="pre">as_csv_reader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DictReader</span></span></span><a class="reference internal" href="../_modules/dorieh/utils/io_utils.html#as_csv_reader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.io_utils.as_csv_reader" title="Permalink to this definition"></a></dt>
+<dd><p>An utility method to return the CSV content of the URL as CSVReader</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.utils.io_utils.as_csv_reader.params.url"></span><strong>url</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.io_utils.as_csv_reader.params.url">¶</a> – URL</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>an instance of csv.DictReader</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.utils.io_utils.file_as_stream">
+<span class="sig-name descname"><span class="pre">file_as_stream</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'.csv'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/io_utils.html#file_as_stream"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.io_utils.file_as_stream" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the content of file as a stream. In case the content is in zip
+format (excluding gzip) creates a temporary file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.utils.io_utils.file_as_stream.params.mode"></span><strong>mode</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.io_utils.file_as_stream.params.mode">¶</a> – optional parameter to specify desirable mode: text or binary.
+Possible values: ‘t’ or ‘b’</p></li>
+<li><p><span class="target" id="dorieh.utils.io_utils.file_as_stream.params.filename"></span><strong>filename</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.io_utils.file_as_stream.params.filename">¶</a> – path to file</p></li>
+<li><p><span class="target" id="dorieh.utils.io_utils.file_as_stream.params.extension"></span><strong>extension</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.io_utils.file_as_stream.params.extension">¶</a> – optional, when the content is zip-encoded, the extension
+of the zip entry to return</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Content of the file or a zip entry</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.utils.io_utils.file_as_csv_reader">
+<span class="sig-name descname"><span class="pre">file_as_csv_reader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/io_utils.html#file_as_csv_reader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.io_utils.file_as_csv_reader" title="Permalink to this definition"></a></dt>
+<dd><p>An utility method to return the CSV content of the file as CSVReader</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.utils.io_utils.file_as_csv_reader.params.filename"></span><strong>filename</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.io_utils.file_as_csv_reader.params.filename">¶</a> – path to file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>an instance of csv.DictReader</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.utils.io_utils.fopen">
+<span class="sig-name descname"><span class="pre">fopen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/io_utils.html#fopen"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.io_utils.fopen" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper to open various types of files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.utils.io_utils.fopen.params.path"></span><strong>path</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.io_utils.fopen.params.path">¶</a> – Path to file</p></li>
+<li><p><span class="target" id="dorieh.utils.io_utils.fopen.params.mode"></span><strong>mode</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.io_utils.fopen.params.mode">¶</a> – Opening mode</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>file-like object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.utils.io_utils.check_http_response">
+<span class="sig-name descname"><span class="pre">check_http_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Response</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/io_utils.html#check_http_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.io_utils.check_http_response" title="Permalink to this definition"></a></dt>
+<dd><p>An internal method raises an exception of HTTP response is not OK</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.utils.io_utils.check_http_response.params.r"></span><strong>r</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.io_utils.check_http_response.params.r">¶</a> – Response</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>nothing, raises an exception if response is not OK</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.utils.io_utils.download">
+<span class="sig-name descname"><span class="pre">download</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">IO</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/io_utils.html#download"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.io_utils.download" title="Permalink to this definition"></a></dt>
+<dd><p>A utility method to download large binary data to a file-like object</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.utils.io_utils.is_downloaded">
+<span class="sig-name descname"><span class="pre">is_downloaded</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/dorieh/utils/io_utils.html#is_downloaded"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.io_utils.is_downloaded" title="Permalink to this definition"></a></dt>
+<dd><p>Checks if the same data has already been downloaded</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.utils.io_utils.is_downloaded.params.check_size"></span><strong>check_size</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.io_utils.is_downloaded.params.check_size">¶</a> – Use default value (0) if target size should be equal
+to source size. If several urls are combined when downloaded
+then specify a positive integer to check that destination file
+size is greater than the specified value. Specifying negative
+value will disable size check</p></li>
+<li><p><span class="target" id="dorieh.utils.io_utils.is_downloaded.params.url"></span><strong>url</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.io_utils.is_downloaded.params.url">¶</a> – URL with data</p></li>
+<li><p><span class="target" id="dorieh.utils.io_utils.is_downloaded.params.target"></span><strong>target</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.io_utils.is_downloaded.params.target">¶</a> – Destination of the downloads</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the destination file exists and is newer than
+URL content</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.utils.io_utils.write_csv">
+<span class="sig-name descname"><span class="pre">write_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reader</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DictReader</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">writer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DictWriter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">write_header</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/io_utils.html#write_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.io_utils.write_csv" title="Permalink to this definition"></a></dt>
+<dd><p>Rewrites the CSV content optionally transforming and
+filtering rows</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.utils.io_utils.write_csv.params.transformer"></span><strong>transformer</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.io_utils.write_csv.params.transformer">¶</a> – An optional callable that tranmsforms a row in place</p></li>
+<li><p><span class="target" id="dorieh.utils.io_utils.write_csv.params.reader"></span><strong>reader</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.io_utils.write_csv.params.reader">¶</a> – Input data as an instance of csv.DictReader</p></li>
+<li><p><span class="target" id="dorieh.utils.io_utils.write_csv.params.writer"></span><strong>writer</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.io_utils.write_csv.params.writer">¶</a> – Output source should be provided as csv.DictWriter</p></li>
+<li><p><span class="target" id="dorieh.utils.io_utils.write_csv.params.filter"></span><strong>filter</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.io_utils.write_csv.params.filter">¶</a> – Optionally, a callable function returning True
+for rows that should be written to the output and False for those
+that should be omitted</p></li>
+<li><p><span class="target" id="dorieh.utils.io_utils.write_csv.params.write_header"></span><strong>write_header</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.io_utils.write_csv.params.write_header">¶</a> – whether to first write header row</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Nothing</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.utils.io_utils.Collector">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Collector</span></span><a class="reference internal" href="../_modules/dorieh/utils/io_utils.html#Collector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.io_utils.Collector" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.utils.io_utils.CSVWriter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CSVWriter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out_stream</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/io_utils.html#CSVWriter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.io_utils.CSVWriter" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.utils.io_utils.ListCollector">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ListCollector</span></span><a class="reference internal" href="../_modules/dorieh/utils/io_utils.html#ListCollector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.io_utils.ListCollector" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.utils.io_utils.basename">
+<span class="sig-name descname"><span class="pre">basename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/io_utils.html#basename"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.io_utils.basename" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a name without extension of a file or an
+archive entry</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.utils.io_utils.basename.params.path"></span><strong>path</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.io_utils.basename.params.path">¶</a> – a path to a file or archive entry</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>base name without full path or extension</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.utils.io_utils.is_readme">
+<span class="sig-name descname"><span class="pre">is_readme</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/dorieh/utils/io_utils.html#is_readme"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.io_utils.is_readme" title="Permalink to this definition"></a></dt>
+<dd><p>Checks if a file is a documentation file
+This method is used to extract some metadata from documentation
+provided as markDOwn files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.utils.io_utils.is_readme.params.name"></span><strong>name</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.io_utils.is_readme.params.name">¶</a> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.utils.io_utils.get_entries">
+<span class="sig-name descname"><span class="pre">get_entries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/dorieh/utils/io_utils.html#get_entries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.io_utils.get_entries" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a list of entries in an archive or files in
+a directory</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.utils.io_utils.get_entries.params.path"></span><strong>path</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.io_utils.get_entries.params.path">¶</a> – path to a directory or an archive</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Tuple with the list of entry names and a method</p>
+</dd>
+</dl>
+<p>to open these entries for reading</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.utils.io_utils.get_readme">
+<span class="sig-name descname"><span class="pre">get_readme</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/io_utils.html#get_readme"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.io_utils.get_readme" title="Permalink to this definition"></a></dt>
+<dd><p>Looks for a README file in the specified path
+:param _sphinx_paramlinks_dorieh.utils.io_utils.get_readme.path: a path to a folder or an archive
+:return: a file that is possibly a README file</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dorieh.utils.io_utils.is_dir">
+<span class="sig-name descname"><span class="pre">is_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/dorieh/utils/io_utils.html#is_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.io_utils.is_dir" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Determine if a certain path specification refers</dt><dd><p>to a collection of files or a single entry.
+Examples of collections are folders (directories)
+and archives</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.utils.io_utils.is_dir.params.path"></span><strong>path</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.io_utils.is_dir.params.path">¶</a> – path specification</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if specification refers to a collection of files</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.utils.io_utils.CSVFileWrapper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CSVFileWrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_like_object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">','</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">null_replacement</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'NA'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/io_utils.html#CSVFileWrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.io_utils.CSVFileWrapper" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper around CSV reader that does:</p>
+<ul class="simple">
+<li><p>Counts characters and line read</p></li>
+<li><p>Logging of the progress of the file being read</p></li>
+<li><p>Performs on-the-fly replacement of null and special
+values</p></li>
+</ul>
+</dd></dl>
+
 </section>
 
 

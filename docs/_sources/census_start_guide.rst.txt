@@ -65,7 +65,7 @@ After this, we can begin interpolation.
 This will interpolate missing data using a weighted moving average model missing data for each
 variable, for each geographic unit, for each year in the dataset. Since ACS data/Decennial data
 is available for counties in 2000, and in 2009 onward, this will create data for 1999, and 2001-2008.
-More information on the interpolation methods can be seen in the ``nsaph_utils`` package documentation.
+More information on the interpolation methods can be seen in the ``dorieh.utils`` package documentation.
 
 - Calculate Densities: ::
 

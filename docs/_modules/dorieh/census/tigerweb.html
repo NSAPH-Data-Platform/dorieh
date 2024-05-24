@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dorieh.census.tigerweb &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../DBT.html">Database Testing Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">dorieh.census.tigerweb</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for dorieh.census.tigerweb</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">tigerweb.py</span>
+<span class="sd">=================================================</span>
+<span class="sd">Code for interacting with the Census TIGERWEb API, query area and download shape</span>
+<span class="sd"> files.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1">#  Copyright (c) 2022. Harvard University</span>
+<span class="c1">#</span>
+<span class="c1">#  Developed by Harvard T.H. Chan School of Public Health</span>
+<span class="c1">#  (HSPH) and Research Software Engineering,</span>
+<span class="c1">#  Faculty of Arts and Sciences, Research Computing (FAS RC)</span>
+<span class="c1">#  Author: Ben Sabath (https://github.com/mbsabath)</span>
+<span class="c1">#</span>
+<span class="c1">#  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1">#  you may not use this file except in compliance with the License.</span>
+<span class="c1">#  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#         http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1">#  limitations under the License.</span>
+<span class="c1">#</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="kn">from</span> <span class="nn">.data</span> <span class="kn">import</span> <span class="n">load_state_codes</span>
+<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="kn">import</span> <span class="n">CensusException</span>
+<span class="kn">from</span> <span class="nn">.query</span> <span class="kn">import</span> <span class="n">_prep_vars</span>
+
+<span class="n">GEOMETRY_CODES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;zcta&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                  <span class="s2">&quot;tract&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+                  <span class="s2">&quot;block group&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+                  <span class="s2">&quot;state&quot;</span><span class="p">:</span> <span class="mi">82</span><span class="p">,</span>
+                  <span class="s2">&quot;county&quot;</span><span class="p">:</span> <span class="mi">84</span><span class="p">}</span>
+
+<span class="n">TIGER_NAMES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;zcta&quot;</span><span class="p">:</span> <span class="s2">&quot;ZCTA5&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;tract&quot;</span><span class="p">:</span> <span class="s2">&quot;TRACT&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;county&quot;</span><span class="p">:</span> <span class="s2">&quot;COUNTY&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;state&quot;</span><span class="p">:</span> <span class="s2">&quot;STATE&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;block group&quot;</span><span class="p">:</span> <span class="s2">&quot;BG&quot;</span>
+<span class="p">}</span>
+
+<span class="n">LOG</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">_BBox</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Internal class defining a simple bounding box</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xmin</span><span class="o">=-</span><span class="mf">1.96724487545E7</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=-</span><span class="mf">1678452.6019</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=</span><span class="mf">1.62682738027E7</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="mf">1.15436424852E7</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xmin</span> <span class="o">=</span> <span class="n">xmin</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ymin</span> <span class="o">=</span> <span class="n">ymin</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xmax</span> <span class="o">=</span> <span class="n">xmax</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ymax</span> <span class="o">=</span> <span class="n">ymax</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xmin</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ymin</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xmax</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ymax</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">subdivide</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create list of BBox objects that break up the axes of the parent obejct by `factor`. I.e. A factor of</span>
+<span class="sd">        :math:`n` will create :math:`n^2` child BBox objects</span>
+
+<span class="sd">        :param factor: Factor to subdivide by</span>
+<span class="sd">        :return: List of sub-boxes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">xdiff</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xmax</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">xmin</span><span class="p">)</span><span class="o">/</span><span class="n">factor</span>
+        <span class="n">ydiff</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ymax</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">ymin</span><span class="p">)</span><span class="o">/</span><span class="n">factor</span>
+
+        <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">factor</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">factor</span><span class="p">):</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_BBox</span><span class="p">(</span><span class="n">xmin</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">xmin</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">xdiff</span><span class="p">),</span>
+                                 <span class="n">ymin</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ymin</span> <span class="o">+</span> <span class="p">(</span><span class="n">j</span> <span class="o">*</span> <span class="n">ydiff</span><span class="p">),</span>
+                                 <span class="n">xmax</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">xmin</span> <span class="o">+</span> <span class="p">((</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">xdiff</span><span class="p">),</span>
+                                 <span class="n">ymax</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ymin</span> <span class="o">+</span> <span class="p">((</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">ydiff</span><span class="p">)))</span>
+
+        <span class="k">return</span> <span class="n">out</span>
+
+
+<span class="k">def</span> <span class="nf">_tigerweb_endpoint</span><span class="p">(</span><span class="n">geometry</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the API endpoint for making queries to the census tigerweb</span>
+
+<span class="sd">    :param geometry: type of census geometry to use</span>
+<span class="sd">    :return: string of rest API URL endpoint</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="s2">&quot;https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2019/MapServer/&quot;</span>
+    <span class="n">out</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">GEOMETRY_CODES</span><span class="p">[</span><span class="n">geometry</span><span class="p">])</span>
+    <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;/query&quot;</span>
+
+    <span class="k">return</span> <span class="n">out</span>
+
+
+<span class="c1"># noinspection PyDefaultArgument</span>
+<span class="k">def</span> <span class="nf">_tigerweb_params</span><span class="p">(</span><span class="n">attributes</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GEOID&quot;</span><span class="p">],</span> <span class="n">split_factor</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a list of  dictionaries of the necessary parameters to query the census tigerweb API. Returns</span>
+<span class="sd">    a list to enable combining of queries that return sets larger than the maximum number of objects</span>
+
+<span class="sd">    :param attributes: List of names of attributes to include. You should always include &quot;GEOID&quot; to enable</span>
+<span class="sd">      linking of features with other census data</span>
+<span class="sd">    :param split_factor: Factor to divide the bounding box by to enable splitting up of large queries</span>
+<span class="sd">    :return: list of dictionary of needed parameters</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">bbox</span> <span class="o">=</span> <span class="n">_BBox</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">split_factor</span><span class="p">:</span>
+        <span class="n">boxes</span> <span class="o">=</span> <span class="n">bbox</span><span class="o">.</span><span class="n">subdivide</span><span class="p">(</span><span class="n">split_factor</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">boxes</span> <span class="o">=</span> <span class="p">[</span><span class="n">bbox</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">box</span> <span class="ow">in</span> <span class="n">boxes</span><span class="p">:</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="n">params</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
+        <span class="n">params</span><span class="p">[</span><span class="s2">&quot;geometryType&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;esriGeometryEnvelope&quot;</span>
+        <span class="n">params</span><span class="p">[</span><span class="s2">&quot;spatialRel&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;esriSpatialRelIntersects&quot;</span>
+        <span class="n">params</span><span class="p">[</span><span class="s2">&quot;outFields&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_prep_vars</span><span class="p">(</span><span class="n">attributes</span><span class="p">)</span>
+        <span class="n">params</span><span class="p">[</span><span class="s2">&quot;returnTrueCurves&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;false&quot;</span>
+        <span class="n">params</span><span class="p">[</span><span class="s2">&quot;returnTrueCurves&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;false&quot;</span>
+        <span class="n">params</span><span class="p">[</span><span class="s2">&quot;returnIdsOnly&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;false&quot;</span>
+        <span class="n">params</span><span class="p">[</span><span class="s2">&quot;returnCountOnly&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;false&quot;</span>
+        <span class="n">params</span><span class="p">[</span><span class="s2">&quot;returnZ&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;false&quot;</span>
+        <span class="n">params</span><span class="p">[</span><span class="s2">&quot;returnM&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;false&quot;</span>
+        <span class="n">params</span><span class="p">[</span><span class="s2">&quot;returnExtentsOnly&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;false&quot;</span>
+        <span class="n">params</span><span class="p">[</span><span class="s2">&quot;returnGeometry&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;false&quot;</span>
+        <span class="n">params</span><span class="p">[</span><span class="s2">&quot;f&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;pjson&quot;</span>
+
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">out</span>
+
+
+<div class="viewcode-block" id="get_area"><a class="viewcode-back" href="../../../members/tigerweb.html#dorieh.census.tigerweb.get_area">[docs]</a><span class="k">def</span> <span class="nf">get_area</span><span class="p">(</span><span class="n">geometry</span><span class="p">,</span> <span class="n">sq_mi</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a data frame of Census GEOIDs and Area. Due to the Tigerweb API&#39;s limiting of</span>
+<span class="sd">    the number of features per query to 100,000, block groups aren&#39;t currently supported through this wrapper.</span>
+
+<span class="sd">    :param geometry: type of census geometry to use</span>
+<span class="sd">    :param sq_mi:  Should areas be converted to square miles?</span>
+<span class="sd">    :return: pandas data frame</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">url</span> <span class="o">=</span> <span class="n">_tigerweb_endpoint</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">geometry</span> <span class="o">==</span> <span class="s2">&quot;block group&quot;</span><span class="p">:</span>
+        <span class="n">split_factor</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">split_factor</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">param_list</span> <span class="o">=</span> <span class="n">_tigerweb_params</span><span class="p">([</span><span class="s2">&quot;GEOID&quot;</span><span class="p">,</span> <span class="s2">&quot;AREALAND&quot;</span><span class="p">],</span> <span class="n">split_factor</span><span class="p">)</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">queries</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">params</span> <span class="ow">in</span> <span class="n">param_list</span><span class="p">:</span>
+        <span class="n">queries</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Area query &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">queries</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; of &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">param_list</span><span class="p">)))</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s2">&quot;error&quot;</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="ow">and</span> <span class="n">result</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;error&quot;</span><span class="p">][</span><span class="s2">&quot;code&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">CensusException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Url </span><span class="si">{</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="si">}</span><span class="s2"> not found&quot;</span><span class="p">)</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;attributes&#39;</span><span class="p">],</span> <span class="n">result</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;features&#39;</span><span class="p">]))</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">out</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">result</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;outer&quot;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GEOID&quot;</span><span class="p">,</span> <span class="s2">&quot;AREALAND&quot;</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> <span class="o">==</span> <span class="mi">100000</span><span class="p">:</span>
+            <span class="n">LOG</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Max rows hit, increase split factor, ending&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">CensusException</span><span class="p">(</span><span class="s2">&quot;Max rows hit, increase split factor, ending&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">sq_mi</span><span class="p">:</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;AREALAND&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">out</span><span class="p">[</span><span class="s1">&#39;AREALAND&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">2589988</span>  <span class="c1"># 2589988 square meters to a square mile</span>
+
+    <span class="n">out</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">out</span></div>
+
+
+<span class="k">def</span> <span class="nf">_tiger_line_url</span><span class="p">(</span><span class="n">geometry</span><span class="p">,</span> <span class="n">year</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return URL (or URLs) of zip file(s) containing shape files</span>
+<span class="sd">    for a given census geography</span>
+
+<span class="sd">    :param geometry: name of census geometry to download</span>
+<span class="sd">    :param year: year of geometry to download</span>
+<span class="sd">    :return: List of URLs</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">base</span> <span class="o">=</span> <span class="s2">&quot;https://www2.census.gov/geo/tiger/&quot;</span>
+
+    <span class="k">if</span> <span class="n">geometry</span> <span class="o">==</span> <span class="s2">&quot;zcta&quot;</span> <span class="ow">and</span> <span class="n">year</span> <span class="o">==</span> <span class="mi">2011</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_tiger_line_url</span><span class="p">(</span><span class="s2">&quot;zcta&quot;</span><span class="p">,</span> <span class="mi">2010</span><span class="p">)</span>  <span class="c1"># No ZCTAs listed in 2011 (for some reason)</span>
+
+    <span class="k">if</span> <span class="n">year</span> <span class="o">&gt;=</span> <span class="mi">2010</span><span class="p">:</span>
+        <span class="n">base</span> <span class="o">+=</span> <span class="s2">&quot;TIGER&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span>
+        <span class="n">base</span> <span class="o">+=</span> <span class="n">TIGER_NAMES</span><span class="p">[</span><span class="n">geometry</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span>
+        <span class="k">if</span> <span class="n">year</span> <span class="o">==</span> <span class="mi">2010</span><span class="p">:</span>
+            <span class="n">base</span> <span class="o">+=</span> <span class="s2">&quot;2010/&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">year</span> <span class="o">=</span> <span class="mi">2000</span>
+        <span class="n">base</span> <span class="o">+=</span> <span class="s2">&quot;TIGER2010/&quot;</span> <span class="o">+</span> <span class="n">TIGER_NAMES</span><span class="p">[</span><span class="n">geometry</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;/2000/&quot;</span>
+
+    <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Define file stem for each geometry</span>
+    <span class="k">if</span> <span class="n">geometry</span> <span class="o">==</span> <span class="s2">&quot;zcta&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">year</span> <span class="o">==</span> <span class="mi">2000</span><span class="p">:</span>
+            <span class="n">base</span> <span class="o">+=</span> <span class="s2">&quot;tl_2010_us_zcta500.zip&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">base</span> <span class="o">+=</span> <span class="s2">&quot;tl_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;_us_zcta510.zip&quot;</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">base</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">geometry</span> <span class="o">==</span> <span class="s2">&quot;county&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">year</span> <span class="o">==</span> <span class="mi">2000</span><span class="p">:</span>
+            <span class="n">base</span> <span class="o">+=</span> <span class="s2">&quot;tl_2010_us_county00.zip&quot;</span>
+        <span class="k">elif</span> <span class="n">year</span> <span class="o">==</span> <span class="mi">2010</span><span class="p">:</span>
+            <span class="n">base</span> <span class="o">+=</span> <span class="s2">&quot;tl_2010_us_county10.zip&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">base</span> <span class="o">+=</span> <span class="s2">&quot;tl_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;_us_county.zip&quot;</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">base</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">geometry</span> <span class="o">==</span> <span class="s2">&quot;state&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">year</span> <span class="o">==</span> <span class="mi">2000</span><span class="p">:</span>
+            <span class="n">base</span> <span class="o">+=</span> <span class="s2">&quot;tl_2010_us_state00.zip&quot;</span>
+        <span class="k">elif</span> <span class="n">year</span> <span class="o">==</span> <span class="mi">2010</span><span class="p">:</span>
+            <span class="n">base</span> <span class="o">+=</span> <span class="s2">&quot;tl_2010_us_state10.zip&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">base</span> <span class="o">+=</span> <span class="s2">&quot;tl_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;_us_state.zip&quot;</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">base</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">geometry</span> <span class="o">==</span> <span class="s2">&quot;block group&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">year</span> <span class="o">==</span> <span class="mi">2000</span><span class="p">:</span>
+            <span class="n">base</span> <span class="o">+=</span> <span class="s2">&quot;tl_2010_&quot;</span>
+            <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">load_state_codes</span><span class="p">()[</span><span class="s1">&#39;state&#39;</span><span class="p">]:</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">base</span> <span class="o">+</span> <span class="n">state</span> <span class="o">+</span> <span class="s2">&quot;_bg00.zip&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">year</span> <span class="o">==</span> <span class="mi">2010</span><span class="p">:</span>
+            <span class="n">base</span> <span class="o">+=</span> <span class="s2">&quot;tl_2010_&quot;</span>
+            <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">load_state_codes</span><span class="p">()[</span><span class="s1">&#39;state&#39;</span><span class="p">]:</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">base</span> <span class="o">+</span> <span class="n">state</span> <span class="o">+</span> <span class="s2">&quot;_bg10.zip&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">base</span> <span class="o">+=</span> <span class="s2">&quot;tl_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span>
+            <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">load_state_codes</span><span class="p">()[</span><span class="s1">&#39;state&#39;</span><span class="p">]:</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">base</span> <span class="o">+</span> <span class="n">state</span> <span class="o">+</span> <span class="s2">&quot;_bg.zip&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">geometry</span> <span class="o">==</span> <span class="s2">&quot;tract&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">year</span> <span class="o">==</span> <span class="mi">2000</span><span class="p">:</span>
+            <span class="n">base</span> <span class="o">+=</span> <span class="s2">&quot;tl_2010_&quot;</span>
+            <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">load_state_codes</span><span class="p">()[</span><span class="s1">&#39;state&#39;</span><span class="p">]:</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">base</span> <span class="o">+</span> <span class="n">state</span> <span class="o">+</span> <span class="s2">&quot;_tract00.zip&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">year</span> <span class="o">==</span> <span class="mi">2010</span><span class="p">:</span>
+            <span class="n">base</span> <span class="o">+=</span> <span class="s2">&quot;tl_2010_&quot;</span>
+            <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">load_state_codes</span><span class="p">()[</span><span class="s1">&#39;state&#39;</span><span class="p">]:</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">base</span> <span class="o">+</span> <span class="n">state</span> <span class="o">+</span> <span class="s2">&quot;_tract10.zip&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">base</span> <span class="o">+=</span> <span class="s2">&quot;tl_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span>
+            <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">load_state_codes</span><span class="p">()[</span><span class="s1">&#39;state&#39;</span><span class="p">]:</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">base</span> <span class="o">+</span> <span class="n">state</span> <span class="o">+</span> <span class="s2">&quot;_tract.zip&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">LOG</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;invalid geography: &quot;</span> <span class="o">+</span> <span class="n">geometry</span> <span class="o">+</span> <span class="s2">&quot;provided&quot;</span> <span class="p">)</span>
+        <span class="k">raise</span> <span class="n">CensusException</span><span class="p">(</span><span class="s2">&quot;invalid geography: &quot;</span> <span class="o">+</span> <span class="n">geometry</span> <span class="o">+</span> <span class="s2">&quot;provided&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">out</span>
+
+
+<span class="k">def</span> <span class="nf">_download_file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">out_dir</span><span class="p">):</span>
+    <span class="n">local_filename</span> <span class="o">=</span> <span class="n">out_dir</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c1"># NOTE the stream=True parameter below</span>
+    <span class="k">with</span> <span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">result</span><span class="p">:</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">local_filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">iter_content</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">1024</span><span class="o">**</span><span class="mi">2</span><span class="p">):</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">local_filename</span>
+
+
+<div class="viewcode-block" id="download_geometry"><a class="viewcode-back" href="../../../members/tigerweb.html#dorieh.census.tigerweb.download_geometry">[docs]</a><span class="k">def</span> <span class="nf">download_geometry</span><span class="p">(</span><span class="n">geometry</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2019</span><span class="p">,</span> <span class="n">out_dir</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get spatial information for a census geometry in geojson format and save it to disk</span>
+
+<span class="sd">    :param geometry: type of census geometry to use</span>
+<span class="sd">    :param year: Year to get geometry for</span>
+<span class="sd">    :param out_dir: Directory to save downloaded files in. Note that due to requiring multiple</span>
+<span class="sd">      downloads, tract and block group downloads will create a directory if no out_dir is defined.</span>
+<span class="sd">    :return: None, downloads files only</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">geometry</span> <span class="o">==</span> <span class="s2">&quot;tract&quot;</span> <span class="ow">and</span> <span class="n">out_dir</span> <span class="o">==</span> <span class="s2">&quot;.&quot;</span><span class="p">:</span>
+        <span class="n">out_dir</span> <span class="o">=</span> <span class="s2">&quot;tract&quot;</span>
+    <span class="k">elif</span> <span class="n">geometry</span> <span class="o">==</span> <span class="s2">&quot;block group&quot;</span> <span class="ow">and</span> <span class="n">out_dir</span> <span class="o">==</span> <span class="s2">&quot;.&quot;</span><span class="p">:</span>
+        <span class="n">out_dir</span> <span class="o">=</span> <span class="s2">&quot;bg&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">out_dir</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">out_dir</span><span class="p">)</span>
+
+    <span class="n">urls</span> <span class="o">=</span> <span class="n">_tiger_line_url</span><span class="p">(</span><span class="n">geometry</span><span class="p">,</span> <span class="n">year</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
+        <span class="n">_download_file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">out_dir</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -22,6 +22,7 @@ import logging
 import os
 import subprocess
 import tempfile
+from pathlib import Path
 from typing import Any, Dict, Optional
 
 import yaml
@@ -49,10 +50,12 @@ logger.addHandler(logging.StreamHandler())
 
 arg_parser = argparse.ArgumentParser(description='Convert CWL files into Markdown')
 arg_parser.add_argument(
-    '-i', '--input-dir', type=str, required=True, dest='input_dir', help='An input dir with CWL files'
+    '-i', '--input-dir', type=str, required=True, dest='input_dir',
+    help='An input directory with CWL files or path to a single CWL file'
 )
 arg_parser.add_argument(
-    '-o', '--output-dir', type=str, required=True, dest='output_dir', help='An output dir for Markdown files'
+    '-o', '--output-dir', type=str, required=True, dest='output_dir',
+    help='The output dir for Markdown files'
 )
 arg_parser.add_argument('-v', '--verbose', dest='verbose', action='store_true', help='An extended logging')
 
@@ -146,18 +149,12 @@ class CWLParser:
     def _extract_tool(self, base_command: str) -> str:
         tool = base_command.replace('[', '').replace(']', '').replace("'", '').split(', ')[-1]
         pp = tool.split('.')
-        docroot = os.path.join("../../../nsaph_utils", "..", "..")
-        docpath = os.path.join("doc", "members")
-        d = os.path.dirname(self.output_file_path)
-        if pp[0] == "nsaph":
-            docdir = "core-platform"
-        elif pp[0] == "nsaph_utils":
-            docdir = "utils"
-        elif os.path.isdir(os.path.join(d ,docroot, pp[0])):
-            docdir = pp[0]
+        docpath = os.path.join("..", "members")
+        if pp[0] == "dorieh":
+            doc = os.path.join(docpath, pp[-1])
         else:
             return tool
-        doc = os.path.join(docroot, docdir, docpath, pp[-1])
+
         return f'[{tool}]({doc})'
 
     def _add_docs(self):
