@@ -114,7 +114,7 @@ class FWFReader:
         Constructor
         :param meta: an instance of FWFMeta
         :param ret_dict: boolean value, denoting whether to return each record
-         as a dictionary
+            as a dictionary
         """
 
         self.metadata = meta
