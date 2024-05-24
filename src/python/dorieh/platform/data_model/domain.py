@@ -42,6 +42,7 @@ from dorieh.platform.data_model.utils import basename, split
 from dorieh.platform.data_model.model import index_method, INDEX_NAME_PATTERN, \
     INDEX_DDL_PATTERN, UNIQUE_INDEX_DDL_PATTERN
 from dorieh.platform.pg_keywords import PG_TXT_TYPE, HLL_HASHVAL, HLL
+from dorieh.version import get_version
 
 CONSTRAINTS = [
     "CONSTRAINT",
@@ -65,8 +66,10 @@ AUDIT_INSERT = """INSERT INTO {target}
                 VALUES ({values}, '{reason}');"""
 
 VALIDATION_PROC = """
-CREATE OR REPLACE FUNCTION {schema}.validate_{source}() RETURNS TRIGGER AS ${schema}_{source}_validation$
+CREATE OR REPLACE FUNCTION {schema}.validate_{source}() RETURNS TRIGGER 
 -- Validate foreign key for {schema}.{source}
+AS $body$
+    DECLARE rctid tid;
     BEGIN
         IF ({condition_pk}) THEN
             {action_pk}
@@ -91,12 +94,31 @@ CREATE OR REPLACE FUNCTION {schema}.validate_{source}() RETURNS TRIGGER AS ${sch
         RETURN NEW;
     END;
  
-${schema}_{source}_validation$ LANGUAGE plpgsql;
+$body$ LANGUAGE plpgsql;
 """
 
 VALIDATION_TRIGGER = """
     CREATE TRIGGER {schema}_{name}_validation BEFORE INSERT ON {table}
         FOR EACH ROW EXECUTE FUNCTION {schema}.validate_{name}();
+"""
+
+
+DUP_CHECK = """
+            SELECT 
+                ctid 
+            FROM {table} AS t 
+            WHERE {condition} 
+            INTO rctid;
+"""
+
+QUALITY_UPDATE = """
+UPDATE {table}
+SET quality = '{reason}'
+WHERE
+    ctid IN (
+        SELECT refctid FROM {target} WHERE reason = '{reason}'
+    )
+;
 """
 
 
@@ -427,7 +449,7 @@ class Domain:
                 ]
             elif "nullable group by" in create:
                 group_by = ','.join(create["nullable group by"])
-                create_table += "\nGROUP BY {columns}\n".format(columns=group_by)
+                create_table += "\nGROUP BY {columns};\n".format(columns=group_by)
             else:
                 create_table = create_table.strip() + ';'
         else:
@@ -462,12 +484,15 @@ class Domain:
                             if "CONSTRAINT" not in f and "PRIMARY KEY" not in f
                     ]
                 ff.append("REASON VARCHAR(16)")
+                ff.append("REFCTID TID")
                 ff.append("recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ")
                 create_table = self.create_table(t2) + \
                     " (\n\t{features}\n);".format(features=",\n\t".join(ff))
                 self.append_ddl(table, create_table)
                 ddl, _ = self.get_index_ddl(t2, "REASON")
                 self.add_index_by_ddl(table, ddl)
+                ddl, _ = self.get_index_ddl(t2, "REFCTID")
+                self.append_ddl(table, ddl)
                 for column in columns:
                     if not self.need_index(column):
                         continue
@@ -499,6 +524,10 @@ class Domain:
         if object_type != "view":
             self.add_column_indices(table, columns)
         self.add_multi_column_indices(table, definition)
+
+        comment = f"CREATED BY Dorieh: {get_version()}"
+        comment_sql = f"COMMENT ON {object_type} {table} IS '{comment}';"
+        self.append_ddl(table, comment_sql)
 
         if "children" in definition:
             children = {t: definition["children"][t] for t in definition["children"]}
@@ -546,7 +575,15 @@ class Domain:
             else:
                 raise ValueError("Unsupported limit: " + str(limit))
         sql += ";\n"
+        sql += self.gen_update_quality(table=table, reasons=["DUPLICATE"])
         return sql
+
+    def is_populate_on_create(self, table) -> bool:
+        definition = self.find(table)
+        create = definition["create"]
+        if "populate" in create and create["populate"] is False:
+            return False
+        return True
 
     def create_object_from(self, table, definition, features, obj_type) -> str:
         create = definition["create"]
@@ -570,7 +607,7 @@ class Domain:
                     if not is_constraint(feature)
             ]
             select += ",\n" + ",\n".join(add_columns)
-        if "populate" in create and create["populate"] is False:
+        if not self.is_populate_on_create(table):
             condition = "WHERE 1 = 0"
         else:
             condition = ""
@@ -896,26 +933,47 @@ class Domain:
         logging.warning("This method is deprecated")
         return DomainOperations.create(self, connection, list_of_tables)
 
+    def gen_insert_on_validation_failure(self, table, target, columns, conditions) -> List[str]:
+        cc = []
+        for c in columns:
+            name, definition = split(c)
+            if not self.is_generated(definition):
+                cc.append(name)
+        vv = ["NEW.{}".format(c) for c in cc]
+        reason = "DUPLICATE"
+        sel_dup = DUP_CHECK.format(table=table, condition = conditions[0])
+        ins_dup = AUDIT_INSERT.format(
+            target=target,
+            columns=','.join(cc + ["REFCTID"]),
+            values=','.join(vv + ["rctid"]),
+            reason=reason)
+        action_dup = sel_dup + ins_dup
+        actions = [action_dup] + [
+            AUDIT_INSERT.format(target=target, columns=','.join(cc), values=','.join(vv), reason=r)
+            for r in ["FOREIGN KEY", "PRIMARY KEY"]
+        ]
+        return actions
+
+    def gen_update_quality(self, table, reasons: List[str]) -> str:
+        definition = self.find(table)
+        if "invalid.records" not in definition:
+            return ""
+        validation = definition["invalid.records"]
+        action = validation["action"].lower()
+        t2 = self.spillover_table(table, definition)
+        if action != "insert" or not t2:
+            return ""
+        statements = []
+        for reason in reasons:
+            sql = QUALITY_UPDATE.format(reason=reason, table=self.fqn(table), target=t2)
+            statements.append(sql)
+        return ";\n".join(statements)
+
     def add_fk_validation(self, table, pk, action, target, columns, pt, fk_columns):
         columns_as_dict = {}
         for c in columns:
             name, definition = split(c)
             columns_as_dict[name] = definition
-        if action == "insert":
-            cc = []
-            for c in columns:
-                name, definition = split(c)
-                if not self.is_generated(definition):
-                    cc.append(name)
-            vv = ["NEW.{}".format(c) for c in cc]
-            actions = [
-                AUDIT_INSERT.format(target=target, columns=','.join(cc), values=','.join(vv), reason=r)
-                for r in ["DUPLICATE", "FOREIGN KEY", "PRIMARY KEY"]
-            ]
-        elif action == "ignore":
-            actions = ["", "", ""]
-        else:
-            raise Exception("Invalid action on validation for table {}: {}".format(table, action))
         conditions = []
         for constraint in [pk, fk_columns]:
             cols = []
@@ -928,6 +986,12 @@ class Domain:
                     cols.append("NEW.{c} = t.{c}".format(c=c))
             conditions.append("\n\t\t\t\tAND ".join(cols))
         conditions.append("\n\t\t\t\tOR ".join(["NEW.{c} IS NULL ".format(c=c) for c in pk]))
+        if action == "insert":
+            actions = self.gen_insert_on_validation_failure(table, target, columns, conditions)
+        elif action == "ignore":
+            actions = ["", "", ""]
+        else:
+            raise Exception("Invalid action on validation for table {}: {}".format(table, action))
         # OR NEW.{c} = ''
         t = basename(table)
 
@@ -939,6 +1003,9 @@ class Domain:
         self.append_ddl(table, sql)
         sql = VALIDATION_TRIGGER.format(schema=self.schema, name=t, table=table).strip()
         self.append_ddl(table, sql)
+        if self.is_populate_on_create(table):
+            sql = self.gen_update_quality(table, reasons=["DUPLICATE"])
+            self.append_ddl(table, sql)
         return
 
     @classmethod

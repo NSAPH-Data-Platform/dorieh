@@ -69,5 +69,9 @@ copy_section doc/gis.md doc/home.md dorieh.gis
 sphinx-build doc docs || exit
 touch docs/.nojekyll
 
+echo "Build finished"
+
 git add docs
 git commit -a -m "Updating documentation"
+
+echo "Changes committed"

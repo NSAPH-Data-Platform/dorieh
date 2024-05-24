@@ -7,7 +7,7 @@ with open("README.md", "r") as readme:
 
 setup(
     name='dorieh',
-    version="0.0.5",
+    version="0.0.10",
     url='https://github.com/NSAPH-Data-Platform/dorieh',
     license='Apache 2.0',
     author='Michael A Bouzinier',
@@ -20,6 +20,8 @@ setup(
             'cwl2md=dorieh.docutils.cwl2md:main',
             'copy_section=dorieh.docutils.copy_section:main',
             'collector=dorieh.docutils.collector:main',
+            'dorieh_version=dorieh.version:main',
+            'validate_domain=dorieh.platform.loader.validator:main'
         ],
     },
     packages=find_packages(where='./src/python') + [
@@ -37,7 +39,7 @@ setup(
         "dorieh": ["**/*.yaml", "**/*.yml"],
         "dorieh.sql": ["*.sql"],
         "dorieh.resources": ["**/*", "*/*/*", "*/*/*/*"],
-        "dorieh.cwl": ["*.cwl"],
+        "dorieh.cwl": ["./src/cwl/*.cwl"],
         "dorieh.gis": ["data/*.csv"]
     },
     install_requires=[
@@ -74,6 +76,7 @@ setup(
         'future>=0.18.2',
         "geopandas",
         "geopy",
+        'GitPython',
         'graphviz>=0.14.2',
         'gunicorn>=20.0.4',
         'h5py',

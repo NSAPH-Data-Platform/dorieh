@@ -138,6 +138,8 @@ class TableFingerprint:
                     t = CType.numeric
                 elif c[1] in ['date']:
                     t = CType.date
+                elif c[1] in ['USER-DEFINED']:
+                    continue
                 else:
                     t = CType.text
                 dc = 1024*1024*1024
@@ -169,7 +171,7 @@ class TableFingerprint:
             test_case = self.test_exact(s1, c.name, "count distinct")
             self.test_cases.append(test_case)
         if c.type in [CType.text, CType.categorical]:
-            s2 = f"SELECT MD5(string_agg({c.name}::varchar, '')) FROM {self.fqtn}"
+            s2 = f"SELECT MD5(string_agg({c.name}::varchar, '' order by {c.name})) FROM {self.fqtn}"
             test_case = self.test_exact(s2, c.name, "MD5 value")
             self.test_cases.append(test_case)
         if c.type in [CType.numeric, CType.integral]:
@@ -209,6 +211,9 @@ class TableFingerprint:
                 cursor.execute(sql)
                 for row in cursor:
                     v = row[0]
+        if v is None:
+            condition = f"({sql}) IS NULL"
+            return self.test_case_sql(name, test, condition)
         if v >= 0:
             v1 = 0.99 * float(v)
             v2 = 1.01 * float(v)

@@ -127,7 +127,7 @@ class Lock:
             self.blocked_app, self.blocked_pid,
             self.blocking_user, self.blocking_app, self.blocking_pid
         )
-        return super().__str__()
+        return super().__str__() + f"[{msg}]"
 
 
 

@@ -17,7 +17,29 @@
 --  limitations under the License.
 --
 
+-- This file contains collection of scripts and DDLs required to initialize Dorieh
+-- database. It is being automatically executed by the majority of the pipelines
+-- before ingesting data into the warehouse.
+
 CREATE EXTENSION IF NOT EXISTS  hll;
+
+CREATE SCHEMA IF NOT EXISTS metadata;
+CREATE OR REPLACE FUNCTION metadata.stamp (
+)   RETURNS timestamp
+    IMMUTABLE
+LANGUAGE plpgsql
+AS $body$
+BEGIN
+    RETURN NOW();
+END
+$body$
+;
+
+CREATE TABLE IF NOT EXISTS metadata.log (
+    update_timestamp TIMESTAMP GENERATED ALWAYS AS ( metadata.stamp() ) STORED,
+    ddl VARCHAR(32000),
+    version VARCHAR(1024)
+);
 
 CREATE OR REPLACE FUNCTION "public"."count_rows" (
     schema_name character varying, table_name character varying

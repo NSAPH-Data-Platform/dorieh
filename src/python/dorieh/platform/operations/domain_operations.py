@@ -35,7 +35,15 @@
 #
 import logging
 
-import dorieh.platform.dictionary.element
+from dorieh.version import get_version
+
+LOG_SQL = """
+INSERT INTO metadata.log (ddl, version) VALUES({ddl}, {version});
+"""
+
+
+def escape(s: str) -> str:
+    return "'" + s.replace("'", "''") + "'"
 
 
 class DomainOperations:
@@ -53,6 +61,7 @@ class DomainOperations:
                     sql = "DROP {TABLE} IF EXISTS {} CASCADE".format(t, TABLE=kind)
                     logging.info(sql)
                     cursor.execute(sql)
+                    cursor.execute(LOG_SQL.format(ddl=escape(sql), version=escape(get_version())))
                 if not connection.autocommit:
                     connection.commit()
             return [t for t in tables]
@@ -76,6 +85,7 @@ class DomainOperations:
                     logging.info(statement)
                 sql = "\n".join(statements)
                 cursor.execute(sql)
+                cursor.execute(LOG_SQL.format(ddl=escape(sql), version=escape(get_version())))
                 if not connection.autocommit:
                     connection.commit()
                 logging.info("Schema and all tables for domain {} have been created".format(domain.domain))
