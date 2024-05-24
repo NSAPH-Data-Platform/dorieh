@@ -7,7 +7,7 @@ with open("README.md", "r") as readme:
 
 setup(
     name='dorieh',
-    version="0.0.9",
+    version="0.0.10",
     url='https://github.com/NSAPH-Data-Platform/dorieh',
     license='Apache 2.0',
     author='Michael A Bouzinier',
@@ -39,7 +39,7 @@ setup(
         "dorieh": ["**/*.yaml", "**/*.yml"],
         "dorieh.sql": ["*.sql"],
         "dorieh.resources": ["**/*", "*/*/*", "*/*/*/*"],
-        "dorieh.cwl": ["*.cwl"],
+        "dorieh.cwl": ["./src/cwl/*.cwl"],
         "dorieh.gis": ["data/*.csv"]
     },
     install_requires=[

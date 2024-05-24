@@ -17,6 +17,10 @@
 --  limitations under the License.
 --
 
+-- This file contains collection of scripts and DDLs required to initialize Dorieh
+-- database. It is being automatically executed by the majority of the pipelines
+-- before ingesting data into the warehouse.
+
 CREATE EXTENSION IF NOT EXISTS  hll;
 
 CREATE SCHEMA IF NOT EXISTS metadata;
