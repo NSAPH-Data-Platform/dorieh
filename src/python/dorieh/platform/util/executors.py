@@ -1,6 +1,6 @@
 """
 This module implements a
-`ThreadPoolExecutor https://docs.python.org/3/library/concurrent.futures.html#threadpoolexecutor`_
+`ThreadPoolExecutor <https://docs.python.org/3/library/concurrent.futures.html#threadpoolexecutor>`_
 with a bounded queue of fixed given capacity. When the queue reaches
 its maximum capacity, it stops accepting new tasks and blocks
 until some tasks are removed from the queue for execution.
@@ -11,6 +11,7 @@ a database. Reading files is usually much faster than processing
 them and without blocking, for huge files can lead to out of memory (OOM)
 errors. Using this executor implements parallelization without
 danger of causing OOM.
+
 """
 
 #  Copyright (c) 2021. Harvard University
@@ -46,6 +47,7 @@ def thread_initializer():
 
 
 class BlockingThreadPoolExecutor(ThreadPoolExecutor):
+
     def __init__(self, max_queue_size:int, timeout=None, *args, **kwargs):
         super().__init__(initializer=thread_initializer, *args, **kwargs)
         self.max_queue_size = max_queue_size

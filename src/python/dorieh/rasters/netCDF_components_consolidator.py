@@ -20,10 +20,10 @@
 
 
 """
-  Given a NetCDF file with absolute values (e.g., for PM25) and a set of
-  NetCDF files containing percentage values for individual components,
-  this tool consolidates all data into a single NetCDF file with both
-  percentages and absolute values for all components.
+Given a NetCDF file with absolute values (e.g., for PM25) and a set of
+NetCDF files containing percentage values for individual components,
+this tool consolidates all data into a single NetCDF file with both
+percentages and absolute values for all components.
 
 See also:
 
@@ -32,6 +32,7 @@ https://neetinayak.medium.com/combine-many-netcdf-files-into-a-single-file-with-
 https://docs.xarray.dev/en/stable/api.html
 
 """
+
 import argparse
 import logging
 import os.path
@@ -54,7 +55,9 @@ class NetCDFDataset:
     """
     Class to combine NetCDF dataset with absolute values with
     dependent datasets containing components
+
     """
+
     def __init__(self):
         self.dataset: Optional[Dataset] = None
         '''NetCDF Dataset that we will be modifying'''
