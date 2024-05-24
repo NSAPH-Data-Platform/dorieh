@@ -36,7 +36,7 @@ inputs:
   interp_qc_log: string # Place to log QC for interpolated data
   no_interp_qc_log: string # Place to log QC for uninterpolated data
   database:
-    type: string
+    type: File
     doc: Path to database connection file, usually database.ini
   connection_name:
     type: string

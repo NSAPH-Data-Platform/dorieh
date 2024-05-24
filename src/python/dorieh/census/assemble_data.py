@@ -29,8 +29,8 @@ import logging
 import yaml
 import numpy as np
 import pandas as pd
-import nsaph_utils.qc
-import nsaph_utils.interpolation
+import dorieh.utils.qc as qc
+import dorieh.utils.interpolation  as interpolation
 
 from .data import *
 from .exceptions import CensusException
@@ -274,7 +274,7 @@ class DataPlan:
         :param max_year: Maximum year to interpolate
         :return:
         """
-        if method not in nsaph_utils.interpolation.IMPLEMENTED_METHODS:
+        if method not in interpolation.IMPLEMENTED_METHODS:
             self.__logger.exception("Can't interpolate, Invalid Interpretation Method")
             raise CensusException("Invalid Interpretation Method")
 
@@ -287,16 +287,16 @@ class DataPlan:
         if not self.__has_missing:
             self.create_missingness(min_year, max_year)
 
-        nsaph_utils.interpolate(self.data, self.get_var_names(), method, "year", "geoid")
+        interpolation.interpolate(self.data, self.get_var_names(), method, "year", "geoid")
 
     def quality_check(self, test_file: str):
         """
         Test self.data for the checks defined in the test file
-        :param test_file: path to a yaml file defining tests per the quality check paradigm in nsaph_utils.qc
+        :param test_file: path to a yaml file defining tests per the quality check paradigm in dorieh.utils.qc
         :return: None
         """
         name = "census_" + self.geometry + "_" + str(min(self.years)) + "_" + str(max(self.years))
-        census_tester = nsaph_utils.qc.Tester(name, yaml_file=test_file)
+        census_tester = qc.Tester(name, yaml_file=test_file)
         census_tester.check(self.data)
 
     def _schema_dict_old(self, table_name: str = None):

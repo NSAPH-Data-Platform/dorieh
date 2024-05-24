@@ -11,7 +11,7 @@ requirements:
   
 inputs:
   database:
-    type: string
+    type: File
     doc: Path to database connection file, usually database.ini
   connection_name:
     type: string
@@ -25,7 +25,7 @@ steps:
       class: Workflow
       inputs:
         db:
-          type: string
+          type: File
         connection: 
           type: string
         schema:
@@ -59,6 +59,8 @@ steps:
           doc: Uploads data into the database
           in:
             registry: schema
+            domain:
+              valueFrom: "census"
             table: table
             input: data
             database: db

@@ -106,7 +106,7 @@ class CensusContext(Context):
                               aliases=["qc"],
                               help="""
                               Path to a yaml file specifying the checks to be run on the data. Yaml file should be 
-                              structured per the paradigm used by nsaph_utils.qc
+                              structured per the paradigm used by dorieh.utils.qc
                               """,
                               cardinality=Cardinality.single,
                               default=None,

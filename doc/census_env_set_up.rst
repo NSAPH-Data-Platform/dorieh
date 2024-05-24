@@ -41,15 +41,6 @@ Navigate to the package folder and use the following code to install the package
 ``-e`` flag installs the package in the development mode. As a result, you do not need to reintall the package by chaning the code.
 
 
-Installing nsaph_utils
-----------------------
-
-The package is dependent on the `nsaph_utils` package. This package is not available on CRAN or PyPI. You need to get the source code from the `Gitlab repository <https://gitlab-int.rc.fas.harvard.edu/rse/francesca_dominici/tools/nsaph_utils>`_ and install it similar to the `census` package.
-You can skip `-e` flag. While inside the package folder, you can run:
-
-.. code-block:: console
-
-    $ pip3 install -e .
 
 
 Setting up Census API Key
@@ -83,7 +74,8 @@ If you added new features to the package which is dependent on a library that is
 
     $ conda env export > environment_dev.yml
 
-Make sure to manually remove `name` and `prefix` sections as well as `census` and `nsaph_utils` from the dependencies section in the `.yml` file.     
+Make sure to manually remove `name` and `prefix` sections as well as `dorieh`
+from the dependencies section in the `.yml` file.
 
 
 

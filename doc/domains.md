@@ -6,7 +6,7 @@ maxdepth: 1
 caption: Data Domains (Subject areas)
 ---
 Health <cms>
-Climate <girdmet>
+Climate <gridmet>
 Pollution <epa>
 Demographics <census>
 ```

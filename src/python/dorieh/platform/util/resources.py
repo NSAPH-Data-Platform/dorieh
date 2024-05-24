@@ -36,7 +36,7 @@ def name2path(name: str) -> str:
 def get_resources(name: str) -> Dict[str, str]:
     rel_path = name2path(name)
     dirs = [get_resource_dir()] + [
-        os.path.join(d, "nsaph_resources")
+        os.path.join(d, "resources")
         for d in sys.path
     ]
     for d in dirs:

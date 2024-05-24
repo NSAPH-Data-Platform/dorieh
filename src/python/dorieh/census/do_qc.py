@@ -44,7 +44,7 @@ def initialize_logging(log: str, qc_log: str):
     qc_formatter = logging.Formatter('%(levelname)s - %(name)s - %(message)s - %(asctime)s')
     qc_handler.setFormatter(qc_formatter)
 
-    qc_logger = logging.getLogger("nsaph_utils.qc")
+    qc_logger = logging.getLogger("dorieh.utils.qc")
     qc_logger.addHandler(qc_handler)
     qc_logger.setLevel(logging.DEBUG)
 
