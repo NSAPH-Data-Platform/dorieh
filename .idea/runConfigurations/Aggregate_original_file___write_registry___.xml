@@ -1,0 +1,25 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Aggregate original file  (write registry)  " type="PythonConfigurationType" factoryName="Python" folderName="Python - Aggregations - Exposures">
+    <module name="dorieh" />
+    <option name="ENV_FILES" value="" />
+    <option name="INTERPRETER_OPTIONS" value="" />
+    <option name="PARENT_ENVS" value="true" />
+    <envs>
+      <env name="PYTHONUNBUFFERED" value="1" />
+    </envs>
+    <option name="SDK_HOME" value="" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../run/gridmet" />
+    <option name="IS_MODULE_SDK" value="true" />
+    <option name="ADD_CONTENT_ROOTS" value="true" />
+    <option name="ADD_SOURCE_ROOTS" value="true" />
+    <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+    <option name="SCRIPT_NAME" value="dorieh.rasters.file_processors.wustl_file_processor" />
+    <option name="PARAMETERS" value="--raw_downloads pm25/V4NA03_PM25_NA_201601_201612-RH35.nc --strategy downscale --geography county --shape_files $PROJECT_DIR$/../../../nsaph/gridmet/shapes/2010/gz_2010_us_050_00_500k.shp --var PM25 -d data/processed/auto --output data_dictionary" />
+    <option name="SHOW_COMMAND_LINE" value="false" />
+    <option name="EMULATE_TERMINAL" value="false" />
+    <option name="MODULE_MODE" value="true" />
+    <option name="REDIRECT_INPUT" value="false" />
+    <option name="INPUT_FILE" value="" />
+    <method v="2" />
+  </configuration>
+</component>
