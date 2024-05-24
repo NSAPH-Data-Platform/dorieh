@@ -89,6 +89,511 @@
              
   <section id="medicaid-yaml">
 <h1>Medicaid.yaml<a class="headerlink" href="#medicaid-yaml" title="Permalink to this heading"></a></h1>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">medicaid</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">reference</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://gitlab-int.rc.fas.harvard.edu/rse/francesca_dominici/dominici_data_pipelines/-/blob/master/medicaid/reports/schema.yml&quot;</span>
+<span class="w">  </span><span class="nt">header</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">quoting</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="w">  </span><span class="nt">index</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;unless</span><span class="nv"> </span><span class="s">excluded&quot;</span>
+<span class="w">  </span><span class="nt">schema</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;medicaid&quot;</span>
+<span class="w">  </span><span class="nt">schema.audit</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;medicaid_audit&quot;</span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Data</span><span class="nv"> </span><span class="s">model</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">Medicaid&quot;</span>
+<span class="w">  </span><span class="nt">tables</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">beneficiaries</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">create</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">materialized view</span>
+<span class="w">        </span><span class="nt">from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cms.ps</span>
+<span class="w">        </span><span class="nt">group by</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bene_id</span>
+<span class="w">      </span><span class="nt">columns</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bene_id</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">dob</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;MIN(el_dob)&quot;</span>
+<span class="w">            </span><span class="nt">identifier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">dod</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;MAX(el_dod)&quot;</span>
+<span class="w">            </span><span class="nt">identifier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">race_ethnicity_code</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://resdac.org/cms-data/variables/raceethnicity-msis&quot;</span>
+<span class="w">            </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;string_agg(distinct</span><span class="nv"> </span><span class="s">el_race_ethncy_cd,</span><span class="nv"> </span><span class="s">&#39;,&#39;)&quot;</span>
+<span class="w">            </span><span class="nt">identifier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">sex</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;string_agg(distinct</span><span class="nv"> </span><span class="s">el_sex_cd,</span><span class="nv"> </span><span class="s">&#39;,&#39;)&quot;</span>
+<span class="w">            </span><span class="nt">identifier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">duplicates</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;COUNT(distinct</span><span class="nv"> </span><span class="s">{identifiers})&quot;</span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;number</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">duplicate</span><span class="nv"> </span><span class="s">records</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">beneficiary&quot;</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">dob_latest</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">              </span><span class="no">CASE</span>
+<span class="w">                </span><span class="no">WHEN MAX(el_dob) &lt;&gt; MIN(el_dob) THEN  MAX(el_dob)</span>
+<span class="w">              </span><span class="no">END</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">dod_earliest</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">              </span><span class="no">CASE</span>
+<span class="w">                </span><span class="no">WHEN MIN(el_dod) &lt;&gt; MAX(el_dod) THEN MIN(el_dod)</span>
+<span class="w">              </span><span class="no">END</span>
+<span class="w">      </span><span class="nt">children</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">monthly</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">create</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">materialized view</span>
+<span class="w">            </span><span class="nt">from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cms.ps</span>
+<span class="w">          </span><span class="nt">indices</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">primary</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">columns</span><span class="p">:</span>
+<span class="w">                </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bene_id</span>
+<span class="w">                </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">state</span>
+<span class="w">                </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">year</span>
+<span class="w">                </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">max_elg_cd</span>
+<span class="w">          </span><span class="nt">columns</span><span class="p">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bene_id</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">msis_id</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">year</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">max_yr_dt</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">state</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">state_cd</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">month</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;unnest(ARRAY[1,2,3,4,5,6,7,8,9,10,11,12])&quot;</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">max_elg_cd</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">                  </span><span class="no">unnest(ARRAY[</span>
+<span class="w">                    </span><span class="no">max_elg_cd_mo_1,</span>
+<span class="w">                    </span><span class="no">max_elg_cd_mo_2,</span>
+<span class="w">                    </span><span class="no">max_elg_cd_mo_3,</span>
+<span class="w">                    </span><span class="no">max_elg_cd_mo_4,</span>
+<span class="w">                    </span><span class="no">max_elg_cd_mo_5,</span>
+<span class="w">                    </span><span class="no">max_elg_cd_mo_6,</span>
+<span class="w">                    </span><span class="no">max_elg_cd_mo_7,</span>
+<span class="w">                    </span><span class="no">max_elg_cd_mo_8,</span>
+<span class="w">                    </span><span class="no">max_elg_cd_mo_9,</span>
+<span class="w">                    </span><span class="no">max_elg_cd_mo_10,</span>
+<span class="w">                    </span><span class="no">max_elg_cd_mo_11,</span>
+<span class="w">                    </span><span class="no">max_elg_cd_mo_12</span>
+<span class="w">                  </span><span class="no">])</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">el_mdcr_ben</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">                  </span><span class="no">unnest(ARRAY[</span>
+<span class="w">                    </span><span class="no">el_mdcr_ben_mo_1,</span>
+<span class="w">                    </span><span class="no">el_mdcr_ben_mo_2,</span>
+<span class="w">                    </span><span class="no">el_mdcr_ben_mo_3,</span>
+<span class="w">                    </span><span class="no">el_mdcr_ben_mo_4,</span>
+<span class="w">                    </span><span class="no">el_mdcr_ben_mo_5,</span>
+<span class="w">                    </span><span class="no">el_mdcr_ben_mo_6,</span>
+<span class="w">                    </span><span class="no">el_mdcr_ben_mo_7,</span>
+<span class="w">                    </span><span class="no">el_mdcr_ben_mo_8,</span>
+<span class="w">                    </span><span class="no">el_mdcr_ben_mo_9,</span>
+<span class="w">                    </span><span class="no">el_mdcr_ben_mo_10,</span>
+<span class="w">                    </span><span class="no">el_mdcr_ben_mo_11,</span>
+<span class="w">                    </span><span class="no">el_mdcr_ben_mo_12</span>
+<span class="w">                  </span><span class="no">])</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">el_mdcr_dual</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">                  </span><span class="no">unnest(ARRAY[</span>
+<span class="w">                    </span><span class="no">el_mdcr_dual_mo_1,</span>
+<span class="w">                    </span><span class="no">el_mdcr_dual_mo_2,</span>
+<span class="w">                    </span><span class="no">el_mdcr_dual_mo_3,</span>
+<span class="w">                    </span><span class="no">el_mdcr_dual_mo_4,</span>
+<span class="w">                    </span><span class="no">el_mdcr_dual_mo_5,</span>
+<span class="w">                    </span><span class="no">el_mdcr_dual_mo_6,</span>
+<span class="w">                    </span><span class="no">el_mdcr_dual_mo_7,</span>
+<span class="w">                    </span><span class="no">el_mdcr_dual_mo_8,</span>
+<span class="w">                    </span><span class="no">el_mdcr_dual_mo_9,</span>
+<span class="w">                    </span><span class="no">el_mdcr_dual_mo_10,</span>
+<span class="w">                    </span><span class="no">el_mdcr_dual_mo_11,</span>
+<span class="w">                    </span><span class="no">el_mdcr_dual_mo_12</span>
+<span class="w">                  </span><span class="no">])</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">mc_combo</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">                  </span><span class="no">unnest(ARRAY[</span>
+<span class="w">                    </span><span class="no">mc_combo_mo_1,</span>
+<span class="w">                    </span><span class="no">mc_combo_mo_2,</span>
+<span class="w">                    </span><span class="no">mc_combo_mo_3,</span>
+<span class="w">                    </span><span class="no">mc_combo_mo_4,</span>
+<span class="w">                    </span><span class="no">mc_combo_mo_5,</span>
+<span class="w">                    </span><span class="no">mc_combo_mo_6,</span>
+<span class="w">                    </span><span class="no">mc_combo_mo_7,</span>
+<span class="w">                    </span><span class="no">mc_combo_mo_8,</span>
+<span class="w">                    </span><span class="no">mc_combo_mo_9,</span>
+<span class="w">                    </span><span class="no">mc_combo_mo_10,</span>
+<span class="w">                    </span><span class="no">mc_combo_mo_11,</span>
+<span class="w">                    </span><span class="no">mc_combo_mo_12</span>
+<span class="w">                  </span><span class="no">])</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">el_rstrct_bnft_flg</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">                  </span><span class="no">unnest(ARRAY[</span>
+<span class="w">                    </span><span class="no">el_rstrct_bnft_flg_1,</span>
+<span class="w">                    </span><span class="no">el_rstrct_bnft_flg_2,</span>
+<span class="w">                    </span><span class="no">el_rstrct_bnft_flg_3,</span>
+<span class="w">                    </span><span class="no">el_rstrct_bnft_flg_4,</span>
+<span class="w">                    </span><span class="no">el_rstrct_bnft_flg_5,</span>
+<span class="w">                    </span><span class="no">el_rstrct_bnft_flg_6,</span>
+<span class="w">                    </span><span class="no">el_rstrct_bnft_flg_7,</span>
+<span class="w">                    </span><span class="no">el_rstrct_bnft_flg_8,</span>
+<span class="w">                    </span><span class="no">el_rstrct_bnft_flg_9,</span>
+<span class="w">                    </span><span class="no">el_rstrct_bnft_flg_10,</span>
+<span class="w">                    </span><span class="no">el_rstrct_bnft_flg_11,</span>
+<span class="w">                    </span><span class="no">el_rstrct_bnft_flg_12</span>
+<span class="w">                  </span><span class="no">])</span>
+<span class="w">        </span><span class="nt">enrollments</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">create</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">materialized view</span>
+<span class="w">            </span><span class="c1">#type: view</span>
+<span class="w">            </span><span class="nt">from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cms.ps</span>
+<span class="w">            </span><span class="nt">group by</span><span class="p">:</span>
+<span class="w">              </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bene_id</span>
+<span class="w">              </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">max_yr_dt</span>
+<span class="w">              </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">state_cd</span>
+<span class="w">          </span><span class="nt">columns</span><span class="p">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">year</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">max_yr_dt</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">state</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">state_cd</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">state_iso</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;(&#39;US-&#39;</span><span class="nv"> </span><span class="s">||</span><span class="nv"> </span><span class="s">state_cd)</span><span class="nv"> </span><span class="s">&quot;</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">residence_county</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;MAX(el_rsdnc_cnty_cd_ltst)&quot;</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">residence_counties</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;string_agg(distinct</span><span class="nv"> </span><span class="s">el_rsdnc_cnty_cd_ltst,</span><span class="nv"> </span><span class="s">&#39;,&#39;)&quot;</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">fips5</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;(SELECT</span><span class="nv"> </span><span class="s">fips2</span><span class="nv"> </span><span class="s">FROM</span><span class="nv"> </span><span class="s">public.us_states</span><span class="nv"> </span><span class="s">as</span><span class="nv"> </span><span class="s">s</span><span class="nv"> </span><span class="s">WHERE</span><span class="nv"> </span><span class="s">s.state_id</span><span class="nv"> </span><span class="s">=</span><span class="nv"> </span><span class="s">ps.state_cd)</span><span class="nv"> </span><span class="s">||</span><span class="nv"> </span><span class="s">MAX(el_rsdnc_cnty_cd_ltst)&quot;</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">zip9</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;MAX(el_rsdnc_zip_cd_ltst)&quot;</span>
+<span class="c1">#             Manipulations</span>
+<span class="c1">#             ALTER TABLE medicaid.enrollments RENAME column zip to zip9;</span>
+<span class="c1">#             ALTER TABLE medicaid.enrollments ADD column zip int</span>
+<span class="c1">#             GENERATED ALWAYS AS (</span>
+<span class="c1">#             CASE WHEN year &lt; 2005 THEN</span>
+<span class="c1">#                 SUBSTRING(zip9 FROM 1 FOR 5)::int</span>
+<span class="c1">#             ELSE</span>
+<span class="c1">#                 SUBSTRING(zip9 FROM 5)::int</span>
+<span class="c1">#             END</span>
+<span class="c1">#             ) STORED;</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">zips</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;string_agg(distinct</span><span class="nv"> </span><span class="s">el_rsdnc_zip_cd_ltst,</span><span class="nv"> </span><span class="s">&#39;,&#39;)&quot;</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">months_eligible</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span>
+<span class="w">                  </span><span class="nt">select</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;COUNT(distinct</span><span class="nv"> </span><span class="s">month)&quot;</span>
+<span class="w">                  </span><span class="nt">from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monthly</span>
+<span class="w">                  </span><span class="nt">where</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;max_elg_cd</span><span class="nv"> </span><span class="s">!=</span><span class="nv"> </span><span class="s">&#39;00&#39;&quot;</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">months_dual_eligible</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span>
+<span class="w">                  </span><span class="nt">select</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;COUNT(distinct</span><span class="nv"> </span><span class="s">month)&quot;</span>
+<span class="w">                  </span><span class="nt">from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monthly</span>
+<span class="w">                  </span><span class="nt">where</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;max_elg_cd</span><span class="nv"> </span><span class="s">!=</span><span class="nv"> </span><span class="s">&#39;00&#39;</span><span class="nv"> </span><span class="s">AND</span><span class="nv"> </span><span class="s">el_mdcr_ben</span><span class="nv"> </span><span class="s">&gt;</span><span class="nv"> </span><span class="s">0&quot;</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">state_count</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">                  </span><span class="no">(</span>
+<span class="w">                    </span><span class="no">SELECT COUNT(distinct state_cd)</span>
+<span class="w">                    </span><span class="no">from dorieh.cms.ps AS ps2</span>
+<span class="w">                    </span><span class="no">WHERE</span>
+<span class="w">                      </span><span class="no">cms.ps.bene_id = ps2.bene_id</span>
+<span class="w">                      </span><span class="no">AND cms.ps.max_yr_dt = ps2.max_yr_dt</span>
+<span class="w">                  </span><span class="no">)</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">died</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">                  </span><span class="no">CASE EXTRACT (YEAR from MAX(el_dod))</span>
+<span class="w">                    </span><span class="no">WHEN max_yr_dt THEN TRUE</span>
+<span class="w">                    </span><span class="no">ELSE FALSE</span>
+<span class="w">                  </span><span class="no">END</span>
+<span class="w">        </span><span class="nt">_eligibility</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">create</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">view</span>
+<span class="w">            </span><span class="c1">#type: view</span>
+<span class="w">            </span><span class="nt">from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">medicaid.monthly</span>
+<span class="w">            </span><span class="nt">group by</span><span class="p">:</span>
+<span class="w">              </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bene_id</span>
+<span class="w">              </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">year</span>
+<span class="w">              </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">state</span>
+<span class="w">              </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">month</span>
+<span class="w">          </span><span class="nt">columns</span><span class="p">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">year</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">state</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">month</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">eligibility_code</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://resdac.org/cms-data/variables/medicare-medicaid-dual-eligibility-code-january&quot;</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MAX(max_elg_cd)</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">managed_care_code</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://resdac.org/cms-data/variables/managed-care-combinations-jan&quot;</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MAX(mc_combo)</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">medicare_eligibility</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MAX(el_mdcr_ben)</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">restrictions</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://resdac.org/cms-data/variables/restricted-benefits-jan&quot;</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MAX(el_rstrct_bnft_flg)</span>
+<span class="w">    </span><span class="nt">eligibility</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">create</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">table</span>
+<span class="w">        </span><span class="nt">select</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;*&quot;</span>
+<span class="w">        </span><span class="nt">from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">_eligibility</span>
+<span class="w">      </span><span class="nt">primary_key</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bene_id</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">year</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">state</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">month</span>
+<span class="w">      </span><span class="nt">indices</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">eligibility_ys_idx</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">columns</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">state</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">year</span>
+
+<span class="w">      </span><span class="nt">children</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">admissions</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">invalid.records</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;INSERT&quot;</span>
+<span class="w">            </span><span class="c1">#action: &quot;IGNORE&quot;</span>
+<span class="w">            </span><span class="nt">target</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$schema.audit</span>
+<span class="w">          </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://resdac.org/cms-data/files/max-ip/data-documentation&quot;</span>
+<span class="w">          </span><span class="nt">columns</span><span class="p">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">state</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;VARCHAR(2)&quot;</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;STATE_CD&quot;</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">year</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;INT&quot;</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span>
+<span class="w">                  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;generated&quot;</span>
+<span class="w">                  </span><span class="nt">code</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;GENERATED</span><span class="nv"> </span><span class="s">ALWAYS</span><span class="nv"> </span><span class="s">AS</span><span class="nv"> </span><span class="s">(EXTRACT</span><span class="nv"> </span><span class="s">(YEAR</span><span class="nv"> </span><span class="s">FROM</span><span class="nv"> </span><span class="s">admission_date))</span><span class="nv"> </span><span class="s">STORED&quot;</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">month</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;INT&quot;</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span>
+<span class="w">                  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;generated&quot;</span>
+<span class="w">                  </span><span class="nt">code</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;GENERATED</span><span class="nv"> </span><span class="s">ALWAYS</span><span class="nv"> </span><span class="s">AS</span><span class="nv"> </span><span class="s">(EXTRACT</span><span class="nv"> </span><span class="s">(MONTH</span><span class="nv"> </span><span class="s">FROM</span><span class="nv"> </span><span class="s">admission_date))</span><span class="nv"> </span><span class="s">STORED&quot;</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">admission_date</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;DATE&quot;</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span>
+<span class="w">                  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;compute&quot;</span>
+<span class="w">                  </span><span class="nt">columns</span><span class="p">:</span><span class="w"> </span><span class="c1"># parameters refer to column names in the table, while columns refer to column names in the source</span>
+<span class="w">                    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;ADMSN_DT&quot;</span>
+<span class="w">                  </span><span class="nt">code</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;datetime.strptime({1},</span><span class="nv"> </span><span class="s">&#39;%Y%m%d&#39;).date()&quot;</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">discharge_date</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;DATE&quot;</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span>
+<span class="w">                  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;compute&quot;</span>
+<span class="w">                  </span><span class="nt">columns</span><span class="p">:</span><span class="w"> </span><span class="c1"># parameters refer to column names in the table, while columns refer to column names in the source</span>
+<span class="w">                    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;SRVC_END_DT&quot;</span>
+<span class="w">                  </span><span class="nt">code</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;datetime.strptime({1},</span><span class="nv"> </span><span class="s">&#39;%Y%m%d&#39;).date()&quot;</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">diagnosis</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;VARCHAR(12)[10]&quot;</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;DIAG_CD_*&quot;</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">FILE</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RESDAC original file name</span>
+<span class="w">                </span><span class="nt">index</span><span class="p">:</span>
+<span class="w">                  </span><span class="nt">required_before_loading_data</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span>
+<span class="w">                  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">file</span>
+<span class="w">                </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VARCHAR(128)</span>
+<span class="w">          </span><span class="nt">primary_key</span><span class="p">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bene_id</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admission_date</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">discharge_date</span>
+<span class="w">          </span><span class="nt">indices</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">adm_ys_idx</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">columns</span><span class="p">:</span>
+<span class="w">              </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">state</span>
+<span class="w">              </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">year</span>
+<span class="w">          </span><span class="nt">source_columns</span><span class="p">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">BENE_ID</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MSIS_ID</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">STATE_CD</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">YR_NUM</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EL_DOB</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EL_SEX_CD</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EL_RACE_ETHNCY_CD</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RACE_CODE_1</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RACE_CODE_2</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RACE_CODE_3</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RACE_CODE_4</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RACE_CODE_5</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ETHNICITY_CODE</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EL_SS_ELGBLTY_CD_LTST</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EL_SS_ELGBLTY_CD_MO</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EL_MAX_ELGBLTY_CD_LTST</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EL_MAX_ELGBLTY_CD_MO</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EL_MDCR_ANN_XOVR_OLD</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MSNG_ELG_DATA</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EL_MDCR_XOVR_CLM_BSD_CD</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EL_MDCR_ANN_XOVR_99</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MSIS_TOS</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MSIS_TOP</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MAX_TOS</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PRVDR_ID_NMBR</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NPI</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TAXONOMY</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TYPE_CLM_CD</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ADJUST_CD</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PHP_TYPE</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PHP_ID</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MDCD_PYMT_AMT</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TP_PYMT_AMT</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PYMT_DT</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CHRG_AMT</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PHP_VAL</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MDCR_COINSUR_PYMT_AMT</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MDCR_DED_PYMT_AMT</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ADMSN_DT</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SRVC_BGN_DT</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SRVC_END_DT</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DIAG_CD_1</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DIAG_CD_2</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DIAG_CD_3</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DIAG_CD_4</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DIAG_CD_5</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DIAG_CD_6</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DIAG_CD_7</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DIAG_CD_8</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DIAG_CD_9</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PRNCPL_PRCDR_DT</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PRCDR_CD_SYS_1</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PRCDR_CD_1</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PRCDR_CD_SYS_2</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PRCDR_CD_2</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PRCDR_CD_SYS_3</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PRCDR_CD_3</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PRCDR_CD_SYS_4</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PRCDR_CD_4</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PRCDR_CD_SYS_5</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PRCDR_CD_5</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PRCDR_CD_SYS_6</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PRCDR_CD_6</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RCPNT_DLVRY_CD</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MDCD_CVRD_IP_DAYS</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PATIENT_STATUS_CD</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DRG_REL_GROUP_IND</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DRG_REL_GROUP</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_GP_1</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_CHGS_1</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_UNITS_1</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_GP_2</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_CHGS_2</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_UNITS_2</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_GP_3</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_CHGS_3</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_UNITS_3</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_GP_4</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_CHGS_4</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_UNITS_4</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_GP_5</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_CHGS_5</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_UNITS_5</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_GP_6</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_CHGS_6</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_UNITS_6</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_GP_7</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_CHGS_7</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_UNITS_7</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_GP_8</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_CHGS_8</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_UNITS_8</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_GP_9</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_CHGS_9</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_UNITS_9</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_GP_10</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_CHGS_10</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_UNITS_10</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_GP_11</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_CHGS_11</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_UNITS_11</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_GP_12</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_CHGS_12</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_UNITS_12</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_GP_13</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_CHGS_13</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_UNITS_13</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_GP_14</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_CHGS_14</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_UNITS_14</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_GP_15</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_CHGS_15</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_UNITS_15</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_GP_16</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_CHGS_16</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_UNITS_16</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_GP_17</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_CHGS_17</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_UNITS_17</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_GP_18</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_CHGS_18</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_UNITS_18</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_GP_19</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_CHGS_19</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_UNITS_19</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_GP_20</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_CHGS_20</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_UNITS_20</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_GP_21</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_CHGS_21</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_UNITS_21</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_GP_22</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_CHGS_22</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_UNITS_22</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_GP_23</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_CHGS_23</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UB_92_REV_CD_UNITS_23</span>
+
+<span class="c1">#    admissions:</span>
+<span class="c1">#      invalid.records:</span>
+<span class="c1">#        action: &quot;INSERT&quot;</span>
+<span class="c1">#        #action: &quot;IGNORE&quot;</span>
+<span class="c1">#        target:</span>
+<span class="c1">#          schema: $schema.audit</span>
+<span class="c1">#      description: &quot;https://resdac.org/cms-data/files/max-ip/data-documentation&quot;</span>
+<span class="c1">#      columns:</span>
+<span class="c1">#        - bene_id:</span>
+<span class="c1">#            description: Encrypted 723 CCW Beneficiary ID</span>
+<span class="c1">#            index: true</span>
+<span class="c1">#            type: VARCHAR(15)</span>
+<span class="c1">#            source: BENE_ID</span>
+<span class="c1">#        - state:</span>
+<span class="c1">#            description: State</span>
+<span class="c1">#            index: true</span>
+<span class="c1">#            type: VARCHAR(2)</span>
+<span class="c1">#            source: STATE_CD</span>
+<span class="c1">#        - year:</span>
+<span class="c1">#            type: &quot;INT&quot;</span>
+<span class="c1">#            source:</span>
+<span class="c1">#              type: &quot;generated&quot;</span>
+<span class="c1">#              code: &quot;GENERATED ALWAYS AS (EXTRACT (YEAR FROM admission_date)) STORED&quot;</span>
+<span class="c1">#        - month:</span>
+<span class="c1">#            type: &quot;INT&quot;</span>
+<span class="c1">#            source:</span>
+<span class="c1">#              type: &quot;generated&quot;</span>
+<span class="c1">#              code: &quot;GENERATED ALWAYS AS (EXTRACT (MONTH FROM admission_date)) STORED&quot;</span>
+<span class="c1">#        - admission_date:</span>
+<span class="c1">#            type: &quot;DATE&quot;</span>
+<span class="c1">#            source:</span>
+<span class="c1">#              type: &quot;compute&quot;</span>
+<span class="c1">#              columns: # parameters refer to column names in the table, while columns refer to column names in the source</span>
+<span class="c1">#                - &quot;ADMSN_DT&quot;</span>
+<span class="c1">#              code: &quot;datetime.strptime({1}, &#39;%Y%m%d&#39;).date()&quot;</span>
+<span class="c1">#        - discharge_date:</span>
+<span class="c1">#            type: &quot;DATE&quot;</span>
+<span class="c1">#            source:</span>
+<span class="c1">#              type: &quot;compute&quot;</span>
+<span class="c1">#              columns: # parameters refer to column names in the table, while columns refer to column names in the source</span>
+<span class="c1">#                - &quot;SRVC_END_DT&quot;</span>
+<span class="c1">#              code: &quot;datetime.strptime({1}, &#39;%Y%m%d&#39;).date()&quot;</span>
+<span class="c1">#        - diagnosis:</span>
+<span class="c1">#            type: &quot;VARCHAR(12)[10]&quot;</span>
+<span class="c1">#            source: &quot;DIAG_CD_*&quot;</span>
+<span class="c1">#        - FILE:</span>
+<span class="c1">#            description: RESDAC original file name</span>
+<span class="c1">#            index:</span>
+<span class="c1">#              required_before_loading_data: true</span>
+<span class="c1">#            source:</span>
+<span class="c1">#              type: file</span>
+<span class="c1">#            type: VARCHAR(128)</span>
+<span class="c1">#      primary_key:</span>
+<span class="c1">#        - bene_id</span>
+<span class="c1">#        - admission_date</span>
+<span class="c1">#        - discharge_date</span>
+<span class="c1">#      indices:</span>
+<span class="c1">#        foreign:</span>
+<span class="c1">#          columns:</span>
+<span class="c1">#            - bene_id</span>
+<span class="c1">#            - state</span>
+<span class="c1">#            - year</span>
+<span class="c1">#            - month</span>
+</pre></div>
+</div>
 </section>
 
 

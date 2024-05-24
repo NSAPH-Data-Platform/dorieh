@@ -1,5 +1,5 @@
 """
-Reads a NetCDF file (*.nc) and prints some information
+Reads a NetCDF file (\*.nc) and prints some information
 about it
 """
 

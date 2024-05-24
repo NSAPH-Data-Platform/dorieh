@@ -48,7 +48,7 @@ class NetCDFFile:
         """
         Creates a new instance
 
-        :param context: An optional GridmetContext object, if not specified,
+        :param context: An optional GridContext object, if not specified,
             then it is constructed from the command line arguments
         """
 

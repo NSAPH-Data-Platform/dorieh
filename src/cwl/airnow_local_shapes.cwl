@@ -97,6 +97,8 @@ steps:
     doc: Uploads data into the database
     in:
       registry: introspect/model
+      domain:
+        valueFrom: "epa"
       table: table
       input: download/data
       database: database

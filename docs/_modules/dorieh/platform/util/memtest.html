@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dorieh.platform.util.memtest &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../DBT.html">Database Testing Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">dorieh.platform.util.memtest</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for dorieh.platform.util.memtest</h1><div class="highlight"><pre>
+<span></span><span class="c1">#  Copyright (c) 2024. Harvard University</span>
+<span class="c1">#</span>
+<span class="c1">#  Developed by Research Software Engineering,</span>
+<span class="c1">#  Faculty of Arts and Sciences, Research Computing (FAS RC)</span>
+<span class="c1">#  Author: Michael A Bouzinier</span>
+<span class="c1">#</span>
+<span class="c1">#  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1">#  you may not use this file except in compliance with the License.</span>
+<span class="c1">#  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#         http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1">#  limitations under the License.</span>
+<span class="c1">#</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">from</span> <span class="nn">argparse</span> <span class="kn">import</span> <span class="n">ArgumentParser</span>
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">contextmanager</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span><span class="p">,</span> <span class="n">randbytes</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
+
+<span class="kn">from</span> <span class="nn">memory_profiler</span> <span class="kn">import</span> <span class="n">profile</span>
+<span class="kn">from</span> <span class="nn">pyarrow</span> <span class="kn">import</span> <span class="n">RecordBatch</span>
+<span class="kn">from</span> <span class="nn">pyarrow.dataset</span> <span class="kn">import</span> <span class="n">Scanner</span>
+<span class="kn">import</span> <span class="nn">pyarrow</span> <span class="k">as</span> <span class="nn">pa</span>
+<span class="kn">import</span> <span class="nn">pyarrow.dataset</span> <span class="k">as</span> <span class="nn">ds</span>
+<span class="kn">from</span> <span class="nn">pympler</span> <span class="kn">import</span> <span class="n">summary</span><span class="p">,</span> <span class="n">muppy</span><span class="p">,</span> <span class="n">tracker</span>
+<span class="kn">from</span> <span class="nn">pympler.classtracker</span> <span class="kn">import</span> <span class="n">ClassTracker</span>
+
+<span class="kn">from</span> <span class="nn">dorieh.utils.io_utils</span> <span class="kn">import</span> <span class="n">sizeof_fmt</span>
+<span class="kn">from</span> <span class="nn">psycopg2.extras</span> <span class="kn">import</span> <span class="n">RealDictCursor</span>
+<span class="kn">from</span> <span class="nn">psycopg2.extensions</span> <span class="kn">import</span> <span class="n">connection</span>
+
+<span class="kn">from</span> <span class="nn">dorieh.platform.db</span> <span class="kn">import</span> <span class="n">Connection</span>
+<span class="kn">from</span> <span class="nn">dorieh.utils.profile_utils</span> <span class="kn">import</span> <span class="n">qmem</span>
+
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">10000</span>
+
+
+<div class="viewcode-block" id="me_prof"><a class="viewcode-back" href="../../../../members/memtest.html#dorieh.platform.util.memtest.me_prof">[docs]</a><span class="k">def</span> <span class="nf">me_prof</span><span class="p">():</span>
+    <span class="n">all_objects</span> <span class="o">=</span> <span class="n">muppy</span><span class="o">.</span><span class="n">get_objects</span><span class="p">()</span>
+    <span class="n">all_objects_summary</span> <span class="o">=</span> <span class="n">summary</span><span class="o">.</span><span class="n">summarize</span><span class="p">(</span><span class="n">all_objects</span><span class="p">)</span>
+    <span class="n">summary</span><span class="o">.</span><span class="n">print_</span><span class="p">(</span><span class="n">all_objects_summary</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="result_set"><a class="viewcode-back" href="../../../../members/memtest.html#dorieh.platform.util.memtest.result_set">[docs]</a><span class="nd">@contextmanager</span>
+<span class="k">def</span> <span class="nf">result_set</span><span class="p">(</span><span class="n">conn</span><span class="p">:</span> <span class="n">connection</span><span class="p">,</span> <span class="n">sql</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">cursor_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">(</span><span class="n">cursor_factory</span><span class="o">=</span><span class="n">RealDictCursor</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">cursor_name</span><span class="p">)</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">itersize</span> <span class="o">=</span> <span class="n">batch_size</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+        <span class="k">yield</span> <span class="n">cursor</span></div>
+
+
+<div class="viewcode-block" id="run_query"><a class="viewcode-back" href="../../../../members/memtest.html#dorieh.platform.util.memtest.run_query">[docs]</a><span class="k">def</span> <span class="nf">run_query</span><span class="p">(</span><span class="n">cnxn</span><span class="p">:</span> <span class="n">connection</span><span class="p">,</span> <span class="n">sql</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">with</span> <span class="n">result_set</span><span class="p">(</span><span class="n">cnxn</span><span class="p">,</span> <span class="n">sql</span><span class="p">,</span> <span class="s2">&quot;test-cursor-1&quot;</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">)</span> <span class="k">as</span> <span class="n">rs</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">batch_size</span><span class="p">:</span>
+                <span class="n">data</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+                <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">%</span> <span class="mi">100</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">()</span>
+                    <span class="n">mem</span> <span class="o">=</span> <span class="n">sizeof_fmt</span><span class="p">(</span><span class="n">qmem</span><span class="p">())</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="o">*</span><span class="w"> </span><span class="n">batch_size</span><span class="si">}</span><span class="s2">: memory: </span><span class="si">{</span><span class="n">mem</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+    <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="PyArrowTest"><a class="viewcode-back" href="../../../../members/memtest.html#dorieh.platform.util.memtest.PyArrowTest">[docs]</a><span class="k">class</span> <span class="nc">PyArrowTest</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">count_batches</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">schema</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">pa</span><span class="o">.</span><span class="n">string</span><span class="p">()),</span>
+            <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">pa</span><span class="o">.</span><span class="n">int64</span><span class="p">()),</span>
+            <span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="n">pa</span><span class="o">.</span><span class="n">int32</span><span class="p">())</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">schema</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">schema</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parquet_partitioning</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">partitioning</span><span class="p">(</span>
+            <span class="n">pa</span><span class="o">.</span><span class="n">schema</span><span class="p">([</span>
+                <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">pa</span><span class="o">.</span><span class="n">int64</span><span class="p">()),</span>
+                <span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="n">pa</span><span class="o">.</span><span class="n">int32</span><span class="p">())</span>
+            <span class="p">]),</span> <span class="n">flavor</span><span class="o">=</span><span class="s2">&quot;hive&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">class_tracker</span> <span class="o">=</span> <span class="n">ClassTracker</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tracker</span> <span class="o">=</span> <span class="n">tracker</span><span class="o">.</span><span class="n">SummaryTracker</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">class_tracker</span><span class="o">.</span><span class="n">track_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resolution_level</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">class_tracker</span><span class="o">.</span><span class="n">create_snapshot</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="PyArrowTest.me_track"><a class="viewcode-back" href="../../../../members/memtest.html#dorieh.platform.util.memtest.PyArrowTest.me_track">[docs]</a>    <span class="k">def</span> <span class="nf">me_track</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tracker</span><span class="o">.</span><span class="n">print_diff</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">class_tracker</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">print_summary</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">class_tracker</span><span class="o">.</span><span class="n">create_snapshot</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">count_batches</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="PyArrowTest.batch"><a class="viewcode-back" href="../../../../members/memtest.html#dorieh.platform.util.memtest.PyArrowTest.batch">[docs]</a>    <span class="k">def</span> <span class="nf">batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">count_batches</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">batch_size</span> <span class="o">&gt;</span> <span class="mi">100000</span> <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">count_batches</span> <span class="o">%</span> <span class="mi">100</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">mem</span> <span class="o">=</span> <span class="n">sizeof_fmt</span><span class="p">(</span><span class="n">qmem</span><span class="p">())</span>
+            <span class="n">pmem</span> <span class="o">=</span> <span class="n">sizeof_fmt</span><span class="p">(</span><span class="n">pa</span><span class="o">.</span><span class="n">total_allocated_bytes</span><span class="p">())</span>
+            <span class="nb">print</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Received the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">count_batches</span><span class="si">}</span><span class="s2">-th batch of </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2"> records. &quot;</span>
+                  <span class="sa">f</span><span class="s2">&quot;Total: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="si">}</span><span class="s2">. Memory: </span><span class="si">{</span><span class="n">mem</span><span class="si">}</span><span class="s2">. PyArrow: </span><span class="si">{</span><span class="n">pmem</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="c1">#me_prof()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">me_track</span><span class="p">()</span>
+        <span class="n">rb</span> <span class="o">=</span> <span class="n">RecordBatch</span><span class="o">.</span><span class="n">from_pylist</span><span class="p">(</span><span class="n">mapping</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">class_tracker</span><span class="o">.</span><span class="n">track_object</span><span class="p">(</span><span class="n">rb</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">rb</span></div>
+
+<div class="viewcode-block" id="PyArrowTest.batches"><a class="viewcode-back" href="../../../../members/memtest.html#dorieh.platform.util.memtest.PyArrowTest.batches">[docs]</a>    <span class="nd">@profile</span>
+    <span class="k">def</span> <span class="nf">batches</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">row</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">randbytes</span><span class="p">(</span><span class="mi">10</span><span class="p">)),</span>
+                <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="n">randint</span><span class="p">(</span><span class="mi">1999</span><span class="p">,</span> <span class="mi">2012</span><span class="p">),</span>
+                <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">12</span><span class="p">)</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">batch_size</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                <span class="n">data</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+                <span class="c1">#pa.default_memory_pool().release_unused()</span>
+                <span class="c1">#gc.collect()</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">:</span>
+                    <span class="k">break</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PyArrowTest.export"><a class="viewcode-back" href="../../../../members/memtest.html#dorieh.platform.util.memtest.PyArrowTest.export">[docs]</a>    <span class="k">def</span> <span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">datadir</span> <span class="o">=</span> <span class="s2">&quot;test_data&quot;</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">datadir</span><span class="p">):</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">datadir</span><span class="p">)</span>
+        <span class="n">scanner</span> <span class="o">=</span> <span class="n">Scanner</span><span class="o">.</span><span class="n">from_batches</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">batches</span><span class="p">(),</span> <span class="n">schema</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">class_tracker</span><span class="o">.</span><span class="n">track_object</span><span class="p">(</span><span class="n">scanner</span><span class="p">,</span> <span class="n">resolution_level</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">ds</span><span class="o">.</span><span class="n">write_dataset</span><span class="p">(</span><span class="n">scanner</span><span class="p">,</span> <span class="n">datadir</span><span class="p">,</span> <span class="n">partitioning</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parquet_partitioning</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;parquet&quot;</span><span class="p">)</span>
+        <span class="k">return</span></div></div>
+
+
+<div class="viewcode-block" id="run_write"><a class="viewcode-back" href="../../../../members/memtest.html#dorieh.platform.util.memtest.run_write">[docs]</a><span class="k">def</span> <span class="nf">run_write</span><span class="p">():</span>
+    <span class="n">test</span> <span class="o">=</span> <span class="n">PyArrowTest</span><span class="p">()</span>
+    <span class="n">test</span><span class="o">.</span><span class="n">export</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../../../members/memtest.html#dorieh.platform.util.memtest.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span> <span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Import/Export resources&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--sql&quot;</span><span class="p">,</span> <span class="s2">&quot;-s&quot;</span><span class="p">,</span>
+                    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;SQL Query or a path to a file containing SQL query&quot;</span><span class="p">,</span>
+                    <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--db&quot;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Path to a database connection parameters file&quot;</span><span class="p">,</span>
+                        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;database.ini&quot;</span><span class="p">,</span>
+                        <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--connection&quot;</span><span class="p">,</span> <span class="s2">&quot;-c&quot;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Section in the database connection parameters file&quot;</span><span class="p">,</span>
+                        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;nsaph2&quot;</span><span class="p">,</span>
+                        <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--action&quot;</span><span class="p">,</span> <span class="s2">&quot;-a&quot;</span><span class="p">,</span>
+                        <span class="n">help</span> <span class="o">=</span> <span class="s2">&quot;Read or Write&quot;</span><span class="p">,</span>
+                        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;w&quot;</span><span class="p">,</span><span class="s2">&quot;r&quot;</span><span class="p">],</span>
+                        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">arguments</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">arguments</span><span class="o">.</span><span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;w&quot;</span><span class="p">:</span>
+        <span class="n">run_write</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">arguments</span><span class="o">.</span><span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;r&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">arguments</span><span class="o">.</span><span class="n">sql</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">arguments</span><span class="o">.</span><span class="n">db</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">arguments</span><span class="o">.</span><span class="n">connection</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Not all arguments are provided&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">arguments</span><span class="o">.</span><span class="n">sql</span><span class="p">):</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">arguments</span><span class="o">.</span><span class="n">sql</span><span class="p">)</span> <span class="k">as</span> <span class="n">inp</span><span class="p">:</span>
+                <span class="n">sql</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">inp</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sql</span> <span class="o">=</span> <span class="n">arguments</span><span class="o">.</span><span class="n">sql</span>
+        <span class="k">with</span> <span class="n">Connection</span><span class="p">(</span><span class="n">arguments</span><span class="o">.</span><span class="n">db</span><span class="p">,</span> <span class="n">arguments</span><span class="o">.</span><span class="n">connection</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="n">run_query</span> <span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">sql</span><span class="o">=</span><span class="n">sql</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid action: &quot;</span> <span class="o">+</span> <span class="n">arguments</span><span class="o">.</span><span class="n">action</span><span class="p">)</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

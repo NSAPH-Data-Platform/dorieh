@@ -84,6 +84,335 @@
              
   <section id="configuration-object">
 <h1>Configuration Object<a class="headerlink" href="#configuration-object" title="Permalink to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GridContext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subclass</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dorieh/rasters/config.html#GridContext"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.config.GridContext" title="Permalink to this definition"></a></dt>
+<dd><p>Defines a configuration object to process aggregations and other tasks
+over data grids</p>
+<p>Constructor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.rasters.config.GridContext.params.doc"></span><strong>doc</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.config.GridContext.params.doc">¶</a> – Optional argument, specifying what to print as documentation</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.enum">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">enum_cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dorieh.rasters.config.GridContext.enum" title="Permalink to this definition"></a></dt>
+<dd><p>A helper method to return Enum value by its name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.rasters.config.GridContext.enum.params.cls"></span><strong>cls</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.config.GridContext.enum.params.cls">¶</a> – Enum class</p></li>
+<li><p><span class="target" id="dorieh.rasters.config.GridContext.enum.params.s"></span><strong>s</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.config.GridContext.enum.params.s">¶</a> – name of a member in Enum class</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>value of the member</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.years">
+<span class="sig-name descname"><span class="pre">years</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.years" title="Permalink to this definition"></a></dt>
+<dd><p>Year or list of years to download. For example, 
+the following argument: 
+<cite>-y 1992:1995 1998 1999 2011 2015:2017</cite> will produce 
+the following list: 
+[1992,1993,1994,1995,1998,1999,2011,2015,2016,2017]</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.compress">
+<span class="sig-name descname"><span class="pre">compress</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.compress" title="Permalink to this definition"></a></dt>
+<dd><p>Specifies whether to use gzip compression for the result</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.variables">
+<span class="sig-name descname"><span class="pre">variables</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.variables" title="Permalink to this definition"></a></dt>
+<dd><p>Gridmet bands or variables</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="members/config.html#dorieh.rasters.config.GridmetVariable" title="dorieh.rasters.config.GridmetVariable">GridmetVariable</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.strategy">
+<span class="sig-name descname"><span class="pre">strategy</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.strategy" title="Permalink to this definition"></a></dt>
+<dd><p>Rasterization strategy
+:type: RasterizationStrategy</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.destination">
+<span class="sig-name descname"><span class="pre">destination</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.destination" title="Permalink to this definition"></a></dt>
+<dd><p>Destination directory for the processed files</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.raw_downloads">
+<span class="sig-name descname"><span class="pre">raw_downloads</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.raw_downloads" title="Permalink to this definition"></a></dt>
+<dd><p>Directory for downloaded raw files</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.geography">
+<span class="sig-name descname"><span class="pre">geography</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.geography" title="Permalink to this definition"></a></dt>
+<dd><p>The type of geographic area over which we aggregate data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="members/gis_constants.html#dorieh.gis.constants.Geography" title="dorieh.gis.constants.Geography">Geography</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.shapes_dir">
+<span class="sig-name descname"><span class="pre">shapes_dir</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.shapes_dir" title="Permalink to this definition"></a></dt>
+<dd><p>Directory containing shape files for geographies</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.shapes">
+<span class="sig-name descname"><span class="pre">shapes</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.shapes" title="Permalink to this definition"></a></dt>
+<dd><p>Type of shapes to aggregate over, e.g. points, polygons</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="shapes.html#dorieh.rasters.config.Shape" title="dorieh.rasters.config.Shape">Shape</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.points">
+<span class="sig-name descname"><span class="pre">points</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.points" title="Permalink to this definition"></a></dt>
+<dd><p>Path to CSV file containing points</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.coordinates">
+<span class="sig-name descname"><span class="pre">coordinates</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.coordinates" title="Permalink to this definition"></a></dt>
+<dd><p>Column names for coordinates</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.metadata" title="Permalink to this definition"></a></dt>
+<dd><p>Column names for metadata</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.extra_columns">
+<span class="sig-name descname"><span class="pre">extra_columns</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.extra_columns" title="Permalink to this definition"></a></dt>
+<dd><p>Columns with constant values to be added to the output file</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.dates">
+<span class="sig-name descname"><span class="pre">dates</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="members/config.html#dorieh.rasters.config.DateFilter" title="dorieh.rasters.config.DateFilter"><span class="pre">DateFilter</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#dorieh.rasters.config.GridContext.dates" title="Permalink to this definition"></a></dt>
+<dd><p>Filter on dates - for debugging purposes only</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.statistics">
+<span class="sig-name descname"><span class="pre">statistics</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.statistics" title="Permalink to this definition"></a></dt>
+<dd><p>Type of statistics</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.description">
+<span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.description" title="Permalink to this definition"></a></dt>
+<dd><p>Description to be added to data dictionary</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.table">
+<span class="sig-name descname"><span class="pre">table</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.table" title="Permalink to this definition"></a></dt>
+<dd><p>Name of the table where the aggregated data will be stored</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.output">
+<span class="sig-name descname"><span class="pre">output</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.output" title="Permalink to this definition"></a></dt>
+<dd><p>Type of the output the tool should produce</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.ram">
+<span class="sig-name descname"><span class="pre">ram</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.ram" title="Permalink to this definition"></a></dt>
+<dd><p>Runtime memory available to the process</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GridMETContext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">doc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dorieh/rasters/config.html#GridMETContext"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.config.GridMETContext" title="Permalink to this definition"></a></dt>
+<dd><p>Defines a configuration object to process aggregations and other tasks
+over data grids containing gridMET data. Includes validation that
+a correct gridMET band is provided</p>
+<p>Constructor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.rasters.config.GridMETContext.params.doc"></span><strong>doc</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.config.GridMETContext.params.doc">¶</a> – Optional argument, specifying what to print as documentation</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.enum">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">enum_cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.enum" title="Permalink to this definition"></a></dt>
+<dd><p>A helper method to return Enum value by its name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.rasters.config.GridMETContext.enum.params.cls"></span><strong>cls</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.config.GridMETContext.enum.params.cls">¶</a> – Enum class</p></li>
+<li><p><span class="target" id="dorieh.rasters.config.GridMETContext.enum.params.s"></span><strong>s</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.config.GridMETContext.enum.params.s">¶</a> – name of a member in Enum class</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>value of the member</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.dates">
+<span class="sig-name descname"><span class="pre">dates</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="members/config.html#dorieh.rasters.config.DateFilter" title="dorieh.rasters.config.DateFilter"><span class="pre">DateFilter</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.dates" title="Permalink to this definition"></a></dt>
+<dd><p>Filter on dates - for debugging purposes only</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.variables">
+<span class="sig-name descname"><span class="pre">variables</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.variables" title="Permalink to this definition"></a></dt>
+<dd><p>Gridmet bands or variables</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="members/config.html#dorieh.rasters.config.GridmetVariable" title="dorieh.rasters.config.GridmetVariable">GridmetVariable</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.strategy">
+<span class="sig-name descname"><span class="pre">strategy</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.strategy" title="Permalink to this definition"></a></dt>
+<dd><p>Rasterization strategy
+:type: RasterizationStrategy</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.destination">
+<span class="sig-name descname"><span class="pre">destination</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.destination" title="Permalink to this definition"></a></dt>
+<dd><p>Destination directory for the processed files</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.raw_downloads">
+<span class="sig-name descname"><span class="pre">raw_downloads</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.raw_downloads" title="Permalink to this definition"></a></dt>
+<dd><p>Directory for downloaded raw files</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.geography">
+<span class="sig-name descname"><span class="pre">geography</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.geography" title="Permalink to this definition"></a></dt>
+<dd><p>The type of geographic area over which we aggregate data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="members/gis_constants.html#dorieh.gis.constants.Geography" title="dorieh.gis.constants.Geography">Geography</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.shapes_dir">
+<span class="sig-name descname"><span class="pre">shapes_dir</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.shapes_dir" title="Permalink to this definition"></a></dt>
+<dd><p>Directory containing shape files for geographies</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.shapes">
+<span class="sig-name descname"><span class="pre">shapes</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.shapes" title="Permalink to this definition"></a></dt>
+<dd><p>Type of shapes to aggregate over, e.g. points, polygons</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="shapes.html#dorieh.rasters.config.Shape" title="dorieh.rasters.config.Shape">Shape</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.points">
+<span class="sig-name descname"><span class="pre">points</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.points" title="Permalink to this definition"></a></dt>
+<dd><p>Path to CSV file containing points</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.coordinates">
+<span class="sig-name descname"><span class="pre">coordinates</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.coordinates" title="Permalink to this definition"></a></dt>
+<dd><p>Column names for coordinates</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.metadata" title="Permalink to this definition"></a></dt>
+<dd><p>Column names for metadata</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.extra_columns">
+<span class="sig-name descname"><span class="pre">extra_columns</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.extra_columns" title="Permalink to this definition"></a></dt>
+<dd><p>Columns with constant values to be added to the output file</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.statistics">
+<span class="sig-name descname"><span class="pre">statistics</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.statistics" title="Permalink to this definition"></a></dt>
+<dd><p>Type of statistics</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.description">
+<span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.description" title="Permalink to this definition"></a></dt>
+<dd><p>Description to be added to data dictionary</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.table">
+<span class="sig-name descname"><span class="pre">table</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.table" title="Permalink to this definition"></a></dt>
+<dd><p>Name of the table where the aggregated data will be stored</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.output">
+<span class="sig-name descname"><span class="pre">output</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.output" title="Permalink to this definition"></a></dt>
+<dd><p>Type of the output the tool should produce</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.ram">
+<span class="sig-name descname"><span class="pre">ram</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.ram" title="Permalink to this definition"></a></dt>
+<dd><p>Runtime memory available to the process</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.years">
+<span class="sig-name descname"><span class="pre">years</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.years" title="Permalink to this definition"></a></dt>
+<dd><p>Year or list of years to download. For example, 
+the following argument: 
+<cite>-y 1992:1995 1998 1999 2011 2015:2017</cite> will produce 
+the following list: 
+[1992,1993,1994,1995,1998,1999,2011,2015,2016,2017]</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.compress">
+<span class="sig-name descname"><span class="pre">compress</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.compress" title="Permalink to this definition"></a></dt>
+<dd><p>Specifies whether to use gzip compression for the result</p>
+</dd></dl>
+
+</dd></dl>
+
 <section id="classes-used-internally">
 <h2>Classes used Internally<a class="headerlink" href="#classes-used-internally" title="Permalink to this heading"></a></h2>
 <section id="abstract-context">
