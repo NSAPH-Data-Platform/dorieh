@@ -75,3 +75,4 @@ git add docs
 git commit -a -m "Updating documentation"
 
 echo "Changes committed"
+git checkout "${branch}"
