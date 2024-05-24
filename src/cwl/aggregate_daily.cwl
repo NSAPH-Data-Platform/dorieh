@@ -21,7 +21,7 @@
 
 cwlVersion: v1.2
 class: CommandLineTool
-baseCommand: [python, -mdorieh.rasters.launcher]
+baseCommand: [python, -m, dorieh.rasters.launcher]
 
 requirements:
   InlineJavascriptRequirement: {}

@@ -2,7 +2,7 @@
 A point in a raster class
 =========================
 
-.. automodule:: dorieh.gis.geometry
+.. autoclass:: dorieh.gis.geometry.PointInRaster
    :members:
    :undoc-members:
 

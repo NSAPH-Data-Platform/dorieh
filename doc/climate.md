@@ -1,4 +1,4 @@
-# Computational Utilities for working with gridMET data
+# Computational Utilities for working with Climate gridMET data
 
 <!-- TODO ->
 
@@ -31,7 +31,7 @@ for the years actually used.
 ## Using command line gridMET utility 
 
 ```
-    usage: dorieh.rasters.py [-h] --variable
+    usage: python -m dorieh.rasters.launcher [-h] --variable
                       {bi,erc,etr,fm100,fm1000,pet,pr,rmax,rmin,sph,srad,th,tmmn,tmmx,vpd,vs}
                       [{bi,erc,etr,fm100,fm1000,pet,pr,rmax,rmin,sph,srad,th,tmmn,tmmx,vpd,vs} ...]
                       [--strategy {default,all_touched,combined}]
@@ -77,14 +77,9 @@ for the years actually used.
 
 ## Example
 
-One can try it on `nsaph-sandbox01.rc.fas.harvard.edu` changing to folder:
-`/data/projects/gridmet/`
-
-and running the following command (do not forget `-u` option, or you 
-will not be able to see the progress):
 
 ```shell
-source /home/nsaph/projects/tools/gridmet/.gridmet/bin/activate && PYTHONPATH=/home/nsaph/projects/tools/gridmet/src/python python -u -m gridmet --var tmmx -y 2001 --shapes_dir shapes/zip_shape_files --strategy downscale
+python -u -m dorieh.rasters.launcher --var tmmx -y 2001 --shapes_dir shapes/zip_shape_files --strategy downscale
 ```
 
 The results can be then found in `data/processed` folder
@@ -96,7 +91,10 @@ The results can be then found in `data/processed` folder
 maxdepth: 2
 glob:
 ---
-python_components
+members/gridmet_tools
+members/launcher
+members/task
+members/registry
 ```
 
 ## CWL pipelines and tools
@@ -106,5 +104,5 @@ python_components
 maxdepth: 2
 glob:
 ---
-pipeline/*
+pipeline/gridmet*
 ```

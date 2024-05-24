@@ -1,5 +1,6 @@
 #!/usr/bin/env cwl-runner
-### Pipeline to ingest Pollution downloaded from WashU Box
+### Pipeline to ingest Monthly Pollution data downloaded from WashU Box
+
 #  Copyright (c) 2021-2022. Harvard University
 #
 #  Developed by Research Software Engineering,

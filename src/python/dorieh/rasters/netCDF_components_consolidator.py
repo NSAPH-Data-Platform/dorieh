@@ -137,16 +137,13 @@ class NetCDFDataset:
 
     def add_component(self, filename: str, var: str = None):
         """
-        Reads the NetCDF dataset from a *.nc file
+        Reads the NetCDF dataset from a \\*.nc file
         Assumes that this dataset contains percentage of a component defined by
         the var parameter.
 
         Can only be called after the dataset is initialized with absolute values.
 
         :param var: The variable containing percentage of a certain component
-        :param abs_var: The variable name to contain absolute values of the component. If omitted,
-            it is constructed from the percentage variable name either by removing 'p' if the
-            variable starts with 'p' otherwise, by adding 'abs_' prefix
         :param filename: A path to file to read.
             Can also be a python 3 pathlib instance or the URL of an OpenDAP dataset.
         :raises: ValueError if var is None and there is more than one variable in the dataset or, if var

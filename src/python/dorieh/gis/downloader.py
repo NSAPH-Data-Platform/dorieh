@@ -1,27 +1,17 @@
 """
-Utilities to download shapefiles from US Census website
+Python class to download shapefiles from US Census website.
+Files to be downloaded are selected based on a desired year and
+shapefiles collection.
+
+If the desired year is not present in the requested collection,
+the most recent prior year is used.
+
+If HTTP Proxy is used the environment variable
+`HTTPS_PROXY` must be defined.
+
 """
 
 #  Copyright (c) 2022-2024.  Harvard University
-#
-#   Developed by Research Software Engineering,
-#   Harvard University Research Computing and Data (RCD) Services.
-#
-#   Author: Michael A Bouzinier
-#
-#   Licensed under the Apache License, Version 2.0 (the "License");
-#   you may not use this file except in compliance with the License.
-#   You may obtain a copy of the License at
-#
-#          http://www.apache.org/licenses/LICENSE-2.0
-#
-#  Unless required by applicable law or agreed to in writing, software
-#  distributed under the License is distributed on an "AS IS" BASIS,
-#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-#  See the License for the specific language governing permissions and
-#  limitations under the License.
-#
-#
 #
 #  Developed by Research Software Engineering,
 #  Faculty of Arts and Sciences, Research Computing (FAS RC)
@@ -52,17 +42,37 @@ import certifi
 from tqdm import tqdm
 
 
-
 class CensusShapeCollection(Enum):
+    """
+    Collections that are part of the Topologically Integrated Geographic
+    Encoding and Referencing (TIGER) system, a digital database of geographic
+    features, such as roads, rivers, and legal and statistical geographic areas.
+    Each shape file in these collections contains a series of polygons, each
+    corresponding to a specific geographical area.
+
+    `See also: <https://www2.census.gov/geo/pdfs/maps-data/data/tiger/tgrshp2022/TGRSHP2022_TechDoc.pdf>`_
+
+    """
+
     genz = 'genz'
+    """
+    TIGER/GENZ collection, most providing simplified representations of selected geographic areas, 
+    are specifically designed for small scale thematic mapping and improved visual representations.
+    """
+
     tiger = 'tiger'
+    """
+    TIGER/Line collection, recommended for calculations.
+    """
 
 
 class GISDownloader:
     """
     Geographic Downloader downloads shape files for given dates
     from https://www.census.gov/
+
     """
+
     COUNTY_TEMPLATE = 'https://www2.census.gov/geo/tiger/GENZ{year}/shp/cb_{year}_us_county_500k.zip'
     ZCTA_GENZ_TEMPLATE = 'https://www2.census.gov/geo/tiger/GENZ{year}/shp/cb_{year}_us_zcta510_500k.zip'
     ZCTA_TIGER_URLs = {

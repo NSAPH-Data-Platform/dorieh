@@ -4,6 +4,9 @@ and observed values for a certain parameter (band)
 and returns records containing
 an identifier for a geographic shape and the value of the band
 aggregated over the shape.
+
+A progress bar is displayed while the computational process is running
+
 """
 #  Copyright (c) 2024.  Harvard University
 #

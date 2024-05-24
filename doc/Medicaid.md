@@ -32,10 +32,6 @@ We refer to the original MAX data as RAW data.
 The pipeline steps are being put into a framework and wrapped
 as CWL workflows.
                                 
-## Legacy Pipeline
-
-See [documentation and path references](LegacyMedicaid.md#links-to-legacy-documentation)
-
 ## Importing raw data   
                                        
 ### Parsing FTS files to generate schema

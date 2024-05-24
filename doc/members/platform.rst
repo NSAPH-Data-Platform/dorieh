@@ -1,8 +1,6 @@
-:orphan:
-
 NSAPH Core Package-wide utilities
 =================================
 
-.. automodule:: nsaph
+.. automodule:: dorieh.platform
    :members:
 
