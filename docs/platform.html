@@ -23,7 +23,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Project (Directory) Loading Utility" href="ProjectLoader.html" />
+    <link rel="next" title="Data Modelling for NSAPH Data Platform" href="Datamodels.html" />
     <link rel="prev" title="Data Platform Internals" href="guts.html" /> 
 </head>
 
@@ -111,7 +111,7 @@
              
   <section id="dorieh-core-data-platform">
 <h1>Dorieh Core Data Platform<a class="headerlink" href="#dorieh-core-data-platform" title="Permalink to this heading"></a></h1>
-<p><a class="reference external" href="https://nsaph-data-platform.github.io/nsaph-platform-docs/home.html">Documentation Home</a></p>
+<p><a class="reference internal" href="home.html"><span class="doc std std-doc">Documentation Home</span></a></p>
 <div class="toctree-wrapper compound">
 </div>
 <nav class="contents local" id="contents">
@@ -122,7 +122,7 @@
 <li><p><a class="reference internal" href="#software-sources" id="id3">Software Sources</a></p></li>
 <li><p><a class="reference internal" href="#python-packages" id="id4">Python packages</a></p>
 <ul>
-<li><p><a class="reference internal" href="#nsaph-package" id="id5">NSAPH Package</a></p>
+<li><p><a class="reference internal" href="#dorieh-platform-package" id="id5">dorieh.platform Package</a></p>
 <ul>
 <li><p><a class="reference internal" href="#subpackage-for-data-modelling" id="id6">Subpackage for Data Modelling</a></p></li>
 <li><p><a class="reference internal" href="#module-database-connection-wrapper" id="id7">Module Database Connection Wrapper</a></p></li>
@@ -209,10 +209,10 @@ implemented in PL/pgSQL language</p></li>
 </section>
 <section id="python-packages">
 <h3><a class="toc-backref" href="#id4" role="doc-backlink">Python packages</a><a class="headerlink" href="#python-packages" title="Permalink to this heading"></a></h3>
-<section id="nsaph-package">
-<h4><a class="toc-backref" href="#id5" role="doc-backlink">NSAPH Package</a><a class="headerlink" href="#nsaph-package" title="Permalink to this heading"></a></h4>
+<section id="dorieh-platform-package">
+<h4><a class="toc-backref" href="#id5" role="doc-backlink">dorieh.platform Package</a><a class="headerlink" href="#dorieh-platform-package" title="Permalink to this heading"></a></h4>
 <p>This is the main package containing the majority of the code.
-Modules and subpackages included in <code class="docutils literal notranslate"><span class="pre">nsaph</span></code> package are described below.</p>
+Modules and subpackages included in <code class="docutils literal notranslate"><span class="pre">dorieh.platform</span></code> package are described below.</p>
 <section id="subpackage-for-data-modelling">
 <h5><a class="toc-backref" href="#id6" role="doc-backlink">Subpackage for Data Modelling</a><a class="headerlink" href="#subpackage-for-data-modelling" title="Permalink to this heading"></a></h5>
 <ul class="simple">
@@ -307,10 +307,7 @@ the whole file into memory before dispatching it for processing).</p></li>
 </section>
 <section id="yaml-files">
 <h3><a class="toc-backref" href="#id11" role="doc-backlink">YAML files</a><a class="headerlink" href="#yaml-files" title="Permalink to this heading"></a></h3>
-<p>The majority of files are data model definitions. For now, they
-are included in <strong>nsaph</strong> package because they are used by
-different utilities and thus, expected to be stored in
-a specific location.</p>
+<p>The majority of files are data model definitions.</p>
 <p>Beside data model files, there are YAML files for:</p>
 <ul class="simple">
 <li><p>Conda environments, required for NSAPH pipelines. Unless we
@@ -396,7 +393,7 @@ page.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="guts.html" class="btn btn-neutral float-left" title="Data Platform Internals" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="ProjectLoader.html" class="btn btn-neutral float-right" title="Project (Directory) Loading Utility" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Datamodels.html" class="btn btn-neutral float-right" title="Data Modelling for NSAPH Data Platform" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -117,8 +117,6 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="members/netCDF_components_consolidator.html#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.abs_values">abs_values (NetCDFDataset attribute)</a>
 </li>
-      <li><a href="members/netCDF_components_consolidator.html#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.add_component.params.abs_var">abs_var (dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.add_component parameter)</a>
-</li>
       <li><a href="members/config.html#dorieh.rasters.config.DateFilter.accept">accept() (DateFilter method)</a>
 </li>
       <li><a href="census_glossary.html#term-acs"><strong>acs</strong></a>
@@ -281,6 +279,8 @@
         <li><a href="members/airnow_downloader.html#dorieh.epa.airnow_downloader.AirNowDownloader.params.api_key">(dorieh.epa.airnow_downloader.AirNowDownloader parameter)</a>
 </li>
       </ul></li>
+      <li><a href="members/platform.html#dorieh.platform.app_name">app_name() (in module dorieh.platform)</a>
+</li>
       <li><a href="members/aqs_tools.html#dorieh.epa.aqs_tools.download_data.params.append">append (dorieh.epa.aqs_tools.download_data parameter)</a>
 </li>
       <li><a href="members/hdf5_export.html#dorieh.platform.requests.hdf5_export.Dataset.append">append() (Dataset method)</a>
@@ -447,7 +447,7 @@
 </li>
       <li><a href="members/do_qc.html#dorieh.census.do_qc.CensusQCContext">CensusQCContext (class in dorieh.census.do_qc)</a>
 </li>
-      <li><a href="members/downloader.html#dorieh.gis.downloader.CensusShapeCollection">CensusShapeCollection (class in dorieh.gis.downloader)</a>
+      <li><a href="members/downloader.html#dorieh.gis.downloader.CensusShapeCollection">CensusShapeCollection (class in dorieh.gis.downloader)</a>, <a href="members/gis_constants.html#dorieh.gis.downloader.CensusShapeCollection">[1]</a>
 </li>
       <li><a href="members/write_data.html#dorieh.census.write_data.CensusWriteContext">CensusWriteContext (class in dorieh.census.write_data)</a>
 </li>
@@ -582,7 +582,7 @@
 </li>
         <li><a href="members/fts2yaml.html#dorieh.cms.fts2yaml.MedicareFTS.on_after_read_file.params.columns">(dorieh.cms.fts2yaml.MedicareFTS.on_after_read_file parameter)</a>
 </li>
-        <li><a href="members/annotator.html#dorieh.gis.annotator.GISAnnotator.params.columns">(dorieh.gis.annotator.GISAnnotator parameter)</a>
+        <li><a href="members/annotator.html#dorieh.gis.annotator.GISAnnotator.params.columns">(dorieh.gis.annotator.GISAnnotator parameter)</a>, <a href="members/gis_annotator.html#dorieh.gis.annotator.GISAnnotator.params.columns">[1]</a>
 </li>
         <li><a href="members/fwf.html#dorieh.utils.fwf.FWFMeta.columns">(FWFMeta attribute)</a>
 </li>
@@ -771,7 +771,7 @@
 </li>
       <li><a href="members/tester.html#dorieh.utils.qc.tester.Severity.critical">critical (Severity attribute)</a>
 </li>
-      <li><a href="members/annotator.html#dorieh.gis.annotator.GISAnnotator.params.crs">crs (dorieh.gis.annotator.GISAnnotator parameter)</a>
+      <li><a href="members/annotator.html#dorieh.gis.annotator.GISAnnotator.params.crs">crs (dorieh.gis.annotator.GISAnnotator parameter)</a>, <a href="members/gis_annotator.html#dorieh.gis.annotator.GISAnnotator.params.crs">[1]</a>
 </li>
       <li><a href="members/model.html#dorieh.platform.data_model.model.csv_reader">csv_reader() (in module dorieh.platform.data_model.model)</a>
 
@@ -1009,7 +1009,7 @@
 </li>
       <li><a href="members/aqs_tools.html#dorieh.epa.aqs_tools.destination_path">destination_path() (in module dorieh.epa.aqs_tools)</a>
 </li>
-      <li><a href="members/annotator.html#dorieh.gis.annotator.GISAnnotator.join.params.df">df (dorieh.gis.annotator.GISAnnotator.join parameter)</a>
+      <li><a href="members/annotator.html#dorieh.gis.annotator.GISAnnotator.join.params.df">df (dorieh.gis.annotator.GISAnnotator.join parameter)</a>, <a href="members/gis_annotator.html#dorieh.gis.annotator.GISAnnotator.join.params.df">[1]</a>
 
       <ul>
         <li><a href="members/tester.html#dorieh.utils.qc.tester.Test.check.params.df">(dorieh.utils.qc.tester.Test.check parameter)</a>
@@ -1332,7 +1332,7 @@
     dorieh.gis.annotator
 
       <ul>
-        <li><a href="members/annotator.html#module-dorieh.gis.annotator">module</a>
+        <li><a href="members/annotator.html#module-dorieh.gis.annotator">module</a>, <a href="members/gis_annotator.html#module-dorieh.gis.annotator">[1]</a>
 </li>
       </ul></li>
       <li>
@@ -1346,21 +1346,7 @@
     dorieh.gis.constants
 
       <ul>
-        <li><a href="members/constants.html#module-dorieh.gis.constants">module</a>, <a href="members/gis_constants.html#module-dorieh.gis.constants">[1]</a>
-</li>
-      </ul></li>
-      <li>
-    dorieh.gis.downloader
-
-      <ul>
-        <li><a href="members/downloader.html#module-dorieh.gis.downloader">module</a>
-</li>
-      </ul></li>
-      <li>
-    dorieh.gis.geometry
-
-      <ul>
-        <li><a href="members/geometry.html#module-dorieh.gis.geometry">module</a>
+        <li><a href="members/constants.html#module-dorieh.gis.constants">module</a>
 </li>
       </ul></li>
       <li>
@@ -1368,6 +1354,13 @@
 
       <ul>
         <li><a href="members/shapes_downloader.html#module-dorieh.gis.shapes_downloader">module</a>
+</li>
+      </ul></li>
+      <li>
+    dorieh.platform
+
+      <ul>
+        <li><a href="members/platform.html#module-dorieh.platform">module</a>
 </li>
       </ul></li>
       <li>
@@ -2269,7 +2262,7 @@
 </li>
       <li><a href="members/app_run_generator.html#dorieh.platform.apprunner.app_run_generator.CWLAppRunnerGenerator.generate_workflow">generate_workflow() (CWLAppRunnerGenerator method)</a>
 </li>
-      <li><a href="members/downloader.html#dorieh.gis.downloader.CensusShapeCollection.genz">genz (CensusShapeCollection attribute)</a>
+      <li><a href="members/downloader.html#dorieh.gis.downloader.CensusShapeCollection.genz">genz (CensusShapeCollection attribute)</a>, <a href="members/gis_constants.html#dorieh.gis.downloader.CensusShapeCollection.genz">[1]</a>
 </li>
       <li><a href="geo.html#dorieh.gis.constants.Geography">Geography (class in dorieh.gis.constants)</a>, <a href="members/constants.html#dorieh.gis.constants.Geography">[1]</a>, <a href="members/gis_constants.html#dorieh.gis.constants.Geography">[2]</a>
 </li>
@@ -2543,7 +2536,7 @@
 </li>
       <li><a href="members/zip2zcta.html#dorieh.platform.crosswalks.zip2zcta.XReader.get_year">get_year() (XReader method)</a>
 </li>
-      <li><a href="members/annotator.html#dorieh.gis.annotator.GISAnnotator">GISAnnotator (class in dorieh.gis.annotator)</a>
+      <li><a href="members/annotator.html#dorieh.gis.annotator.GISAnnotator">GISAnnotator (class in dorieh.gis.annotator)</a>, <a href="members/gis_annotator.html#dorieh.gis.annotator.GISAnnotator">[1]</a>
 </li>
       <li><a href="members/downloader.html#dorieh.gis.downloader.GISDownloader">GISDownloader (class in dorieh.gis.downloader)</a>
 </li>
@@ -2715,6 +2708,8 @@
       </ul></li>
       <li><a href="members/init_core_db.html#dorieh.platform.util.init_core_db.init_core">init_core() (in module dorieh.platform.util.init_core_db)</a>
 </li>
+      <li><a href="members/platform.html#dorieh.platform.init_logging">init_logging() (in module dorieh.platform)</a>
+</li>
       <li><a href="members/mcr_registry.html#dorieh.cms.tools.mcr_registry.MedicareRegistry.init_registry">init_registry() (MedicareRegistry method)</a>
 </li>
       <li><a href="members/calculate_density.html#dorieh.census.calculate_density.initialize_logging">initialize_logging() (in module dorieh.census.calculate_density)</a>
@@ -2819,7 +2814,7 @@
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="members/annotator.html#dorieh.gis.annotator.GISAnnotator.join">join() (GISAnnotator method)</a>
+      <li><a href="members/annotator.html#dorieh.gis.annotator.GISAnnotator.join">join() (GISAnnotator method)</a>, <a href="members/gis_annotator.html#dorieh.gis.annotator.GISAnnotator.join">[1]</a>
 </li>
   </ul></td>
 </tr></table>
@@ -2868,6 +2863,8 @@
       <li><a href="members/fwf.html#dorieh.utils.fwf.FWFColumn.length">length (FWFColumn attribute)</a>
 </li>
       <li><a href="members/tester.html#dorieh.utils.qc.tester.Condition.less_than">less_than (Condition attribute)</a>
+</li>
+      <li><a href="members/platform.html#dorieh.platform.init_logging.params.level">level (dorieh.platform.init_logging parameter)</a>
 </li>
       <li><a href="members/data_loader.html#dorieh.platform.loader.loader_config.LoaderConfig.limit">limit (LoaderConfig attribute)</a>, <a href="members/loader_config.html#dorieh.platform.loader.loader_config.LoaderConfig.limit">[1]</a>
 </li>
@@ -3010,7 +3007,7 @@
       <li><a href="members/domain.html#dorieh.platform.data_model.domain.Domain.matches">matches() (Domain method)</a>
 
       <ul>
-        <li><a href="members/annotator.html#dorieh.gis.annotator.GISAnnotator.matches">(GISAnnotator static method)</a>
+        <li><a href="members/annotator.html#dorieh.gis.annotator.GISAnnotator.matches">(GISAnnotator static method)</a>, <a href="members/gis_annotator.html#dorieh.gis.annotator.GISAnnotator.matches">[1]</a>
 </li>
         <li><a href="members/mcr_sas2yaml.html#dorieh.cms.tools.mcr_sas2yaml.SASIntrospector.matches">(SASIntrospector class method)</a>
 </li>
@@ -3203,17 +3200,15 @@
 </li>
         <li><a href="members/registry.html#module-dorieh.epa.registry">dorieh.epa.registry</a>
 </li>
-        <li><a href="members/annotator.html#module-dorieh.gis.annotator">dorieh.gis.annotator</a>
+        <li><a href="members/annotator.html#module-dorieh.gis.annotator">dorieh.gis.annotator</a>, <a href="members/gis_annotator.html#module-dorieh.gis.annotator">[1]</a>
 </li>
         <li><a href="members/compute_shape.html#module-dorieh.gis.compute_shape">dorieh.gis.compute_shape</a>
 </li>
-        <li><a href="members/constants.html#module-dorieh.gis.constants">dorieh.gis.constants</a>, <a href="members/gis_constants.html#module-dorieh.gis.constants">[1]</a>
-</li>
-        <li><a href="members/downloader.html#module-dorieh.gis.downloader">dorieh.gis.downloader</a>
-</li>
-        <li><a href="members/geometry.html#module-dorieh.gis.geometry">dorieh.gis.geometry</a>
+        <li><a href="members/constants.html#module-dorieh.gis.constants">dorieh.gis.constants</a>
 </li>
         <li><a href="members/shapes_downloader.html#module-dorieh.gis.shapes_downloader">dorieh.gis.shapes_downloader</a>
+</li>
+        <li><a href="members/platform.html#module-dorieh.platform">dorieh.platform</a>
 </li>
         <li><a href="members/adi.html#module-dorieh.platform.adi">dorieh.platform.adi</a>
 </li>
@@ -3370,9 +3365,11 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="members/io_utils.html#dorieh.utils.io_utils.SpecialValues.NA">NA (SpecialValues attribute)</a>
 </li>
-      <li><a href="members/airnow_ds_def.html#dorieh.utils.context.Argument.params.name">name (dorieh.utils.context.Argument parameter)</a>, <a href="members/aqs_ds_def.html#dorieh.utils.context.Argument.params.name">[1]</a>, <a href="members/context.html#dorieh.utils.context.Argument.params.name">[2]</a>, <a href="rasters_ds_def.html#dorieh.utils.context.Argument.params.name">[3]</a>
+      <li><a href="members/platform.html#dorieh.platform.init_logging.params.name">name (dorieh.platform.init_logging parameter)</a>
 
       <ul>
+        <li><a href="members/airnow_ds_def.html#dorieh.utils.context.Argument.params.name">(dorieh.utils.context.Argument parameter)</a>, <a href="members/aqs_ds_def.html#dorieh.utils.context.Argument.params.name">[1]</a>, <a href="members/context.html#dorieh.utils.context.Argument.params.name">[2]</a>, <a href="rasters_ds_def.html#dorieh.utils.context.Argument.params.name">[3]</a>
+</li>
         <li><a href="members/aqs_tools.html#dorieh.utils.io_utils.is_readme.params.name">(dorieh.utils.io_utils.is_readme parameter)</a>, <a href="members/io_utils.html#dorieh.utils.io_utils.is_readme.params.name">[1]</a>
 </li>
         <li><a href="members/fwf.html#dorieh.utils.fwf.FWFColumn.name">(FWFColumn attribute)</a>
@@ -3830,8 +3827,12 @@
       </ul></li>
       <li><a href="members/netCDF_tools.html#dorieh.rasters.netCDF_tools.NCViewer.random_lat_lon">random_lat_lon() (NCViewer method)</a>
 </li>
-      <li><a href="members/geometry.html#dorieh.gis.geometry.PointInRaster.bilinear.params.raster">raster (dorieh.gis.geometry.PointInRaster.bilinear parameter)</a>
+      <li><a href="members/geometry.html#dorieh.gis.geometry.PointInRaster.array.params.raster">raster (dorieh.gis.geometry.PointInRaster.array parameter)</a>
+
+      <ul>
+        <li><a href="members/geometry.html#dorieh.gis.geometry.PointInRaster.bilinear.params.raster">(dorieh.gis.geometry.PointInRaster.bilinear parameter)</a>
 </li>
+      </ul></li>
       <li><a href="members/constants.html#dorieh.gis.constants.RasterizationStrategy">RasterizationStrategy (class in dorieh.gis.constants)</a>, <a href="members/gis_constants.html#dorieh.gis.constants.RasterizationStrategy">[1]</a>, <a href="strategy.html#dorieh.gis.constants.RasterizationStrategy">[2]</a>
 </li>
       <li><a href="members/config.html#dorieh.rasters.config.GridContext.raw_downloads">raw_downloads (GridContext attribute)</a>, <a href="rasters_ds_def.html#dorieh.rasters.config.GridContext.raw_downloads">[1]</a>
@@ -4070,7 +4071,7 @@
 </li>
       <li><a href="members/task.html#dorieh.rasters.task.GridmetTask.find_shape_file.params.shape">shape (dorieh.rasters.task.GridmetTask.find_shape_file parameter)</a>, <a href="rasters_task.html#dorieh.rasters.task.GridmetTask.find_shape_file.params.shape">[1]</a>
 </li>
-      <li><a href="members/annotator.html#dorieh.gis.annotator.GISAnnotator.params.shape_files">shape_files (dorieh.gis.annotator.GISAnnotator parameter)</a>
+      <li><a href="members/annotator.html#dorieh.gis.annotator.GISAnnotator.params.shape_files">shape_files (dorieh.gis.annotator.GISAnnotator parameter)</a>, <a href="members/gis_annotator.html#dorieh.gis.annotator.GISAnnotator.params.shape_files">[1]</a>
 </li>
       <li><a href="members/gridmet_tools.html#dorieh.rasters.gridmet_tools.find_shape_file.params.shape_type">shape_type (dorieh.rasters.gridmet_tools.find_shape_file parameter)</a>, <a href="rasters_tools.html#dorieh.rasters.gridmet_tools.find_shape_file.params.shape_type">[1]</a>
 </li>
@@ -4360,7 +4361,7 @@
 </li>
       <li><a href="members/data_loader.html#dorieh.platform.loader.loader_config.LoaderConfig.threads">threads (LoaderConfig attribute)</a>, <a href="members/loader_config.html#dorieh.platform.loader.loader_config.LoaderConfig.threads">[1]</a>
 </li>
-      <li><a href="members/downloader.html#dorieh.gis.downloader.CensusShapeCollection.tiger">tiger (CensusShapeCollection attribute)</a>
+      <li><a href="members/downloader.html#dorieh.gis.downloader.CensusShapeCollection.tiger">tiger (CensusShapeCollection attribute)</a>, <a href="members/gis_constants.html#dorieh.gis.downloader.CensusShapeCollection.tiger">[1]</a>
 </li>
       <li><a href="members/inserter.html#dorieh.platform.data_model.inserter.Inserter.timer">timer() (Inserter method)</a>
 </li>
@@ -4624,6 +4625,8 @@
       </ul></li>
       <li><a href="members/geometry.html#dorieh.gis.geometry.PointInRaster.window">window (PointInRaster attribute)</a>
 </li>
+      <li><a href="members/platform.html#dorieh.platform.init_logging.params.with_thread_id">with_thread_id (dorieh.platform.init_logging parameter)</a>
+</li>
       <li><a href="members/app_run_generator.html#dorieh.platform.apprunner.app_run_generator.CWLAppRunnerGenerator.write_app_outputs">write_app_outputs() (CWLAppRunnerGenerator method)</a>
 </li>
       <li><a href="members/aqs_tools.html#dorieh.utils.io_utils.write_csv">write_csv() (in module dorieh.utils.io_utils)</a>, <a href="members/io_utils.html#dorieh.utils.io_utils.write_csv">[1]</a>
@@ -4692,7 +4695,7 @@
 <h2 id="X">X</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="members/annotator.html#dorieh.gis.annotator.GISAnnotator.join.params.x">x (dorieh.gis.annotator.GISAnnotator.join parameter)</a>
+      <li><a href="members/annotator.html#dorieh.gis.annotator.GISAnnotator.join.params.x">x (dorieh.gis.annotator.GISAnnotator.join parameter)</a>, <a href="members/gis_annotator.html#dorieh.gis.annotator.GISAnnotator.join.params.x">[1]</a>
 
       <ul>
         <li><a href="members/geometry.html#dorieh.gis.geometry.PointInRaster.x">(PointInRaster attribute)</a>
@@ -4708,7 +4711,7 @@
 <h2 id="Y">Y</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="members/annotator.html#dorieh.gis.annotator.GISAnnotator.join.params.y">y (dorieh.gis.annotator.GISAnnotator.join parameter)</a>
+      <li><a href="members/annotator.html#dorieh.gis.annotator.GISAnnotator.join.params.y">y (dorieh.gis.annotator.GISAnnotator.join parameter)</a>, <a href="members/gis_annotator.html#dorieh.gis.annotator.GISAnnotator.join.params.y">[1]</a>
 
       <ul>
         <li><a href="members/downloader.html#dorieh.gis.downloader.GISDownloader.y">(GISDownloader attribute)</a>

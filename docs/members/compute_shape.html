@@ -23,8 +23,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="The config Module" href="config.html" />
-    <link rel="prev" title="The common Module" href="common.html" /> 
+    <link rel="next" title="A point in a raster class" href="geometry.html" />
+    <link rel="prev" title="GIS Annotator" href="gis_annotator.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -47,12 +47,32 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../packages.html">Python Packages</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../utils.html">General purpose utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CoreLibrary.html">Data platform components</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../gis.html">GIS utilities</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../gis.html#gis-library-overview">GIS Library Overview</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../gis.html#shape-files-downloader">Shape files Downloader</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../gis.html#us-census-shapefiles-collections">US Census Shapefiles collections</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gis.html#downloader-python-modules">Downloader Python Modules</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../gis.html#shapefiles-based-computations">Shapefiles-based computations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gis.html#a-point-in-raster-tools">A Point in raster tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gis.html#gis-related-constants-enums">GIS-related constants (enums)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../CMSLibrary.html">Health data manipulation tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../epa.html">EPA tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rasters.html">Raster data tools (climate and exposure)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../census.html">Census data manipulation tools</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DBT.html">Database Testing Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
@@ -74,9 +94,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../domains.html">Data Domains</a></li>
-          <li class="breadcrumb-item"><a href="../epa.html">Dorieh EPA Package Description</a></li>
-          <li class="breadcrumb-item"><a href="../python_components.html">Python Components</a></li>
+          <li class="breadcrumb-item"><a href="../packages.html">Python Packages Included in the Platform</a></li>
+          <li class="breadcrumb-item"><a href="../gis.html">Dorieh GIS python package</a></li>
       <li class="breadcrumb-item active">Observation values aggregation over shapes</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/members/compute_shape.rst.txt" rel="nofollow"> View page source</a>
@@ -94,6 +113,7 @@ and observed values for a certain parameter (band)
 and returns records containing
 an identifier for a geographic shape and the value of the band
 aggregated over the shape.</p>
+<p>A progress bar is displayed while the computational process is running</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="dorieh.gis.compute_shape.Record">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prop</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/gis/compute_shape.html#Record"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.gis.compute_shape.Record" title="Permalink to this definition"></a></dt>
@@ -264,8 +284,8 @@ for this shape</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="common.html" class="btn btn-neutral float-left" title="The common Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="config.html" class="btn btn-neutral float-right" title="The config Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="gis_annotator.html" class="btn btn-neutral float-left" title="GIS Annotator" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="geometry.html" class="btn btn-neutral float-right" title="A point in a raster class" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

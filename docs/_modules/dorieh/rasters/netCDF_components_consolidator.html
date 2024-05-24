@@ -221,16 +221,13 @@
 
 <div class="viewcode-block" id="NetCDFDataset.add_component"><a class="viewcode-back" href="../../../members/netCDF_components_consolidator.html#dorieh.rasters.netCDF_components_consolidator.NetCDFDataset.add_component">[docs]</a>    <span class="k">def</span> <span class="nf">add_component</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">var</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Reads the NetCDF dataset from a *.nc file</span>
+<span class="sd">        Reads the NetCDF dataset from a \\*.nc file</span>
 <span class="sd">        Assumes that this dataset contains percentage of a component defined by</span>
 <span class="sd">        the var parameter.</span>
 
 <span class="sd">        Can only be called after the dataset is initialized with absolute values.</span>
 
 <span class="sd">        :param var: The variable containing percentage of a certain component</span>
-<span class="sd">        :param abs_var: The variable name to contain absolute values of the component. If omitted,</span>
-<span class="sd">            it is constructed from the percentage variable name either by removing &#39;p&#39; if the</span>
-<span class="sd">            variable starts with &#39;p&#39; otherwise, by adding &#39;abs_&#39; prefix</span>
 <span class="sd">        :param filename: A path to file to read.</span>
 <span class="sd">            Can also be a python 3 pathlib instance or the URL of an OpenDAP dataset.</span>
 <span class="sd">        :raises: ValueError if var is None and there is more than one variable in the dataset or, if var</span>

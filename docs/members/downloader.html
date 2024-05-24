@@ -23,8 +23,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="The duplicates Module" href="duplicates.html" />
-    <link rel="prev" title="The domain_operations Module" href="domain_operations.html" /> 
+    <link rel="next" title="The shapes_downloader Module" href="shapes_downloader.html" />
+    <link rel="prev" title="Dorieh GIS python package" href="../gis.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -47,12 +47,32 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../packages.html">Python Packages</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../utils.html">General purpose utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CoreLibrary.html">Data platform components</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../gis.html">GIS utilities</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../gis.html#gis-library-overview">GIS Library Overview</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../gis.html#shape-files-downloader">Shape files Downloader</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../gis.html#us-census-shapefiles-collections">US Census Shapefiles collections</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../gis.html#downloader-python-modules">Downloader Python Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gis.html#shapefiles-based-computations">Shapefiles-based computations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gis.html#a-point-in-raster-tools">A Point in raster tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gis.html#gis-related-constants-enums">GIS-related constants (enums)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../CMSLibrary.html">Health data manipulation tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../epa.html">EPA tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rasters.html">Raster data tools (climate and exposure)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../census.html">Census data manipulation tools</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DBT.html">Database Testing Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
@@ -74,9 +94,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../domains.html">Data Domains</a></li>
-          <li class="breadcrumb-item"><a href="../epa.html">Dorieh EPA Package Description</a></li>
-          <li class="breadcrumb-item"><a href="../python_components.html">Python Components</a></li>
+          <li class="breadcrumb-item"><a href="../packages.html">Python Packages Included in the Platform</a></li>
+          <li class="breadcrumb-item"><a href="../gis.html">Dorieh GIS python package</a></li>
       <li class="breadcrumb-item active">Shapefiles downloader</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/members/downloader.rst.txt" rel="nofollow"> View page source</a>
@@ -87,25 +106,41 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-dorieh.gis.downloader">
-<span id="shapefiles-downloader"></span><h1>Shapefiles downloader<a class="headerlink" href="#module-dorieh.gis.downloader" title="Permalink to this heading"></a></h1>
-<p>Utilities to download shapefiles from US Census website</p>
+  <section id="shapefiles-downloader">
+<h1>Shapefiles downloader<a class="headerlink" href="#shapefiles-downloader" title="Permalink to this heading"></a></h1>
+<p>Python API to download shapefiles from US Census website.
+Files to be downloaded are selected based on a desired year and
+shapefiles collection.</p>
+<p>If the desired year is not present in the requested collection,
+the most recent prior year is used.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="dorieh.gis.downloader.CensusShapeCollection">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CensusShapeCollection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/gis/downloader.html#CensusShapeCollection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.gis.downloader.CensusShapeCollection" title="Permalink to this definition"></a></dt>
-<dd><p>An enumeration.</p>
+<dd><p>Collections that are part of the Topologically Integrated Geographic
+Encoding and Referencing (TIGER) system, a digital database of geographic
+features, such as roads, rivers, and legal and statistical geographic areas.
+Each shape file in these collections contains a series of polygons, each
+corresponding to a specific geographical area.</p>
+<p><a class="reference external" href="https://www2.census.gov/geo/pdfs/maps-data/data/tiger/tgrshp2022/TGRSHP2022_TechDoc.pdf">See also:</a></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="dorieh.gis.downloader.CensusShapeCollection.genz">
 <span class="sig-name descname"><span class="pre">genz</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'genz'</span></em><a class="headerlink" href="#dorieh.gis.downloader.CensusShapeCollection.genz" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>TIGER/GENZ collection, most providing simplified representations of selected geographic areas, 
+are specifically designed for small scale thematic mapping and improved visual representations.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="dorieh.gis.downloader.CensusShapeCollection.tiger">
 <span class="sig-name descname"><span class="pre">tiger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'tiger'</span></em><a class="headerlink" href="#dorieh.gis.downloader.CensusShapeCollection.tiger" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>TIGER/Line collection, recommended for calculations.</p>
+</dd></dl>
 
 </dd></dl>
 
+<p>If HTTP Proxy is used the environment variable
+<cite>HTTPS_PROXY</cite> must be defined.</p>
+<section id="class-gisdownloader">
+<h2>Class GISDownloader<a class="headerlink" href="#class-gisdownloader" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="dorieh.gis.downloader.GISDownloader">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GISDownloader</span></span><a class="reference internal" href="../_modules/dorieh/gis/downloader.html#GISDownloader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.gis.downloader.GISDownloader" title="Permalink to this definition"></a></dt>
@@ -128,12 +163,12 @@ from <a class="reference external" href="https://www.census.gov/">https://www.ce
 
 <dl class="py method">
 <dt class="sig sig-object py" id="dorieh.gis.downloader.GISDownloader.download_shapes">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">download_shapes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dorieh.gis.downloader.CensusShapeCollection" title="dorieh.gis.downloader.CensusShapeCollection"><span class="pre">CensusShapeCollection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/dorieh/gis/downloader.html#GISDownloader.download_shapes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.gis.downloader.GISDownloader.download_shapes" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">download_shapes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gis_constants.html#dorieh.gis.downloader.CensusShapeCollection" title="dorieh.gis.downloader.CensusShapeCollection"><span class="pre">CensusShapeCollection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/dorieh/gis/downloader.html#GISDownloader.download_shapes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.gis.downloader.GISDownloader.download_shapes" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="dorieh.gis.downloader.GISDownloader.download_zcta">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">download_zcta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dorieh.gis.downloader.CensusShapeCollection" title="dorieh.gis.downloader.CensusShapeCollection"><span class="pre">CensusShapeCollection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/dorieh/gis/downloader.html#GISDownloader.download_zcta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.gis.downloader.GISDownloader.download_zcta" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">download_zcta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gis_constants.html#dorieh.gis.downloader.CensusShapeCollection" title="dorieh.gis.downloader.CensusShapeCollection"><span class="pre">CensusShapeCollection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/dorieh/gis/downloader.html#GISDownloader.download_zcta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.gis.downloader.GISDownloader.download_zcta" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -149,13 +184,14 @@ from <a class="reference external" href="https://www.census.gov/">https://www.ce
 </dd></dl>
 
 </section>
+</section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="domain_operations.html" class="btn btn-neutral float-left" title="The domain_operations Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="duplicates.html" class="btn btn-neutral float-right" title="The duplicates Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../gis.html" class="btn btn-neutral float-left" title="Dorieh GIS python package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="shapes_downloader.html" class="btn btn-neutral float-right" title="The shapes_downloader Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

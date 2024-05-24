@@ -22,9 +22,7 @@
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Utility functions" href="utils.sql.html" />
-    <link rel="prev" title="The tigerweb Module" href="tigerweb.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -74,9 +72,6 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../domains.html">Data Domains</a></li>
-          <li class="breadcrumb-item"><a href="../epa.html">Dorieh EPA Package Description</a></li>
-          <li class="breadcrumb-item"><a href="../python_components.html">Python Components</a></li>
       <li class="breadcrumb-item active">The utils Module</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/members/utils.rst.txt" rel="nofollow"> View page source</a>
@@ -158,14 +153,17 @@ returns just a basename of a table</p>
 <dd><p>Generalized reader for columns-structured files, such as CSV, FST and
 sas7bdat</p>
 <p>This class is Context manager and can be used with with block</p>
-<p>Example:</p>
-<dl class="simple">
+<p>Example
+.. code-block:: python</p>
+<blockquote>
+<div><dl class="simple">
 <dt>with DataReader(file_path) as reader:</dt><dd><dl class="simple">
 <dt>for row in reader.rows():</dt><dd><p>print(row)</p>
 </dd>
 </dl>
 </dd>
 </dl>
+</div></blockquote>
 <dl class="py method">
 <dt class="sig sig-object py" id="dorieh.platform.data_model.utils.DataReader.open_fst">
 <span class="sig-name descname"><span class="pre">open_fst</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/data_model/utils.html#DataReader.open_fst"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.data_model.utils.DataReader.open_fst" title="Permalink to this definition"></a></dt>
@@ -213,10 +211,7 @@ sas7bdat</p>
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="tigerweb.html" class="btn btn-neutral float-left" title="The tigerweb Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="utils.sql.html" class="btn btn-neutral float-right" title="Utility functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 

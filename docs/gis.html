@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NSAPH GIS python package &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+  <title>Dorieh GIS python package &mdash; Dorieh Data Platform 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
@@ -22,7 +22,9 @@
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Shapefiles downloader" href="members/downloader.html" />
+    <link rel="prev" title="Python Core Platform Components" href="CoreLibrary.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,12 +47,32 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
 <li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="packages.html">Python Packages</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="utils.html">General purpose utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CoreLibrary.html">Data platform components</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">GIS utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gis-library-overview">GIS Library Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#shape-files-downloader">Shape files Downloader</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#us-census-shapefiles-collections">US Census Shapefiles collections</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#downloader-python-modules">Downloader Python Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#shapefiles-based-computations">Shapefiles-based computations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#a-point-in-raster-tools">A Point in raster tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gis-related-constants-enums">GIS-related constants (enums)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="CMSLibrary.html">Health data manipulation tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="epa.html">EPA tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasters.html">Raster data tools (climate and exposure)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="census.html">Census data manipulation tools</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DBT.html">Database Testing Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
@@ -72,7 +94,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">NSAPH GIS python package</li>
+          <li class="breadcrumb-item"><a href="packages.html">Python Packages Included in the Platform</a></li>
+      <li class="breadcrumb-item active">Dorieh GIS python package</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/gis.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -82,158 +105,103 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="nsaph-gis-python-package">
-<h1>NSAPH GIS python package<a class="headerlink" href="#nsaph-gis-python-package" title="Permalink to this heading"></a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="python_components.html">Python Components</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="members/adi.html">The adi Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/aggregates.html">The aggregates Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/aggregator.html">The aggregator Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/airnow.html">Main Class for EPA AirNow Package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/airnow_downloader.html">Downloader for AirNow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/airnow_ds_def.html">Configuration Options for EPA AirNow Package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/airnow_setup.html">The airnow_setup Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/airnow_shapes.html">The airnow_shapes Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/annotator.html">GIS Annotator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/app_run_generator.html">The app_run_generator Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/aqs.html">Main Class for EPA AQS Package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/aqs_ds_def.html">Configuration Options for EPA AQS Package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/aqs_expand.html">The aqs_expand Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/aqs_tools.html">Internal scripts used for download tasks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/assemble_data.html">The assemble_data Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/calculate_density.html">The calculate_density Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/census_info.html">The census_info Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/cli.html">The cli Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/collector.html">The collector Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/columns.html">The columns Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/common.html">The common Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/compute_shape.html">Observation values aggregation over shapes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/config.html">The config Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/constants.html">The constants Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/context.html">The context Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/copy_section.html">The copy_section Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/create.html">The create Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/create_schema_config.html">The create_schema_config Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/create_test.html">The create_test Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/cwl2md.html">The cwl2md Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/cwl_collect_outputs.html">Utility to generate outputs sections for a CWL Tool</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/cwl_generator.html">The cwl_generator Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/data_loader.html">The data_loader Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/db.html">Database connection API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/dbt_config.html">The dbt_config Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/dbt_runner.html">The dbt_runner Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/display_netcdf.html">The display_netcdf Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/do_qc.html">The do_qc Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/domain.html">The Domain Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/domain_dictionary.html">The domain_dictionary Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/domain_operations.html">The domain_operations Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/downloader.html">Shapefiles downloader</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/duplicates.html">The duplicates Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/element.html">The element Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/exceptions.html">The exceptions Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/executors.html">The executors Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/fips.html">The fips Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/fst2csv.html">The fst2csv Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/fts2yaml.html">Parser for FTS files that accompany CMS data from ResDac</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/functions.html">Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/fwf.html">The fwf Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/gen_dbt_cwl.html">The gen_dbt_cwl Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/geometry.html">A point in a raster class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/gis_constants.html">GIS Related Enums</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/gridmet_tools.html">The gridmet_tools Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/hdf5_export.html">The hdf5_export Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/hud_zip2fips.html">DDL for HUD ZIP to FIPS mappings</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/index_builder.html">The index_builder Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/init_cms_db.html">The init_cms_db Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/init_core_db.html">The init_core_db Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/inserter.html">The inserter Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/interface.html">The interface Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/interpolate_data.html">The interpolate_data Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/interpolate_ma.html">The interpolate_ma Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/introspector.html">The introspector Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/io_utils.html">The io_utils Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/launcher.html">The launcher Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/link_gis.html">The link_gis Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/load_data.html">The load_data Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/loader.html">Data loader base abstract API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/loader_config.html">The loader_config Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/map_to_foreign_database.ddl.html">Set of SQL statements to map tables from another database</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/mcr_combine_tables.html">The mcr_combine_tables Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/mcr_create_test_data.html">The mcr_create_test_data Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/mcr_data_loader.html">The mcr_data_loader Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/mcr_file.html">The mcr_file Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/mcr_fts2csv.html">The mcr_fts2csv Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/mcr_fts2db.html">The mcr_fts2db Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/mcr_registry.html">The mcr_registry Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/mcr_sas.html">The mcr_sas Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/mcr_sas2db.html">The mcr_sas2db Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/mcr_sas2yaml.html">The mcr_sas2yaml Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/md_creator.html">The md_creator Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/medicaid_yaml.html">Medicaid.yaml</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/medicare_yaml.html">Medicare.yaml</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/medpar_converter.html">The medpar_converter Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/memtest.html">The memtest Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/model.html">The model Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/monitor.html">The monitor Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/net.html">The net Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/netCDF_components_consolidator.html">The netCDF_components_consolidator Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/netCDF_file_processor.html">The netCDF_file_processor Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/netCDF_tools.html">The netCDF_tools Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/pg_export_parquet.html">The pg_export_parquet Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/pg_json_dump.html">The pg_json_dump Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/pg_keywords.html">The pg_keywords Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/platform.html">NSAPH Core Package-wide utilities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/procedures.html">Procedures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/prof.html">The prof Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/profile_utils.html">The profile_utils Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/project_loader.html">The project_loader Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/psql.html">The psql Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/pyfst.html">The pyfst Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/query.html">The query Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/query_builder.html">The query_builder Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/random_selector.html">The random_selector Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/registry.html">The registry Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/rename_indices.sql.html">A procedure to rename indices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/resources.html">The resources Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/sample_query.html">Sample query</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/sas_explorer.html">The sas_explorer Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/shapes.html">The shapes Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/shapes_downloader.html">The shapes_downloader Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/ssa2fips.html">The ssa2fips Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/table_population.html">The table_population Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/tables.html">The tables Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/task.html">The task Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/tester.html">The tester Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/tigerweb.html">The tigerweb Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/utils.html">The utils Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/utils.sql.html">Utility functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/vacuum.html">The vacuum Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/validator.html">The validator Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/version.html">The version Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/write_data.html">The write_data Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/wustl_file_processor.html">The wustl_file_processor Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/zip2fips.html">The zip2fips Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/zip2fips.sql.html">SQL to create direct ZIP =&gt; FIPS lookup table and helper functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/zip2zcta.html">The zip2zcta Module</a></li>
-</ul>
-</li>
-</ul>
-</div>
+  <section id="dorieh-gis-python-package">
+<h1>Dorieh GIS python package<a class="headerlink" href="#dorieh-gis-python-package" title="Permalink to this heading"></a></h1>
 <section id="gis-library-overview">
 <h2>GIS Library Overview<a class="headerlink" href="#gis-library-overview" title="Permalink to this heading"></a></h2>
-<p>This library contains several packages, aimed to work with census shape files.</p>
+<p>Per <a class="reference external" href="https://www.usgs.gov/faqs/what-geographic-information-system-gis">USGS</a>,
+a Geographic Information System (GIS) is a computer system that
+analyzes and displays geographically referenced information.
+It uses data that is attached to a unique location.</p>
+<p>This <code class="docutils literal notranslate"><span class="pre">dorieh.gis</span></code> library contains several modules, aimed to work with US Census shape files.
+They fall into two categories:</p>
+<ul class="simple">
+<li><p>Utilities to download appropriate shapefiles for a given geography type and year</p></li>
+<li><p>Utilities to aggregate raster data over given shapefiles</p></li>
+</ul>
 </section>
-<section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">git+https://github.com/NSAPH-Data-Platform/nsaph-gis&#64;master#egg=nsaph-gis</span></code></p>
+<section id="shape-files-downloader">
+<h2>Shape files Downloader<a class="headerlink" href="#shape-files-downloader" title="Permalink to this heading"></a></h2>
+<section id="us-census-shapefiles-collections">
+<h3>US Census Shapefiles collections<a class="headerlink" href="#us-census-shapefiles-collections" title="Permalink to this heading"></a></h3>
+<p><a class="reference external" href="https://www2.census.gov/geo/tiger/GENZ2022/description.pdf">See also</a></p>
+<p>We predominantly focus on two types of geographical areas:  US counties and
+US Zip Code Tabulation Areas (ZCTAs).
+ZCTAs, created by the US Census Bureau, are generalized representations of the
+United States Postal Service (USPS) zip code service areas.
+Shape files for these specific types of areas can be obtained freely from the
+US Census website, which offers two collections: TIGER/Line and TIGER/GENZ.
+These collections are part of the Topologically Integrated Geographic
+Encoding and Referencing (TIGER) system, a digital database of geographic
+features, such as roads, rivers, and legal and statistical geographic areas.
+Each shape file in these collections contains a series of polygons, each
+corresponding to a specific geographical area. TIGER/GENZ shape files,
+while providing simplified representations of selected geographic areas, are
+specifically designed for small scale thematic mapping and improved visual representations.
+However, due to their lack of detail, they are not recommended for calculations.
+Therefore, our work primarily utilizes the more detailed TIGER/Line shape files.</p>
+</section>
+<section id="downloader-python-modules">
+<h3>Downloader Python Modules<a class="headerlink" href="#downloader-python-modules" title="Permalink to this heading"></a></h3>
+<p>Python tools to download shapefiles from US Census website.
+Files to be downloaded are selected based on a desired year and
+shapefiles collection.</p>
+<p>If the desired year is not present in the requested collection,
+the most recent prior year is used.</p>
+<p>If HTTP Proxy is used the environment variable
+<code class="docutils literal notranslate"><span class="pre">HTTPS_PROXY</span></code> must be defined.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="members/downloader.html">Python class GISDownloader, a Python API to download shapefiles from US Census website</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="members/downloader.html#class-gisdownloader">Class GISDownloader</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="members/shapes_downloader.html">Python module to be used as command line for downloading shapefiles</a></li>
+</ul>
+</div>
+</section>
+<section id="shapefiles-based-computations">
+<h3>Shapefiles-based computations<a class="headerlink" href="#shapefiles-based-computations" title="Permalink to this heading"></a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="members/gis_annotator.html">Dorieh GIS Annotator annotates records in the stream fo data with labels attached to polygons in shapefiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="members/compute_shape.html">A Python module to take layer(s) from a raster file and aggregate teh data to given shapes</a></li>
+</ul>
+</div>
+</section>
+<section id="a-point-in-raster-tools">
+<h3>A Point in raster tools<a class="headerlink" href="#a-point-in-raster-tools" title="Permalink to this heading"></a></h3>
+<p>PointInRaster Python class provides an abstraction for a point superimposed on a raster.
+It provides methods to check if a point is masked, obtain the rectangular containing
+the given point, and, most importantly, providing fast bilinear interpolation for the
+raster data to the point.</p>
+<p>The most important application of this class is for processing a stream of points, for example,
+when one needs to process a huge number of points, so it is not viable to create a single
+dataframe containing them all.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="members/geometry.html">A point in raster Python API</a></li>
+</ul>
+</div>
+</section>
+<section id="gis-related-constants-enums">
+<h3>GIS-related constants (enums)<a class="headerlink" href="#gis-related-constants-enums" title="Permalink to this heading"></a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="members/gis_constants.html">Dorieh GIS enums</a></li>
+</ul>
+</div>
+</section>
 </section>
 </section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="CoreLibrary.html" class="btn btn-neutral float-left" title="Python Core Platform Components" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="members/downloader.html" class="btn btn-neutral float-right" title="Shapefiles downloader" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

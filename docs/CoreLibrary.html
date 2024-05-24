@@ -22,7 +22,9 @@
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Dorieh GIS python package" href="gis.html" />
+    <link rel="prev" title="Dorieh Utilities (Python package)" href="utils.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,12 +47,28 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
 <li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="packages.html">Python Packages</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="utils.html">General purpose utilities</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Data platform components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#package-dorieh-platform">Package dorieh.platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#package-dorieh-platform-data-model">Package dorieh.platform.data_model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#package-dorieh-platform-loader">Package dorieh.platform.loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#package-dorieh-platform-requests">Package dorieh.platform.requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#package-dorieh-platform-utils">Package dorieh.platform.utils</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gis.html">GIS utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CMSLibrary.html">Health data manipulation tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="epa.html">EPA tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasters.html">Raster data tools (climate and exposure)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="census.html">Census data manipulation tools</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DBT.html">Database Testing Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
@@ -72,6 +90,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="packages.html">Python Packages Included in the Platform</a></li>
       <li class="breadcrumb-item active">Python Core Platform Components</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/CoreLibrary.md.txt" rel="nofollow"> View page source</a>
@@ -88,8 +107,8 @@
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Python Module Index</span></a></p>
 </div>
-<section id="package-nsaph">
-<h2>Package nsaph<a class="headerlink" href="#package-nsaph" title="Permalink to this heading"></a></h2>
+<section id="package-dorieh-platform">
+<h2>Package dorieh.platform<a class="headerlink" href="#package-dorieh-platform" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="members/platform.html"><span class="std std-doc">NSAPH Core Package-wide utilities</span></a> API to initialize logging and database connections</p></li>
 <li><p><a class="reference internal" href="members/db.html"><span class="std std-doc">db</span></a> Database connections API</p></li>
@@ -173,7 +192,10 @@ FIPS mapping from HUD site</p></li>
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="utils.html" class="btn btn-neutral float-left" title="Dorieh Utilities (Python package)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="gis.html" class="btn btn-neutral float-right" title="Dorieh GIS python package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

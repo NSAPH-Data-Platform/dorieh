@@ -42,7 +42,7 @@ python -m pip install git+https://github.com/NSAPH-Data-Platform/nsaph-utils.git
 python -m pip install git+https://github.com/NSAPH-Data-Platform/nsaph-core-platform.git
 ```
 
-If you are getting errors installing `nsaph-utils` package or, if you see
+If you are getting errors installing dorieh package with FST format support (`dorieh[FST]`), if you see
 errors like "R Home is not defined", you might need to set up
 [Conda environment](#creating-conda-environment) 
 instead of Python Virtual Environment.

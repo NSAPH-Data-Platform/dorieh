@@ -24,7 +24,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="EPA Toolkit Usage" href="epa_usage.html" />
-    <link rel="prev" title="Computational Utilities for working with gridMET data" href="gridmet.html" /> 
+    <link rel="prev" title="Querying Medicaid Data" href="QueringMedicaid.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -50,13 +50,16 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="domains.html">Data Domains</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="cms.html">Health</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gridmet.html">Climate</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Pollution</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="packages.html">Python Packages</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="utils.html">General purpose utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CoreLibrary.html">Data platform components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gis.html">GIS utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CMSLibrary.html">Health data manipulation tools</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">EPA tools</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#package-contents">Package Contents</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="epa_usage.html">EPA Toolkit Usage</a></li>
-<li class="toctree-l4"><a class="reference internal" href="python_components.html">Python Components</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cwl_tools.html">CWL Tools and Common Workflows</a></li>
 </ul>
 </li>
@@ -67,11 +70,10 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="census.html">Demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasters.html">Raster data tools (climate and exposure)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="census.html">Census data manipulation tools</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DBT.html">Database Testing Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
@@ -106,7 +108,7 @@
              
   <section id="dorieh-epa-package-description">
 <h1>Dorieh EPA Package Description<a class="headerlink" href="#dorieh-epa-package-description" title="Permalink to this heading"></a></h1>
-<p><a class="reference external" href="https://nsaph-data-platform.github.io/nsaph-platform-docs/home.html">Documentation Home</a></p>
+<p><a class="reference internal" href="home.html"><span class="doc std std-doc">Documentation Home</span></a></p>
 <p>Toolkit for downloading and preprocessing of data provided by EPA</p>
 <p>Handles the following types of data:</p>
 <ul class="simple">
@@ -130,221 +132,6 @@ than AQS</p>
 <li class="toctree-l1"><a class="reference internal" href="epa_usage.html">EPA Toolkit Usage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="epa_usage.html#aqs-usage">AQS Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="epa_usage.html#airnow-usage">AirNow Usage</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="python_components.html">Python Components</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="members/adi.html">The adi Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/aggregates.html">The aggregates Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/aggregator.html">The aggregator Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/airnow.html">Main Class for EPA AirNow Package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/airnow_downloader.html">Downloader for AirNow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/airnow_ds_def.html">Configuration Options for EPA AirNow Package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="members/airnow_ds_def.html#classes-used-internally">Classes used Internally</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="members/airnow_ds_def.html#abstract-context">Abstract Context</a></li>
-<li class="toctree-l4"><a class="reference internal" href="members/airnow_ds_def.html#argument">Argument</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="members/airnow_setup.html">The airnow_setup Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/airnow_shapes.html">The airnow_shapes Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/annotator.html">GIS Annotator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/app_run_generator.html">The app_run_generator Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/aqs.html">Main Class for EPA AQS Package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/aqs_ds_def.html">Configuration Options for EPA AQS Package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="members/aqs_ds_def.html#classes-used-internally">Classes used Internally</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="members/aqs_ds_def.html#abstract-context">Abstract Context</a></li>
-<li class="toctree-l4"><a class="reference internal" href="members/aqs_ds_def.html#argument">Argument</a></li>
-<li class="toctree-l4"><a class="reference internal" href="members/aqs_ds_def.html#argument-cardinality-enum">Argument Cardinality Enum</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="members/aqs_expand.html">The aqs_expand Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/aqs_tools.html">Internal scripts used for download tasks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/assemble_data.html">The assemble_data Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="members/assemble_data.html#assemble-data-py">assemble_data.py</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="members/calculate_density.html">The calculate_density Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/census_info.html">The census_info Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="members/census_info.html#census-info-py">census_info.py</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="members/cli.html">The cli Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="members/cli.html#fst2csv-py">fst2csv.py</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="members/collector.html">The collector Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/columns.html">The columns Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/common.html">The common Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/compute_shape.html">Observation values aggregation over shapes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/config.html">The config Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/constants.html">The constants Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/context.html">The context Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/copy_section.html">The copy_section Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/create.html">The create Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/create_schema_config.html">The create_schema_config Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/create_test.html">The create_test Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/cwl2md.html">The cwl2md Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/cwl_collect_outputs.html">Utility to generate outputs sections for a CWL Tool</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="members/cwl_collect_outputs.html#usage">Usage</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="members/cwl_generator.html">The cwl_generator Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/data_loader.html">The data_loader Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="DataLoader.html">NSAPH Data Loader</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="DataLoader.html#using-dorieh-data-loader">Using Dorieh Data Loader</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="members/data_loader.html#module-dorieh.platform.loader.data_loader">API</a></li>
-<li class="toctree-l3"><a class="reference internal" href="members/data_loader.html#module-dorieh.platform.loader.common">Configuration</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="Datamodels.html">Data Modelling for NSAPH Data Platform</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="Datamodels.html#introduction-to-data-modelling-for-nsaph-data-platform">Introduction to data modelling for NSAPH Data Platform</a></li>
-<li class="toctree-l5"><a class="reference internal" href="Datamodels.html#domain">Domain</a></li>
-<li class="toctree-l5"><a class="reference internal" href="Datamodels.html#table">Table</a><ul>
-<li class="toctree-l6"><a class="reference internal" href="Datamodels.html#create-statement">Create statement</a></li>
-<li class="toctree-l6"><a class="reference internal" href="Datamodels.html#invalid-record">Invalid Record</a></li>
-</ul>
-</li>
-<li class="toctree-l5"><a class="reference internal" href="Datamodels.html#column">Column</a><ul>
-<li class="toctree-l6"><a class="reference internal" href="Datamodels.html#source">Source</a></li>
-<li class="toctree-l6"><a class="reference internal" href="Datamodels.html#index">Index</a></li>
-<li class="toctree-l6"><a class="reference internal" href="Datamodels.html#generated-columns">Generated columns</a></li>
-<li class="toctree-l6"><a class="reference internal" href="Datamodels.html#computed-columns">Computed columns</a></li>
-<li class="toctree-l6"><a class="reference internal" href="Datamodels.html#file-columns">File columns</a></li>
-<li class="toctree-l6"><a class="reference internal" href="Datamodels.html#record-columns">Record columns</a></li>
-<li class="toctree-l6"><a class="reference internal" href="Datamodels.html#transposing-columns">Transposing columns</a></li>
-<li class="toctree-l6"><a class="reference internal" href="Datamodels.html#wildcards">Wildcards</a></li>
-</ul>
-</li>
-<li class="toctree-l5"><a class="reference internal" href="Datamodels.html#multi-column-indices">Multi-column indices</a></li>
-<li class="toctree-l5"><a class="reference internal" href="Datamodels.html#generation-of-the-database-schema-ddl">Generation of the database schema (DDL)</a></li>
-<li class="toctree-l5"><a class="reference internal" href="Datamodels.html#indexing-policies">Indexing policies</a></li>
-<li class="toctree-l5"><a class="reference internal" href="Datamodels.html#linking-with-nomenclature">Linking with nomenclature</a><ul>
-<li class="toctree-l6"><a class="reference internal" href="Datamodels.html#us-states">US States</a></li>
-</ul>
-</li>
-<li class="toctree-l5"><a class="reference internal" href="Datamodels.html#ingesting-data">Ingesting data</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="members/db.html">Database connection API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/dbt_config.html">The dbt_config Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/dbt_runner.html">The dbt_runner Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/display_netcdf.html">The display_netcdf Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/do_qc.html">The do_qc Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/domain.html">The Domain Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/domain_dictionary.html">The domain_dictionary Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/domain_operations.html">The domain_operations Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/downloader.html">Shapefiles downloader</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/duplicates.html">The duplicates Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/element.html">The element Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/exceptions.html">The exceptions Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="members/exceptions.html#exceptions-py">exceptions.py</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="members/executors.html">The executors Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/fips.html">The fips Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/fst2csv.html">The fst2csv Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/fts2yaml.html">Parser for FTS files that accompany CMS data from ResDac</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="members/fts2yaml.html#abstract-class-for-cms-fts-file">Abstract class for CMS FTS file</a></li>
-<li class="toctree-l3"><a class="reference internal" href="members/fts2yaml.html#concrete-subclass-describing-medicare-fts-file">Concrete subclass describing Medicare FTS file</a></li>
-<li class="toctree-l3"><a class="reference internal" href="members/fts2yaml.html#concrete-subclass-describing-medicaid-fts-file">Concrete subclass describing Medicaid FTS file</a></li>
-<li class="toctree-l3"><a class="reference internal" href="members/fts2yaml.html#abstract-class-describing-a-column-in-a-cms-data-file">Abstract class describing a column in a CMS data file</a></li>
-<li class="toctree-l3"><a class="reference internal" href="members/fts2yaml.html#concrete-subclass-describing-a-column-in-a-medicare-data-file">Concrete subclass describing a column in a Medicare data file</a></li>
-<li class="toctree-l3"><a class="reference internal" href="members/fts2yaml.html#concrete-subclass-describing-a-column-in-a-medicaid-data-file">Concrete subclass describing a column in a Medicaid data file</a></li>
-<li class="toctree-l3"><a class="reference internal" href="members/fts2yaml.html#concrete-subclass-describing-a-column-not-present-in-the-original-data-but-that-should-be-generated-in-the-database">Concrete subclass describing a column not present in the original data but that should be generated in the database</a></li>
-<li class="toctree-l3"><a class="reference internal" href="members/fts2yaml.html#helper-classes">Helper Classes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="members/fts2yaml.html#helper-functions">Helper Functions</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="members/functions.html">Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/fwf.html">The fwf Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/gen_dbt_cwl.html">The gen_dbt_cwl Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/geometry.html">A point in a raster class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/gis_constants.html">GIS Related Enums</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/gridmet_tools.html">The gridmet_tools Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/hdf5_export.html">The hdf5_export Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/hud_zip2fips.html">DDL for HUD ZIP to FIPS mappings</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/index_builder.html">The index_builder Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/init_cms_db.html">The init_cms_db Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/init_core_db.html">The init_core_db Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/inserter.html">The inserter Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/interface.html">The interface Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/interpolate_data.html">The interpolate_data Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/interpolate_ma.html">The interpolate_ma Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/introspector.html">The introspector Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/io_utils.html">The io_utils Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/launcher.html">The launcher Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/link_gis.html">The link_gis Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/load_data.html">The load_data Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/loader.html">Data loader base abstract API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/loader_config.html">The loader_config Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/map_to_foreign_database.ddl.html">Set of SQL statements to map tables from another database</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/mcr_combine_tables.html">The mcr_combine_tables Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/mcr_create_test_data.html">The mcr_create_test_data Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/mcr_data_loader.html">The mcr_data_loader Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/mcr_file.html">The mcr_file Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/mcr_fts2csv.html">The mcr_fts2csv Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/mcr_fts2db.html">The mcr_fts2db Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/mcr_registry.html">The mcr_registry Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/mcr_sas.html">The mcr_sas Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/mcr_sas2db.html">The mcr_sas2db Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/mcr_sas2yaml.html">The mcr_sas2yaml Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/md_creator.html">The md_creator Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/medicaid_yaml.html">Medicaid.yaml</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/medicare_yaml.html">Medicare.yaml</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/medpar_converter.html">The medpar_converter Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/memtest.html">The memtest Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/model.html">The model Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/monitor.html">The monitor Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/net.html">The net Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/netCDF_components_consolidator.html">The netCDF_components_consolidator Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/netCDF_file_processor.html">The netCDF_file_processor Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/netCDF_tools.html">The netCDF_tools Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/pg_export_parquet.html">The pg_export_parquet Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/pg_json_dump.html">The pg_json_dump Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/pg_keywords.html">The pg_keywords Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/platform.html">NSAPH Core Package-wide utilities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/procedures.html">Procedures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/prof.html">The prof Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/profile_utils.html">The profile_utils Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/project_loader.html">The project_loader Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/psql.html">The psql Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/pyfst.html">The pyfst Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/query.html">The query Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/query_builder.html">The query_builder Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/random_selector.html">The random_selector Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/registry.html">The registry Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/rename_indices.sql.html">A procedure to rename indices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/resources.html">The resources Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/sample_query.html">Sample query</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/sas_explorer.html">The sas_explorer Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/shapes.html">The shapes Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/shapes_downloader.html">The shapes_downloader Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/ssa2fips.html">The ssa2fips Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/table_population.html">The table_population Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/tables.html">The tables Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/task.html">The task Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/tester.html">The tester Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/tigerweb.html">The tigerweb Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="members/tigerweb.html#tigerweb-py">tigerweb.py</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="members/utils.html">The utils Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/utils.sql.html">Utility functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/vacuum.html">The vacuum Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/validator.html">The validator Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/version.html">The version Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/write_data.html">The write_data Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/wustl_file_processor.html">The wustl_file_processor Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/zip2fips.html">The zip2fips Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/zip2fips.sql.html">SQL to create direct ZIP =&gt; FIPS lookup table and helper functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="members/zip2zcta.html">The zip2zcta Module</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cwl_tools.html">CWL Tools and Common Workflows</a><ul>
@@ -447,7 +234,7 @@ than AQS</p>
 <li class="toctree-l3"><a class="reference internal" href="pipeline/census_ingest_1.html#steps">Steps</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="pipeline/census_ingest_1cwl_src.html">tmpx9e9u1z3census_ingest.cwl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/census_ingest_1cwl_src.html">tmpuu42wjcjcensus_ingest.cwl</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pipeline/census_ingestcwl_src.html">census_ingest.cwl</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pipeline/census_interpolate.html">census_interpolate.cwl</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="pipeline/census_interpolate.html#inputs">Inputs</a></li>
@@ -552,7 +339,7 @@ than AQS</p>
 <li class="toctree-l3"><a class="reference internal" href="pipeline/gridmet_1.html#steps">Steps</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_1cwl_src.html">tmp0bcls7rtgridmet.cwl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_1cwl_src.html">tmpgjktzs81gridmet.cwl</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_dwnl_only.html">gridMET Pipeline</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="pipeline/gridmet_dwnl_only.html#description">Description</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pipeline/gridmet_dwnl_only.html#inputs">Inputs</a></li>
@@ -566,7 +353,7 @@ than AQS</p>
 <li class="toctree-l3"><a class="reference internal" href="pipeline/gridmet_dwnl_only_1.html#steps">Steps</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_dwnl_only_1cwl_src.html">tmpbvvzwt2kgridmet_dwnl_only.cwl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_dwnl_only_1cwl_src.html">tmpixvl9jj7gridmet_dwnl_only.cwl</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_dwnl_onlycwl_src.html">gridmet_dwnl_only.cwl</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_local_shapes.html">gridMET Pipeline</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="pipeline/gridmet_local_shapes.html#description">Description</a></li>
@@ -812,7 +599,7 @@ than AQS</p>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="pipeline/verifycwl_src.html">verify.cwl</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pipeline/wustl.html">Pipeline to ingest Pollution downloaded from WashU Box</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/wustl.html">Pipeline to ingest Monthly Pollution data downloaded from WashU Box</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="pipeline/wustl.html#description">Description</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pipeline/wustl.html#inputs">Inputs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pipeline/wustl.html#outputs">Outputs</a></li>
@@ -1655,7 +1442,7 @@ for the description of the columns</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="gridmet.html" class="btn btn-neutral float-left" title="Computational Utilities for working with gridMET data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="QueringMedicaid.html" class="btn btn-neutral float-left" title="Querying Medicaid Data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="epa_usage.html" class="btn btn-neutral float-right" title="EPA Toolkit Usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

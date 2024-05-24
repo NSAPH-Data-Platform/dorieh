@@ -22,9 +22,7 @@
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="The sas_explorer Module" href="sas_explorer.html" />
-    <link rel="prev" title="The resources Module" href="resources.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -74,9 +72,6 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../domains.html">Data Domains</a></li>
-          <li class="breadcrumb-item"><a href="../epa.html">Dorieh EPA Package Description</a></li>
-          <li class="breadcrumb-item"><a href="../python_components.html">Python Components</a></li>
       <li class="breadcrumb-item active">Sample query</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/members/sample_query.rst.txt" rel="nofollow"> View page source</a>
@@ -89,15 +84,81 @@
              
   <section id="sample-query">
 <h1>Sample query<a class="headerlink" href="#sample-query" title="Permalink to this heading"></a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#  Copyright (c) 2022. Harvard University</span>
+<span class="c1">#</span>
+<span class="c1">#  Developed by Research Software Engineering,</span>
+<span class="c1">#  Faculty of Arts and Sciences, Research Computing (FAS RC)</span>
+<span class="c1">#  Author: Michael A Bouzinier</span>
+<span class="c1">#</span>
+<span class="c1">#  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1">#  you may not use this file except in compliance with the License.</span>
+<span class="c1">#  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#         http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1">#  limitations under the License.</span>
+<span class="c1">#</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+
+<span class="kn">from</span> <span class="nn">psycopg2.extras</span> <span class="kn">import</span> <span class="n">RealDictCursor</span>
+
+<span class="kn">from</span> <span class="nn">nsaph.db</span> <span class="kn">import</span> <span class="n">Connection</span>
+
+
+<span class="n">SQL</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">SELECT </span>
+<span class="s1">    t.county,</span>
+<span class="s1">    AVG(tmmx) - 273.15 AS tmmx,</span>
+<span class="s1">    AVG(rmin) AS rmin,</span>
+<span class="s1">    AVG(rmax) AS rmax,</span>
+<span class="s1">    AVG(median_household_income) AS income,</span>
+<span class="s1">    AVG(arithmetic_mean) AS pm25</span>
+<span class="s1">FROM </span>
+<span class="s1">    gridmet.county_tmmx as t</span>
+<span class="s1">        join gridmet.county_rmin as r1 on r1.county = t.county and r1.observation_date = t.observation_date</span>
+<span class="s1">        join gridmet.county_rmax as r2 on r2.county = t.county and r2.observation_date = t.observation_date</span>
+<span class="s1">        join census.county_interp as c on c.geoid = t.county AND (c.year = EXTRACT (YEAR FROM t.observation_date))</span>
+<span class="s1">        join epa.pm25_daily as p on p.date_local = t.observation_date AND ((state_code || county_code)::int) = t.county and p.state_code ~ &#39;^[0-9]+$&#39;  </span>
+<span class="s1">GROUP BY 1</span>
+<span class="s1">ORDER BY 1</span>
+<span class="s1">&#39;&#39;&#39;</span>
+
+
+<span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="n">db_ini_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">db_conn_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">connection</span> <span class="o">=</span> <span class="n">Connection</span><span class="p">(</span><span class="n">db_ini_file</span><span class="p">,</span>
+                            <span class="n">db_conn_name</span><span class="p">,</span>
+                            <span class="n">silent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                            <span class="n">app_name_postfix</span><span class="o">=</span><span class="s2">&quot;.sample_query&quot;</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">with</span> <span class="n">connection</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span> <span class="k">as</span> <span class="n">cnxn</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">cnxn</span><span class="o">.</span><span class="n">cursor</span><span class="p">(</span><span class="n">cursor_factory</span><span class="o">=</span><span class="n">RealDictCursor</span><span class="p">)</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">SQL</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cursor</span><span class="p">:</span>
+                <span class="n">row</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">Decimal</span><span class="p">)</span> <span class="k">else</span> <span class="n">row</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">row</span><span class="p">}</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Returned </span><span class="si">{:d}</span><span class="s2"> rows&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">count</span><span class="p">))</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">query</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+                
+
+</pre></div>
+</div>
 </section>
 
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="resources.html" class="btn btn-neutral float-left" title="The resources Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="sas_explorer.html" class="btn btn-neutral float-right" title="The sas_explorer Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 

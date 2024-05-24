@@ -72,6 +72,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../../platform.html">dorieh.platform</a></li>
       <li class="breadcrumb-item active">dorieh.platform.data_model.utils</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -126,7 +127,9 @@
 <span class="sd">    :param node: an array node, usually from YAML or JSON file</span>
 <span class="sd">    :return: a tuple consisting of a name and an array containing</span>
 <span class="sd">        definitions</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">node</span><span class="p">,</span> <span class="p">{}</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
@@ -153,6 +156,7 @@
 <span class="sd">    :param table: a fully qualified table name</span>
 <span class="sd">    :return: just the base name of the table, a piece of name after the last dot</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">return</span> <span class="n">table</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
 
 
@@ -219,12 +223,13 @@
 
 <span class="sd">    This class is Context manager and can be used with with block</span>
 
-<span class="sd">    Example::</span>
+<span class="sd">    Example</span>
+<span class="sd">    .. code-block:: python</span>
 
-<span class="sd">    with DataReader(file_path) as reader:</span>
-<span class="sd">        for row in reader.rows():</span>
-<span class="sd">            print(row)</span>
-<span class="sd">        </span>
+<span class="sd">        with DataReader(file_path) as reader:</span>
+<span class="sd">            for row in reader.rows():</span>
+<span class="sd">                print(row)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>

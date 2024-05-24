@@ -83,29 +83,19 @@
              
   <h1>Source code for dorieh.gis.downloader</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Utilities to download shapefiles from US Census website</span>
+<span class="sd">Python class to download shapefiles from US Census website.</span>
+<span class="sd">Files to be downloaded are selected based on a desired year and</span>
+<span class="sd">shapefiles collection.</span>
+
+<span class="sd">If the desired year is not present in the requested collection,</span>
+<span class="sd">the most recent prior year is used.</span>
+
+<span class="sd">If HTTP Proxy is used the environment variable</span>
+<span class="sd">`HTTPS_PROXY` must be defined.</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="c1">#  Copyright (c) 2022-2024.  Harvard University</span>
-<span class="c1">#</span>
-<span class="c1">#   Developed by Research Software Engineering,</span>
-<span class="c1">#   Harvard University Research Computing and Data (RCD) Services.</span>
-<span class="c1">#</span>
-<span class="c1">#   Author: Michael A Bouzinier</span>
-<span class="c1">#</span>
-<span class="c1">#   Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
-<span class="c1">#   you may not use this file except in compliance with the License.</span>
-<span class="c1">#   You may obtain a copy of the License at</span>
-<span class="c1">#</span>
-<span class="c1">#          http://www.apache.org/licenses/LICENSE-2.0</span>
-<span class="c1">#</span>
-<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
-<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
-<span class="c1">#  See the License for the specific language governing permissions and</span>
-<span class="c1">#  limitations under the License.</span>
-<span class="c1">#</span>
-<span class="c1">#</span>
 <span class="c1">#</span>
 <span class="c1">#  Developed by Research Software Engineering,</span>
 <span class="c1">#  Faculty of Arts and Sciences, Research Computing (FAS RC)</span>
@@ -136,17 +126,37 @@
 <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
 
 
+<div class="viewcode-block" id="CensusShapeCollection"><a class="viewcode-back" href="../../../members/gis_constants.html#dorieh.gis.downloader.CensusShapeCollection">[docs]</a><span class="k">class</span> <span class="nc">CensusShapeCollection</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Collections that are part of the Topologically Integrated Geographic</span>
+<span class="sd">    Encoding and Referencing (TIGER) system, a digital database of geographic</span>
+<span class="sd">    features, such as roads, rivers, and legal and statistical geographic areas.</span>
+<span class="sd">    Each shape file in these collections contains a series of polygons, each</span>
+<span class="sd">    corresponding to a specific geographical area.</span>
 
-<div class="viewcode-block" id="CensusShapeCollection"><a class="viewcode-back" href="../../../members/downloader.html#dorieh.gis.downloader.CensusShapeCollection">[docs]</a><span class="k">class</span> <span class="nc">CensusShapeCollection</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="sd">    `See also: &lt;https://www2.census.gov/geo/pdfs/maps-data/data/tiger/tgrshp2022/TGRSHP2022_TechDoc.pdf&gt;`_</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">genz</span> <span class="o">=</span> <span class="s1">&#39;genz&#39;</span>
-    <span class="n">tiger</span> <span class="o">=</span> <span class="s1">&#39;tiger&#39;</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    TIGER/GENZ collection, most providing simplified representations of selected geographic areas, </span>
+<span class="sd">    are specifically designed for small scale thematic mapping and improved visual representations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">tiger</span> <span class="o">=</span> <span class="s1">&#39;tiger&#39;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    TIGER/Line collection, recommended for calculations.</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="GISDownloader"><a class="viewcode-back" href="../../../members/downloader.html#dorieh.gis.downloader.GISDownloader">[docs]</a><span class="k">class</span> <span class="nc">GISDownloader</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Geographic Downloader downloads shape files for given dates</span>
 <span class="sd">    from https://www.census.gov/</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">COUNTY_TEMPLATE</span> <span class="o">=</span> <span class="s1">&#39;https://www2.census.gov/geo/tiger/GENZ</span><span class="si">{year}</span><span class="s1">/shp/cb_</span><span class="si">{year}</span><span class="s1">_us_county_500k.zip&#39;</span>
     <span class="n">ZCTA_GENZ_TEMPLATE</span> <span class="o">=</span> <span class="s1">&#39;https://www2.census.gov/geo/tiger/GENZ</span><span class="si">{year}</span><span class="s1">/shp/cb_</span><span class="si">{year}</span><span class="s1">_us_zcta510_500k.zip&#39;</span>
     <span class="n">ZCTA_TIGER_URLs</span> <span class="o">=</span> <span class="p">{</span>

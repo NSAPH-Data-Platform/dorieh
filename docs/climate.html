@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Computational Utilities for working with gridMET data &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+  <title>Computational Utilities for working with Climate gridMET data &mdash; Dorieh Data Platform 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
@@ -22,9 +22,7 @@
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Dorieh EPA Package Description" href="epa.html" />
-    <link rel="prev" title="Querying Medicaid Data" href="QueringMedicaid.html" /> 
+    <link rel="search" title="Search" href="search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -47,16 +45,10 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="domains.html">Data Domains</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="cms.html">Health</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Climate</a></li>
-<li class="toctree-l2"><a class="reference internal" href="epa.html">Pollution</a></li>
-<li class="toctree-l2"><a class="reference internal" href="census.html">Demographics</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
@@ -80,10 +72,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="domains.html">Data Domains</a></li>
-      <li class="breadcrumb-item active">Computational Utilities for working with gridMET data</li>
+      <li class="breadcrumb-item active">Computational Utilities for working with Climate gridMET data</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/gridmet.md.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/climate.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -91,8 +82,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="computational-utilities-for-working-with-gridmet-data">
-<h1>Computational Utilities for working with gridMET data<a class="headerlink" href="#computational-utilities-for-working-with-gridmet-data" title="Permalink to this heading"></a></h1>
+  <section id="computational-utilities-for-working-with-climate-gridmet-data">
+<h1>Computational Utilities for working with Climate gridMET data<a class="headerlink" href="#computational-utilities-for-working-with-climate-gridmet-data" title="Permalink to this heading"></a></h1>
 <!-- TODO ->
 
 [Documentation Home](home)
@@ -124,7 +115,7 @@ for the years actually used.
 ## Using command line gridMET utility 
 
 ```
-    usage: dorieh.rasters.py [-h] --variable
+    usage: python -m dorieh.rasters.launcher [-h] --variable
                       {bi,erc,etr,fm100,fm1000,pet,pr,rmax,rmin,sph,srad,th,tmmn,tmmx,vpd,vs}
                       [{bi,erc,etr,fm100,fm1000,pet,pr,rmax,rmin,sph,srad,th,tmmn,tmmx,vpd,vs} ...]
                       [--strategy {default,all_touched,combined}]
@@ -170,14 +161,9 @@ for the years actually used.
 
 ## Example
 
-One can try it on `nsaph-sandbox01.rc.fas.harvard.edu` changing to folder:
-`/data/projects/gridmet/`
-
-and running the following command (do not forget `-u` option, or you 
-will not be able to see the progress):
 
 ```shell
-source /home/nsaph/projects/tools/gridmet/.gridmet/bin/activate && PYTHONPATH=/home/nsaph/projects/tools/gridmet/src/python python -u -m gridmet --var tmmx -y 2001 --shapes_dir shapes/zip_shape_files --strategy downscale
+python -u -m dorieh.rasters.launcher --var tmmx -y 2001 --shapes_dir shapes/zip_shape_files --strategy downscale
 ```
 
 The results can be then found in `data/processed` folder
@@ -189,7 +175,10 @@ The results can be then found in `data/processed` folder
 maxdepth: 2
 glob:
 ---
-python_components
+members/gridmet_tools
+members/launcher
+members/task
+members/registry
 ```
 
 ## CWL pipelines and tools
@@ -199,17 +188,14 @@ python_components
 maxdepth: 2
 glob:
 ---
-pipeline/*
+pipeline/gridmet*
 ```
 </section>
 
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="QueringMedicaid.html" class="btn btn-neutral float-left" title="Querying Medicaid Data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="epa.html" class="btn btn-neutral float-right" title="Dorieh EPA Package Description" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 

@@ -23,7 +23,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="The gridmet_tools Module" href="gridmet_tools.html" />
+    <link rel="next" title="Python package to manipulate health (CMS) data" href="../CMSLibrary.html" />
     <link rel="prev" title="A point in a raster class" href="geometry.html" /> 
 </head>
 
@@ -47,12 +47,32 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../packages.html">Python Packages</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../utils.html">General purpose utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CoreLibrary.html">Data platform components</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../gis.html">GIS utilities</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../gis.html#gis-library-overview">GIS Library Overview</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../gis.html#shape-files-downloader">Shape files Downloader</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../gis.html#us-census-shapefiles-collections">US Census Shapefiles collections</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gis.html#downloader-python-modules">Downloader Python Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gis.html#shapefiles-based-computations">Shapefiles-based computations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gis.html#a-point-in-raster-tools">A Point in raster tools</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../gis.html#gis-related-constants-enums">GIS-related constants (enums)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../CMSLibrary.html">Health data manipulation tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../epa.html">EPA tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rasters.html">Raster data tools (climate and exposure)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../census.html">Census data manipulation tools</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DBT.html">Database Testing Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
@@ -74,9 +94,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../domains.html">Data Domains</a></li>
-          <li class="breadcrumb-item"><a href="../epa.html">Dorieh EPA Package Description</a></li>
-          <li class="breadcrumb-item"><a href="../python_components.html">Python Components</a></li>
+          <li class="breadcrumb-item"><a href="../packages.html">Python Packages Included in the Platform</a></li>
+          <li class="breadcrumb-item"><a href="../gis.html">Dorieh GIS python package</a></li>
       <li class="breadcrumb-item active">GIS Related Enums</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/members/gis_constants.rst.txt" rel="nofollow"> View page source</a>
@@ -87,10 +106,63 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-dorieh.gis.constants">
-<span id="gis-related-enums"></span><h1>GIS Related Enums<a class="headerlink" href="#module-dorieh.gis.constants" title="Permalink to this heading"></a></h1>
-<p>This module contains Enums used by configuration for
-processing of GIS information</p>
+  <section id="gis-related-enums">
+<h1>GIS Related Enums<a class="headerlink" href="#gis-related-enums" title="Permalink to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.gis.downloader.CensusShapeCollection">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CensusShapeCollection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/gis/downloader.html#CensusShapeCollection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.gis.downloader.CensusShapeCollection" title="Permalink to this definition"></a></dt>
+<dd><p>Collections that are part of the Topologically Integrated Geographic
+Encoding and Referencing (TIGER) system, a digital database of geographic
+features, such as roads, rivers, and legal and statistical geographic areas.
+Each shape file in these collections contains a series of polygons, each
+corresponding to a specific geographical area.</p>
+<p><a class="reference external" href="https://www2.census.gov/geo/pdfs/maps-data/data/tiger/tgrshp2022/TGRSHP2022_TechDoc.pdf">See also:</a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.gis.downloader.CensusShapeCollection.genz">
+<span class="sig-name descname"><span class="pre">genz</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'genz'</span></em><a class="headerlink" href="#dorieh.gis.downloader.CensusShapeCollection.genz" title="Permalink to this definition"></a></dt>
+<dd><p>TIGER/GENZ collection, most providing simplified representations of selected geographic areas, 
+are specifically designed for small scale thematic mapping and improved visual representations.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.gis.downloader.CensusShapeCollection.tiger">
+<span class="sig-name descname"><span class="pre">tiger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'tiger'</span></em><a class="headerlink" href="#dorieh.gis.downloader.CensusShapeCollection.tiger" title="Permalink to this definition"></a></dt>
+<dd><p>TIGER/Line collection, recommended for calculations.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.gis.constants.Geography">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Geography</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/gis/constants.html#Geography"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.gis.constants.Geography" title="Permalink to this definition"></a></dt>
+<dd><p>Type of geography</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.gis.constants.Geography.zip">
+<span class="sig-name descname"><span class="pre">zip</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'zip'</span></em><a class="headerlink" href="#dorieh.gis.constants.Geography.zip" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.gis.constants.Geography.zcta">
+<span class="sig-name descname"><span class="pre">zcta</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'zcta'</span></em><a class="headerlink" href="#dorieh.gis.constants.Geography.zcta" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.gis.constants.Geography.county">
+<span class="sig-name descname"><span class="pre">county</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'county'</span></em><a class="headerlink" href="#dorieh.gis.constants.Geography.county" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.gis.constants.Geography.custom">
+<span class="sig-name descname"><span class="pre">custom</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'custom'</span></em><a class="headerlink" href="#dorieh.gis.constants.Geography.custom" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.gis.constants.Geography.all">
+<span class="sig-name descname"><span class="pre">all</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'all'</span></em><a class="headerlink" href="#dorieh.gis.constants.Geography.all" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="dorieh.gis.constants.RasterizationStrategy">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RasterizationStrategy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/gis/constants.html#RasterizationStrategy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.gis.constants.RasterizationStrategy" title="Permalink to this definition"></a></dt>
@@ -152,37 +224,6 @@ and will run slower.</p>
 
 </dd></dl>
 
-<dl class="py class">
-<dt class="sig sig-object py" id="dorieh.gis.constants.Geography">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Geography</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/gis/constants.html#Geography"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.gis.constants.Geography" title="Permalink to this definition"></a></dt>
-<dd><p>Type of geography</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dorieh.gis.constants.Geography.zip">
-<span class="sig-name descname"><span class="pre">zip</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'zip'</span></em><a class="headerlink" href="#dorieh.gis.constants.Geography.zip" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dorieh.gis.constants.Geography.zcta">
-<span class="sig-name descname"><span class="pre">zcta</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'zcta'</span></em><a class="headerlink" href="#dorieh.gis.constants.Geography.zcta" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dorieh.gis.constants.Geography.county">
-<span class="sig-name descname"><span class="pre">county</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'county'</span></em><a class="headerlink" href="#dorieh.gis.constants.Geography.county" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dorieh.gis.constants.Geography.custom">
-<span class="sig-name descname"><span class="pre">custom</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'custom'</span></em><a class="headerlink" href="#dorieh.gis.constants.Geography.custom" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dorieh.gis.constants.Geography.all">
-<span class="sig-name descname"><span class="pre">all</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'all'</span></em><a class="headerlink" href="#dorieh.gis.constants.Geography.all" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
 </section>
 
 
@@ -190,7 +231,7 @@ and will run slower.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="geometry.html" class="btn btn-neutral float-left" title="A point in a raster class" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="gridmet_tools.html" class="btn btn-neutral float-right" title="The gridmet_tools Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../CMSLibrary.html" class="btn btn-neutral float-right" title="Python package to manipulate health (CMS) data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
