@@ -141,9 +141,16 @@ primarily the bilinear interpolation</p>
 <dd><p>An optimized version of rasterstats.point function:
 given a point’s window as 2x2 array, and x, y as its coordinates,
 treat center points as a unit square.</p>
-<blockquote>
-<div><p>e.g.: Center of A is at (0, 1) on unit square, D is at (1, 0), etc</p>
-</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+---+---+</span>
+<span class="o">|</span> <span class="n">A</span> <span class="o">|</span> <span class="n">B</span> <span class="o">|</span>      <span class="o">+----+</span>
+<span class="o">+---+---+</span>  <span class="o">=&gt;</span>  <span class="o">|</span>    <span class="o">|</span>
+<span class="o">|</span> <span class="n">C</span> <span class="o">|</span> <span class="n">D</span> <span class="o">|</span>      <span class="o">+----+</span>
+<span class="o">+---+---+</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">:</span> <span class="n">Center</span> <span class="n">of</span> <span class="n">A</span> <span class="ow">is</span> <span class="n">at</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="n">on</span> <span class="n">unit</span> <span class="n">square</span><span class="p">,</span> <span class="n">D</span> <span class="ow">is</span> <span class="n">at</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">etc</span>
+</pre></div>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><span class="target" id="dorieh.gis.geometry.PointInRaster.bilinear.params.raster"></span><strong>raster</strong><a class="paramlink headerlink reference internal" href="#dorieh.gis.geometry.PointInRaster.bilinear.params.raster">¶</a> – Raster, to which the point belongs</p>

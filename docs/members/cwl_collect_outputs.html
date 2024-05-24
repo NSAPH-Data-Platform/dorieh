@@ -110,11 +110,15 @@ any calling workflow</p>
 
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
-<p>cwl_collect_outputs.py [-h] [–name NAME] step path</p>
+<blockquote>
+<div><p>cwl_collect_outputs.py [-h] [–name NAME] step path</p>
+</div></blockquote>
+<p>Positional arguments:</p>
+<ul class="simple">
+<li><p>step:         Step name in the outer (calling) workflow</p></li>
+<li><p>path:         Path to sub-workflow CWL file</p></li>
+</ul>
 <dl>
-<dt>Positional arguments:</dt><dd><p>step         Step name in the outer (calling) workflow
-path         Path to sub-workflow CWL file</p>
-</dd>
 <dt>Options:</dt><dd><dl class="option-list">
 <dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
 <dd><p>show this help message and exit</p>

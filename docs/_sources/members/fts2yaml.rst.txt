@@ -81,7 +81,7 @@ Helper Classes
 
 
 Helper Functions
---------------
+----------------
 
 .. autofunction:: dorieh.cms.fts2yaml.mcr_type
 

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Utility to generate test queries &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+  <title>The create_test Module &mdash; Dorieh Data Platform 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
@@ -77,7 +77,7 @@
           <li class="breadcrumb-item"><a href="../domains.html">Data Domains</a></li>
           <li class="breadcrumb-item"><a href="../epa.html">Dorieh EPA Package Description</a></li>
           <li class="breadcrumb-item"><a href="../python_components.html">Python Components</a></li>
-      <li class="breadcrumb-item active">Utility to generate test queries</li>
+      <li class="breadcrumb-item active">The create_test Module</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/members/create_test.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -87,54 +87,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="utility-to-generate-test-queries">
-<h1>Utility to generate test queries<a class="headerlink" href="#utility-to-generate-test-queries" title="Permalink to this heading"></a></h1>
-<section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
-<blockquote>
-<div><dl class="simple">
-<dt>python -m dorieh.platform.dbt.create_test [-h] –script SCRIPT [SCRIPT …]</dt><dd><p>[–autocommit] [–db DB] [–connection CONNECTION]
-[–verbose] [–table TABLE]</p>
-</dd>
-</dl>
-</div></blockquote>
-<dl>
-<dt>Options:</dt><dd><dl class="option-list">
-<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
-<dd><p>show this help message and exit</p>
-</dd>
-</dl>
-<dl class="simple">
-<dt>–script SCRIPT [SCRIPT …], -s SCRIPT [SCRIPT …]</dt><dd><p>Path to the file(s) containing test scripts. When
-generating test, the file is used to output the
-script, while when running the tests, the scripts from
-the specified files are executed</p>
-</dd>
-</dl>
-<dl class="option-list">
-<dt><kbd><span class="option">--autocommit</span></kbd></dt>
-<dd><p>Use autocommit, default: False</p>
-</dd>
-<dt><kbd><span class="option">--db <var>DB</var></span>, <span class="option">--database <var>DB</var></span></kbd></dt>
-<dd><p>Path to a database connection parameters file,
-default: database.ini</p>
-</dd>
-<dt><kbd><span class="option">--connection <var>CONNECTION</var></span>, <span class="option">--connection_name <var>CONNECTION</var></span></kbd></dt>
-<dd><p>Section in the database connection parameters file,
-default: nsaph2</p>
-</dd>
-<dt><kbd><span class="option">--verbose</span></kbd></dt>
-<dd><p>Verbose output, default: False</p>
-</dd>
-<dt><kbd><span class="option">--table <var>TABLE</var></span>, <span class="option">-t <var>TABLE</var></span></kbd></dt>
-<dd><p>Name of the table to manipulate, default: None</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</section>
-<section id="module-dorieh.platform.dbt.create_test">
-<span id="details"></span><h2>Details<a class="headerlink" href="#module-dorieh.platform.dbt.create_test" title="Permalink to this heading"></a></h2>
+  <section id="module-dorieh.platform.dbt.create_test">
+<span id="the-create-test-module"></span><h1>The create_test Module<a class="headerlink" href="#module-dorieh.platform.dbt.create_test" title="Permalink to this heading"></a></h1>
 <p>A utility to generate a test based on a sample table.</p>
 <p>The tool introspects a table, given as an input
 and generates a set of queries each of which tests that the data in
@@ -143,11 +97,11 @@ a certain column has not changed.</p>
 as a single SQL query producing a table with the following columns:</p>
 <ol class="arabic simple">
 <li><p>Name of the column being tested</p></li>
+<li><p>What value is being tested not to change:
+MD5 hash, number of distinct records, mean value or variance</p></li>
+<li><p>Whether the value has changed (indicated by string <cite>failed</cite>) or remained
+the same (indicated by string <cite>passed</cite>)</p></li>
 </ol>
-<p>2. What value is being tested not to change:
-MD5 hash, number of distinct records, mean value or variance
-3. Whether the value has changed (indicated by string <cite>failed</cite>) or remained
-the same (indicated by string <cite>passed</cite>)</p>
 <p>Individual queries are separated by a comment strings:</p>
 <ul class="simple">
 <li><p><cite>– Test case end</cite></p></li>
@@ -245,7 +199,6 @@ the same (indicated by string <cite>passed</cite>)</p>
 
 </dd></dl>
 
-</section>
 </section>
 
 
