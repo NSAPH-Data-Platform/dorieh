@@ -191,6 +191,7 @@
 <span class="sd">    Fixed width files (FWF) reader. Returns records in the same way</span>
 <span class="sd">    as standard CSV reader. Can return each record as either ;ist of values or</span>
 <span class="sd">    a dictionary with column headers as keys.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">meta</span><span class="p">:</span> <span class="n">FWFMeta</span><span class="p">,</span> <span class="n">ret_dict</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
@@ -199,6 +200,7 @@
 <span class="sd">        :param meta: an instance of FWFMeta</span>
 <span class="sd">        :param ret_dict: boolean value, denoting whether to return each record</span>
 <span class="sd">            as a dictionary</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="n">meta</span>

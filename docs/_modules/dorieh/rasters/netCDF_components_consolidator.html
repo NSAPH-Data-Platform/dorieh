@@ -104,10 +104,10 @@
 
 
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">  Given a NetCDF file with absolute values (e.g., for PM25) and a set of</span>
-<span class="sd">  NetCDF files containing percentage values for individual components,</span>
-<span class="sd">  this tool consolidates all data into a single NetCDF file with both</span>
-<span class="sd">  percentages and absolute values for all components.</span>
+<span class="sd">Given a NetCDF file with absolute values (e.g., for PM25) and a set of</span>
+<span class="sd">NetCDF files containing percentage values for individual components,</span>
+<span class="sd">this tool consolidates all data into a single NetCDF file with both</span>
+<span class="sd">percentages and absolute values for all components.</span>
 
 <span class="sd">See also:</span>
 
@@ -116,6 +116,7 @@
 <span class="sd">https://docs.xarray.dev/en/stable/api.html</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
+
 <span class="kn">import</span> <span class="nn">argparse</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">os.path</span>
@@ -138,7 +139,9 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class to combine NetCDF dataset with absolute values with</span>
 <span class="sd">    dependent datasets containing components</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dataset</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;NetCDF Dataset that we will be modifying&#39;&#39;&#39;</span>

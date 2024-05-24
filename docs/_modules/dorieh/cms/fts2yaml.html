@@ -406,7 +406,7 @@
         <span class="k">return</span> <span class="n">desc</span></div></div>
 
 
-<span class="k">class</span> <span class="nc">CMSFTS</span><span class="p">:</span>
+<div class="viewcode-block" id="CMSFTS"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.CMSFTS">[docs]</a><span class="k">class</span> <span class="nc">CMSFTS</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Abstract class for Medicaid and Medicare files from dorieh.cms</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -433,10 +433,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
         <span class="k">return</span>
 
-    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="k">pass</span>
+<div class="viewcode-block" id="CMSFTS.init"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.CMSFTS.init">[docs]</a>    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">pass</span></div>
 
-    <span class="k">def</span> <span class="nf">read_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+<div class="viewcode-block" id="CMSFTS.read_file"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.CMSFTS.read_file">[docs]</a>    <span class="k">def</span> <span class="nf">read_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
         <span class="k">with</span> <span class="n">fopen</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s2">&quot;rt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fts</span><span class="p">:</span>
             <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">fts</span><span class="p">]</span>
         <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
@@ -477,9 +477,9 @@
 
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">columns</span><span class="p">)):</span>
             <span class="k">if</span> <span class="n">columns</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
-                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Reconciliation required: </span><span class="si">{}</span><span class="s2">, column: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">columns</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Reconciliation required: </span><span class="si">{}</span><span class="s2">, column: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">columns</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span></div>
 
-    <span class="k">def</span> <span class="nf">on_after_read_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">FTSColumn</span><span class="p">]):</span>
+<div class="viewcode-block" id="CMSFTS.on_after_read_file"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.CMSFTS.on_after_read_file">[docs]</a>    <span class="k">def</span> <span class="nf">on_after_read_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">FTSColumn</span><span class="p">]):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Callback function</span>
 
@@ -487,9 +487,9 @@
 <span class="sd">        :return:  nothing</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">add_file_column</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_file_column</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span></div>
 
-    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="CMSFTS.add_record_column"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.CMSFTS.add_record_column">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">add_record_column</span><span class="p">(</span><span class="n">columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">FTSColumn</span><span class="p">]):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Adds a RECORD column, to uniquely identify a record in the database.</span>
@@ -507,9 +507,9 @@
             <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Record number in the file&quot;</span>
         <span class="p">)</span>
         <span class="n">column</span><span class="o">.</span><span class="n">is_input</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="n">columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+        <span class="n">columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">column</span><span class="p">)</span></div>
 
-    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="CMSFTS.add_file_column"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.CMSFTS.add_file_column">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">add_file_column</span><span class="p">(</span><span class="n">columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">FTSColumn</span><span class="p">]):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Adds a column containing the name of original file, from which the data</span>
@@ -527,9 +527,9 @@
             <span class="n">label</span><span class="o">=</span><span class="s2">&quot;RESDAC original file name&quot;</span>
         <span class="p">)</span>
         <span class="n">column</span><span class="o">.</span><span class="n">is_input</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="n">columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+        <span class="n">columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">column</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">column_to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="n">FTSColumn</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<div class="viewcode-block" id="CMSFTS.column_to_dict"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.CMSFTS.column_to_dict">[docs]</a>    <span class="k">def</span> <span class="nf">column_to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="n">FTSColumn</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a column as a dictionary object that can be added to</span>
 <span class="sd">        YAML data model</span>
@@ -545,9 +545,9 @@
                 <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;file&quot;</span>
             <span class="p">}</span>
             <span class="n">d</span><span class="p">[</span><span class="s2">&quot;index&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;required_before_loading_data&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
-        <span class="k">return</span> <span class="n">d</span>
+        <span class="k">return</span> <span class="n">d</span></div>
 
-    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="CMSFTS.to_dict"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.CMSFTS.to_dict">[docs]</a>    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns full metadata for the file as a dictionary</span>
 <span class="sd">        to be included in the YAML data model used to</span>
@@ -574,13 +574,13 @@
             <span class="n">t</span><span class="p">[</span><span class="s2">&quot;indices&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
 
         <span class="n">table</span><span class="p">[</span><span class="n">tname</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span>
-        <span class="k">return</span> <span class="n">table</span>
+        <span class="k">return</span> <span class="n">table</span></div>
 
-    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="CMSFTS.v2i"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.CMSFTS.v2i">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">v2i</span><span class="p">(</span><span class="n">v</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">))</span></div>
 
-    <span class="k">def</span> <span class="nf">to_fwf_meta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FWFMeta</span><span class="p">:</span>
+<div class="viewcode-block" id="CMSFTS.to_fwf_meta"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.CMSFTS.to_fwf_meta">[docs]</a>    <span class="k">def</span> <span class="nf">to_fwf_meta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FWFMeta</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns metadata required to read the file if</span>
 <span class="sd">        it is a fixed width file</span>
@@ -612,12 +612,12 @@
             <span class="n">size</span><span class="o">=</span><span class="n">fsize</span><span class="p">,</span>
             <span class="n">number_of_rows</span><span class="o">=</span><span class="n">nrows</span><span class="p">,</span>
             <span class="n">columns</span><span class="o">=</span><span class="n">columns</span>
-        <span class="p">)</span>
+        <span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">print_yaml</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="CMSFTS.print_yaml"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.CMSFTS.print_yaml">[docs]</a>    <span class="k">def</span> <span class="nf">print_yaml</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">root_dir</span><span class="p">)</span>
         <span class="n">table</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">table</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">table</span><span class="p">))</span></div></div>
 
 
 <div class="viewcode-block" id="MedicaidFTS"><a class="viewcode-back" href="../../../members/fts2yaml.html#dorieh.cms.fts2yaml.MedicaidFTS">[docs]</a><span class="k">class</span> <span class="nc">MedicaidFTS</span><span class="p">(</span><span class="n">CMSFTS</span><span class="p">):</span>

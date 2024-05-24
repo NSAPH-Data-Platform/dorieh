@@ -1,6 +1,3 @@
-:orphan:
-
-
 Parser for FTS files that accompany CMS data from ResDac
 ========================================================
 
@@ -16,7 +13,7 @@ extract metadata
 
 Abstract class for CMS FTS file
 -------------------------------
-.. autoclass:: cmsFTS
+.. autoclass:: dorieh.cms.fts2yaml.CMSFTS
     :show-inheritance:
     :members:
     :undoc-members:

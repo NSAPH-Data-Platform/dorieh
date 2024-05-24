@@ -84,7 +84,7 @@
   <h1>Source code for dorieh.platform.util.executors</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">This module implements a</span>
-<span class="sd">`ThreadPoolExecutor https://docs.python.org/3/library/concurrent.futures.html#threadpoolexecutor`_</span>
+<span class="sd">`ThreadPoolExecutor &lt;https://docs.python.org/3/library/concurrent.futures.html#threadpoolexecutor&gt;`_</span>
 <span class="sd">with a bounded queue of fixed given capacity. When the queue reaches</span>
 <span class="sd">its maximum capacity, it stops accepting new tasks and blocks</span>
 <span class="sd">until some tasks are removed from the queue for execution.</span>
@@ -95,6 +95,7 @@
 <span class="sd">them and without blocking, for huge files can lead to out of memory (OOM)</span>
 <span class="sd">errors. Using this executor implements parallelization without</span>
 <span class="sd">danger of causing OOM.</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="c1">#  Copyright (c) 2021. Harvard University</span>
@@ -130,6 +131,7 @@
 
 
 <div class="viewcode-block" id="BlockingThreadPoolExecutor"><a class="viewcode-back" href="../../../../members/executors.html#dorieh.platform.util.executors.BlockingThreadPoolExecutor">[docs]</a><span class="k">class</span> <span class="nc">BlockingThreadPoolExecutor</span><span class="p">(</span><span class="n">ThreadPoolExecutor</span><span class="p">):</span>
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_queue_size</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">initializer</span><span class="o">=</span><span class="n">thread_initializer</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_queue_size</span> <span class="o">=</span> <span class="n">max_queue_size</span>
