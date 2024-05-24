@@ -1,6 +1,6 @@
 # Dorieh EPA Package Description
 
-[Documentation Home](https://nsaph-data-platform.github.io/nsaph-platform-docs/home.html)
+[Documentation Home](home)
 
 Toolkit for downloading and preprocessing of data provided by EPA
 

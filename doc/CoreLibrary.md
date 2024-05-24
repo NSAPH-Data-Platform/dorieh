@@ -4,7 +4,7 @@
 [Python Module Index](modindex)
 ```
  
-## Package nsaph
+## Package dorieh.platform
 
 * [](members/platform.rst) API to initialize logging and database connections
 * [db](members/db.rst) Database connections API

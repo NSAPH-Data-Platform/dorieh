@@ -45,21 +45,8 @@ callbacks.
 
 ## Building Blocks
         
-The building blocks of the data platform are packaged in several repositories:
 
-* The **NSAPH utilities** repository https://github.com/NSAPH-Data-Platform/nsaph-utils
-* The **core platform** repository https://github.com/NSAPH-Data-Platform/nsaph-core-platform
-* The **GIS utilities** repository https://github.com/NSAPH-Data-Platform/nsaph-gis
-* The **pipeline** repositories. Five pipelines, each focused in a different data domain have been implemented:
-    + The **cms** repository https://github.com/NSAPH-Data-Platform/nsaph-cms
-    + The **EPA** repository https://github.com/NSAPH-Data-Platform/nsaph-epa
-    + The **gridmet** repository https://github.com/NSAPH-Data-Platform/nsaph-gridmet
-    + The **census** repository https://github.com/NSAPH-Data-Platform/nsaph-census
-* The **deployment** repository https://github.com/NSAPH-Data-Platform/nsaph-platform-deployment
-
-General details of the building blocks are provided next. 
-
-### NSAPH Utilities
+### Dorieh Utilities
 
 <!-- section overview from dorieh.utils -->
 
@@ -71,11 +58,13 @@ General details of the building blocks are provided next.
 
 <!-- end of section overview from dorieh.platform -->
 
-### GIS Utilities
+### Dorieh GIS Utilities
 
 <!-- section overview from dorieh.gis -->
 
 <!-- end of section overview from dorieh.gis -->
+
+### Dorieh Documentation Utilities
 
 <!-- section overview from dorieh.docutils -->
 
@@ -133,14 +122,14 @@ Additionaly, [General Index](genindex) and [Python Module Index](modindex) englo
 
 ## Building Platform documentation
 
-The [documentation](https://github.com/NSAPH-Data-Platform/nsaph-platform-docs)
+The [documentation](https://nsaph-data-platform.github.io/dorieh/)
 contains general documentation pages in 
 [MarkDown](https://www.markdownguide.org/) 
 format and a build script that goes over all other platform 
 repositories in the platform
 and creates a combined [GitHub Pages](https://pages.github.com/) site.
 The script supports links between repositories. The 
-[README.md](https://github.com/NSAPH-Data-Platform/nsaph-platform-docs/blob/main/README.md) file contains
+[README.md](../README.md) file contains
 Build instructions.
 
 To integrate Markdown with [Sphinx](https://www.sphinx-doc.org/en/master/) 

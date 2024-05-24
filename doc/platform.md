@@ -1,6 +1,6 @@
 # Dorieh Core Data Platform
 
-[Documentation Home](https://nsaph-data-platform.github.io/nsaph-platform-docs/home.html)
+[Documentation Home](home)
 
 ```{toctree}
 ---
@@ -93,10 +93,10 @@ Here is a brief overview:
 
 ### Python packages
 
-#### NSAPH Package
+#### dorieh.platform Package
 
 This is the main package containing the majority of the code.
-Modules and subpackages included in `nsaph` package are described below.
+Modules and subpackages included in `dorieh.platform` package are described below.
 
 ##### Subpackage for Data Modelling
 
@@ -191,10 +191,7 @@ Package `dorieh.platform.util` contains:
 
 ### YAML files
 
-The majority of files are data model definitions. For now, they
-are included in **nsaph** package because they are used by
-different utilities and thus, expected to be stored in
-a specific location.
+The majority of files are data model definitions. 
 
 Beside data model files, there are YAML files for:
 

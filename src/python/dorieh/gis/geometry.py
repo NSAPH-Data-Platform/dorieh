@@ -75,6 +75,14 @@ class PointInRaster:
         return self.masked == self.COMPLETELY_MASKED
 
     def array(self, raster):
+        """
+        Returns an array consisting of the corners of the rectangular, containing this point.
+
+        :param raster:
+        :return:
+
+        """
+
         return raster.array[
             self.window[0][0]:self.window[0][1],
             self.window[1][0]:self.window[1][1],

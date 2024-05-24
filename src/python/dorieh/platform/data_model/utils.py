@@ -42,7 +42,9 @@ def split(node) -> (str, dict):
     :param node: an array node, usually from YAML or JSON file
     :return: a tuple consisting of a name and an array containing
         definitions
+
     """
+
     if isinstance(node, str):
         return node, {}
     if not isinstance(node, dict):
@@ -69,6 +71,7 @@ def basename(table):
     :param table: a fully qualified table name
     :return: just the base name of the table, a piece of name after the last dot
     """
+
     return table.split('.')[-1]
 
 
@@ -135,12 +138,13 @@ class DataReader:
 
     This class is Context manager and can be used with with block
 
-    Example::
+    Example
+    .. code-block:: python
 
-    with DataReader(file_path) as reader:
-        for row in reader.rows():
-            print(row)
-        
+        with DataReader(file_path) as reader:
+            for row in reader.rows():
+                print(row)
+
     """
 
     def __init__(self, path: str,
