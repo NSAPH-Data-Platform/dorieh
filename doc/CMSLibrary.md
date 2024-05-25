@@ -10,7 +10,7 @@
     parser for [FTS](#parsing-fts) format for both Medicaid and Medicare.
 * [create_schema_config](members/create_schema_config.rst) is used
     to interpret options to introspect raw files or parse FTS
-* [registry](members/registry.rst) Command line tool to create and/or update
+* [registry](members/epa_registry.rst) Command line tool to create and/or update
     data models for raw CMS data (See 
     [create_schema_config](members/create_schema_config.rst) for options)
 * [random_selector](members/random_selector.rst) Selects random lines

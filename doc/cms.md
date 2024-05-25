@@ -9,7 +9,6 @@ maxdepth: 4
 glob: true
 hidden: 
 ---
-LegacyMedicaid.md
 Medicaid.md
 Medicare.md
 QueringMedicaid.md
