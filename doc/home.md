@@ -48,27 +48,43 @@ callbacks.
 
 ### Dorieh Utilities
 
-<!-- section overview from dorieh.utils -->
+<!-- section Overview of Utilities from dorieh.utils -->
 
-<!-- end of section overview from dorieh.utils -->
+
+The dorieh.utils package is intended to hold python 
+code that will be useful
+across multiple portions of the Dorieh pipelines.
+
+The included utilities are developed to be as independent of
+specific infrastructure and execution environment as possible.
+
+Included utilities:
+
+* Interpolation code
+* Reading FST files from Python [](members/pyfst)
+* Reading FWF files [](members/fwf)
+* various I/O wrappers [](members/io_utils)
+* An API and CLI framework [](members/context)
+* QC Framework
+
+
+
+<!-- end of section overview of utilities from dorieh.utils -->
 
 ### Core Platform
 
-<!-- section overview from dorieh.platform -->
+<!-- section Core platform overview from dorieh.platform -->
 
-<!-- end of section overview from dorieh.platform -->
 
 ### Dorieh GIS Utilities
 
-<!-- section overview from dorieh.gis -->
+<!-- section GIS Library Overview from dorieh.gis -->
 
-<!-- end of section overview from dorieh.gis -->
 
 ### Dorieh Documentation Utilities
 
-<!-- section overview from dorieh.docutils -->
+<!-- section Documentation utilities overview from dorieh.docutils -->
 
-<!-- end of section overview from dorieh.docutils -->
 
 
 ### Data Processing and Loading Pipelines
@@ -86,6 +102,11 @@ go to [Adding more data](adding_data) section.
 
 Pipelines can be tested with
 [DBT Pipeline Testing Framework](common/core-platform/doc/DBT)
+
+## Working with NSAPH containerized apps
+
+<!-- section Introduction from dorieh.AppPipelineGenerator -->
+
 
 ## Deployment
 

@@ -105,7 +105,7 @@ class FWFMeta:
 class FWFReader:
     """
     Fixed width files (FWF) reader. Returns records in the same way
-    as standard CSV reader. Can return each record as either ;ist of values or
+    as standard CSV reader. Can return each record as either a list of values or
     a dictionary with column headers as keys.
 
     """
@@ -113,6 +113,7 @@ class FWFReader:
     def __init__(self, meta: FWFMeta, ret_dict: bool = False):
         """
         Constructor
+
         :param meta: an instance of FWFMeta
         :param ret_dict: boolean value, denoting whether to return each record
             as a dictionary

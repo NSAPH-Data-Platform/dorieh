@@ -30,6 +30,15 @@ import yaml
 from dorieh.docutils.md_creator import MDCreator
 
 
+cwl_src_content_template = """
+
+# CWL sub-workflow
+
+.. code-block:: yaml
+   :caption: Example of database.ini file
+
+"""
+
 cwl_src_template = """---
 orphan: true
 ---
@@ -43,6 +52,7 @@ language: yaml
 ```
 
 """
+
 
 
 logger = logging.getLogger('script')
@@ -75,9 +85,12 @@ class CWLParser:
         self.md_file = MDCreator(file_name=self.output_file_path)
         self.sub_workflow_counter = 0
 
-    def parse(self):
+    def parse(self, content: Dict = None):
         self._add_title()
-        self._add_source()
+        if content:
+            self._add_source_content(content)
+        else:
+            self._add_source()
         self._add_image()
         self._add_contents()
         self._add_header()
@@ -99,6 +112,16 @@ class CWLParser:
                                           literalinclude="{literalinclude}")
         with open(of, "w") as out:
             out.write(content)
+        self.md_file.add_text("\n [Source code]({}) \n".format(
+            os.path.basename(of)
+        ))
+
+    def _add_source_content(self, content: Dict):
+        of = self.output_file_path.replace(".md", "cwl_src.md")
+        
+        with open(of, "w") as out:
+            out.write(cwl_src_content_template)
+            yaml.safe_dump(content, out)
         self.md_file.add_text("\n [Source code]({}) \n".format(
             os.path.basename(of)
         ))
@@ -254,7 +277,7 @@ class CWLParser:
             output_file_path = self.output_file_path.replace('.md', f'_{self.sub_workflow_counter}.md')
             image_file_path = self.output_file_path.replace('.md', f'_{self.sub_workflow_counter}.png')
 
-            CWLParser(temp_file.name, output_file_path, image_file_path).parse()
+            CWLParser(temp_file.name, output_file_path, image_file_path).parse(content=prepared_data)
 
             return self._get_filename(output_file_path)
 

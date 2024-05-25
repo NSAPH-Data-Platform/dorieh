@@ -6,7 +6,8 @@ maxdepth: 1
 caption: Data Domains (Subject areas)
 ---
 Health <cms>
-Climate <gridmet>
-Pollution <epa>
+Climate <climate>
+Exposure (from Atmospheric Composition Analysis Group of Washington University in St. Louis) <exposures>
+Environmental Protection Agency (EPA) data <epa>
 Demographics <census>
 ```
