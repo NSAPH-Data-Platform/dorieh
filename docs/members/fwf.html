@@ -54,6 +54,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DBT.html">Database Testing Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppPipelineGenerator.html">Executing containerized apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
 </ul>
@@ -187,14 +188,18 @@ therefore a universal parser for FTS files is not feasible to supply.</p>
 <dt class="sig sig-object py" id="dorieh.utils.fwf.FWFReader">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FWFReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dorieh.utils.fwf.FWFMeta" title="dorieh.utils.fwf.FWFMeta"><span class="pre">FWFMeta</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">ret_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/utils/fwf.html#FWFReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.fwf.FWFReader" title="Permalink to this definition"></a></dt>
 <dd><p>Fixed width files (FWF) reader. Returns records in the same way
-as standard CSV reader. Can return each record as either ;ist of values or
+as standard CSV reader. Can return each record as either a list of values or
 a dictionary with column headers as keys.</p>
-<p>Constructor
-:param _sphinx_paramlinks_dorieh.utils.fwf.FWFReader.meta: an instance of FWFMeta
-:param _sphinx_paramlinks_dorieh.utils.fwf.FWFReader.ret_dict: boolean value, denoting whether to return each record</p>
-<blockquote>
-<div><p>as a dictionary</p>
-</div></blockquote>
+<p>Constructor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.utils.fwf.FWFReader.params.meta"></span><strong>meta</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.fwf.FWFReader.params.meta">¶</a> – an instance of FWFMeta</p></li>
+<li><p><span class="target" id="dorieh.utils.fwf.FWFReader.params.ret_dict"></span><strong>ret_dict</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.fwf.FWFReader.params.ret_dict">¶</a> – boolean value, denoting whether to return each record
+as a dictionary</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="dorieh.utils.fwf.FWFReader.good_lines">
 <span class="sig-name descname"><span class="pre">good_lines</span></span><a class="headerlink" href="#dorieh.utils.fwf.FWFReader.good_lines" title="Permalink to this definition"></a></dt>

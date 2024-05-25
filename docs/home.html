@@ -58,6 +58,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#data-processing-and-loading-pipelines">Data Processing and Loading Pipelines</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#working-with-nsaph-containerized-apps">Working with NSAPH containerized apps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#deployment">Deployment</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#using-the-database">Using the Database</a></li>
 </ul>
@@ -73,6 +74,7 @@
 <li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DBT.html">Database Testing Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AppPipelineGenerator.html">Executing containerized apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
 </ul>
@@ -117,13 +119,14 @@
 <li><p><a class="reference internal" href="#data-processing-and-loading-pipelines" id="id7">Data Processing and Loading Pipelines</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#deployment" id="id8">Deployment</a></p>
+<li><p><a class="reference internal" href="#working-with-nsaph-containerized-apps" id="id8">Working with NSAPH containerized apps</a></p></li>
+<li><p><a class="reference internal" href="#deployment" id="id9">Deployment</a></p>
 <ul>
-<li><p><a class="reference internal" href="#using-the-database" id="id9">Using the Database</a></p></li>
+<li><p><a class="reference internal" href="#using-the-database" id="id10">Using the Database</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#terms-and-acronyms" id="id10">Terms and Acronyms</a></p></li>
-<li><p><a class="reference internal" href="#building-platform-documentation" id="id11">Building Platform documentation</a></p></li>
+<li><p><a class="reference internal" href="#terms-and-acronyms" id="id11">Terms and Acronyms</a></p></li>
+<li><p><a class="reference internal" href="#building-platform-documentation" id="id12">Building Platform documentation</a></p></li>
 </ul>
 </nav>
 <section id="introduction-to-data-platform">
@@ -161,23 +164,68 @@ callbacks.</p>
 <h2><a class="toc-backref" href="#id2" role="doc-backlink">Building Blocks</a><a class="headerlink" href="#building-blocks" title="Permalink to this heading"></a></h2>
 <section id="dorieh-utilities">
 <h3><a class="toc-backref" href="#id3" role="doc-backlink">Dorieh Utilities</a><a class="headerlink" href="#dorieh-utilities" title="Permalink to this heading"></a></h3>
-<!-- section overview from dorieh.utils -->
-<!-- end of section overview from dorieh.utils -->
+<!-- section Overview of Utilities from dorieh.utils -->
+<p>The dorieh.utils package is intended to hold python
+code that will be useful
+across multiple portions of the Dorieh pipelines.</p>
+<p>The included utilities are developed to be as independent of
+specific infrastructure and execution environment as possible.</p>
+<p>Included utilities:</p>
+<ul class="simple">
+<li><p>Interpolation code</p></li>
+<li><p>Reading FST files from Python <a class="reference internal" href="members/pyfst.html"><span class="doc std std-doc">The pyfst Module</span></a></p></li>
+<li><p>Reading FWF files <a class="reference internal" href="members/fwf.html"><span class="doc std std-doc">The fwf Module</span></a></p></li>
+<li><p>various I/O wrappers <a class="reference internal" href="members/io_utils.html"><span class="doc std std-doc">The io_utils Module</span></a></p></li>
+<li><p>An API and CLI framework <a class="reference internal" href="members/context.html"><span class="doc std std-doc">The context Module</span></a></p></li>
+<li><p>QC Framework</p></li>
+</ul>
+<!-- end of section overview of utilities from dorieh.utils -->
 </section>
 <section id="core-platform">
 <h3><a class="toc-backref" href="#id4" role="doc-backlink">Core Platform</a><a class="headerlink" href="#core-platform" title="Permalink to this heading"></a></h3>
-<!-- section overview from dorieh.platform -->
-<!-- end of section overview from dorieh.platform -->
+<!-- section Core platform overview from dorieh.platform -->
+<p>The data platform provides generic functionality for Dorieh Data Platform
+with APIs and command line utilities dependent on the infrastructure
+and the environment. For instance, its components assume presence of PostgreSQL
+DBMS (version 13 or later) and CWL runtime environment.</p>
+<p>Some mapping (or crosswalk) tables are also included in the Core
+Platform module. These tables include between different
+territorial codes, such as USPS ZIP codes, Census ZCTA codes,
+FIPS codes for US states
+and counties, SSA codes for codes for US states
+and counties. See more information in the
+<a class="reference external" href="https://nsaph-data-platform.github.io/nsaph-platform-docs/common/core-platform/doc/TerritorialCodes.html">Mapping between different territorial codes</a></p>
+<!-- end of section core platform overview from dorieh.platform -->
 </section>
 <section id="dorieh-gis-utilities">
 <h3><a class="toc-backref" href="#id5" role="doc-backlink">Dorieh GIS Utilities</a><a class="headerlink" href="#dorieh-gis-utilities" title="Permalink to this heading"></a></h3>
-<!-- section overview from dorieh.gis -->
-<!-- end of section overview from dorieh.gis -->
+<!-- section GIS Library Overview from dorieh.gis -->
+<p>Per <a class="reference external" href="https://www.usgs.gov/faqs/what-geographic-information-system-gis">USGS</a>,
+a Geographic Information System (GIS) is a computer system that
+analyzes and displays geographically referenced information.
+It uses data that is attached to a unique location.</p>
+<p>This <code class="docutils literal notranslate"><span class="pre">dorieh.gis</span></code> library contains several modules, aimed to work with US Census shape files.
+They fall into two categories:</p>
+<ul class="simple">
+<li><p>Utilities to download appropriate shapefiles for a given geography type and year</p></li>
+<li><p>Utilities to aggregate raster data over given shapefiles</p></li>
+</ul>
+<!-- end of section gis library overview from dorieh.gis -->
 </section>
 <section id="dorieh-documentation-utilities">
 <h3><a class="toc-backref" href="#id6" role="doc-backlink">Dorieh Documentation Utilities</a><a class="headerlink" href="#dorieh-documentation-utilities" title="Permalink to this heading"></a></h3>
-<!-- section overview from dorieh.docutils -->
-<!-- end of section overview from dorieh.docutils -->
+<!-- section Documentation utilities overview from dorieh.docutils -->
+<p>Documentation utilities to simplify creation of consistent
+documentation for Dorieh platform</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="members/cwl2md.html"><span class="doc std std-doc">cwl2md</span></a> Generates <a class="reference external" href="https://www.markdownguide.org/basic-syntax/">Markdown</a>
+documentation for a CWL tool or workflow</p></li>
+<li><p><a class="reference internal" href="members/collector.html"><span class="doc std std-doc">collector</span></a> Generates automatic
+<a class="reference external" href="https://docutils.sourceforge.io/rst.html">reStructuredText</a>
+templates for all Python modules</p></li>
+<li><p><a class="reference internal" href="members/copy_section.html"><span class="doc std std-doc">copy_section</span></a>  Copies a specified section from one markdown document
+to another. This way we can collect summaries in one file<!-- end of section documentation utilities overview from dorieh.docutils --></p></li>
+</ul>
 </section>
 <section id="data-processing-and-loading-pipelines">
 <h3><a class="toc-backref" href="#id7" role="doc-backlink">Data Processing and Loading Pipelines</a><a class="headerlink" href="#data-processing-and-loading-pipelines" title="Permalink to this heading"></a></h3>
@@ -193,8 +241,12 @@ go to <a class="reference internal" href="adding_data.html"><span class="doc std
 <a class="reference internal" href="#common/core-platform/doc/DBT"><span class="xref myst">DBT Pipeline Testing Framework</span></a></p>
 </section>
 </section>
+<section id="working-with-nsaph-containerized-apps">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Working with NSAPH containerized apps</a><a class="headerlink" href="#working-with-nsaph-containerized-apps" title="Permalink to this heading"></a></h2>
+<!-- section Introduction from dorieh.AppPipelineGenerator -->
+</section>
 <section id="deployment">
-<h2><a class="toc-backref" href="#id8" role="doc-backlink">Deployment</a><a class="headerlink" href="#deployment" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">Deployment</a><a class="headerlink" href="#deployment" title="Permalink to this heading"></a></h2>
 <p>The deployment repository is based on<br />
 CWL-Airflow Docker Deployment developed
 by Harvard FAS RC in collaboration with Forome Association. Essentially, this is a fork of:
@@ -207,7 +259,7 @@ approach.</p>
 customized for Harvard FAS RC environment.</p>
 <p>Detailed description of this deployment is covered in the <a class="reference internal" href="#common/platform-deployment/doc/index"><span class="xref myst">NSAPH Data Platform Deployment</span></a> subsection of the <a class="reference internal" href="guts.html"><span class="doc std std-doc">Data Platform Internals</span></a> section.</p>
 <section id="using-the-database">
-<h3><a class="toc-backref" href="#id9" role="doc-backlink">Using the Database</a><a class="headerlink" href="#using-the-database" title="Permalink to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">Using the Database</a><a class="headerlink" href="#using-the-database" title="Permalink to this heading"></a></h3>
 <p>For a sample to query the database, please look at
 <a class="reference internal" href="#common/core-platform/doc/SampleQuery"><span class="xref myst">Sample Query</span></a></p>
 <p>A discussion of querying of health data can be found in
@@ -215,14 +267,14 @@ customized for Harvard FAS RC environment.</p>
 </section>
 </section>
 <section id="terms-and-acronyms">
-<h2><a class="toc-backref" href="#id10" role="doc-backlink">Terms and Acronyms</a><a class="headerlink" href="#terms-and-acronyms" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">Terms and Acronyms</a><a class="headerlink" href="#terms-and-acronyms" title="Permalink to this heading"></a></h2>
 <p>Included
 <a class="reference internal" href="glossary.html"><span class="std std-doc">Glossary</span></a> provides some information about
 acronyms and other terms used throughout this documentation.</p>
 <p>Additionaly, <a class="reference internal" href="genindex.html"><span class="std std-ref">General Index</span></a> and <a class="reference internal" href="py-modindex.html"><span class="std std-ref">Python Module Index</span></a> englobe all the pieces of the Data Platform together.</p>
 </section>
 <section id="building-platform-documentation">
-<h2><a class="toc-backref" href="#id11" role="doc-backlink">Building Platform documentation</a><a class="headerlink" href="#building-platform-documentation" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id12" role="doc-backlink">Building Platform documentation</a><a class="headerlink" href="#building-platform-documentation" title="Permalink to this heading"></a></h2>
 <p>The <a class="reference external" href="https://nsaph-data-platform.github.io/dorieh/">documentation</a>
 contains general documentation pages in
 <a class="reference external" href="https://www.markdownguide.org/">MarkDown</a>

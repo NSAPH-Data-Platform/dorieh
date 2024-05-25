@@ -17,8 +17,8 @@ Handles the following types of data:
 
 ```{toctree}
 epa_usage
-python_components
-cwl_tools
+epa_python_modules
+epa_cwl_tools
 ```
 
 ## Querying Data

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CWL Tools and Workflows used by EPA pipelines &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Full EPA AQS Processing Pipeline" href="pipeline/aqs.html" />
+    <link rel="prev" title="The EPA Data Dictionary" href="members/epa_registry.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="packages.html">Python Packages</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="utils.html">General purpose utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CoreLibrary.html">Data platform components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gis.html">GIS utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CMSLibrary.html">Health data manipulation tools</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="epa.html">EPA tools</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="epa.html#package-contents">Package Contents</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="epa_usage.html">EPA Toolkit Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="epa_python_modules.html">Python modules used by dorieh.epa package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">CWL Tools and Workflows used by EPA pipelines</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="epa.html#querying-data">Querying Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rasters.html">Raster data tools (climate and exposure)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="census.html">Census data manipulation tools</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBT.html">Database Testing Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AppPipelineGenerator.html">Executing containerized apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="domains.html">Data Domains</a></li>
+          <li class="breadcrumb-item"><a href="epa.html">Dorieh EPA Package Description</a></li>
+      <li class="breadcrumb-item active">CWL Tools and Workflows used by EPA pipelines</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/epa_cwl_tools.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cwl-tools-and-workflows-used-by-epa-pipelines">
+<h1>CWL Tools and Workflows used by EPA pipelines<a class="headerlink" href="#cwl-tools-and-workflows-used-by-epa-pipelines" title="Permalink to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/aqs.html">Full EPA AQS Processing Pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/aqs.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/aqs.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/aqs.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/aqs.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/aqscwl_src.html">aqs.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/download_aqs.html">Downloader of AQS Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/download_aqs.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/download_aqs.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/download_aqs.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/download_aqscwl_src.html">download_aqs.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/expand_aqs.html">Downloader of AQS Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/expand_aqs.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/expand_aqs.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/expand_aqs.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/expand_aqscwl_src.html">expand_aqs.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/sample_aqs.html">Sample arguments to AQS pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/sample_aqs.html#for-annual-no2-nitrogen-data">For annual NO2 (nitrogen) data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/sample_aqs.html#for-daily-pm25-small-particles-data">For daily PM25 (small particles) data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/test_aqs.html">Test harness for aqs.cwl</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/test_aqs.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/test_aqs.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/test_aqs.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/test_aqscwl_src.html">test_aqs.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/airnow.html">Full EPA AirNow Processing Pipeline (including downloading shapefiles)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/airnow.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/airnow.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/airnow.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/airnow.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/airnow_local_shapes.html">Full AirNowProcessing Pipeline (with shapefiles on local file system)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/airnow_local_shapes.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/airnow_local_shapes.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/airnow_local_shapes.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/airnow_local_shapes.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/airnow_local_shapescwl_src.html">airnow_local_shapes.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/airnowcwl_src.html">airnow.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/download_airnow.html">Downloader of AirNow Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/download_airnow.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/download_airnow.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/download_airnow.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/download_airnowcwl_src.html">download_airnow.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/sample_airnow.html">Sample arguments to AirNow pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/setup_airnow.html">Prepare environment for AirNow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/setup_airnow.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/setup_airnow.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/setup_airnow.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/setup_airnowcwl_src.html">setup_airnow.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/test_airnow.html">Test harness for airnow.cwl</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/test_airnow.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/test_airnow.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/test_airnow.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/test_airnowcwl_src.html">test_airnow.cwl</a></li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="members/epa_registry.html" class="btn btn-neutral float-left" title="The EPA Data Dictionary" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pipeline/aqs.html" class="btn btn-neutral float-right" title="Full EPA AQS Processing Pipeline" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2024, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

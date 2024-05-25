@@ -23,8 +23,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Python Packages Included in the Platform" href="packages.html" />
-    <link rel="prev" title="Working with the census Package" href="census_start_guide.html" /> 
+    <link rel="next" title="Pipeline to aggregate data from Climatology Lab" href="pipeline/gridmet.html" />
+    <link rel="prev" title="census_write.cwl" href="pipeline/census_writecwl_src.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -61,7 +61,15 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#testing-pipelines">Testing pipelines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#installing-python-dependencies">Installing Python dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#published-and-tested-pipelines">Published and tested pipelines</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="#published-and-tested-pipelines">Published and tested pipelines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/gridmet.html">Pipeline to aggregate data from Climatology Lab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/wustl.html">Pipeline to ingest Monthly Pollution data downloaded from WashU Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/pm25_yearly_download.html">Pipeline to aggregate data in NetCDF format over given geographies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/aqs.html">Full EPA AQS Processing Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/airnow.html">Full EPA AirNow Processing Pipeline (including downloading shapefiles)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/medicare.html">Medicare data ingestion and processing pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/medicaid.html">Full Medicaid Processing Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_workflow.html">census_workflow.cwl</a></li>
 </ul>
 </li>
 </ul>
@@ -70,6 +78,7 @@
 <li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DBT.html">Database Testing Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AppPipelineGenerator.html">Executing containerized apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
 </ul>
@@ -216,6 +225,63 @@ Python packages included in the platform.</p>
 <section id="published-and-tested-pipelines">
 <h2><a class="toc-backref" href="#id8" role="doc-backlink">Published and tested pipelines</a><a class="headerlink" href="#published-and-tested-pipelines" title="Permalink to this heading"></a></h2>
 <div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet.html">Pipeline to aggregate data from Climatology Lab</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/wustl.html">Pipeline to ingest Monthly Pollution data downloaded from WashU Box</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/wustl.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/wustl.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/wustl.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/wustl.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/pm25_yearly_download.html">Pipeline to aggregate data in NetCDF format over given geographies</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/pm25_yearly_download.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/pm25_yearly_download.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/pm25_yearly_download.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/pm25_yearly_download.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/aqs.html">Full EPA AQS Processing Pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/aqs.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/aqs.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/aqs.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/aqs.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/airnow.html">Full EPA AirNow Processing Pipeline (including downloading shapefiles)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/airnow.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/airnow.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/airnow.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/airnow.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/medicare.html">Medicare data ingestion and processing pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/medicare.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/medicare.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/medicare.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/medicare.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/medicaid.html">Full Medicaid Processing Pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/medicaid.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/medicaid.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/medicaid.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/medicaid.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/census_workflow.html">census_workflow.cwl</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/census_workflow.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/census_workflow.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/census_workflow.html#steps">Steps</a></li>
+</ul>
+</li>
+</ul>
 </div>
 </section>
 </section>
@@ -224,8 +290,8 @@ Python packages included in the platform.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="census_start_guide.html" class="btn btn-neutral float-left" title="Working with the census Package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="packages.html" class="btn btn-neutral float-right" title="Python Packages Included in the Platform" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="pipeline/census_writecwl_src.html" class="btn btn-neutral float-left" title="census_write.cwl" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pipeline/gridmet.html" class="btn btn-neutral float-right" title="Pipeline to aggregate data from Climatology Lab" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

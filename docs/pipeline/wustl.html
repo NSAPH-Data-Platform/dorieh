@@ -23,8 +23,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="wustl_consolidate_components.cwl" href="wustl_consolidate_components.html" />
-    <link rel="prev" title="verify.cwl" href="verifycwl_src.html" /> 
+    <link rel="next" title="Dorieh EPA Package Description" href="../epa.html" />
+    <link rel="prev" title="Pipeline to aggregate data in NetCDF format over given geographies" href="pm25_yearly_download.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -47,15 +47,39 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../pipelines.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pipelines.html#running-pipelines">Running Pipelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pipelines.html#testing-pipelines">Testing pipelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pipelines.html#installing-python-dependencies">Installing Python dependencies</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../pipelines.html#published-and-tested-pipelines">Published and tested pipelines</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="gridmet.html">Pipeline to aggregate data from Climatology Lab</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Pipeline to ingest Monthly Pollution data downloaded from WashU Box</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#inputs">Inputs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#outputs">Outputs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pm25_yearly_download.html">Pipeline to aggregate data in NetCDF format over given geographies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aqs.html">Full EPA AQS Processing Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="airnow.html">Full EPA AirNow Processing Pipeline (including downloading shapefiles)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="medicare.html">Medicare data ingestion and processing pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="medicaid.html">Full Medicaid Processing Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_workflow.html">census_workflow.cwl</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DBT.html">Database Testing Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppPipelineGenerator.html">Executing containerized apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
 </ul>
@@ -75,8 +99,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../domains.html">Data Domains</a></li>
-          <li class="breadcrumb-item"><a href="../epa.html">Dorieh EPA Package Description</a></li>
-          <li class="breadcrumb-item"><a href="../cwl_tools.html">CWL Tools and Common Workflows</a></li>
+          <li class="breadcrumb-item"><a href="../exposures.html">Computational Utilities for working with Exposure data from Washington University in St. Louis</a></li>
       <li class="breadcrumb-item active">Pipeline to ingest Monthly Pollution data downloaded from WashU Box</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/pipeline/wustl.md.txt" rel="nofollow"> View page source</a>
@@ -280,8 +303,8 @@ aggregated data into the database</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="verifycwl_src.html" class="btn btn-neutral float-left" title="verify.cwl" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="wustl_consolidate_components.html" class="btn btn-neutral float-right" title="wustl_consolidate_components.cwl" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="pm25_yearly_download.html" class="btn btn-neutral float-left" title="Pipeline to aggregate data in NetCDF format over given geographies" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../epa.html" class="btn btn-neutral float-right" title="Dorieh EPA Package Description" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

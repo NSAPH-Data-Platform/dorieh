@@ -1,12 +1,85 @@
----
-orphan: true
----
 
-# tmpuu42wjcjcensus_ingest.cwl
 
-```{literalinclude} ../../src/cwl/tmpuu42wjcjcensus_ingest.cwl
----
-language: yaml
----
-```
+# CWL sub-workflow
 
+.. code-block:: yaml
+   :caption: Example of database.ini file
+
+class: Workflow
+cwlVersion: v1.1
+inputs:
+  connection:
+    type: string
+  data:
+    type: File
+  db:
+    type: File
+  schema:
+    type: File
+  table:
+    type: string
+outputs:
+  index_err:
+    outputSource: index/errors
+    type: File
+  index_log:
+    outputSource: index/log
+    type: File
+  ingest_err:
+    outputSource: ingest/errors
+    type: File
+  ingest_log:
+    outputSource: ingest/log
+    type: File
+  vacuum_err:
+    outputSource: vacuum/errors
+    type: File
+  vacuum_log:
+    outputSource: vacuum/log
+    type: File
+requirements:
+  InlineJavascriptRequirement: {}
+  ScatterFeatureRequirement: {}
+  StepInputExpressionRequirement: {}
+  SubworkflowFeatureRequirement: {}
+steps:
+  index:
+    in:
+      connection_name: connection
+      database: db
+      depends_on: ingest/log
+      domain:
+        valueFrom: census
+      registry: schema
+      table: table
+    out:
+    - log
+    - errors
+    run: index.cwl
+  ingest:
+    doc: Uploads data into the database
+    in:
+      connection_name: connection
+      database: db
+      domain:
+        valueFrom: census
+      input: data
+      registry: schema
+      table: table
+    out:
+    - log
+    - errors
+    run: ingest.cwl
+  vacuum:
+    in:
+      connection_name: connection
+      database: db
+      depends_on: index/log
+      domain:
+        valueFrom: census
+      registry: schema
+      table: table
+    out:
+    - log
+    - errors
+    run: vacuum.cwl

@@ -53,6 +53,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../guts.html">Data Platform Internals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../DBT.html">Database Testing Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AppPipelineGenerator.html">Executing containerized apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Terms and Acronyms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../docindices.html">Indices</a></li>
 </ul>
@@ -120,7 +121,7 @@
 <span class="n">DOMAIN_NAME</span> <span class="o">=</span> <span class="s2">&quot;epa&quot;</span>
 
 
-<div class="viewcode-block" id="EPAConfig"><a class="viewcode-back" href="../../../members/registry.html#dorieh.epa.registry.EPAConfig">[docs]</a><span class="k">class</span> <span class="nc">EPAConfig</span><span class="p">(</span><span class="n">Context</span><span class="p">):</span>
+<div class="viewcode-block" id="EPAConfig"><a class="viewcode-back" href="../../../members/epa_registry.html#dorieh.epa.registry.EPAConfig">[docs]</a><span class="k">class</span> <span class="nc">EPAConfig</span><span class="p">(</span><span class="n">Context</span><span class="p">):</span>
 
     <span class="n">_output</span> <span class="o">=</span> <span class="n">Argument</span><span class="p">(</span><span class="s2">&quot;output&quot;</span><span class="p">,</span>
             <span class="n">help</span> <span class="o">=</span> <span class="s2">&quot;Output path for schema&quot;</span><span class="p">,</span>
@@ -155,7 +156,7 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">EPAConfig</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="n">include_default</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Registry"><a class="viewcode-back" href="../../../members/registry.html#dorieh.epa.registry.Registry">[docs]</a><span class="k">class</span> <span class="nc">Registry</span><span class="p">:</span>
+<div class="viewcode-block" id="Registry"><a class="viewcode-back" href="../../../members/epa_registry.html#dorieh.epa.registry.Registry">[docs]</a><span class="k">class</span> <span class="nc">Registry</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class parses File Transfer Summary files and</span>
 <span class="sd">    creates YAML data model. It can either</span>
@@ -170,7 +171,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span> <span class="o">=</span> <span class="n">context</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">domain</span> <span class="o">=</span> <span class="kc">None</span>
 
-<div class="viewcode-block" id="Registry.update"><a class="viewcode-back" href="../../../members/registry.html#dorieh.epa.registry.Registry.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Registry.update"><a class="viewcode-back" href="../../../members/epa_registry.html#dorieh.epa.registry.Registry.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">registry_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">output</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">registry_path</span><span class="p">):</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">registry_path</span><span class="p">,</span> <span class="s2">&quot;rt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
@@ -182,7 +183,7 @@
             <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
         <span class="k">return</span></div>
 
-<div class="viewcode-block" id="Registry.create_domain_yaml"><a class="viewcode-back" href="../../../members/registry.html#dorieh.epa.registry.Registry.create_domain_yaml">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Registry.create_domain_yaml"><a class="viewcode-back" href="../../../members/epa_registry.html#dorieh.epa.registry.Registry.create_domain_yaml">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">create_domain_yaml</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
         <span class="n">domain</span> <span class="o">=</span> <span class="p">{</span>
             <span class="n">DOMAIN_NAME</span><span class="p">:</span> <span class="p">{</span>
@@ -196,7 +197,7 @@
         <span class="p">}</span>
         <span class="k">return</span> <span class="n">domain</span></div>
 
-<div class="viewcode-block" id="Registry.create_table_yaml"><a class="viewcode-back" href="../../../members/registry.html#dorieh.epa.registry.Registry.create_table_yaml">[docs]</a>    <span class="k">def</span> <span class="nf">create_table_yaml</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Registry.create_table_yaml"><a class="viewcode-back" href="../../../members/epa_registry.html#dorieh.epa.registry.Registry.create_table_yaml">[docs]</a>    <span class="k">def</span> <span class="nf">create_table_yaml</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">table</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
         <span class="n">introspector</span> <span class="o">=</span> <span class="n">Introspector</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
         <span class="n">introspector</span><span class="o">.</span><span class="n">introspect</span><span class="p">()</span>

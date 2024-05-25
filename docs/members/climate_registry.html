@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Climate Data Dictionary &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/dorieh.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DBT.html">Database Testing Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppPipelineGenerator.html">Executing containerized apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">The Climate Data Dictionary</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/members/climate_registry.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-dorieh.rasters.registry">
+<span id="the-climate-data-dictionary"></span><h1>The Climate Data Dictionary<a class="headerlink" href="#module-dorieh.rasters.registry" title="Permalink to this heading"></a></h1>
+<p>A utility to create skeleton data model (database schema)
+for gridMET data</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="dorieh.rasters.registry.Registry">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Registry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/registry.html#Registry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.registry.Registry" title="Permalink to this definition"></a></dt>
+<dd><p>This class
+creates YAML data model for gridMET tables.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.registry.Registry.COMMON_COLUMNS">
+<span class="sig-name descname"><span class="pre">COMMON_COLUMNS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">-</span> <span class="pre">year:</span> <span class="pre">\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">source:\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">type:</span> <span class="pre">&quot;generated&quot;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">code:</span> <span class="pre">&quot;GENERATED</span> <span class="pre">ALWAYS</span> <span class="pre">AS</span> <span class="pre">(EXTRACT</span> <span class="pre">(YEAR</span> <span class="pre">FROM</span> <span class="pre">observation_date))</span> <span class="pre">STORED&quot;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">type:</span> <span class="pre">INT\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">index:</span> <span class="pre">true\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">doc:</span> <span class="pre">The</span> <span class="pre">year</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">observation\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">-</span> <span class="pre">month:</span> <span class="pre">\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">source:\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">type:</span> <span class="pre">&quot;generated&quot;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">code:</span> <span class="pre">&quot;GENERATED</span> <span class="pre">ALWAYS</span> <span class="pre">AS</span> <span class="pre">(EXTRACT</span> <span class="pre">(MONTH</span> <span class="pre">FROM</span> <span class="pre">observation_date))</span> <span class="pre">STORED&quot;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">type:</span> <span class="pre">INT\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">index:</span> <span class="pre">true\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">doc:</span> <span class="pre">The</span> <span class="pre">year</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">observation\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">-</span> <span class="pre">day_of_the_year:</span> <span class="pre">\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">source:\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">type:</span> <span class="pre">&quot;generated&quot;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">code:</span> <span class="pre">&quot;GENERATED</span> <span class="pre">ALWAYS</span> <span class="pre">AS</span> <span class="pre">(EXTRACT</span> <span class="pre">(DOY</span> <span class="pre">FROM</span> <span class="pre">observation_date))</span> <span class="pre">STORED&quot;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">type:</span> <span class="pre">INT\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">index:</span> <span class="pre">true\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">doc:</span> <span class="pre">The</span> <span class="pre">year</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">observation\n</span>&#160;&#160;&#160; <span class="pre">'</span></em><a class="headerlink" href="#dorieh.rasters.registry.Registry.COMMON_COLUMNS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.registry.Registry.COUNTY_COLUMNS">
+<span class="sig-name descname"><span class="pre">COUNTY_COLUMNS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">-</span> <span class="pre">fips5:\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">source:\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">type:</span> <span class="pre">&quot;generated&quot;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">code:</span> <span class="pre">&quot;GENERATED</span> <span class="pre">ALWAYS</span> <span class="pre">AS</span> <span class="pre">(county::INT)</span> <span class="pre">STORED&quot;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">type:</span> <span class="pre">INT\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">doc:</span> <span class="pre">County</span> <span class="pre">FIPS</span> <span class="pre">code</span> <span class="pre">as</span> <span class="pre">an</span> <span class="pre">integer,</span> <span class="pre">value</span> <span class="pre">is</span> <span class="pre">equal</span> <span class="pre">to</span> <span class="pre">&quot;county&quot;.\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">-</span> <span class="pre">fips2:\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">source:\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">type:</span> <span class="pre">&quot;generated&quot;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">code:</span> <span class="pre">&quot;GENERATED</span> <span class="pre">ALWAYS</span> <span class="pre">AS</span> <span class="pre">(substring(county,</span> <span class="pre">1,</span> <span class="pre">2)::INT)</span> <span class="pre">STORED&quot;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">type:</span> <span class="pre">INT\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">doc:</span> <span class="pre">FIPS</span> <span class="pre">code</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">US</span> <span class="pre">State</span> <span class="pre">in</span> <span class="pre">which</span> <span class="pre">the</span> <span class="pre">county</span> <span class="pre">is</span> <span class="pre">located\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">-</span> <span class="pre">fips3:\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">source:\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">type:</span> <span class="pre">&quot;generated&quot;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">code:</span> <span class="pre">&quot;GENERATED</span> <span class="pre">ALWAYS</span> <span class="pre">AS</span> <span class="pre">(substring(county,</span> <span class="pre">3,</span> <span class="pre">3)::INT)</span> <span class="pre">STORED&quot;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">type:</span> <span class="pre">INT\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">doc:</span> <span class="pre">FIPS</span> <span class="pre">code</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">county</span> <span class="pre">without</span> <span class="pre">state</span> <span class="pre">FIPS</span> <span class="pre">code\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">-</span> <span class="pre">state:\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">source:\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">type:</span> <span class="pre">&quot;generated&quot;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">code:</span> <span class="pre">&quot;GENERATED</span> <span class="pre">ALWAYS</span> <span class="pre">AS</span> <span class="pre">(public.fips2state(substring(county,</span> <span class="pre">1,</span> <span class="pre">2)::VARCHAR))</span> <span class="pre">STORED&quot;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">-</span> <span class="pre">state_iso:\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">source:\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">type:</span> <span class="pre">&quot;generated&quot;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">code:</span> <span class="pre">&quot;GENERATED</span> <span class="pre">ALWAYS</span> <span class="pre">AS</span> <span class="pre">(public.fips2state_iso(substring(county,</span> <span class="pre">1,</span> <span class="pre">2)))</span> <span class="pre">STORED&quot;\n</span>&#160;&#160;&#160; <span class="pre">'</span></em><a class="headerlink" href="#dorieh.rasters.registry.Registry.COUNTY_COLUMNS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.registry.Registry.ZCTA_COLUMNS">
+<span class="sig-name descname"><span class="pre">ZCTA_COLUMNS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">-</span> <span class="pre">state:\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">index:</span> <span class="pre">true\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">source:\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">type:</span> <span class="pre">&quot;generated&quot;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">code:</span> <span class="pre">&quot;GENERATED</span> <span class="pre">ALWAYS</span> <span class="pre">AS</span> <span class="pre">(public.zip_to_state((EXTRACT</span> <span class="pre">(YEAR</span> <span class="pre">FROM</span> <span class="pre">observation_date))::INT,</span> <span class="pre">zcta::INT))</span> <span class="pre">STORED&quot;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">doc:</span> <span class="pre">|\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">This</span> <span class="pre">column</span> <span class="pre">is</span> <span class="pre">for</span> <span class="pre">informational</span> <span class="pre">purposes</span> <span class="pre">only.</span> <span class="pre">The</span> <span class="pre">US</span> <span class="pre">State</span> <span class="pre">or</span> <span class="pre">\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">territory</span> <span class="pre">Id</span> <span class="pre">associated</span> <span class="pre">with</span> <span class="pre">this</span> <span class="pre">ZCTA.</span> <span class="pre">Some</span> <span class="pre">ZCTAs</span> <span class="pre">span</span> <span class="pre">over\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">more</span> <span class="pre">than</span> <span class="pre">one</span> <span class="pre">states</span> <span class="pre">or</span> <span class="pre">territories.\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">-</span> <span class="pre">city:\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">source:\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">type:</span> <span class="pre">&quot;generated&quot;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">code:</span> <span class="pre">&quot;GENERATED</span> <span class="pre">ALWAYS</span> <span class="pre">AS</span> <span class="pre">(public.zip_to_city((EXTRACT</span> <span class="pre">(YEAR</span> <span class="pre">FROM</span> <span class="pre">observation_date))::INT,</span> <span class="pre">zcta::INT))</span> <span class="pre">STORED&quot;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">doc:</span> <span class="pre">|\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">This</span> <span class="pre">column</span> <span class="pre">is</span> <span class="pre">for</span> <span class="pre">informational</span> <span class="pre">purposes</span> <span class="pre">only.</span> <span class="pre">The</span> <span class="pre">name</span> <span class="pre">\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">of</span> <span class="pre">the</span> <span class="pre">city</span> <span class="pre">preferred</span> <span class="pre">by</span> <span class="pre">the</span> <span class="pre">US</span> <span class="pre">Postal</span> <span class="pre">service</span> <span class="pre">for</span> <span class="pre">the</span> <span class="pre">ZIP</span> <span class="pre">code\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">associated</span> <span class="pre">with</span> <span class="pre">this</span> <span class="pre">ZCTA.\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">-</span> <span class="pre">county:\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">source:\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">type:</span> <span class="pre">&quot;generated&quot;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">code:</span> <span class="pre">&quot;GENERATED</span> <span class="pre">ALWAYS</span> <span class="pre">AS</span> <span class="pre">(public.zip_to_fips5((EXTRACT</span> <span class="pre">(YEAR</span> <span class="pre">FROM</span> <span class="pre">observation_date))::INT,</span> <span class="pre">zcta::INT))</span> <span class="pre">STORED&quot;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">doc:</span> <span class="pre">|\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">This</span> <span class="pre">column</span> <span class="pre">is</span> <span class="pre">for</span> <span class="pre">informational</span> <span class="pre">purposes</span> <span class="pre">only.</span> <span class="pre">The</span> <span class="pre">US</span> <span class="pre">County</span>&#160; <span class="pre">\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">FIPS</span> <span class="pre">code,</span> <span class="pre">for</span> <span class="pre">the</span> <span class="pre">county</span> <span class="pre">having</span> <span class="pre">the</span> <span class="pre">largest</span> <span class="pre">intersection</span> <span class="pre">\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">in</span> <span class="pre">terms</span> <span class="pre">of</span> <span class="pre">population</span> <span class="pre">with</span> <span class="pre">this</span> <span class="pre">ZCTA.</span> <span class="pre">\n</span>&#160;&#160;&#160; <span class="pre">'</span></em><a class="headerlink" href="#dorieh.rasters.registry.Registry.ZCTA_COLUMNS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.registry.Registry.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/registry.html#Registry.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.registry.Registry.update" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.registry.Registry.create_yaml">
+<span class="sig-name descname"><span class="pre">create_yaml</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/registry.html#Registry.create_yaml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.registry.Registry.create_yaml" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dorieh.rasters.registry.Registry.built_in_registry_path">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">built_in_registry_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/registry.html#Registry.built_in_registry_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.registry.Registry.built_in_registry_path" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2024, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

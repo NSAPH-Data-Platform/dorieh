@@ -22,9 +22,7 @@
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Downloader of gridMET Data" href="pipeline/add_daily_data.html" />
-    <link rel="prev" title="EPA Toolkit Usage" href="epa_usage.html" /> 
+    <link rel="search" title="Search" href="search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -47,32 +45,16 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
 <li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="packages.html">Python Packages</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="utils.html">General purpose utilities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CoreLibrary.html">Data platform components</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gis.html">GIS utilities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CMSLibrary.html">Health data manipulation tools</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="epa.html">EPA tools</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="epa.html#package-contents">Package Contents</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="epa_usage.html">EPA Toolkit Usage</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">CWL Tools and Common Workflows</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="epa.html#querying-data">Querying Data</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="rasters.html">Raster data tools (climate and exposure)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="census.html">Census data manipulation tools</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DBT.html">Database Testing Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AppPipelineGenerator.html">Executing containerized apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
 </ul>
@@ -91,8 +73,6 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="domains.html">Data Domains</a></li>
-          <li class="breadcrumb-item"><a href="epa.html">Dorieh EPA Package Description</a></li>
       <li class="breadcrumb-item active">CWL Tools and Common Workflows</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/cwl_tools.md.txt" rel="nofollow"> View page source</a>
@@ -206,7 +186,7 @@
 <li class="toctree-l2"><a class="reference internal" href="pipeline/census_ingest_1.html#steps">Steps</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="pipeline/census_ingest_1cwl_src.html">tmpuu42wjcjcensus_ingest.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/census_ingest_1cwl_src.html">CWL sub-workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pipeline/census_ingestcwl_src.html">census_ingest.cwl</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pipeline/census_interpolate.html">census_interpolate.cwl</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="pipeline/census_interpolate.html#inputs">Inputs</a></li>
@@ -311,7 +291,7 @@
 <li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_1.html#steps">Steps</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet_1cwl_src.html">tmpgjktzs81gridmet.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet_1cwl_src.html">CWL sub-workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet_dwnl_only.html">gridMET Pipeline</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_dwnl_only.html#description">Description</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_dwnl_only.html#inputs">Inputs</a></li>
@@ -325,23 +305,8 @@
 <li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_dwnl_only_1.html#steps">Steps</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet_dwnl_only_1cwl_src.html">tmpixvl9jj7gridmet_dwnl_only.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet_dwnl_only_1cwl_src.html">CWL sub-workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet_dwnl_onlycwl_src.html">gridmet_dwnl_only.cwl</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet_local_shapes.html">gridMET Pipeline</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_local_shapes.html#description">Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_local_shapes.html#inputs">Inputs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_local_shapes.html#outputs">Outputs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_local_shapes.html#steps">Steps</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet_local_shapes_1.html">Sub-workflow <em>process</em> from gridmet_local_shapes.cwl</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_local_shapes_1.html#inputs">Inputs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_local_shapes_1.html#outputs">Outputs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_local_shapes_1.html#steps">Steps</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet_local_shapes_1cwl_src.html">tmp948memtugridmet_local_shapes.cwl</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet_local_shapescwl_src.html">gridmet_local_shapes.cwl</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet_one_file.html">Workflow to aggregate and ingest one gridMET file in NetCDF format</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_one_file.html#description">Description</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_one_file.html#inputs">Inputs</a></li>
@@ -549,6 +514,13 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pipeline/test_pm25_yearly_downloadcwl_src.html">test_pm25_yearly_download.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/tmp6oqopwe5gridmet.html">Sub-workflow <em>init_tables</em> from gridmet.cwl</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/tmp6oqopwe5gridmet.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/tmp6oqopwe5gridmet.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/tmp6oqopwe5gridmet.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/tmp6oqopwe5gridmetcwl_src.html">tmp6oqopwe5gridmet.cwl</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pipeline/update_medicaid.html">Full Medicaid Processing Pipeline</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="pipeline/update_medicaid.html#description">Description</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pipeline/update_medicaid.html#inputs">Inputs</a></li>
@@ -616,10 +588,7 @@
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="epa_usage.html" class="btn btn-neutral float-left" title="EPA Toolkit Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="pipeline/add_daily_data.html" class="btn btn-neutral float-right" title="Downloader of gridMET Data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 

@@ -1,12 +1,52 @@
----
-orphan: true
----
 
-# tmpixvl9jj7gridmet_dwnl_only.cwl
 
-```{literalinclude} ../../src/cwl/tmpixvl9jj7gridmet_dwnl_only.cwl
----
-language: yaml
----
-```
+# CWL sub-workflow
 
+.. code-block:: yaml
+   :caption: Example of database.ini file
+
+class: Workflow
+cwlVersion: v1.2
+inputs:
+  band:
+    type: string
+  geography:
+    type: string
+  proxy:
+    type: string?
+  shapes:
+    type: Directory
+  years:
+    type: string[]
+outputs:
+  data:
+    outputSource: download/data
+    type: File[]
+  download_err:
+    outputSource: download/errors
+    type: File[]
+  download_log:
+    outputSource: download/log
+    type: File[]
+requirements:
+  InlineJavascriptRequirement: {}
+  MultipleInputFeatureRequirement: {}
+  ScatterFeatureRequirement: {}
+  StepInputExpressionRequirement: {}
+  SubworkflowFeatureRequirement: {}
+steps:
+  download:
+    doc: Downloads and processes data
+    in:
+      band: band
+      geography: geography
+      proxy: proxy
+      shapes: shapes
+      year: years
+    out:
+    - data
+    - log
+    - errors
+    run: download.cwl
+    scatter: year
+    scatterMethod: nested_crossproduct

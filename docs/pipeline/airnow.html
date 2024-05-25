@@ -24,7 +24,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Full AirNowProcessing Pipeline (with shapefiles on local file system)" href="airnow_local_shapes.html" />
-    <link rel="prev" title="aggregate_wustl.cwl" href="aggregate_wustlcwl_src.html" /> 
+    <link rel="prev" title="test_aqs.cwl" href="test_aqscwl_src.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -51,28 +51,35 @@
 <li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../packages.html">Python Packages</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../utils.html">General purpose utilities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../CoreLibrary.html">Data platform components</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../gis.html">GIS utilities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../CMSLibrary.html">Health data manipulation tools</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../epa.html">EPA tools</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../epa.html#package-contents">Package Contents</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="../epa_usage.html">EPA Toolkit Usage</a></li>
-<li class="toctree-l4 current"><a class="reference internal" href="../cwl_tools.html">CWL Tools and Common Workflows</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../pipelines.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pipelines.html#running-pipelines">Running Pipelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pipelines.html#testing-pipelines">Testing pipelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pipelines.html#installing-python-dependencies">Installing Python dependencies</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../pipelines.html#published-and-tested-pipelines">Published and tested pipelines</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="gridmet.html">Pipeline to aggregate data from Climatology Lab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wustl.html">Pipeline to ingest Monthly Pollution data downloaded from WashU Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pm25_yearly_download.html">Pipeline to aggregate data in NetCDF format over given geographies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aqs.html">Full EPA AQS Processing Pipeline</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Full EPA AirNow Processing Pipeline (including downloading shapefiles)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#inputs">Inputs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#outputs">Outputs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#steps">Steps</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../epa.html#querying-data">Querying Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="medicare.html">Medicare data ingestion and processing pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="medicaid.html">Full Medicaid Processing Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_workflow.html">census_workflow.cwl</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../rasters.html">Raster data tools (climate and exposure)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../census.html">Census data manipulation tools</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DBT.html">Database Testing Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppPipelineGenerator.html">Executing containerized apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
 </ul>
@@ -93,7 +100,7 @@
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../domains.html">Data Domains</a></li>
           <li class="breadcrumb-item"><a href="../epa.html">Dorieh EPA Package Description</a></li>
-          <li class="breadcrumb-item"><a href="../cwl_tools.html">CWL Tools and Common Workflows</a></li>
+          <li class="breadcrumb-item"><a href="../epa_cwl_tools.html">CWL Tools and Workflows used by EPA pipelines</a></li>
       <li class="breadcrumb-item active">Full EPA AirNow Processing Pipeline (including downloading shapefiles)</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/pipeline/airnow.md.txt" rel="nofollow"> View page source</a>
@@ -275,7 +282,7 @@ and ingests the data into the database</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="aggregate_wustlcwl_src.html" class="btn btn-neutral float-left" title="aggregate_wustl.cwl" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="test_aqscwl_src.html" class="btn btn-neutral float-left" title="test_aqs.cwl" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="airnow_local_shapes.html" class="btn btn-neutral float-right" title="Full AirNowProcessing Pipeline (with shapefiles on local file system)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

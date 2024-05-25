@@ -62,6 +62,7 @@
 <li class="toctree-l3"><a class="reference internal" href="SampleQuery.html">How to query the database</a></li>
 <li class="toctree-l3"><a class="reference internal" href="UserRequests.html">Preliminary Considerations for Handling User Requests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="SQLDocumentation.html">SQL Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#core-platform-overview">Core platform overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tool-examples">Tool Examples</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#project-structure">Project Structure</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#software-sources">Software Sources</a></li>
@@ -80,6 +81,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="DBT.html">Database Testing Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AppPipelineGenerator.html">Executing containerized apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
 </ul>
@@ -116,34 +118,49 @@
 </div>
 <nav class="contents local" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#tool-examples" id="id1">Tool Examples</a></p></li>
-<li><p><a class="reference internal" href="#project-structure" id="id2">Project Structure</a></p>
+<li><p><a class="reference internal" href="#core-platform-overview" id="id1">Core platform overview</a></p></li>
+<li><p><a class="reference internal" href="#tool-examples" id="id2">Tool Examples</a></p></li>
+<li><p><a class="reference internal" href="#project-structure" id="id3">Project Structure</a></p>
 <ul>
-<li><p><a class="reference internal" href="#software-sources" id="id3">Software Sources</a></p></li>
-<li><p><a class="reference internal" href="#python-packages" id="id4">Python packages</a></p>
+<li><p><a class="reference internal" href="#software-sources" id="id4">Software Sources</a></p></li>
+<li><p><a class="reference internal" href="#python-packages" id="id5">Python packages</a></p>
 <ul>
-<li><p><a class="reference internal" href="#dorieh-platform-package" id="id5">dorieh.platform Package</a></p>
+<li><p><a class="reference internal" href="#dorieh-platform-package" id="id6">dorieh.platform Package</a></p>
 <ul>
-<li><p><a class="reference internal" href="#subpackage-for-data-modelling" id="id6">Subpackage for Data Modelling</a></p></li>
-<li><p><a class="reference internal" href="#module-database-connection-wrapper" id="id7">Module Database Connection Wrapper</a></p></li>
-<li><p><a class="reference internal" href="#loader-subpackage" id="id8">Loader Subpackage</a></p></li>
-<li><p><a class="reference internal" href="#subpackage-to-describe-and-implement-user-requests-incomplete" id="id9">Subpackage to describe and implement user requests [Incomplete]</a></p></li>
-<li><p><a class="reference internal" href="#subpackage-with-miscellaneous-utilities" id="id10">Subpackage with miscellaneous utilities</a></p></li>
+<li><p><a class="reference internal" href="#subpackage-for-data-modelling" id="id7">Subpackage for Data Modelling</a></p></li>
+<li><p><a class="reference internal" href="#module-database-connection-wrapper" id="id8">Module Database Connection Wrapper</a></p></li>
+<li><p><a class="reference internal" href="#loader-subpackage" id="id9">Loader Subpackage</a></p></li>
+<li><p><a class="reference internal" href="#subpackage-to-describe-and-implement-user-requests-incomplete" id="id10">Subpackage to describe and implement user requests [Incomplete]</a></p></li>
+<li><p><a class="reference internal" href="#subpackage-with-miscellaneous-utilities" id="id11">Subpackage with miscellaneous utilities</a></p></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#yaml-files" id="id11">YAML files</a></p></li>
-<li><p><a class="reference internal" href="#resources" id="id12">Resources</a></p></li>
-<li><p><a class="reference internal" href="#sql-utilities" id="id13">SQL Utilities</a></p></li>
+<li><p><a class="reference internal" href="#yaml-files" id="id12">YAML files</a></p></li>
+<li><p><a class="reference internal" href="#resources" id="id13">Resources</a></p></li>
+<li><p><a class="reference internal" href="#sql-utilities" id="id14">SQL Utilities</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#territorial-codes-mappings" id="id14">Territorial Codes Mappings</a></p></li>
-<li><p><a class="reference internal" href="#documentation-indices" id="id15">Documentation Indices</a></p></li>
+<li><p><a class="reference internal" href="#territorial-codes-mappings" id="id15">Territorial Codes Mappings</a></p></li>
+<li><p><a class="reference internal" href="#documentation-indices" id="id16">Documentation Indices</a></p></li>
 </ul>
 </nav>
+<section id="core-platform-overview">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Core platform overview</a><a class="headerlink" href="#core-platform-overview" title="Permalink to this heading"></a></h2>
+<p>The data platform provides generic functionality for Dorieh Data Platform
+with APIs and command line utilities dependent on the infrastructure
+and the environment. For instance, its components assume presence of PostgreSQL
+DBMS (version 13 or later) and CWL runtime environment.</p>
+<p>Some mapping (or crosswalk) tables are also included in the Core
+Platform module. These tables include between different
+territorial codes, such as USPS ZIP codes, Census ZCTA codes,
+FIPS codes for US states
+and counties, SSA codes for codes for US states
+and counties. See more information in the
+<a class="reference external" href="https://nsaph-data-platform.github.io/nsaph-platform-docs/common/core-platform/doc/TerritorialCodes.html">Mapping between different territorial codes</a></p>
+</section>
 <section id="tool-examples">
-<h2><a class="toc-backref" href="#id1" role="doc-backlink">Tool Examples</a><a class="headerlink" href="#tool-examples" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Tool Examples</a><a class="headerlink" href="#tool-examples" title="Permalink to this heading"></a></h2>
 <p>Examples of tools included in this package are:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="members/data_loader.html"><span class="doc std std-doc">Universal Data Loader</span></a></p></li>
@@ -156,7 +173,7 @@
 </ul>
 </section>
 <section id="project-structure">
-<span id="core-prj-struct"></span><h2><a class="toc-backref" href="#id2" role="doc-backlink">Project Structure</a><a class="headerlink" href="#project-structure" title="Permalink to this heading"></a></h2>
+<span id="core-prj-struct"></span><h2><a class="toc-backref" href="#id3" role="doc-backlink">Project Structure</a><a class="headerlink" href="#project-structure" title="Permalink to this heading"></a></h2>
 <p><strong>The package is under intensive development, the project structure is in flux</strong></p>
 <p>Top level directories are:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- doc
@@ -172,7 +189,7 @@ See details in <a class="reference internal" href="#resources">Resources</a> sec
 <p>Src directory contains software source code.
 See details in <a class="reference internal" href="#core-software-sources"><span class="std std-ref">Software Sources</span></a> section.</p>
 <section id="software-sources">
-<span id="core-software-sources"></span><h3><a class="toc-backref" href="#id3" role="doc-backlink">Software Sources</a><a class="headerlink" href="#software-sources" title="Permalink to this heading"></a></h3>
+<span id="core-software-sources"></span><h3><a class="toc-backref" href="#id4" role="doc-backlink">Software Sources</a><a class="headerlink" href="#software-sources" title="Permalink to this heading"></a></h3>
 <p>The directories under sources are:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- airflow
 - commonwl
@@ -208,13 +225,13 @@ implemented in PL/pgSQL language</p></li>
 </ul>
 </section>
 <section id="python-packages">
-<h3><a class="toc-backref" href="#id4" role="doc-backlink">Python packages</a><a class="headerlink" href="#python-packages" title="Permalink to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Python packages</a><a class="headerlink" href="#python-packages" title="Permalink to this heading"></a></h3>
 <section id="dorieh-platform-package">
-<h4><a class="toc-backref" href="#id5" role="doc-backlink">dorieh.platform Package</a><a class="headerlink" href="#dorieh-platform-package" title="Permalink to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id6" role="doc-backlink">dorieh.platform Package</a><a class="headerlink" href="#dorieh-platform-package" title="Permalink to this heading"></a></h4>
 <p>This is the main package containing the majority of the code.
 Modules and subpackages included in <code class="docutils literal notranslate"><span class="pre">dorieh.platform</span></code> package are described below.</p>
 <section id="subpackage-for-data-modelling">
-<h5><a class="toc-backref" href="#id6" role="doc-backlink">Subpackage for Data Modelling</a><a class="headerlink" href="#subpackage-for-data-modelling" title="Permalink to this heading"></a></h5>
+<h5><a class="toc-backref" href="#id7" role="doc-backlink">Subpackage for Data Modelling</a><a class="headerlink" href="#subpackage-for-data-modelling" title="Permalink to this heading"></a></h5>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">dorieh.platform.data_model</span></code></p></li>
 </ul>
@@ -244,7 +261,7 @@ to reading columnar files in two (potentially more)
 different formats.</p>
 </section>
 <section id="module-database-connection-wrapper">
-<h5><a class="toc-backref" href="#id7" role="doc-backlink">Module Database Connection Wrapper</a><a class="headerlink" href="#module-database-connection-wrapper" title="Permalink to this heading"></a></h5>
+<h5><a class="toc-backref" href="#id8" role="doc-backlink">Module Database Connection Wrapper</a><a class="headerlink" href="#module-database-connection-wrapper" title="Permalink to this heading"></a></h5>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">dorieh.platform.db</span></code></p></li>
 </ul>
@@ -254,7 +271,7 @@ an <code class="docutils literal notranslate"><span class="pre">ini</span></code
 transparently connect over <strong>ssh tunnel</strong> when required.</p>
 </section>
 <section id="loader-subpackage">
-<h5><a class="toc-backref" href="#id8" role="doc-backlink">Loader Subpackage</a><a class="headerlink" href="#loader-subpackage" title="Permalink to this heading"></a></h5>
+<h5><a class="toc-backref" href="#id9" role="doc-backlink">Loader Subpackage</a><a class="headerlink" href="#loader-subpackage" title="Permalink to this heading"></a></h5>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">dorieh.platform.loader</span></code></p></li>
 </ul>
@@ -267,7 +284,7 @@ both virtual and materialized.</p>
 is a utility to build indices and monitor the build progress.</p>
 </section>
 <section id="subpackage-to-describe-and-implement-user-requests-incomplete">
-<h5><a class="toc-backref" href="#id9" role="doc-backlink">Subpackage to describe and implement user requests [Incomplete]</a><a class="headerlink" href="#subpackage-to-describe-and-implement-user-requests-incomplete" title="Permalink to this heading"></a></h5>
+<h5><a class="toc-backref" href="#id10" role="doc-backlink">Subpackage to describe and implement user requests [Incomplete]</a><a class="headerlink" href="#subpackage-to-describe-and-implement-user-requests-incomplete" title="Permalink to this heading"></a></h5>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">dorieh.platform.requests</span></code></p></li>
 </ul>
@@ -281,7 +298,7 @@ described by a YAML request definition.</p>
 from a YAML request definition.</p>
 </section>
 <section id="subpackage-with-miscellaneous-utilities">
-<h5><a class="toc-backref" href="#id10" role="doc-backlink">Subpackage with miscellaneous utilities</a><a class="headerlink" href="#subpackage-with-miscellaneous-utilities" title="Permalink to this heading"></a></h5>
+<h5><a class="toc-backref" href="#id11" role="doc-backlink">Subpackage with miscellaneous utilities</a><a class="headerlink" href="#subpackage-with-miscellaneous-utilities" title="Permalink to this heading"></a></h5>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">dorieh.platform.util</span></code></p></li>
 </ul>
@@ -306,7 +323,7 @@ the whole file into memory before dispatching it for processing).</p></li>
 </section>
 </section>
 <section id="yaml-files">
-<h3><a class="toc-backref" href="#id11" role="doc-backlink">YAML files</a><a class="headerlink" href="#yaml-files" title="Permalink to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id12" role="doc-backlink">YAML files</a><a class="headerlink" href="#yaml-files" title="Permalink to this heading"></a></h3>
 <p>The majority of files are data model definitions.</p>
 <p>Beside data model files, there are YAML files for:</p>
 <ul class="simple">
@@ -321,7 +338,7 @@ that create user workspaces from the database. File
 </ul>
 </section>
 <section id="resources">
-<h3><a class="toc-backref" href="#id12" role="doc-backlink">Resources</a><a class="headerlink" href="#resources" title="Permalink to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id13" role="doc-backlink">Resources</a><a class="headerlink" href="#resources" title="Permalink to this heading"></a></h3>
 <p>Resources are organized in the following way:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>- ${database schema}/
     - ddl file for ${resource1}
@@ -340,7 +357,7 @@ provides support for packaging tables as resources in JSONLines
 format. This format is used natively by some DBMSs.</p>
 </section>
 <section id="sql-utilities">
-<h3><a class="toc-backref" href="#id13" role="doc-backlink">SQL Utilities</a><a class="headerlink" href="#sql-utilities" title="Permalink to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id14" role="doc-backlink">SQL Utilities</a><a class="headerlink" href="#sql-utilities" title="Permalink to this heading"></a></h3>
 <p>Utilities, implementing the following:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="members/utils.sql.html"><span class="doc std std-doc">Functions</span></a>:</p>
@@ -371,7 +388,7 @@ and counties.</p></li>
 </section>
 </section>
 <section id="territorial-codes-mappings">
-<h2><a class="toc-backref" href="#id14" role="doc-backlink">Territorial Codes Mappings</a><a class="headerlink" href="#territorial-codes-mappings" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">Territorial Codes Mappings</a><a class="headerlink" href="#territorial-codes-mappings" title="Permalink to this heading"></a></h2>
 <p>An important part of the data platform is the mappings between different
 territorial codes, such as USPS ZIP codes, Census ZCTA codes,
 FIPS codes for US states and counties, SSA codes for codes for US states
@@ -380,7 +397,7 @@ and counties. See more information in the
 page.</p>
 </section>
 <section id="documentation-indices">
-<span id="core-soft-idx"></span><h2><a class="toc-backref" href="#id15" role="doc-backlink">Documentation Indices</a><a class="headerlink" href="#documentation-indices" title="Permalink to this heading"></a></h2>
+<span id="core-soft-idx"></span><h2><a class="toc-backref" href="#id16" role="doc-backlink">Documentation Indices</a><a class="headerlink" href="#documentation-indices" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">genindex</span></a></p></li>
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">modindex</span></a></p></li>

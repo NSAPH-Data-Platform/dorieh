@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>tmpuu42wjcjcensus_ingest.cwl &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+  <title>CWL sub-workflow &mdash; Dorieh Data Platform 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
@@ -47,32 +47,16 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../packages.html">Python Packages</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../utils.html">General purpose utilities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../CoreLibrary.html">Data platform components</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../gis.html">GIS utilities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../CMSLibrary.html">Health data manipulation tools</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../epa.html">EPA tools</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../epa.html#package-contents">Package Contents</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="../epa_usage.html">EPA Toolkit Usage</a></li>
-<li class="toctree-l4 current"><a class="reference internal" href="../cwl_tools.html">CWL Tools and Common Workflows</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="../epa.html#querying-data">Querying Data</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../rasters.html">Raster data tools (climate and exposure)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../census.html">Census data manipulation tools</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DBT.html">Database Testing Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppPipelineGenerator.html">Executing containerized apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
 </ul>
@@ -92,9 +76,8 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../domains.html">Data Domains</a></li>
-          <li class="breadcrumb-item"><a href="../epa.html">Dorieh EPA Package Description</a></li>
-          <li class="breadcrumb-item"><a href="../cwl_tools.html">CWL Tools and Common Workflows</a></li>
-      <li class="breadcrumb-item active">tmpuu42wjcjcensus_ingest.cwl</li>
+          <li class="breadcrumb-item"><a href="../census.html">NSAPH Census Pipelines</a></li>
+      <li class="breadcrumb-item active">CWL sub-workflow</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/pipeline/census_ingest_1cwl_src.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -104,8 +87,88 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="tmpuu42wjcjcensus-ingest-cwl">
-<h1>tmpuu42wjcjcensus_ingest.cwl<a class="headerlink" href="#tmpuu42wjcjcensus-ingest-cwl" title="Permalink to this heading"></a></h1>
+  <section id="cwl-sub-workflow">
+<h1>CWL sub-workflow<a class="headerlink" href="#cwl-sub-workflow" title="Permalink to this heading"></a></h1>
+<p>.. code-block:: yaml
+:caption: Example of database.ini file</p>
+<p>class: Workflow
+cwlVersion: v1.1
+inputs:
+connection:
+type: string
+data:
+type: File
+db:
+type: File
+schema:
+type: File
+table:
+type: string
+outputs:
+index_err:
+outputSource: index/errors
+type: File
+index_log:
+outputSource: index/log
+type: File
+ingest_err:
+outputSource: ingest/errors
+type: File
+ingest_log:
+outputSource: ingest/log
+type: File
+vacuum_err:
+outputSource: vacuum/errors
+type: File
+vacuum_log:
+outputSource: vacuum/log
+type: File
+requirements:
+InlineJavascriptRequirement: {}
+ScatterFeatureRequirement: {}
+StepInputExpressionRequirement: {}
+SubworkflowFeatureRequirement: {}
+steps:
+index:
+in:
+connection_name: connection
+database: db
+depends_on: ingest/log
+domain:
+valueFrom: census
+registry: schema
+table: table
+out:
+- log
+- errors
+run: index.cwl
+ingest:
+doc: Uploads data into the database
+in:
+connection_name: connection
+database: db
+domain:
+valueFrom: census
+input: data
+registry: schema
+table: table
+out:
+- log
+- errors
+run: ingest.cwl
+vacuum:
+in:
+connection_name: connection
+database: db
+depends_on: index/log
+domain:
+valueFrom: census
+registry: schema
+table: table
+out:
+- log
+- errors
+run: vacuum.cwl</p>
 </section>
 
 

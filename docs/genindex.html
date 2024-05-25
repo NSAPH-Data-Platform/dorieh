@@ -53,6 +53,7 @@
 <li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DBT.html">Database Testing Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AppPipelineGenerator.html">Executing containerized apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
 </ul>
@@ -407,6 +408,8 @@
 </li>
       <li><a href="members/model.html#dorieh.platform.data_model.model.Table.build_indices">build_indices() (Table method)</a>
 </li>
+      <li><a href="members/climate_registry.html#dorieh.rasters.registry.Registry.built_in_registry_path">built_in_registry_path() (Registry static method)</a>, <a href="members/registry.html#dorieh.cms.registry.Registry.built_in_registry_path">[1]</a>
+</li>
       <li><a href="members/interface.html#dorieh.utils.interpolation.interface.interpolate.params.by_var">by_var (dorieh.utils.interpolation.interface.interpolate parameter)</a>
 </li>
   </ul></td>
@@ -593,6 +596,8 @@
 </li>
       <li><a href="members/data_loader.html#dorieh.platform.loader.data_loader.DataLoader.commit">commit() (DataLoader method)</a>
 </li>
+      <li><a href="members/climate_registry.html#dorieh.rasters.registry.Registry.COMMON_COLUMNS">COMMON_COLUMNS (Registry attribute)</a>
+</li>
       <li><a href="members/fts2yaml.html#dorieh.cms.fts2yaml.CMSFTS.common_indices">common_indices (CMSFTS attribute)</a>
 </li>
       <li><a href="members/common.html#dorieh.platform.loader.common.CommonConfig">CommonConfig (class in dorieh.platform.loader.common)</a>, <a href="members/data_loader.html#dorieh.platform.loader.common.CommonConfig">[1]</a>
@@ -733,6 +738,8 @@
         <li><a href="members/constants.html#dorieh.gis.constants.Geography.county">(Geography attribute)</a>, <a href="members/gis_constants.html#dorieh.gis.constants.Geography.county">[1]</a>
 </li>
       </ul></li>
+      <li><a href="members/climate_registry.html#dorieh.rasters.registry.Registry.COUNTY_COLUMNS">COUNTY_COLUMNS (Registry attribute)</a>
+</li>
       <li><a href="members/downloader.html#dorieh.gis.downloader.GISDownloader.COUNTY_TEMPLATE">COUNTY_TEMPLATE (GISDownloader attribute)</a>
 </li>
       <li><a href="members/domain.html#dorieh.platform.data_model.domain.Domain.CREATE">CREATE (Domain attribute)</a>
@@ -749,7 +756,7 @@
       </ul></li>
       <li><a href="members/cwl_generator.html#dorieh.platform.util.cwl_generator.CWLGenerator.create_docker_requirement">create_docker_requirement() (CWLGenerator static method)</a>
 </li>
-      <li><a href="members/registry.html#dorieh.epa.registry.Registry.create_domain_yaml">create_domain_yaml() (Registry static method)</a>
+      <li><a href="members/epa_registry.html#dorieh.epa.registry.Registry.create_domain_yaml">create_domain_yaml() (Registry static method)</a>
 </li>
       <li><a href="members/cwl_generator.html#dorieh.platform.util.cwl_generator.CWLGenerator.create_expression_requirements">create_expression_requirements() (CWLGenerator static method)</a>
 </li>
@@ -765,9 +772,11 @@
         <li><a href="members/create.html#dorieh.platform.create.create_table">(in module dorieh.platform.create)</a>
 </li>
       </ul></li>
-      <li><a href="members/registry.html#dorieh.epa.registry.Registry.create_table_yaml">create_table_yaml() (Registry method)</a>
+      <li><a href="members/epa_registry.html#dorieh.epa.registry.Registry.create_table_yaml">create_table_yaml() (Registry method)</a>
 </li>
       <li><a href="members/domain.html#dorieh.platform.data_model.domain.Domain.create_true_table">create_true_table() (Domain method)</a>
+</li>
+      <li><a href="members/climate_registry.html#dorieh.rasters.registry.Registry.create_yaml">create_yaml() (Registry method)</a>
 </li>
       <li><a href="members/tester.html#dorieh.utils.qc.tester.Severity.critical">critical (Severity attribute)</a>
 </li>
@@ -830,7 +839,7 @@
       <ul>
         <li><a href="members/interface.html#dorieh.utils.interpolation.interface.interpolate.params.data">(dorieh.utils.interpolation.interface.interpolate parameter)</a>
 </li>
-        <li><a href="members/registry.html#dorieh.epa.registry.EPAConfig.data">(EPAConfig attribute)</a>
+        <li><a href="members/epa_registry.html#dorieh.epa.registry.EPAConfig.data">(EPAConfig attribute)</a>
 </li>
         <li><a href="members/data_loader.html#dorieh.platform.loader.loader_config.LoaderConfig.data">(LoaderConfig attribute)</a>, <a href="members/loader_config.html#dorieh.platform.loader.loader_config.LoaderConfig.data">[1]</a>
 </li>
@@ -962,7 +971,7 @@
 </li>
         <li><a href="members/table_population.html#dorieh.cms.table_population.PopulateConfig.params.description">(dorieh.cms.table_population.PopulateConfig parameter)</a>
 </li>
-        <li><a href="members/registry.html#dorieh.epa.registry.EPAConfig.params.description">(dorieh.epa.registry.EPAConfig parameter)</a>
+        <li><a href="members/epa_registry.html#dorieh.epa.registry.EPAConfig.params.description">(dorieh.epa.registry.EPAConfig parameter)</a>
 </li>
         <li><a href="members/dbt_config.html#dorieh.platform.dbt.dbt_config.DBTConfig.params.description">(dorieh.platform.dbt.dbt_config.DBTConfig parameter)</a>
 </li>
@@ -1152,6 +1161,13 @@
 </li>
       </ul></li>
       <li>
+    dorieh.cms.registry
+
+      <ul>
+        <li><a href="members/registry.html#module-dorieh.cms.registry">module</a>
+</li>
+      </ul></li>
+      <li>
     dorieh.cms.table_population
 
       <ul>
@@ -1323,7 +1339,7 @@
     dorieh.epa.registry
 
       <ul>
-        <li><a href="members/registry.html#module-dorieh.epa.registry">module</a>
+        <li><a href="members/epa_registry.html#module-dorieh.epa.registry">module</a>
 </li>
       </ul></li>
   </ul></td>
@@ -1770,6 +1786,13 @@
 </li>
       </ul></li>
       <li>
+    dorieh.rasters.registry
+
+      <ul>
+        <li><a href="members/climate_registry.html#module-dorieh.rasters.registry">module</a>
+</li>
+      </ul></li>
+      <li>
     dorieh.rasters.task
 
       <ul>
@@ -1964,7 +1987,7 @@
         <li><a href="rasters_ds_def.html#dorieh.rasters.config.GridMETContext.enum">(GridMETContext class method)</a>
 </li>
       </ul></li>
-      <li><a href="members/registry.html#dorieh.epa.registry.EPAConfig">EPAConfig (class in dorieh.epa.registry)</a>
+      <li><a href="members/epa_registry.html#dorieh.epa.registry.EPAConfig">EPAConfig (class in dorieh.epa.registry)</a>
 </li>
       <li><a href="gridmet_bands.html#dorieh.rasters.config.GridmetVariable.erc">erc (GridmetVariable attribute)</a>, <a href="members/config.html#dorieh.rasters.config.GridmetVariable.erc">[1]</a>
 </li>
@@ -2699,6 +2722,8 @@
 </li>
         <li><a href="members/fts2yaml.html#dorieh.cms.fts2yaml.MedicareFTS.init">(MedicareFTS method)</a>
 </li>
+        <li><a href="members/registry.html#dorieh.cms.registry.Registry.init">(Registry method)</a>
+</li>
       </ul></li>
       <li><a href="members/init_cms_db.html#dorieh.cms.init_cms_db.init_cms">init_cms() (in module dorieh.cms.init_cms_db)</a>
 
@@ -2712,6 +2737,8 @@
 </li>
       <li><a href="members/mcr_registry.html#dorieh.cms.tools.mcr_registry.MedicareRegistry.init_registry">init_registry() (MedicareRegistry method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="members/calculate_density.html#dorieh.census.calculate_density.initialize_logging">initialize_logging() (in module dorieh.census.calculate_density)</a>
 
       <ul>
@@ -2722,8 +2749,6 @@
         <li><a href="members/write_data.html#dorieh.census.write_data.initialize_logging">(in module dorieh.census.write_data)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="members/create_schema_config.html#dorieh.cms.create_schema_config.CMSSchema.input">input (CMSSchema attribute)</a>
 </li>
       <li><a href="members/app_run_generator.html#dorieh.platform.apprunner.app_run_generator.Inputs">Inputs (class in dorieh.platform.apprunner.app_run_generator)</a>
@@ -3150,6 +3175,8 @@
 </li>
         <li><a href="members/random_selector.html#module-dorieh.cms.random_selector">dorieh.cms.random_selector</a>
 </li>
+        <li><a href="members/registry.html#module-dorieh.cms.registry">dorieh.cms.registry</a>
+</li>
         <li><a href="members/table_population.html#module-dorieh.cms.table_population">dorieh.cms.table_population</a>
 </li>
         <li><a href="members/mcr_combine_tables.html#module-dorieh.cms.tools.mcr_combine_tables">dorieh.cms.tools.mcr_combine_tables</a>
@@ -3198,7 +3225,7 @@
 </li>
         <li><a href="members/aqs_tools.html#module-dorieh.epa.aqs_tools">dorieh.epa.aqs_tools</a>
 </li>
-        <li><a href="members/registry.html#module-dorieh.epa.registry">dorieh.epa.registry</a>
+        <li><a href="members/epa_registry.html#module-dorieh.epa.registry">dorieh.epa.registry</a>
 </li>
         <li><a href="members/annotator.html#module-dorieh.gis.annotator">dorieh.gis.annotator</a>, <a href="members/gis_annotator.html#module-dorieh.gis.annotator">[1]</a>
 </li>
@@ -3325,6 +3352,8 @@
         <li><a href="members/netCDF_tools.html#module-dorieh.rasters.netCDF_tools">dorieh.rasters.netCDF_tools</a>
 </li>
         <li><a href="members/prof.html#module-dorieh.rasters.prof">dorieh.rasters.prof</a>
+</li>
+        <li><a href="members/climate_registry.html#module-dorieh.rasters.registry">dorieh.rasters.registry</a>
 </li>
         <li><a href="members/task.html#module-dorieh.rasters.task">dorieh.rasters.task</a>
 </li>
@@ -3526,7 +3555,7 @@
       <li><a href="members/create_schema_config.html#dorieh.cms.create_schema_config.CMSSchema.output">output (CMSSchema attribute)</a>
 
       <ul>
-        <li><a href="members/registry.html#dorieh.epa.registry.EPAConfig.output">(EPAConfig attribute)</a>
+        <li><a href="members/epa_registry.html#dorieh.epa.registry.EPAConfig.output">(EPAConfig attribute)</a>
 </li>
         <li><a href="members/config.html#dorieh.rasters.config.GridContext.output">(GridContext attribute)</a>, <a href="rasters_ds_def.html#dorieh.rasters.config.GridContext.output">[1]</a>
 </li>
@@ -3893,8 +3922,14 @@
 </li>
       <li><a href="members/utils.html#dorieh.platform.data_model.utils.regex">regex() (in module dorieh.platform.data_model.utils)</a>
 </li>
-      <li><a href="members/registry.html#dorieh.epa.registry.Registry">Registry (class in dorieh.epa.registry)</a>
+      <li><a href="members/registry.html#dorieh.cms.registry.Registry">Registry (class in dorieh.cms.registry)</a>
+
+      <ul>
+        <li><a href="members/epa_registry.html#dorieh.epa.registry.Registry">(class in dorieh.epa.registry)</a>
 </li>
+        <li><a href="members/climate_registry.html#dorieh.rasters.registry.Registry">(class in dorieh.rasters.registry)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="members/common.html#dorieh.platform.loader.common.CommonConfig.registry">registry (CommonConfig attribute)</a>, <a href="members/data_loader.html#dorieh.platform.loader.common.CommonConfig.registry">[1]</a>
@@ -4246,7 +4281,7 @@
 </li>
         <li><a href="members/table_population.html#dorieh.cms.table_population.PopulateConfig.params.subclass">(dorieh.cms.table_population.PopulateConfig parameter)</a>
 </li>
-        <li><a href="members/registry.html#dorieh.epa.registry.EPAConfig.params.subclass">(dorieh.epa.registry.EPAConfig parameter)</a>
+        <li><a href="members/epa_registry.html#dorieh.epa.registry.EPAConfig.params.subclass">(dorieh.epa.registry.EPAConfig parameter)</a>
 </li>
         <li><a href="members/dbt_config.html#dorieh.platform.dbt.dbt_config.DBTConfig.params.subclass">(dorieh.platform.dbt.dbt_config.DBTConfig parameter)</a>
 </li>
@@ -4296,7 +4331,7 @@
       <ul>
         <li><a href="members/utils.html#dorieh.platform.data_model.utils.basename.params.table">(dorieh.platform.data_model.utils.basename parameter)</a>
 </li>
-        <li><a href="members/registry.html#dorieh.epa.registry.EPAConfig.table">(EPAConfig attribute)</a>
+        <li><a href="members/epa_registry.html#dorieh.epa.registry.EPAConfig.table">(EPAConfig attribute)</a>
 </li>
         <li><a href="members/config.html#dorieh.rasters.config.GridContext.table">(GridContext attribute)</a>, <a href="rasters_ds_def.html#dorieh.rasters.config.GridContext.table">[1]</a>
 </li>
@@ -4452,13 +4487,17 @@
       <li><a href="members/prof.html#dorieh.rasters.prof.ProfilingData.update">update() (ProfilingData method)</a>
 
       <ul>
-        <li><a href="members/registry.html#dorieh.epa.registry.Registry.update">(Registry method)</a>
+        <li><a href="members/climate_registry.html#dorieh.rasters.registry.Registry.update">(Registry method)</a>, <a href="members/epa_registry.html#dorieh.epa.registry.Registry.update">[1]</a>, <a href="members/registry.html#dorieh.cms.registry.Registry.update">[2]</a>
 </li>
       </ul></li>
-      <li><a href="members/prof.html#dorieh.rasters.prof.ProfilingData.update_mem_only">update_mem_only() (ProfilingData method)</a>
+      <li><a href="members/registry.html#dorieh.cms.registry.Registry.update_medicaid">update_medicaid() (Registry method)</a>
+</li>
+      <li><a href="members/registry.html#dorieh.cms.registry.Registry.update_medicare">update_medicare() (Registry method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="members/prof.html#dorieh.rasters.prof.ProfilingData.update_mem_only">update_mem_only() (ProfilingData method)</a>
+</li>
       <li><a href="members/prof.html#dorieh.rasters.prof.ProfilingData.update_mem_time">update_mem_time() (ProfilingData method)</a>
 </li>
       <li><a href="members/aqs_tools.html#dorieh.epa.aqs_tools.download_data.params.url">url (dorieh.epa.aqs_tools.download_data parameter)</a>
@@ -4793,10 +4832,12 @@
         <li><a href="members/constants.html#dorieh.gis.constants.Geography.zcta">(Geography attribute)</a>, <a href="members/gis_constants.html#dorieh.gis.constants.Geography.zcta">[1]</a>
 </li>
       </ul></li>
-      <li><a href="members/downloader.html#dorieh.gis.downloader.GISDownloader.ZCTA_GENZ_TEMPLATE">ZCTA_GENZ_TEMPLATE (GISDownloader attribute)</a>
+      <li><a href="members/climate_registry.html#dorieh.rasters.registry.Registry.ZCTA_COLUMNS">ZCTA_COLUMNS (Registry attribute)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="members/downloader.html#dorieh.gis.downloader.GISDownloader.ZCTA_GENZ_TEMPLATE">ZCTA_GENZ_TEMPLATE (GISDownloader attribute)</a>
+</li>
       <li><a href="members/downloader.html#dorieh.gis.downloader.GISDownloader.ZCTA_TIGER_URLs">ZCTA_TIGER_URLs (GISDownloader attribute)</a>
 </li>
       <li><a href="members/constants.html#dorieh.gis.constants.Geography.zip">zip (Geography attribute)</a>, <a href="members/gis_constants.html#dorieh.gis.constants.Geography.zip">[1]</a>

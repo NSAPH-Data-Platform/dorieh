@@ -13,6 +13,7 @@ Python Packages <packages>
 guts
 DBT
 Adding more data <adding_data>
+Executing containerized apps <AppPipelineGenerator>
 Terms and Acronyms <glossary>
 docindices
 ```

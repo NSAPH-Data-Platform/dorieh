@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sub-workflow process from gridmet_local_shapes.cwl &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+  <title>Sub-workflow init_tables from gridmet.cwl &mdash; Dorieh Data Platform 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
@@ -22,9 +22,7 @@
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="tmp948memtugridmet_local_shapes.cwl" href="gridmet_local_shapes_1cwl_src.html" />
-    <link rel="prev" title="gridMET Pipeline" href="gridmet_local_shapes.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -47,32 +45,16 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../packages.html">Python Packages</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../utils.html">General purpose utilities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../CoreLibrary.html">Data platform components</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../gis.html">GIS utilities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../CMSLibrary.html">Health data manipulation tools</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../epa.html">EPA tools</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../epa.html#package-contents">Package Contents</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="../epa_usage.html">EPA Toolkit Usage</a></li>
-<li class="toctree-l4 current"><a class="reference internal" href="../cwl_tools.html">CWL Tools and Common Workflows</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="../epa.html#querying-data">Querying Data</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../rasters.html">Raster data tools (climate and exposure)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../census.html">Census data manipulation tools</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DBT.html">Database Testing Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppPipelineGenerator.html">Executing containerized apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
 </ul>
@@ -91,12 +73,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../domains.html">Data Domains</a></li>
-          <li class="breadcrumb-item"><a href="../epa.html">Dorieh EPA Package Description</a></li>
-          <li class="breadcrumb-item"><a href="../cwl_tools.html">CWL Tools and Common Workflows</a></li>
-      <li class="breadcrumb-item active">Sub-workflow <em>process</em> from gridmet_local_shapes.cwl</li>
+      <li class="breadcrumb-item active">Sub-workflow <em>init_tables</em> from gridmet.cwl</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/pipeline/gridmet_local_shapes_1.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/pipeline/tmp6oqopwe5gridmet.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -104,10 +83,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="sub-workflow-process-from-gridmet-local-shapes-cwl">
-<h1>Sub-workflow <em>process</em> from gridmet_local_shapes.cwl<a class="headerlink" href="#sub-workflow-process-from-gridmet-local-shapes-cwl" title="Permalink to this heading"></a></h1>
-<p><a class="reference internal" href="gridmet_local_shapes_1cwl_src.html"><span class="std std-doc">Source code</span></a></p>
-<p><img alt="" src="../_images/gridmet_local_shapes_1.png" /></p>
+  <section id="sub-workflow-init-tables-from-gridmet-cwl">
+<h1>Sub-workflow <em>init_tables</em> from gridmet.cwl<a class="headerlink" href="#sub-workflow-init-tables-from-gridmet-cwl" title="Permalink to this heading"></a></h1>
+<p><a class="reference internal" href="tmp6oqopwe5gridmetcwl_src.html"><span class="std std-doc">Source code</span></a></p>
+<p><img alt="" src="../_images/tmp6oqopwe5gridmet.png" /></p>
 <nav class="contents local" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#inputs" id="id1">Inputs</a></p></li>
@@ -127,63 +106,28 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-left"><p>band</p></td>
+<tr class="row-even"><td class="text-left"><p>connection_name</p></td>
 <td class="text-left"><p>string</p></td>
 <td class="text-left"><p></p></td>
 <td class="text-left"><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>connection_name</p></td>
+<tr class="row-odd"><td class="text-left"><p>database</p></td>
+<td class="text-left"><p>File</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>domain</p></td>
 <td class="text-left"><p>string</p></td>
 <td class="text-left"><p></p></td>
 <td class="text-left"><p></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p>database</p></td>
+<tr class="row-odd"><td class="text-left"><p>registry</p></td>
 <td class="text-left"><p>File</p></td>
-<td class="text-left"><p></p></td>
-<td class="text-left"><p></p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p>dates</p></td>
-<td class="text-left"><p>string?</p></td>
-<td class="text-left"><p></p></td>
-<td class="text-left"><p></p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p>geography</p></td>
-<td class="text-left"><p>string</p></td>
-<td class="text-left"><p></p></td>
-<td class="text-left"><p></p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p>model</p></td>
-<td class="text-left"><p>File</p></td>
-<td class="text-left"><p></p></td>
-<td class="text-left"><p></p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p>nc</p></td>
-<td class="text-left"><p>File</p></td>
-<td class="text-left"><p></p></td>
-<td class="text-left"><p></p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p>proxy</p></td>
-<td class="text-left"><p>string?</p></td>
-<td class="text-left"><p></p></td>
-<td class="text-left"><p></p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p>shape_files</p></td>
-<td class="text-left"><p>File[]</p></td>
-<td class="text-left"><p></p></td>
-<td class="text-left"><p></p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p>shapes</p></td>
-<td class="text-left"><p>Directory?</p></td>
 <td class="text-left"><p></p></td>
 <td class="text-left"><p></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p>table</p></td>
 <td class="text-left"><p>string</p></td>
-<td class="text-left"><p></p></td>
-<td class="text-left"><p></p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p>years</p></td>
-<td class="text-left"><p>string[]</p></td>
 <td class="text-left"><p></p></td>
 <td class="text-left"><p></p></td>
 </tr>
@@ -208,27 +152,11 @@
 <td class="text-left"><p>File</p></td>
 <td class="text-left"><p></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p>ingest_err</p></td>
+<tr class="row-even"><td class="text-left"><p>reset_err</p></td>
 <td class="text-left"><p>File</p></td>
 <td class="text-left"><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>ingest_log</p></td>
-<td class="text-left"><p>File</p></td>
-<td class="text-left"><p></p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p>process_data</p></td>
-<td class="text-left"><p>File[]</p></td>
-<td class="text-left"><p></p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p>process_log</p></td>
-<td class="text-left"><p>File[]</p></td>
-<td class="text-left"><p></p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p>vacuum_err</p></td>
-<td class="text-left"><p>File</p></td>
-<td class="text-left"><p></p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p>vacuum_log</p></td>
+<tr class="row-odd"><td class="text-left"><p>reset_log</p></td>
 <td class="text-left"><p>File</p></td>
 <td class="text-left"><p></p></td>
 </tr>
@@ -249,16 +177,8 @@
 <td class="text-left"><p><a class="reference internal" href="index.html"><span class="std std-doc">index.cwl</span></a></p></td>
 <td class="text-left"><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>ingest</p></td>
-<td class="text-left"><p><a class="reference internal" href="ingest.html"><span class="std std-doc">ingest.cwl</span></a></p></td>
-<td class="text-left"><p>Uploads data into the database</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p>process</p></td>
-<td class="text-left"><p><a class="reference internal" href="add_daily_data.html"><span class="std std-doc">add_daily_data.cwl</span></a></p></td>
-<td class="text-left"><p>Processes data</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p>vacuum</p></td>
-<td class="text-left"><p><a class="reference internal" href="vacuum.html"><span class="std std-doc">vacuum.cwl</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p>reset</p></td>
+<td class="text-left"><p><a class="reference internal" href="reset.html"><span class="std std-doc">reset.cwl</span></a></p></td>
 <td class="text-left"><p></p></td>
 </tr>
 </tbody>
@@ -269,10 +189,7 @@
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="gridmet_local_shapes.html" class="btn btn-neutral float-left" title="gridMET Pipeline" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="gridmet_local_shapes_1cwl_src.html" class="btn btn-neutral float-right" title="tmp948memtugridmet_local_shapes.cwl" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 

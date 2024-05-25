@@ -22,7 +22,9 @@
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="The wustl_file_processor Module" href="members/wustl_file_processor.html" />
+    <link rel="prev" title="Computational Utilities for working with Climate gridMET data" href="climate.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,15 +47,38 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
-<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="domains.html">Data Domains</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cms.html">Health</a></li>
+<li class="toctree-l2"><a class="reference internal" href="climate.html">Climate</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Exposure (from Atmospheric Composition Analysis Group of Washington University in St. Louis)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#exposure-data-by-atmospheric-composition-analysis-group">Exposure data by Atmospheric Composition Analysis Group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#python-packages">Python packages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="members/wustl_file_processor.html">The wustl_file_processor Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="members/netCDF_components_consolidator.html">The netCDF_components_consolidator Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="members/netCDF_file_processor.html">The netCDF_file_processor Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="members/netCDF_tools.html">The netCDF_tools Module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cwl-workflows">CWL Workflows</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pipeline/pm25_yearly_download.html">Pipeline to aggregate data in NetCDF format over given geographies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pipeline/wustl.html">Pipeline to ingest Monthly Pollution data downloaded from WashU Box</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="epa.html">Environmental Protection Agency (EPA) data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="census.html">Demographics</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DBT.html">Database Testing Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AppPipelineGenerator.html">Executing containerized apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
 </ul>
@@ -72,6 +97,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="domains.html">Data Domains</a></li>
       <li class="breadcrumb-item active">Computational Utilities for working with Exposure data from Washington University in St. Louis</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/exposures.md.txt" rel="nofollow"> View page source</a>
@@ -133,7 +159,10 @@ these values into absolute values and combine the result as a single tabular dat
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="climate.html" class="btn btn-neutral float-left" title="Computational Utilities for working with Climate gridMET data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="members/wustl_file_processor.html" class="btn btn-neutral float-right" title="The wustl_file_processor Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

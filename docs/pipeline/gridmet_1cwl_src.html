@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>tmpgjktzs81gridmet.cwl &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+  <title>CWL sub-workflow &mdash; Dorieh Data Platform 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
@@ -22,9 +22,7 @@
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="gridMET Pipeline" href="gridmet_dwnl_only.html" />
-    <link rel="prev" title="Sub-workflow init_tables from gridmet.cwl" href="gridmet_1.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -47,32 +45,16 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../packages.html">Python Packages</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../utils.html">General purpose utilities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../CoreLibrary.html">Data platform components</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../gis.html">GIS utilities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../CMSLibrary.html">Health data manipulation tools</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../epa.html">EPA tools</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../epa.html#package-contents">Package Contents</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="../epa_usage.html">EPA Toolkit Usage</a></li>
-<li class="toctree-l4 current"><a class="reference internal" href="../cwl_tools.html">CWL Tools and Common Workflows</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="../epa.html#querying-data">Querying Data</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../rasters.html">Raster data tools (climate and exposure)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../census.html">Census data manipulation tools</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DBT.html">Database Testing Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppPipelineGenerator.html">Executing containerized apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
 </ul>
@@ -91,10 +73,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../domains.html">Data Domains</a></li>
-          <li class="breadcrumb-item"><a href="../epa.html">Dorieh EPA Package Description</a></li>
-          <li class="breadcrumb-item"><a href="../cwl_tools.html">CWL Tools and Common Workflows</a></li>
-      <li class="breadcrumb-item active">tmpgjktzs81gridmet.cwl</li>
+      <li class="breadcrumb-item active">CWL sub-workflow</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/pipeline/gridmet_1cwl_src.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -104,17 +83,72 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="tmpgjktzs81gridmet-cwl">
-<h1>tmpgjktzs81gridmet.cwl<a class="headerlink" href="#tmpgjktzs81gridmet-cwl" title="Permalink to this heading"></a></h1>
+  <section id="cwl-sub-workflow">
+<h1>CWL sub-workflow<a class="headerlink" href="#cwl-sub-workflow" title="Permalink to this heading"></a></h1>
+<p>.. code-block:: yaml
+:caption: Example of database.ini file</p>
+<p>class: Workflow
+cwlVersion: v1.2
+inputs:
+connection_name:
+type: string
+database:
+type: File
+domain:
+type: string
+registry:
+type: File
+table:
+type: string
+outputs:
+index_err:
+outputSource: index/errors
+type: File
+index_log:
+outputSource: index/log
+type: File
+reset_err:
+outputSource: reset/errors
+type: File
+reset_log:
+outputSource: reset/log
+type: File
+requirements:
+InlineJavascriptRequirement: {}
+MultipleInputFeatureRequirement: {}
+ScatterFeatureRequirement: {}
+StepInputExpressionRequirement: {}
+SubworkflowFeatureRequirement: {}
+steps:
+index:
+in:
+connection_name: connection_name
+database: database
+depends_on: reset/log
+domain: domain
+registry: registry
+table: table
+out:
+- log
+- errors
+run: index.cwl
+reset:
+in:
+connection_name: connection_name
+database: database
+domain: domain
+registry: registry
+table: table
+out:
+- log
+- errors
+run: reset.cwl</p>
 </section>
 
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="gridmet_1.html" class="btn btn-neutral float-left" title="Sub-workflow init_tables from gridmet.cwl" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="gridmet_dwnl_only.html" class="btn btn-neutral float-right" title="gridMET Pipeline" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 

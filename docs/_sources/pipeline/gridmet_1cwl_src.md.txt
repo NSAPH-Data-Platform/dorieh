@@ -1,12 +1,63 @@
----
-orphan: true
----
 
-# tmpgjktzs81gridmet.cwl
 
-```{literalinclude} ../../src/cwl/tmpgjktzs81gridmet.cwl
----
-language: yaml
----
-```
+# CWL sub-workflow
 
+.. code-block:: yaml
+   :caption: Example of database.ini file
+
+class: Workflow
+cwlVersion: v1.2
+inputs:
+  connection_name:
+    type: string
+  database:
+    type: File
+  domain:
+    type: string
+  registry:
+    type: File
+  table:
+    type: string
+outputs:
+  index_err:
+    outputSource: index/errors
+    type: File
+  index_log:
+    outputSource: index/log
+    type: File
+  reset_err:
+    outputSource: reset/errors
+    type: File
+  reset_log:
+    outputSource: reset/log
+    type: File
+requirements:
+  InlineJavascriptRequirement: {}
+  MultipleInputFeatureRequirement: {}
+  ScatterFeatureRequirement: {}
+  StepInputExpressionRequirement: {}
+  SubworkflowFeatureRequirement: {}
+steps:
+  index:
+    in:
+      connection_name: connection_name
+      database: database
+      depends_on: reset/log
+      domain: domain
+      registry: registry
+      table: table
+    out:
+    - log
+    - errors
+    run: index.cwl
+  reset:
+    in:
+      connection_name: connection_name
+      database: database
+      domain: domain
+      registry: registry
+      table: table
+    out:
+    - log
+    - errors
+    run: reset.cwl

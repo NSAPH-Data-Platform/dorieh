@@ -76,15 +76,54 @@ Included utilities:
 <!-- section Core platform overview from dorieh.platform -->
 
 
+The data platform provides generic functionality for Dorieh Data Platform
+with APIs and command line utilities dependent on the infrastructure
+and the environment. For instance, its components assume presence of PostgreSQL
+DBMS (version 13 or later) and CWL runtime environment.
+
+Some mapping (or crosswalk) tables are also included in the Core
+Platform module. These tables include between different
+territorial codes, such as USPS ZIP codes, Census ZCTA codes,
+FIPS codes for US states
+and counties, SSA codes for codes for US states
+and counties. See more information in the
+[Mapping between different territorial codes](https://nsaph-data-platform.github.io/nsaph-platform-docs/common/core-platform/doc/TerritorialCodes.html)
+
+<!-- end of section core platform overview from dorieh.platform -->
+
 ### Dorieh GIS Utilities
 
 <!-- section GIS Library Overview from dorieh.gis -->
 
 
+Per [USGS](https://www.usgs.gov/faqs/what-geographic-information-system-gis), 
+a Geographic Information System (GIS) is a computer system that 
+analyzes and displays geographically referenced information. 
+It uses data that is attached to a unique location.
+
+This `dorieh.gis` library contains several modules, aimed to work with US Census shape files. 
+They fall into two categories:
+
+* Utilities to download appropriate shapefiles for a given geography type and year
+* Utilities to aggregate raster data over given shapefiles 
+
+<!-- end of section gis library overview from dorieh.gis -->
+
 ### Dorieh Documentation Utilities
 
 <!-- section Documentation utilities overview from dorieh.docutils -->
 
+
+Documentation utilities to simplify creation of consistent
+documentation for Dorieh platform 
+                                                         
+* [cwl2md](members/cwl2md) Generates [Markdown](https://www.markdownguide.org/basic-syntax/) 
+    documentation for a CWL tool or workflow
+* [collector](members/collector) Generates automatic 
+    [reStructuredText](https://docutils.sourceforge.io/rst.html) 
+    templates for all Python modules 
+* [copy_section](members/copy_section)  Copies a specified section from one markdown document
+    to another. This way we can collect summaries in one file<!-- end of section documentation utilities overview from dorieh.docutils -->
 
 
 ### Data Processing and Loading Pipelines
