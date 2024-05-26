@@ -30,12 +30,11 @@ import yaml
 from dorieh.docutils.md_creator import MDCreator
 
 
-cwl_src_content_template = """
+cwl_src_content_template = """# CWL sub-workflow for step <u>*{step}*</u> of workflow {workflow}
 
-# CWL sub-workflow
-
-.. code-block:: yaml
-   :caption: Example of database.ini file
+```{{code-block}} yaml
+:caption: CWL Content 
+:linenos:
 
 """
 
@@ -71,9 +70,13 @@ arg_parser.add_argument('-v', '--verbose', dest='verbose', action='store_true', 
 
 
 class CWLParser:
-    def __init__(self, input_file_path: str, output_file_path: str, image_file_path: str):
+    def __init__(self, input_file_path: str, output_file_path: str, image_file_path: str, root=None):
         logger.info(output_file_path)
         self.input_file_path = input_file_path
+        if root is None:
+            self.root = self._get_filename(self.input_file_path)
+        else:
+            self.root = root
 
         with open(input_file_path, 'r') as cwl_file:
             self.raw_content = cwl_file.read()
@@ -85,10 +88,10 @@ class CWLParser:
         self.md_file = MDCreator(file_name=self.output_file_path)
         self.sub_workflow_counter = 0
 
-    def parse(self, content: Dict = None):
+    def parse(self, content: Dict = None, name=None):
         self._add_title()
         if content:
-            self._add_source_content(content)
+            self._add_source_content(content, name)
         else:
             self._add_source()
         self._add_image()
@@ -116,12 +119,13 @@ class CWLParser:
             os.path.basename(of)
         ))
 
-    def _add_source_content(self, content: Dict):
+    def _add_source_content(self, content: Dict, name):
         of = self.output_file_path.replace(".md", "cwl_src.md")
-        
+
         with open(of, "w") as out:
-            out.write(cwl_src_content_template)
+            out.write(cwl_src_content_template.format(workflow=self.root, step=name))
             yaml.safe_dump(content, out)
+            print("```", file=out)
         self.md_file.add_text("\n [Source code]({}) \n".format(
             os.path.basename(of)
         ))
@@ -258,14 +262,14 @@ class CWLParser:
 
         self.md_file.add_table(data=data)
 
-    def _handle_sub_workflow(self, workflow_name: str, data: Dict[str, Any]) -> str:
+    def _handle_sub_workflow(self, step_name: str, data: Dict[str, Any]) -> str:
         prepared_data = {
             **data,
             'cwlVersion': self.yaml_content['cwlVersion'],
             'requirements': self.yaml_content['requirements'],
         }
         pipeline_file_name = self._get_filename(self.input_file_path)
-        header = f'### Sub-workflow *{workflow_name}* from {pipeline_file_name} \n\n'
+        header = f'### Sub-workflow *{step_name}* from {pipeline_file_name} \n\n'
 
         source_dir, basename = os.path.split(self.input_file_path)
 
@@ -277,7 +281,12 @@ class CWLParser:
             output_file_path = self.output_file_path.replace('.md', f'_{self.sub_workflow_counter}.md')
             image_file_path = self.output_file_path.replace('.md', f'_{self.sub_workflow_counter}.png')
 
-            CWLParser(temp_file.name, output_file_path, image_file_path).parse(content=prepared_data)
+            CWLParser(
+                temp_file.name,
+                output_file_path,
+                image_file_path,
+                root=self.root
+            ).parse(content=prepared_data, name=step_name)
 
             return self._get_filename(output_file_path)
 
