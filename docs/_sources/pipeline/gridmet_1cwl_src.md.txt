@@ -1,9 +1,8 @@
+# CWL sub-workflow for step <u>*init_tables*</u> of workflow gridmet.cwl
 
-
-# CWL sub-workflow
-
-.. code-block:: yaml
-   :caption: Example of database.ini file
+```{code-block} yaml
+:caption: CWL Content 
+:linenos:
 
 class: Workflow
 cwlVersion: v1.2
@@ -61,3 +60,4 @@ steps:
     - log
     - errors
     run: reset.cwl
+```

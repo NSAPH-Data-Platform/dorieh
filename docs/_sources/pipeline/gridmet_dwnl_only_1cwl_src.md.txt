@@ -1,9 +1,8 @@
+# CWL sub-workflow for step <u>*process*</u> of workflow gridmet_dwnl_only.cwl
 
-
-# CWL sub-workflow
-
-.. code-block:: yaml
-   :caption: Example of database.ini file
+```{code-block} yaml
+:caption: CWL Content 
+:linenos:
 
 class: Workflow
 cwlVersion: v1.2
@@ -50,3 +49,4 @@ steps:
     run: download.cwl
     scatter: year
     scatterMethod: nested_crossproduct
+```

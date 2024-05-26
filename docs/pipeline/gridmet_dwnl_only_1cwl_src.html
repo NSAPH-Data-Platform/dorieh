@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CWL sub-workflow &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+  <title>CWL sub-workflow for step process of workflow gridmet_dwnl_only.cwl &mdash; Dorieh Data Platform 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
@@ -73,7 +73,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">CWL sub-workflow</li>
+      <li class="breadcrumb-item active">CWL sub-workflow for step <u><em>process</em></u> of workflow gridmet_dwnl_only.cwl</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/pipeline/gridmet_dwnl_only_1cwl_src.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -83,55 +83,58 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="cwl-sub-workflow">
-<h1>CWL sub-workflow<a class="headerlink" href="#cwl-sub-workflow" title="Permalink to this heading"></a></h1>
-<p>.. code-block:: yaml
-:caption: Example of database.ini file</p>
-<p>class: Workflow
-cwlVersion: v1.2
-inputs:
-band:
-type: string
-geography:
-type: string
-proxy:
-type: string?
-shapes:
-type: Directory
-years:
-type: string[]
-outputs:
-data:
-outputSource: download/data
-type: File[]
-download_err:
-outputSource: download/errors
-type: File[]
-download_log:
-outputSource: download/log
-type: File[]
-requirements:
-InlineJavascriptRequirement: {}
-MultipleInputFeatureRequirement: {}
-ScatterFeatureRequirement: {}
-StepInputExpressionRequirement: {}
-SubworkflowFeatureRequirement: {}
-steps:
-download:
-doc: Downloads and processes data
-in:
-band: band
-geography: geography
-proxy: proxy
-shapes: shapes
-year: years
-out:
-- data
-- log
-- errors
-run: download.cwl
-scatter: year
-scatterMethod: nested_crossproduct</p>
+  <section id="cwl-sub-workflow-for-step-process-of-workflow-gridmet-dwnl-only-cwl">
+<h1>CWL sub-workflow for step <u><em>process</em></u> of workflow gridmet_dwnl_only.cwl<a class="headerlink" href="#cwl-sub-workflow-for-step-process-of-workflow-gridmet-dwnl-only-cwl" title="Permalink to this heading"></a></h1>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">CWL Content</span><a class="headerlink" href="#id1" title="Permalink to this code"></a></div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Workflow</span>
+<span class="linenos"> 2</span><span class="nt">cwlVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1.2</span>
+<span class="linenos"> 3</span><span class="nt">inputs</span><span class="p">:</span>
+<span class="linenos"> 4</span><span class="w">  </span><span class="nt">band</span><span class="p">:</span>
+<span class="linenos"> 5</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="linenos"> 6</span><span class="w">  </span><span class="nt">geography</span><span class="p">:</span>
+<span class="linenos"> 7</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="linenos"> 8</span><span class="w">  </span><span class="nt">proxy</span><span class="p">:</span>
+<span class="linenos"> 9</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string?</span>
+<span class="linenos">10</span><span class="w">  </span><span class="nt">shapes</span><span class="p">:</span>
+<span class="linenos">11</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Directory</span>
+<span class="linenos">12</span><span class="w">  </span><span class="nt">years</span><span class="p">:</span>
+<span class="linenos">13</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string[]</span>
+<span class="linenos">14</span><span class="nt">outputs</span><span class="p">:</span>
+<span class="linenos">15</span><span class="w">  </span><span class="nt">data</span><span class="p">:</span>
+<span class="linenos">16</span><span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">download/data</span>
+<span class="linenos">17</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File[]</span>
+<span class="linenos">18</span><span class="w">  </span><span class="nt">download_err</span><span class="p">:</span>
+<span class="linenos">19</span><span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">download/errors</span>
+<span class="linenos">20</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File[]</span>
+<span class="linenos">21</span><span class="w">  </span><span class="nt">download_log</span><span class="p">:</span>
+<span class="linenos">22</span><span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">download/log</span>
+<span class="linenos">23</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File[]</span>
+<span class="linenos">24</span><span class="nt">requirements</span><span class="p">:</span>
+<span class="linenos">25</span><span class="w">  </span><span class="nt">InlineJavascriptRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="linenos">26</span><span class="w">  </span><span class="nt">MultipleInputFeatureRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="linenos">27</span><span class="w">  </span><span class="nt">ScatterFeatureRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="linenos">28</span><span class="w">  </span><span class="nt">StepInputExpressionRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="linenos">29</span><span class="w">  </span><span class="nt">SubworkflowFeatureRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="linenos">30</span><span class="nt">steps</span><span class="p">:</span>
+<span class="linenos">31</span><span class="w">  </span><span class="nt">download</span><span class="p">:</span>
+<span class="linenos">32</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Downloads and processes data</span>
+<span class="linenos">33</span><span class="w">    </span><span class="nt">in</span><span class="p">:</span>
+<span class="linenos">34</span><span class="w">      </span><span class="nt">band</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">band</span>
+<span class="linenos">35</span><span class="w">      </span><span class="nt">geography</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">geography</span>
+<span class="linenos">36</span><span class="w">      </span><span class="nt">proxy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">proxy</span>
+<span class="linenos">37</span><span class="w">      </span><span class="nt">shapes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">shapes</span>
+<span class="linenos">38</span><span class="w">      </span><span class="nt">year</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">years</span>
+<span class="linenos">39</span><span class="w">    </span><span class="nt">out</span><span class="p">:</span>
+<span class="linenos">40</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data</span>
+<span class="linenos">41</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">log</span>
+<span class="linenos">42</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">errors</span>
+<span class="linenos">43</span><span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">download.cwl</span>
+<span class="linenos">44</span><span class="w">    </span><span class="nt">scatter</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">year</span>
+<span class="linenos">45</span><span class="w">    </span><span class="nt">scatterMethod</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nested_crossproduct</span>
+</pre></div>
+</div>
+</div>
 </section>
 
 
