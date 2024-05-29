@@ -47,6 +47,7 @@ Examples of tools included in this package are:
 * A [utility to link a table to GIS](members/link_gis) from a CSV file
 * A [wrapper around database connection to PostgreSQL](#module-database-connection-wrapper)
 * A [utility to import/export JSONLines](members/pg_json_dump) files into/from PostgreSQL
+* A [utility to export Parquet files](members/pg_export_parquet) files from PostgreSQL
 * An [Executor with a bounded queue](members/executors)
 
 (core-prj-struct)=

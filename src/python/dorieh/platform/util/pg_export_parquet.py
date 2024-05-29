@@ -1,26 +1,24 @@
 """
 A command line utility to export results of SQL query as Parquet files
-"""
-import copy
-import decimal
-import logging
-import os.path
-from abc import ABC, abstractmethod
-from argparse import ArgumentParser
-from datetime import datetime
-from typing import Dict, Callable, Optional, List, Tuple
 
-#  Copyright (c) 2021. Harvard University
+
+
+
+
+"""
+
+#  Copyright (c) 2024. Harvard University
 #
 #  Developed by Research Software Engineering,
-#  Faculty of Arts and Sciences, Research Computing (FAS RC)
+#  Harvard University Research Computing and Data (RCD) Services.
+#
 #  Author: Michael A Bouzinier
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
 #  You may obtain a copy of the License at
 #
-#         http://www.apache.org/licenses/LICENSE-2.0
+#           http://www.apache.org/licenses/LICENSE-2.0
 #
 #  Unless required by applicable law or agreed to in writing, software
 #  distributed under the License is distributed on an "AS IS" BASIS,
@@ -29,6 +27,14 @@ from typing import Dict, Callable, Optional, List, Tuple
 #  limitations under the License.
 #
 
+import copy
+import decimal
+import logging
+import os.path
+from abc import ABC, abstractmethod
+from argparse import ArgumentParser
+from datetime import datetime
+from typing import Dict, Callable, Optional, List, Tuple
 
 import pyarrow as pa
 import pyarrow.dataset as ds

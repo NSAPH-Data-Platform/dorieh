@@ -2,6 +2,8 @@
 
 Detailed documentation: [Dorieh Documentation](https://nsaph-data-platform.github.io/dorieh/)
 
+## Dorieh overview
+
 
 Dorieh Data Platform is intended for development and deployment of
 ETL/ELT pipelines that includes complex data processing and data
@@ -21,11 +23,14 @@ The data produced by the data processing workflows is eventually stored in
 either CSV files, a PostgreSQL DBMS or Parquet files. Dorieh also supports storing
 results in [FST](https://www.fstpackage.org/) and [HDF5](https://www.hdfgroup.org/) files. 
 
-Some of the [included data processing workflows](doc/pipelines) use “Extract, Load, Transform,” (ELT) paradigm 
+Some of the included data processing workflows use “Extract, Load, Transform,” (ELT) paradigm 
 rather than more traditional “Extract, Transform, Load” ETL. It means that these workflows 
 perform calculations, translations, filtering, cleansing, de-duplicating, validating, and 
 data analysis or summarizations inside a DBMS using DBMS internal tools.
 
+The data platform supports tools written in widely used languages such as
+Python, C/C++ and Java, R and PL/pgSQL.
+            
 
 ## Setting up
 
@@ -53,4 +58,8 @@ A prebuilt docker image with Dorieh is provided:
 
     docker pull forome/dorieh
 
+
+## Built-in Workflows
+
+For examples of data processing workflows, see [included data processing workflows](doc/pipelines)
 
