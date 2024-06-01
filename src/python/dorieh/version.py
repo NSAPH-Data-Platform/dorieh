@@ -60,7 +60,7 @@ def get_version() -> str:
     except:
         pass
     try:
-        d1 = distribution("dorieh")
+        d1 = distribution(PACKAGE_NAME)
         url_json = d1.read_text("direct_url.json")
         if url_json:
             data = json.loads(url_json)
@@ -70,6 +70,8 @@ def get_version() -> str:
                 vcs_info = data["vcs_info"]
                 if "commit_id" in vcs_info:
                     sha = vcs_info["commit_id"]
+        if not url:
+            url = d1.metadata.get("Home-page")
     except:
         pass
     if not sha:
@@ -86,7 +88,7 @@ def get_version() -> str:
     info = {
         "version": package_version,
         "url": url,
-        "sha": sha
+        "commit": sha
     }
     VERSION = json.dumps(info)
     return VERSION
