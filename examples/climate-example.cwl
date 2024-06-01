@@ -59,7 +59,7 @@ inputs:
 
 steps:
   download:
-    run: ../src/cwl/download.cwl
+    run: https://raw.githubusercontent.com/NSAPH-Data-Platform/dorieh/main/src/cwl/download.cwl
     doc: Downloads NetCDF file with gridMET data from Atmospheric Composition Analysis Group
     in:
       year:
@@ -71,7 +71,7 @@ steps:
       - log
       - errors
   get_shapes:
-    run: ../src/cwl/get_shapes.cwl
+    run: https://raw.githubusercontent.com/NSAPH-Data-Platform/dorieh/main/src/cwl/get_shapes.cwl
     in:
       year:
         valueFrom: $(inputs.date.split('-')[0])
@@ -79,7 +79,7 @@ steps:
       date: date
     out: [shape_files]
   aggregate:
-    run: ../src/cwl/aggregate_daily.cwl
+    run: https://raw.githubusercontent.com/NSAPH-Data-Platform/dorieh/main/src/cwl/aggregate_daily.cwl
     in:
       geography: geography
       year:
