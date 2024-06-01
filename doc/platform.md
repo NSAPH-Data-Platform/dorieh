@@ -60,6 +60,8 @@ Top level directories are:
     - doc
     - resources
     - src
+    - examples
+    - docker
 
 Doc directory contains documentation.
 
@@ -76,36 +78,22 @@ See details in {ref}`core-software-sources` section.
 
 The directories under sources are:
 
-    - airflow
-    - commonwl
-    - html
-    - plpgsql
+    - cwl
     - python
-    - r
-    - superset
-    - yml
+    - sql
 
 They are described in more details in the corresponding sections.
 Here is a brief overview:
 
-* **airflow** contains code and configuration for Airflow.
-  Most of the content is deprecated as it is now transferred
-  to the deployment package or the specific pipelines. However,
-  this directory is intended to contain Airflow plugins that are
-  generic for all NSAPH pipelines
-* **commonwl** contains reusable workflows, packaged as tools
+* **cwl** contains reusable workflows, packaged as tools
   that can and should be used by
-  all NSAPH pipelines. Examples of such tools
+  Dorieh pipelines. Examples of such tools 
   are: introspection of CSV files, indexing tables, linking
   tables with GIS information for easy mapping, creation of a
   Superset datasource.
-* **html** is a deprecated directory for HTML documents
-* **plpgsql** contains PostgreSQL procedures and functions
-  implemented in PL/pgSQL language
+* **sql** contains PostgreSQL procedures and functions
+  implemented in the PostgreSQL dialect of SQL/DDL and PL/pgSQL language
 * **python** contains Python code. See [more details](#python-packages).
-* **r** contains R utilities. Probably will be deprecated
-* **superset** contains definitions of reusable Superset datasets and dashboards
-* **yml** contains various YAML files used by the platform.
 
 ### Python packages
 
@@ -204,21 +192,6 @@ Package `dorieh.platform.util` contains:
   with a bounded queue. It is used to prevent out of memory (OOM)
   errors when processing huge files (to prevent loading
   the whole file into memory before dispatching it for processing).
-
-### YAML files
-
-The majority of files are data model definitions. 
-
-Beside data model files, there are YAML files for:
-
-* Conda environments, required for NSAPH pipelines. Unless we
-  will be able to create a single environment that accomodate
-  all pipelines we will probably deprecate them and move
-  into corresponding pipeline repositories.
-* Sample user requests for future downstream pipelines
-  that create user workspaces from the database. File
-  [example_request.yml](members/example_request.yaml) is used by
-  [sample request handler](members/hdf5_export)
 
 ### Resources
 

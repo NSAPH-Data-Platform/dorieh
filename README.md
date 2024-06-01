@@ -40,19 +40,26 @@ Install Toil:
 
     pip install "toil[cwl,aws]"
 
-Install Dorieh:
+Install Dorieh (stable version):
+
+    pip install dorieh
+
+If you prefer to install the latest version from GitHub: 
 
     pip install git+https://github.com/NSAPH-Data-Platform/dorieh
 
 If FST support is desired, [R](https://www.r-project.org/) runtime has to be installed and R_HOME environment 
 variable set up. One of the simples ways of installing R is to use 
 [Conda package manager](https://docs.conda.io/projects/conda/en/stable/). Once R is set up, install
-Dorieh with the following command:
+Dorieh with either of the  following command:
 
+    pip install dorieh[FST]
 
     pip install "git+https://github.com/NSAPH-Data-Platform/dorieh[FST]"
 
 ### Docker Container
+
+To build your own Dorieh Docker image see [docker directory](docker/README.md)
 
 A prebuilt docker image with Dorieh is provided:
 

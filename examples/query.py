@@ -22,7 +22,7 @@ from decimal import Decimal
 
 from psycopg2.extras import RealDictCursor
 
-from nsaph.db import Connection
+from dorieh.platform.db import Connection
 
 
 SQL = '''
