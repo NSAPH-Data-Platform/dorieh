@@ -37,9 +37,9 @@ local:
 
 ## Steps
 
-| Name       | Runs                                                            | Description                                                                         | 
-|:-----------|:----------------------------------------------------------------|:------------------------------------------------------------------------------------|
-| download   | [../src/cwl/download.cwl](../src/cwl/download.md)               | Downloads NetCDF file with gridMET data from Atmospheric Composition Analysis Group | 
-| get_shapes | [../src/cwl/get_shapes.cwl](../src/cwl/get_shapes.md)           |                                                                                     | 
-| aggregate  | [../src/cwl/aggregate_daily.cwl](../src/cwl/aggregate_daily.md) |                                                                                     | 
+| Name       | Runs                                               | Description                                                                                                                                                                           | 
+|:-----------|:---------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| download   | [download.cwl](pipeline/download.md)               | Downloads NetCDF file with gridMET data from Atmospheric Composition Analysis Group                                                                                                   | 
+| get_shapes | [get_shapes.cwl](pipeline/get_shapes.md)           | This step downloads Shape files from a given collection (TIGER/Line or GENZ)  and a geography (ZCTA or Counties) from the US Census website, for a given year or for the closest one. | 
+| aggregate  | [aggregate_daily.cwl](pipeline/aggregate_daily.md) | This step aggregates gridded data from a NetCDF file over polygons from the provided shapefiles                                                                                       | 
 

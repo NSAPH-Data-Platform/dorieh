@@ -1,5 +1,5 @@
 #!/usr/bin/env cwl-runner
-### Downloader of AirNow Data
+### Downloads Shape files from US Census website for a given year or the closest one
 #  Copyright (c) 2021. Harvard University
 #
 #  Developed by Research Software Engineering,
@@ -34,7 +34,9 @@ requirements:
 
 
 doc: |
-  This tool downloads Shape files from US Census website
+  This tool downloads Shape files from a given collection (TIGER/Line or GENZ) 
+  and a geography (ZCTA or Counties) from the US Census website,
+  for a given year or for the closest one.
 
 inputs:
   proxy:

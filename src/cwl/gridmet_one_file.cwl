@@ -85,6 +85,11 @@ steps:
 
   get_shapes:
     run: get_shapes.cwl
+    doc: |
+      This step downloads Shape files from a given collection (TIGER/Line or GENZ) 
+      and a geography (ZCTA or Counties) from the US Census website,
+      for a given year or for the closest one.
+
     in:
       year: year
       geo: geography
