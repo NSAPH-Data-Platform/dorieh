@@ -87,7 +87,7 @@
   <section id="get-shapes-cwl">
 <h1>get_shapes.cwl<a class="headerlink" href="#get-shapes-cwl" title="Permalink to this heading"></a></h1>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1">#!/usr/bin/env cwl-runner</span>
-<span class="c1">### Downloader of AirNow Data</span>
+<span class="c1">### Downloads Shape files from US Census website for a given year or the closest one</span>
 <span class="c1">#  Copyright (c) 2021. Harvard University</span>
 <span class="c1">#</span>
 <span class="c1">#  Developed by Research Software Engineering,</span>
@@ -122,7 +122,9 @@
 
 
 <span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">  </span><span class="no">This tool downloads Shape files from US Census website</span>
+<span class="w">  </span><span class="no">This tool downloads Shape files from a given collection (TIGER/Line or GENZ) </span>
+<span class="w">  </span><span class="no">and a geography (ZCTA or Counties) from the US Census website,</span>
+<span class="w">  </span><span class="no">for a given year or for the closest one.</span>
 
 <span class="nt">inputs</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">proxy</span><span class="p">:</span>

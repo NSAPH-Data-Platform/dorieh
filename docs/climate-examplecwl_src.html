@@ -160,6 +160,11 @@
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">errors</span>
 <span class="w">  </span><span class="nt">get_shapes</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://raw.githubusercontent.com/NSAPH-Data-Platform/dorieh/main/src/cwl/get_shapes.cwl</span>
+<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">      </span><span class="no">This step downloads Shape files from a given collection (TIGER/Line or GENZ) </span>
+<span class="w">      </span><span class="no">and a geography (ZCTA or Counties) from the US Census website,</span>
+<span class="w">      </span><span class="no">for a given year or for the closest one.</span>
+
 <span class="w">    </span><span class="nt">in</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">year</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$(inputs.date.split(&#39;-&#39;)[0])</span>
@@ -168,6 +173,8 @@
 <span class="w">    </span><span class="nt">out</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">shape_files</span><span class="p p-Indicator">]</span>
 <span class="w">  </span><span class="nt">aggregate</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://raw.githubusercontent.com/NSAPH-Data-Platform/dorieh/main/src/cwl/aggregate_daily.cwl</span>
+<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">      </span><span class="no">This step aggregates gridded data from a NetCDF file over polygons from the provided shapefiles</span>
 <span class="w">    </span><span class="nt">in</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">geography</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">geography</span>
 <span class="w">      </span><span class="nt">year</span><span class="p">:</span>

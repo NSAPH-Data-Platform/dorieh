@@ -62,12 +62,12 @@ cwl-runner --parallel /opt/airflow/project/epa/src/cwl/airnow.cwl --database /op
 
 ## Steps
 
-| Name       | Runs                                      | Description                    | 
-|:-----------|:------------------------------------------|:-------------------------------|
-| get_shapes | [get_shapes.cwl](get_shapes.md)           |                                | 
-| download   | [download_airnow.cwl](download_airnow.md) |                                | 
-| introspect | [introspect.cwl](introspect.md)           |                                | 
-| ingest     | [ingest.cwl](ingest.md)                   | Uploads data into the database | 
-| index      | [index.cwl](index.md)                     |                                | 
-| vacuum     | [vacuum.cwl](vacuum.md)                   |                                | 
+| Name       | Runs                                      | Description                                                                                                                                                                            | 
+|:-----------|:------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| get_shapes | [get_shapes.cwl](get_shapes.md)           | This step downloads Shape files from a given collection (TIGER/Line or GENZ)  and a geography (ZCTA or Counties) from the US Census website, for a given year or for the closest one.  | 
+| download   | [download_airnow.cwl](download_airnow.md) |                                                                                                                                                                                        | 
+| introspect | [introspect.cwl](introspect.md)           |                                                                                                                                                                                        | 
+| ingest     | [ingest.cwl](ingest.md)                   | Uploads data into the database                                                                                                                                                         | 
+| index      | [index.cwl](index.md)                     |                                                                                                                                                                                        | 
+| vacuum     | [vacuum.cwl](vacuum.md)                   |                                                                                                                                                                                        | 
 

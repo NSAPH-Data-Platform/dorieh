@@ -191,6 +191,11 @@
 <span class="nt">steps</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">get_shapes</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">get_shapes.cwl</span>
+<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">      </span><span class="no">This step downloads Shape files from a given collection (TIGER/Line or GENZ) </span>
+<span class="w">      </span><span class="no">and a geography (ZCTA or Counties) from the US Census website,</span>
+<span class="w">      </span><span class="no">for a given year or for the closest one.</span>
+
 <span class="w">    </span><span class="nt">in</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">year</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$(String(inputs.yy))</span>

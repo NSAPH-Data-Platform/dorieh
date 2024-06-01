@@ -57,10 +57,10 @@ aggregated data into the database
 
 ## Steps
 
-| Name       | Runs                                    | Description    | 
-|:-----------|:----------------------------------------|:---------------|
-| download   | [download.cwl](download.md)             | Downloads data | 
-| get_shapes | [get_shapes.cwl](get_shapes.md)         |                | 
-| add_data   | [add_daily_data.cwl](add_daily_data.md) | Processes data | 
-| vacuum     | [vacuum.cwl](vacuum.md)                 |                | 
+| Name       | Runs                                    | Description                                                                                                                                                                            | 
+|:-----------|:----------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| download   | [download.cwl](download.md)             | Downloads data                                                                                                                                                                         | 
+| get_shapes | [get_shapes.cwl](get_shapes.md)         | This step downloads Shape files from a given collection (TIGER/Line or GENZ)  and a geography (ZCTA or Counties) from the US Census website, for a given year or for the closest one.  | 
+| add_data   | [add_daily_data.cwl](add_daily_data.md) | Processes data                                                                                                                                                                         | 
+| vacuum     | [vacuum.cwl](vacuum.md)                 |                                                                                                                                                                                        | 
 

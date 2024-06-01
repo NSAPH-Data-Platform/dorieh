@@ -52,8 +52,8 @@ shape files fo this year from US Census website
 
 ## Steps
 
-| Name          | Runs                                    | Description                          | 
-|:--------------|:----------------------------------------|:-------------------------------------|
-| get_shapes    | [get_shapes.cwl](get_shapes.md)         |                                      | 
-| process_files | [wustl_one_file.cwl](wustl_one_file.md) | Aggregates and ingests relvant files | 
+| Name          | Runs                                    | Description                                                                                                                                                                            | 
+|:--------------|:----------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| get_shapes    | [get_shapes.cwl](get_shapes.md)         | This step downloads Shape files from a given collection (TIGER/Line or GENZ)  and a geography (ZCTA or Counties) from the US Census website, for a given year or for the closest one.  | 
+| process_files | [wustl_one_file.cwl](wustl_one_file.md) | Aggregates and ingests relvant files                                                                                                                                                   | 
 
