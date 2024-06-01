@@ -72,6 +72,11 @@ steps:
       - errors
   get_shapes:
     run: https://raw.githubusercontent.com/NSAPH-Data-Platform/dorieh/main/src/cwl/get_shapes.cwl
+    doc: |
+      This step downloads Shape files from a given collection (TIGER/Line or GENZ) 
+      and a geography (ZCTA or Counties) from the US Census website,
+      for a given year or for the closest one.
+
     in:
       year:
         valueFrom: $(inputs.date.split('-')[0])
@@ -80,6 +85,8 @@ steps:
     out: [shape_files]
   aggregate:
     run: https://raw.githubusercontent.com/NSAPH-Data-Platform/dorieh/main/src/cwl/aggregate_daily.cwl
+    doc: |
+      This step aggregates gridded data from a NetCDF file over polygons from the provided shapefiles
     in:
       geography: geography
       year:
