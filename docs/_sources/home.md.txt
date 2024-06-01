@@ -11,30 +11,41 @@ local:
 
 ## Introduction to Data Platform
 
-This data platform is intended for development and deployment of 
-ETL/ELT pipelines that includes complex data processing and data 
-cleansing workflows. Complex workflows require a workflow language, 
-and we have chosen 
+<!-- section Dorieh overview from README -->
+
+
+
+Dorieh Data Platform is intended for development and deployment of
+ETL/ELT pipelines that includes complex data processing and data
+cleansing workflows. Complex workflows require a workflow language,
+and we have chosen
 [Common Workflow Language (CWL)](https://www.commonwl.org/).
-For deployment, we have selected CWL-Airflow to take advantage of the excellent
-user interface allowing for the control of the actual execution process. 
-The data is eventually stored in a PostgreSQL DBMS; many processing steps 
-in the [included data processing pipelines](pipelines) 
-are being run inside the database itself. 
 
-The data platform is based on a combination of an 
-[Infrastructure as Code (IaC) approach](https://en.wikipedia.org/wiki/Infrastructure_as_code) 
-and CWL. Beside tools written in widely used languages such as 
-Python, C/C++ and
-Java, the platform also supports tools written in R and PL/pgSQL.
-Data platform consists of several [python packages](packages), 
-a [package to deploy the platform](#deployment)
-using [CWL-Airflow](https://cwl-airflow.readthedocs.io/en/latest/)
-and a number of data ingestion pipelines. 
-[Data ingestion pipelines](pipelines)
-process data from external sources and load it into the database.
+We have tested deployment with the following CWL [implementations](https://www.commonwl.org/implementations/): 
+                                                                 
+* [Toil](https://toil.readthedocs.io/en/latest/running/cwl.html).
+* [CWL reference implementation](https://github.com/common-workflow-language/cwltool), 
+    primarily using [cwlref-runner ](https://pypi.org/project/cwlref-runner/) package
+* [CWL-Airflow](https://cwl-airflow.readthedocs.io/en/latest/) that provides a very nice 
+    Airflow graphical user interface (GUI) for running workflows.
 
-A discussion on what are the aims of this data platform and how reproducible research can benefit from such product is provided in the
+The data produced by the data processing workflows is eventually stored in 
+either CSV files, a PostgreSQL DBMS or Parquet files. Dorieh also supports storing
+results in [FST](https://www.fstpackage.org/) and [HDF5](https://www.hdfgroup.org/) files. 
+
+Some of the included data processing workflows use “Extract, Load, Transform,” (ELT) paradigm 
+rather than more traditional “Extract, Transform, Load” ETL. It means that these workflows 
+perform calculations, translations, filtering, cleansing, de-duplicating, validating, and 
+data analysis or summarizations inside a DBMS using DBMS internal tools.
+
+The data platform supports tools written in widely used languages such as
+Python, C/C++ and Java, R and PL/pgSQL.
+            
+
+<!-- end of section dorieh overview from readme -->
+
+A discussion on what are the aims of this data platform and how reproducible 
+research can benefit from such product is provided in the
 [What is Data Platform](rationale) section.
 
 The data platform is deployed as a set of Docker containers orchestrated by
@@ -65,6 +76,7 @@ Included utilities:
 * Reading FWF files [](members/fwf)
 * various I/O wrappers [](members/io_utils)
 * An API and CLI framework [](members/context)
+* Helper wrappers to get currently allocated memory [](members/profile_utils)
 * QC Framework
 
 
@@ -113,6 +125,17 @@ They fall into two categories:
 
 <!-- section Documentation utilities overview from dorieh.docutils -->
 
+
+Documentation utilities to simplify creation of consistent
+documentation for Dorieh platform 
+                                                         
+* [cwl2md](members/cwl2md) Generates [Markdown](https://www.markdownguide.org/basic-syntax/) 
+    documentation for a CWL tool or workflow
+* [collector](members/collector) Generates automatic 
+    [reStructuredText](https://docutils.sourceforge.io/rst.html) 
+    templates for all Python modules 
+* [copy_section](members/copy_section)  Copies a specified section from one markdown document
+    to another. This way we can collect summaries in one file<!-- end of section documentation utilities overview from dorieh.docutils -->
 
 Documentation utilities to simplify creation of consistent
 documentation for Dorieh platform 
@@ -188,7 +211,8 @@ Included
 [Glossary](glossary.md) provides some information about
 acronyms and other terms used throughout this documentation.
 
-Additionaly, [General Index](genindex) and [Python Module Index](modindex) englobe all the pieces of the Data Platform together.
+Additionally, [General Index](genindex) and [Python Module Index](modindex) 
+provide direct access to the Dorieh components. 
 
 
 ## Building Platform documentation
@@ -199,9 +223,22 @@ contains general documentation pages in
 format and a build script that goes over all other platform 
 repositories in the platform
 and creates a combined [GitHub Pages](https://pages.github.com/) site.
-The script supports links between repositories. The 
-[README.md](../README.md) file contains
-Build instructions.
+The script supports links between repositories. 
+
+To build documentation:
+
+1. Clone Dorieh project:
+
+        git clone https://github.com/NSAPH-Data-Platform/dorieh.git
+2. Cd into the prject directory:
+
+        cd dorieh
+3. Create virtual environment (e.g., named `.dorieh`):
+
+        python -m venv .dorieh
+4. Run [build_documentation](https://github.com/NSAPH-Data-Platform/dorieh/blob/main/build_documentation.sh) shell script:
+
+        source .dorieh/bin/activate && ./build_documentation.sh
 
 To integrate Markdown with [Sphinx](https://www.sphinx-doc.org/en/master/) 
 processing we use [MyST Parser](https://jupyterbook.org/en/stable/content/myst.html). 

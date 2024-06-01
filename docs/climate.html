@@ -23,7 +23,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Computational Utilities for working with Exposure data from Washington University in St. Louis" href="exposures.html" />
+    <link rel="next" title="The gridmet_tools Module" href="members/gridmet_tools.html" />
     <link rel="prev" title="Querying Medicaid Data" href="QueringMedicaid.html" /> 
 </head>
 
@@ -52,7 +52,32 @@
 <li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="domains.html">Data Domains</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="cms.html">Health</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Climate</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Climate</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-is-gridmet">What is gridMET?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-command-line-gridmet-utility">Using command line gridMET utility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#python-modules">Python modules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="members/gridmet_tools.html">The gridmet_tools Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="members/launcher.html">The launcher Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="members/task.html">The task Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="members/registry.html">The registry Module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cwl-pipelines-and-tools">CWL pipelines and tools</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pipeline/gridmet.html">Pipeline to aggregate data from Climatology Lab</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pipeline/gridmet_1.html">Sub-workflow <em>init_tables</em> from gridmet.cwl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pipeline/gridmet_1cwl_src.html">CWL sub-workflow for step <u><em>init_tables</em></u> of workflow gridmet.cwl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pipeline/gridmet_dwnl_only.html">gridMET Pipeline</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pipeline/gridmet_dwnl_only_1.html">Sub-workflow <em>process</em> from gridmet_dwnl_only.cwl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pipeline/gridmet_dwnl_only_1cwl_src.html">CWL sub-workflow for step <u><em>process</em></u> of workflow gridmet_dwnl_only.cwl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pipeline/gridmet_dwnl_onlycwl_src.html">gridmet_dwnl_only.cwl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pipeline/gridmet_one_file.html">Workflow to aggregate and ingest one gridMET file in NetCDF format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pipeline/gridmet_one_filecwl_src.html">gridmet_one_file.cwl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pipeline/gridmetcwl_src.html">gridmet.cwl</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="exposures.html">Exposure (from Atmospheric Composition Analysis Group of Washington University in St. Louis)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="epa.html">Environmental Protection Agency (EPA) data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="census.html">Demographics</a></li>
@@ -60,6 +85,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DBT.html">Database Testing Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
@@ -95,38 +121,34 @@
              
   <section id="computational-utilities-for-working-with-climate-gridmet-data">
 <h1>Computational Utilities for working with Climate gridMET data<a class="headerlink" href="#computational-utilities-for-working-with-climate-gridmet-data" title="Permalink to this heading"></a></h1>
-<!-- TODO ->
-
-[Documentation Home](home)
-
-
-```{contents}
----
-local:
----
-```
-
-## What is gridMET?
-
-gridMET is a dataset of daily high-spatial resolution (~4-km, 1/24th degree)
+<!-- TODO -->
+<p><a class="reference internal" href="home.html"><span class="doc std std-doc">Documentation Home</span></a></p>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#what-is-gridmet" id="id1">What is gridMET?</a></p></li>
+<li><p><a class="reference internal" href="#using-command-line-gridmet-utility" id="id2">Using command line gridMET utility</a></p></li>
+<li><p><a class="reference internal" href="#example" id="id3">Example</a></p></li>
+<li><p><a class="reference internal" href="#python-modules" id="id4">Python modules</a></p></li>
+<li><p><a class="reference internal" href="#cwl-pipelines-and-tools" id="id5">CWL pipelines and tools</a></p></li>
+</ul>
+</nav>
+<section id="what-is-gridmet">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">What is gridMET?</a><a class="headerlink" href="#what-is-gridmet" title="Permalink to this heading"></a></h2>
+<p>gridMET is a dataset of daily high-spatial resolution (~4-km, 1/24th degree)
 surface meteorological data covering the contiguous US from 1979-yesterday.
-The data are also known and cited as METDATA.
-
-Executing pipelines from this package require a collection of shape files
+The data are also known and cited as METDATA.</p>
+<p>Executing pipelines from this package require a collection of shape files
 corresponding to geographies for which data is aggregated
-(for example, zip code areas or counties).
-
-The data has to be placed in the following directory structure:
-`${year}/${geo_type: zip|county|etc.}/${shape:point|polygon}/`
-
-Which geography is used is defined by `geography` argument that defaults
-to "zip". Only actually used geographies must have their shape files
-for the years actually used.
-
-## Using command line gridMET utility 
-
-```
-    usage: python -m dorieh.rasters.launcher [-h] --variable
+(for example, zip code areas or counties).</p>
+<p>The data has to be placed in the following directory structure:
+<code class="docutils literal notranslate"><span class="pre">${year}/${geo_type:</span> <span class="pre">zip|county|etc.}/${shape:point|polygon}/</span></code></p>
+<p>Which geography is used is defined by <code class="docutils literal notranslate"><span class="pre">geography</span></code> argument that defaults
+to “zip”. Only actually used geographies must have their shape files
+for the years actually used.</p>
+</section>
+<section id="using-command-line-gridmet-utility">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Using command line gridMET utility</a><a class="headerlink" href="#using-command-line-gridmet-utility" title="Permalink to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    usage: python -m dorieh.rasters.launcher [-h] --variable
                       {bi,erc,etr,fm100,fm1000,pet,pr,rmax,rmin,sph,srad,th,tmmn,tmmx,vpd,vs}
                       [{bi,erc,etr,fm100,fm1000,pet,pr,rmax,rmin,sph,srad,th,tmmn,tmmx,vpd,vs} ...]
                       [--strategy {default,all_touched,combined}]
@@ -162,45 +184,78 @@ for the years actually used.
                             .../${year}/${geo_type}/{point|polygon}/, default:
                             shapes
       --shapes [{point,polygon} [{point,polygon} ...]]
-                            Type of shapes to aggregate over, default: ['polygon']
+                            Type of shapes to aggregate over, default: [&#39;polygon&#39;]
       --points POINTS       Path to CSV file containing points, default:
       --coordinates COORDINATES [COORDINATES ...], --xy COORDINATES [COORDINATES ...], --coord COORDINATES [COORDINATES ...]
                             Column names for coordinates, default:
       --metadata METADATA [METADATA ...], -m METADATA [METADATA ...], --meta METADATA [METADATA ...]
                             Column names for metadata, default:
-```
-
-## Example
-
-
-```shell
-python -u -m dorieh.rasters.launcher --var tmmx -y 2001 --shapes_dir shapes/zip_shape_files --strategy downscale
-```
-
-The results can be then found in `data/processed` folder
-
-## Python modules
-
-```{toctree}
----
-maxdepth: 2
-glob:
----
-members/gridmet_tools
-members/launcher
-members/task
-members/registry
-```
-
-## CWL pipelines and tools
-
-```{toctree}
----
-maxdepth: 2
-glob:
----
-pipeline/gridmet*
-```
+</pre></div>
+</div>
+</section>
+<section id="example">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Example</a><a class="headerlink" href="#example" title="Permalink to this heading"></a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-u<span class="w"> </span>-m<span class="w"> </span>dorieh.rasters.launcher<span class="w"> </span>--var<span class="w"> </span>tmmx<span class="w"> </span>-y<span class="w"> </span><span class="m">2001</span><span class="w"> </span>--shapes_dir<span class="w"> </span>shapes/zip_shape_files<span class="w"> </span>--strategy<span class="w"> </span>downscale
+</pre></div>
+</div>
+<p>The results can be then found in <code class="docutils literal notranslate"><span class="pre">data/processed</span></code> folder</p>
+</section>
+<section id="python-modules">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Python modules</a><a class="headerlink" href="#python-modules" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="members/gridmet_tools.html">The gridmet_tools Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="members/launcher.html">The launcher Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="members/task.html">The task Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="members/registry.html">The registry Module</a></li>
+</ul>
+</div>
+</section>
+<section id="cwl-pipelines-and-tools">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">CWL pipelines and tools</a><a class="headerlink" href="#cwl-pipelines-and-tools" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet.html">Pipeline to aggregate data from Climatology Lab</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet_1.html">Sub-workflow <em>init_tables</em> from gridmet.cwl</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_1.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_1.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_1.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet_1cwl_src.html">CWL sub-workflow for step <u><em>init_tables</em></u> of workflow gridmet.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet_dwnl_only.html">gridMET Pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_dwnl_only.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_dwnl_only.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_dwnl_only.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_dwnl_only.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet_dwnl_only_1.html">Sub-workflow <em>process</em> from gridmet_dwnl_only.cwl</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_dwnl_only_1.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_dwnl_only_1.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_dwnl_only_1.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet_dwnl_only_1cwl_src.html">CWL sub-workflow for step <u><em>process</em></u> of workflow gridmet_dwnl_only.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet_dwnl_onlycwl_src.html">gridmet_dwnl_only.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet_one_file.html">Workflow to aggregate and ingest one gridMET file in NetCDF format</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_one_file.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_one_file.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_one_file.html#outputs">Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/gridmet_one_file.html#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet_one_filecwl_src.html">gridmet_one_file.cwl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/gridmetcwl_src.html">gridmet.cwl</a></li>
+</ul>
+</div>
+</section>
 </section>
 
 
@@ -208,7 +263,7 @@ pipeline/gridmet*
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="QueringMedicaid.html" class="btn btn-neutral float-left" title="Querying Medicaid Data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="exposures.html" class="btn btn-neutral float-right" title="Computational Utilities for working with Exposure data from Washington University in St. Louis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="members/gridmet_tools.html" class="btn btn-neutral float-right" title="The gridmet_tools Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

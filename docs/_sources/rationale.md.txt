@@ -17,7 +17,7 @@ hand, data processing involves heavy floating-point computations which are very
 sensitive to the exact computational environment. Differing operating systems
 and/or versions of the tools and libraries might affect the result. Several
 scientific communities proposed various standards to define portable
-reproducible data processing workflows, with Common Workflow Language (CWL) [1]
+reproducible data processing workflows, with Common Workflow Language (CWL) 
 having the widest adoption in both commercial and academic settings. CWL can be
 used to define pipelines in imperative rather than procedural ways.
 Reproducibility challenges are exacerbated when the research involves healthcare

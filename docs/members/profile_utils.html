@@ -51,6 +51,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DBT.html">Database Testing Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
@@ -85,20 +86,55 @@
              
   <section id="module-dorieh.utils.profile_utils">
 <span id="the-profile-utils-module"></span><h1>The profile_utils Module<a class="headerlink" href="#module-dorieh.utils.profile_utils" title="Permalink to this heading"></a></h1>
+<p>Shortcuts to get currently allocated memory in bytes</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="dorieh.utils.profile_utils.mem">
 <span class="sig-name descname"><span class="pre">mem</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../_modules/dorieh/utils/profile_utils.html#mem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.profile_utils.mem" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Returns currently allocated memory using
+<a class="reference external" href="https://psutil.readthedocs.io/en/latest/#psutil.Process.memory_full_info">full memory info</a>.</p>
+<p>When <cite>uss</cite> aka “Unique Set Size”, is available then this function returns the value of uss.
+USS is the memory which is unique to a process and which would be freed if the process was terminated right now.</p>
+<p>If <cite>uss</cite> is unavailable it returns the <cite>pss</cite>, aka “Proportional Set Size”,
+is the amount of memory shared with other processes, accounted in a way that
+the amount is divided evenly between the processes that share it.
+I.e., if a process has 10 MBs all to itself and 10 MBs shared with another process its PSS will be 15 MBs.</p>
+<p>This function might be slower than <cite>qmem()</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>currently allocated memory in bytes</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="dorieh.utils.profile_utils.qmem">
 <span class="sig-name descname"><span class="pre">qmem</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../_modules/dorieh/utils/profile_utils.html#qmem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.profile_utils.qmem" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Quickly return currently allocated memory in bytes.
+This function returns rss, “Resident Set Size”, this is the non-swapped physical
+memory a process has used. On UNIX it matches “top“‘s RES column).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>currently allocated memory in bytes</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="dorieh.utils.profile_utils.qqmem">
 <span class="sig-name descname"><span class="pre">qqmem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pid</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../_modules/dorieh/utils/profile_utils.html#qqmem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.profile_utils.qqmem" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Quickly return currently allocated memory in bytes given the process id.
+This function does not call <cite>os.getpid()</cite> and therefore, might be faster than <cite>qmem()</cite>.</p>
+<p>This function returns rss, “Resident Set Size”, this is the non-swapped physical
+memory a process has used. On UNIX it matches “top“‘s RES column).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.utils.profile_utils.qqmem.params.pid"></span><strong>pid</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.profile_utils.qqmem.params.pid">¶</a> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>currently allocated memory in bytes</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 

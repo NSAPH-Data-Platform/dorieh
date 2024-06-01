@@ -51,6 +51,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DBT.html">Database Testing Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
@@ -83,8 +84,45 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-dorieh.platform.util.pg_export_parquet">
-<span id="the-pg-export-parquet-module"></span><h1>The pg_export_parquet Module<a class="headerlink" href="#module-dorieh.platform.util.pg_export_parquet" title="Permalink to this heading"></a></h1>
+  <section id="the-pg-export-parquet-module">
+<h1>The pg_export_parquet Module<a class="headerlink" href="#the-pg-export-parquet-module" title="Permalink to this heading"></a></h1>
+<p>This utility uses <a class="reference external" href="https://arrow.apache.org/docs/python/index.html">PyArrow Library</a>
+to write Parquet files. It is capable of writing very large files with hundreds of
+billions of records.</p>
+<p>To write huge files one should use <em>hard</em> partitioning to work around a memory leak in
+the Arrow library.</p>
+<p>It can export either a table of a result of an SQL query.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pg_export_parquet</span><span class="o">.</span><span class="n">py</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">sql</span> <span class="n">SQL</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">schema</span> <span class="n">SCHEMA</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">table</span> <span class="n">TABLE</span><span class="p">]</span>
+                        <span class="p">[</span><span class="o">--</span><span class="n">partition</span> <span class="n">PARTITION</span> <span class="p">[</span><span class="n">PARTITION</span> <span class="o">...</span><span class="p">]]</span> <span class="o">--</span><span class="n">output</span>
+                        <span class="n">OUTPUT</span> <span class="o">--</span><span class="n">db</span> <span class="n">DB</span> <span class="o">--</span><span class="n">connection</span> <span class="n">CONNECTION</span>
+                        <span class="p">[</span><span class="o">--</span><span class="n">batch_size</span> <span class="n">BATCH_SIZE</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">hard</span><span class="p">]</span>
+
+
+<span class="n">options</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
+  <span class="o">--</span><span class="n">sql</span> <span class="n">SQL</span><span class="p">,</span> <span class="o">-</span><span class="n">s</span> <span class="n">SQL</span>     <span class="n">SQL</span> <span class="n">Query</span> <span class="ow">or</span> <span class="n">a</span> <span class="n">path</span> <span class="n">to</span> <span class="n">a</span> <span class="n">file</span> <span class="n">containing</span> <span class="n">SQL</span> <span class="n">query</span>
+  <span class="o">--</span><span class="n">schema</span> <span class="n">SCHEMA</span>       <span class="n">Export</span> <span class="nb">all</span> <span class="n">columns</span> <span class="k">for</span> <span class="nb">all</span> <span class="n">tables</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">given</span> <span class="n">schema</span>
+  <span class="o">--</span><span class="n">table</span> <span class="n">TABLE</span><span class="p">,</span> <span class="o">-</span><span class="n">t</span> <span class="n">TABLE</span>
+                        <span class="n">Export</span> <span class="nb">all</span> <span class="n">columns</span> <span class="n">a</span> <span class="n">given</span> <span class="n">table</span> <span class="p">(</span><span class="n">fully</span> <span class="n">qualified</span> <span class="n">name</span>
+                        <span class="n">required</span><span class="p">)</span>
+  <span class="o">--</span><span class="n">partition</span> <span class="n">PARTITION</span> <span class="p">[</span><span class="n">PARTITION</span> <span class="o">...</span><span class="p">],</span> <span class="o">-</span><span class="n">p</span> <span class="n">PARTITION</span> <span class="p">[</span><span class="n">PARTITION</span> <span class="o">...</span><span class="p">]</span>
+                        <span class="n">Columns</span> <span class="n">to</span> <span class="n">be</span> <span class="n">used</span> <span class="k">for</span> <span class="n">partitioning</span>
+  <span class="o">--</span><span class="n">output</span> <span class="n">OUTPUT</span><span class="p">,</span> <span class="o">--</span><span class="n">destination</span> <span class="n">OUTPUT</span><span class="p">,</span> <span class="o">-</span><span class="n">o</span> <span class="n">OUTPUT</span>
+                        <span class="n">Path</span> <span class="n">to</span> <span class="n">a</span> <span class="n">directory</span><span class="p">,</span> <span class="n">where</span> <span class="n">the</span> <span class="n">files</span> <span class="n">will</span> <span class="n">be</span> <span class="n">exported</span>
+  <span class="o">--</span><span class="n">db</span> <span class="n">DB</span>               <span class="n">Path</span> <span class="n">to</span> <span class="n">a</span> <span class="n">database</span> <span class="n">connection</span> <span class="n">parameters</span> <span class="n">file</span>
+  <span class="o">--</span><span class="n">connection</span> <span class="n">CONNECTION</span><span class="p">,</span> <span class="o">-</span><span class="n">c</span> <span class="n">CONNECTION</span>
+                        <span class="n">Section</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">database</span> <span class="n">connection</span> <span class="n">parameters</span> <span class="n">file</span>
+  <span class="o">--</span><span class="n">batch_size</span> <span class="n">BATCH_SIZE</span><span class="p">,</span> <span class="o">-</span><span class="n">b</span> <span class="n">BATCH_SIZE</span>
+                        <span class="n">The</span> <span class="n">size</span> <span class="n">of</span> <span class="n">a</span> <span class="n">single</span> <span class="n">batch</span>
+  <span class="o">--</span><span class="n">hard</span>                <span class="n">Hard</span> <span class="n">partitioning</span><span class="p">:</span> <span class="n">execute</span> <span class="n">separate</span> <span class="n">SQL</span> <span class="n">statement</span> <span class="k">for</span>
+                        <span class="n">each</span> <span class="n">partition</span> <span class="p">(</span><span class="k">for</span> <span class="n">writing</span> <span class="n">huge</span> <span class="n">files</span><span class="p">)</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="module-dorieh.platform.util.pg_export_parquet">
+<span id="api"></span><h2>API<a class="headerlink" href="#module-dorieh.platform.util.pg_export_parquet" title="Permalink to this heading"></a></h2>
 <p>A command line utility to export results of SQL query as Parquet files</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="dorieh.platform.util.pg_export_parquet.result_set">
@@ -211,6 +249,7 @@
 
 </dd></dl>
 
+</section>
 </section>
 
 

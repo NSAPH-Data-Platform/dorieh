@@ -50,6 +50,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../domains.html">Data Domains</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../pipelines.html">Data Processing Pipelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../packages.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../guts.html">Data Platform Internals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../DBT.html">Database Testing Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../adding_data.html">Adding more data</a></li>
@@ -83,7 +84,12 @@
            <div itemprop="articleBody">
              
   <h1>Source code for dorieh.utils.profile_utils</h1><div class="highlight"><pre>
-<span></span><span class="c1">#  Copyright (c) 2024.  Harvard University</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Shortcuts to get currently allocated memory in bytes</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="c1">#  Copyright (c) 2024.  Harvard University</span>
 <span class="c1">#</span>
 <span class="c1">#   Developed by Research Software Engineering,</span>
 <span class="c1">#   Harvard University Research Computing and Data (RCD) Services.</span>
@@ -109,6 +115,23 @@
 
 
 <div class="viewcode-block" id="mem"><a class="viewcode-back" href="../../../members/profile_utils.html#dorieh.utils.profile_utils.mem">[docs]</a><span class="k">def</span> <span class="nf">mem</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns currently allocated memory using</span>
+<span class="sd">    `full memory info &lt;https://psutil.readthedocs.io/en/latest/#psutil.Process.memory_full_info&gt;`_.</span>
+
+<span class="sd">    When `uss` aka “Unique Set Size”, is available then this function returns the value of uss.</span>
+<span class="sd">    USS is the memory which is unique to a process and which would be freed if the process was terminated right now.</span>
+
+<span class="sd">    If `uss` is unavailable it returns the `pss`, aka “Proportional Set Size”,</span>
+<span class="sd">    is the amount of memory shared with other processes, accounted in a way that</span>
+<span class="sd">    the amount is divided evenly between the processes that share it.</span>
+<span class="sd">    I.e., if a process has 10 MBs all to itself and 10 MBs shared with another process its PSS will be 15 MBs.</span>
+
+<span class="sd">    This function might be slower than `qmem()`</span>
+
+<span class="sd">    :return: currently allocated memory in bytes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">mem_info</span> <span class="o">=</span> <span class="n">psutil</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">())</span><span class="o">.</span><span class="n">memory_full_info</span><span class="p">()</span>
     <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">mem_info</span><span class="p">,</span> <span class="s2">&quot;uss&quot;</span><span class="p">):</span>
         <span class="n">m</span> <span class="o">=</span> <span class="n">mem_info</span><span class="o">.</span><span class="n">uss</span>
@@ -118,9 +141,29 @@
 
 
 <div class="viewcode-block" id="qmem"><a class="viewcode-back" href="../../../members/profile_utils.html#dorieh.utils.profile_utils.qmem">[docs]</a><span class="k">def</span> <span class="nf">qmem</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Quickly return currently allocated memory in bytes.</span>
+<span class="sd">    This function returns rss, “Resident Set Size”, this is the non-swapped physical</span>
+<span class="sd">    memory a process has used. On UNIX it matches “top“‘s RES column).</span>
+
+<span class="sd">    :return: currently allocated memory in bytes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">return</span> <span class="n">psutil</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">())</span><span class="o">.</span><span class="n">memory_info</span><span class="p">()</span><span class="o">.</span><span class="n">rss</span></div>
 
+
 <div class="viewcode-block" id="qqmem"><a class="viewcode-back" href="../../../members/profile_utils.html#dorieh.utils.profile_utils.qqmem">[docs]</a><span class="k">def</span> <span class="nf">qqmem</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Quickly return currently allocated memory in bytes given the process id.</span>
+<span class="sd">    This function does not call `os.getpid()` and therefore, might be faster than `qmem()`.</span>
+<span class="sd">     </span>
+<span class="sd">    This function returns rss, “Resident Set Size”, this is the non-swapped physical</span>
+<span class="sd">    memory a process has used. On UNIX it matches “top“‘s RES column).</span>
+
+<span class="sd">    :param pid:</span>
+<span class="sd">    :return: currently allocated memory in bytes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">return</span> <span class="n">psutil</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span><span class="o">.</span><span class="n">memory_info</span><span class="p">()</span><span class="o">.</span><span class="n">rss</span></div>
 
 </pre></div>

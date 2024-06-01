@@ -10,6 +10,7 @@ What is Data Platform <rationale>
 domains
 pipelines
 Python Packages <packages>
+examples
 guts
 DBT
 Adding more data <adding_data>

@@ -72,6 +72,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../census.html">Census data manipulation tools</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DBT.html">Database Testing Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
@@ -108,28 +109,78 @@
              
   <section id="module-dorieh.rasters.prof">
 <span id="the-prof-module"></span><h1>The prof Module<a class="headerlink" href="#module-dorieh.rasters.prof" title="Permalink to this heading"></a></h1>
+<p>Python class used to store profiling data to profile spatial aggregation</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="dorieh.rasters.prof.ProfilingData">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ProfilingData</span></span><a class="reference internal" href="../_modules/dorieh/rasters/prof.html#ProfilingData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.prof.ProfilingData" title="Permalink to this definition"></a></dt>
-<dd><dl class="py method">
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.prof.ProfilingData.max_mem">
+<span class="sig-name descname"><span class="pre">max_mem</span></span><a class="headerlink" href="#dorieh.rasters.prof.ProfilingData.max_mem" title="Permalink to this definition"></a></dt>
+<dd><p>Maximum memory used during the execution</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="dorieh.rasters.prof.ProfilingData.update_mem_only">
 <span class="sig-name descname"><span class="pre">update_mem_only</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/prof.html#ProfilingData.update_mem_only"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.prof.ProfilingData.update_mem_only" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Updates <cite>max_mem</cite> if the argument passed is greater than the current value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.rasters.prof.ProfilingData.update_mem_only.params.m"></span><strong>m</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.prof.ProfilingData.update_mem_only.params.m">¶</a> – Currently used memory, presumably returned by the last called function or procedure</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="dorieh.rasters.prof.ProfilingData.update_mem_time">
 <span class="sig-name descname"><span class="pre">update_mem_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">timedelta</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">timedelta</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/prof.html#ProfilingData.update_mem_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.prof.ProfilingData.update_mem_time" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Updates <cite>max_mem</cite> and time values. Memory is updated if the provided value is greater
+than current maximum, times (when provided) are added to the stored values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.rasters.prof.ProfilingData.update_mem_time.params.m"></span><strong>m</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.prof.ProfilingData.update_mem_time.params.m">¶</a> – Currently used memory, presumably returned by the last called function or procedure</p></li>
+<li><p><span class="target" id="dorieh.rasters.prof.ProfilingData.update_mem_time.params.t"></span><strong>t</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.prof.ProfilingData.update_mem_time.params.t">¶</a> – total time used by a step, including wait time</p></li>
+<li><p><span class="target" id="dorieh.rasters.prof.ProfilingData.update_mem_time.params.t0"></span><strong>t0</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.prof.ProfilingData.update_mem_time.params.t0">¶</a> – “core” time used by a step, presumably, CPU time</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="dorieh.rasters.prof.ProfilingData.update">
 <span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/prof.html#ProfilingData.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.prof.ProfilingData.update" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>This method is presumably called after a sub-procedure that collects its own
+profiling data is executed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.rasters.prof.ProfilingData.update.params.other"></span><strong>other</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.prof.ProfilingData.update.params.other">¶</a> – an instance of <cite>ProfilingData</cite> returned by sub-procedure</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="dorieh.rasters.prof.ProfilingData.log">
 <span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/rasters/prof.html#ProfilingData.log"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.prof.ProfilingData.log" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Logs currently available profiling data with a given message.
+Logs using current logger with INFO level.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.rasters.prof.ProfilingData.log.params.msg"></span><strong>msg</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.prof.ProfilingData.log.params.msg">¶</a> – A message to prepend to the data</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
