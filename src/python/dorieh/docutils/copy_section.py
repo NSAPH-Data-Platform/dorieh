@@ -75,7 +75,7 @@ def insert_section(source: str, to: str, project: str = None):
                     n = tokens.index("from")
                 except ValueError:
                     n = len(tokens)
-                if project != tokens[n + 1]:
+                if project.lower() != tokens[n + 1].lower():
                     continue
                 section = ' '.join(tokens[1:n])
                 start = l1

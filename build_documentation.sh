@@ -63,7 +63,7 @@ copy_section doc/utils.md doc/home.md dorieh.utils
 copy_section doc/docutils.md doc/home.md dorieh.docutils
 copy_section doc/platform.md doc/home.md dorieh.platform
 copy_section doc/gis.md doc/home.md dorieh.gis
-copy_section doc/AppPipelineGenerator.md doc/home.md dorieh.AppPipelineGenerator
+copy_section doc/AppPipelineGenerator.md doc/home.md dorieh.apppipelinegenerator
 copy_section README.md doc/home.md readme
 
 

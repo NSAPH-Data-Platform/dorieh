@@ -258,6 +258,23 @@ Pipelines can be tested with
 <!-- section Introduction from dorieh.AppPipelineGenerator -->
 
 
+[National Studies on Air Pollution and Health](https://www.hsph.harvard.edu/nsaph/)
+organization (NSAPH) publishes containerized applications to produce
+certain types of data. These applications are published on the
+[NSAPH Data Production GitHub](https://github.com/NSAPH-Data-Processing).
+
+The Pipeline Generator generates a 
+[CWL](https://www.commonwl.org/) pipeline to execute the app and ingest
+the data it produces into Dorieh Data warehouse.
+
+The process of data ingestion consists of two steps:
+
+1. Generation of the piepline for data ingestion
+2. Execution of the pipeline
+
+             
+<!-- end of section introduction from dorieh.apppipelinegenerator -->
+
 ## Deployment
 
 Dorieh can be deployed either as a Python virtual environment or as a Docker container.
