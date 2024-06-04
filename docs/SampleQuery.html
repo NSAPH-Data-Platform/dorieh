@@ -56,8 +56,8 @@
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="guts.html">Data Platform Internals</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="platform.html">Dorieh Core Data Platform</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="Datamodels.html">Data Modelling for NSAPH Data Platform</a></li>
-<li class="toctree-l3"><a class="reference internal" href="DataLoader.html">NSAPH Data Loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html">Data Modelling for Dorieh Data Platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DataLoader.html">Dorieh Data Loader</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ProjectLoader.html">Project (Directory) Loading Utility</a></li>
 <li class="toctree-l3"><a class="reference internal" href="TerritorialCodes.html">Mapping between different territorial codes</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">How to query the database</a><ul>
@@ -120,7 +120,7 @@
 <ul>
 <li><p><a class="reference internal" href="#create-python-virtual-environment" id="id2">Create Python Virtual Environment</a></p></li>
 <li><p><a class="reference internal" href="#creating-conda-environment" id="id3">Creating Conda environment</a></p></li>
-<li><p><a class="reference internal" href="#install-nsaph-packages" id="id4">Install NSAPH packages</a></p></li>
+<li><p><a class="reference internal" href="#install-dorieh-package" id="id4">Install Dorieh package</a></p></li>
 </ul>
 </li>
 <li><p><a class="reference internal" href="#create-connection-definition-file" id="id5">Create connection definition file</a></p></li>
@@ -128,7 +128,7 @@
 <li><p><a class="reference internal" href="#using-explain-to-optimize-queries" id="id7">Using EXPLAIN to optimize queries</a></p></li>
 </ul>
 </nav>
-<p>Here we show how to query the NSAPH database from Python.</p>
+<p>Here we show how to query the Dorieh database from Python.</p>
 <p>We use public data (climate, pollution, census) in the query,
 hence it can be executed in any environment.</p>
 <section id="setup">
@@ -139,8 +139,8 @@ Python Virtual Environment or Conda environment.</p>
 <h3><a class="toc-backref" href="#id2" role="doc-backlink">Create Python Virtual Environment</a><a class="headerlink" href="#create-python-virtual-environment" title="Permalink to this heading"></a></h3>
 <p>First, we need to create a Python virtual environment. This can
 be done with commands like:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.nsaph
-<span class="nb">source</span><span class="w"> </span>.nsaph/bin/activate
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.dorieh
+<span class="nb">source</span><span class="w"> </span>.dorieh/bin/activate
 </pre></div>
 </div>
 </section>
@@ -148,12 +148,11 @@ be done with commands like:</p>
 <h3><a class="toc-backref" href="#id3" role="doc-backlink">Creating Conda environment</a><a class="headerlink" href="#creating-conda-environment" title="Permalink to this heading"></a></h3>
 <p>To run the software on older operating systems, use Conda environment.</p>
 </section>
-<section id="install-nsaph-packages">
-<h3><a class="toc-backref" href="#id4" role="doc-backlink">Install NSAPH packages</a><a class="headerlink" href="#install-nsaph-packages" title="Permalink to this heading"></a></h3>
+<section id="install-dorieh-package">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Install Dorieh package</a><a class="headerlink" href="#install-dorieh-package" title="Permalink to this heading"></a></h3>
 <p>Next, we need to install NSAPH core packages. This can be done
 using GitHub install:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/NSAPH-Data-Platform/nsaph-utils.git
-python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/NSAPH-Data-Platform/nsaph-core-platform.git
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>dorieh
 </pre></div>
 </div>
 <p>If you are getting errors installing dorieh package with FST format support (<code class="docutils literal notranslate"><span class="pre">dorieh[FST]</span></code>), if you see
@@ -182,7 +181,7 @@ to the database. Here is a sample file I use:</p>
 </div>
 <blockquote>
 <div><p>Note that the first connection uses my local instance of PostgreSQL
-on my laptop. The second connects to NSAPH database. It is using ssh
+on my laptop. The second connects to <code class="docutils literal notranslate"><span class="pre">NSAPH</span></code> database. It is using ssh
 tunnel to connect - this is defined by adding ssh_user parameter.</p>
 <p><strong>mbouzinier</strong> is my username for both ssh and the database.</p>
 </div></blockquote>
@@ -190,7 +189,7 @@ tunnel to connect - this is defined by adding ssh_user parameter.</p>
 <section id="executing-the-query">
 <h2><a class="toc-backref" href="#id6" role="doc-backlink">Executing the query</a><a class="headerlink" href="#executing-the-query" title="Permalink to this heading"></a></h2>
 <p>We will use the following sample Python program to execute
-a query (with public data) on the NSAPH database:
+a query (with public data) on a Dorieh database:
 <a class="reference internal" href="members/sample_query.html"><span class="doc std std-doc">query.py</span></a></p>
 <p>Copy the file into your local directory and execute it:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-u<span class="w"> </span>query.py<span class="w"> </span>database.ini<span class="w"> </span>nsaph2

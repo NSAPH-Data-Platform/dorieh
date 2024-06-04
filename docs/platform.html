@@ -23,7 +23,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Data Modelling for NSAPH Data Platform" href="Datamodels.html" />
+    <link rel="next" title="Data Modelling for Dorieh Data Platform" href="Datamodels.html" />
     <link rel="prev" title="Data Platform Internals" href="guts.html" /> 
 </head>
 
@@ -56,8 +56,8 @@
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="guts.html">Data Platform Internals</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Dorieh Core Data Platform</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="Datamodels.html">Data Modelling for NSAPH Data Platform</a></li>
-<li class="toctree-l3"><a class="reference internal" href="DataLoader.html">NSAPH Data Loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html">Data Modelling for Dorieh Data Platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DataLoader.html">Dorieh Data Loader</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ProjectLoader.html">Project (Directory) Loading Utility</a></li>
 <li class="toctree-l3"><a class="reference internal" href="TerritorialCodes.html">Mapping between different territorial codes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="SampleQuery.html">How to query the database</a></li>
@@ -154,7 +154,7 @@ and counties. See more information in the
 <li><p>A <a class="reference internal" href="members/monitor.html"><span class="doc std std-doc">utility to monitor progress of long-running database</span></a> processes like indexing.</p></li>
 <li><p>A <a class="reference internal" href="members/introspector.html"><span class="doc std std-doc">utility to infer database schema and generate DDL</span></a> from a CSV file</p></li>
 <li><p>A <a class="reference internal" href="members/link_gis.html"><span class="doc std std-doc">utility to link a table to GIS</span></a> from a CSV file</p></li>
-<li><p>A <a class="reference internal" href="#module-database-connection-wrapper"><span class="xref myst">wrapper around database connection to PostgreSQL</span></a></p></li>
+<li><p>A <a class="reference internal" href="members/db.html"><span class="doc std std-doc">wrapper around database connection to PostgreSQL</span></a></p></li>
 <li><p>A <a class="reference internal" href="members/pg_json_dump.html"><span class="doc std std-doc">utility to import/export JSONLines</span></a> files into/from PostgreSQL</p></li>
 <li><p>A <a class="reference internal" href="members/pg_export_parquet.html"><span class="doc std std-doc">utility to export Parquet files</span></a> files from PostgreSQL</p></li>
 <li><p>An <a class="reference internal" href="members/executors.html"><span class="doc std std-doc">Executor with a bounded queue</span></a></p></li>
@@ -238,8 +238,11 @@ format. This format is used natively by some DBMSs.</p>
 <li><p>Procedure:</p>
 <ul>
 <li><p><a class="reference internal" href="members/utils.sql.html"><span class="doc std std-doc">A procedure</span></a> granting <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> privileges
-to a user on all NSAPH tables</p></li>
+to a user on all tables created or managed by Dorieh platform</p>
+<ul>
 <li><p><a class="reference internal" href="members/rename_indices.sql.html"><span class="doc std std-doc">A procedure to rename indices</span></a></p></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><p>Set of SQL statements:
@@ -278,7 +281,7 @@ page.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="guts.html" class="btn btn-neutral float-left" title="Data Platform Internals" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Datamodels.html" class="btn btn-neutral float-right" title="Data Modelling for NSAPH Data Platform" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Datamodels.html" class="btn btn-neutral float-right" title="Data Modelling for Dorieh Data Platform" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

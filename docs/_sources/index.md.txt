@@ -1,4 +1,4 @@
-# NSAPH Data Platform
+# Dorieh Data Platform
 
 ```{toctree}
 ---
