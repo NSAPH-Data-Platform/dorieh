@@ -322,7 +322,7 @@ command. The image is built for Intel/AMD and ARM CPUs. ARM architecture is used
 processors that, according to AWS, deliver up to 40% better price performance. ARM CPUs are also used
 by latest Mac computers.
 
-If you would like to modify the container please refer to the [README](../docker/README.md) in the docker directory.
+If you would like to modify the container please refer to the [README](docker_readme.md) in the docker directory.
 
 
 ### Using the Database

@@ -1,0 +1,33 @@
+### Example user request for data
+###
+### This request is to provide a dataset extracted from the `climate` knowledge
+### domain, containing the given variables, with data restricted to a specific
+### year and month and to certain geographical areas. The data to be packaged
+### as HDF5. Data should be aggregated by state and date.
+
+name: request_148302
+source: climate
+variables:
+  - state
+  - sitecode
+  - zip
+  - date
+  - tmmx
+  - rmax
+  - name
+restrict:
+  date:
+    YEAR: 2016
+    MONTH: 1
+  state:
+    - CA
+    - MA
+  name:
+    - Ferndale
+    - Allston
+    - Newton
+package:
+  format: hdf5
+  group:
+    - state
+    - date
