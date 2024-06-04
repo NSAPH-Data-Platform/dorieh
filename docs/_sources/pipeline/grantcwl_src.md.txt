@@ -5,8 +5,7 @@ orphan: true
 # grant.cwl
 
 ```{literalinclude} ../../src/cwl/grant.cwl
----
-language: yaml
----
+:linenos:
+:language: yaml
 ```
 

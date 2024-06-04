@@ -5,8 +5,7 @@ orphan: true
 # update_medicaid.cwl
 
 ```{literalinclude} ../../src/cwl/update_medicaid.cwl
----
-language: yaml
----
+:linenos:
+:language: yaml
 ```
 

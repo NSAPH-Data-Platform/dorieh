@@ -5,8 +5,7 @@ orphan: true
 # census_workflow.cwl
 
 ```{literalinclude} ../../src/cwl/census_workflow.cwl
----
-language: yaml
----
+:linenos:
+:language: yaml
 ```
 

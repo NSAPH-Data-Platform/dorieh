@@ -5,8 +5,7 @@ orphan: true
 # add_daily_data.cwl
 
 ```{literalinclude} ../../src/cwl/add_daily_data.cwl
----
-language: yaml
----
+:linenos:
+:language: yaml
 ```
 

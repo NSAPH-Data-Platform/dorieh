@@ -5,8 +5,7 @@ orphan: true
 # pm25_yearly_download.cwl
 
 ```{literalinclude} ../../src/cwl/pm25_yearly_download.cwl
----
-language: yaml
----
+:linenos:
+:language: yaml
 ```
 

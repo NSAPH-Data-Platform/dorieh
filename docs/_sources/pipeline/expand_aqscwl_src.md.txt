@@ -5,8 +5,7 @@ orphan: true
 # expand_aqs.cwl
 
 ```{literalinclude} ../../src/cwl/expand_aqs.cwl
----
-language: yaml
----
+:linenos:
+:language: yaml
 ```
 

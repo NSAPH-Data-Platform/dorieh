@@ -86,209 +86,209 @@
              
   <section id="test-pm25-yearly-download-cwl">
 <h1>test_pm25_yearly_download.cwl<a class="headerlink" href="#test-pm25-yearly-download-cwl" title="Permalink to this heading"></a></h1>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1">#!/usr/bin/env cwl-runner</span>
-<span class="c1">### Test harness for pm25_yearly_download.cwl</span>
-
-<span class="nt">cwlVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1.2</span>
-<span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Workflow</span>
-
-<span class="nt">requirements</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">InlineJavascriptRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
-<span class="w">  </span><span class="nt">MultipleInputFeatureRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
-<span class="w">  </span><span class="nt">ScatterFeatureRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
-<span class="w">  </span><span class="nt">StepInputExpressionRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
-<span class="w">  </span><span class="nt">SubworkflowFeatureRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
-
-
-<span class="c1"># All inputs of original pipeline, remove what is not needed</span>
-<span class="nt">inputs</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">component</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">BC</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NH4</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NIT</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OM</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SO4</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SOIL</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SS</span>
-<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Optional</span><span class="nv"> </span><span class="s">components</span><span class="nv"> </span><span class="s">provided</span><span class="nv"> </span><span class="s">as</span><span class="nv"> </span><span class="s">percentages</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">separate</span><span class="nv"> </span><span class="s">set</span><span class="nv"> </span><span class="s">\nof</span><span class="nv"> </span><span class="s">netCDF\</span>
-<span class="w">      </span><span class="s">\ files\n&quot;</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string[]</span>
-<span class="w">  </span><span class="nt">connection_name</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;The</span><span class="nv"> </span><span class="s">name</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">section</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">database.ini</span><span class="nv"> </span><span class="s">file</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">literal</span>
-
-<span class="w">      </span><span class="s">`None`</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">skip</span><span class="nv"> </span><span class="s">over</span><span class="nv"> </span><span class="s">database</span><span class="nv"> </span><span class="s">ingestion</span><span class="nv"> </span><span class="s">step</span>
-
-<span class="w">      </span><span class="s">&#39;</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">  </span><span class="nt">database</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database.ini</span>
-<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Path</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">database</span><span class="nv"> </span><span class="s">connection</span><span class="nv"> </span><span class="s">file,</span><span class="nv"> </span><span class="s">usually</span><span class="nv"> </span><span class="s">database.ini.</span><span class="nv"> </span><span class="s">\nThis</span><span class="nv"> </span><span class="s">argument\</span>
-<span class="w">      </span><span class="s">\ is</span><span class="nv"> </span><span class="s">ignored</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">`connection_name`</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">`None`\n&quot;</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="w">  </span><span class="nt">downloads</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Local</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">AWS</span><span class="nv"> </span><span class="s">bucket</span><span class="nv"> </span><span class="s">folder</span><span class="nv"> </span><span class="s">containing</span><span class="nv"> </span><span class="s">netCDF</span><span class="nv"> </span><span class="s">grid</span><span class="nv"> </span><span class="s">files,</span><span class="nv"> </span><span class="s">downloaded</span><span class="nv"> </span><span class="s">\nand\</span>
-<span class="w">      </span><span class="s">\ unpacked</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">Washington</span><span class="nv"> </span><span class="s">University</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">St.</span><span class="nv"> </span><span class="s">Louis</span><span class="nv"> </span><span class="s">(WUSTL)</span><span class="nv"> </span><span class="s">Box\nsite.</span><span class="nv"> </span><span class="s">Annual\</span>
-<span class="w">      </span><span class="s">\ and</span><span class="nv"> </span><span class="s">monthly</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">repositories</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">described</span><span class="nv"> </span><span class="s">in\n[WUSTL</span><span class="nv"> </span><span class="s">Atmospheric</span><span class="nv"> </span><span class="s">Composition\</span>
-<span class="w">      </span><span class="s">\ Analysis</span><span class="nv"> </span><span class="s">Group](https://sites.wustl.edu/acag/datasets/surface-pm2-5/).\n\n\</span>
-<span class="w">      </span><span class="s">The</span><span class="nv"> </span><span class="s">annual</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">PM2.5</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">also</span><span class="nv"> </span><span class="s">available</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">\na</span><span class="nv"> </span><span class="s">Harvard</span><span class="nv"> </span><span class="s">URC</span><span class="nv"> </span><span class="s">AWS</span><span class="nv"> </span><span class="s">Bucket:</span><span class="nv"> </span><span class="s">`s3://nsaph-public/data/exposures/wustl/`\n&quot;</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Directory</span>
-<span class="w">  </span><span class="nt">geography</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Type</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">geography:</span><span class="nv"> </span><span class="s">zip</span><span class="nv"> </span><span class="s">codes</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">counties</span>
-
-<span class="w">      </span><span class="s">Supported</span><span class="nv"> </span><span class="s">values:</span><span class="nv"> </span><span class="s">&quot;zip&quot;,</span><span class="nv"> </span><span class="s">&quot;zcta&quot;</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">&quot;county&quot;</span>
-
-<span class="w">      </span><span class="s">&#39;</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">  </span><span class="nt">proxy</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
-<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HTTP/HTTPS Proxy if required</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string?</span>
-<span class="w">  </span><span class="nt">ram</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2GB</span>
-<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Runtime memory, available to the process</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">  </span><span class="nt">shape_file_collection</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tiger</span>
-<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;[Collection</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">shapefiles](https://www2.census.gov/geo/tiger),</span><span class="nv"> </span><span class="s">\neither\</span>
-<span class="w">      </span><span class="s">\ GENZ</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">TIGER\n&quot;</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">  </span><span class="nt">strategy</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">auto</span>
-<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Rasterization</span><span class="nv"> </span><span class="s">strategy,</span><span class="nv"> </span><span class="s">see</span>
-
-<span class="w">      </span><span class="s">[documentation](https://nsaph-data-platform.github.io/nsaph-platform-docs/common/gridmet/doc/strategy.html)</span>
-
-<span class="w">      </span><span class="s">for</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">list</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">supported</span><span class="nv"> </span><span class="s">values</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">explanations</span>
-
-<span class="w">      </span><span class="s">&#39;</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">  </span><span class="nt">table</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pm25_aggregated</span>
-<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The name of the table to store teh aggregated data in</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">  </span><span class="nt">test_script</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File containing SQL test script</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="w">  </span><span class="nt">variable</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PM25</span>
-<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;The</span><span class="nv"> </span><span class="s">main</span><span class="nv"> </span><span class="s">variable</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">being</span><span class="nv"> </span><span class="s">aggregated</span><span class="nv"> </span><span class="s">over</span><span class="nv"> </span><span class="s">shapes.</span><span class="nv"> </span><span class="s">We</span><span class="nv"> </span><span class="s">have</span><span class="nv"> </span><span class="s">tested</span>
-
-<span class="w">      </span><span class="s">the</span><span class="nv"> </span><span class="s">pipeline</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">PM25</span>
-
-<span class="w">      </span><span class="s">&#39;</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">  </span><span class="nt">years</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2000</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2001</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2002</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2003</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2004</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2005</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2006</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2007</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2008</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2009</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2010</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2011</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2012</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2013</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2014</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2015</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2016</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2017</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">int[]</span>
-
-
-<span class="nt">steps</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">execute</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pm25_yearly_download.cwl</span>
-<span class="w">    </span><span class="nt">in</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">proxy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">proxy</span>
-<span class="w">      </span><span class="nt">downloads</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">downloads</span>
-<span class="w">      </span><span class="nt">geography</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">geography</span>
-<span class="w">      </span><span class="nt">years</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">years</span>
-<span class="w">      </span><span class="nt">variable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable</span>
-<span class="w">      </span><span class="nt">component</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">component</span>
-<span class="w">      </span><span class="nt">strategy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">strategy</span>
-<span class="w">      </span><span class="nt">ram</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ram</span>
-<span class="w">      </span><span class="nt">shape_file_collection</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">shape_file_collection</span>
-<span class="w">      </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
-<span class="w">      </span><span class="nt">connection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection_name</span>
-<span class="w">      </span><span class="nt">table</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">table</span>
-<span class="w">    </span><span class="nt">out</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">aggregate_data</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data_dictionary</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">consolidated_data</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">shapes</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">aggregate_log</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">aggregate_err</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ingest_log</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">index_log</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vacuum_log</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ingest_err</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">index_err</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vacuum_err</span>
-
-<span class="w">  </span><span class="nt">verify</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">run_test.cwl</span>
-<span class="w">    </span><span class="nt">in</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
-<span class="w">      </span><span class="nt">connection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection_name</span>
-<span class="w">      </span><span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test_script</span>
-<span class="w">      </span><span class="nt">depends_on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/vacuum_err</span>
-<span class="w">    </span><span class="nt">out</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">log</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">errors</span>
-
-<span class="nt">outputs</span><span class="p">:</span>
-<span class="c1">## Generated by nsaph/util/cwl_collect_outputs.py from pm25_yearly_download.cwl:</span>
-<span class="w">  </span><span class="nt">execute_aggregate_data</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File[]</span>
-<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/aggregate_data</span>
-<span class="w">  </span><span class="nt">execute_data_dictionary</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/data_dictionary</span>
-<span class="w">  </span><span class="nt">execute_consolidated_data</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File[]</span>
-<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/consolidated_data</span>
-<span class="w">  </span><span class="nt">execute_shapes</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="s">&#39;type&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;array&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;items&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="s">&#39;type&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;array&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;items&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;File&#39;</span><span class="p p-Indicator">]}}</span>
-<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/shapes</span>
-<span class="w">  </span><span class="nt">execute_aggregate_log</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="s">&#39;type&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;array&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;items&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;Any&#39;</span><span class="p p-Indicator">}</span>
-<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/aggregate_log</span>
-<span class="w">  </span><span class="nt">execute_aggregate_err</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File[]</span>
-<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/aggregate_err</span>
-<span class="w">  </span><span class="nt">execute_ingest_log</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/ingest_log</span>
-<span class="w">  </span><span class="nt">execute_index_log</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/index_log</span>
-<span class="w">  </span><span class="nt">execute_vacuum_log</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/vacuum_log</span>
-<span class="w">  </span><span class="nt">execute_ingest_err</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/ingest_err</span>
-<span class="w">  </span><span class="nt">execute_index_err</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/index_err</span>
-<span class="w">  </span><span class="nt">execute_vacuum_err</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/vacuum_err</span>
-<span class="c1">## Generated by nsaph/util/cwl_collect_outputs.py from run_test.cwl:</span>
-<span class="w">  </span><span class="nt">verify_log</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">verify/log</span>
-<span class="w">  </span><span class="nt">verify_errors</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">verify/errors</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1">#!/usr/bin/env cwl-runner</span>
+<span class="linenos">  2</span><span class="c1">### Test harness for pm25_yearly_download.cwl</span>
+<span class="linenos">  3</span>
+<span class="linenos">  4</span><span class="nt">cwlVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1.2</span>
+<span class="linenos">  5</span><span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Workflow</span>
+<span class="linenos">  6</span>
+<span class="linenos">  7</span><span class="nt">requirements</span><span class="p">:</span>
+<span class="linenos">  8</span><span class="w">  </span><span class="nt">InlineJavascriptRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="linenos">  9</span><span class="w">  </span><span class="nt">MultipleInputFeatureRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="linenos"> 10</span><span class="w">  </span><span class="nt">ScatterFeatureRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="linenos"> 11</span><span class="w">  </span><span class="nt">StepInputExpressionRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="linenos"> 12</span><span class="w">  </span><span class="nt">SubworkflowFeatureRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="linenos"> 13</span>
+<span class="linenos"> 14</span>
+<span class="linenos"> 15</span><span class="c1"># All inputs of original pipeline, remove what is not needed</span>
+<span class="linenos"> 16</span><span class="nt">inputs</span><span class="p">:</span>
+<span class="linenos"> 17</span><span class="w">  </span><span class="nt">component</span><span class="p">:</span>
+<span class="linenos"> 18</span><span class="w">    </span><span class="nt">default</span><span class="p">:</span>
+<span class="linenos"> 19</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">BC</span>
+<span class="linenos"> 20</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NH4</span>
+<span class="linenos"> 21</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NIT</span>
+<span class="linenos"> 22</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OM</span>
+<span class="linenos"> 23</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SO4</span>
+<span class="linenos"> 24</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SOIL</span>
+<span class="linenos"> 25</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SS</span>
+<span class="linenos"> 26</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Optional</span><span class="nv"> </span><span class="s">components</span><span class="nv"> </span><span class="s">provided</span><span class="nv"> </span><span class="s">as</span><span class="nv"> </span><span class="s">percentages</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">separate</span><span class="nv"> </span><span class="s">set</span><span class="nv"> </span><span class="s">\nof</span><span class="nv"> </span><span class="s">netCDF\</span>
+<span class="linenos"> 27</span><span class="w">      </span><span class="s">\ files\n&quot;</span>
+<span class="linenos"> 28</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string[]</span>
+<span class="linenos"> 29</span><span class="w">  </span><span class="nt">connection_name</span><span class="p">:</span>
+<span class="linenos"> 30</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;The</span><span class="nv"> </span><span class="s">name</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">section</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">database.ini</span><span class="nv"> </span><span class="s">file</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">literal</span>
+<span class="linenos"> 31</span>
+<span class="linenos"> 32</span><span class="w">      </span><span class="s">`None`</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">skip</span><span class="nv"> </span><span class="s">over</span><span class="nv"> </span><span class="s">database</span><span class="nv"> </span><span class="s">ingestion</span><span class="nv"> </span><span class="s">step</span>
+<span class="linenos"> 33</span>
+<span class="linenos"> 34</span><span class="w">      </span><span class="s">&#39;</span>
+<span class="linenos"> 35</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="linenos"> 36</span><span class="w">  </span><span class="nt">database</span><span class="p">:</span>
+<span class="linenos"> 37</span><span class="w">    </span><span class="nt">default</span><span class="p">:</span>
+<span class="linenos"> 38</span><span class="w">      </span><span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos"> 39</span><span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database.ini</span>
+<span class="linenos"> 40</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Path</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">database</span><span class="nv"> </span><span class="s">connection</span><span class="nv"> </span><span class="s">file,</span><span class="nv"> </span><span class="s">usually</span><span class="nv"> </span><span class="s">database.ini.</span><span class="nv"> </span><span class="s">\nThis</span><span class="nv"> </span><span class="s">argument\</span>
+<span class="linenos"> 41</span><span class="w">      </span><span class="s">\ is</span><span class="nv"> </span><span class="s">ignored</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">`connection_name`</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">`None`\n&quot;</span>
+<span class="linenos"> 42</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos"> 43</span><span class="w">  </span><span class="nt">downloads</span><span class="p">:</span>
+<span class="linenos"> 44</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Local</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">AWS</span><span class="nv"> </span><span class="s">bucket</span><span class="nv"> </span><span class="s">folder</span><span class="nv"> </span><span class="s">containing</span><span class="nv"> </span><span class="s">netCDF</span><span class="nv"> </span><span class="s">grid</span><span class="nv"> </span><span class="s">files,</span><span class="nv"> </span><span class="s">downloaded</span><span class="nv"> </span><span class="s">\nand\</span>
+<span class="linenos"> 45</span><span class="w">      </span><span class="s">\ unpacked</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">Washington</span><span class="nv"> </span><span class="s">University</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">St.</span><span class="nv"> </span><span class="s">Louis</span><span class="nv"> </span><span class="s">(WUSTL)</span><span class="nv"> </span><span class="s">Box\nsite.</span><span class="nv"> </span><span class="s">Annual\</span>
+<span class="linenos"> 46</span><span class="w">      </span><span class="s">\ and</span><span class="nv"> </span><span class="s">monthly</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">repositories</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">described</span><span class="nv"> </span><span class="s">in\n[WUSTL</span><span class="nv"> </span><span class="s">Atmospheric</span><span class="nv"> </span><span class="s">Composition\</span>
+<span class="linenos"> 47</span><span class="w">      </span><span class="s">\ Analysis</span><span class="nv"> </span><span class="s">Group](https://sites.wustl.edu/acag/datasets/surface-pm2-5/).\n\n\</span>
+<span class="linenos"> 48</span><span class="w">      </span><span class="s">The</span><span class="nv"> </span><span class="s">annual</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">PM2.5</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">also</span><span class="nv"> </span><span class="s">available</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">\na</span><span class="nv"> </span><span class="s">Harvard</span><span class="nv"> </span><span class="s">URC</span><span class="nv"> </span><span class="s">AWS</span><span class="nv"> </span><span class="s">Bucket:</span><span class="nv"> </span><span class="s">`s3://nsaph-public/data/exposures/wustl/`\n&quot;</span>
+<span class="linenos"> 49</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Directory</span>
+<span class="linenos"> 50</span><span class="w">  </span><span class="nt">geography</span><span class="p">:</span>
+<span class="linenos"> 51</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Type</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">geography:</span><span class="nv"> </span><span class="s">zip</span><span class="nv"> </span><span class="s">codes</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">counties</span>
+<span class="linenos"> 52</span>
+<span class="linenos"> 53</span><span class="w">      </span><span class="s">Supported</span><span class="nv"> </span><span class="s">values:</span><span class="nv"> </span><span class="s">&quot;zip&quot;,</span><span class="nv"> </span><span class="s">&quot;zcta&quot;</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">&quot;county&quot;</span>
+<span class="linenos"> 54</span>
+<span class="linenos"> 55</span><span class="w">      </span><span class="s">&#39;</span>
+<span class="linenos"> 56</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="linenos"> 57</span><span class="w">  </span><span class="nt">proxy</span><span class="p">:</span>
+<span class="linenos"> 58</span><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="linenos"> 59</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HTTP/HTTPS Proxy if required</span>
+<span class="linenos"> 60</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string?</span>
+<span class="linenos"> 61</span><span class="w">  </span><span class="nt">ram</span><span class="p">:</span>
+<span class="linenos"> 62</span><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2GB</span>
+<span class="linenos"> 63</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Runtime memory, available to the process</span>
+<span class="linenos"> 64</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="linenos"> 65</span><span class="w">  </span><span class="nt">shape_file_collection</span><span class="p">:</span>
+<span class="linenos"> 66</span><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tiger</span>
+<span class="linenos"> 67</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;[Collection</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">shapefiles](https://www2.census.gov/geo/tiger),</span><span class="nv"> </span><span class="s">\neither\</span>
+<span class="linenos"> 68</span><span class="w">      </span><span class="s">\ GENZ</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">TIGER\n&quot;</span>
+<span class="linenos"> 69</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="linenos"> 70</span><span class="w">  </span><span class="nt">strategy</span><span class="p">:</span>
+<span class="linenos"> 71</span><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">auto</span>
+<span class="linenos"> 72</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Rasterization</span><span class="nv"> </span><span class="s">strategy,</span><span class="nv"> </span><span class="s">see</span>
+<span class="linenos"> 73</span>
+<span class="linenos"> 74</span><span class="w">      </span><span class="s">[documentation](https://nsaph-data-platform.github.io/nsaph-platform-docs/common/gridmet/doc/strategy.html)</span>
+<span class="linenos"> 75</span>
+<span class="linenos"> 76</span><span class="w">      </span><span class="s">for</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">list</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">supported</span><span class="nv"> </span><span class="s">values</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">explanations</span>
+<span class="linenos"> 77</span>
+<span class="linenos"> 78</span><span class="w">      </span><span class="s">&#39;</span>
+<span class="linenos"> 79</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="linenos"> 80</span><span class="w">  </span><span class="nt">table</span><span class="p">:</span>
+<span class="linenos"> 81</span><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pm25_aggregated</span>
+<span class="linenos"> 82</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The name of the table to store teh aggregated data in</span>
+<span class="linenos"> 83</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="linenos"> 84</span><span class="w">  </span><span class="nt">test_script</span><span class="p">:</span>
+<span class="linenos"> 85</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File containing SQL test script</span>
+<span class="linenos"> 86</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos"> 87</span><span class="w">  </span><span class="nt">variable</span><span class="p">:</span>
+<span class="linenos"> 88</span><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PM25</span>
+<span class="linenos"> 89</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;The</span><span class="nv"> </span><span class="s">main</span><span class="nv"> </span><span class="s">variable</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">being</span><span class="nv"> </span><span class="s">aggregated</span><span class="nv"> </span><span class="s">over</span><span class="nv"> </span><span class="s">shapes.</span><span class="nv"> </span><span class="s">We</span><span class="nv"> </span><span class="s">have</span><span class="nv"> </span><span class="s">tested</span>
+<span class="linenos"> 90</span>
+<span class="linenos"> 91</span><span class="w">      </span><span class="s">the</span><span class="nv"> </span><span class="s">pipeline</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">PM25</span>
+<span class="linenos"> 92</span>
+<span class="linenos"> 93</span><span class="w">      </span><span class="s">&#39;</span>
+<span class="linenos"> 94</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="linenos"> 95</span><span class="w">  </span><span class="nt">years</span><span class="p">:</span>
+<span class="linenos"> 96</span><span class="w">    </span><span class="nt">default</span><span class="p">:</span>
+<span class="linenos"> 97</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2000</span>
+<span class="linenos"> 98</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2001</span>
+<span class="linenos"> 99</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2002</span>
+<span class="linenos">100</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2003</span>
+<span class="linenos">101</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2004</span>
+<span class="linenos">102</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2005</span>
+<span class="linenos">103</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2006</span>
+<span class="linenos">104</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2007</span>
+<span class="linenos">105</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2008</span>
+<span class="linenos">106</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2009</span>
+<span class="linenos">107</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2010</span>
+<span class="linenos">108</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2011</span>
+<span class="linenos">109</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2012</span>
+<span class="linenos">110</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2013</span>
+<span class="linenos">111</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2014</span>
+<span class="linenos">112</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2015</span>
+<span class="linenos">113</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2016</span>
+<span class="linenos">114</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2017</span>
+<span class="linenos">115</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">int[]</span>
+<span class="linenos">116</span>
+<span class="linenos">117</span>
+<span class="linenos">118</span><span class="nt">steps</span><span class="p">:</span>
+<span class="linenos">119</span><span class="w">  </span><span class="nt">execute</span><span class="p">:</span>
+<span class="linenos">120</span><span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pm25_yearly_download.cwl</span>
+<span class="linenos">121</span><span class="w">    </span><span class="nt">in</span><span class="p">:</span>
+<span class="linenos">122</span><span class="w">      </span><span class="nt">proxy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">proxy</span>
+<span class="linenos">123</span><span class="w">      </span><span class="nt">downloads</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">downloads</span>
+<span class="linenos">124</span><span class="w">      </span><span class="nt">geography</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">geography</span>
+<span class="linenos">125</span><span class="w">      </span><span class="nt">years</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">years</span>
+<span class="linenos">126</span><span class="w">      </span><span class="nt">variable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable</span>
+<span class="linenos">127</span><span class="w">      </span><span class="nt">component</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">component</span>
+<span class="linenos">128</span><span class="w">      </span><span class="nt">strategy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">strategy</span>
+<span class="linenos">129</span><span class="w">      </span><span class="nt">ram</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ram</span>
+<span class="linenos">130</span><span class="w">      </span><span class="nt">shape_file_collection</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">shape_file_collection</span>
+<span class="linenos">131</span><span class="w">      </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
+<span class="linenos">132</span><span class="w">      </span><span class="nt">connection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection_name</span>
+<span class="linenos">133</span><span class="w">      </span><span class="nt">table</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">table</span>
+<span class="linenos">134</span><span class="w">    </span><span class="nt">out</span><span class="p">:</span>
+<span class="linenos">135</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">aggregate_data</span>
+<span class="linenos">136</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data_dictionary</span>
+<span class="linenos">137</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">consolidated_data</span>
+<span class="linenos">138</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">shapes</span>
+<span class="linenos">139</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">aggregate_log</span>
+<span class="linenos">140</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">aggregate_err</span>
+<span class="linenos">141</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ingest_log</span>
+<span class="linenos">142</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">index_log</span>
+<span class="linenos">143</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vacuum_log</span>
+<span class="linenos">144</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ingest_err</span>
+<span class="linenos">145</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">index_err</span>
+<span class="linenos">146</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vacuum_err</span>
+<span class="linenos">147</span>
+<span class="linenos">148</span><span class="w">  </span><span class="nt">verify</span><span class="p">:</span>
+<span class="linenos">149</span><span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">run_test.cwl</span>
+<span class="linenos">150</span><span class="w">    </span><span class="nt">in</span><span class="p">:</span>
+<span class="linenos">151</span><span class="w">      </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
+<span class="linenos">152</span><span class="w">      </span><span class="nt">connection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection_name</span>
+<span class="linenos">153</span><span class="w">      </span><span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test_script</span>
+<span class="linenos">154</span><span class="w">      </span><span class="nt">depends_on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/vacuum_err</span>
+<span class="linenos">155</span><span class="w">    </span><span class="nt">out</span><span class="p">:</span>
+<span class="linenos">156</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">log</span>
+<span class="linenos">157</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">errors</span>
+<span class="linenos">158</span>
+<span class="linenos">159</span><span class="nt">outputs</span><span class="p">:</span>
+<span class="linenos">160</span><span class="c1">## Generated by nsaph/util/cwl_collect_outputs.py from pm25_yearly_download.cwl:</span>
+<span class="linenos">161</span><span class="w">  </span><span class="nt">execute_aggregate_data</span><span class="p">:</span>
+<span class="linenos">162</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File[]</span>
+<span class="linenos">163</span><span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/aggregate_data</span>
+<span class="linenos">164</span><span class="w">  </span><span class="nt">execute_data_dictionary</span><span class="p">:</span>
+<span class="linenos">165</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">166</span><span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/data_dictionary</span>
+<span class="linenos">167</span><span class="w">  </span><span class="nt">execute_consolidated_data</span><span class="p">:</span>
+<span class="linenos">168</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File[]</span>
+<span class="linenos">169</span><span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/consolidated_data</span>
+<span class="linenos">170</span><span class="w">  </span><span class="nt">execute_shapes</span><span class="p">:</span>
+<span class="linenos">171</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="s">&#39;type&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;array&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;items&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="s">&#39;type&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;array&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;items&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;File&#39;</span><span class="p p-Indicator">]}}</span>
+<span class="linenos">172</span><span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/shapes</span>
+<span class="linenos">173</span><span class="w">  </span><span class="nt">execute_aggregate_log</span><span class="p">:</span>
+<span class="linenos">174</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="s">&#39;type&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;array&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;items&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;Any&#39;</span><span class="p p-Indicator">}</span>
+<span class="linenos">175</span><span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/aggregate_log</span>
+<span class="linenos">176</span><span class="w">  </span><span class="nt">execute_aggregate_err</span><span class="p">:</span>
+<span class="linenos">177</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File[]</span>
+<span class="linenos">178</span><span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/aggregate_err</span>
+<span class="linenos">179</span><span class="w">  </span><span class="nt">execute_ingest_log</span><span class="p">:</span>
+<span class="linenos">180</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">181</span><span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/ingest_log</span>
+<span class="linenos">182</span><span class="w">  </span><span class="nt">execute_index_log</span><span class="p">:</span>
+<span class="linenos">183</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">184</span><span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/index_log</span>
+<span class="linenos">185</span><span class="w">  </span><span class="nt">execute_vacuum_log</span><span class="p">:</span>
+<span class="linenos">186</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">187</span><span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/vacuum_log</span>
+<span class="linenos">188</span><span class="w">  </span><span class="nt">execute_ingest_err</span><span class="p">:</span>
+<span class="linenos">189</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">190</span><span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/ingest_err</span>
+<span class="linenos">191</span><span class="w">  </span><span class="nt">execute_index_err</span><span class="p">:</span>
+<span class="linenos">192</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">193</span><span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/index_err</span>
+<span class="linenos">194</span><span class="w">  </span><span class="nt">execute_vacuum_err</span><span class="p">:</span>
+<span class="linenos">195</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">196</span><span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">execute/vacuum_err</span>
+<span class="linenos">197</span><span class="c1">## Generated by nsaph/util/cwl_collect_outputs.py from run_test.cwl:</span>
+<span class="linenos">198</span><span class="w">  </span><span class="nt">verify_log</span><span class="p">:</span>
+<span class="linenos">199</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">200</span><span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">verify/log</span>
+<span class="linenos">201</span><span class="w">  </span><span class="nt">verify_errors</span><span class="p">:</span>
+<span class="linenos">202</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">203</span><span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">verify/errors</span>
 </pre></div>
 </div>
 </section>

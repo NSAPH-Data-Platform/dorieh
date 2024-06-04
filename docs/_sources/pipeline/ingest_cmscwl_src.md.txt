@@ -5,8 +5,7 @@ orphan: true
 # ingest_cms.cwl
 
 ```{literalinclude} ../../src/cwl/ingest_cms.cwl
----
-language: yaml
----
+:linenos:
+:language: yaml
 ```
 

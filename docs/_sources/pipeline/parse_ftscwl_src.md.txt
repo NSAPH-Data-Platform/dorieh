@@ -5,8 +5,7 @@ orphan: true
 # parse_fts.cwl
 
 ```{literalinclude} ../../src/cwl/parse_fts.cwl
----
-language: yaml
----
+:linenos:
+:language: yaml
 ```
 

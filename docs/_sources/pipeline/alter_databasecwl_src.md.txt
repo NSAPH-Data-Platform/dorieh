@@ -5,8 +5,7 @@ orphan: true
 # alter_database.cwl
 
 ```{literalinclude} ../../src/cwl/alter_database.cwl
----
-language: yaml
----
+:linenos:
+:language: yaml
 ```
 

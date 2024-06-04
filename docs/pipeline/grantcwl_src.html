@@ -86,68 +86,68 @@
              
   <section id="grant-cwl">
 <h1>grant.cwl<a class="headerlink" href="#grant-cwl" title="Permalink to this heading"></a></h1>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1">### Workflow to grant read (SELECT) privilege to all users in NSAPH admin role</span>
-<span class="c1">#  Copyright (c) 2022. Harvard University</span>
-<span class="c1">#</span>
-<span class="c1">#  Developed by Research Software Engineering,</span>
-<span class="c1">#  Faculty of Arts and Sciences, Research Computing (FAS RC)</span>
-<span class="c1">#  Author: Michael A Bouzinier</span>
-<span class="c1">#</span>
-<span class="c1">#  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
-<span class="c1">#  you may not use this file except in compliance with the License.</span>
-<span class="c1">#  You may obtain a copy of the License at</span>
-<span class="c1">#</span>
-<span class="c1">#         http://www.apache.org/licenses/LICENSE-2.0</span>
-<span class="c1">#</span>
-<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
-<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
-<span class="c1">#  See the License for the specific language governing permissions and</span>
-<span class="c1">#  limitations under the License.</span>
-<span class="c1">#</span>
-
-<span class="nt">cwlVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1.2</span>
-<span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Workflow</span>
-
-<span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">  </span><span class="no">This workflow executes an SQL statement in the database to grant</span>
-<span class="w">  </span><span class="no">read priviligies to NSAPH users (memebrs of group nsaph_admin)</span>
-<span class="w">  </span><span class="no">This is a wrapper around the tool to be called from Airflow DAG.</span>
-
-<span class="nt">inputs</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">database</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Path to database connection file, usually database.ini</span>
-<span class="w">  </span><span class="nt">connection_name</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The name of the section in the database.ini file</span>
-<span class="w">  </span><span class="nt">sql</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string[]</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;call</span><span class="nv"> </span><span class="s">public.grant_select(&#39;nsaph_admin&#39;);&quot;</span>
-
-<span class="nt">steps</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">grant</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">alter_database.cwl</span>
-<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">      </span><span class="no">Grants read access to the members of NSAPH group for newly created</span>
-<span class="w">      </span><span class="no">or updated tables</span>
-<span class="w">    </span><span class="nt">in</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
-<span class="w">      </span><span class="nt">connection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection_name</span>
-<span class="w">      </span><span class="nt">sql</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sql</span>
-<span class="w">    </span><span class="nt">out</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">log</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">err</span>
-
-
-<span class="nt">outputs</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">grant_log</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">grant/log</span>
-<span class="w">  </span><span class="nt">grant_err</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">grant/err</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### Workflow to grant read (SELECT) privilege to all users in NSAPH admin role</span>
+<span class="linenos"> 2</span><span class="c1">#  Copyright (c) 2022. Harvard University</span>
+<span class="linenos"> 3</span><span class="c1">#</span>
+<span class="linenos"> 4</span><span class="c1">#  Developed by Research Software Engineering,</span>
+<span class="linenos"> 5</span><span class="c1">#  Faculty of Arts and Sciences, Research Computing (FAS RC)</span>
+<span class="linenos"> 6</span><span class="c1">#  Author: Michael A Bouzinier</span>
+<span class="linenos"> 7</span><span class="c1">#</span>
+<span class="linenos"> 8</span><span class="c1">#  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="linenos"> 9</span><span class="c1">#  you may not use this file except in compliance with the License.</span>
+<span class="linenos">10</span><span class="c1">#  You may obtain a copy of the License at</span>
+<span class="linenos">11</span><span class="c1">#</span>
+<span class="linenos">12</span><span class="c1">#         http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="linenos">13</span><span class="c1">#</span>
+<span class="linenos">14</span><span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="linenos">15</span><span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="linenos">16</span><span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="linenos">17</span><span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="linenos">18</span><span class="c1">#  limitations under the License.</span>
+<span class="linenos">19</span><span class="c1">#</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span><span class="nt">cwlVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1.2</span>
+<span class="linenos">22</span><span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Workflow</span>
+<span class="linenos">23</span>
+<span class="linenos">24</span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="linenos">25</span><span class="w">  </span><span class="no">This workflow executes an SQL statement in the database to grant</span>
+<span class="linenos">26</span><span class="w">  </span><span class="no">read priviligies to NSAPH users (memebrs of group nsaph_admin)</span>
+<span class="linenos">27</span><span class="w">  </span><span class="no">This is a wrapper around the tool to be called from Airflow DAG.</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span><span class="nt">inputs</span><span class="p">:</span>
+<span class="linenos">30</span><span class="w">  </span><span class="nt">database</span><span class="p">:</span>
+<span class="linenos">31</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">32</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Path to database connection file, usually database.ini</span>
+<span class="linenos">33</span><span class="w">  </span><span class="nt">connection_name</span><span class="p">:</span>
+<span class="linenos">34</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="linenos">35</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The name of the section in the database.ini file</span>
+<span class="linenos">36</span><span class="w">  </span><span class="nt">sql</span><span class="p">:</span>
+<span class="linenos">37</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string[]</span>
+<span class="linenos">38</span><span class="w">    </span><span class="nt">default</span><span class="p">:</span>
+<span class="linenos">39</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;call</span><span class="nv"> </span><span class="s">public.grant_select(&#39;nsaph_admin&#39;);&quot;</span>
+<span class="linenos">40</span>
+<span class="linenos">41</span><span class="nt">steps</span><span class="p">:</span>
+<span class="linenos">42</span><span class="w">  </span><span class="nt">grant</span><span class="p">:</span>
+<span class="linenos">43</span><span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">alter_database.cwl</span>
+<span class="linenos">44</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="linenos">45</span><span class="w">      </span><span class="no">Grants read access to the members of NSAPH group for newly created</span>
+<span class="linenos">46</span><span class="w">      </span><span class="no">or updated tables</span>
+<span class="linenos">47</span><span class="w">    </span><span class="nt">in</span><span class="p">:</span>
+<span class="linenos">48</span><span class="w">      </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
+<span class="linenos">49</span><span class="w">      </span><span class="nt">connection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection_name</span>
+<span class="linenos">50</span><span class="w">      </span><span class="nt">sql</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sql</span>
+<span class="linenos">51</span><span class="w">    </span><span class="nt">out</span><span class="p">:</span>
+<span class="linenos">52</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">log</span>
+<span class="linenos">53</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">err</span>
+<span class="linenos">54</span>
+<span class="linenos">55</span>
+<span class="linenos">56</span><span class="nt">outputs</span><span class="p">:</span>
+<span class="linenos">57</span><span class="w">  </span><span class="nt">grant_log</span><span class="p">:</span>
+<span class="linenos">58</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">59</span><span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">grant/log</span>
+<span class="linenos">60</span><span class="w">  </span><span class="nt">grant_err</span><span class="p">:</span>
+<span class="linenos">61</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">62</span><span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">grant/err</span>
 </pre></div>
 </div>
 </section>

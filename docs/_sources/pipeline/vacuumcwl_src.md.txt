@@ -5,8 +5,7 @@ orphan: true
 # vacuum.cwl
 
 ```{literalinclude} ../../src/cwl/vacuum.cwl
----
-language: yaml
----
+:linenos:
+:language: yaml
 ```
 

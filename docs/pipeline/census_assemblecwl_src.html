@@ -90,69 +90,69 @@
              
   <section id="census-assemble-cwl">
 <h1>census_assemble.cwl<a class="headerlink" href="#census-assemble-cwl" title="Permalink to this heading"></a></h1>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1">#! cwl-runner</span>
-
-<span class="nt">cwlVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1.2</span>
-<span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CommandLineTool</span>
-<span class="nt">baseCommand</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">python</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-m</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">census.cli</span><span class="p p-Indicator">]</span>
-<span class="nt">requirements</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">EnvVarRequirement</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">envDef</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">GET_CENSUS_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$(inputs.api_key)</span>
-<span class="w">      </span><span class="nt">HTTPS_PROXY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$(inputs.http_proxy)</span>
-<span class="w">      </span><span class="nt">HTTP_PROXY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$(inputs.http_proxy)</span>
-<span class="w">  </span><span class="nt">NetworkAccess</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">networkAccess</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-
-<span class="nt">inputs</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">http_proxy</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
-<span class="w">  </span><span class="nt">api_key</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">  </span><span class="nt">var_file</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="w">    </span><span class="nt">inputBinding</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--var_file</span>
-<span class="w">  </span><span class="nt">geometry</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">    </span><span class="nt">inputBinding</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--geometry</span>
-<span class="w">  </span><span class="nt">years</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1999:2019&quot;</span>
-<span class="w">    </span><span class="nt">inputBinding</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--years</span>
-<span class="w">  </span><span class="nt">log</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="w">      </span><span class="nt">location</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">census.log</span>
-<span class="w">    </span><span class="nt">inputBinding</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--log</span>
-<span class="w">  </span><span class="nt">pkl_file</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;census.pkl&quot;</span>
-<span class="w">    </span><span class="nt">inputBinding</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--pkl_file</span>
-<span class="w">  </span><span class="nt">state</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string?</span>
-<span class="w">    </span><span class="nt">inputBinding</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--state</span>
-<span class="w">  </span><span class="nt">county</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string?</span>
-<span class="w">    </span><span class="nt">inputBinding</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--county</span>
-
-<span class="nt">arguments</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--out</span>
-<span class="w">    </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;out.csv&quot;</span>
-
-<span class="nt">outputs</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">pkl</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="w">    </span><span class="nt">outputBinding</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">glob</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$(inputs.pkl_file)</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">#! cwl-runner</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="nt">cwlVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1.2</span>
+<span class="linenos"> 4</span><span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CommandLineTool</span>
+<span class="linenos"> 5</span><span class="nt">baseCommand</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">python</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-m</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">census.cli</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 6</span><span class="nt">requirements</span><span class="p">:</span>
+<span class="linenos"> 7</span><span class="w">  </span><span class="nt">EnvVarRequirement</span><span class="p">:</span>
+<span class="linenos"> 8</span><span class="w">    </span><span class="nt">envDef</span><span class="p">:</span>
+<span class="linenos"> 9</span><span class="w">      </span><span class="nt">GET_CENSUS_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$(inputs.api_key)</span>
+<span class="linenos">10</span><span class="w">      </span><span class="nt">HTTPS_PROXY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$(inputs.http_proxy)</span>
+<span class="linenos">11</span><span class="w">      </span><span class="nt">HTTP_PROXY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$(inputs.http_proxy)</span>
+<span class="linenos">12</span><span class="w">  </span><span class="nt">NetworkAccess</span><span class="p">:</span>
+<span class="linenos">13</span><span class="w">    </span><span class="nt">networkAccess</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="nt">inputs</span><span class="p">:</span>
+<span class="linenos">16</span><span class="w">  </span><span class="nt">http_proxy</span><span class="p">:</span>
+<span class="linenos">17</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="linenos">18</span><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="linenos">19</span><span class="w">  </span><span class="nt">api_key</span><span class="p">:</span>
+<span class="linenos">20</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="linenos">21</span><span class="w">  </span><span class="nt">var_file</span><span class="p">:</span>
+<span class="linenos">22</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">23</span><span class="w">    </span><span class="nt">inputBinding</span><span class="p">:</span>
+<span class="linenos">24</span><span class="w">      </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--var_file</span>
+<span class="linenos">25</span><span class="w">  </span><span class="nt">geometry</span><span class="p">:</span>
+<span class="linenos">26</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="linenos">27</span><span class="w">    </span><span class="nt">inputBinding</span><span class="p">:</span>
+<span class="linenos">28</span><span class="w">      </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--geometry</span>
+<span class="linenos">29</span><span class="w">  </span><span class="nt">years</span><span class="p">:</span>
+<span class="linenos">30</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="linenos">31</span><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1999:2019&quot;</span>
+<span class="linenos">32</span><span class="w">    </span><span class="nt">inputBinding</span><span class="p">:</span>
+<span class="linenos">33</span><span class="w">      </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--years</span>
+<span class="linenos">34</span><span class="w">  </span><span class="nt">log</span><span class="p">:</span>
+<span class="linenos">35</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">36</span><span class="w">    </span><span class="nt">default</span><span class="p">:</span>
+<span class="linenos">37</span><span class="w">      </span><span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">38</span><span class="w">      </span><span class="nt">location</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">census.log</span>
+<span class="linenos">39</span><span class="w">    </span><span class="nt">inputBinding</span><span class="p">:</span>
+<span class="linenos">40</span><span class="w">      </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--log</span>
+<span class="linenos">41</span><span class="w">  </span><span class="nt">pkl_file</span><span class="p">:</span>
+<span class="linenos">42</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="linenos">43</span><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;census.pkl&quot;</span>
+<span class="linenos">44</span><span class="w">    </span><span class="nt">inputBinding</span><span class="p">:</span>
+<span class="linenos">45</span><span class="w">      </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--pkl_file</span>
+<span class="linenos">46</span><span class="w">  </span><span class="nt">state</span><span class="p">:</span>
+<span class="linenos">47</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string?</span>
+<span class="linenos">48</span><span class="w">    </span><span class="nt">inputBinding</span><span class="p">:</span>
+<span class="linenos">49</span><span class="w">      </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--state</span>
+<span class="linenos">50</span><span class="w">  </span><span class="nt">county</span><span class="p">:</span>
+<span class="linenos">51</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string?</span>
+<span class="linenos">52</span><span class="w">    </span><span class="nt">inputBinding</span><span class="p">:</span>
+<span class="linenos">53</span><span class="w">      </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--county</span>
+<span class="linenos">54</span>
+<span class="linenos">55</span><span class="nt">arguments</span><span class="p">:</span>
+<span class="linenos">56</span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--out</span>
+<span class="linenos">57</span><span class="w">    </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;out.csv&quot;</span>
+<span class="linenos">58</span>
+<span class="linenos">59</span><span class="nt">outputs</span><span class="p">:</span>
+<span class="linenos">60</span><span class="w">  </span><span class="nt">pkl</span><span class="p">:</span>
+<span class="linenos">61</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">62</span><span class="w">    </span><span class="nt">outputBinding</span><span class="p">:</span>
+<span class="linenos">63</span><span class="w">      </span><span class="nt">glob</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$(inputs.pkl_file)</span>
 </pre></div>
 </div>
 </section>

@@ -5,8 +5,7 @@ orphan: true
 # wustl_one_year.cwl
 
 ```{literalinclude} ../../src/cwl/wustl_one_year.cwl
----
-language: yaml
----
+:linenos:
+:language: yaml
 ```
 

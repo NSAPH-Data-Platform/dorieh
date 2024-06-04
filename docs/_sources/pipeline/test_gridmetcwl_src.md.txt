@@ -5,8 +5,7 @@ orphan: true
 # test_gridmet.cwl
 
 ```{literalinclude} ../../src/cwl/test_gridmet.cwl
----
-language: yaml
----
+:linenos:
+:language: yaml
 ```
 

@@ -5,8 +5,7 @@ orphan: true
 # medicare_combine_tables.cwl
 
 ```{literalinclude} ../../src/cwl/medicare_combine_tables.cwl
----
-language: yaml
----
+:linenos:
+:language: yaml
 ```
 

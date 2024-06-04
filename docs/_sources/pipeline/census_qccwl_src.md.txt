@@ -5,8 +5,7 @@ orphan: true
 # census_qc.cwl
 
 ```{literalinclude} ../../src/cwl/census_qc.cwl
----
-language: yaml
----
+:linenos:
+:language: yaml
 ```
 

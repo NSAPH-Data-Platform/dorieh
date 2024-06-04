@@ -5,8 +5,7 @@ orphan: true
 # reset.cwl
 
 ```{literalinclude} ../../src/cwl/reset.cwl
----
-language: yaml
----
+:linenos:
+:language: yaml
 ```
 

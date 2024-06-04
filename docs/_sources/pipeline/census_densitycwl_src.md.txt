@@ -5,8 +5,7 @@ orphan: true
 # census_density.cwl
 
 ```{literalinclude} ../../src/cwl/census_density.cwl
----
-language: yaml
----
+:linenos:
+:language: yaml
 ```
 

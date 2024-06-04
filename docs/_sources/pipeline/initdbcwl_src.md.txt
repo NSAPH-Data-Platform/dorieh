@@ -5,8 +5,7 @@ orphan: true
 # initdb.cwl
 
 ```{literalinclude} ../../src/cwl/initdb.cwl
----
-language: yaml
----
+:linenos:
+:language: yaml
 ```
 

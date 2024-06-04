@@ -5,8 +5,7 @@ orphan: true
 # medicare_admissions.cwl
 
 ```{literalinclude} ../../src/cwl/medicare_admissions.cwl
----
-language: yaml
----
+:linenos:
+:language: yaml
 ```
 

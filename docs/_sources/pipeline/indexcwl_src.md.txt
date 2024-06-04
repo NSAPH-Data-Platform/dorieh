@@ -5,8 +5,7 @@ orphan: true
 # index.cwl
 
 ```{literalinclude} ../../src/cwl/index.cwl
----
-language: yaml
----
+:linenos:
+:language: yaml
 ```
 

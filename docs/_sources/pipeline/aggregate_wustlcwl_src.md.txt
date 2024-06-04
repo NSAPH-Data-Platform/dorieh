@@ -5,8 +5,7 @@ orphan: true
 # aggregate_wustl.cwl
 
 ```{literalinclude} ../../src/cwl/aggregate_wustl.cwl
----
-language: yaml
----
+:linenos:
+:language: yaml
 ```
 

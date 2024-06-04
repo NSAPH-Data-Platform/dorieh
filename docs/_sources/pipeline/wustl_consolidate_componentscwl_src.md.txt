@@ -5,8 +5,7 @@ orphan: true
 # wustl_consolidate_components.cwl
 
 ```{literalinclude} ../../src/cwl/wustl_consolidate_components.cwl
----
-language: yaml
----
+:linenos:
+:language: yaml
 ```
 

@@ -90,43 +90,43 @@
              
   <section id="census-qc-cwl">
 <h1>census_qc.cwl<a class="headerlink" href="#census-qc-cwl" title="Permalink to this heading"></a></h1>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">cwlVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1.1</span>
-<span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CommandLineTool</span>
-<span class="nt">baseCommand</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">python</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-m</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">census.do_qc</span><span class="p p-Indicator">]</span>
-
-<span class="nt">inputs</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">log</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="w">      </span><span class="nt">location</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">census.log</span>
-<span class="w">    </span><span class="nt">inputBinding</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--log</span>
-<span class="w">  </span><span class="nt">in_pkl</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="w">      </span><span class="nt">location</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">census.pkl</span>
-<span class="w">    </span><span class="nt">inputBinding</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--in_pkl</span>
-<span class="w">  </span><span class="nt">qc_file</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="w">      </span><span class="nt">location</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">census_qc.yml</span>
-<span class="w">    </span><span class="nt">inputBinding</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--qc_file</span>
-<span class="w">  </span><span class="nt">qc_log</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">census_qc.log</span>
-<span class="w">    </span><span class="nt">inputBinding</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--qc_log</span>
-
-<span class="nt">outputs</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">qc_log</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="w">    </span><span class="nt">outputBinding</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">glob</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$(inputs.qc_log)</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="nt">cwlVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1.1</span>
+<span class="linenos"> 2</span><span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CommandLineTool</span>
+<span class="linenos"> 3</span><span class="nt">baseCommand</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">python</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-m</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">census.do_qc</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="nt">inputs</span><span class="p">:</span>
+<span class="linenos"> 6</span><span class="w">  </span><span class="nt">log</span><span class="p">:</span>
+<span class="linenos"> 7</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos"> 8</span><span class="w">    </span><span class="nt">default</span><span class="p">:</span>
+<span class="linenos"> 9</span><span class="w">      </span><span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">10</span><span class="w">      </span><span class="nt">location</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">census.log</span>
+<span class="linenos">11</span><span class="w">    </span><span class="nt">inputBinding</span><span class="p">:</span>
+<span class="linenos">12</span><span class="w">      </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--log</span>
+<span class="linenos">13</span><span class="w">  </span><span class="nt">in_pkl</span><span class="p">:</span>
+<span class="linenos">14</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">15</span><span class="w">    </span><span class="nt">default</span><span class="p">:</span>
+<span class="linenos">16</span><span class="w">      </span><span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">17</span><span class="w">      </span><span class="nt">location</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">census.pkl</span>
+<span class="linenos">18</span><span class="w">    </span><span class="nt">inputBinding</span><span class="p">:</span>
+<span class="linenos">19</span><span class="w">      </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--in_pkl</span>
+<span class="linenos">20</span><span class="w">  </span><span class="nt">qc_file</span><span class="p">:</span>
+<span class="linenos">21</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">22</span><span class="w">    </span><span class="nt">default</span><span class="p">:</span>
+<span class="linenos">23</span><span class="w">      </span><span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">24</span><span class="w">      </span><span class="nt">location</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">census_qc.yml</span>
+<span class="linenos">25</span><span class="w">    </span><span class="nt">inputBinding</span><span class="p">:</span>
+<span class="linenos">26</span><span class="w">      </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--qc_file</span>
+<span class="linenos">27</span><span class="w">  </span><span class="nt">qc_log</span><span class="p">:</span>
+<span class="linenos">28</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="linenos">29</span><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">census_qc.log</span>
+<span class="linenos">30</span><span class="w">    </span><span class="nt">inputBinding</span><span class="p">:</span>
+<span class="linenos">31</span><span class="w">      </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--qc_log</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span><span class="nt">outputs</span><span class="p">:</span>
+<span class="linenos">34</span><span class="w">  </span><span class="nt">qc_log</span><span class="p">:</span>
+<span class="linenos">35</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">36</span><span class="w">    </span><span class="nt">outputBinding</span><span class="p">:</span>
+<span class="linenos">37</span><span class="w">      </span><span class="nt">glob</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$(inputs.qc_log)</span>
 </pre></div>
 </div>
 </section>

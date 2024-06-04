@@ -5,8 +5,7 @@ orphan: true
 # airnow.cwl
 
 ```{literalinclude} ../../src/cwl/airnow.cwl
----
-language: yaml
----
+:linenos:
+:language: yaml
 ```
 
