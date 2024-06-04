@@ -131,10 +131,10 @@ If you would like to modify the container please refer to the [README](../docker
 ### Using the Database
 
 For a sample to query the database, please look at
-[Sample Query](common/core-platform/doc/SampleQuery)
+[Sample Query](SampleQuery)
 
 A discussion of querying of health data can be found in 
-[this document](common/cms/doc/QueringMedicaid)
+[this document](QueringMedicaid)
 
 ## Terms and Acronyms 
 
