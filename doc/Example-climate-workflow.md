@@ -1,5 +1,12 @@
 # Example of a workflow: aggregating a climate variable
 
+```{contents}
+---
+local:
+---
+```
+
+
 ## What the sample workflow is doing: aggregating a climate variable
 
 In this example we will be running a simple 
@@ -60,7 +67,7 @@ in your Python Virtual Environment:
 
 ## Running the workflow in Python virtual environment                 
                                                         
-To run teh workflow in the Python virtual environment you need to install dorieh package:
+To run the workflow in the Python virtual environment you need to install dorieh package:
 
     pip install dorieh
 
@@ -72,4 +79,76 @@ Then you can run the following command:
     --date 2020-10-03
 
 (Replace the date with any date you fancy)
+
+## Running the workflow using Docker
+
+### Dorieh Docker image
+
+A prebuilt Docker image with Dorieh is available from DockerHub. Pull it to your local
+machine using 
+   
+    docker pull forome/dorieh
+
+command. The image is built for Intel/AMD and ARM CPUs. ARM architecture is used in AWS Graviton2 
+processors that, according to AWS, deliver up to 40% better price performance. ARM CPUs are also used
+by latest Mac computers.
+   
+There are two ways to use Docker instead of installing a dorieh package in your Python virtual environment.
+A recommended way is to specify 
+[DockerRequirement](https://www.commonwl.org/v1.2/CommandLineTool.html#DockerRequirement)
+(See also [Using Containers](https://www.commonwl.org/user_guide/topics/using-containers.html) 
+section of the CWL User Guide). An alternative is to manually run the commands inside a running
+Docker container. While much more cumbersome, this alternative way does not require installing
+any CWL implementation or even Python.
+
+### Using DockerRequirement for your workflow
+
+When using DockerRequirement, you still need to have an engine that supports CWL, e.g., Toil.
+Therefore, unless you already have done so, you need to create a Python virtual environment and
+install CWL implementation there, for example with the following command:
+
+    pip install "toil[cwl,aws]"
+
+Then you need to add `DockerRequirement` to your workflow. Using 
+[climate example workflow](climate-examplecwl_src), uncomment the following
+3 lines (lines 34-36):
+
+```yaml
+#hints:
+#  DockerRequirement:
+#    dockerPull: forome/dorieh
+
+```
+
+So you have:
+
+```yaml
+hints:
+  DockerRequirement:
+    dockerPull: forome/dorieh
+```
+
+You can now run the workflow with the same command:
+
+    toil-cwl-runner --retryCount 1 --cleanWorkDir never --outdir tmmx --workDir . \
+    https://raw.githubusercontent.com/NSAPH-Data-Platform/dorieh/main/examples/climate-example.cwl \ 
+    --date 2020-10-03
+
+even without having dorieh package installed in you Python virtual environment.
+
+### Using your Docker container manually
+
+You can also use a Docker container more like a virtual machine. Start it by executing 
+
+    docker start forome/dorieh 
+
+command and just run teh commands inside the container, using 
+
+    docker exec -it forome/dorieh ${commands}
+
+This way you can use any machine that has Docker without a need of either Pyton or
+CWL. But you will need to copy your files manually between the host and the container.
+
+
+
 
