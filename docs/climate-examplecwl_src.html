@@ -86,135 +86,135 @@
              
   <section id="climate-example-cwl">
 <h1>climate-example.cwl<a class="headerlink" href="#climate-example-cwl" title="Permalink to this heading"></a></h1>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1">#!/usr/bin/env cwl-runner</span>
-<span class="c1">### Sample workflow to download and aggregate a given variable (default: maximum temperature) for a given date</span>
-<span class="c1">#  Copyright (c) 2021-2022. Harvard University</span>
-<span class="c1">#</span>
-<span class="c1">#  Developed by Research Software Engineering,</span>
-<span class="c1">#  Faculty of Arts and Sciences, Research Computing (FAS RC)</span>
-<span class="c1">#  Author: Michael A Bouzinier</span>
-<span class="c1">#</span>
-<span class="c1">#  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
-<span class="c1">#  you may not use this file except in compliance with the License.</span>
-<span class="c1">#  You may obtain a copy of the License at</span>
-<span class="c1">#</span>
-<span class="c1">#         http://www.apache.org/licenses/LICENSE-2.0</span>
-<span class="c1">#</span>
-<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
-<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
-<span class="c1">#  See the License for the specific language governing permissions and</span>
-<span class="c1">#  limitations under the License.</span>
-<span class="c1">#</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/usr/bin/env cwl-runner
+### Sample workflow to download and aggregate a given variable (default: maximum temperature) for a given date
+#  Copyright (c) 2021-2022. Harvard University
+#
+#  Developed by Research Software Engineering,
+#  Faculty of Arts and Sciences, Research Computing (FAS RC)
+#  Author: Michael A Bouzinier
+#
+#  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#         http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+#
 
-<span class="nt">cwlVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1.2</span>
-<span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Workflow</span>
+cwlVersion: v1.2
+class: Workflow
 
-<span class="nt">requirements</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">SubworkflowFeatureRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
-<span class="w">  </span><span class="nt">StepInputExpressionRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
-<span class="w">  </span><span class="nt">InlineJavascriptRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
-<span class="w">  </span><span class="nt">ScatterFeatureRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
-<span class="w">  </span><span class="nt">MultipleInputFeatureRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
-<span class="w">  </span><span class="nt">NetworkAccess</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">networkAccess</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+requirements:
+  SubworkflowFeatureRequirement: {}
+  StepInputExpressionRequirement: {}
+  InlineJavascriptRequirement: {}
+  ScatterFeatureRequirement: {}
+  MultipleInputFeatureRequirement: {}
+  NetworkAccess:
+    networkAccess: True
 
-<span class="c1">#hints:</span>
-<span class="c1">#  DockerRequirement:</span>
-<span class="c1">#    dockerPull: forome/dorieh</span>
+#hints:
+#  DockerRequirement:
+#    dockerPull: forome/dorieh
 
 
-<span class="nt">inputs</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">geography</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">zcta</span>
-<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">      </span><span class="no">Type of geography: zip codes or counties</span>
-<span class="w">      </span><span class="no">Valid values: &quot;zip&quot;, &quot;zcta&quot; or &quot;county&quot;</span>
-<span class="w">  </span><span class="nt">band</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tmmx</span>
-<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">      </span><span class="no">University of Idaho Gridded Surface Meteorological Dataset </span>
-<span class="w">      </span><span class="no">[bands](https://developers.google.com/earth-engine/datasets/catalog/IDAHO_EPSCOR_GRIDMET#bands)</span>
-<span class="w">  </span><span class="nt">date</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">a date to retrieve data for in the &#39;YYYY-mm-dd&#39; format</span>
-<span class="w">  </span><span class="nt">ram</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2GB</span>
-<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Runtime memory, available to the process</span>
+inputs:
+  geography:
+    type: string
+    default: zcta
+    doc: |
+      Type of geography: zip codes or counties
+      Valid values: &quot;zip&quot;, &quot;zcta&quot; or &quot;county&quot;
+  band:
+    type: string
+    default: tmmx
+    doc: |
+      University of Idaho Gridded Surface Meteorological Dataset 
+      [bands](https://developers.google.com/earth-engine/datasets/catalog/IDAHO_EPSCOR_GRIDMET#bands)
+  date:
+    type: string
+    doc: a date to retrieve data for in the &#39;YYYY-mm-dd&#39; format
+  ram:
+    type: string
+    default: 2GB
+    doc: Runtime memory, available to the process
 
-<span class="nt">steps</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">download</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://raw.githubusercontent.com/NSAPH-Data-Platform/dorieh/main/src/cwl/download.cwl</span>
-<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Downloads NetCDF file with gridMET data from Atmospheric Composition Analysis Group</span>
-<span class="w">    </span><span class="nt">in</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">year</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$(inputs.date.split(&#39;-&#39;)[0])</span>
-<span class="w">      </span><span class="nt">band</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">band</span>
-<span class="w">      </span><span class="nt">date</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">date</span>
-<span class="w">    </span><span class="nt">out</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">log</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">errors</span>
-<span class="w">  </span><span class="nt">get_shapes</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://raw.githubusercontent.com/NSAPH-Data-Platform/dorieh/main/src/cwl/get_shapes.cwl</span>
-<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">      </span><span class="no">This step downloads Shape files from a given collection (TIGER/Line or GENZ) </span>
-<span class="w">      </span><span class="no">and a geography (ZCTA or Counties) from the US Census website,</span>
-<span class="w">      </span><span class="no">for a given year or for the closest one.</span>
+steps:
+  download:
+    run: https://raw.githubusercontent.com/NSAPH-Data-Platform/dorieh/main/src/cwl/download.cwl
+    doc: Downloads NetCDF file with gridMET data from Atmospheric Composition Analysis Group
+    in:
+      year:
+        valueFrom: $(inputs.date.split(&#39;-&#39;)[0])
+      band: band
+      date: date
+    out:
+      - data
+      - log
+      - errors
+  get_shapes:
+    run: https://raw.githubusercontent.com/NSAPH-Data-Platform/dorieh/main/src/cwl/get_shapes.cwl
+    doc: |
+      This step downloads Shape files from a given collection (TIGER/Line or GENZ) 
+      and a geography (ZCTA or Counties) from the US Census website,
+      for a given year or for the closest one.
 
-<span class="w">    </span><span class="nt">in</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">year</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$(inputs.date.split(&#39;-&#39;)[0])</span>
-<span class="w">      </span><span class="nt">geo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">geography</span>
-<span class="w">      </span><span class="nt">date</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">date</span>
-<span class="w">    </span><span class="nt">out</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">shape_files</span><span class="p p-Indicator">]</span>
-<span class="w">  </span><span class="nt">aggregate</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://raw.githubusercontent.com/NSAPH-Data-Platform/dorieh/main/src/cwl/aggregate_daily.cwl</span>
-<span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">      </span><span class="no">This step aggregates gridded data from a NetCDF file over polygons from the provided shapefiles</span>
-<span class="w">    </span><span class="nt">in</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">geography</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">geography</span>
-<span class="w">      </span><span class="nt">year</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$(inputs.date.split(&#39;-&#39;)[0])</span>
-<span class="w">      </span><span class="nt">dates</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$(inputs.date + &#39;:&#39; + inputs.date)</span>
-<span class="w">      </span><span class="nt">band</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">band</span>
-<span class="w">      </span><span class="nt">input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">download/data</span>
-<span class="w">      </span><span class="nt">date</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">date</span>
-<span class="w">      </span><span class="nt">ram</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ram</span>
-<span class="w">      </span><span class="nt">shape_files</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">get_shapes/shape_files</span>
-<span class="w">    </span><span class="nt">out</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">log</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">errors</span>
+    in:
+      year:
+        valueFrom: $(inputs.date.split(&#39;-&#39;)[0])
+      geo: geography
+      date: date
+    out: [shape_files]
+  aggregate:
+    run: https://raw.githubusercontent.com/NSAPH-Data-Platform/dorieh/main/src/cwl/aggregate_daily.cwl
+    doc: |
+      This step aggregates gridded data from a NetCDF file over polygons from the provided shapefiles
+    in:
+      geography: geography
+      year:
+        valueFrom: $(inputs.date.split(&#39;-&#39;)[0])
+      dates:
+        valueFrom: $(inputs.date + &#39;:&#39; + inputs.date)
+      band: band
+      input: download/data
+      date: date
+      ram: ram
+      shape_files: get_shapes/shape_files
+    out:
+      - data
+      - log
+      - errors
 
-<span class="nt">outputs</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">netCDF_file</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File?</span>
-<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">download/data</span>
-<span class="w">  </span><span class="nt">csv_file</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File?</span>
-<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">aggregate/data</span>
-<span class="w">  </span><span class="nt">shapefiles</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File[]</span>
-<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">get_shapes/shape_files</span>
+outputs:
+  netCDF_file:
+    type: File?
+    outputSource: download/data
+  csv_file:
+    type: File?
+    outputSource: aggregate/data
+  shapefiles:
+    type: File[]
+    outputSource: get_shapes/shape_files
 
-<span class="w">  </span><span class="nt">download_log</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File?</span>
-<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">download/log</span>
-<span class="w">  </span><span class="nt">download_err</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File?</span>
-<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">download/errors</span>
+  download_log:
+    type: File?
+    outputSource: download/log
+  download_err:
+    type: File?
+    outputSource: download/errors
 
-<span class="w">  </span><span class="nt">aggregate_log</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File?</span>
-<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">aggregate/log</span>
-<span class="w">  </span><span class="nt">aggregate_errors</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File?</span>
-<span class="w">    </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">aggregate/errors</span>
+  aggregate_log:
+    type: File?
+    outputSource: aggregate/log
+  aggregate_errors:
+    type: File?
+    outputSource: aggregate/errors
 </pre></div>
 </div>
 </section>

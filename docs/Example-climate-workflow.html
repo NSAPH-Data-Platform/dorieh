@@ -58,6 +58,12 @@
 <li class="toctree-l3"><a class="reference internal" href="#what-the-sample-workflow-is-doing-aggregating-a-climate-variable">What the sample workflow is doing: aggregating a climate variable</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#prepare-to-run-a-workflow">Prepare to run a workflow</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#running-the-workflow-in-python-virtual-environment">Running the workflow in Python virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-the-workflow-using-docker">Running the workflow using Docker</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dorieh-docker-image">Dorieh Docker image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-dockerrequirement-for-your-workflow">Using DockerRequirement for your workflow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-your-docker-container-manually">Using your Docker container manually</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -97,8 +103,22 @@
              
   <section id="example-of-a-workflow-aggregating-a-climate-variable">
 <h1>Example of a workflow: aggregating a climate variable<a class="headerlink" href="#example-of-a-workflow-aggregating-a-climate-variable" title="Permalink to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#what-the-sample-workflow-is-doing-aggregating-a-climate-variable" id="id1">What the sample workflow is doing: aggregating a climate variable</a></p></li>
+<li><p><a class="reference internal" href="#prepare-to-run-a-workflow" id="id2">Prepare to run a workflow</a></p></li>
+<li><p><a class="reference internal" href="#running-the-workflow-in-python-virtual-environment" id="id3">Running the workflow in Python virtual environment</a></p></li>
+<li><p><a class="reference internal" href="#running-the-workflow-using-docker" id="id4">Running the workflow using Docker</a></p>
+<ul>
+<li><p><a class="reference internal" href="#dorieh-docker-image" id="id5">Dorieh Docker image</a></p></li>
+<li><p><a class="reference internal" href="#using-dockerrequirement-for-your-workflow" id="id6">Using DockerRequirement for your workflow</a></p></li>
+<li><p><a class="reference internal" href="#using-your-docker-container-manually" id="id7">Using your Docker container manually</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
 <section id="what-the-sample-workflow-is-doing-aggregating-a-climate-variable">
-<h2>What the sample workflow is doing: aggregating a climate variable<a class="headerlink" href="#what-the-sample-workflow-is-doing-aggregating-a-climate-variable" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">What the sample workflow is doing: aggregating a climate variable</a><a class="headerlink" href="#what-the-sample-workflow-is-doing-aggregating-a-climate-variable" title="Permalink to this heading"></a></h2>
 <p>In this example we will be running a simple
 <a class="reference external" href="https://www.commonwl.org/">Common Workflow Language (CWL)</a>
 workflow. This workflow produces a CSV
@@ -132,7 +152,7 @@ is in examples directory. See more details in
 <a class="reference external" href="https://www.commonwl.org/v1.2/Workflow.html">CWL Workflow Specifications</a></p>
 </section>
 <section id="prepare-to-run-a-workflow">
-<h2>Prepare to run a workflow<a class="headerlink" href="#prepare-to-run-a-workflow" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Prepare to run a workflow</a><a class="headerlink" href="#prepare-to-run-a-workflow" title="Permalink to this heading"></a></h2>
 <p>We suggest that You create a Python virtual environment for trying this workflow, or use an existing one.
 If you are creating a new virtual environment, run the following command:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python3 -m venv $path
@@ -149,8 +169,8 @@ in your Python Virtual Environment:</p>
 </div>
 </section>
 <section id="running-the-workflow-in-python-virtual-environment">
-<h2>Running the workflow in Python virtual environment<a class="headerlink" href="#running-the-workflow-in-python-virtual-environment" title="Permalink to this heading"></a></h2>
-<p>To run teh workflow in the Python virtual environment you need to install dorieh package:</p>
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Running the workflow in Python virtual environment</a><a class="headerlink" href="#running-the-workflow-in-python-virtual-environment" title="Permalink to this heading"></a></h2>
+<p>To run the workflow in the Python virtual environment you need to install dorieh package:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>pip install dorieh
 </pre></div>
 </div>
@@ -162,6 +182,70 @@ https://raw.githubusercontent.com/NSAPH-Data-Platform/dorieh/main/examples/clima
 </pre></div>
 </div>
 <p>(Replace the date with any date you fancy)</p>
+</section>
+<section id="running-the-workflow-using-docker">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Running the workflow using Docker</a><a class="headerlink" href="#running-the-workflow-using-docker" title="Permalink to this heading"></a></h2>
+<section id="dorieh-docker-image">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Dorieh Docker image</a><a class="headerlink" href="#dorieh-docker-image" title="Permalink to this heading"></a></h3>
+<p>A prebuilt Docker image with Dorieh is available from DockerHub. Pull it to your local
+machine using</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>docker pull forome/dorieh
+</pre></div>
+</div>
+<p>command. The image is built for Intel/AMD and ARM CPUs. ARM architecture is used in AWS Graviton2
+processors that, according to AWS, deliver up to 40% better price performance. ARM CPUs are also used
+by latest Mac computers.</p>
+<p>There are two ways to use Docker instead of installing a dorieh package in your Python virtual environment.
+A recommended way is to specify
+<a class="reference external" href="https://www.commonwl.org/v1.2/CommandLineTool.html#DockerRequirement">DockerRequirement</a>
+(See also <a class="reference external" href="https://www.commonwl.org/user_guide/topics/using-containers.html">Using Containers</a>
+section of the CWL User Guide). An alternative is to manually run the commands inside a running
+Docker container. While much more cumbersome, this alternative way does not require installing
+any CWL implementation or even Python.</p>
+</section>
+<section id="using-dockerrequirement-for-your-workflow">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">Using DockerRequirement for your workflow</a><a class="headerlink" href="#using-dockerrequirement-for-your-workflow" title="Permalink to this heading"></a></h3>
+<p>When using DockerRequirement, you still need to have an engine that supports CWL, e.g., Toil.
+Therefore, unless you already have done so, you need to create a Python virtual environment and
+install CWL implementation there, for example with the following command:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>pip install &quot;toil[cwl,aws]&quot;
+</pre></div>
+</div>
+<p>Then you need to add <code class="docutils literal notranslate"><span class="pre">DockerRequirement</span></code> to your workflow. Using
+<a class="reference internal" href="climate-examplecwl_src.html"><span class="doc std std-doc">climate example workflow</span></a>, uncomment the following
+3 lines (lines 34-36):</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1">#hints:</span>
+<span class="c1">#  DockerRequirement:</span>
+<span class="c1">#    dockerPull: forome/dorieh</span>
+</pre></div>
+</div>
+<p>So you have:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">hints</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">DockerRequirement</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">dockerPull</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">forome/dorieh</span>
+</pre></div>
+</div>
+<p>You can now run the workflow with the same command:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>toil-cwl-runner --retryCount 1 --cleanWorkDir never --outdir tmmx --workDir . \
+https://raw.githubusercontent.com/NSAPH-Data-Platform/dorieh/main/examples/climate-example.cwl \ 
+--date 2020-10-03
+</pre></div>
+</div>
+<p>even without having dorieh package installed in you Python virtual environment.</p>
+</section>
+<section id="using-your-docker-container-manually">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">Using your Docker container manually</a><a class="headerlink" href="#using-your-docker-container-manually" title="Permalink to this heading"></a></h3>
+<p>You can also use a Docker container more like a virtual machine. Start it by executing</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>docker start forome/dorieh 
+</pre></div>
+</div>
+<p>command and just run teh commands inside the container, using</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>docker exec -it forome/dorieh ${commands}
+</pre></div>
+</div>
+<p>This way you can use any machine that has Docker without a need of either Pyton or
+CWL. But you will need to copy your files manually between the host and the container.</p>
+</section>
 </section>
 </section>
 
