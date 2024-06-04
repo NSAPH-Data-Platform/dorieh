@@ -85,7 +85,7 @@ def insert_section(source: str, to: str, project: str = None):
             end = l1 + 1
             break
     if start is None:
-        raise ValueError("Not found")
+        raise ValueError(f"Not found: copy {project} from {source} to {to}")
     section_content = read_section(source, section)
     with open(to, "wt") as f:
         for line in content[: start + 1]:
