@@ -103,7 +103,7 @@ toil-cwl-runner --retryCount 1 --cleanWorkDir never \
 ## Testing pipelines
 
 Pipelines can be tested using included 
-[DBT Pipeline Testing Framework](common/core-platform/doc/DBT)
+[DBT Pipeline Testing Framework](DBT)
 
 ## Installing Python dependencies
                                  

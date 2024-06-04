@@ -29,24 +29,24 @@ data sampling.
 ## Data modelling vs data introspection
 
 Tools for data modelling are discussed in 
-[](common/core-platform/doc/Datamodels.md). 
+[](Datamodels.md). 
 
 Examples of manually created data models are data models for
-[Medicare](common/cms/doc/Medicare.md) and 
-[Medicaid](common/cms/doc/Medicaid.md) domains. Actual models are defined
+[Medicare](Medicare.md) and 
+[Medicaid](Medicaid.md) domains. Actual models are defined
 respectively in 
-[](common/cms/doc/members/medicare_yaml.md) and
-[](common/cms/doc/members/medicaid_yaml.md)
+[](members/medicare_yaml.md) and
+[](members/medicaid_yaml.md)
 
 To automatically infer data structure by analyzing sample data
 and generating data model corresponding to the existing structure
 one can use
-[Introspector tool](common/core-platform/doc/members/introspector.rst).
+[Introspector tool](members/introspector.rst).
 It can be run as a standalone command-line tool or used via Python API.                                                   
 Examples of using introspector via API can be found in 
-[EPA pipeline](common/epa/doc/members/registry.rst). 
+[EPA pipeline]members/epa_registry.rst). 
 
-[Project Loader Tool](common/core-platform/doc/ProjectLoader.md)
+[Project Loader Tool](ProjectLoader.md)
 also uses Introspector.
 
 ## Adding new data domain
@@ -58,22 +58,22 @@ or other source control system
 ## Adding data to existing table
 
 The process of adding data to an existing table is described in
-[](common/core-platform/doc/DataLoader.md)
+[](DataLoader.md)
 
 ## Creating new single table
 
 In many cases, creating a new single table will mean running a 
 pipeline that first 
-[introspects the data](common/core-platform/doc/members/introspector.rst) 
+[introspects the data](members/introspector.rst) 
 in a file (CSV, JSON, FST and some other
 formats) and then running the 
-[Data Loader](common/core-platform/doc/DataLoader.md). 
+[Data Loader](DataLoader.md). 
 However, for simple cases one can use 
-[Project Loader Tool](common/core-platform/doc/ProjectLoader.md)
+[Project Loader Tool](ProjectLoader.md)
 to either ingest or just to introspect the data 
 (introspection can be done by using `--dryrun` argument).
 
 ## Automatically ingesting multiple files from a file system
 
-See [Project Loader Tool](common/core-platform/doc/ProjectLoader.md)
+See [Project Loader Tool](ProjectLoader.md)
 for details.
