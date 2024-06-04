@@ -34,7 +34,7 @@ then
   exit 1
 fi
 
-git merge "${branch}" -m "merging latest changes"
+git merge "${branch}" -m "merging latest changes" --no-edit
 if [ $? -ne 0 ]
 then
   echo "Failed to merge latest changes into the documentation branch: ${doc_source_branch}"
