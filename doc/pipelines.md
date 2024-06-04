@@ -41,7 +41,7 @@ formats. Therefore, many steps (nodes in the pipeline topology) will be
 responsible for various data transformation operations. 
 
 
-## Running Pipelines
+## Running Workflows
                    
 ### Tested runners
 
@@ -100,7 +100,7 @@ toil-cwl-runner --retryCount 1 --cleanWorkDir never \
   pm25_yearly_download.cwl test_exposure_job.yml 
 ```
                                                                                 
-## Testing pipelines
+## Testing workflows
 
 Pipelines can be tested using included 
 [DBT Pipeline Testing Framework](DBT)
@@ -113,7 +113,7 @@ Python packages included in the platform.
 
 
 
-## Published and tested pipelines
+## Published and tested workflows
 
 ```{toctree}
 ---
@@ -129,3 +129,19 @@ pipeline/medicare
 pipeline/medicaid
 pipeline/census_workflow
 ```
+
+## Developing your own workflows
+
+### Combining included CWL tools into a new workflow
+
+Dorieh includes many packaged CWL tools that can be combined in custom workflows. 
+It also includes a [utility](members/cwl_collect_outputs) 
+to generate CWL code that can be copied abd pasted into a parent
+workflow.
+
+### Wrapping python modules as CWL tools
+
+You might want to look at [cwl2argparse](https://github.com/hexylena/argparse2tool#cwl-specific-functionality)
+or other [CWL development tools](https://www.commonwl.org/tools/)
+
+

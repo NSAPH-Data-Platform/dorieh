@@ -33,7 +33,7 @@ Some mapping (or crosswalk) tables are also included in the Core
 Platform module. These tables include between different
 territorial codes, such as USPS ZIP codes, Census ZCTA codes,
 FIPS codes for US states
-and counties, SSA codes for codes for US states
+and counties, SSA codes for US states
 and counties. See more information in the
 [Mapping between different territorial codes](https://nsaph-data-platform.github.io/nsaph-platform-docs/common/core-platform/doc/TerritorialCodes.html)
 
@@ -97,101 +97,8 @@ Here is a brief overview:
 
 ### Python packages
 
-#### dorieh.platform Package
-
-This is the main package containing the majority of the code.
-Modules and subpackages included in `dorieh.platform` package are described below.
-
-##### Subpackage for Data Modelling
-
-* `dorieh.platform.data_model`
-
-Implements version 2 of the data modelling toolkit.
-
-Version 1 was focused on loading into the database already
-processed data saved as flat files. It inferred data
-model from the data files structure and accompanied README
-files. The inferred data model is converted to database schema
-by generating appropriate DDL.
-
-Version 2 focuses on generating code required to do the
-actual processing. The main concept is a knowledge domain, or
-just a domain. Domain model is define in a YAML file as
-described in the [documentation](Datamodels). The main
-module that processes the YAML definition of the domain
-is [domain.py](members/domain). Another
-module, [inserter](members/inserter)
-handles parallel insertion of the data into domain tables.
-
-Auxiliary modules perform various maintenance tasks.
-Module [index_builder](members/index_builder)
-builds indices for a given tables or for all
-tables within a domain.
-Module [utils](members/utils)
-provides convenience function wrappers and defines
-class DataReader that abstracts reading CSV and FST files.
-In other words, DataReader provides uniform interface
-to reading columnar files in two (potentially more)
-different formats.
-
-##### Module Database Connection Wrapper
-
-* `dorieh.platform.db`
-
-Module [db](members/db) is a PostgreSQL
-connection wrapper. It reads connection parameters from
-an `ini` file and connects to the database. It can
-transparently connect over **ssh tunnel** when required.
-
-##### Loader Subpackage
-
-* `dorieh.platform.loader`
-
-A set of utilities to manipulate data.
-
-Module [data_loader](members/data_loader)
-Implements parallel loading data into a PostgreSQL database.
-It is also responsible for loading DDL and creation of view,
-both virtual and materialized.
-
-Module [index_builder](members/index_builder)
-is a utility to build indices and monitor the build progress.
-
-##### Subpackage to describe and implement user requests [Incomplete]
-
-* `dorieh.platform.requests`
-
-Package `dorieh.platform.requests` contains some code that is
-intended to be used for fulfilling user requests. Its
-development is currently put on hold.
-
-Module [hdf5_export](members/hdf5_export) exports
-result of SQL query as an HDF5 file. The structure of the HDF5 is
-described by a YAML request definition.
-
-Module [query](members/query) generates SQL query
-from a YAML request definition.
-
-##### Subpackage with miscellaneous utilities
-
-* `dorieh.platform.util`
-
-Package `dorieh.platform.util` contains:
-
-* Support for packaging [resources](#resources)
-  in two modules [resources](members/resources)
-  and [pg_json_dump](members/pg_json_dump). The
-  latter module imports and exports PostgreSQL (pg) tables
-  as JSONLines format.
-* Module [net](members/net) contains
-  one method resolving host to `localhost`. This method is
-  required by Airflow.
-* Module [executors](members/executors)
-  implements a
-  [ThreadPoolExecutor](https://docs.python.org/3/library/concurrent.futures.html#threadpoolexecutor)
-  with a bounded queue. It is used to prevent out of memory (OOM)
-  errors when processing huge files (to prevent loading
-  the whole file into memory before dispatching it for processing).
+Modules and subpackages included in `dorieh.platform` package are 
+described [here](CoreLibrary.md).
 
 ### Resources
 
