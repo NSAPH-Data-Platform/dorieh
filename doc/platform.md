@@ -132,8 +132,8 @@ Utilities, implementing the following:
     * Creating a hash for [HLL aggregations](https://en.wikipedia.org/wiki/HyperLogLog)
 * Procedure:
     * [A procedure](members/utils.sql) granting `SELECT` privileges
-      to a user on all NSAPH tables
-    * [A procedure to rename indices](members/rename_indices.sql)
+      to a user on all tables created or managed by Dorieh platform
+      * [A procedure to rename indices](members/rename_indices.sql)
 * Set of SQL statements:
     [to map tables from another database](members/map_to_foreign_database.ddl)
     This can be used to map public tables available to anybody

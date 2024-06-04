@@ -60,7 +60,7 @@ Src directory contains software source code. The directories under sources are:
 
 CWL folder contains reusable workflows, packaged as tools 
 that can and should be used by
-all NSAPH pipelines.
+all Dorieh pipelines.
 
 Each processing step of CMS data is packaged as a 
 standalone tool that can be run individually. 

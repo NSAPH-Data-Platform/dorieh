@@ -1,4 +1,4 @@
-# NSAPH Data Platform: Documentation Home
+# Dorieh Data Platform: Documentation Home
  **User and Development Documentation**
 
  [Index](genindex)

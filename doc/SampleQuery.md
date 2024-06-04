@@ -6,7 +6,7 @@ local:
 ---
 ```
 
-Here we show how to query the NSAPH database from Python.
+Here we show how to query the Dorieh database from Python.
 
 We use public data (climate, pollution, census) in the query,
 hence it can be executed in any environment.
@@ -22,24 +22,22 @@ First, we need to create a Python virtual environment. This can
 be done with commands like:
 
 ```shell
-python3 -m venv .nsaph
-source .nsaph/bin/activate
+python3 -m venv .dorieh
+source .dorieh/bin/activate
 ```
-                                                                      
+                                                                    
 
 ### Creating Conda environment
 
 To run the software on older operating systems, use Conda environment.
 
-
-### Install NSAPH packages
+### Install Dorieh package
 
 Next, we need to install NSAPH core packages. This can be done
 using GitHub install:
 
 ```shell
-python -m pip install git+https://github.com/NSAPH-Data-Platform/nsaph-utils.git
-python -m pip install git+https://github.com/NSAPH-Data-Platform/nsaph-core-platform.git
+python -m pip install dorieh
 ```
 
 If you are getting errors installing dorieh package with FST format support (`dorieh[FST]`), if you see
@@ -69,7 +67,7 @@ ssh_user=johndoe
 ```
 
 > Note that the first connection uses my local instance of PostgreSQL
-> on my laptop. The second connects to NSAPH database. It is using ssh
+> on my laptop. The second connects to `NSAPH` database. It is using ssh
 > tunnel to connect - this is defined by adding ssh_user parameter.
 >
 > **mbouzinier** is my username for both ssh and the database.
@@ -78,7 +76,7 @@ ssh_user=johndoe
 ## Executing the query
 
 We will use the following sample Python program to execute
-a query (with public data) on the NSAPH database:
+a query (with public data) on a Dorieh database:
 [query.py](members/sample_query)
 
 Copy the file into your local directory and execute it:
