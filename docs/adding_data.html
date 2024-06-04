@@ -132,21 +132,21 @@ data sampling.</p>
 <section id="data-modelling-vs-data-introspection">
 <h2><a class="toc-backref" href="#id2" role="doc-backlink">Data modelling vs data introspection</a><a class="headerlink" href="#data-modelling-vs-data-introspection" title="Permalink to this heading"></a></h2>
 <p>Tools for data modelling are discussed in
-<a class="reference internal" href="#common/core-platform/doc/Datamodels.md"><code class="xref myst docutils literal notranslate"><span class="pre">common/core-platform/doc/Datamodels.md</span></code></a>.</p>
+<a class="reference internal" href="Datamodels.html"><span class="std std-doc">Data Modelling for NSAPH Data Platform</span></a>.</p>
 <p>Examples of manually created data models are data models for
-<a class="reference internal" href="#common/cms/doc/Medicare.md"><span class="xref myst">Medicare</span></a> and
-<a class="reference internal" href="#common/cms/doc/Medicaid.md"><span class="xref myst">Medicaid</span></a> domains. Actual models are defined
+<a class="reference internal" href="Medicare.html"><span class="std std-doc">Medicare</span></a> and
+<a class="reference internal" href="Medicaid.html"><span class="std std-doc">Medicaid</span></a> domains. Actual models are defined
 respectively in
-<a class="reference internal" href="#common/cms/doc/members/medicare_yaml.md"><code class="xref myst docutils literal notranslate"><span class="pre">common/cms/doc/members/medicare_yaml.md</span></code></a> and
-<a class="reference internal" href="#common/cms/doc/members/medicaid_yaml.md"><code class="xref myst docutils literal notranslate"><span class="pre">common/cms/doc/members/medicaid_yaml.md</span></code></a></p>
+<a class="reference internal" href="members/medicare_yaml.html"><span class="std std-doc">Medicare.yaml</span></a> and
+<a class="reference internal" href="members/medicaid_yaml.html"><span class="std std-doc">Medicaid.yaml</span></a></p>
 <p>To automatically infer data structure by analyzing sample data
 and generating data model corresponding to the existing structure
 one can use
-<a class="reference internal" href="#common/core-platform/doc/members/introspector.rst"><span class="xref myst">Introspector tool</span></a>.
+<a class="reference internal" href="members/introspector.html"><span class="std std-doc">Introspector tool</span></a>.
 It can be run as a standalone command-line tool or used via Python API.<br />
 Examples of using introspector via API can be found in
-<a class="reference internal" href="#common/epa/doc/members/registry.rst"><span class="xref myst">EPA pipeline</span></a>.</p>
-<p><a class="reference internal" href="#common/core-platform/doc/ProjectLoader.md"><span class="xref myst">Project Loader Tool</span></a>
+[EPA pipeline]members/epa_registry.rst).</p>
+<p><a class="reference internal" href="ProjectLoader.html"><span class="std std-doc">Project Loader Tool</span></a>
 also uses Introspector.</p>
 </section>
 <section id="adding-new-data-domain">
@@ -157,24 +157,24 @@ or other source control system</p>
 <section id="adding-data-to-existing-table">
 <h2><a class="toc-backref" href="#id4" role="doc-backlink">Adding data to existing table</a><a class="headerlink" href="#adding-data-to-existing-table" title="Permalink to this heading"></a></h2>
 <p>The process of adding data to an existing table is described in
-<a class="reference internal" href="#common/core-platform/doc/DataLoader.md"><code class="xref myst docutils literal notranslate"><span class="pre">common/core-platform/doc/DataLoader.md</span></code></a></p>
+<a class="reference internal" href="DataLoader.html"><span class="std std-doc">NSAPH Data Loader</span></a></p>
 </section>
 <section id="creating-new-single-table">
 <h2><a class="toc-backref" href="#id5" role="doc-backlink">Creating new single table</a><a class="headerlink" href="#creating-new-single-table" title="Permalink to this heading"></a></h2>
 <p>In many cases, creating a new single table will mean running a
 pipeline that first
-<a class="reference internal" href="#common/core-platform/doc/members/introspector.rst"><span class="xref myst">introspects the data</span></a>
+<a class="reference internal" href="members/introspector.html"><span class="std std-doc">introspects the data</span></a>
 in a file (CSV, JSON, FST and some other
 formats) and then running the
-<a class="reference internal" href="#common/core-platform/doc/DataLoader.md"><span class="xref myst">Data Loader</span></a>.
+<a class="reference internal" href="DataLoader.html"><span class="std std-doc">Data Loader</span></a>.
 However, for simple cases one can use
-<a class="reference internal" href="#common/core-platform/doc/ProjectLoader.md"><span class="xref myst">Project Loader Tool</span></a>
+<a class="reference internal" href="ProjectLoader.html"><span class="std std-doc">Project Loader Tool</span></a>
 to either ingest or just to introspect the data
 (introspection can be done by using <code class="docutils literal notranslate"><span class="pre">--dryrun</span></code> argument).</p>
 </section>
 <section id="automatically-ingesting-multiple-files-from-a-file-system">
 <h2><a class="toc-backref" href="#id6" role="doc-backlink">Automatically ingesting multiple files from a file system</a><a class="headerlink" href="#automatically-ingesting-multiple-files-from-a-file-system" title="Permalink to this heading"></a></h2>
-<p>See <a class="reference internal" href="#common/core-platform/doc/ProjectLoader.md"><span class="xref myst">Project Loader Tool</span></a>
+<p>See <a class="reference internal" href="ProjectLoader.html"><span class="std std-doc">Project Loader Tool</span></a>
 for details.</p>
 </section>
 </section>

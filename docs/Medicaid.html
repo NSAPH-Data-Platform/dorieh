@@ -179,7 +179,7 @@ each of the column (such as character, numeric or date)</p>
 </pre></div>
 </div>
 <p>Once the schema is generated, the
-<a class="reference internal" href="#../../core-platform/doc/members/data_loader"><span class="xref myst">Universal Data Loader</span></a> can import it
+<a class="reference internal" href="members/data_loader.html"><span class="doc std std-doc">Universal Data Loader</span></a> can import it
 by running the following command:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>nohup python -u -m dorieh.platform.loader.data_loader --domain cms -t ps --domain cms --incremental --data /data/incoming/rce/ci3_d_medicaid/original_data/cms_medicaid-max/data/  -t ps --pattern &quot;**/maxdata_*_ps_*.csv*&quot;  --threads 4 --page 1000 --log 100000 2&gt;&amp;1 &gt; ps-2021-09-25--21-37.log&amp;
 </pre></div>

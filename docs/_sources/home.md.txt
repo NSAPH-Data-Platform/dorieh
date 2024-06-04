@@ -192,6 +192,17 @@ documentation for Dorieh platform
 * [copy_section](members/copy_section)  Copies a specified section from one markdown document
     to another. This way we can collect summaries in one file<!-- end of section documentation utilities overview from dorieh.docutils -->
 
+Documentation utilities to simplify creation of consistent
+documentation for Dorieh platform 
+                                                         
+* [cwl2md](members/cwl2md) Generates [Markdown](https://www.markdownguide.org/basic-syntax/) 
+    documentation for a CWL tool or workflow
+* [collector](members/collector) Generates automatic 
+    [reStructuredText](https://docutils.sourceforge.io/rst.html) 
+    templates for all Python modules 
+* [copy_section](members/copy_section)  Copies a specified section from one markdown document
+    to another. This way we can collect summaries in one file<!-- end of section documentation utilities overview from dorieh.docutils -->
+
 
 ### Data Processing and Loading Pipelines
 
@@ -207,7 +218,7 @@ To include additional data in a deployed data-platform instance
 go to [Adding more data](adding_data) section.
 
 Pipelines can be tested with
-[DBT Pipeline Testing Framework](common/core-platform/doc/DBT)
+[DBT Pipeline Testing Framework](DBT)
 
 ## Working with NSAPH containerized apps
 
@@ -216,19 +227,42 @@ Pipelines can be tested with
 
 ## Deployment
 
-The deployment repository is based on  
-CWL-Airflow Docker Deployment developed
-by Harvard FAS RC in collaboration with Forome Association. Essentially, this is a fork of: 
-[Apache Airflow + CWL in Docker with Optional Conda and R](https://github.com/ForomePlatform/airflow-cwl-docker)
-It follows 
-[Infrastructure as Code (IaC)](https://en.wikipedia.org/wiki/Infrastructure_as_code) 
-approach.
+Dorieh can be deployed either as a Python virtual environment or as a Docker container.
 
-[Harvard FAS RC Superset] repository is a fork of 
-[Apache Superset](https://superset.apache.org/) 
-customized for Harvard FAS RC environment.
+Python package can be signalled using a simple python command:
 
-Detailed description of this deployment is covered in the [NSAPH Data Platform Deployment](common/platform-deployment/doc/index) subsection of the [Data Platform Internals](guts) section.
+    pip install dorieh
+
+or, if FST support is desired:
+
+    pip install dorieh[FST]
+                      
+To run workflows one also needs a [CWL implementation](https://www.commonwl.org/implementations/).
+
+We have tested deployment with the following CWL [implementations](https://www.commonwl.org/implementations/):
+
+* [Toil](https://toil.readthedocs.io/en/latest/running/cwl.html).
+* [CWL reference implementation](https://github.com/common-workflow-language/cwltool),
+  primarily using [cwlref-runner ](https://pypi.org/project/cwlref-runner/) package
+* [CWL-Airflow](https://cwl-airflow.readthedocs.io/en/latest/) that provides a very nice
+  Airflow graphical user interface (GUI) for running workflows.
+
+We suggest using [Toil](https://toil.ucsc-cgl.org/). To install Toil just run the following command
+in your Python Virtual Environment:
+
+    pip install "toil[cwl,aws]"
+
+A prebuilt Docker image with Dorieh is available from DockerHub. Pull it to your local
+machine using
+
+    docker pull forome/dorieh
+
+command. The image is built for Intel/AMD and ARM CPUs. ARM architecture is used in AWS Graviton2
+processors that, according to AWS, deliver up to 40% better price performance. ARM CPUs are also used
+by latest Mac computers.
+
+If you would like to modify the container please refer to the [README](../docker/README.md) in the docker directory.
+
 
 ### Using the Database
 

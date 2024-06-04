@@ -2,9 +2,9 @@
 
 ## General
 
-See [General Data Modeling](../../core-platform/doc/Datamodels.md#invalid-record)
+See [General Data Modeling](Datamodels.md) for description of the general data modelling syntax. 
 
-Used by [](members/mcr_combine_tables)
+Extensions described here are used by [](members/mcr_combine_tables)
 
 ## Combining multiple sources and optional columns
 

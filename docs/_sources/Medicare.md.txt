@@ -491,7 +491,7 @@ During this step the following major operations are performed:
     copied to `medicare_audit.admissions` table. 
 
 See more information about handling records that have failed validation in:
-[Data Modeling](../../core-platform/doc/Datamodels.md#invalid-record)
+[Data Modeling](Datamodels.md#invalid-record)
 
 ## Creating QC Tables
                              

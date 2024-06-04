@@ -287,6 +287,17 @@ templates for all Python modules</p></li>
 <li><p><a class="reference internal" href="members/copy_section.html"><span class="doc std std-doc">copy_section</span></a>  Copies a specified section from one markdown document
 to another. This way we can collect summaries in one file<!-- end of section documentation utilities overview from dorieh.docutils --></p></li>
 </ul>
+<p>Documentation utilities to simplify creation of consistent
+documentation for Dorieh platform</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="members/cwl2md.html"><span class="doc std std-doc">cwl2md</span></a> Generates <a class="reference external" href="https://www.markdownguide.org/basic-syntax/">Markdown</a>
+documentation for a CWL tool or workflow</p></li>
+<li><p><a class="reference internal" href="members/collector.html"><span class="doc std std-doc">collector</span></a> Generates automatic
+<a class="reference external" href="https://docutils.sourceforge.io/rst.html">reStructuredText</a>
+templates for all Python modules</p></li>
+<li><p><a class="reference internal" href="members/copy_section.html"><span class="doc std std-doc">copy_section</span></a>  Copies a specified section from one markdown document
+to another. This way we can collect summaries in one file<!-- end of section documentation utilities overview from dorieh.docutils --></p></li>
+</ul>
 </section>
 <section id="data-processing-and-loading-pipelines">
 <h3><a class="toc-backref" href="#id7" role="doc-backlink">Data Processing and Loading Pipelines</a><a class="headerlink" href="#data-processing-and-loading-pipelines" title="Permalink to this heading"></a></h3>
@@ -299,7 +310,7 @@ access to the same health data that was used for their development.</p>
 <p>To include additional data in a deployed data-platform instance
 go to <a class="reference internal" href="adding_data.html"><span class="doc std std-doc">Adding more data</span></a> section.</p>
 <p>Pipelines can be tested with
-<a class="reference internal" href="#common/core-platform/doc/DBT"><span class="xref myst">DBT Pipeline Testing Framework</span></a></p>
+<a class="reference internal" href="DBT.html"><span class="doc std std-doc">DBT Pipeline Testing Framework</span></a></p>
 </section>
 </section>
 <section id="working-with-nsaph-containerized-apps">
@@ -308,17 +319,38 @@ go to <a class="reference internal" href="adding_data.html"><span class="doc std
 </section>
 <section id="deployment">
 <h2><a class="toc-backref" href="#id9" role="doc-backlink">Deployment</a><a class="headerlink" href="#deployment" title="Permalink to this heading"></a></h2>
-<p>The deployment repository is based on<br />
-CWL-Airflow Docker Deployment developed
-by Harvard FAS RC in collaboration with Forome Association. Essentially, this is a fork of:
-<a class="reference external" href="https://github.com/ForomePlatform/airflow-cwl-docker">Apache Airflow + CWL in Docker with Optional Conda and R</a>
-It follows
-<a class="reference external" href="https://en.wikipedia.org/wiki/Infrastructure_as_code">Infrastructure as Code (IaC)</a>
-approach.</p>
-<p>[Harvard FAS RC Superset] repository is a fork of
-<a class="reference external" href="https://superset.apache.org/">Apache Superset</a>
-customized for Harvard FAS RC environment.</p>
-<p>Detailed description of this deployment is covered in the <a class="reference internal" href="#common/platform-deployment/doc/index"><span class="xref myst">NSAPH Data Platform Deployment</span></a> subsection of the <a class="reference internal" href="guts.html"><span class="doc std std-doc">Data Platform Internals</span></a> section.</p>
+<p>Dorieh can be deployed either as a Python virtual environment or as a Docker container.</p>
+<p>Python package can be signalled using a simple python command:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>pip install dorieh
+</pre></div>
+</div>
+<p>or, if FST support is desired:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>pip install dorieh[FST]
+</pre></div>
+</div>
+<p>To run workflows one also needs a <a class="reference external" href="https://www.commonwl.org/implementations/">CWL implementation</a>.</p>
+<p>We have tested deployment with the following CWL <a class="reference external" href="https://www.commonwl.org/implementations/">implementations</a>:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://toil.readthedocs.io/en/latest/running/cwl.html">Toil</a>.</p></li>
+<li><p><a class="reference external" href="https://github.com/common-workflow-language/cwltool">CWL reference implementation</a>,
+primarily using <a class="reference external" href="https://pypi.org/project/cwlref-runner/">cwlref-runner </a> package</p></li>
+<li><p><a class="reference external" href="https://cwl-airflow.readthedocs.io/en/latest/">CWL-Airflow</a> that provides a very nice
+Airflow graphical user interface (GUI) for running workflows.</p></li>
+</ul>
+<p>We suggest using <a class="reference external" href="https://toil.ucsc-cgl.org/">Toil</a>. To install Toil just run the following command
+in your Python Virtual Environment:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>pip install &quot;toil[cwl,aws]&quot;
+</pre></div>
+</div>
+<p>A prebuilt Docker image with Dorieh is available from DockerHub. Pull it to your local
+machine using</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>docker pull forome/dorieh
+</pre></div>
+</div>
+<p>command. The image is built for Intel/AMD and ARM CPUs. ARM architecture is used in AWS Graviton2
+processors that, according to AWS, deliver up to 40% better price performance. ARM CPUs are also used
+by latest Mac computers.</p>
+<p>If you would like to modify the container please refer to the <span class="xref myst">README</span> in the docker directory.</p>
 <section id="using-the-database">
 <h3><a class="toc-backref" href="#id10" role="doc-backlink">Using the Database</a><a class="headerlink" href="#using-the-database" title="Permalink to this heading"></a></h3>
 <p>For a sample to query the database, please look at
