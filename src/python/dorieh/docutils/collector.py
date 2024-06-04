@@ -51,6 +51,10 @@ class ModuleCollector:
             name, _ = os.path.splitext(name)
             if name.startswith("_"):
                 continue
+            target = name + ".md"
+            target = os.path.join(self.dest, target)
+            if os.path.exists(target):
+                continue
             target = name + ".rst"
             target = os.path.join(self.dest, target)
             if os.path.exists(target):

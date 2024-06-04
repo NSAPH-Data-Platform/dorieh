@@ -1,6 +1,13 @@
 """
-A utility that prints the statistics about
-currently running indexing processes
+A utility that prints the DBMS activity statistics, like
+currently running processes and some details about each process.
+
+
+It can be used as a command line utility to monitor database
+activity or monitor a specific process.
+
+It can also be used as Python API to run a long-running
+process within a database with performance monitoring.
 """
 #  Copyright (c) 2021. Harvard University
 #
