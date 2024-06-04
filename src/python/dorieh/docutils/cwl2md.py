@@ -45,9 +45,8 @@ orphan: true
 # {name}
 
 ```{literalinclude} ../../src/cwl/{path}
----
-language: yaml
----
+:linenos:
+:language: yaml
 ```
 
 """
