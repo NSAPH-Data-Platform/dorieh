@@ -53,15 +53,15 @@
 <li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Data Processing Pipelines</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#running-pipelines">Running Pipelines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#running-workflows">Running Workflows</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#tested-runners">Tested runners</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#providing-parameters-to-the-pipelines">Providing parameters to the pipelines</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#using-toil">Using Toil</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#testing-pipelines">Testing pipelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-workflows">Testing workflows</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#installing-python-dependencies">Installing Python dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#published-and-tested-pipelines">Published and tested pipelines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#published-and-tested-workflows">Published and tested workflows</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="pipeline/gridmet.html">Pipeline to aggregate data from Climatology Lab</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pipeline/wustl.html">Pipeline to ingest Monthly Pollution data downloaded from WashU Box</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pipeline/pm25_yearly_download.html">Pipeline to aggregate data in NetCDF format over given geographies</a></li>
@@ -70,6 +70,11 @@
 <li class="toctree-l3"><a class="reference internal" href="pipeline/medicare.html">Medicare data ingestion and processing pipeline</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pipeline/medicaid.html">Full Medicaid Processing Pipeline</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pipeline/census_workflow.html">census_workflow.cwl</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#developing-your-own-workflows">Developing your own workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#combining-included-cwl-tools-into-a-new-workflow">Combining included CWL tools into a new workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wrapping-python-modules-as-cwl-tools">Wrapping python modules as CWL tools</a></li>
 </ul>
 </li>
 </ul>
@@ -113,16 +118,22 @@
 <nav class="contents local" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#introduction" id="id1">Introduction</a></p></li>
-<li><p><a class="reference internal" href="#running-pipelines" id="id2">Running Pipelines</a></p>
+<li><p><a class="reference internal" href="#running-workflows" id="id2">Running Workflows</a></p>
 <ul>
 <li><p><a class="reference internal" href="#tested-runners" id="id3">Tested runners</a></p></li>
 <li><p><a class="reference internal" href="#providing-parameters-to-the-pipelines" id="id4">Providing parameters to the pipelines</a></p></li>
 <li><p><a class="reference internal" href="#using-toil" id="id5">Using Toil</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#testing-pipelines" id="id6">Testing pipelines</a></p></li>
+<li><p><a class="reference internal" href="#testing-workflows" id="id6">Testing workflows</a></p></li>
 <li><p><a class="reference internal" href="#installing-python-dependencies" id="id7">Installing Python dependencies</a></p></li>
-<li><p><a class="reference internal" href="#published-and-tested-pipelines" id="id8">Published and tested pipelines</a></p></li>
+<li><p><a class="reference internal" href="#published-and-tested-workflows" id="id8">Published and tested workflows</a></p></li>
+<li><p><a class="reference internal" href="#developing-your-own-workflows" id="id9">Developing your own workflows</a></p>
+<ul>
+<li><p><a class="reference internal" href="#combining-included-cwl-tools-into-a-new-workflow" id="id10">Combining included CWL tools into a new workflow</a></p></li>
+<li><p><a class="reference internal" href="#wrapping-python-modules-as-cwl-tools" id="id11">Wrapping python modules as CWL tools</a></p></li>
+</ul>
+</li>
 </ul>
 </nav>
 <section id="introduction">
@@ -157,8 +168,8 @@ data comes from much more diverse sources, in diverse and often incompatible
 formats. Therefore, many steps (nodes in the pipeline topology) will be
 responsible for various data transformation operations.</p>
 </section>
-<section id="running-pipelines">
-<h2><a class="toc-backref" href="#id2" role="doc-backlink">Running Pipelines</a><a class="headerlink" href="#running-pipelines" title="Permalink to this heading"></a></h2>
+<section id="running-workflows">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Running Workflows</a><a class="headerlink" href="#running-workflows" title="Permalink to this heading"></a></h2>
 <section id="tested-runners">
 <h3><a class="toc-backref" href="#id3" role="doc-backlink">Tested runners</a><a class="headerlink" href="#tested-runners" title="Permalink to this heading"></a></h3>
 <p>CWL is “write once run anywhere” language. If a piepline one has developed
@@ -213,8 +224,8 @@ adding <code class="docutils literal notranslate"><span class="pre">--restart</s
 </div>
 </section>
 </section>
-<section id="testing-pipelines">
-<h2><a class="toc-backref" href="#id6" role="doc-backlink">Testing pipelines</a><a class="headerlink" href="#testing-pipelines" title="Permalink to this heading"></a></h2>
+<section id="testing-workflows">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Testing workflows</a><a class="headerlink" href="#testing-workflows" title="Permalink to this heading"></a></h2>
 <p>Pipelines can be tested using included
 <a class="reference internal" href="DBT.html"><span class="doc std std-doc">DBT Pipeline Testing Framework</span></a></p>
 </section>
@@ -223,8 +234,8 @@ adding <code class="docutils literal notranslate"><span class="pre">--restart</s
 <p>The following requirements.txt file can be used to fetch all
 Python packages included in the platform.</p>
 </section>
-<section id="published-and-tested-pipelines">
-<h2><a class="toc-backref" href="#id8" role="doc-backlink">Published and tested pipelines</a><a class="headerlink" href="#published-and-tested-pipelines" title="Permalink to this heading"></a></h2>
+<section id="published-and-tested-workflows">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Published and tested workflows</a><a class="headerlink" href="#published-and-tested-workflows" title="Permalink to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet.html">Pipeline to aggregate data from Climatology Lab</a><ul>
@@ -284,6 +295,21 @@ Python packages included in the platform.</p>
 </li>
 </ul>
 </div>
+</section>
+<section id="developing-your-own-workflows">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">Developing your own workflows</a><a class="headerlink" href="#developing-your-own-workflows" title="Permalink to this heading"></a></h2>
+<section id="combining-included-cwl-tools-into-a-new-workflow">
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">Combining included CWL tools into a new workflow</a><a class="headerlink" href="#combining-included-cwl-tools-into-a-new-workflow" title="Permalink to this heading"></a></h3>
+<p>Dorieh includes many packaged CWL tools that can be combined in custom workflows.
+It also includes a <a class="reference internal" href="members/cwl_collect_outputs.html"><span class="doc std std-doc">utility</span></a>
+to generate CWL code that can be copied abd pasted into a parent
+workflow.</p>
+</section>
+<section id="wrapping-python-modules-as-cwl-tools">
+<h3><a class="toc-backref" href="#id11" role="doc-backlink">Wrapping python modules as CWL tools</a><a class="headerlink" href="#wrapping-python-modules-as-cwl-tools" title="Permalink to this heading"></a></h3>
+<p>You might want to look at <a class="reference external" href="https://github.com/hexylena/argparse2tool#cwl-specific-functionality">cwl2argparse</a>
+or other <a class="reference external" href="https://www.commonwl.org/tools/">CWL development tools</a></p>
+</section>
 </section>
 </section>
 

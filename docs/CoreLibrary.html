@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Python Core Platform Components &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+  <title>Core Platform Python Modules &mdash; Dorieh Data Platform 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
@@ -93,7 +93,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="packages.html">Python Packages Included in the Platform</a></li>
-      <li class="breadcrumb-item active">Python Core Platform Components</li>
+      <li class="breadcrumb-item active">Core Platform Python Modules</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/CoreLibrary.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -103,17 +103,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="python-core-platform-components">
-<h1>Python Core Platform Components<a class="headerlink" href="#python-core-platform-components" title="Permalink to this heading"></a></h1>
+  <section id="core-platform-python-modules">
+<h1>Core Platform Python Modules<a class="headerlink" href="#core-platform-python-modules" title="Permalink to this heading"></a></h1>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Python Module Index</span></a></p>
 </div>
 <section id="package-dorieh-platform">
 <h2>Package dorieh.platform<a class="headerlink" href="#package-dorieh-platform" title="Permalink to this heading"></a></h2>
+<p>This package contains teh following modules used in subpackages:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="members/platform.html"><span class="std std-doc">NSAPH Core Package-wide utilities</span></a> API to initialize logging and database connections</p></li>
-<li><p><a class="reference internal" href="members/db.html"><span class="std std-doc">db</span></a> Database connections API</p></li>
+<li><p><a class="reference internal" href="members/db.html"><span class="std std-doc">db</span></a> is a PostgreSQL
+connection wrapper. It reads connection parameters from
+an <code class="docutils literal notranslate"><span class="pre">ini</span></code> file and connects to the database. It can
+transparently connect over <strong>ssh tunnel</strong> when required.</p></li>
 <li><p><a class="reference internal" href="members/fips.html"><span class="std std-doc">fips</span></a> US State FIPS codes, represented as Python dictionary</p></li>
 <li><p><a class="reference internal" href="members/pg_keywords.html"><span class="std std-doc">pg_keywords</span></a> PostgreSQL keywords, e.g.
 type names, etc.</p></li>
@@ -121,7 +125,33 @@ type names, etc.</p></li>
 </section>
 <section id="package-dorieh-platform-data-model">
 <h2>Package dorieh.platform.data_model<a class="headerlink" href="#package-dorieh-platform-data-model" title="Permalink to this heading"></a></h2>
-<p>APIs for data modelling, loading and manipulations</p>
+<p>APIs for data modelling, loading and manipulations.
+This subpackage focuses on generating code required to do the
+actual processing. It uses the same Medallion architecture paradigm
+as <a class="reference external" href="https://www.databricks.com/glossary/medallion-architecture">Databricks</a>.</p>
+<p>The main concept is a knowledge domain, or
+just a domain. Domain model is define in a YAML file as
+described in the <a class="reference internal" href="Datamodels.html"><span class="doc std std-doc">documentation</span></a>. A domain model
+defines a graph of data transformations using intermediate
+views, materialized views and tables (in this sense it
+is more flexible than
+<a class="reference external" href="https://www.databricks.com/product/delta-live-tables">Databricks DLT model</a>
+that only uses materialized views).</p>
+<p>The most important
+module that processes the YAML definition of the domain
+is <a class="reference internal" href="members/domain.html"><span class="doc std std-doc">domain.py</span></a>. Another
+module, <a class="reference internal" href="members/inserter.html"><span class="doc std std-doc">inserter</span></a>
+handles parallel insertion of the data into domain tables.</p>
+<p>Auxiliary modules perform various maintenance tasks.
+Module <a class="reference internal" href="members/index_builder.html"><span class="doc std std-doc">index_builder</span></a>
+builds indices for a given tables or for all
+tables within a domain.
+Module <a class="reference internal" href="members/utils.html"><span class="doc std std-doc">utils</span></a>
+provides convenience function wrappers and defines
+class DataReader that abstracts reading CSV and FST files.
+In other words, DataReader provides uniform interface
+to reading columnar files in two (potentially more)
+different formats.</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="members/domain.html"><span class="std std-doc">Domain class</span></a> Data modeling for a data domain</p></li>
 <li><p><a class="reference internal" href="members/inserter.html"><span class="doc std std-doc">Inserter</span></a> API to parallel data loader</p></li>
@@ -130,14 +160,16 @@ type names, etc.</p></li>
 </section>
 <section id="package-dorieh-platform-loader">
 <h2>Package dorieh.platform.loader<a class="headerlink" href="#package-dorieh-platform-loader" title="Permalink to this heading"></a></h2>
-<p>Command line utilities to manipulate data</p>
+<p>Command line utilities to manipulate data
+Implements parallel loading .</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="members/loader.html"><span class="std std-doc">Data loader base abstract API</span></a></p></li>
 <li><p><a class="reference internal" href="members/introspector.html"><span class="doc std std-doc">Data Introspector</span></a> introspects columnar data to
 infer the types of the columns</p></li>
 <li><p><a class="reference internal" href="members/data_loader.html"><span class="std std-doc">The data_loader Module</span></a> Transfers data from file(s) to the database.
-Implements parallel loading and handling multiple file formats
-(CSV, FST, JSON, SAS, FWF)</p></li>
+Implements parallel loading of data into a PostgreSQL database and handling multiple file formats
+(CSV, FST, JSON, SAS, FWF). It is also responsible for loading DDL and creation of view,
+both virtual and materialized.</p></li>
 <li><p><a class="reference internal" href="members/project_loader.html"><span class="std std-doc">Project Loader</span></a> Recursively introspects and loads
 data directory into the database</p></li>
 <li><p><a class="reference internal" href="members/index_builder.html"><span class="doc std std-doc">Index Builder</span></a> Builds indices for a table or for all
@@ -146,7 +178,7 @@ tables in the data domain, reporting the progress</p></li>
 to monitor database activity</p></li>
 <li><p><a class="reference internal" href="members/vacuum.html"><span class="doc std std-doc">Vacuum</span></a> Executes VACUUM command in the database to tune
 tables for better query performance</p></li>
-<li><p><a class="reference internal" href="members/common.html"><span class="doc std std-doc">Common Configuration</span></a> Common configuration options
+<li><p><a class="reference internal" href="members/common.html"><span class="doc std std-doc">Common Configuration</span></a> options
 for working with the database</p></li>
 <li><p><a class="reference internal" href="members/loader_config.html"><span class="doc std std-doc">Loader Configurator</span></a> Configuration options
 for data loader</p></li>
@@ -154,7 +186,10 @@ for data loader</p></li>
 </section>
 <section id="package-dorieh-platform-requests">
 <h2>Package dorieh.platform.requests<a class="headerlink" href="#package-dorieh-platform-requests" title="Permalink to this heading"></a></h2>
-<p>Attempt to tackle User requests API. Incomplete work in progress</p>
+<p>Package <code class="docutils literal notranslate"><span class="pre">dorieh.platform.requests</span></code>
+contains some PoC-quality API that is
+intended to be used for fulfilling user requests. Its
+development is currently put on hold.</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="members/hdf5_export.html"><span class="std std-doc">HDF5 Export</span></a> API and utility to export result
 of quering the database in HDF5 format</p></li>
@@ -176,7 +211,7 @@ it can use localhost</p></li>
 <li><p><a class="reference internal" href="members/pg_json_dump.html"><span class="doc std std-doc">JSON to/from Table converter</span></a> A command line utility
 to import/export JSON files as database tables</p></li>
 <li><p><a class="reference internal" href="members/resources.html"><span class="doc std std-doc">Resource finder</span></a> An API to look for resources
-in Python packages</p></li>
+in Python packages. See <a class="reference internal" href="platform.html#resources"><span class="std std-ref">Resources section</span></a>.</p></li>
 <li><p><a class="reference internal" href="members/sas_explorer.html"><span class="doc std std-doc">sas_explorer</span></a> A tool to print metadata of a SAS
 SAS7BDAT file</p></li>
 <li><p><a class="reference internal" href="members/ssa2fips.html"><span class="doc std std-doc">SSA to FIPS Mapping</span></a> A utility to create in-database
