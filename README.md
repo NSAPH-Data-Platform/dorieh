@@ -68,5 +68,5 @@ A prebuilt docker image with Dorieh is provided:
 
 ## Built-in Workflows
 
-For examples of data processing workflows, see [included data processing workflows](doc/pipelines)
+For examples of data processing workflows, see [included data processing workflows](doc/pipelines.md)
 
