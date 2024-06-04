@@ -4,8 +4,7 @@ Provided are two Dockerfile:
 
 * For Intel / AMD platform: [Dockerfile.amd64](Dockerfile.amd64)
 * For ARM platform used by AWG Graviton family of virtual machines and newer Macs: [Dockerfile.arm64](Dockerfile.arm64)
-                                                                                                                    
-Please note, that ARM architecture requires installation of more components (mainly, GIS tools).
+
 
 The included Docker file builds a multi-architecture docker image for Dorieh. It includes support for 
 R functions and FST file format. If you do not need FST and R support, comment out 

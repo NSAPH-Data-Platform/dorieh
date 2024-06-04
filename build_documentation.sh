@@ -66,6 +66,7 @@ copy_section doc/gis.md doc/home.md dorieh.gis
 copy_section doc/AppPipelineGenerator.md doc/home.md dorieh.apppipelinegenerator
 copy_section README.md doc/home.md readme
 
+cp docker/README.md doc/docker_readme.md
 
 # build documentation
 sphinx-build doc docs || exit
