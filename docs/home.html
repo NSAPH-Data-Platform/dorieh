@@ -331,6 +331,17 @@ templates for all Python modules</p></li>
 <li><p><a class="reference internal" href="members/copy_section.html"><span class="doc std std-doc">copy_section</span></a>  Copies a specified section from one markdown document
 to another. This way we can collect summaries in one file<!-- end of section documentation utilities overview from dorieh.docutils --></p></li>
 </ul>
+<p>Documentation utilities to simplify creation of consistent
+documentation for Dorieh platform</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="members/cwl2md.html"><span class="doc std std-doc">cwl2md</span></a> Generates <a class="reference external" href="https://www.markdownguide.org/basic-syntax/">Markdown</a>
+documentation for a CWL tool or workflow</p></li>
+<li><p><a class="reference internal" href="members/collector.html"><span class="doc std std-doc">collector</span></a> Generates automatic
+<a class="reference external" href="https://docutils.sourceforge.io/rst.html">reStructuredText</a>
+templates for all Python modules</p></li>
+<li><p><a class="reference internal" href="members/copy_section.html"><span class="doc std std-doc">copy_section</span></a>  Copies a specified section from one markdown document
+to another. This way we can collect summaries in one file<!-- end of section documentation utilities overview from dorieh.docutils --></p></li>
+</ul>
 </section>
 <section id="data-processing-and-loading-pipelines">
 <h3><a class="toc-backref" href="#id7" role="doc-backlink">Data Processing and Loading Pipelines</a><a class="headerlink" href="#data-processing-and-loading-pipelines" title="Permalink to this heading"></a></h3>
@@ -349,6 +360,19 @@ go to <a class="reference internal" href="adding_data.html"><span class="doc std
 <section id="working-with-nsaph-containerized-apps">
 <h2><a class="toc-backref" href="#id8" role="doc-backlink">Working with NSAPH containerized apps</a><a class="headerlink" href="#working-with-nsaph-containerized-apps" title="Permalink to this heading"></a></h2>
 <!-- section Introduction from dorieh.AppPipelineGenerator -->
+<p><a class="reference external" href="https://www.hsph.harvard.edu/nsaph/">National Studies on Air Pollution and Health</a>
+organization (NSAPH) publishes containerized applications to produce
+certain types of data. These applications are published on the
+<a class="reference external" href="https://github.com/NSAPH-Data-Processing">NSAPH Data Production GitHub</a>.</p>
+<p>The Pipeline Generator generates a
+<a class="reference external" href="https://www.commonwl.org/">CWL</a> pipeline to execute the app and ingest
+the data it produces into Dorieh Data warehouse.</p>
+<p>The process of data ingestion consists of two steps:</p>
+<ol class="arabic simple">
+<li><p>Generation of the piepline for data ingestion</p></li>
+<li><p>Execution of the pipeline</p></li>
+</ol>
+<!-- end of section introduction from dorieh.apppipelinegenerator -->
 </section>
 <section id="deployment">
 <h2><a class="toc-backref" href="#id9" role="doc-backlink">Deployment</a><a class="headerlink" href="#deployment" title="Permalink to this heading"></a></h2>
