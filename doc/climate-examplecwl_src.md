@@ -6,6 +6,7 @@ orphan: true
 
 ```{literalinclude} ../examples/climate-example.cwl
 ---
+linenos
 language: yaml
 ---
 ```
