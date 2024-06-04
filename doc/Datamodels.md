@@ -1,4 +1,4 @@
-# Data Modelling for NSAPH Data Platform
+# Data Modelling for Dorieh Data Platform
 
 **How data models are defined and handled**
 

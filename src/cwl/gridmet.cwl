@@ -60,7 +60,7 @@ doc: |
           --geography zcta \ 
           --ram 8GB
 
-  Or, by providing a YaML file (see [example](../test_gridmet_job)) 
+  Or, by providing a YaML file (see [example](jobs/test_gridmet_job)) 
   with similar options:
   
       toil-cwl-runner --retryCount 1 --cleanWorkDir never \ 

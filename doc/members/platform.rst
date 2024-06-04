@@ -1,5 +1,5 @@
-NSAPH Core Package-wide utilities
-=================================
+Dorieh Core Package-wide utilities
+==================================
 
 .. automodule:: dorieh.platform
    :members:

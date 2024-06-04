@@ -45,7 +45,7 @@ Examples of tools included in this package are:
 * A [utility to monitor progress of long-running database](members/monitor) processes like indexing.
 * A [utility to infer database schema and generate DDL](members/introspector) from a CSV file
 * A [utility to link a table to GIS](members/link_gis) from a CSV file
-* A [wrapper around database connection to PostgreSQL](#module-database-connection-wrapper)
+* A [wrapper around database connection to PostgreSQL](members/db)
 * A [utility to import/export JSONLines](members/pg_json_dump) files into/from PostgreSQL
 * A [utility to export Parquet files](members/pg_export_parquet) files from PostgreSQL
 * An [Executor with a bounded queue](members/executors)
@@ -132,8 +132,8 @@ Utilities, implementing the following:
     * Creating a hash for [HLL aggregations](https://en.wikipedia.org/wiki/HyperLogLog)
 * Procedure:
     * [A procedure](members/utils.sql) granting `SELECT` privileges
-      to a user on all NSAPH tables
-    * [A procedure to rename indices](members/rename_indices.sql)
+      to a user on all tables created or managed by Dorieh platform
+      * [A procedure to rename indices](members/rename_indices.sql)
 * Set of SQL statements:
     [to map tables from another database](members/map_to_foreign_database.ddl)
     This can be used to map public tables available to anybody
