@@ -85,7 +85,7 @@ echo "Changes committed"
 if [ "${staging}" == "push" ]; then
   git push
 elif [ "${staging}" != "" ]; then
-  cp -R doc "${staging}"/
+  cp -R docs "${staging}"/
 fi
 
 git checkout "${branch}"
