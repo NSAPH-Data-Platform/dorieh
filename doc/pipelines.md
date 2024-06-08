@@ -39,7 +39,9 @@ known tools. In other areas, for example, in population health research, the
 data comes from much more diverse sources, in diverse and often incompatible
 formats. Therefore, many steps (nodes in the pipeline topology) will be
 responsible for various data transformation operations. 
-
+                                                           
+> Some workflows require database connection to perform all steps.
+> See [](DBConnections) section. for details
 
 ## Running Workflows
                    
