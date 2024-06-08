@@ -124,7 +124,7 @@ class Lock:
     """
     Class resenting detailed information about a database lock
 
-    See also "PostgreSQL Documentation <https://wiki.postgresql.org/wiki/Lock_Monitoring>"_
+    See also `PostgreSQL Documentation <https://wiki.postgresql.org/wiki/Lock_Monitoring>`_
 
     """
 
