@@ -95,12 +95,21 @@ process within a database with performance monitoring.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="dorieh.platform.loader.monitor.Lock">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Lock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/loader/monitor.html#Lock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.monitor.Lock" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Class resenting detailed information about a database lock</p>
+<p>See also “PostgreSQL Documentation &lt;<a class="reference external" href="https://wiki.postgresql.org/wiki/Lock_Monitoring">https://wiki.postgresql.org/wiki/Lock_Monitoring</a>&gt;”_</p>
+</dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="dorieh.platform.loader.monitor.DBMonitorConfig">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DBMonitorConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subclass</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/loader/monitor.html#DBMonitorConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.monitor.DBMonitorConfig" title="Permalink to this definition"></a></dt>
-<dd><p>Creates a new object</p>
+<dd><p>Configuration for DBActivityMonitor class,
+a subclass of a general class <a class="reference internal" href="data_loader.html#dorieh.platform.loader.common.DBConnectionConfig" title="dorieh.platform.loader.common.DBConnectionConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">dorieh.platform.loader.common.DBConnectionConfig</span></code></a></p>
+<p>It adds two parameters:</p>
+<ul class="simple">
+<li><p>pid - process id to monitor. If it is given, then only this process is monitored</p></li>
+<li><p>status - if this parameter is defined only processes with the specified status are monitored</p></li>
+</ul>
+<p>Creates a new object</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -130,7 +139,9 @@ If not specified, then it is extracted from subclass documentation</p></li>
 <dl class="py class">
 <dt class="sig sig-object py" id="dorieh.platform.loader.monitor.DBActivityMonitor">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DBActivityMonitor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="data_loader.html#dorieh.platform.loader.common.DBConnectionConfig" title="dorieh.platform.loader.common.DBConnectionConfig"><span class="pre">DBConnectionConfig</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/loader/monitor.html#DBActivityMonitor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.monitor.DBActivityMonitor" title="Permalink to this definition"></a></dt>
-<dd><dl class="py method">
+<dd><p>Main class of this module. Provides API to monitor database activity and execute
+long-running processes while monitoring their status.</p>
+<dl class="py method">
 <dt class="sig sig-object py" id="dorieh.platform.loader.monitor.DBActivityMonitor.get_instance">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_instance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="data_loader.html#dorieh.platform.loader.common.DBConnectionConfig" title="dorieh.platform.loader.common.DBConnectionConfig"><span class="pre">DBConnectionConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#dorieh.platform.loader.monitor.DBMonitorConfig" title="dorieh.platform.loader.monitor.DBMonitorConfig"><span class="pre">DBMonitorConfig</span></a></span></span><a class="reference internal" href="../_modules/dorieh/platform/loader/monitor.html#DBActivityMonitor.get_instance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.monitor.DBActivityMonitor.get_instance" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
@@ -138,39 +149,74 @@ If not specified, then it is extracted from subclass documentation</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="dorieh.platform.loader.monitor.DBActivityMonitor.run">
 <span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/loader/monitor.html#DBActivityMonitor.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.monitor.DBActivityMonitor.run" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>This method is being run when the module is used as CLI.
+Prints current activity for selected processes. Processes are selected based
+on the value of <cite>pid</cite> and <cite>status</cite> configuration parameters.</p>
+<p>See  <a class="reference internal" href="#dorieh.platform.loader.monitor.DBMonitorConfig" title="dorieh.platform.loader.monitor.DBMonitorConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">dorieh.platform.loader.monitor.DBMonitorConfig</span></code></a>
+:return:</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="dorieh.platform.loader.monitor.DBActivityMonitor.get_blocks">
 <span class="sig-name descname"><span class="pre">get_blocks</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/loader/monitor.html#DBActivityMonitor.get_blocks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.monitor.DBActivityMonitor.get_blocks" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Internal method</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="dorieh.platform.loader.monitor.DBActivityMonitor.get_indexing_progress">
 <span class="sig-name descname"><span class="pre">get_indexing_progress</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/dorieh/platform/loader/monitor.html#DBActivityMonitor.get_indexing_progress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.monitor.DBActivityMonitor.get_indexing_progress" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>This method provides a more detailed statistics for processes
+that build an index.
+:return:</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="dorieh.platform.loader.monitor.DBActivityMonitor.get_activity">
 <span class="sig-name descname"><span class="pre">get_activity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/dorieh/platform/loader/monitor.html#DBActivityMonitor.get_activity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.monitor.DBActivityMonitor.get_activity" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Returns a list of statuses, one status for every processed being monitored.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="dorieh.platform.loader.monitor.DBActivityMonitor.get_activity.params.pid"></span><strong>pid</strong><a class="paramlink headerlink reference internal" href="#dorieh.platform.loader.monitor.DBActivityMonitor.get_activity.params.pid">¶</a> – optional process id, if given only status of this process would be provided</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="dorieh.platform.loader.monitor.DBActivityMonitor.execute">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">what</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">on_monitor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/loader/monitor.html#DBActivityMonitor.execute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.monitor.DBActivityMonitor.execute" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Executes a process in the database while periodically outputting
+the process status</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dorieh.platform.loader.monitor.DBActivityMonitor.execute.params.what"></span><strong>what</strong><a class="paramlink headerlink reference internal" href="#dorieh.platform.loader.monitor.DBActivityMonitor.execute.params.what">¶</a> – A Python function that calls a process in the database</p></li>
+<li><p><span class="target" id="dorieh.platform.loader.monitor.DBActivityMonitor.execute.params.on_monitor"></span><strong>on_monitor</strong><a class="paramlink headerlink reference internal" href="#dorieh.platform.loader.monitor.DBActivityMonitor.execute.params.on_monitor">¶</a> – A Python callback function that is called to output the desired information</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="dorieh.platform.loader.monitor.DBActivityMonitor.log_activity">
 <span class="sig-name descname"><span class="pre">log_activity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/loader/monitor.html#DBActivityMonitor.log_activity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.monitor.DBActivityMonitor.log_activity" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Log activity of the given process using configured Python loggers
+:param _sphinx_paramlinks_dorieh.platform.loader.monitor.DBActivityMonitor.log_activity.pid: The process id to log the status of
+:return:</p>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="dorieh.platform.loader.monitor.Activity">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Activity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">activity:</span> <span class="pre">~typing.Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">known_blocks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">now:</span> <span class="pre">&lt;module</span> <span class="pre">'datetime'</span> <span class="pre">from</span> <span class="pre">'/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/datetime.py'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg_len=32</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dorieh/platform/loader/monitor.html#Activity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.platform.loader.monitor.Activity" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>A class representing database activity</p>
+</dd></dl>
 
 </section>
 

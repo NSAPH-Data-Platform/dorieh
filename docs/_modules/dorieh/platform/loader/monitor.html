@@ -209,6 +209,13 @@
 
 
 <div class="viewcode-block" id="Lock"><a class="viewcode-back" href="../../../../members/monitor.html#dorieh.platform.loader.monitor.Lock">[docs]</a><span class="k">class</span> <span class="nc">Lock</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class resenting detailed information about a database lock</span>
+
+<span class="sd">    See also &quot;PostgreSQL Documentation &lt;https://wiki.postgresql.org/wiki/Lock_Monitoring&gt;&quot;_</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">List</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">blocked_pid</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">blocking_pid</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
@@ -225,8 +232,18 @@
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s2">]&quot;</span></div>
 
 
-
 <div class="viewcode-block" id="DBMonitorConfig"><a class="viewcode-back" href="../../../../members/monitor.html#dorieh.platform.loader.monitor.DBMonitorConfig">[docs]</a><span class="k">class</span> <span class="nc">DBMonitorConfig</span><span class="p">(</span><span class="n">DBConnectionConfig</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Configuration for DBActivityMonitor class,</span>
+<span class="sd">    a subclass of a general class :py:class:`dorieh.platform.loader.common.DBConnectionConfig`</span>
+
+<span class="sd">    It adds two parameters:</span>
+
+<span class="sd">    * pid - process id to monitor. If it is given, then only this process is monitored</span>
+<span class="sd">    * status - if this parameter is defined only processes with the specified status are monitored</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
     <span class="n">_pid</span> <span class="o">=</span> <span class="n">Argument</span><span class="p">(</span><span class="s2">&quot;pid&quot;</span><span class="p">,</span>
         <span class="n">help</span> <span class="o">=</span> <span class="s2">&quot;Display monitoring information only for selected process ids&quot;</span><span class="p">,</span>
         <span class="nb">type</span> <span class="o">=</span> <span class="nb">int</span><span class="p">,</span>
@@ -260,7 +277,13 @@
                 <span class="k">if</span> <span class="n">attr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;_&#39;</span> <span class="ow">and</span> <span class="n">attr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;_&#39;</span>
             <span class="p">]</span></div>
 
+
 <div class="viewcode-block" id="DBActivityMonitor"><a class="viewcode-back" href="../../../../members/monitor.html#dorieh.platform.loader.monitor.DBActivityMonitor">[docs]</a><span class="k">class</span> <span class="nc">DBActivityMonitor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Main class of this module. Provides API to monitor database activity and execute</span>
+<span class="sd">    long-running processes while monitoring their status.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
 <div class="viewcode-block" id="DBActivityMonitor.get_instance"><a class="viewcode-back" href="../../../../members/monitor.html#dorieh.platform.loader.monitor.DBActivityMonitor.get_instance">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">get_instance</span> <span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">DBConnectionConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DBMonitorConfig</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">DBMonitorConfig</span><span class="p">):</span>
@@ -286,6 +309,15 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="n">Lock</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
 
 <div class="viewcode-block" id="DBActivityMonitor.run"><a class="viewcode-back" href="../../../../members/monitor.html#dorieh.platform.loader.monitor.DBActivityMonitor.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method is being run when the module is used as CLI.</span>
+<span class="sd">        Prints current activity for selected processes. Processes are selected based</span>
+<span class="sd">        on the value of `pid` and `status` configuration parameters.</span>
+
+<span class="sd">        See  :py:class:`dorieh.platform.loader.monitor.DBMonitorConfig`</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">get_blocks</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">lock</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
             <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">lock</span><span class="p">))</span>
@@ -307,6 +339,8 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
 
 <div class="viewcode-block" id="DBActivityMonitor.get_blocks"><a class="viewcode-back" href="../../../../members/monitor.html#dorieh.platform.loader.monitor.DBActivityMonitor.get_blocks">[docs]</a>    <span class="k">def</span> <span class="nf">get_blocks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Internal method &quot;&quot;&quot;</span>
+
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connect</span><span class="p">()</span> <span class="k">as</span> <span class="n">cnxn</span><span class="p">:</span>
             <span class="k">with</span> <span class="n">cnxn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
                 <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">LOCK_QUERY</span><span class="p">)</span>
@@ -316,6 +350,12 @@
         <span class="k">return</span></div>
 
 <div class="viewcode-block" id="DBActivityMonitor.get_indexing_progress"><a class="viewcode-back" href="../../../../members/monitor.html#dorieh.platform.loader.monitor.DBActivityMonitor.get_indexing_progress">[docs]</a>    <span class="k">def</span> <span class="nf">get_indexing_progress</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method provides a more detailed statistics for processes</span>
+<span class="sd">        that build an index.</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connect</span><span class="p">()</span> <span class="k">as</span> <span class="n">cnxn</span><span class="p">:</span>
             <span class="n">cursor</span> <span class="o">=</span> <span class="n">cnxn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
             <span class="n">version</span> <span class="o">=</span> <span class="n">cnxn</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">server_version</span>
@@ -352,6 +392,13 @@
         <span class="k">return</span> <span class="n">msgs</span></div>
 
 <div class="viewcode-block" id="DBActivityMonitor.get_activity"><a class="viewcode-back" href="../../../../members/monitor.html#dorieh.platform.loader.monitor.DBActivityMonitor.get_activity">[docs]</a>    <span class="k">def</span> <span class="nf">get_activity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a list of statuses, one status for every processed being monitored.</span>
+
+<span class="sd">        :param pid: optional process id, if given only status of this process would be provided</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="n">msgs</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">leaders</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">workers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
@@ -389,6 +436,15 @@
 
 <div class="viewcode-block" id="DBActivityMonitor.execute"><a class="viewcode-back" href="../../../../members/monitor.html#dorieh.platform.loader.monitor.DBActivityMonitor.execute">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="n">what</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">on_monitor</span><span class="p">:</span> <span class="n">Callable</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Executes a process in the database while periodically outputting</span>
+<span class="sd">        the process status</span>
+
+<span class="sd">        :param what: A Python function that calls a process in the database</span>
+<span class="sd">        :param on_monitor: A Python callback function that is called to output the desired information</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="n">x</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">what</span><span class="p">)</span>
         <span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
         <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
@@ -405,6 +461,12 @@
         <span class="n">x</span><span class="o">.</span><span class="n">join</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="DBActivityMonitor.log_activity"><a class="viewcode-back" href="../../../../members/monitor.html#dorieh.platform.loader.monitor.DBActivityMonitor.log_activity">[docs]</a>    <span class="k">def</span> <span class="nf">log_activity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pid</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Log activity of the given process using configured Python loggers</span>
+<span class="sd">        :param pid: The process id to log the status of</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="n">activity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_activity</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="n">activity</span><span class="p">:</span>
             <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
@@ -412,6 +474,10 @@
 
 
 <div class="viewcode-block" id="Activity"><a class="viewcode-back" href="../../../../members/monitor.html#dorieh.platform.loader.monitor.Activity">[docs]</a><span class="k">class</span> <span class="nc">Activity</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A class representing database activity</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">activity</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">known_blocks</span><span class="p">,</span> <span class="n">now</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">msg_len</span><span class="o">=</span><span class="mi">32</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">now</span> <span class="o">=</span> <span class="n">now</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">msg_len</span> <span class="o">=</span> <span class="n">msg_len</span>
