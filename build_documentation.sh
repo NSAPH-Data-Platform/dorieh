@@ -82,7 +82,9 @@ git add docs
 git commit -a -m "Updating documentation"
 echo "Changes committed"
 
-if [ "${staging}" == "push" ]; then
+echo Staging: "$staging"
+
+if [ "${staging}" = "push" ]; then
   git push
 elif [ "${staging}" != "" ]; then
   cp -R docs "${staging}"/
