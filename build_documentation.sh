@@ -8,6 +8,7 @@ read -r -d '' help_text <<- EOM
 Usage:
   -b - specify custom branch to clone. Default is ${branch}
   -n - custom namespace on github to clone from. Default is ${namespace}
+  -s - staging documentation.
 EOM
 
 
@@ -18,11 +19,14 @@ then
   exit 1
 fi
 
-while getopts b:n: flag
+staging=""
+
+while getopts b:n:s flag
 do
     case "${flag}" in
         b) branch=${OPTARG};;
         n) namespace=${OPTARG};;
+        s) staging=${OPTARG};;
         *) echo "$help_text"; exit;;
     esac
 done
@@ -76,6 +80,12 @@ echo "Build finished"
 
 git add docs
 git commit -a -m "Updating documentation"
-
 echo "Changes committed"
+
+if [ "${staging}" == "push" ]; then
+  git push
+elif [ "${staging}" != "" ]; then
+  cp -R doc "${staging}"/
+fi
+
 git checkout "${branch}"
