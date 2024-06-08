@@ -57,6 +57,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="guts.html">Data Platform Internals</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="platform.html">Dorieh Core Data Platform</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="Datamodels.html">Data Modelling for Dorieh Data Platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DBConnections.html">Managing database connections</a></li>
 <li class="toctree-l3"><a class="reference internal" href="DataLoader.html">Dorieh Data Loader</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ProjectLoader.html">Project (Directory) Loading Utility</a></li>
 <li class="toctree-l3"><a class="reference internal" href="TerritorialCodes.html">Mapping between different territorial codes</a></li>
@@ -163,8 +164,9 @@ instead of Python Virtual Environment.</p>
 </section>
 <section id="create-connection-definition-file">
 <h2><a class="toc-backref" href="#id5" role="doc-backlink">Create connection definition file</a><a class="headerlink" href="#create-connection-definition-file" title="Permalink to this heading"></a></h2>
+<p>See also: <a class="reference internal" href="DBConnections.html"><span class="doc std std-doc">Managing database connections</span></a>.</p>
 <p>We need to create or update a database.ini file that stores connections
-to the database. Here is a sample file I use:</p>
+to the database. Here is a sample database.ini file:</p>
 <div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[mimic]</span>
 <span class="na">host</span><span class="o">=</span><span class="s">localhost</span>
 <span class="na">database</span><span class="o">=</span><span class="s">mimicii</span>
@@ -177,13 +179,21 @@ to the database. Here is a sample file I use:</p>
 <span class="na">user</span><span class="o">=</span><span class="s">dbuser</span>
 <span class="na">password</span><span class="o">=</span><span class="s">*********</span>
 <span class="na">ssh_user</span><span class="o">=</span><span class="s">johndoe</span>
+
+<span class="k">[dorieh]</span>
+<span class="na">database</span><span class="o">=</span><span class="s">dorieh</span>
+<span class="na">secret</span><span class="o">=</span><span class="s">aws:region=us-east-1:name=nsaph/public/dorieh/</span>
 </pre></div>
 </div>
 <blockquote>
-<div><p>Note that the first connection uses my local instance of PostgreSQL
-on my laptop. The second connects to <code class="docutils literal notranslate"><span class="pre">NSAPH</span></code> database. It is using ssh
-tunnel to connect - this is defined by adding ssh_user parameter.</p>
-<p><strong>mbouzinier</strong> is my username for both ssh and the database.</p>
+<div><p>Note that the first connection uses a local instance of PostgreSQL.
+The second connects to a database that is not accessible from a local machine.<br />
+It is using ssh
+tunnel to connect to a remote host that - this is defined by adding ssh_user parameter.
+The third connection uses
+<a class="reference external" href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html">AWS Secrets Manager</a>
+to retrieve connection credentials.</p>
+<p><strong>johndoe</strong> is a username for ssh while <strong>dbuser</strong> is a username for the database.</p>
 </div></blockquote>
 </section>
 <section id="executing-the-query">

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SQL Documentation &mdash; Dorieh Data Platform 0.0.1 documentation</title>
+  <title>Managing database connections &mdash; Dorieh Data Platform 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
@@ -23,8 +23,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Set of SQL statements to map tables from another database" href="members/map_to_foreign_database.ddl.html" />
-    <link rel="prev" title="Preliminary Considerations for Handling User Requests" href="UserRequests.html" /> 
+    <link rel="next" title="Dorieh Data Loader" href="DataLoader.html" />
+    <link rel="prev" title="Extensions used for creating federated view of different years" href="DataModellingExtensions.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -57,19 +57,13 @@
 <li class="toctree-l1 current"><a class="reference internal" href="guts.html">Data Platform Internals</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="platform.html">Dorieh Core Data Platform</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="Datamodels.html">Data Modelling for Dorieh Data Platform</a></li>
-<li class="toctree-l3"><a class="reference internal" href="DBConnections.html">Managing database connections</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Managing database connections</a></li>
 <li class="toctree-l3"><a class="reference internal" href="DataLoader.html">Dorieh Data Loader</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ProjectLoader.html">Project (Directory) Loading Utility</a></li>
 <li class="toctree-l3"><a class="reference internal" href="TerritorialCodes.html">Mapping between different territorial codes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="SampleQuery.html">How to query the database</a></li>
 <li class="toctree-l3"><a class="reference internal" href="UserRequests.html">Preliminary Considerations for Handling User Requests</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">SQL Documentation</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="members/map_to_foreign_database.ddl.html">Set of SQL statements to map tables from another database</a></li>
-<li class="toctree-l4"><a class="reference internal" href="members/rename_indices.sql.html">A procedure to rename indices</a></li>
-<li class="toctree-l4"><a class="reference internal" href="members/utils.sql.html">Utility functions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="members/zip2fips.sql.html">SQL to create direct ZIP =&gt; FIPS lookup table and helper functions</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="SQLDocumentation.html">SQL Documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="platform.html#core-platform-overview">Core platform overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="platform.html#tool-examples">Tool Examples</a></li>
 <li class="toctree-l3"><a class="reference internal" href="platform.html#project-structure">Project Structure</a></li>
@@ -103,9 +97,9 @@
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="guts.html">Data Platform Internals</a></li>
           <li class="breadcrumb-item"><a href="platform.html">Dorieh Core Data Platform</a></li>
-      <li class="breadcrumb-item active">SQL Documentation</li>
+      <li class="breadcrumb-item active">Managing database connections</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/SQLDocumentation.md.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/DBConnections.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -113,24 +107,72 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="sql-documentation">
-<h1>SQL Documentation<a class="headerlink" href="#sql-documentation" title="Permalink to this heading"></a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="members/map_to_foreign_database.ddl.html">Set of SQL statements to map tables from another database</a></li>
-<li class="toctree-l1"><a class="reference internal" href="members/rename_indices.sql.html">A procedure to rename indices</a></li>
-<li class="toctree-l1"><a class="reference internal" href="members/utils.sql.html">Utility functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="members/zip2fips.sql.html">SQL to create direct ZIP =&gt; FIPS lookup table and helper functions</a></li>
-</ul>
+  <section id="managing-database-connections">
+<h1>Managing database connections<a class="headerlink" href="#managing-database-connections" title="Permalink to this heading"></a></h1>
+<p>One of the most important functionalities of Dorieh data platform
+is support for creating a data warehouse for storing an analysis of large
+volumes of data. Moreover, Dorieh supports a rich set of in-database
+data transformations
+(see <a class="reference internal" href="Datamodels.html"><span class="doc std std-doc">Modelling data in Dorieh</span></a>). Dorieh assumes that the DBMS
+used for data warehousing is an instance of<br />
+<a class="reference external" href="https://www.postgresql.org/docs/current/index.html">PostgreSQL</a>
+version 13 or higher.</p>
+<p>A preferred way to manage connections to a database is through a <code class="docutils literal notranslate"><span class="pre">.ini</span></code> file.</p>
+<p>Such a file contains URIs and credentials for database connections and can store multiple
+entries. These entries can be either in a clear text or a reference to a Vault or a Secret Manager.</p>
+<p>Dorieh supports connection that require creating an ssh tunnel to connect to a host
+on the same network as the DBMS.</p>
+<p>Below is an example of database connection file storing 3 different ways to connect to
+a database.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[mimic]</span>
+<span class="na">host</span><span class="o">=</span><span class="s">localhost</span>
+<span class="na">database</span><span class="o">=</span><span class="s">mimicii</span>
+<span class="na">user</span><span class="o">=</span><span class="s">postgres</span>
+<span class="na">password</span><span class="o">=</span><span class="s">*****</span>
+
+<span class="k">[nsaph2]</span>
+<span class="na">host</span><span class="o">=</span><span class="s">dorieh.platform.cluster.uni.edu</span>
+<span class="na">database</span><span class="o">=</span><span class="s">nsaph</span>
+<span class="na">user</span><span class="o">=</span><span class="s">dbuser</span>
+<span class="na">password</span><span class="o">=</span><span class="s">*********</span>
+<span class="na">ssh_user</span><span class="o">=</span><span class="s">johndoe</span>
+
+<span class="k">[dorieh]</span>
+<span class="na">database</span><span class="o">=</span><span class="s">dorieh</span>
+<span class="na">secret</span><span class="o">=</span><span class="s">aws:region=us-east-1:name=nsaph/public/dorieh/</span>
+</pre></div>
 </div>
+<p>The first connection uses a local instance of PostgreSQL containing a copy of
+<a class="reference external" href="https://physionet.org/content/mimiciii/1.4/">MIMIC-III Clinical Database</a>.</p>
+<p>The second connects to a database that is not accessible from a local machine.<br />
+It is using an ssh tunnel to connect to a remote host that has direct access.
+The tunnel is defined by adding an <code class="docutils literal notranslate"><span class="pre">ssh_user</span></code> parameter.
+In this example <strong>johndoe</strong> is a username for ssh while <strong>dbuser</strong> is a username for the database.</p>
+<p>These options are appropriate for development and debugging, but are not secure enough for any
+production. The third connection uses
+<a class="reference external" href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html">AWS Secrets Manager</a>
+to retrieve connection credentials. In this case security is provided by AWS.</p>
+<blockquote>
+<div><p>Note: in some cases it might be required to specify an
+<a class="reference external" href="https://docs.aws.amazon.com/cli/v1/userguide/cli-configure-files.html">AWS profile</a>
+to be able to access the Secrets Manager. This is done by setting an environment variable.
+See the following example:</p>
+</div></blockquote>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> export AWS_PROFILE=dorieh
+</pre></div>
+</div>
+<blockquote>
+<div><p>defines that an AWS profile named <code class="docutils literal notranslate"><span class="pre">dorieh</span></code> will be used to retrieve credentials from
+the Secrets Manager.</p>
+</div></blockquote>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="UserRequests.html" class="btn btn-neutral float-left" title="Preliminary Considerations for Handling User Requests" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="members/map_to_foreign_database.ddl.html" class="btn btn-neutral float-right" title="Set of SQL statements to map tables from another database" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="DataModellingExtensions.html" class="btn btn-neutral float-left" title="Extensions used for creating federated view of different years" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="DataLoader.html" class="btn btn-neutral float-right" title="Dorieh Data Loader" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

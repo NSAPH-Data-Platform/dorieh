@@ -8,6 +8,7 @@ maxdepth: 4
 hidden: 
 ---
 Datamodels
+DBConnections
 DataLoader
 ProjectLoader
 TerritorialCodes
@@ -36,6 +37,9 @@ FIPS codes for US states
 and counties, SSA codes for US states
 and counties. See more information in the
 [Mapping between different territorial codes](https://nsaph-data-platform.github.io/nsaph-platform-docs/common/core-platform/doc/TerritorialCodes.html)
+
+See also: [](DBConnections).
+
 
 ## Tool Examples
 

@@ -101,6 +101,9 @@ and counties, SSA codes for US states
 and counties. See more information in the
 [Mapping between different territorial codes](https://nsaph-data-platform.github.io/nsaph-platform-docs/common/core-platform/doc/TerritorialCodes.html)
 
+See also: [](DBConnections).
+
+
 <!-- end of section core platform overview from dorieh.platform -->
 
 ### Dorieh GIS Utilities
@@ -125,6 +128,17 @@ They fall into two categories:
 
 <!-- section Documentation utilities overview from dorieh.docutils -->
 
+
+Documentation utilities to simplify creation of consistent
+documentation for Dorieh platform 
+                                                         
+* [cwl2md](members/cwl2md) Generates [Markdown](https://www.markdownguide.org/basic-syntax/) 
+    documentation for a CWL tool or workflow
+* [collector](members/collector) Generates automatic 
+    [reStructuredText](https://docutils.sourceforge.io/rst.html) 
+    templates for all Python modules 
+* [copy_section](members/copy_section)  Copies a specified section from one markdown document
+    to another. This way we can collect summaries in one file<!-- end of section documentation utilities overview from dorieh.docutils -->
 
 Documentation utilities to simplify creation of consistent
 documentation for Dorieh platform 

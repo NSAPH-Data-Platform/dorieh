@@ -2,6 +2,17 @@
 
 **How data models are defined and handled**
 
+```{toctree}
+---
+maxdepth: 4
+hidden: 
+---
+DataModellingExtensions
+Medicare
+Medicaid
+```
+
+
 ```{contents}
 ---
 local:
@@ -23,9 +34,21 @@ Currently, we are in the process of defining data models for the
 following domains
 
 * Medicaid
+* Medicare
 * EPA
 * Census
-* Gridmet
+* Climate (gridMET data)
+
+Extended functionality for data transformations is provided by
+[Data Modelling Extensions](DataModellingExtensions) that are used by 
+[Medicare processing workflow](Medicare)  and 
+[Medicaid processing workflow](Medicaid). These functionalities include:
+
+* Combining data from different tables (approximate **union** operation)
+* Casting data types
+* Validating consistency of data across tables
+
+See also: [](DBConnections).
 
 ## Domain
 

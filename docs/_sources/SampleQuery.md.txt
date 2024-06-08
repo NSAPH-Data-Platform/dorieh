@@ -48,8 +48,10 @@ instead of Python Virtual Environment.
 
 ## Create connection definition file
 
+See also: [](DBConnections).
+
 We need to create or update a database.ini file that stores connections
-to the database. Here is a sample file I use:
+to the database. Here is a sample database.ini file:
 
 ```ini
 [mimic]
@@ -64,13 +66,22 @@ database=nsaph
 user=dbuser
 password=*********
 ssh_user=johndoe
+
+[dorieh]
+database=dorieh
+secret=aws:region=us-east-1:name=nsaph/public/dorieh/
+
 ```
 
-> Note that the first connection uses my local instance of PostgreSQL
-> on my laptop. The second connects to `NSAPH` database. It is using ssh
-> tunnel to connect - this is defined by adding ssh_user parameter.
+> Note that the first connection uses a local instance of PostgreSQL.
+> The second connects to a database that is not accessible from a local machine.  
+> It is using ssh
+> tunnel to connect to a remote host that - this is defined by adding ssh_user parameter.
+> The third connection uses 
+> [AWS Secrets Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html)
+> to retrieve connection credentials.
 >
-> **mbouzinier** is my username for both ssh and the database.
+> **johndoe** is a username for ssh while **dbuser** is a username for the database.
 
 
 ## Executing the query
