@@ -46,7 +46,7 @@ See also: [](DBConnections).
 Examples of tools included in this package are:
 
 * [Universal Data Loader](members/data_loader)
-* A [utility to monitor progress of long-running database](members/monitor) processes like indexing.
+* A [utility to monitor progress of long-running database](MonitoringDB) processes like indexing.
 * A [utility to infer database schema and generate DDL](members/introspector) from a CSV file
 * A [utility to link a table to GIS](members/link_gis) from a CSV file
 * A [wrapper around database connection to PostgreSQL](members/db)
