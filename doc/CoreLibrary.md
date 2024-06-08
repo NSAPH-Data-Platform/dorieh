@@ -20,6 +20,7 @@ This package contains teh following modules used in subpackages:
   connection wrapper. It reads connection parameters from
   an `ini` file and connects to the database. It can
   transparently connect over **ssh tunnel** when required.
+  See also [](DBConnections)
 * [fips](members/fips.rst) US State FIPS codes, represented as Python dictionary
 * [pg_keywords](members/pg_keywords.rst) PostgreSQL keywords, e.g.
   type names, etc.
@@ -81,7 +82,7 @@ Implements parallel loading .
 * [Index Builder](members/index_builder) Builds indices for a table or for all 
     tables in the data domain, reporting the progress
 * [Database Activity Monitor](members/monitor) API and command line utility
-    to monitor database activity
+    to monitor database activity, see [](MonitoringDB)
 * [Vacuum](members/vacuum) Executes VACUUM command in the database to tune
     tables for better query performance
 * [Common Configuration](members/common) options
