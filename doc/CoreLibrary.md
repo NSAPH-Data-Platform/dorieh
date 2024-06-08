@@ -3,7 +3,14 @@
 ```{seealso}
 [Python Module Index](modindex)
 ```
- 
+
+```{contents}
+---
+local:
+---
+```
+
+
 ## Package dorieh.platform
 
 This package contains teh following modules used in subpackages:

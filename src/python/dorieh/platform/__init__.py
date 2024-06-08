@@ -44,7 +44,7 @@ def app_name() -> str:
                 script = frame.filename
                 break
     if not script:
-        return "nsaph"
+        return "dorieh"
     script = os.path.basename(script)
     script = os.path.splitext(script)[0]
     return script

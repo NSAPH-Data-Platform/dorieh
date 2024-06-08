@@ -121,6 +121,13 @@ ACTIVITY_BY_DB = ACTIVITY_QUERY + "WHERE datname = '{}'"
 
 
 class Lock:
+    """
+    Class resenting detailed information about a database lock
+
+    See also "PostgreSQL Documentation <https://wiki.postgresql.org/wiki/Lock_Monitoring>"_
+
+    """
+
     def __init__(self, data: List):
         self.blocked_pid = data[0]
         self.blocking_pid = data[2]
@@ -137,8 +144,18 @@ class Lock:
         return super().__str__() + f"[{msg}]"
 
 
-
 class DBMonitorConfig(DBConnectionConfig):
+    """
+    Configuration for DBActivityMonitor class,
+    a subclass of a general class :py:class:`dorieh.platform.loader.common.DBConnectionConfig`
+
+    It adds two parameters:
+
+    * pid - process id to monitor. If it is given, then only this process is monitored
+    * status - if this parameter is defined only processes with the specified status are monitored
+    """
+
+
     _pid = Argument("pid",
         help = "Display monitoring information only for selected process ids",
         type = int,
@@ -172,7 +189,13 @@ class DBMonitorConfig(DBConnectionConfig):
                 if attr[0] == '_' and attr[1] != '_'
             ]
 
+
 class DBActivityMonitor:
+    """
+    Main class of this module. Provides API to monitor database activity and execute
+    long-running processes while monitoring their status.
+    """
+
     @classmethod
     def get_instance (cls, context: DBConnectionConfig) -> DBMonitorConfig:
         if isinstance(context, DBMonitorConfig):
@@ -198,6 +221,15 @@ class DBActivityMonitor:
         self.blocks: Dict[int,Lock] = dict()
 
     def run(self):
+        """
+        This method is being run when the module is used as CLI.
+        Prints current activity for selected processes. Processes are selected based
+        on the value of `pid` and `status` configuration parameters.
+
+        See  :py:class:`dorieh.platform.loader.monitor.DBMonitorConfig`
+        :return:
+        """
+
         self.get_blocks()
         for lock in self.blocks.values():
             print(str(lock))
@@ -219,6 +251,8 @@ class DBActivityMonitor:
         return self.connection.connect()
 
     def get_blocks(self):
+        """ Internal method """
+
         with self._connect() as cnxn:
             with cnxn.cursor() as cursor:
                 cursor.execute(LOCK_QUERY)
@@ -228,6 +262,12 @@ class DBActivityMonitor:
         return
 
     def get_indexing_progress(self) -> List[str]:
+        """
+        This method provides a more detailed statistics for processes
+        that build an index.
+        :return:
+        """
+
         with self._connect() as cnxn:
             cursor = cnxn.cursor()
             version = cnxn.info.server_version
@@ -264,6 +304,13 @@ class DBActivityMonitor:
         return msgs
 
     def get_activity(self, pid: int = None) -> List[str]:
+        """
+        Returns a list of statuses, one status for every processed being monitored.
+
+        :param pid: optional process id, if given only status of this process would be provided
+        :return:
+        """
+
         msgs = []
         leaders: List[Dict] = []
         workers: List[Dict] = []
@@ -301,6 +348,15 @@ class DBActivityMonitor:
 
     @staticmethod
     def execute(what: Callable, on_monitor: Callable):
+        """
+        Executes a process in the database while periodically outputting
+        the process status
+
+        :param what: A Python function that calls a process in the database
+        :param on_monitor: A Python callback function that is called to output the desired information
+        :return:
+        """
+
         x = threading.Thread(target=what)
         x.start()
         n = 0
@@ -317,6 +373,12 @@ class DBActivityMonitor:
         x.join()
 
     def log_activity(self, pid: int):
+        """
+        Log activity of the given process using configured Python loggers
+        :param pid: The process id to log the status of
+        :return:
+        """
+
         activity = self.get_activity(pid)
         for msg in activity:
             logging.info(msg)
@@ -324,6 +386,10 @@ class DBActivityMonitor:
 
 
 class Activity:
+    """
+    A class representing database activity
+    """
+
     def __init__(self, activity: Dict, known_blocks, now: datetime, msg_len=32):
         self.now = now
         self.msg_len = msg_len

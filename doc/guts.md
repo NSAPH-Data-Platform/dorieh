@@ -2,9 +2,12 @@
 
 ```{toctree}
 ---
-maxdepth: 1
+maxdepth: 2
 caption: Data Platform Internals
 ---
 platform
 deployment
+DBConnections
+MonitoringDB 
+ProjectLoader
 ```
