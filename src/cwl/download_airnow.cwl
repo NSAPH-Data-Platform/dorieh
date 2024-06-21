@@ -24,6 +24,8 @@ class: CommandLineTool
 baseCommand: [python, -m, dorieh.epa.airnow]
 requirements:
   InlineJavascriptRequirement: {}
+  NetworkAccess:
+    networkAccess: True
   EnvVarRequirement:
     envDef:
       HTTPS_PROXY: $(inputs.proxy)

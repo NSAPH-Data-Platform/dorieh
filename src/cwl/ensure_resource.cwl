@@ -23,6 +23,10 @@ cwlVersion: v1.2
 class: CommandLineTool
 baseCommand: [python, -m, dorieh.platform.util.pg_json_dump]
 
+requirements:
+  NetworkAccess:
+    networkAccess: True
+
 doc: |
   This tool ensures that resources required by
   the processing steps are loaded into the database

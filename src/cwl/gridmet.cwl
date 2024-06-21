@@ -28,6 +28,8 @@ requirements:
   InlineJavascriptRequirement: {}
   ScatterFeatureRequirement: {}
   MultipleInputFeatureRequirement: {}
+  NetworkAccess:
+    networkAccess: True
 
 
 doc: |

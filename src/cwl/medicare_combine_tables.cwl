@@ -23,6 +23,10 @@ cwlVersion: v1.2
 class: CommandLineTool
 baseCommand: [python, -m, dorieh.cms.tools.mcr_combine_tables]
 
+requirements:
+  NetworkAccess:
+    networkAccess: True
+
 doc: |
   This tool combines disparate tables with raw Medicare data into a single
   view, transforming common columns to uniform type and format
