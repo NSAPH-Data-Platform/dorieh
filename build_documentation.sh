@@ -21,7 +21,7 @@ fi
 
 staging=""
 
-while getopts b:n:s flag
+while getopts b:n:s: flag
 do
     case "${flag}" in
         b) branch=${OPTARG};;
