@@ -39,18 +39,16 @@ this additional command:
 
     pip install dorieh
 
-## Testing AQS workflow
+## Before running any test
 
-### Before running the test
-                          
 Tests write significant amount of logs, therefore we recommend running them in a temporary scratch directory.
 
 First, create a scratch directory:
 
-    mkdir -p scratch/aqs
-    cd scratch/aqs
-                                                               
-You will also need to create a database connection file, see 
+    mkdir -p scratch/testxx
+    cd scratch/testxx
+
+You will also need to create a database connection file, see
 [](DBConnections) for details and examples.
 
 Further we assume the following environment variables:
@@ -59,9 +57,26 @@ Further we assume the following environment variables:
 export dbini=${/path/to/database.ini}
 export connection=${section_name_in_database.ini}
 ```
-                               
+
 We also assume that you are using Toil as CWL implementation. If you use a different implementation,
 you will need to replace `toil-cwl-runner` command with an appropriate alternative
+
+
+## Testing AQS workflow
+
+### Before running the test
+
+Create a scratch directory:
+
+    mkdir -p scratch/aqs
+    cd scratch/aqs
+ 
+Export environment variables:
+
+```shell
+export dbini=${/path/to/database.ini}
+export connection=${section_name_in_database.ini}
+```
 
 ###  Testing local installation
 
@@ -92,3 +107,30 @@ In the virtual environment that has Toil run the following command:
         --test_script https://raw.githubusercontent.com/ForomePlatform/dorieh/main/src/cwl/test_cases/aqs_test.sql \
         --aggregation annual --parameter_code PM25 --table pm25_annual --years 2011 --years 2010    
 
+
+## Testing Airnow workflow
+
+### Before running the test
+
+Create a scratch directory:
+
+    mkdir -p scratch/airnow
+    cd scratch/airnow
+
+Export environment variables:
+
+```shell
+export dbini=${/path/to/database.ini}
+export connection=${section_name_in_database.ini}
+```
+
+###  Testing local installation
+
+If you have installed dorieh locally, run the following command
+
+    toil-cwl-runner --retryCount 0 --cleanWorkDir never --outdir outputs --workDir . \
+        https://raw.githubusercontent.com/ForomePlatform/dorieh/main/src/cwl/test_airnow.cwl \
+        --database ${dbini} --connection_name ${connection} \
+        --test_script https://raw.githubusercontent.com/ForomePlatform/dorieh/main/src/cwl/test_cases/airnow_test.sql \
+        --parameter_code PM25 --table airnow_pm25_2022 --year 2022  \
+        --api-key 9B053C38-3C42-416E-A330-203A698CCCDA --from 2022-01-01 --to 2022-08-31
