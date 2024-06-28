@@ -36,7 +36,7 @@ def name2path(name: str) -> str:
 def get_resources(name: str, verbose=False) -> Dict[str, str]:
     rel_path = name2path(name)
     dirs = [get_resource_dir()] + [
-        os.path.join(d, "resources")
+        os.path.join(d, "dorieh", "resources")
         for d in sys.path
     ]
     for d in dirs:
