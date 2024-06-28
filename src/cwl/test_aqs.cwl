@@ -40,7 +40,6 @@ inputs:
   test_script:
     doc: File containing SQL test script
     type:
-      - File
       - File[]
   years:
     doc: Years to download

@@ -1,6 +1,24 @@
 Utility to generate test queries
 ================================
 
+```{toctree}
+---
+maxdepth: 4
+glob: true
+hidden: 
+---
+dbt_runner.md
+getn_dbt_cwl.rst
+../DBT.md
+```
+
+```{contents}
+---
+local:
+---
+```
+
+
 Usage
 -----
 

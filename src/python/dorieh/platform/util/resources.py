@@ -23,9 +23,22 @@ import sys
 from pathlib import Path
 from typing import Dict
 
+from dorieh.version import PACKAGE_NAME
+
 
 def get_resource_dir() -> str:
-    root = Path(__file__).parents[4]
+    pp = list(Path(__file__).parents)
+    idx = -1
+    for i in range(len(pp)):
+        d = pp[i].name
+        if d == PACKAGE_NAME:
+            idx = i
+            break
+    if idx < 0:
+        idx = 3
+    if pp[idx+1].name == "python" and pp[idx+2].name == "src":
+        idx += 3
+    root = pp[idx]
     return os.path.join(root, "resources")
 
 

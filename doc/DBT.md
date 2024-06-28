@@ -1,5 +1,18 @@
 # Database Testing Framework
 
+```{toctree}
+---
+maxdepth: 4
+glob: true
+hidden: 
+---
+members/create_test.md
+members/dbt_runner.md
+members/getn_dbt_cwl.rst
+guts.md
+```
+
+
 The testing framework allows to test a pipeline produces
 exactly the same data in subsequent pipeline runs. The data is
 tested in database table(s) procedure by the pipeline.
