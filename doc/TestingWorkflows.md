@@ -73,3 +73,22 @@ If you have installed dorieh locally, run the following command
         --test_script https://raw.githubusercontent.com/ForomePlatform/dorieh/main/src/cwl/test_cases/aqs_test.sql \
         --aggregation annual --parameter_code PM25 --table pm25_annual --years 2011 --years 2010    
 
+
+### Testing with DockerRequirement
+                                                                                  
+We will use workflows from src/workflows instead of src/cwl directory.
+
+When testing with Docker, you should remember that commands are executed within 
+a docker container, so `localhost` refers to a local docker container, not to your
+local host. If your PostgreSQL is running locally, you need to update your database.ini file.
+
+You might need to replace host with `host.docker.internal` or `172.17.0.1`.
+
+In the virtual environment that has Toil run the following command:
+
+    toil-cwl-runner --retryCount 0 --cleanWorkDir never --outdir outputs --workDir . \
+        https://raw.githubusercontent.com/ForomePlatform/dorieh/main/src/workflows/test_aqs.cwl \
+        --database ${dbini} --connection_name ${connection} \
+        --test_script https://raw.githubusercontent.com/ForomePlatform/dorieh/main/src/cwl/test_cases/aqs_test.sql \
+        --aggregation annual --parameter_code PM25 --table pm25_annual --years 2011 --years 2010    
+
