@@ -53,8 +53,7 @@ inputs:
     type: string
   test_script:
     doc: File containing SQL test script
-    type:
-      - File[]
+    type: File[]
   years:
     default:
     - '1999'
