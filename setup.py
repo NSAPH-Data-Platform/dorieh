@@ -7,7 +7,7 @@ with open("README.md", "r") as readme:
 
 setup(
     name='dorieh',
-    version="0.1.0",
+    version="0.1.1",
     url='https://github.com/NSAPH-Data-Platform/dorieh',
     license='Apache 2.0',
     author='Michael A Bouzinier',
@@ -18,6 +18,7 @@ setup(
     entry_points={
         'console_scripts': [
             'cwl2md=dorieh.docutils.cwl2md:main',
+            'mkpgpass=dorieh.platform.util.pgpass:main',
             'copy_section=dorieh.docutils.copy_section:main',
             'collector=dorieh.docutils.collector:main',
             'dorieh_version=dorieh.version:main',
