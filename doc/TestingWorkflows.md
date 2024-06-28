@@ -134,3 +134,33 @@ If you have installed dorieh locally, run the following command
         --test_script https://raw.githubusercontent.com/ForomePlatform/dorieh/main/src/cwl/test_cases/airnow_test.sql \
         --parameter_code PM25 --table airnow_pm25_2022 --year 2022  \
         --api-key 9B053C38-3C42-416E-A330-203A698CCCDA --from 2022-01-01 --to 2022-08-31
+
+## Testing Climate workflow
+                                    
+See also [](Example-climate-workflow)
+
+### Before running the test
+
+Create a scratch directory:
+
+    mkdir -p scratch/climate
+    cd scratch/climate
+
+Export environment variables:
+
+```shell
+export dbini=${/path/to/database.ini}
+export connection=${section_name_in_database.ini}
+```
+
+###  Testing local installation
+
+If you have installed dorieh locally, run the following command
+
+    toil-cwl-runner --retryCount 0 --cleanWorkDir never --outdir outputs --workDir . \
+        https://raw.githubusercontent.com/ForomePlatform/dorieh/main/src/cwl/test_gridmet.cwl \
+        --database ${dbini} --connection_name ${connection} \
+        --test_script https://raw.githubusercontent.com/ForomePlatform/dorieh/main/src/cwl/test_cases/airnow_test.sql \
+        --parameter_code PM25 --table airnow_pm25_2022 --year 2022  \
+        --api-key 9B053C38-3C42-416E-A330-203A698CCCDA --from 2022-01-01 --to 2022-08-31
+
