@@ -167,6 +167,11 @@ def import_table(conn: connection, table: str, replace = True):
             logging.info(sql)
             cursor.execute(sql)
     resource = get_resources(table)
+    if not resource:
+        get_resources(table, verbose=True)
+        raise ValueError(f"Resource for table {table} not found")
+    elif 'ddl' not in resource:
+        raise ValueError(f"Resource {resource} does not contain key 'ddl'")
     ddl_path = resource['ddl']
     with open(ddl_path) as f:
         ddl = ''.join([

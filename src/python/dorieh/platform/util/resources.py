@@ -33,7 +33,7 @@ def name2path(name: str) -> str:
     return os.path.join(*(name.split('.')))
 
 
-def get_resources(name: str) -> Dict[str, str]:
+def get_resources(name: str, verbose=False) -> Dict[str, str]:
     rel_path = name2path(name)
     dirs = [get_resource_dir()] + [
         os.path.join(d, "resources")
@@ -41,6 +41,8 @@ def get_resources(name: str) -> Dict[str, str]:
     ]
     for d in dirs:
         rpath = os.path.join(d, rel_path + "*")
+        if verbose:
+            print(rpath)
         resources = glob.glob(rpath, recursive=False)
         if resources:
             return {
