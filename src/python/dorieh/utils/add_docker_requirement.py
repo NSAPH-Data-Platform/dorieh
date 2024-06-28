@@ -30,13 +30,14 @@ import shutil
 from pathlib import Path
 
 
-def main(rtype = "hint"):
+def main(rtype = "hints"):
     pp = list(Path(__file__).parents)
     root = pp[3]
     pattern = os.path.join(root, "cwl", "*.cwl")
     scripts = glob.glob(pattern, recursive=False)
     outdir = os.path.join(root, "workflows")
-    os.mkdir(outdir)
+    if not os.path.isdir(outdir):
+        os.mkdir(outdir)
     for script in scripts:
         tool = False
         with open(script, "rt") as f:
@@ -54,7 +55,7 @@ def main(rtype = "hint"):
                 if line.startswith(rtype):
                     idx = i + 1
                     break
-            if i < 0:
+            if idx < 0:
                 for i in range(len(lines)):
                     line = lines[i]
                     if line.startswith("inputs:"):
@@ -62,11 +63,11 @@ def main(rtype = "hint"):
                         lines.insert(i+1, rtype + ":\n")
                         idx = i + 2
                         break
-            if i < 0:
+            if idx < 0:
                 raise ValueError("Failed to find insertion point")
-            lines.insert(idx+2, "  DockerRequirement:\n")
-            lines.insert(idx+3, "    dockerPull: forome/dorieh\n")
-            lines.insert(idx+4, "\n")
+            lines.insert(idx, "  DockerRequirement:\n")
+            lines.insert(idx+1, "    dockerPull: forome/dorieh\n")
+            lines.insert(idx+2, "\n")
         with open(os.path.join(outdir, os.path.basename(script)), "wt") as o:
             o.writelines(lines)
     return

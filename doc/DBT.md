@@ -9,9 +9,9 @@ hidden:
 members/create_test.md
 members/dbt_runner.md
 members/getn_dbt_cwl.rst
+TestingWorkflows.md
 guts.md
 ```
-
 
 The testing framework allows to test a pipeline produces
 exactly the same data in subsequent pipeline runs. The data is
@@ -26,3 +26,6 @@ The framework consists of three utilities:
     by `create_test.py`
 * [gen_dbt_cwl.py](members/gen_dbt_cwl): A tool to generate a CWL workflow
     that tests a given pipeline (also CWL workflow)
+                                                             
+For instructions to test bundled workflows 
+see [](TestingWorkflows.md)
