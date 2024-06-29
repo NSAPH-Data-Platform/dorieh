@@ -41,7 +41,7 @@ inputs:
     doc: HTTP/HTTPS Proxy if required
     type: string?
   ram:
-    default: 2GB
+    default: 1GB
     doc: Runtime memory, available to the process
     type: string
   shapes:

@@ -89,7 +89,7 @@ If you have installed dorieh locally, run the following command
         --aggregation annual --parameter_code PM25 --table pm25_annual --years 2011 --years 2010    
 
 
-### Testing with DockerRequirement
+### Testing AQS workflow with DockerRequirement
                                                                                   
 We will use workflows from src/workflows instead of src/cwl directory.
 
@@ -135,6 +135,24 @@ If you have installed dorieh locally, run the following command
         --parameter_code PM25 --table airnow_pm25_2022 --year 2022  \
         --api-key 9B053C38-3C42-416E-A330-203A698CCCDA --from 2022-01-01 --to 2022-08-31
 
+### Testing Airnow workflow with DockerRequirement
+
+To test without local installation of Dorieh, using workflow DockerRequirement instead, change two things:
+
+1. Ensure that docker container can access PostgreSQL server
+2. In the URI for the workflow repalce '/cwl/' with '/workflows/'.
+
+The command will be:
+
+    toil-cwl-runner --retryCount 0 --cleanWorkDir never --outdir outputs --workDir . \
+        https://raw.githubusercontent.com/ForomePlatform/dorieh/main/src/workflows/test_airnow.cwl \
+        --database ${dbini} --connection_name ${connection} \
+        --test_script https://raw.githubusercontent.com/ForomePlatform/dorieh/main/src/cwl/test_cases/airnow_test.sql \
+        --parameter_code PM25 --table airnow_pm25_2022 --year 2022  \
+        --api-key 9B053C38-3C42-416E-A330-203A698CCCDA --from 2022-01-01 --to 2022-08-31
+
+
+
 ## Testing Climate workflow
                                     
 See also [](Example-climate-workflow)
@@ -155,6 +173,49 @@ export connection=${section_name_in_database.ini}
 
 ###  Testing local installation
                                   
+There are frequent failure in downloading both datafiles and shapefiles, therefore, here we use option `--retryCount 3`
+to automatically retry failed downloads.
+
+If you have installed dorieh locally, run the following command
+
+    toil-cwl-runner --retryCount 3 --cleanWorkDir never --outdir outputs --workDir . \
+        https://raw.githubusercontent.com/ForomePlatform/dorieh/main/src/cwl/test_gridmet.cwl \
+        --database ${dbini} --connection_name ${connection} \
+        --test_script https://raw.githubusercontent.com/ForomePlatform/dorieh/main/src/cwl/test_cases/county_rmax.sql \
+        --test_script https://raw.githubusercontent.com/ForomePlatform/dorieh/main/src/cwl/test_cases/county_rmin.sql \
+        --dates dayOfMonth:13 --bands rmax --bands rmin --geography county
+
+                           
+### Testing climate workflow with DockerRequirement
+
+    toil-cwl-runner --retryCount 3 --cleanWorkDir never --outdir outputs --workDir . \
+        https://raw.githubusercontent.com/ForomePlatform/dorieh/main/src/workflows/test_gridmet.cwl \
+        --database ${dbini} --connection_name ${connection} \
+        --test_script https://raw.githubusercontent.com/ForomePlatform/dorieh/main/src/cwl/test_cases/county_rmax.sql \
+        --test_script https://raw.githubusercontent.com/ForomePlatform/dorieh/main/src/cwl/test_cases/county_rmin.sql \
+        --dates dayOfMonth:13 --bands rmax --bands rmin --geography county
+
+
+## Testing Exposure workflow
+
+See also [](Example-climate-workflow)
+
+### Before running the test
+
+Create a scratch directory:
+
+    mkdir -p scratch/pm25
+    cd scratch/pm25
+
+Export environment variables:
+
+```shell
+export dbini=${/path/to/database.ini}
+export connection=${section_name_in_database.ini}
+```
+
+###  Testing local installation
+
 There are frequent failure in downloading both datafiles and shapefiles, therefore, here we use option `--retryCount 3`
 to automatically retry failed downloads.
 

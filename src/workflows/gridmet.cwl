@@ -31,6 +31,10 @@ requirements:
   NetworkAccess:
     networkAccess: True
 
+hints:
+  DockerRequirement:
+    dockerPull: forome/dorieh
+
 
 doc: |
   This workflow downloads NetCDF datasets from 
