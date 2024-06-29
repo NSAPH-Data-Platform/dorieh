@@ -240,6 +240,7 @@ If you have installed dorieh locally, run the following command
         --database ${dbini} --connection_name ${connection} \
         --test_script https://raw.githubusercontent.com/ForomePlatform/dorieh/main/src/cwl/test_cases/exposures_test_pm25_components.sql \
         --downloads s3://nsaph-public/data/exposures/wustl/ \ 
-        --geography county --shape_file_collection tiger --table pm25_components_annual_county_mean
+        --geography county --shape_file_collection tiger --table pm25_components_annual_county_mean \
+        --years 2010 --years 2011
         
 

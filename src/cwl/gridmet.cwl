@@ -121,6 +121,16 @@ inputs:
 
 
 steps:
+  initdb:
+    run: initdb.cwl
+    doc: Ensure that database utilities are at their latest version
+    in:
+      database: database
+      connection_name: connection_name
+    out:
+      - log
+      - err
+
   init_db_schema:
     doc: We need to do it because of parallel creation of tables
     run:
@@ -278,6 +288,20 @@ steps:
       - vacuum_err
 
 outputs:
+  initdb_log:
+    type: File?
+    outputSource: initdb/log
+  initdb_err:
+    type: File?
+    outputSource: initdb/err
+
+  init_schema_log:
+    type: File?
+    outputSource: init_db_schema/log
+  init_schema_err:
+    type: File?
+    outputSource: init_db_schema/err
+
   registry:
     type: File?
     outputSource: make_registry/model

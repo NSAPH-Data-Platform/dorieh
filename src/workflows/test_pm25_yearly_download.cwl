@@ -34,9 +34,6 @@ inputs:
       '
     type: string
   database:
-    default:
-      class: File
-      path: database.ini
     doc: "Path to database connection file, usually database.ini. \nThis argument\
       \ is ignored if `connection_name` == `None`\n"
     type: File
