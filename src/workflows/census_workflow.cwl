@@ -8,6 +8,11 @@ requirements:
   StepInputExpressionRequirement: {}
 
 
+
+hints:
+  DockerRequirement:
+    dockerPull: forome/dorieh
+
 inputs:
   api_key: string # API Key for the Census API
   http_proxy:

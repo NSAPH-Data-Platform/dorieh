@@ -43,7 +43,7 @@ def main(rtype = "hints"):
         with open(script, "rt") as f:
             lines = [l for l in f]
             for line in lines:
-                if line.startswith("class: CommandLineTool"):
+                if "class: CommandLineTool" in line:
                     tool = True
                     break
             if not tool:

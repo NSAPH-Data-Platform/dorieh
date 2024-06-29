@@ -71,6 +71,11 @@ doc: |
           gridmet.cwl test_gridmet_job.yml 
   
 
+
+hints:
+  DockerRequirement:
+    dockerPull: forome/dorieh
+
 inputs:
   proxy:
     type: string?
