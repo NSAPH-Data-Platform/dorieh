@@ -39,7 +39,7 @@ def main(rtype = "hints"):
     if not os.path.isdir(outdir):
         os.mkdir(outdir)
     for script in scripts:
-        tool = False
+        tool = script.startswith("test_")
         with open(script, "rt") as f:
             lines = [l for l in f]
             for line in lines:

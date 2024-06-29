@@ -235,7 +235,7 @@ to automatically retry failed downloads.
 
 If you have installed dorieh locally, run the following command
 
-    toil-cwl-runner --retryCount 2 --cleanWorkDir never --outdir outputs --workDir . \
+    toil-cwl-runner --reference-inputs --retryCount 2 --cleanWorkDir never --outdir outputs --workDir . \
         https://raw.githubusercontent.com/ForomePlatform/dorieh/main/src/cwl/test_pm25_yearly_download.cwl \
         --database ${dbini} --connection_name ${connection} \
         --test_script https://raw.githubusercontent.com/ForomePlatform/dorieh/main/src/cwl/test_cases/exposures_test_pm25_components.sql \
