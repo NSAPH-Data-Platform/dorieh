@@ -11,6 +11,9 @@ requirements:
   StepInputExpressionRequirement: {}
   SubworkflowFeatureRequirement: {}
 
+hints:
+  DockerRequirement:
+    dockerPull: forome/dorieh
 
 # All inputs of original pipeline, remove what is not needed
 inputs:
