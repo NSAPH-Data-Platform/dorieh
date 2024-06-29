@@ -9,9 +9,23 @@ local:
 ```{seealso}
 [Database Testing Framework](DBT)
 ```
-  
+
+```{toctree}
+---
+maxdepth: 2
+
+---
+pipelines
+pipeline/aqs
+pipeline/airnow
+pipeline/gridmet
+pipeline/pm25_yearly_download
+```
 
 ## Introduction to testing and prerequisites
+
+Introduction to using workflows with Dorieh can be found in
+[](pipelines)
 
 Bundled workflows can be tested in two ways:
 
@@ -216,16 +230,16 @@ export connection=${section_name_in_database.ini}
 
 ###  Testing local installation
 
-There are frequent failure in downloading both datafiles and shapefiles, therefore, here we use option `--retryCount 3`
+There are frequent failure in downloading both datafiles and shapefiles, therefore, here we use option `--retryCount 2`
 to automatically retry failed downloads.
 
 If you have installed dorieh locally, run the following command
 
-    toil-cwl-runner --retryCount 3 --cleanWorkDir never --outdir outputs --workDir . \
-        https://raw.githubusercontent.com/ForomePlatform/dorieh/main/src/cwl/test_gridmet.cwl \
+    toil-cwl-runner --retryCount 2 --cleanWorkDir never --outdir outputs --workDir . \
+        https://raw.githubusercontent.com/ForomePlatform/dorieh/main/src/cwl/test_pm25_yearly_download.cwl \
         --database ${dbini} --connection_name ${connection} \
-        --test_script https://raw.githubusercontent.com/ForomePlatform/dorieh/main/src/cwl/test_cases/county_rmax.sql \
-        --test_script https://raw.githubusercontent.com/ForomePlatform/dorieh/main/src/cwl/test_cases/county_rmin.sql \
-        --dates dayOfMonth:13 --bands rmax --bands rmin --geography county
+        --test_script https://raw.githubusercontent.com/ForomePlatform/dorieh/main/src/cwl/test_cases/exposures_test_pm25_components.sql \
+        --downloads s3://nsaph-public/data/exposures/wustl/ \ 
+        --geography county --shape_file_collection tiger --table pm25_components_annual_county_mean
         
 
