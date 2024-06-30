@@ -3,13 +3,12 @@ Utility to generate test queries
 
 ```{toctree}
 ---
-maxdepth: 4
+maxdepth: 2
 glob: true
 hidden: 
 ---
 dbt_runner.md
 getn_dbt_cwl.rst
-../DBT.md
 ```
 
 ```{contents}
@@ -17,6 +16,9 @@ getn_dbt_cwl.rst
 local:
 ---
 ```
+
+Generates SQL script that can be used with [dbt_runner](dbt_runner). 
+These scripts are used by [](gen_dbt_cwl).
 
 
 Usage
