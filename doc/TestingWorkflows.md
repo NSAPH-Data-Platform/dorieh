@@ -8,18 +8,7 @@ local:
 
 ```{seealso}
 [Database Testing Framework](DBT)
-```
-
-```{toctree}
----
-maxdepth: 2
-
----
-pipelines
-pipeline/aqs
-pipeline/airnow
-pipeline/gridmet
-pipeline/pm25_yearly_download
+[](pipelines)
 ```
 
 ## Introduction to testing and prerequisites
@@ -78,6 +67,11 @@ you will need to replace `toil-cwl-runner` command with an appropriate alternati
 
 ## Testing AQS workflow
 
+```{seealso}
+[](pipeline/aqs)
+```
+
+
 ### Before running the test
 
 Create a scratch directory:
@@ -124,6 +118,11 @@ In the virtual environment that has Toil run the following command:
 
 ## Testing Airnow workflow
 
+```{seealso}
+[](pipeline/airnow)
+```
+
+
 ### Before running the test
 
 Create a scratch directory:
@@ -168,8 +167,11 @@ The command will be:
 
 
 ## Testing Climate workflow
-                                    
-See also [](Example-climate-workflow)
+
+```{seealso}
+[](Example-climate-workflow)
+[](pipeline/gridmet)
+```
 
 ### Before running the test
 
@@ -212,7 +214,10 @@ If you have installed dorieh locally, run the following command
 
 ## Testing Exposure workflow
 
-See also [](Example-climate-workflow)
+```{seealso}
+[](pipeline/pm25_yearly_download)
+```
+
 
 ### Before running the test
 
