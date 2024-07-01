@@ -1,7 +1,7 @@
 Parser for FTS files that accompany CMS data from ResDac
 ========================================================
 
-See also `What is FTS <../../../../fts.html>`_  for more details about FTS
+See also `What is FTS <../fts.html>`_  for more details about FTS
 
 .. contents:: Table of Contents
    :depth: 4

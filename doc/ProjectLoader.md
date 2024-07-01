@@ -128,7 +128,7 @@ directory `/data/incoming/valuable/data/`:
 
     python -u -m dorieh.platform.loader.project_loader --domain my_schema --data /data/incoming/valuable/data/ --registry my_temp_schema.yaml --reset --pattern *.csv --db database.ini --connection postgres
 
-It uses `database.ini` file in the current directory 
+It uses `database.ini` file (see [](DBConnections) for details) in the current directory 
 (where the program is started) and a section named `postgres` inside it. 
 It creates temporary file 
 `my_temp_schema.yaml` also in the current directory. If such a file 

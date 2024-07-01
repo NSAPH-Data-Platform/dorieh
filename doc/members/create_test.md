@@ -1,6 +1,26 @@
 Utility to generate test queries
 ================================
 
+```{toctree}
+---
+maxdepth: 2
+glob: true
+hidden: 
+---
+dbt_runner.md
+getn_dbt_cwl.rst
+```
+
+```{contents}
+---
+local:
+---
+```
+
+Generates SQL script that can be used with [dbt_runner](dbt_runner). 
+These scripts are used by [](gen_dbt_cwl).
+
+
 Usage
 -----
 

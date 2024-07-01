@@ -58,7 +58,7 @@ the pipeline does not require the data warehouse.
           
 Dorieh uses database.ini type file to manage connections
 to data warehouse. The format described in
-[documentation](SampleQuery.md#create-connection-definition-file).
+[documentation](DBConnections.md).
 
 If the file with database connections does not exist, you 
 need to create one. For example, named database.ini somewhere

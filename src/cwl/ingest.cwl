@@ -24,6 +24,8 @@ class: CommandLineTool
 baseCommand: [python, -m, dorieh.platform.loader.data_loader]
 requirements:
   InlineJavascriptRequirement: {}
+  NetworkAccess:
+    networkAccess: True
 
 # Running in Docker container does not work on FASSE or Cannon, will have to find a workaround
 #hints:

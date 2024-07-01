@@ -44,7 +44,7 @@ one can use
 [Introspector tool](members/introspector.rst).
 It can be run as a standalone command-line tool or used via Python API.                                                   
 Examples of using introspector via API can be found in 
-[EPA pipeline]members/epa_registry.rst). 
+[EPA pipeline](members/epa_registry.rst). 
 
 [Project Loader Tool](ProjectLoader.md)
 also uses Introspector.

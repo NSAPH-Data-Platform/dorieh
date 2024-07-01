@@ -1,6 +1,6 @@
 # Dorieh Data Platform for population and environmental health
 
-Detailed documentation: [Dorieh Documentation](https://nsaph-data-platform.github.io/dorieh/)
+Detailed documentation: [Dorieh Documentation](https://foromeplatform.github.io/dorieh/)
 
 ## Dorieh overview
 

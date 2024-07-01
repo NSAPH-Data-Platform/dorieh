@@ -25,12 +25,14 @@ baseCommand: [python, -m, dorieh.cms.registry]
 
 doc: |
   This tool examines a directory with raw CMS data, looking
-  for File Transfer Summary (FTS) files. It examnines each
+  for [File Transfer Summary (FTS)](../fts) files. It examines each
   FTS file under directory (recursively) and creates a unified
   data model for input raw CMS data. If any FTS files for
   different years are incompatible with one another, a
   warning is reported. However, so far we found that all years
   are compatible.
+  
+  See also [Python FTS Parser](../members/fts2yaml)
 
 
 inputs:

@@ -1,7 +1,3 @@
----
-orphan: true
----
-
 # File Transfer Summary
 
 File transfer summary (FTS) document contains information about 
@@ -22,6 +18,7 @@ data files described with FTS:
 
 * [Fixed Width File Reader](members/fwf)
 * [Specialized parser for FTS CMS files from ResDac](members/fts2yaml)
+* [CWL tool for parsing FTS](pipeline/parse_fts)
 * [Converter of CMS files from ResDac to CSV](members/mcr_fts2csv)
 * [Data loader for CMS files from ResDac](members/mcr_fts2db)
 * [Tool to slect a random subset from CMS data files](members/mcr_create_test_data.rst)

@@ -27,6 +27,8 @@ requirements:
   InlineJavascriptRequirement: {}
   ResourceRequirement:
     coresMin: 0.5
+  NetworkAccess:
+    networkAccess: True
   EnvVarRequirement:
     envDef:
       HTTP_PROXY: "$('proxy' in inputs? inputs.proxy: null)"
