@@ -26,6 +26,8 @@ baseCommand: [python, -m, dorieh.gis.shapes_downloader]
 requirements:
   ResourceRequirement:
     coresMin: 1
+  NetworkAccess:
+    networkAccess: True
   EnvVarRequirement:
     envDef:
       HTTP_PROXY: "$('proxy' in inputs? inputs.proxy: null)"

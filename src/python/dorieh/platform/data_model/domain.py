@@ -371,7 +371,7 @@ class Domain:
         ptable = None
         fk_columns = None
         create = None
-        object_type = None
+        object_type = "table"
         is_view = False
         is_select_from = False
         if "create" in definition:

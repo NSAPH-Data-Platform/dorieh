@@ -23,6 +23,10 @@ cwlVersion: v1.2
 class: CommandLineTool
 baseCommand: [python, -m, dorieh.cms.aggregates]
 
+requirements:
+  NetworkAccess:
+    networkAccess: True
+
 doc: |
   This tool verifies correct counts for a random selection of
   mediciad MAX data

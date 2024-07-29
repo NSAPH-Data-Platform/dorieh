@@ -107,6 +107,8 @@ toil-cwl-runner --retryCount 1 --cleanWorkDir never \
 Pipelines can be tested using included 
 [DBT Pipeline Testing Framework](DBT)
 
+More detailed document that describes testing is: [](TestingWorkflows).
+
 ## Installing Python dependencies
                                  
 The following requirements.txt file can be used to fetch all 
@@ -146,4 +148,7 @@ workflow.
 You might want to look at [cwl2argparse](https://github.com/hexylena/argparse2tool#cwl-specific-functionality)
 or other [CWL development tools](https://www.commonwl.org/tools/)
 
+## Example of a workflow
+
+Please see [](Example-climate-workflow)
 

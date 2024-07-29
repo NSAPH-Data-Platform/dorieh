@@ -23,6 +23,8 @@ class: CommandLineTool
 baseCommand: [python, -m, dorieh.platform.util.psql]
 requirements:
   InlineJavascriptRequirement: {}
+  NetworkAccess:
+    networkAccess: True
 
 
 doc: |

@@ -22,9 +22,11 @@
 cwlVersion: v1.2
 class: CommandLineTool
 baseCommand: [python, -m, dorieh.platform.loader.data_loader]
-# baseCommand: echo
 requirements:
   InlineJavascriptRequirement: {}
+  NetworkAccess:
+    networkAccess: True
+
 
 doc: |
   This tool uploads the data to the database

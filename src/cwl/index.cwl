@@ -24,6 +24,8 @@ class: CommandLineTool
 baseCommand: [python, -m, dorieh.platform.loader.index_builder]
 requirements:
   InlineJavascriptRequirement: {}
+  NetworkAccess:
+    networkAccess: True
 
 doc: |
   This tool builds all indices for the specified table.

@@ -7,7 +7,7 @@ with open("README.md", "r") as readme:
 
 setup(
     name='dorieh',
-    version="0.0.11",
+    version="0.1.4",
     url='https://github.com/NSAPH-Data-Platform/dorieh',
     license='Apache 2.0',
     author='Michael A Bouzinier',
@@ -18,6 +18,7 @@ setup(
     entry_points={
         'console_scripts': [
             'cwl2md=dorieh.docutils.cwl2md:main',
+            'mkpgpass=dorieh.platform.util.pgpass:main',
             'copy_section=dorieh.docutils.copy_section:main',
             'collector=dorieh.docutils.collector:main',
             'dorieh_version=dorieh.version:main',
@@ -27,19 +28,22 @@ setup(
     packages=find_packages(where='./src/python') + [
         'dorieh.resources',
         'dorieh.sql',
-        'dorieh.cwl'
+        'dorieh.cwl',
+        'dorieh.workflows'
     ],
     package_dir={
         "dorieh": "./src/python/dorieh",
         "dorieh.sql": "./src/sql",
         "dorieh.resources": "./resources",
-        "dorieh.cwl": "./src/cwl"
+        "dorieh.cwl": "./src/cwl",
+        "dorieh.workflows": "./src/workflows"
     },
     package_data = {
         "dorieh": ["**/*.yaml", "**/*.yml"],
         "dorieh.sql": ["*.sql"],
         "dorieh.resources": ["**/*", "*/*/*", "*/*/*/*"],
-        "dorieh.cwl": ["./src/cwl/*.cwl"],
+        "dorieh.cwl": ["*.cwl"],
+        "dorieh.workflows": ["*.cwl"],
         "dorieh.gis": ["data/*.csv"]
     },
     install_requires=[

@@ -70,6 +70,29 @@ class Connection:
         else:
             raise ValueError('Section {0} not found in the {1} file'
                             .format(section, filename))
+        if "secret" in parameters and parameters["secret"].startswith("aws:"):
+            pp = parameters["secret"].split(':')
+            region = cls.aws_default_region
+            name = cls.aws_default_secret_name
+            for x in pp:
+                xx = x.split('=')
+                if xx[0] == "region":
+                    region = xx[1]
+                elif xx[0] == "name":
+                    name = xx[1]
+            data = json.loads(cls.get_aws_secret(region, name))
+            print(data)
+            del parameters["secret"]
+            for key in ["password", "database"]:
+                if key in data:
+                    parameters[key] = data[key]
+            for key in ["host", "port"]:
+                # to account for port forwarding
+                if key in data and key not in parameters:
+                    parameters[key] = data[key]
+            if "username" in data:
+                parameters["user"] = data["username"]
+
         return parameters
 
     @classmethod
@@ -127,30 +150,8 @@ class Connection:
         if not section:
             section = Connection.default_section
         self.parameters = self.read_config(filename, section)
-        if "secret" in self.parameters and self.parameters["secret"].startswith("aws:"):
-            pp = self.parameters["secret"].split(':')
-            region = self.aws_default_region
-            name = self.aws_default_secret_name
-            for x in pp:
-                xx = x.split('=')
-                if xx[0] == "region":
-                    region = xx[1]
-                elif xx[0] == "name":
-                    name = xx[1]
-            data = json.loads(self.get_aws_secret(region, name))
-            print(data)
-            del self.parameters["secret"]
-            for key in ["password", "database"]:
-                if key in data:
-                    self.parameters[key] = data[key]
-            for key in ["host", "port"]:
-                # to account for port forwarding
-                if key in data and key not in self.parameters:
-                    self.parameters[key] = data[key]
-            if "username" in data:
-                self.parameters["user"] = data["username"]
         if "application_name" not in self.parameters:
-            name = "nsaph:" + app_name() + app_name_postfix
+            name = "dorieh:" + app_name() + app_name_postfix
             self.parameters["application_name"] = name
         self.connection = None
         self.tunnel = None

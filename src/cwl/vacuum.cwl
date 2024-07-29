@@ -24,6 +24,8 @@ class: CommandLineTool
 baseCommand: [python, -m, dorieh.platform.loader.vacuum]
 requirements:
   InlineJavascriptRequirement: {}
+  NetworkAccess:
+    networkAccess: True
 
 doc: |
   This tool runs VACUUM Aanalyze to make subsequent queries
