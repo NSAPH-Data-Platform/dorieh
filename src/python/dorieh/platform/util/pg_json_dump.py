@@ -29,6 +29,7 @@ import os
 import sys
 from argparse import ArgumentParser
 from contextlib import contextmanager
+from datetime import datetime
 from numbers import Number
 from typing import Dict, List
 from psycopg2.extras import RealDictCursor
@@ -103,7 +104,9 @@ def dump(conn: connection, table: str, fd, corrector = None):
             for key in row:
                 if isinstance(row[key], decimal.Decimal):
                     row[key] = float(row[key])
-            print(json.dumps(row), file=fd)
+                elif isinstance(row[key], datetime):
+                    row[key] = str(row[key])
+            print(json.dumps(dict(row)), file=fd)
 
 
 def export(conn: connection, table: str):

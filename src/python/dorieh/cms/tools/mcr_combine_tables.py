@@ -36,6 +36,7 @@ from pathlib import Path
 from typing import List, Tuple, Optional, Dict
 
 import yaml
+from psycopg2 import errors
 
 from dorieh.platform import init_logging
 from dorieh.platform.data_model.domain import Domain
@@ -81,13 +82,32 @@ class MedicareCombinedView:
         logging.info(self.sql)
         # print(self.sql)
 
+    def ensure_schema(self):
+        """
+        Creates the target schema in its own transaction, tolerating a
+        concurrent workflow branch creating it at the same time:
+        CREATE SCHEMA IF NOT EXISTS is not concurrency-safe in PostgreSQL
+        and can fail with a unique constraint violation on pg_namespace.
+        """
+        with Connection(self.context.db,
+                        self.context.connection) as cnxn:
+            try:
+                with cnxn.cursor() as cursor:
+                    cursor.execute(
+                        "CREATE SCHEMA IF NOT EXISTS {}".format(self.schema)
+                    )
+                cnxn.commit()
+            except (errors.UniqueViolation, errors.DuplicateSchema):
+                pass
+
     def execute(self):
         if self.context.dryrun:
             print("Dry run: nothing is done")
             return
         if not self.sql:
             self.generate_sql()
-            
+        self.ensure_schema()
+
         with Connection(self.context.db,
                         self.context.connection) as cnxn:
             with cnxn.cursor() as cursor:
@@ -269,7 +289,17 @@ class MedicareCombinedView:
                             table, c[0], c[1], target_type
                         )
                     )
-                cols.append(cast.format(column_name=c[0]))
+                if c[1] in ("character varying", "character", "text"):
+                    # CMS fixed-width CHAR fields arrive blank-padded
+                    # (left-justified per CMS convention; historical files
+                    # were right-justified). Feed every cast a trimmed,
+                    # NULL-if-empty value so an all-blank (sub)field can
+                    # never reach a numeric or date cast:
+                    # 'zip5     ' -> 'zip5', '         ' -> NULL.
+                    column_expr = "NULLIF(TRIM({}), '')".format(c[0])
+                else:
+                    column_expr = c[0]
+                cols.append(cast.format(column_name=column_expr))
             else:
                 cols.append(c[0])
         return cols

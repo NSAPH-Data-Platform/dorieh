@@ -1,7 +1,10 @@
-# Dorieh Data Platform: Documentation Home
- **User and Development Documentation**
+# Introduction to the Dorieh Data Platform
 
- [Index](genindex)
+This page surveys the platform's building blocks, how to deploy it,
+and how to build this documentation. For the ideas behind the
+platform, read [Why a data platform](rationale.md); for the vocabulary
+that organizes the rest of the documentation, read
+[The Dorieh approach](concepts.md).
 
 ```{contents}
 ---
@@ -11,18 +14,24 @@ local:
 
 ## Introduction to Data Platform
 
+```{note}
+**Using this documentation with (or without) the book.**
+This documentation is a self-contained companion to the book
+*Research Data that Can Be Trusted* (Bouzinier et al., Springer, 2026):
+both describe the same open-source platform, and no page here requires
+the book. See [About the companion book](about-the-book.md) for the
+chapter-to-page map and a suggested reading order. Read
+[Why a data platform](rationale.md) for the motivation, then
+[The Dorieh approach](concepts.md) for the vocabulary that organizes
+the rest of the documentation.
+```
+
 <!-- section Dorieh overview from README -->
 
 
-A discussion on what are the aims of this data platform and how reproducible 
-research can benefit from such product is provided in the
-[What is Data Platform](rationale) section.
-
-The data platform is deployed as a set of Docker containers orchestrated by
-Docker-Compose. Conda (package manager) environment files and Python
-requirements are used to build Docker containers satisfying the dependencies.
-Specific parameters can be customized via environment files and shell script
-callbacks.
+A discussion of the aims of this data platform and how reproducible
+research benefits from it is provided in
+[Why a data platform](rationale).
 
 ## Building Blocks
         
@@ -74,9 +83,13 @@ See [dedicated Pipelines page](pipelines) for additional details.
 
 Fully tested and supported pipelines are listed in the
 [Pipelines](pipelines) page. At this moment, we have published processing
-pipelines for all [Data Domains](domains) except Demographics. However,
-it is not possible to test health data processing pipelines without
-access to the same health data that was used for their development.
+pipelines for all [Data Domains](domains) except Demographics. Health
+data pipelines are developed against restricted data, but a fully
+synthetic Medicare-like dataset is openly published, so the Medicare
+pipeline can be run and tested end to end; see the
+[Medicare example](medicare-example.md), the
+[Medicare tutorial](tutorial/medicare/building-medicare-pipeline.md)
+and its reference, the [Medicare case study](Medicare.md).
 
 To include additional data in a deployed data-platform instance 
 go to [Adding more data](adding_data) section.
@@ -100,7 +113,7 @@ the data it produces into Dorieh Data warehouse.
 
 The process of data ingestion consists of two steps:
 
-1. Generation of the piepline for data ingestion
+1. Generation of the pipeline for data ingestion
 2. Execution of the pipeline
 
              
@@ -108,9 +121,11 @@ The process of data ingestion consists of two steps:
 
 ## Deployment
 
-Dorieh can be deployed either as a Python virtual environment or as a Docker container.
+Dorieh can be installed as a Python package, run from a prebuilt Docker
+image, or deployed as a full Docker-Compose stack (described in
+[Why a data platform](rationale.md#architecture)).
 
-Python package can be signalled using a simple python command:
+The Python package can be installed with a single command:
 
     pip install dorieh
 
@@ -145,13 +160,11 @@ by latest Mac computers.
 If you would like to modify the container please refer to the [README](docker_readme.md) in the docker directory.
 
 
-### Using the Database
+## Using the Database
 
-For a sample to query the database, please look at
-[Sample Query](SampleQuery)
-
-A discussion of querying of health data can be found in 
-[this document](QueringMedicaid)
+To get started with querying the database, see a
+[sample query](SampleQuery) and a discussion of
+[querying Medicaid health data](QueringMedicaid).
 
 ## Terms and Acronyms 
 
@@ -165,26 +178,26 @@ provide direct access to the Dorieh components.
 
 ## Building Platform documentation
 
-The [documentation](https://nsaph-data-platform.github.io/dorieh/)
-contains general documentation pages in 
-[MarkDown](https://www.markdownguide.org/) 
-format and a build script that goes over all other platform 
-repositories in the platform
-and creates a combined [GitHub Pages](https://pages.github.com/) site.
-The script supports links between repositories. 
+The [documentation](https://foromeplatform.github.io/dorieh/)
+combines general pages in
+[Markdown](https://www.markdownguide.org/) format with API pages
+generated from the source tree; the
+[build_documentation](https://github.com/ForomePlatform/dorieh/blob/main/build_documentation.sh)
+script builds the combined site published on
+[GitHub Pages](https://pages.github.com/).
 
 To build documentation:
 
 1. Clone Dorieh project:
 
-        git clone https://github.com/NSAPH-Data-Platform/dorieh.git
-2. Cd into the prject directory:
+        git clone https://github.com/ForomePlatform/dorieh.git
+2. Cd into the project directory:
 
         cd dorieh
 3. Create virtual environment (e.g., named `.dorieh`):
 
         python -m venv .dorieh
-4. Run [build_documentation](https://github.com/NSAPH-Data-Platform/dorieh/blob/main/build_documentation.sh) shell script:
+4. Run [build_documentation](https://github.com/ForomePlatform/dorieh/blob/main/build_documentation.sh) shell script:
 
         source .dorieh/bin/activate && ./build_documentation.sh
 
@@ -192,3 +205,9 @@ To integrate Markdown with [Sphinx](https://www.sphinx-doc.org/en/master/)
 processing we use [MyST Parser](https://jupyterbook.org/en/stable/content/myst.html). 
 
 See [Documentation Utilities](docutils) package. 
+
+## Next steps
+
+Continue with [Why a data platform](rationale.md) for the motivation
+behind the platform, then [The Dorieh approach](concepts.md) for the
+ideas and vocabulary that organize the rest of this documentation.

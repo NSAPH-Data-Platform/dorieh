@@ -97,7 +97,7 @@ inputs:
     type: string
     default: auto
     doc: |
-      [Rasterization strategy](https://nsaph-data-platform.github.io/nsaph-platform-docs/common/gridmet/doc/strategy.html)
+      [Rasterization strategy](https://foromeplatform.github.io/dorieh/strategy.html)
       used for spatial aggregation
   ram:
     type: string
@@ -189,6 +189,9 @@ steps:
     run:
       class: Workflow
       inputs:
+        depends_on:
+          type: Any?
+          doc: a special field used to enforce dependencies and execution order
         registry:
           type: File
         table:
@@ -235,6 +238,7 @@ steps:
           type: File
           outputSource: index/errors
     in:
+      depends_on: initdb/log
       registry:  make_registry/model
       database: database
       connection_name: connection_name
@@ -286,6 +290,32 @@ steps:
       - add_data_ingest_errors
       - vacuum_log
       - vacuum_err
+
+  export:
+    run: export.cwl
+    scatter:
+      - band
+    in:
+      depends_on: process/vacuum_log
+      database: database
+      connection_name: connection_name
+      format:
+        valueFrom: "parquet"
+      domain: domain
+      geography: geography
+      band: bands
+      table:
+        valueFrom: $(inputs.domain + '.' + inputs.geography + '_' + inputs.band)
+      partition:
+        valueFrom: $(["year"])
+      output:
+        valueFrom: $('export/' + inputs.domain + '/' + inputs.geography + '_' + inputs.band)
+    out:
+      - data
+      - log
+      - errors
+
+
 
 outputs:
   initdb_log:
@@ -410,3 +440,15 @@ outputs:
         type: array
         items: [File]
     outputSource: process/vacuum_err
+
+  export_data:
+    type:
+      type: array
+      items:  ['File', 'Directory']
+    outputSource: export/data
+  export_log:
+    type: File[]
+    outputSource: export/log
+  export_err:
+    type: File[]
+    outputSource: export/errors

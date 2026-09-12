@@ -115,6 +115,7 @@ steps:
     run: ingest.cwl
     doc: Uploads data into the database
     in:
+      depends_on: initdb/log
       registry: introspect/model
       domain:
         valueFrom: "epa"
@@ -147,6 +148,26 @@ steps:
       database: database
       connection_name: connection_name
     out: [log, errors]
+
+  export:
+    run: export.cwl
+    in:
+      depends_on: ingest/log
+      database: database
+      connection_name: connection_name
+      format:
+        valueFrom: "parquet"
+      table_base_name: table
+      table:
+        valueFrom: $('epa.' + inputs.table_base_name)
+      partition:
+        valueFrom: $(["year"])
+      output:
+        valueFrom: $('export/' + inputs.table_base_name)
+    out:
+      - data
+      - log
+      - errors
 
 
 outputs:
@@ -186,3 +207,13 @@ outputs:
   vacuum_err:
     type: File
     outputSource: vacuum/errors
+
+  export_data:
+    type: ['File', 'Directory']
+    outputSource: export/data
+  export_log:
+    type: File
+    outputSource: export/log
+  export_err:
+    type: File
+    outputSource: export/errors

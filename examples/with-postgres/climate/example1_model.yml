@@ -1,0 +1,81 @@
+tutorial:
+  header: true
+  quoting: 3
+  index: "unless excluded"
+  description: "Data model for data transformation tutorial"
+  tables:
+    bronze_temperature:
+      description: |
+        Maximum daily temperature for US Zip Code Tabulation Areas
+      columns:
+        - tmmx:
+            type: float
+            description: Maximum daily temperature from the gridMET dataset, in K
+            reference: https://developers.google.com/earth-engine/datasets/catalog/IDAHO_EPSCOR_GRIDMET#bands
+        - date:
+            type: date
+        - zcta:
+            description: Zip Code for a Zip Code Tabulation Area
+            type: int
+      primary_key:
+        - zcta
+        - date
+    silver_temperature:
+      description: |
+        Maximum daily temperature for US Zip Code Tabulation Areas, enriched and harmonized
+      create:
+        type: view
+        from: bronze_temperature
+      columns:
+        - tmmx
+        - date
+        - zcta
+        - temperature_in_C:
+            type: float
+            description: Temperature in Celsius
+            source: (tmmx - 273.15)
+        - temperature_in_F:
+            type: float
+            description: Temperature in Fahrenheit
+            source: ((tmmx - 273.15)*9/5 + 32)
+        - us_state:
+            type: VARCHAR(2)
+            description: US State
+            source:  "public.zip_to_state(EXTRACT(YEAR FROM date)::INT, zcta)"
+        - city:
+            type: VARCHAR(128)
+            description: >
+              Name of a representative city for the ZIP Code Tabulation Area (ZCTA); 
+              for ZCTAs spanning multiple cities, this is the city covering the largest 
+              portion of the area or population.
+            source:  "public.zip_to_city(EXTRACT(YEAR FROM date)::INT, zcta)"
+
+    gold_temperature_by_state:
+      description: |
+        Temperature variations by US State
+      create:
+        type: materialized view
+        from: silver_temperature
+        group by:
+          - us_state
+          - date
+      columns:
+        - us_state
+        - date
+        - t_span:
+            type: float
+            description: Temperature variation in Celsius
+            source: MAX(tmmx) - MIN(tmmx)
+        - t_mean_in_C:
+            type: float
+            description: Mean Temperature in Celsius
+            source: AVG(temperature_in_C)
+        - t_mean_in_F:
+            type: float
+            description: Mean Temperature in Fahrenheit
+            source: AVG(temperature_in_F)
+      primary_key:
+        - us_state
+        - date
+
+

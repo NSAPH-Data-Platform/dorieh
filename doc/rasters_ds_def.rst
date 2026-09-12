@@ -1,7 +1,7 @@
 Configuration Object
 ====================
 
-.. autoclass:: dorieh.rasters.config.GridmetContext
+.. autoclass:: dorieh.rasters.config.GridMETContext
    :members:
    :exclude-members: validate
    :inherited-members: years, compress

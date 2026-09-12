@@ -1,0 +1,20 @@
+# This creates an environment to test Dorieh pipelines requiring PostgreSQL
+
+services:
+  postgres:
+    # container_name: dorieh-postgres
+    build:
+      context: .
+    shm_size: '4g'  # For larger data, use 256M for smaller
+    environment:
+      POSTGRES_DB: dorieh
+      POSTGRES_USER: dorieh
+      POSTGRES_PASSWORD: dorieh_secret
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init-db:/docker-entrypoint-initdb.d
+    ports:
+      - "${POSTGRES_PORT:-55432}:5432"
+
+volumes:
+  pgdata:

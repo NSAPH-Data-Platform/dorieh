@@ -31,9 +31,9 @@ import os
 import pandas as pd
 import requests
 
-from .data import load_state_codes
-from .exceptions import CensusException
-from .query import _prep_vars
+from dorieh.census.data import load_state_codes
+from dorieh.census.exceptions import CensusException
+from dorieh.census.query import _prep_vars
 
 GEOMETRY_CODES = {"zcta": 2,
                   "tract": 8,

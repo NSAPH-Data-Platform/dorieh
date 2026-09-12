@@ -30,7 +30,7 @@ import os
 
 import requests as r
 
-from .exceptions import CensusException
+from dorieh.census.exceptions import CensusException
 
 LOG = logging.getLogger(__name__)
 

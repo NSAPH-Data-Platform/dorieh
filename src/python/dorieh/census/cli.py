@@ -28,9 +28,9 @@ import logging
 import pickle
 from dorieh.utils.context import Context, Argument, Cardinality
 
-from .assemble_data import DataPlan
-from .census_info import census_years
-from .query import SUPPORTED_GEOMETRIES
+from dorieh.census.assemble_data import DataPlan
+from dorieh.census.census_info import census_years
+from dorieh.census.query import SUPPORTED_GEOMETRIES
 
 
 class CensusContext(Context):

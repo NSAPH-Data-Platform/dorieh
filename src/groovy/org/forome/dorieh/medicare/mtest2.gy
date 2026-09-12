@@ -1,0 +1,105 @@
+package org.forome.dorieh.medicare
+/*
+ * Copyright (c) 2024. Harvard University
+ *
+ * Developed by Research Software Engineering,
+ * Harvard University Research Computing and Data (RCD) Services.
+ *
+ * Author: Michael A Bouzinier
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *          http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+
+
+table ps {
+  type = 'view'
+  union of {
+    - 'cms.mbsf_ab*'
+    - 'cms.mcr_bene_*'
+  }
+  
+  columns {
+    bene_id ('STRING')
+
+    year {
+      type = 'INT'
+      isomorphic_transformation of ("year")
+      sql = 
+      '''
+      CASE
+        WHEN "year"::int < 20 THEN (2000 + "year"::int)
+        WHEN (20 < "year"::int AND "year"::int < 100) THEN (1900 + "year"::int)
+        WHEN "year" IS NULL THEN 2000 ELSE "year"::int
+      END
+      '''
+    }
+
+    dob {
+      type = "DATE"
+      description = """
+      Date of birth
+      """
+      isomorphic_transformation of (
+              dob,
+              bene_dob,
+              bene_birth_dt
+      )
+      cast (
+              "character varying": "public.parse_date({column_name})",
+              "numeric": "to_date(to_char({column_name}, '00000000'), 'YYYYMMDD')"
+      )
+    }
+  }
+}
+
+table beneficiaries {
+  aggregation of ( "ps" )
+  on (bene_id)
+  reconcile {
+    dob {
+      pick "max" over "min"
+      record "count distinct"
+    }
+    dod {
+      pick "min" over "max"
+      record ("count distinct")
+    }
+  }
+  
+  aggregate {
+    first_enrollment_year = MIN(year)
+    last_enrollment_year = MAX (year)
+    all_enrollment_years = "ARRAY_AGG(DISTINCT year ORDER BY year)"
+  }
+}
+
+domain Medicare {
+  name 'medicare'
+  schema = 'medicare'
+  auditSchema = 'medicare_audit'
+  quoting = '3'
+  indexingPolicy = 'unless excluded'
+
+  tables {
+    ps
+    beneficiaries
+  }
+}
+
+
+workflow {
+  domain "Medicare"
+  build "beneficiaries"
+}

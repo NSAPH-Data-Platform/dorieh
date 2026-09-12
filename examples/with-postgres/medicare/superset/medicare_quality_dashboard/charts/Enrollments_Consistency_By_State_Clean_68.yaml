@@ -1,0 +1,30 @@
+slice_name: Enrollments Consistency By State (Clean)
+description: null
+certified_by: null
+certification_details: null
+viz_type: country_map
+params:
+  adhoc_filters: []
+  entity: state_iso
+  extra_form_data: {}
+  granularity_sqla: null
+  linear_color_scheme: superset_seq_1
+  metric: inconsistent_beneficiaries
+  number_format: SMART_NUMBER
+  select_country: usa
+  time_range: No filter
+  time_range_endpoints:
+  - inclusive
+  - exclusive
+  url_params: {}
+  viz_type: country_map
+  datasource_name: qc_enrollments
+  schema: medicare
+  database_name: DORIEH2
+  datasource: 16__table
+  annotation_layers: []
+query_context: null
+cache_timeout: null
+uuid: bb535b99-d9e4-572c-b665-6156c9540e75
+version: 1.0.0
+dataset_uuid: adce4851-5172-59af-93bc-1659096abfa4

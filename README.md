@@ -1,6 +1,27 @@
 # Dorieh Data Platform for population and environmental health
 
+[![PyPI](https://img.shields.io/pypi/v/dorieh.svg)](https://pypi.org/project/dorieh/)
+[![DOI](https://zenodo.org/badge/816452278.svg)](https://zenodo.org/badge/latestdoi/816452278)
+                                                          
+Read the [book about Dorieh](https://tidd.ly/4y1ClDH), published by Springer.
+
+<a href="https://tidd.ly/4y1ClDH"><img src="https://raw.githubusercontent.com/ForomePlatform/dorieh/main/doc/img/awin_qrcode.png" alt="QR code linking to the book about Dorieh" width="120"></a>
+
 Detailed documentation: [Dorieh Documentation](https://foromeplatform.github.io/dorieh/)
+
+## Cite as
+
+If you use Dorieh in academic work, please cite the book:
+
+> Bouzinier, M., Etin, D., Khoshnevis, N., Shad, M., Yockel, S. (2026).
+> *Research Data that Can be Trusted.* SpringerBriefs in Computer Science.
+> Springer. <https://doi.org/10.1007/978-3-032-21032-6>
+
+To reference the software itself, use the Zenodo concept DOI
+[10.5281/zenodo.22728722](https://doi.org/10.5281/zenodo.22728722)
+(always resolves to the latest release). See
+[Citing Dorieh](https://foromeplatform.github.io/dorieh/citing.html)
+for chapter DOIs, version DOIs, and BibTeX.
 
 ## Dorieh overview
 
@@ -46,7 +67,7 @@ Install Dorieh (stable version):
 
 If you prefer to install the latest version from GitHub: 
 
-    pip install git+https://github.com/NSAPH-Data-Platform/dorieh
+    pip install git+https://github.com/ForomePlatform/dorieh
 
 If FST support is desired, [R](https://www.r-project.org/) runtime has to be installed and R_HOME environment 
 variable set up. One of the simples ways of installing R is to use 
@@ -55,7 +76,7 @@ Dorieh with either of the  following command:
 
     pip install dorieh[FST]
 
-    pip install "git+https://github.com/NSAPH-Data-Platform/dorieh[FST]"
+    pip install "git+https://github.com/ForomePlatform/dorieh[FST]"
 
 ### Docker Container
 

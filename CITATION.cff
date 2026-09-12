@@ -1,0 +1,69 @@
+# Citation File Format 1.2.0  —  https://citation-file-format.github.io/
+# GitHub renders a "Cite this repository" button when this file is present;
+# the Zenodo GitHub integration reads it when archiving a release —
+# unless .zenodo.json exists (it does, at the repo root): Zenodo then
+# uses .zenodo.json exclusively, so keep the two files in sync.
+cff-version: 1.2.0
+title: "dorieh"
+message: >-
+  If you use this software in academic work, please cite it using the
+  metadata below. For the platform's methodology as a topic, prefer the
+  monograph under `preferred-citation`.
+type: software
+authors:
+  - family-names: Bouzinier
+    given-names: Michael
+    email: michael.bouzinier@forome.org
+    affiliation: Harvard University
+    orcid: "https://orcid.org/0000-0002-3161-5601"
+doi: 10.5281/zenodo.22728722
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.22728722
+    description: "Concept DOI: always resolves to the latest archived release"
+  - type: doi
+    value: 10.5281/zenodo.22728723
+    description: "Version DOI of release 0.5.1"
+repository-code: "https://github.com/ForomePlatform/dorieh"
+url: "https://foromeplatform.github.io/dorieh/"
+license: Apache-2.0
+keywords:
+  - data-engineering
+  - provenance
+  - etl
+  - medicare
+  - environmental-health
+  - population-health
+abstract: >-
+  Dorieh is a data engineering platform for population and
+  environmental health research. It turns heterogeneous raw sources,
+  including Medicare and Medicaid claims in fixed-width ResDAC layouts
+  and climate and air-quality data, into documented, queryable
+  warehouses: schema-driven ingestion through a domain-specific
+  language, CWL-orchestrated workflows, data validation and
+  journaling, quality-control aggregates, and column-level provenance.
+
+# The platform's methodology is described in this monograph; tools that
+# follow CFF's preferred-citation convention will surface it as the
+# recommended cite-target.
+preferred-citation:
+  type: book
+  title: Research Data that Can be Trusted
+  authors:
+    - family-names: Bouzinier
+      given-names: Michael
+    - family-names: Etin
+      given-names: Dmitry
+    - family-names: Khoshnevis
+      given-names: Naeem
+    - family-names: Shad
+      given-names: Max
+    - family-names: Yockel
+      given-names: Scott
+  year: 2026
+  publisher:
+    name: Springer
+  collection-title: SpringerBriefs in Computer Science
+  isbn: "978-3-032-21031-9"
+  doi: 10.1007/978-3-032-21032-6
+  url: "https://doi.org/10.1007/978-3-032-21032-6"

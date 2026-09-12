@@ -28,6 +28,7 @@ import math
 import os
 import time
 from datetime import timedelta, datetime, date
+from io import StringIO
 from pathlib import Path
 from typing import List, Union, Dict
 
@@ -112,6 +113,7 @@ class AirNowDownloader:
             In practice because of AirNow API limitations, if more than
             one parameter is specified, a runtime error will occur.
             Possible values:
+
                 - Ozone (O3, ozone)
                 - PM2.5 (pm25)
                 - PM10 (pm10)
@@ -268,7 +270,7 @@ class AirNowDownloader:
             dictionary, with column names serving as keys
         """
 
-        df = pandas.read_json(content)
+        df = pandas.read_json(StringIO(content))
         agg = {
             c: "mean" if c in [self.VALUE, self.AQI]
                                 else "first"

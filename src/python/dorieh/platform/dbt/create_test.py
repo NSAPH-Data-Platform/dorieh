@@ -10,9 +10,9 @@ as a single SQL query producing a table with the following columns:
 
 1. Name of the column being tested
 2. What value is being tested not to change:
-MD5 hash, number of distinct records, mean value or variance
+   MD5 hash, number of distinct records, mean value or variance
 3. Whether the value has changed (indicated by string `failed`) or remained
-the same (indicated by string `passed`)
+   the same (indicated by string `passed`)
 
 Individual queries are separated by a comment strings:
 
@@ -20,6 +20,12 @@ Individual queries are separated by a comment strings:
 * `-- Test case start`
 
 so a test runner can execute them individually if desired
+
+Note that the generated queries pin the expected values (MD5 hashes,
+distinct counts, means and variances) to the table content at the time
+of generation: if an upstream data source legitimately revises its data,
+previously generated test scripts become stale and must be regenerated
+by re-running this tool against a freshly loaded database.
 
 """
 #  Copyright (c) 2021. Harvard University

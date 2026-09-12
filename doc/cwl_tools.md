@@ -1,3 +1,7 @@
+---
+orphan: true
+---
+
 # CWL Tools and Common Workflows
 
 

@@ -38,13 +38,14 @@ cwl_src_content_template = """# CWL sub-workflow for step <u>*{step}*</u> of wor
 
 """
 
+
 cwl_src_template = """---
 orphan: true
 ---
 
 # {name}
 
-```{literalinclude} ../../src/cwl/{path}
+```{literalinclude} {path}
 :linenos:
 :language: yaml
 ```
@@ -109,9 +110,10 @@ class CWLParser:
 
     def _add_source(self):
         of = self.output_file_path.replace(".md", "cwl_src.md")
-        inf = os.path.basename(self.input_file_path)
-        content = cwl_src_template.format(name=inf, path=inf,
-                                          literalinclude="{literalinclude}")
+        name = os.path.basename(self.input_file_path)
+        abs_path = os.path.abspath(self.input_file_path)
+        rel_path = os.path.relpath(abs_path, os.path.dirname(self.output_file_path))
+        content = cwl_src_template.format(name=name, path=rel_path, literalinclude="{literalinclude}")
         with open(of, "w") as out:
             out.write(content)
         self.md_file.add_text("\n [Source code]({}) \n".format(
@@ -134,6 +136,7 @@ class CWLParser:
         for line in content.splitlines():
             if line.startswith('###'):
                 return line.replace('###', '').strip()
+        return None
 
     @staticmethod
     def _get_filename(file_path: str) -> str:
@@ -229,6 +232,18 @@ class CWLParser:
 
         self.md_file.add_table(data=data)
 
+    @classmethod
+    def find_run_uri(cls, run_target:str) -> str:
+        if run_target.startswith("https://raw.githubusercontent.com/ForomePlatform/dorieh/main/src/"):
+            workflow = os.path.basename(run_target)
+            workflow = os.path.splitext(workflow)[0]
+            uri = f"https://foromeplatform.github.io/dorieh/pipeline/{workflow}.html"
+        elif run_target.startswith("https:/"):
+            uri = run_target
+        else:
+            uri = run_target.replace('.cwl', '.md')
+        return uri
+
     def _add_steps(self):
         if 'steps' not in self.yaml_content:
             return
@@ -247,8 +262,9 @@ class CWLParser:
             doc = arg.get('doc', ' ').replace('\n', ' ')
             runs = arg['run']
             if isinstance(runs, str):
-                ref_uri = runs.replace('.cwl', '.md')
-                target = f'[{runs}]({ref_uri})'
+                ref_uri = self.find_run_uri(runs)
+                runs_name = os.path.basename(runs)
+                target = f'[{runs_name}]({ref_uri})'
             elif runs.get('class').lower() == 'workflow':
                 file_name = self._handle_sub_workflow(name, runs)
                 target = f"[sub-workflow]({file_name})"

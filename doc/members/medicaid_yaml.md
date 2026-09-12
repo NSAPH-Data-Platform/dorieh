@@ -4,7 +4,7 @@ orphan: true
 
 # Medicaid.yaml
 
-```{literalinclude} ../../src/python/cms/models/medicaid.yaml
+```{literalinclude} ../../src/python/dorieh/cms/models/medicaid.yaml
 ---
 language: yaml
 ---

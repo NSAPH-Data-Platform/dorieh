@@ -1,0 +1,40 @@
+digraph {
+			"medicare.beneficiaries.dob" [label=<
+<TABLE>
+<tr><td align = "center" border = "0"><b>medicare.beneficiaries.dob</b></td></tr>
+	<tr><td align = "left">MIN(dob)</td></tr>
+
+</TABLE>
+>,shape=box,URL="../medicare.beneficiaries/dob.html",target=_blank];
+			"medicare._beneficiaries.dob" [label=<
+<TABLE>
+<tr><td align = "center" border = "0"><b>medicare._beneficiaries.dob</b></td></tr>
+	<tr><td align = "left">MIN(dob)</td></tr>
+
+</TABLE>
+>,shape=box,URL="../medicare._beneficiaries/dob.html",target=_blank];
+			"medicare._ps.dob" [label=<
+<TABLE>
+<tr><td align = "center" border = "0"><b>medicare._ps.dob</b></td></tr>
+<tr><td align = "left" border = "0" cellpadding="25">Date of birth</td></tr>
+<tr><td align = "left">character varying &rarr;</td><td align = "left">public.parse_date({column_name})</td></tr>
+<tr><td align = "left">numeric &rarr;</td><td align = "left">to_date(to_char({column_name}, &#x27;00000000&#x27;), &#x27;YYYYMMDD&#x27;)</td></tr>
+
+</TABLE>
+>,shape=box,URL="../medicare._ps/dob.html",target=_blank];
+			"medicare.ps.dob" [label=<
+<TABLE>
+<tr><td align = "center" border = "0"><b>medicare.ps.dob</b></td></tr>
+<tr><td align = "left" border = "0" cellpadding="25">Date of birth</td></tr>
+<tr><td align = "left">character varying &rarr;</td><td align = "left">public.parse_date({column_name})</td></tr>
+<tr><td align = "left">numeric &rarr;</td><td align = "left">to_date(to_char({column_name}, &#x27;00000000&#x27;), &#x27;YYYYMMDD&#x27;)</td></tr>
+
+</TABLE>
+>,shape=box,URL="../medicare.ps/dob.html",target=_blank];
+			"medicare.ps.dob_parent" [label="8 incoming links (columns)",shape="cylinder",fillcolor="yellow",style="filled",minlen=2,width=3,height=1.5,URL="../medicare.ps/dob.html",target=_blank];
+
+	"medicare._beneficiaries.dob" -> "medicare.beneficiaries.dob" [label=Copied,penwidth=1,color=black,labelfloat=True];
+	"medicare._ps.dob" -> "medicare._beneficiaries.dob" [label="	  Aggregated On bene_id",penwidth=5,color=blue,labelfloat=True];
+	"medicare.ps.dob" -> "medicare._ps.dob" [label=Copied,penwidth=1,color=black,labelfloat=True];
+	"medicare.ps.dob_parent" -> "medicare.ps.dob" [penwidth=6.0,color=goldenrod];
+}

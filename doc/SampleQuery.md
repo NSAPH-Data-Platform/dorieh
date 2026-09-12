@@ -33,7 +33,7 @@ To run the software on older operating systems, use Conda environment.
 
 ### Install Dorieh package
 
-Next, we need to install NSAPH core packages. This can be done
+Next, we need to install Dorieh core packages. This can be done
 using GitHub install:
 
 ```shell

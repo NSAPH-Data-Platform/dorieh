@@ -22,11 +22,13 @@ A utility to export result of quering the database in HDF5 format
 #
 
 import argparse
+import logging
 import os
 from typing import List
 
 import h5py
 import numpy
+from psycopg2.extras import RealDictCursor, DictRow
 
 from dorieh.platform.db import ResultSetDeprecated
 from dorieh.platform.requests.query import Query
@@ -48,10 +50,11 @@ class Dataset:
     def append(self, row: list):
         if self.type == float:
             values = [float(row[i]) for i in self.indices]
+        elif self.type == str:
+            values = [str(row[i]).encode('utf-8') for i in self.indices]
+            self.max_len = max([self.max_len] + [len(v) for v in values])
         else:
             values = [row[i] for i in self.indices]
-        if self.type == str:
-            self.max_len = max([self.max_len] + [len(v) for v in values])
         self.data.append(values)
 
     def type_name(self):
@@ -60,8 +63,11 @@ class Dataset:
     def to_hdf5(self, parent, name):
         ds_name = "{}_{}".format(name, self.type_name())
         if self.type == str:
-            dtype = "<S{}".format(self.max_len)
-            h5 = parent.create_dataset(ds_name, data=self.data, dtype=dtype)
+            dtype = f"<S{self.max_len}"
+            try:
+                h5 = parent.create_dataset(ds_name, data=self.data, dtype=dtype)
+            except:
+                raise
         else:
             h5 = parent.create_dataset(ds_name, data=self.data)
         for v in enumerate(self.indices):
@@ -74,7 +80,7 @@ def dtype(t):
         return numpy.dtype(numpy.int32)
     if t == float:
         return numpy.dtype(numpy.float)
-    return numpy.dtype(numpy.str)
+    return numpy.dtype(numpy.unicode_)
 
 
 def append(datasets: List, row):
@@ -197,6 +203,67 @@ def export(path_to_user_request: str, db_ini: str, connection_name: str):
         rs = q.execute()
         _export(q.request, rs, q.request["name"] + ".hdf5")
     print("All done")
+
+
+def export_dataset(cursor: RealDictCursor, output_file: str, name, groups: List, db_types):
+    description = cursor.description
+    headers = [c.name for c in description]
+    types = [db_types[c.type_code] for c in description]
+    dd = dict()
+    for i in range(0, len(headers)):
+        h = headers[i]
+        t = types[i]
+        if h not in groups:
+            if t.startswith("int"):
+                if int not in dd:
+                    dd[int] = Dataset(int)
+                dd[int].add_index(h)
+            elif t.startswith("numeric") or t.startswith("float"):
+                if float not in dd:
+                    dd[float] = Dataset(float)
+                dd[float].add_index(h)
+            else:
+                if str not in dd:
+                    dd[str] = Dataset(str)
+                dd[str].add_index(h)
+    datasets = list(dd.values())
+
+    current = None
+    with h5py.File(output_file, "w") as f:
+        f.attrs["name"] = name
+        f.attrs["file_name"] = output_file
+        h5 = f
+        idx = 0
+        ng = len(groups)
+        for row in cursor:
+            if current is None:
+                for g in groups:
+                    h5.attrs["grouping"] = g
+                    h5 = h5.create_group(str(row[g]))
+                current = {g: row[g] for g in groups}
+            i = ng
+            while i > 0:
+                g = groups[i-1]
+                if row[g] == current[g]:
+                    break
+                i -= 1
+                
+            if i < ng:
+                attrs = {g: str(current[g]) for g in groups}
+                logging.info(f"Storing: {str(current)}")
+                store(h5, str(current[groups[-1]]), datasets, attrs)
+                current = {g: row[g] for g in groups}
+                ii = i
+                for i in range(ii, ng):
+                    h5 = h5.parent
+                for i in range(ii, ng):
+                    g = groups[i]
+                    h5.attrs["grouping"] = g
+                    h5 = h5.create_group(str(row[g]))
+            idx += 1
+            append(datasets, row)
+        attrs = {g: str(current[g]) for g in groups}
+        store(h5, str(row[groups[-1]]), datasets, attrs)
 
 
 if __name__ == '__main__':

@@ -18,10 +18,19 @@
 #
 
 """
-Introspector that looks for all SAS 7BDAT files in a given path
-matching a given pattern, reads metadata and generates data model
-for each file in YAML format. the data model is written to the common
-registry.
+This module defines an introspector for SAS 7BDAT files related to Medicare data.
+
+The SASIntrospector class crawls a directory for SAS files matching a pattern,
+extracts metadata (column info), and generates data model definitions in YAML format.
+These models are written to a centralized registry.
+
+Typical use case: building data models from Medicare SAS files (e.g., 1999–2010).
+
+See Also:
+- :class:`.SASIntrospector` (this class)
+- :class:`.MedicareSAS` (superclass)
+- :class:`~dorieh.platform.loader.introspector.Introspector`
+- :class:`~dorieh.cms.tools.mcr_registry.MedicareRegistry`
 """
 
 import logging
@@ -40,14 +49,32 @@ from dorieh.platform.pg_keywords import PG_INT_TYPE, PG_SERIAL_TYPE
 
 class SASIntrospector(MedicareSAS, MedicareRegistry):
     """
-    Introspector that looks for all SAS 7BDAT files in a given path
-    matching a given pattern, reads metadata and generates data model
-    for each file in YAML format. the data model is written to the common
-    registry.
+    This class traverses a file path looking for SAS .sas7bdat files,
+    extracts their schema using :class:`~dorieh.platform.loader.introspector.Introspector`,
+    and creates a structured data model serialized to a YAML registry.
+
+    In addition to field-level metadata, this introspector:
+    - Attempts to identify common fields such as bene_id, state, zip, and year
+    - Automatically generates a year column if missing
+    - Marks special fields as indexed
+    - Adds virtual key fields for file and record identifiers
+
+    Inherits from:
+        MedicareSAS: For file traversal and handling utilities
+        MedicareRegistry: For interacting with the data model YAML registry
     """
 
     @classmethod
-    def process(cls, registry_path: str, pattern: str, root_dir:str = '.'):
+    def process(cls, registry_path: str, pattern: str, root_dir: str = '.'):
+        """
+        Entry point that initializes and runs the introspector.
+
+        Args:
+            registry_path (str): Path to output YAML registry file.
+            pattern (str): Glob-like pattern to match .sas7bdat files.
+            root_dir (str): Root directory to start searching. Default is current directory.
+        """
+        
         introspector = SASIntrospector(registry_path, root_dir)
         introspector.traverse(pattern)
         introspector.save()
@@ -55,11 +82,30 @@ class SASIntrospector(MedicareSAS, MedicareRegistry):
         return
 
     def __init__(self, registry_path: str, root_dir: str = '.'):
+        """
+        Initializes the SASIntrospector with the given registry path and SAS root directory.
+
+        Args:
+            registry_path (str): Path to the YAML registry file.
+            root_dir (str): Base directory for SAS 7BDAT files.
+        """
+
         MedicareSAS.__init__(self, root_dir)
         MedicareRegistry.__init__(self, registry_path)
 
     @classmethod
     def matches(cls, s: str, candidates: List[str]):
+        """
+        Determines whether a string matches any string or wildcard pattern in candidates.
+
+        Args:
+            s (str): String to match.
+            candidates (List[str]): List of exact names or patterns (may include `*`).
+
+        Returns:
+            bool: True if s matches any candidate.
+        """
+        
         if s in candidates:
             return True
         patterns = [c.replace('*', '.*') for c in candidates if '*' in c]
@@ -69,6 +115,16 @@ class SASIntrospector(MedicareSAS, MedicareRegistry):
         return False
 
     def handle(self, table: str, file_path: str, file_type: str, year: int):
+        """
+        Handles metadata extraction for a single .sas7bdat file.
+
+        Args:
+            table (str): Target table name to use in the registry.
+            file_path (str): File path to the SAS data file.
+            file_type (str): Type of file (e.g., 'denominator').
+            year (int): Associated year of data.
+        """
+
         if file_type == "denominator":
             index_all = True
         else:
@@ -78,6 +134,25 @@ class SASIntrospector(MedicareSAS, MedicareRegistry):
 
     def add_sas_table(self, table: str, file_path: str, index_all: bool,
                       year: int):
+        """
+        Extracts schema from a SAS file and registers columns into the YAML registry.
+
+        - Uses introspection to extract columns and attach metadata.
+        - Detects and indexes key columns (e.g., bene_id, state, year).
+        - Auto-generates a 'year' column if missing using a virtual GENERATED column.
+        - Indexes all columns if index_all is True (e.g., for denominator files).
+        - Adds FILE and RECORD fields to simulate full uniqueness using a compound PK.
+
+        Args:
+            table (str): Name of the table in the registry.
+            file_path (str): Path to the SAS file.
+            index_all (bool): Whether all fields should be indexed.
+            year (int): Year to use when generating missing year columns.
+
+        Raises:
+            ValueError: If duplicate key fields are detected or mandatory fields are missing.
+        """
+
         introspector = Introspector(file_path)
         introspector.introspect()
         introspector.append_file_column()

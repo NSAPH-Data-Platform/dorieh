@@ -102,7 +102,7 @@ inputs:
     type: string
     default: auto
     doc: |
-      [Rasterization strategy](https://nsaph-data-platform.github.io/nsaph-platform-docs/common/gridmet/doc/strategy.html)
+      [Rasterization strategy](https://foromeplatform.github.io/dorieh/strategy.html)
       used for spatial aggregation
   ram:
     type: string

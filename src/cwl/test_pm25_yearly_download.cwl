@@ -68,7 +68,7 @@ inputs:
     default: auto
     doc: 'Rasterization strategy, see
 
-      [documentation](https://nsaph-data-platform.github.io/nsaph-platform-docs/common/gridmet/doc/strategy.html)
+      [documentation](https://foromeplatform.github.io/dorieh/strategy.html)
 
       for the list of supported values and explanations
 

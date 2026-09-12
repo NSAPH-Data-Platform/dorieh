@@ -1,3 +1,5 @@
+:orphan:
+
 Main Classes
 ============
 .. toctree::

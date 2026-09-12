@@ -113,7 +113,7 @@ inputs:
     default: auto
     doc: |
       Rasterization strategy, see
-      [documentation](https://nsaph-data-platform.github.io/nsaph-platform-docs/common/gridmet/doc/strategy.html)
+      [documentation](https://foromeplatform.github.io/dorieh/strategy.html)
       for the list of supported values and explanations
   ram:
     type: string
@@ -131,9 +131,6 @@ inputs:
     doc: |
       Path to database connection file, usually database.ini. 
       This argument is ignored if `connection_name` == `None`
-    default:
-      path: database.ini
-      class: File
 
   connection_name:
     type: string
@@ -205,6 +202,7 @@ steps:
     when: $(inputs.connection_name.toLowerCase() != 'none')
     doc: Uploads data into the database
     in:
+      depends_on: initdb/log
       registry: extract_data_dictionary/data_dictionary
       domain:
         valueFrom: "exposures"

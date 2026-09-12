@@ -1,3 +1,7 @@
+---
+orphan: true
+---
+
 # File Transfer Summary
 
 File transfer summary (FTS) document contains information about 
@@ -22,7 +26,3 @@ data files described with FTS:
 * [Converter of CMS files from ResDac to CSV](members/mcr_fts2csv)
 * [Data loader for CMS files from ResDac](members/mcr_fts2db)
 * [Tool to slect a random subset from CMS data files](members/mcr_create_test_data.rst)
-
-
-
-

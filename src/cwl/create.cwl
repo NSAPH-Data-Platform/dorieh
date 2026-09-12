@@ -66,7 +66,7 @@ inputs:
     inputBinding:
       prefix: --action
   registry:
-    type: string?
+    type: File?
     inputBinding:
       prefix: --registry
   input_data:

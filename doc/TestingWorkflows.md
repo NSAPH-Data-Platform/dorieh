@@ -7,8 +7,8 @@ local:
 ```
 
 ```{seealso}
-[Database Testing Framework](DBT)
-[](pipelines)
+* [Database Testing Framework](DBT)
+* [Data Processing Pipelines](pipelines)
 ```
 
 ## Introduction to testing and prerequisites
@@ -122,6 +122,13 @@ In the virtual environment that has Toil run the following command:
 [](pipeline/airnow)
 ```
 
+```{note}
+As of Dorieh 0.5.0 the AirNow workflow initializes the database itself,
+so this test can be run against a brand-new (empty) database. With
+earlier versions the AirNow test failed on a pristine database unless
+another workflow (for example AQS) had been run first.
+```
+
 
 ### Before running the test
 
@@ -169,8 +176,8 @@ The command will be:
 ## Testing Climate workflow
 
 ```{seealso}
-[](Example-climate-workflow)
-[](pipeline/gridmet)
+* [A CWL workflow example: aggregating a climate variable](Example-climate-workflow)
+* [gridMET pipeline](pipeline/gridmet)
 ```
 
 ### Before running the test
@@ -249,3 +256,34 @@ If you have installed dorieh locally, run the following command
         --years 2010 --years 2011
         
 
+
+## Testing Medicare workflow
+
+```{seealso}
+* [Example: Medicare Processing Pipeline with Synthetic Data](medicare-example.md) —
+  how to run the pipeline that produces the tables these tests verify.
+* [](pipeline/medicare) — the pipeline reference.
+```
+
+Unlike the other tests on this page, there is no combined
+pipeline-plus-test wrapper for Medicare yet. Testing is a two-step
+process: first run the Medicare pipeline on the synthetic dataset as
+described in [the Medicare example](medicare-example.md), then execute
+the golden verification scripts committed under `src/cwl/test_cases/`.
+The expected values in these scripts are pinned to **version 1** of the
+openly published synthetic dataset, so — unlike the AQS and AirNow tests,
+whose upstream sources occasionally revise historical data — they are
+fully deterministic.
+
+With a local Dorieh installation, run all four scripts from a checkout
+of the repository:
+
+    python -m dorieh.platform.dbt.dbt_runner \
+        --db ${dbini} --connection ${connection} \
+        -s src/cwl/test_cases/medicare_synthetic_beneficiaries.sql \
+           src/cwl/test_cases/medicare_synthetic_enrollments.sql \
+           src/cwl/test_cases/medicare_synthetic_admissions.sql \
+           src/cwl/test_cases/medicare_synthetic_admissions_audit.sql
+
+Every assertion should report `passed`; the runner prints a summary and
+exits with a non-zero status if any test fails.

@@ -1,0 +1,16 @@
+digraph {
+	nodesep = 0.5;  // even node distribution
+	size = "25,100";  // graph size in inches
+// Tables with raw (original) data
+
+	{ rank = same; 
+		"Table bronze_temperature" [URL="tables/bronze_temperature.html",target=_blank];
+	}
+
+// Tables with derived (processed) data
+	"view silver_temperature" [URL="tables/silver_temperature.html",target=_blank];
+	"materialized view gold_temperature_by_state" [URL="tables/gold_temperature_by_state.html",target=_blank];
+
+	"Table bronze_temperature" -> "view silver_temperature" [label=	"transformation",penwidth=1,color=black];
+	"view silver_temperature" -> "materialized view gold_temperature_by_state" [label="	aggregation On us_state, date",penwidth=5,color=blue];
+}

@@ -50,12 +50,12 @@ inputs:
       prefix: --parameters
   from:
     type: string
-    doc: Start date for downolading, in YYYY-MM-DD format
+    doc: Start date for downloading, in YYYY-MM-DD format
     inputBinding:
       prefix: --from
   to:
     type: string
-    doc: End date for downolading, in YYYY-MM-DD format
+    doc: End date for downloading, in YYYY-MM-DD format
     inputBinding:
       prefix: --to
   shapes:

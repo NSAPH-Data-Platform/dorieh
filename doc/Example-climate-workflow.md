@@ -1,11 +1,17 @@
 # Example of a workflow: aggregating a climate variable
 
+```{note}
+This page runs the **file-only (no database)** climate workflow, which
+produces a CSV file. For the full Bronze–Silver–Gold pipeline that also
+loads the data into PostgreSQL, see the tutorial
+[Building a Bronze–Silver–Gold Climate Pipeline with Dorieh](tutorial/climate/building-climate-pipeline.md).
+```
+
 ```{contents}
 ---
 local:
 ---
 ```
-
 
 ## What the sample workflow is doing: aggregating a climate variable
 
@@ -25,7 +31,7 @@ tmmx,date,zcta
        
 The [workflow](climate-example.md) consists of 3 steps:
 
-1. Downloads NetCDF file with gridMET data from Atmospheric Composition Analysis Group
+1. Downloads a NetCDF file with gridMET data
 2. Downloads a shapefile set for the given geography type (ZCTA or county) and date 
 3. Aggregate NetCDF over polygons corresponding to a given geography
 
@@ -41,20 +47,20 @@ It accepts 1 required and 3 optional input arguments:
 This architecture is reflected in this diagram: ![diagram](climate-example.png)
 
 
-The [source code for the workflow](https://github.com/NSAPH-Data-Platform/dorieh/blob/main/examples/climate-example.cwl)
+The [source code for the workflow](https://github.com/ForomePlatform/dorieh/blob/main/examples/no-db/climate-example.cwl)
 is in examples directory. See more details in 
 [CWL Workflow Specifications](https://www.commonwl.org/v1.2/Workflow.html)
 
 
 ## Prepare to run a workflow
 
-We suggest that You create a Python virtual environment for trying this workflow, or use an existing one.
+We suggest that you create a Python virtual environment for trying this workflow, or use an existing one.
 If you are creating a new virtual environment, run the following command:
 
     python3 -m venv $path
     source $path/bin/activate
 
-where $path is a path to a directory, that will be created and where the new visualiser environment will
+where $path is a path to a directory, that will be created and where the new virtual environment will
 reside.
 
 
@@ -75,7 +81,7 @@ There is one required argument to the workflow - the date for which we will be a
 Then you can run the following command:
 
     toil-cwl-runner --retryCount 1 --cleanWorkDir never --outdir tmmx --workDir . \
-    https://raw.githubusercontent.com/NSAPH-Data-Platform/dorieh/main/examples/climate-example.cwl \ 
+    https://raw.githubusercontent.com/ForomePlatform/dorieh/refs/heads/main/examples/no-db/climate-example.cwl \
     --date 2020-10-03
 
 (Replace the date with any date you fancy)
@@ -131,10 +137,10 @@ hints:
 You can now run the workflow with the same command:
 
     toil-cwl-runner --retryCount 1 --cleanWorkDir never --outdir tmmx --workDir . \
-    https://raw.githubusercontent.com/NSAPH-Data-Platform/dorieh/main/examples/climate-example.cwl \ 
+    https://raw.githubusercontent.com/ForomePlatform/dorieh/refs/heads/main/examples/no-db/climate-example.cwl \
     --date 2020-10-03
 
-even without having dorieh package installed in you Python virtual environment.
+even without having dorieh package installed in your Python virtual environment.
 
 ### Using your Docker container manually
 
@@ -142,11 +148,11 @@ You can also use a Docker container more like a virtual machine. Start it by exe
 
     docker start forome/dorieh 
 
-command and just run teh commands inside the container, using 
+command and just run the commands inside the container, using 
 
     docker exec -it forome/dorieh ${commands}
 
-This way you can use any machine that has Docker without a need of either Pyton or
+This way you can use any machine that has Docker without a need of either Python or
 CWL. But you will need to copy your files manually between the host and the container.
 
 

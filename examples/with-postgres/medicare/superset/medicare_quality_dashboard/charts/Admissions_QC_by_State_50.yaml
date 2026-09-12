@@ -1,0 +1,31 @@
+slice_name: Admissions QC by State
+description: null
+certified_by: null
+certification_details: null
+viz_type: country_map
+params:
+  adhoc_filters: []
+  entity: state_iso
+  extra_form_data: {}
+  granularity_sqla: null
+  linear_color_scheme: superset_seq_1
+  metric: valid_records
+  number_format: SMART_NUMBER
+  select_country: usa
+  slice_id: 54
+  time_range: No filter
+  time_range_endpoints:
+  - inclusive
+  - exclusive
+  url_params: {}
+  viz_type: country_map
+  datasource_name: qc_admissions
+  schema: medicare
+  database_name: DORIEH2
+  datasource: 15__table
+  annotation_layers: []
+query_context: null
+cache_timeout: null
+uuid: 11cfccd2-af83-556e-9346-db59ad1fdc58
+version: 1.0.0
+dataset_uuid: 2a27c90f-3df0-57b4-9f7c-a0f8b61e9c6e

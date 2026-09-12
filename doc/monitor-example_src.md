@@ -1,6 +1,10 @@
+---
+orphan: true
+---
+
 # Example of using the database mounting tool
 
-```{literalinclude} ../examples/longprocess.py
+```{literalinclude} ../examples/with-postgres/longprocess.py
 :linenos:
 :language: python
 ```
@@ -19,5 +23,3 @@ Where:
                             default: nsaph2
 
 [see [](DBConnections)] for details on how to manage and specify connections to PostgreSQL database.
-
-

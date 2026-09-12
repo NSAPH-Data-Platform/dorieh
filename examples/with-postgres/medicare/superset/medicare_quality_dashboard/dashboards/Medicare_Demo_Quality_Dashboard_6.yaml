@@ -1,0 +1,921 @@
+dashboard_title: Medicare Demo Quality Dashboard
+description: null
+css: ''
+slug: null
+certified_by: null
+certification_details: null
+published: false
+uuid: 194572f4-f219-521a-8f28-6051120c2b58
+position:
+  CHART--85YP3yq5G:
+    children: []
+    id: CHART--85YP3yq5G
+    meta:
+      chartId: 70
+      height: 50
+      sliceName: Filter
+      uuid: f0be4d3e-7034-59e3-af53-d3363f0a766a
+      width: 4
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-CugV7phZ-
+    - ROW-okJh9cw8x
+    type: CHART
+  CHART-2vvKzW2jGm:
+    children: []
+    id: CHART-2vvKzW2jGm
+    meta:
+      chartId: 64
+      height: 50
+      sliceName: Discrepancies in DOB (small)
+      uuid: 098bc3a9-5309-5c7c-8816-b3043545594a
+      width: 4
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-LL9AY9kHJ
+    - ROW-kg15wfiC9
+    type: CHART
+  CHART-6PupamuPTJ:
+    children: []
+    id: CHART-6PupamuPTJ
+    meta:
+      chartId: 54
+      height: 50
+      sliceName: Admissions with Missing data by State
+      uuid: 0f614ebe-684d-5730-9479-a3fc71794e81
+      width: 4
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-oZ-e6kSyR
+    - ROW--WHY7FqNd
+    type: CHART
+  CHART-CDKL2ELOF7:
+    children: []
+    id: CHART-CDKL2ELOF7
+    meta:
+      chartId: 63
+      height: 50
+      sliceName: Discrepancies in DOB (more than 1 month)
+      uuid: 4f42984f-d005-5aa4-b310-3923de3309bf
+      width: 12
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-LL9AY9kHJ
+    - ROW-lJcKK3NVTd
+    type: CHART
+  CHART-DoOTSsUIAR:
+    children: []
+    id: CHART-DoOTSsUIAR
+    meta:
+      chartId: 60
+      height: 50
+      sliceName: BeneficiaryGapYearsByOREC
+      uuid: 2cdc52e5-624d-5d1a-b098-cd60520a84dd
+      width: 4
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-SMh5KxStd
+    - ROW-jHjQB7BIkU
+    type: CHART
+  CHART-EcoMh8YBjG:
+    children: []
+    id: CHART-EcoMh8YBjG
+    meta:
+      chartId: 66
+      height: 50
+      sliceName: Enrollments By State
+      uuid: 089b5326-ef2b-5645-8462-4a4bd53b8704
+      width: 4
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-2rjSz67V2x
+    - ROW-jLocNRvYRL
+    type: CHART
+  CHART-JXQ2bY0vn1:
+    children: []
+    id: CHART-JXQ2bY0vn1
+    meta:
+      chartId: 65
+      height: 50
+      sliceName: Duplicate Admissions by State
+      uuid: cf8abdcf-334c-5739-9f5d-a4dc8258ebb9
+      width: 4
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-oZ-e6kSyR
+    - ROW--WHY7FqNd
+    type: CHART
+  CHART-JkO0tdjj-x:
+    children: []
+    id: CHART-JkO0tdjj-x
+    meta:
+      chartId: 56
+      height: 50
+      sliceName: Bene Discrepancies
+      uuid: f0bff601-a212-53b7-94e8-a450580e920d
+      width: 4
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-LL9AY9kHJ
+    - ROW-kg15wfiC9
+    type: CHART
+  CHART-LgmCa19WTO:
+    children: []
+    id: CHART-LgmCa19WTO
+    meta:
+      chartId: 52
+      height: 50
+      sliceName: Admissions by State
+      uuid: 0c9a951f-60eb-5c9e-a012-b1997eb9bfdf
+      width: 4
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-HnVNnQUmQ
+    - ROW-ydetEl7y1
+    type: CHART
+  CHART-NRbE0dw0Nv:
+    children: []
+    id: CHART-NRbE0dw0Nv
+    meta:
+      chartId: 72
+      height: 50
+      sliceName: ZIP/County Consistency By Year
+      uuid: bcc473b7-8fd9-57ff-89d5-b2c396e3cb31
+      width: 4
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-LL9AY9kHJ
+    - ROW-a2NQvKZ5A
+    type: CHART
+  CHART-QwXqyL5qws:
+    children: []
+    id: CHART-QwXqyL5qws
+    meta:
+      chartId: 50
+      height: 50
+      sliceName: Admissions QC by State
+      uuid: 11cfccd2-af83-556e-9346-db59ad1fdc58
+      width: 4
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-HnVNnQUmQ
+    - ROW-iSvPYzZIR
+    type: CHART
+  CHART-RcJ8lOt6zM:
+    children: []
+    id: CHART-RcJ8lOt6zM
+    meta:
+      chartId: 69
+      height: 50
+      sliceName: Enrollments Consistency By Year (clean)
+      uuid: 6d616866-a881-5965-883d-cf38f2ef8461
+      width: 4
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-LL9AY9kHJ
+    - ROW-ZLw6OHkEy
+    type: CHART
+  CHART-Orec1Year00:
+    children: []
+    id: CHART-Orec1Year00
+    meta:
+      chartId: 100
+      height: 50
+      sliceName: Enrollments OREC Consistency By Year
+      uuid: 7d3f1a02-9b4c-5e6f-8a1d-2c3b4e5f6a70
+      width: 4
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-LL9AY9kHJ
+    - ROW-ZLw6OHkEy
+    type: CHART
+  CHART-TLBzfNJ7bcH:
+    children: []
+    id: CHART-TLBzfNJ7bcH
+    meta:
+      chartId: 67
+      height: 50
+      sliceName: Enrollments By Year
+      uuid: 2b085937-64f7-5181-b033-775358e4031d
+      width: 12
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-2rjSz67V2x
+    - ROW-73VWwPzOu
+    type: CHART
+  CHART-VwvWa0hsTA:
+    children: []
+    id: CHART-VwvWa0hsTA
+    meta:
+      chartId: 53
+      height: 50
+      sliceName: Admissions by Year
+      uuid: 73621110-fcc4-5429-8685-88ae45279b88
+      width: 8
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-HnVNnQUmQ
+    - ROW-ydetEl7y1
+    type: CHART
+  CHART-XgcXHIGOTA:
+    children: []
+    id: CHART-XgcXHIGOTA
+    meta:
+      chartId: 51
+      height: 50
+      sliceName: Admissions QC by Year
+      uuid: 4fa100e9-cb21-51ba-92ae-6e11c9448c24
+      width: 8
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-HnVNnQUmQ
+    - ROW-iSvPYzZIR
+    type: CHART
+  CHART-aVqDcyvGM3:
+    children: []
+    id: CHART-aVqDcyvGM3
+    meta:
+      chartId: 59
+      height: 50
+      sliceName: Beneficiaries, admitted by Year
+      uuid: df0aeea4-5e52-52d9-a453-5b72f895ee92
+      width: 8
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-HnVNnQUmQ
+    - ROW-WttcAffgp
+    type: CHART
+  CHART-bbmUnk7Q7l:
+    children: []
+    id: CHART-bbmUnk7Q7l
+    meta:
+      chartId: 71
+      height: 50
+      sliceName: InvalidZIP
+      uuid: 71a4e929-773e-5fc5-9997-35cc72af322d
+      width: 4
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-LL9AY9kHJ
+    - ROW-a2NQvKZ5A
+    type: CHART
+  CHART-eGuVKl3RL-:
+    children: []
+    id: CHART-eGuVKl3RL-
+    meta:
+      chartId: 58
+      height: 50
+      sliceName: Beneficiaries/Admissions by State
+      uuid: c1963fb3-fb66-578b-b9de-1b92539008a9
+      width: 4
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-HnVNnQUmQ
+    - ROW-WttcAffgp
+    type: CHART
+  CHART-i4ZwtX2jCH:
+    children: []
+    id: CHART-i4ZwtX2jCH
+    meta:
+      chartId: 55
+      height: 50
+      sliceName: Admissions with no enrollment by State
+      uuid: f221371d-ab1d-5a03-aa5d-c4680c4a3852
+      width: 4
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-oZ-e6kSyR
+    - ROW--WHY7FqNd
+    type: CHART
+  CHART-l0uwWEzz3D:
+    children: []
+    id: CHART-l0uwWEzz3D
+    meta:
+      chartId: 62
+      height: 50
+      sliceName: Consistency of beneficiaries data
+      uuid: 10273cbc-148c-5114-a9a0-cfea20da6527
+      width: 4
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-LL9AY9kHJ
+    - ROW-kg15wfiC9
+    type: CHART
+  CHART-nePXv9myD6:
+    children: []
+    id: CHART-nePXv9myD6
+    meta:
+      chartId: 61
+      height: 50
+      sliceName: BeneficiaryGapYears
+      uuid: bb894a3c-8b54-5dbc-96d5-1f19bd6e6ebf
+      width: 4
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-SMh5KxStd
+    - ROW-jHjQB7BIkU
+    type: CHART
+  CHART-ujiLK26eoME:
+    children: []
+    id: CHART-ujiLK26eoME
+    meta:
+      chartId: 49
+      height: 50
+      sliceName: Admissions Issues by Year
+      uuid: ee29a014-fc00-542f-aabd-8a4faf98d06e
+      width: 12
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-oZ-e6kSyR
+    - ROW-cJSLaYE9H
+    type: CHART
+  CHART-wH1U9EwSS-:
+    children: []
+    id: CHART-wH1U9EwSS-
+    meta:
+      chartId: 57
+      height: 50
+      sliceName: Bene by YOB
+      uuid: 70c6356e-6bb4-542c-b910-6dfa1a146bd2
+      width: 12
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-2rjSz67V2x
+    - ROW-bPKcfhYTfS
+    type: CHART
+  CHART-xwO7_SQV9u:
+    children: []
+    id: CHART-xwO7_SQV9u
+    meta:
+      chartId: 68
+      height: 50
+      sliceName: Enrollments Consistency By State (Clean)
+      uuid: bb535b99-d9e4-572c-b665-6156c9540e75
+      width: 4
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-LL9AY9kHJ
+    - ROW-ZLw6OHkEy
+    type: CHART
+  DASHBOARD_VERSION_KEY: v2
+  GRID_ID:
+    children: []
+    id: GRID_ID
+    parents:
+    - ROOT_ID
+    type: GRID
+  HEADER_ID:
+    id: HEADER_ID
+    meta:
+      text: Medicare Demo Quality Dashboard
+    type: HEADER
+  ROOT_ID:
+    children:
+    - TABS-_9fZMgfrAE
+    id: ROOT_ID
+    type: ROOT
+  ROW--WHY7FqNd:
+    children:
+    - CHART-i4ZwtX2jCH
+    - CHART-JXQ2bY0vn1
+    - CHART-6PupamuPTJ
+    id: ROW--WHY7FqNd
+    meta:
+      background: BACKGROUND_TRANSPARENT
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-oZ-e6kSyR
+    type: ROW
+  ROW-73VWwPzOu:
+    children:
+    - CHART-TLBzfNJ7bcH
+    id: ROW-73VWwPzOu
+    meta:
+      background: BACKGROUND_TRANSPARENT
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-2rjSz67V2x
+    type: ROW
+  ROW-WttcAffgp:
+    children:
+    - CHART-aVqDcyvGM3
+    - CHART-eGuVKl3RL-
+    id: ROW-WttcAffgp
+    meta:
+      background: BACKGROUND_TRANSPARENT
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-HnVNnQUmQ
+    type: ROW
+  ROW-ZLw6OHkEy:
+    children:
+    - CHART-xwO7_SQV9u
+    - CHART-RcJ8lOt6zM
+    - CHART-Orec1Year00
+    id: ROW-ZLw6OHkEy
+    meta:
+      background: BACKGROUND_TRANSPARENT
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-LL9AY9kHJ
+    type: ROW
+  ROW-a2NQvKZ5A:
+    children:
+    - CHART-bbmUnk7Q7l
+    - CHART-NRbE0dw0Nv
+    id: ROW-a2NQvKZ5A
+    meta:
+      background: BACKGROUND_TRANSPARENT
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-LL9AY9kHJ
+    type: ROW
+  ROW-bPKcfhYTfS:
+    children:
+    - CHART-wH1U9EwSS-
+    id: ROW-bPKcfhYTfS
+    meta:
+      '0': ROOT_ID
+      '1': TABS-_9fZMgfrAE
+      background: BACKGROUND_TRANSPARENT
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-2rjSz67V2x
+    type: ROW
+  ROW-cJSLaYE9H:
+    children:
+    - CHART-ujiLK26eoME
+    id: ROW-cJSLaYE9H
+    meta:
+      background: BACKGROUND_TRANSPARENT
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-oZ-e6kSyR
+    type: ROW
+  ROW-iSvPYzZIR:
+    children:
+    - CHART-XgcXHIGOTA
+    - CHART-QwXqyL5qws
+    id: ROW-iSvPYzZIR
+    meta:
+      background: BACKGROUND_TRANSPARENT
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-HnVNnQUmQ
+    type: ROW
+  ROW-jHjQB7BIkU:
+    children:
+    - CHART-nePXv9myD6
+    - CHART-DoOTSsUIAR
+    id: ROW-jHjQB7BIkU
+    meta:
+      background: BACKGROUND_TRANSPARENT
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-SMh5KxStd
+    type: ROW
+  ROW-jLocNRvYRL:
+    children:
+    - CHART-EcoMh8YBjG
+    id: ROW-jLocNRvYRL
+    meta:
+      '0': ROOT_ID
+      background: BACKGROUND_TRANSPARENT
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-2rjSz67V2x
+    type: ROW
+  ROW-kg15wfiC9:
+    children:
+    - CHART-l0uwWEzz3D
+    - CHART-JkO0tdjj-x
+    - CHART-2vvKzW2jGm
+    id: ROW-kg15wfiC9
+    meta:
+      background: BACKGROUND_TRANSPARENT
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-LL9AY9kHJ
+    type: ROW
+  ROW-lJcKK3NVTd:
+    children:
+    - CHART-CDKL2ELOF7
+    id: ROW-lJcKK3NVTd
+    meta:
+      background: BACKGROUND_TRANSPARENT
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-LL9AY9kHJ
+    type: ROW
+  ROW-okJh9cw8x:
+    children:
+    - CHART--85YP3yq5G
+    id: ROW-okJh9cw8x
+    meta:
+      background: BACKGROUND_TRANSPARENT
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-CugV7phZ-
+    type: ROW
+  ROW-ydetEl7y1:
+    children:
+    - CHART-VwvWa0hsTA
+    - CHART-LgmCa19WTO
+    id: ROW-ydetEl7y1
+    meta:
+      background: BACKGROUND_TRANSPARENT
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    - TAB-HnVNnQUmQ
+    type: ROW
+  TAB-2rjSz67V2x:
+    children:
+    - ROW-73VWwPzOu
+    - ROW-jLocNRvYRL
+    - ROW-bPKcfhYTfS
+    id: TAB-2rjSz67V2x
+    meta:
+      defaultText: Tab title
+      placeholder: Tab title
+      text: Enrollments Volume
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    type: TAB
+  TAB-CugV7phZ-:
+    children:
+    - ROW-okJh9cw8x
+    id: TAB-CugV7phZ-
+    meta:
+      defaultText: Tab title
+      placeholder: Tab title
+      text: Filter
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    type: TAB
+  TAB-HnVNnQUmQ:
+    children:
+    - ROW-ydetEl7y1
+    - ROW-WttcAffgp
+    - ROW-iSvPYzZIR
+    id: TAB-HnVNnQUmQ
+    meta:
+      defaultText: Tab title
+      placeholder: Tab title
+      text: Admissions
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    type: TAB
+  TAB-LL9AY9kHJ:
+    children:
+    - ROW-kg15wfiC9
+    - ROW-lJcKK3NVTd
+    - ROW-ZLw6OHkEy
+    - ROW-a2NQvKZ5A
+    id: TAB-LL9AY9kHJ
+    meta:
+      defaultText: Tab title
+      placeholder: Tab title
+      text: Enrollments Consistency
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    type: TAB
+  TAB-SMh5KxStd:
+    children:
+    - ROW-jHjQB7BIkU
+    id: TAB-SMh5KxStd
+    meta:
+      defaultText: Tab title
+      placeholder: Tab title
+      text: Gap Years
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    type: TAB
+  TAB-oZ-e6kSyR:
+    children:
+    - ROW-cJSLaYE9H
+    - ROW--WHY7FqNd
+    id: TAB-oZ-e6kSyR
+    meta:
+      defaultText: Tab title
+      placeholder: Tab title
+      text: Admissions Issue
+    parents:
+    - ROOT_ID
+    - TABS-_9fZMgfrAE
+    type: TAB
+  TABS-_9fZMgfrAE:
+    children:
+    - TAB-2rjSz67V2x
+    - TAB-LL9AY9kHJ
+    - TAB-HnVNnQUmQ
+    - TAB-oZ-e6kSyR
+    - TAB-CugV7phZ-
+    - TAB-SMh5KxStd
+    id: TABS-_9fZMgfrAE
+    meta: {}
+    parents:
+    - ROOT_ID
+    type: TABS
+  CHART-UO6U8WNG:
+    children: []
+    id: CHART-UO6U8WNG
+    meta:
+      chartId: 71
+      height: 50
+      sliceName: InvalidZIP
+      uuid: 71a4e929-773e-5fc5-9997-35cc72af322d
+      width: 4
+    type: CHART
+  CHART-SWEKAJ1I:
+    children: []
+    id: CHART-SWEKAJ1I
+    meta:
+      chartId: 64
+      height: 50
+      sliceName: Discrepancies in DOB (up to two months)
+      uuid: 098bc3a9-5309-5c7c-8816-b3043545594a
+      width: 4
+    type: CHART
+  CHART-9570VNYH:
+    children: []
+    id: CHART-9570VNYH
+    meta:
+      chartId: 63
+      height: 50
+      sliceName: Discrepancies in DOB (more than 1 month)
+      uuid: 4f42984f-d005-5aa4-b310-3923de3309bf
+      width: 4
+    type: CHART
+  CHART-GB7P0KI1:
+    children: []
+    id: CHART-GB7P0KI1
+    meta:
+      chartId: 68
+      height: 50
+      sliceName: Enrollments Consistency By State (Clean)
+      uuid: bb535b99-d9e4-572c-b665-6156c9540e75
+      width: 4
+    type: CHART
+  CHART-PWFHOLON:
+    children: []
+    id: CHART-PWFHOLON
+    meta:
+      chartId: 62
+      height: 50
+      sliceName: Consistency of beneficiaries data
+      uuid: 10273cbc-148c-5114-a9a0-cfea20da6527
+      width: 4
+    type: CHART
+  CHART-8IVCNF86:
+    children: []
+    id: CHART-8IVCNF86
+    meta:
+      chartId: 67
+      height: 50
+      sliceName: Enrollments By Year
+      uuid: 2b085937-64f7-5181-b033-775358e4031d
+      width: 4
+    type: CHART
+  CHART-1L6FGF7M:
+    children: []
+    id: CHART-1L6FGF7M
+    meta:
+      chartId: 57
+      height: 50
+      sliceName: Bene by YOB
+      uuid: 70c6356e-6bb4-542c-b910-6dfa1a146bd2
+      width: 4
+    type: CHART
+  CHART-UZWM2SRC:
+    children: []
+    id: CHART-UZWM2SRC
+    meta:
+      chartId: 61
+      height: 50
+      sliceName: BeneficiaryGapYears
+      uuid: bb894a3c-8b54-5dbc-96d5-1f19bd6e6ebf
+      width: 4
+    type: CHART
+  CHART-S4XFV6HH:
+    children: []
+    id: CHART-S4XFV6HH
+    meta:
+      chartId: 65
+      height: 50
+      sliceName: Duplicate Admissions by State
+      uuid: cf8abdcf-334c-5739-9f5d-a4dc8258ebb9
+      width: 4
+    type: CHART
+  CHART-KGA5BWVX:
+    children: []
+    id: CHART-KGA5BWVX
+    meta:
+      chartId: 56
+      height: 50
+      sliceName: Bene Discrepancies
+      uuid: f0bff601-a212-53b7-94e8-a450580e920d
+      width: 4
+    type: CHART
+  CHART-96DLOTSI:
+    children: []
+    id: CHART-96DLOTSI
+    meta:
+      chartId: 72
+      height: 50
+      sliceName: ZIP/County Consistency By Year
+      uuid: bcc473b7-8fd9-57ff-89d5-b2c396e3cb31
+      width: 4
+    type: CHART
+  CHART-MCHGUJV0:
+    children: []
+    id: CHART-MCHGUJV0
+    meta:
+      chartId: 52
+      height: 50
+      sliceName: Admissions by State
+      uuid: 0c9a951f-60eb-5c9e-a012-b1997eb9bfdf
+      width: 4
+    type: CHART
+  CHART-C0NZN0TX:
+    children: []
+    id: CHART-C0NZN0TX
+    meta:
+      chartId: 50
+      height: 50
+      sliceName: Admissions QC by State
+      uuid: 11cfccd2-af83-556e-9346-db59ad1fdc58
+      width: 4
+    type: CHART
+  CHART-5LL2FPC3:
+    children: []
+    id: CHART-5LL2FPC3
+    meta:
+      chartId: 60
+      height: 50
+      sliceName: BeneficiaryGapYearsByOREC
+      uuid: 2cdc52e5-624d-5d1a-b098-cd60520a84dd
+      width: 4
+    type: CHART
+  CHART-BHNWO614:
+    children: []
+    id: CHART-BHNWO614
+    meta:
+      chartId: 59
+      height: 50
+      sliceName: Beneficiaries, admitted by Year
+      uuid: df0aeea4-5e52-52d9-a453-5b72f895ee92
+      width: 4
+    type: CHART
+  CHART-DDFR4I7O:
+    children: []
+    id: CHART-DDFR4I7O
+    meta:
+      chartId: 66
+      height: 50
+      sliceName: Enrollments By State
+      uuid: 089b5326-ef2b-5645-8462-4a4bd53b8704
+      width: 4
+    type: CHART
+  CHART-5Y0HRR69:
+    children: []
+    id: CHART-5Y0HRR69
+    meta:
+      chartId: 69
+      height: 50
+      sliceName: Enrollments Consistency By Year (clean)
+      uuid: 6d616866-a881-5965-883d-cf38f2ef8461
+      width: 4
+    type: CHART
+  CHART-KR1SE0U9:
+    children: []
+    id: CHART-KR1SE0U9
+    meta:
+      chartId: 53
+      height: 50
+      sliceName: Admissions by Year
+      uuid: 73621110-fcc4-5429-8685-88ae45279b88
+      width: 4
+    type: CHART
+  CHART-FN9GMO1D:
+    children: []
+    id: CHART-FN9GMO1D
+    meta:
+      chartId: 55
+      height: 50
+      sliceName: Admissions with no enrollment by State
+      uuid: f221371d-ab1d-5a03-aa5d-c4680c4a3852
+      width: 4
+    type: CHART
+  CHART-2M3ATOWW:
+    children: []
+    id: CHART-2M3ATOWW
+    meta:
+      chartId: 51
+      height: 50
+      sliceName: Admissions QC by Year
+      uuid: 4fa100e9-cb21-51ba-92ae-6e11c9448c24
+      width: 4
+    type: CHART
+  CHART-TWLC6HJ6:
+    children: []
+    id: CHART-TWLC6HJ6
+    meta:
+      chartId: 54
+      height: 50
+      sliceName: Admissions with Missing data by State
+      uuid: 0f614ebe-684d-5730-9479-a3fc71794e81
+      width: 4
+    type: CHART
+  CHART-QBZ1BPNV:
+    children: []
+    id: CHART-QBZ1BPNV
+    meta:
+      chartId: 49
+      height: 50
+      sliceName: Admissions Issues by Year
+      uuid: ee29a014-fc00-542f-aabd-8a4faf98d06e
+      width: 4
+    type: CHART
+  CHART-TUOTC4OA:
+    children: []
+    id: CHART-TUOTC4OA
+    meta:
+      chartId: 58
+      height: 50
+      sliceName: Beneficiaries/Admissions by State
+      uuid: c1963fb3-fb66-578b-b9de-1b92539008a9
+      width: 4
+    type: CHART
+  CHART-7VJ5BAFD:
+    children: []
+    id: CHART-7VJ5BAFD
+    meta:
+      chartId: 70
+      height: 50
+      sliceName: Filter
+      uuid: f0be4d3e-7034-59e3-af53-d3363f0a766a
+      width: 4
+    type: CHART
+metadata:
+  color_scheme: ''
+  refresh_frequency: 0
+  expanded_slices: {}
+  label_colors: {}
+  timed_refresh_immune_slices: []
+  default_filters: '{}'
+  filter_scopes:
+    '70':
+      year:
+        scope:
+        - ROOT_ID
+        immune: []
+      state_iso:
+        scope:
+        - ROOT_ID
+        immune: []
+  chart_configuration: {}
+version: 1.0.0

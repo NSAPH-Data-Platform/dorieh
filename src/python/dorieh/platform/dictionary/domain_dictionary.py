@@ -25,7 +25,8 @@ import sys
 from enum import Enum
 from typing import Dict, List
 
-from dorieh.platform.dictionary.element import HTML, qstr, attrs2string
+from dorieh.platform.dictionary import RenderMode
+from dorieh.platform.dictionary.element import HTML, qstr, attrs2string, create_graph_envelop, PANDOC
 from dorieh.platform.dictionary.tables import Table, Relation
 from dorieh.utils.io_utils import as_dict
 from dorieh.platform.data_model.domain import Domain
@@ -38,7 +39,8 @@ class DomainDict:
         self.of = of
         self.basedir = os.path.dirname(os.path.abspath(of))
         self.options = options
-        self.link = self.options.get("fmt") in ["svg"]
+        self.link = True # self.options.get("fmt") in ["svg"]
+        self.mode = RenderMode(options["mode"])
 
     def add(self, path):
         yml = as_dict(path)
@@ -66,8 +68,8 @@ class DomainDict:
         node_id = qstr(table)
         attrs = dict()
         if self.link:
-            f = os.path.join(self.basedir, "tables", t + ".html")
-            table.html(f)
+            f = os.path.join(self.basedir, "tables", t + ".md")
+            table.markdown(f)
             attrs["URL"] = qstr(os.path.join("tables", t + ".html"))
             attrs["target"] = "_blank"
         space = ''.join('\t' for _ in range(indent))
@@ -109,6 +111,7 @@ class DomainDict:
     def to_dot(self, out = sys.stdout):
         print("digraph {", file=out)
         print("\tnodesep = 0.5;  // even node distribution", file=out)
+        print('\tsize = "25,100";  // graph size in inches', file=out)
         self.print_top_nodes(out)
         self.print_other_nodes(out)
         for r in self.relations:
@@ -123,13 +126,102 @@ class DomainDict:
     def html(self, of: str, svg = None):
         if svg is None:
             return
-        body = f'<object data="{svg}" type="image/svg+xml"></object>'
         block = HTML.format(
             title = f"Table Lineage Diagram",
-            body = body
+            body = self.html_body(svg)
         )
         with open(of, "wt") as out:
             print(block, file=out)
+
+    @staticmethod
+    def html_body(svg):
+        body = f'<object data="{svg}" type="image/svg+xml"></object>'
+        return body
+
+    def write_markdown(self, content: str, of: str):
+        with open(of, "wt") as out:
+            print(content, file=out)
+        if self.mode == RenderMode.standalone:
+            fhtml = os.path.splitext(of)[0] + ".html"
+            os.system(f"{PANDOC} --from markdown  --to html {of} > {fhtml}")
+
+    def link_ext(self):
+        if self.mode == RenderMode.standalone:
+            return "html"
+        return "md"
+
+    def markdown(self, of: str, svg=None):
+        title = "# Table Lineage Diagram\n"
+        body = "\n"
+
+        if svg:
+            if self.mode == RenderMode.standalone:
+                body += self.html_body(svg)
+            elif self.mode == RenderMode.sphinx:
+                target = create_graph_envelop(of, "Table Lineage SVG Diagram", svg)
+                body += self.table_toctree([target + ".md"])
+                body += "\n"
+                body += f"\n```{{figure}} {svg}\n"
+                body += ":align: center\n"
+                body += ":alt: Table Lineage Diagram\n"
+                body += f":target: {target}.html\n"
+                body += "\n"
+                body += "Diagram illustrating data flow during transformations\n"
+                body += "\n"
+                body += "```\n\n"
+        self.write_markdown(f"{title}\n{body}", of)
+
+    def table_toctree(self, extra: List[str] = None) -> str:
+        text = "\n```{toctree}\n"
+        text += "---\n"
+        text += "maxdepth: 1\n"
+        text += "hidden:\n"
+        text += "---\n"
+        if extra:
+            for target in extra:
+                text += f"{target}\n"
+        for t in sorted(self.tables):
+            tname = self.tables[t].qualified_name
+            text += f"tables/{tname}.md\n"
+        text += "```\n\n"
+        return text
+
+    def table_list(self, of: str):
+        title = "# Alphabetic list of all tables\n"
+        body = "\n"
+        for t in sorted(self.tables):
+            tname = self.tables[t].qualified_name
+            body += f"1. [{tname}](tables/{tname}.{self.link_ext()})\n"
+
+        self.write_markdown(f"{title}\n{body}", of)
+
+    def column_list(self, of: str):
+        title = "# Alphabetic list of all columns in all tables\n"
+        body = "\n"
+        columns = dict()
+        for t in self.tables:
+            table = self.tables[t]
+            tname = table.qualified_name
+            for c in table.columns:
+                if c in columns:
+                    tset = columns[c]
+                else:
+                    tset = set()
+                    columns[c] = tset
+                tset.add(tname)
+
+        body +=  "|  Column | Tables                    |\n"
+        body +=  "|  ------ | ------------------------- |\n"
+        ext = self.link_ext()
+        for c in sorted(columns):
+            tset = columns[c]
+            tables = []
+            for t in sorted(tset):
+                tables.append(f"[{t}](tables/{t}/{c}.{ext})")
+            row = ' <br/>'.join(tables)
+            body += f"| {c}     | {row}\n"
+
+        self.write_markdown(f"{title}\n{body}", of)
 
     def generate_graphs(self):
         fmt = self.options.get("fmt")
@@ -140,11 +232,13 @@ class DomainDict:
             os.mkdir(tdir)
         with open(self.of, "w") as graph:
             self.to_dot(graph)
+        self.table_list("table-list.md")
+        self.column_list("column-list.md")
         if generate_image:
             os.system(f"dot -T {fmt} -O {self.of}")
             if fmt == "svg":
                 svg = os.path.basename(self.of + ".svg")
-                self.html(self.of + ".html", svg)
+                self.markdown(self.of + ".md", svg)
         if lod != LOD.none:
             n = 0
             for t in self.tables:
@@ -154,16 +248,22 @@ class DomainDict:
                 table = self.tables[t]
                 for c in table.columns:
                     column = table.columns[c]
+                    basename = os.path.join(d, c)
                     if lod == LOD.min and not column.predecessors:
+                        column.markdown(basename + ".md", svg=None)
                         continue
-                    f = os.path.join(d, c) + ".dot"
+                    f = basename + ".dot"
                     with open(f, "w") as graph:
                         table.column_lineage_to_dot(c, graph)
                     if generate_image:
-                        os.system(f"dot -T {fmt} -O '{f}'")
+                        of = f"{basename}.{fmt}"
+                        os.system(f"dot -T{fmt} -o{of} {f}")
                         if fmt == "svg":
-                            svg = os.path.basename(f + ".svg")
-                            column.html(f + ".html", svg=svg)
+                             # pass just the file name: the .svg is a sibling
+                             # of the .md, and document references must stay
+                             # relative (see the table-level case above)
+                             column.markdown(basename + ".md",
+                                             svg=os.path.basename(of))
                         n += 1
                         if (n % 10) == 0:
                             print('*', end='')
@@ -174,6 +274,10 @@ class DomainDict:
 
 
 class LOD(Enum):
+    """
+    Level of details to include in the generated pages
+    """
+
     full = "full"
     none = "none"
     min = "min"
@@ -187,17 +291,21 @@ def parse_args() -> Dict:
                         help="Paths to YaML files with domain definitions",
                         nargs='+')
     parser.add_argument("--fmt", "-f",
-                        help="Format to generate image, if 'none', "
+                        help="Format of generated image, if 'none', "
                              "then no image is generated",
                         default="none",
                         choices=["none","png","gif","ps2","svg","cmapx","jpeg"],
                         required=False)
     parser.add_argument("--lod",
-                        help="Level of details",
+                        help="Level of details: none (no column lineage), min (derived columns only), full (all columns)",
                         default="none",
                         choices=[s.value for s in LOD])
+    parser.add_argument("--mode",
+                        help="Documentation generation mode",
+                        default=RenderMode.standalone.value,
+                        choices=[s.value for s in RenderMode])
     parser.add_argument("--output", "--of", "-o",
-                        help="Path to the main output dot file",
+                        help="with Table-level data lineage diagram",
                         default="tables.dot",
                         required=False)
     args = parser.parse_args()

@@ -23,10 +23,11 @@
 """
 An entry point to a command line utility aggregating grid data
 provided as NetCDF file over a set of shape files, assigning
-labels defined in the shape files to the aggregated values
+labels defined in the shape files to the aggregated values.
 
 
-`see https://www.unidata.ucar.edu/software/netcdf/`__
+See `NetCDF Website <https://www.unidata.ucar.edu/software/netcdf/>`__
+
 """
 
 import logging
@@ -48,7 +49,7 @@ class NetCDFFile:
         """
         Creates a new instance
 
-        :param context: An optional GridmetContext object, if not specified,
+        :param context: An optional GridContext object, if not specified,
             then it is constructed from the command line arguments
         """
 

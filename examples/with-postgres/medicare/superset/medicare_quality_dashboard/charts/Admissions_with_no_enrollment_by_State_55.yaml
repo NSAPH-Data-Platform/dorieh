@@ -1,0 +1,35 @@
+slice_name: Admissions with no enrollment by State
+description: null
+certified_by: null
+certification_details: null
+viz_type: country_map
+params:
+  adhoc_filters: []
+  entity: state_iso
+  extra_form_data: {}
+  granularity_sqla: null
+  linear_color_scheme: superset_seq_1
+  metric: '% no enrollemnt'
+  number_format: SMART_NUMBER
+  select_country: usa
+  slice_id: 36
+  time_range: No filter
+  time_range_endpoints:
+  - inclusive
+  - exclusive
+  url_params: {}
+  viz_type: country_map
+  datasource_name: qc_admissions
+  schema: medicare
+  database_name: DORIEH2
+  datasource: 15__table
+  annotation_layers: []
+query_context: '{"datasource":{"id":15,"type":"table"},"force":false,"queries":[{"time_range":"No
+  filter","granularity":null,"filters":[],"extras":{"having":"","where":""},"applied_time_extras":{},"columns":[],"metrics":["%
+  no enrollemnt"],"annotation_layers":[],"series_limit":0,"order_desc":true,"url_params":{},"custom_params":{},"custom_form_data":{}}],"form_data":{"adhoc_filters":[],"annotation_layers":[],"database_name":"DORIEH2","datasource":"15__table","datasource_name":"qc_admissions","entity":"state_iso","extra_form_data":{},"granularity_sqla":null,"linear_color_scheme":"superset_seq_1","metric":"%
+  no enrollemnt","number_format":"SMART_NUMBER","schema":"medicare","select_country":"usa","slice_id":55,"time_range":"No
+  filter","time_range_endpoints":["inclusive","exclusive"],"url_params":{},"viz_type":"country_map","force":false,"result_format":"json","result_type":"full"},"result_format":"json","result_type":"full"}'
+cache_timeout: null
+uuid: f221371d-ab1d-5a03-aa5d-c4680c4a3852
+version: 1.0.0
+dataset_uuid: 2a27c90f-3df0-57b4-9f7c-a0f8b61e9c6e

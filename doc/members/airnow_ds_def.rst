@@ -13,10 +13,12 @@ Abstract Context
 
 .. autoclass:: dorieh.utils.context.Context
    :members:
+   :noindex:
 
 Argument
 ^^^^^^^^
 .. autoclass:: dorieh.utils.context.Argument
    :members:
+   :noindex:
 
 

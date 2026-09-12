@@ -20,18 +20,24 @@ class RasterizationStrategy(Enum):
     The default strategy is to include all pixels along the line render path
     (for lines), or cells where the center point is within the polygon
     (for polygons).
+
+    .. :noindex:
     """
 
     all_touched = 'all_touched'
     """
     Alternate, all_touched strategy, rasterizes the geometry
     by including all pixels that it touches.
+
+    .. :noindex:
     """
 
     combined = 'combined'
     """
     Calculate statistics using both default and all_touched strategy and
     combine results, e.g. using arithmetic means
+
+    .. :noindex:
     """
 
     downscale = 'downscale'
@@ -48,6 +54,8 @@ class RasterizationStrategy(Enum):
     and will run slower.
     
     See `get_affine_transform <../../../gridmet/doc/gridmet_tools.html#gridmet.gridmet_tools.get_affine_transform>`_
+
+    .. :noindex:
     """
 
     auto = 'auto'
@@ -64,6 +72,8 @@ class RasterizationStrategy(Enum):
     and will run slower.
     
     See `get_affine_transform <../../../gridmet/doc/gridmet_tools.html#gridmet.gridmet_tools.get_affine_transform>`_
+
+    .. :noindex:
     """
 
 

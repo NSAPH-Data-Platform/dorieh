@@ -62,8 +62,10 @@ class DateFilter:
         if not value:
             return
         if ':' not in value:
-            raise ValueError("Filter spec must include ':'")
-        bounds = value.split(':')
+            # raise ValueError("Filter spec must include ':'")
+            bounds = [value, value]
+        else:
+            bounds = value.split(':')
         if bounds[0].lower() in ["dayofmonth", "month", "date"]:
             self.ftype = bounds[0].lower()
             self.values = [v.strip() for v in bounds[1].split(',')]

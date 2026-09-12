@@ -1,0 +1,57 @@
+digraph {
+    ey1 [label = "Enrollments Data for YEAR1"];
+    ey2 [label = "Enrollments Data for YEAR2"];
+    ey3 [label = "Enrollments Data for YEAR3"];
+
+    ay1 [label = "Inpatient Admissions Data for YEAR1"];
+    ay2 [label = "Inpatient Admissions Data for YEAR2"];
+    ay3 [label = "Inpatient Admissions Data for YEAR3"];
+
+    bronzee1  [label = "Ingest into Bronze Layer"];
+    bronzee2  [label = "Ingest into Bronze Layer"];
+    bronzee3  [label = "Ingest into Bronze Layer"];
+
+    bronzea1  [label = "Ingest into Bronze Layer"];
+    bronzea2  [label = "Ingest into Bronze Layer"];
+    bronzea3  [label = "Ingest into Bronze Layer"];
+
+    harmonizee1 [label = "Harmonize Data"];
+    harmonizee2 [label = "Harmonize Data"];
+    harmonizee3 [label = "Harmonize Data"];
+    harmonizea1 [label = "Harmonize Data"];
+    harmonizea2 [label = "Harmonize Data"];
+    harmonizea3 [label = "Harmonize Data"];
+
+    consoledatee [label = "Consolidate Enrollments Data"];
+    consoledatea [label = "Consolidate Admissions Data"];
+
+    normalizee  [label = "Normalize Data"];
+    normalizea  [label = "Normalize Data"];
+
+    build_master_bene [label = "Aggregate and build Master Beneficiaries Index"];
+    cleanse_enrollments [label = "Cleanse Enrollments Data"];
+    build_enrollments [label = "Build Enrollments Silver Layer"];
+
+    cleanse_admissions [label = "Cleanse Admissions Data"];
+    build_admissions [label = "Build Admissions Silver Layer"];
+
+    build_gold1 [label = "Build Gold Layer: Admissions QC"];
+
+    ey1 -> bronzee1 -> harmonizee1 -> consoledatee;
+    ey2 -> bronzee2 -> harmonizee2 -> consoledatee;
+    ey3 -> bronzee3 -> harmonizee3 -> consoledatee;
+
+    consoledatee -> normalizee -> build_master_bene -> cleanse_enrollments -> build_enrollments;
+
+    ay1 -> bronzea1 -> harmonizea1 -> consoledatea;
+    ay2 -> bronzea2 -> harmonizea2 -> consoledatea;
+    ay3 -> bronzea3 -> harmonizea3 -> consoledatea;
+
+    consoledatea -> normalizea;
+    normalizea -> cleanse_admissions;
+    build_master_bene -> cleanse_admissions;
+    build_enrollments -> cleanse_admissions;
+    cleanse_admissions -> build_admissions;
+
+    build_admissions -> build_gold1;
+}

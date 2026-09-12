@@ -70,6 +70,9 @@ steps:
       - ingest_err
       - index_err
       - vacuum_err
+      - export_data
+      - export_log
+      - export_err
 
   verify:
     run: run_test.cwl
@@ -127,3 +130,13 @@ outputs:
   verify_errors:
     type: File
     outputSource: verify/errors
+
+  execute_export_data:
+    type: ['File', 'Directory']
+    outputSource: execute/export_data
+  execute_export_log:
+    type: File
+    outputSource: execute/export_log
+  execute_export_err:
+    type: File
+    outputSource: execute/export_err

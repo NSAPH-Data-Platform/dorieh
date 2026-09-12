@@ -1,0 +1,204 @@
+digraph medicare_pipeline {
+    // Global graph settings
+    rankdir=TB;
+    splines=ortho;
+    nodesep=1.0;
+    ranksep=1.6;
+    bgcolor="#FAFAFA";
+    fontname="Helvetica";
+    fontsize=18;
+    fontsize=36;
+
+    // Edge defaults
+    edge [penwidth=3.0, arrowsize=1.0];
+
+    // ========== RAW DATA SOURCES ==========
+    subgraph cluster_sources {
+        label=<<B>📦 Raw Data Sources</B>>;
+        style="rounded,filled";
+        color="#B71C1C";
+        fillcolor="#FFEBEE";
+        penwidth=2;
+        fontsize=40;
+        margin=20;
+
+        node [shape=cylinder, style="filled", fillcolor="#EF5350",
+              fontcolor=white, color="#C62828", penwidth=2.4, height=0.8];
+
+        ey1 [label="Enrollments\n2019"];
+        ey2 [label="Enrollments\n2020"];
+        ey3 [label="Enrollments\n2021"];
+        ay1 [label="Admissions\n2019"];
+        ay2 [label="Admissions\n2020"];
+        ay3 [label="Admissions\n2021"];
+    }
+
+    // ========== BRONZE LAYER ==========
+    subgraph cluster_bronze {
+        label=<<B>🥉 Bronze Layer: Raw Ingestion</B>>;
+        style="rounded,filled";
+        color="#E65100";
+        fillcolor="#FFF3E0";
+        penwidth=2;
+        fontsize=40;
+        margin=20;
+
+        node [shape=box, style="rounded,filled,bold", fillcolor="#FFB74D",
+              color="#F57C00", penwidth=2.4, fontsize=30];
+
+        bronzee1 [label="📥 Ingest"];
+        bronzee2 [label="📥 Ingest"];
+        bronzee3 [label="📥 Ingest"];
+        bronzea1 [label="📥 Ingest"];
+        bronzea2 [label="📥 Ingest"];
+        bronzea3 [label="📥 Ingest"];
+    }
+
+    // ========== HARMONIZATION LAYER ==========
+    subgraph cluster_harmonize {
+        label=<<B>🔧 Harmonization: Schema Alignment</B>>;
+        style="rounded,filled";
+        color="#F57F17";
+        fillcolor="#FFFDE7";
+        penwidth=2;
+        fontsize=40;
+        margin=20;
+
+        node [shape=hexagon, style="filled", fillcolor="#FFF59D",
+              color="#F9A825", penwidth=2.4, fontsize=30];
+
+        harmonizee1 [label="⚙️ Harmonize"];
+        harmonizee2 [label="⚙️ Harmonize"];
+        harmonizee3 [label="⚙️ Harmonize"];
+        harmonizea1 [label="⚙️ Harmonize"];
+        harmonizea2 [label="⚙️ Harmonize"];
+        harmonizea3 [label="⚙️ Harmonize"];
+    }
+
+    // ========== CONSOLIDATION ==========
+    node [shape=diamond, style="filled,bold", fillcolor="#81C784",
+          color="#388E3C", penwidth=3, fontsize=32, width=2.4, height=1.5];
+
+    consoledatee [label="🔗 Consolidate\nEnrollments"];
+    consoledatea [label="🔗 Consolidate\nAdmissions"];
+
+    // ========== SILVER LAYER ==========
+    subgraph cluster_silver {
+        label=<<B>🥈 Silver Layer: Curated and Validated</B>>;
+        style="rounded,filled";
+        color="#455A64";
+        fillcolor="#ECEFF1";
+        penwidth=3;
+        fontsize=40;
+        margin=25;
+
+        // Normalization nodes
+        node [shape=parallelogram, style="filled,bold", fillcolor="#90CAF9",
+              color="#1976D2", penwidth=2.4, fontsize=30, skew=0.3];
+
+        normalizee [label="📊 Normalize\nEnrollments"];
+        normalizea [label="📊 Normalize\nAdmissions"];
+
+        // Master index - special node
+        node [shape=octagon, style="filled,bold", fillcolor="#CE93D8",
+              color="#7B1FA2", penwidth=3, fontsize=32, width=2.6];
+
+        build_master_bene [label="🔑 Master\nBeneficiaries\nIndex"];
+
+        // Cleansing nodes
+        node [shape=component, style="filled,rounded", fillcolor="#80DEEA",
+              color="#00838F", penwidth=2.4, fontsize=30];
+
+        cleanse_enrollments [label="🧹 Cleanse\nEnrollments"];
+        cleanse_admissions [label="🧹 Cleanse\nAdmissions"];
+
+        // Build nodes
+        node [shape=folder, style="filled,rounded,bold", fillcolor="#A5D6A7",
+              color="#2E7D32", penwidth=2.4, fontsize=30];
+
+        build_enrollments [label="✅ Build\nEnrollments\nTable"];
+        build_admissions [label="✅ Build\nAdmissions\nTable"];
+    }
+
+    // ========== GOLD LAYER ==========
+    node [shape=star, style="filled,bold", fillcolor="#FFD54F",
+          color="#F57F17", penwidth=4, fontsize=34, width=3.0, height=3.0];
+
+    build_gold1 [label="⭐ Gold:\nAdmissions\nQC Metrics"];
+
+    // ========== EDGES: Raw to Bronze ==========
+    edge [color="#E53935", penwidth=2.4, style=solid, arrowhead=normal];
+    ey1 -> bronzee1;
+    ey2 -> bronzee2;
+    ey3 -> bronzee3;
+    ay1 -> bronzea1;
+    ay2 -> bronzea2;
+    ay3 -> bronzea3;
+
+    // ========== EDGES: Bronze to Harmonize ==========
+    edge [color="#FB8C00", penwidth=2.4, style=solid, arrowhead=vee];
+    bronzee1 -> harmonizee1;
+    bronzee2 -> harmonizee2;
+    bronzee3 -> harmonizee3;
+    bronzea1 -> harmonizea1;
+    bronzea2 -> harmonizea2;
+    bronzea3 -> harmonizea3;
+
+    // ========== EDGES: Harmonize to Consolidate ==========
+    edge [color="#FDD835", penwidth=3.0, style=bold, arrowhead=diamond];
+    harmonizee1 -> consoledatee;
+    harmonizee2 -> consoledatee;
+    harmonizee3 -> consoledatee;
+    harmonizea1 -> consoledatea;
+    harmonizea2 -> consoledatea;
+    harmonizea3 -> consoledatea;
+
+    // ========== EDGES: Enrollments Silver Path ==========
+    edge [color="#1976D2", penwidth=3, style=solid, arrowhead=normal];
+    consoledatee -> normalizee;
+    normalizee -> build_master_bene;
+    build_master_bene -> cleanse_enrollments;
+    cleanse_enrollments -> build_enrollments;
+
+    // ========== EDGES: Admissions Silver Path ==========
+    edge [color="#00838F", penwidth=3, style=solid, arrowhead=normal];
+    consoledatea -> normalizea;
+    normalizea -> cleanse_admissions;
+    cleanse_admissions -> build_admissions;
+
+    // ========== EDGES: Cross-Dependencies (CRITICAL) ==========
+    edge [color="#D32F2F", penwidth=4, style=dashed, arrowhead=normal, constraint=false];
+    build_master_bene -> cleanse_admissions [xlabel="referential\nintegrity", fontsize=9, fontcolor="#D32F2F"];
+    build_enrollments -> cleanse_admissions [xlabel="referential\nintegrity", fontsize=9, fontcolor="#D32F2F"];
+
+    // ========== EDGES: Silver to Gold ==========
+    edge [color="#F9A825", penwidth=4, style=bold, arrowhead=odiamond];
+    build_admissions -> build_gold1;
+
+    // ========== LEGEND ==========
+    subgraph cluster_legend {
+        label=<<B>📖 Legend</B>>;
+        style="rounded,filled";
+        color="#757575";
+        fillcolor="#FFFFFF";
+        penwidth=2;
+        fontsize=32;
+        margin=15;
+
+        node [shape=plaintext, fontsize=28];
+        legend [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="4">
+            <TR><TD ALIGN="LEFT">🔴 Raw Data Flow</TD></TR>
+            <TR><TD ALIGN="LEFT">🟠 Ingestion and Harmonization</TD></TR>
+            <TR><TD ALIGN="LEFT">🔵 Silver Processing</TD></TR>
+            <TR><TD ALIGN="LEFT">🔴⚠️ Critical Dependencies</TD></TR>
+            <TR><TD ALIGN="LEFT">🟡 Gold Analytics</TD></TR>
+            <TR><TD ALIGN="LEFT"></TD></TR>
+            <TR><TD ALIGN="LEFT"><B>Shapes:</B></TD></TR>
+            <TR><TD ALIGN="LEFT">🗄️ Cylinder = Data Source</TD></TR>
+            <TR><TD ALIGN="LEFT">⬢ Hexagon = Transformation</TD></TR>
+            <TR><TD ALIGN="LEFT">💎 Diamond = Merge/Union</TD></TR>
+            <TR><TD ALIGN="LEFT">🔑 Octagon = Master Index</TD></TR>
+            <TR><TD ALIGN="LEFT">⭐ Star = Final Output</TD></TR>
+        </TABLE>>];
+    }
+}

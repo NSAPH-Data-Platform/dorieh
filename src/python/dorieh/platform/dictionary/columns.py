@@ -16,15 +16,19 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 #
-from typing import Dict, List, Optional, Set
+import os
+import textwrap
+from typing import Dict, List, Optional, Set, Callable
 
 import sqlparse
 import yaml
 from sqlparse.sql import IdentifierList, Parenthesis, Function, Identifier
 import html
 
-from dorieh.platform.dictionary.element import HTML, DataModelElement, qstr, attrs2string
+from dorieh.platform.dictionary import RenderMode
+from dorieh.platform.dictionary.element import HTML, DataModelElement, qstr, attrs2string, hr, create_graph_envelop, PANDOC
 from dorieh.platform.data_model.domain import Domain
+from dorieh.platform.dictionary.resdac_crawler import get_resdac_mapping
 
 
 def noop(x):
@@ -32,7 +36,9 @@ def noop(x):
 
 
 class Column(DataModelElement):
-    def __init__(self, table_name: str, column_block: Dict):
+    column_mapping = None
+
+    def __init__(self, table_name: str, column_block: Dict, mode, describe_column_type: Callable):
         if isinstance(column_block, dict):
             for name in column_block:
                 self.name = name
@@ -50,33 +56,47 @@ class Column(DataModelElement):
         self.copied = False
         self.casts = dict()
         self.requires = []
+        self.mode = mode
+        self.describe_column_type = describe_column_type
         if self.block is None:
-            return
-        if "type" in self.block:
-            self.datatype = self.block["type"]
-        if "source" in self.block:
-            self.expand_macro2()
-            src_block = self.block["source"]
-            if isinstance(src_block, list):
-                for item in src_block:
-                    self.predecessors.add(item)
-            elif isinstance(src_block, dict):
-                if "type" in src_block:
-                    self.column_type = src_block["type"]
-                if "code" in src_block:
-                    self.parse_expr(src_block["code"])
-            elif isinstance(src_block, str):
-                self.parse_expr(src_block)
-        if "requires" in self.block:
-            req = self.block["requires"]
-            if isinstance(req, list):
-                self.requires = req
+            self.predecessors.add(self.name)
+        else:
+            if "type" in self.block:
+                self.datatype = self.block["type"]
+            if "source" in self.block:
+                self.expand_macro2()
+                src_block = self.block["source"]
+                if isinstance(src_block, list):
+                    for item in src_block:
+                        self.predecessors.add(item)
+                elif isinstance(src_block, dict):
+                    if "type" in src_block:
+                        self.column_type = src_block["type"]
+                    if "code" in src_block:
+                        self.parse_expr(src_block["code"])
+                elif isinstance(src_block, str):
+                    self.parse_expr(src_block)
+            if "requires" in self.block:
+                req = self.block["requires"]
+                if isinstance(req, list):
+                    self.requires = req
+                else:
+                    self.requires = [req]
+            if "cast" in self.block:
+                for t in self.block["cast"]:
+                    self.casts[t] = self.block["cast"][t]
+        if self.description is None and self.is_in_mapping():
+            descr = self.column_mapping[self.name.lower()].description
+            if isinstance(descr, dict):
+                self.description = descr
             else:
-                self.requires = [req]
-        if "cast" in self.block:
-            for t in self.block["cast"]:
-                self.casts[t] = self.block["cast"][t]
+                self.description = {"text": descr}
+        if self.reference is None and self.is_in_mapping():
+            self.reference = self.column_mapping[self.name.lower()].url
         return
+
+    def is_in_mapping(self):
+        return self.column_mapping is not None and self.name.lower() in self.column_mapping
 
     def is_transformed(self):
         return self.expression or self.casts
@@ -122,7 +142,7 @@ class Column(DataModelElement):
             self.block["source"] = expansion
         return
 
-    def describe(self) -> str:
+    def describe_txt(self) -> str:
         text = f'{self.name} ({self.datatype}) {self.column_type}\n'
         if self.reference:
             text += "See: " + self.reference + '\n\n'
@@ -142,21 +162,24 @@ class Column(DataModelElement):
             text += "\n\n" + exp + '\n'
         return text
 
+    def describe(self, format: str) -> str:
+        if format == 'html':
+            return self.describe_html()
+        return self.describe_markdown()
+
     def describe_html(self) -> str:
         text = "\n<TABLE>\n"
         text += "<tr>"
         text += f'<td align = "center" border = "0"><FONT POINT-SIZE="20"><b>{self.qualified_name}</b></FONT></td>'
-        text += f'<td align = "center" border = "0">{self.datatype}</td>'
         text += "</tr>\n"
 
         if self.column_type:
             text += f'<tr><td  align = "center" border = "0"><i>{self.column_type}</i></td></tr>\n'
-
         if self.reference:
             text += f'<tr><td  align = "center" border = "0"><i>For more information see: {self.reference}</i></td></tr>\n'
         if self.description and "text" in self.description:
             value = html.escape(self.description["text"])
-            text += f'<tr><td  align = "center" border = "0">{value}</td></tr>\n'
+            text += f'<tr><td align = "center" border = "0">{value}</td></tr>\n'
 
         n = 0
         if self.description is not None:
@@ -183,11 +206,94 @@ class Column(DataModelElement):
         text += "\n</TABLE>\n"
         return text
 
-    def html(self, of: str, svg = None):
-        body = self.describe_html()
+    def describe_node(self) -> str:
+        text = "\n<TABLE>\n"
+        text += "<tr>"
+        text += f'<td align = "center" border = "0"><b>{self.qualified_name}</b></td>'
+        text += "</tr>\n"
+
+        if self.description and "text" in self.description:
+            description = self.description["text"]
+            lines = [html.escape(line) for line in textwrap.wrap(description, width=40)]
+            value = '<br/>'.join(lines)
+            text += f'<tr><td align = "left" border = "0" cellpadding="25">{value}</td></tr>\n'
+
+        if self.expression:
+            for exp in self.expression:
+                value = html.escape(exp)
+                text += f'\t<tr><td align = "left">{value}</td></tr>\n'
+        if len(self.casts) > 1:
+            for key in self.casts:
+                value = html.escape(str(self.casts[key]))
+                text += f'<tr><td align = "left">{key} &rarr;</td><td align = "left">{value}</td></tr>\n'
+        text += "\n</TABLE>\n"
+        return text
+
+    def describe_markdown(self) -> str:
+        t, c = os.path.splitext(self.qualified_name)
+        c = c[1:]
+        if self.mode == RenderMode.standalone:
+            ext = ".html"
+        elif self.mode == RenderMode.sphinx:
+            ext = ".md"
+        else:
+            ext = ""
+        tpath = os.path.join("..", t) + ext
+        text = f"## Overview of column {c} in table {t} \n\n"
+        text +=  "|                               |                        |\n"
+        text +=  "| ----------------------------- | ---------------------- |\n"
+        text += f"| Table                         | [{t}]({tpath})           |\n"
+        text += f"| Qualified name                | {self.qualified_name}  |\n"
+        text += f"| Datatype                      | {self.datatype}        |\n"
+        ctype = self.describe_column_type(self)
+        if ctype:
+            text += f"| Column type | {ctype} |\n"
+        if self.requires:
+            text += f"| Tables, required for computation | {self.requires} |\n"
+        if self.reference:
+            text += f"| Reference | [{self.reference}]({self.reference}) |\n"
+
+        text += "\n\n"
+        if self.description and "text" in self.description:
+            text += f"{self.description['text']}\n\n"
+
+        # Add additional description details as a Markdown table
+        if self.description is not None:
+            keys = [key for key in self.description if key != "text"]
+            if keys:
+                text += "| Key | Value |\n"
+                text += "| --- | ----- |\n"
+                for key in keys:
+                    value = str(self.description[key])
+                    text += f"| {key} | {value} |\n"
+            text += "\n\n"
+
+        if self.expression:
+            text += "\n## Expressions\n\n"
+            for exp in self.expression:
+                if "select" not in exp.lower():
+                    exp = "SELECT " + exp
+                text += "```sql\n"
+                text += f"{exp}\n"
+                text += "```\n\n"
+
+        if self.casts:
+            text += "\n### Casts:\n\n"
+            text += "| Original type | Cast expression      |\n"
+            text += "| ------------- | -------------------- |\n"
+            for key in self.casts:
+                value = str(self.casts[key])
+                text += f"| {key} | {value} |\n"
+            text += "\n\n"
+
+        return text
+
+    def html(self, of: str, svg=None):
+        fmt = 'html'
+        body = self.describe(format=fmt)
         if svg:
-            body += "<hr/>\n"
-            body += f'<object data="{svg}" type="image/svg+xml"> </object>'
+            body += hr(format=fmt)
+            body += f'<object data="{svg}" type="image/svg+xml"></object>'
         block = HTML.format(
             title = f"Column {self.qualified_name}",
             body = body
@@ -195,16 +301,59 @@ class Column(DataModelElement):
         with open(of, "wt") as out:
             print(block, file=out)
 
-    def to_dot(self):
-        node_id = qstr(self.qualified_name)
-        node_label = '<' + self.describe_html() + '>'
+    def column_toctree(self, targets: List[str]) -> str:
+        text = "\n```{toctree}\n"
+        text += "---\n"
+        text += "maxdepth: 1\n"
+        text += "hidden:\n"
+        text += "---\n"
+        for target in targets:
+            text += f"{target}\n"
+        text += "```\n\n"
+        return text
+
+    def markdown(self, of: str, svg=None):
+        fmt = 'markdown'
+        body = self.describe(format=fmt)
+        if svg:
+            if self.mode == RenderMode.standalone:
+                body += hr(format=fmt)
+                body += f'<object data="{svg}" type="image/svg+xml"></object>'
+            elif self.mode == RenderMode.sphinx:
+                alt = f"Column {self.qualified_name} Lineage SVG"
+                target = create_graph_envelop(of, alt, svg)
+                body += self.column_toctree([target + ".md"])
+                body += f"\n```{{figure}} {os.path.basename(svg)}\n"
+                body += ":align: center\n"
+                body += f":alt: {alt}\n"
+                body += f":target: {target}.html\n"
+                body += "\n"
+                body += f"Data lineage for column {self.qualified_name}\n"
+                body += "\n"
+                body += "```\n\n"
+        content = f"# Column {self.qualified_name}\n\n{body}"
+        with open(of, "wt") as out:
+            print(content, file=out)
+        if self.mode == RenderMode.standalone:
+            fhtml = os.path.splitext(of)[0] + ".html"
+            os.system(f"{PANDOC} --from markdown  --to html {of} > {fhtml}")
+
+    def to_dot(self, node_id=None, node_label=None, attributes = None):
+        if node_id is None:
+            node_id = qstr(self.qualified_name)
+        if not node_label:
+            node_label = '<' + self.describe_node() + '>'
         attrs = {
             "label": node_label,
             "shape": "box"
         }
-        if self.reference:
-            attrs["URL"] = qstr(self.reference)
-            attrs["target"] = "_blank"
+        if attributes:
+            attrs.update(attributes)
+        t, c = os.path.splitext(self.qualified_name)
+        c = c[1:]
+        cpath = os.path.join("..", t, c) + ".html"
+        attrs["URL"] = qstr(cpath)
+        attrs["target"] = "_blank"
         return f"\t{node_id} [{attrs2string(attrs)}];"
 
     def __repr__(self):
@@ -247,35 +396,13 @@ class Column(DataModelElement):
         return repr
 
 
-c1 = """
-age_min:
-    source: |
-      CASE
-        WHEN MIN(age) <> MAX(age) THEN MIN(age)
-      END
-"""
+class CMSColumn(Column):
+    @classmethod
+    def init_column_mapping(cls):
+        if cls.column_mapping is None:
+            cls.column_mapping = get_resdac_mapping(False, False)
 
-c2 = """
-fips3_valdiated:
-    source: public.validate_zip_fips(MAX(zip), MAX(fips2), MAX(fips3))
-"""
-
-c3="""
-ssa2_list:
-    source: "string_agg(distinct ssa2, ',')"
-"""
-
-c4 = """
-fips5:
-    source: "(MAX(fips2) || MAX(fips3))"
-
-"""
-
-
-if __name__ == '__main__':
-    for c in [c1, c2, c3, c4]:
-        a = yaml.safe_load(c)
-        column = Column("xxx", a)
-        print(column)
-
+    def __init__(self, table_name: str, column_block: Dict, mode, describe_column_type: Callable):
+        super().__init__(table_name, column_block, mode, describe_column_type)
+        self.init_column_mapping()
 

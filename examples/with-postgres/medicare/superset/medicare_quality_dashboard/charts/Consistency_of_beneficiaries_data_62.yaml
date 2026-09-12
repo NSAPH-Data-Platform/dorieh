@@ -1,0 +1,43 @@
+slice_name: Consistency of beneficiaries data
+description: null
+certified_by: null
+certification_details: null
+viz_type: pie
+params:
+  adhoc_filters: []
+  color_scheme: supersetColors
+  date_format: smart_date
+  extra_form_data: {}
+  granularity_sqla: dob
+  groupby:
+  - Consistency
+  innerRadius: 30
+  label_type: key_value_percent
+  labels_outside: true
+  legendOrientation: top
+  legendType: scroll
+  metric: approximate_count
+  number_format: SMART_NUMBER
+  outerRadius: 40
+  row_limit: 10000
+  show_labels: true
+  show_labels_threshold: '0'
+  show_legend: true
+  slice_id: 28
+  sort_by_metric: true
+  time_range: No filter
+  time_range_endpoints:
+  - inclusive
+  - exclusive
+  url_params: {}
+  viz_type: pie
+  datasource_name: beneficiaries
+  schema: medicare
+  database_name: DORIEH2
+  datasource: 13__table
+  annotation_layers: []
+query_context: null
+cache_timeout: null
+uuid: 10273cbc-148c-5114-a9a0-cfea20da6527
+version: 1.0.0
+dataset_uuid: 80bf97c0-f153-5252-a115-c1f0566180c6

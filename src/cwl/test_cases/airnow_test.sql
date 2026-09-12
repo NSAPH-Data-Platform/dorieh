@@ -3,7 +3,7 @@ SELECT
 	'epa.airnow_pm25_2022.agencyname' As table_column,
 	'count distinct' As Testing,
 	CASE 
-		WHEN (SELECT COUNT(DISTINCT agencyname) FROM epa.airnow_pm25_2022) = '126' 
+		WHEN (SELECT COUNT(DISTINCT agencyname) FROM epa.airnow_pm25_2022) = '120' 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -13,7 +13,7 @@ SELECT
 	'epa.airnow_pm25_2022.agencyname' As table_column,
 	'MD5 value' As Testing,
 	CASE 
-		WHEN (SELECT MD5(string_agg(agencyname::varchar, '' order by agencyname)) FROM epa.airnow_pm25_2022) = 'efb0c6ddb859d8a357540d0ca4e10ab8' 
+		WHEN (SELECT MD5(string_agg(agencyname::varchar, '' order by agencyname)) FROM epa.airnow_pm25_2022) = 'e42e43b35a2aa7cd0597c0fdfacebc20' 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -23,7 +23,7 @@ SELECT
 	'epa.airnow_pm25_2022.aqi' As table_column,
 	'Mean value' As Testing,
 	CASE 
-		WHEN (SELECT AVG(aqi) FROM epa.airnow_pm25_2022) BETWEEN 30.52329272514281 AND 31.13992490140832 
+		WHEN (SELECT AVG(aqi) FROM epa.airnow_pm25_2022) BETWEEN 33.44922107148058 AND 34.12496291130847 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -33,7 +33,7 @@ SELECT
 	'epa.airnow_pm25_2022.aqi' As table_column,
 	'Variance' As Testing,
 	CASE 
-		WHEN (SELECT VARIANCE(aqi) FROM epa.airnow_pm25_2022) BETWEEN 1279.0248739613687 AND 1304.8637603040227 
+		WHEN (SELECT VARIANCE(aqi) FROM epa.airnow_pm25_2022) BETWEEN 1342.3424065378422 AND 1369.460434952748 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -43,7 +43,7 @@ SELECT
 	'epa.airnow_pm25_2022.category' As table_column,
 	'count distinct' As Testing,
 	CASE 
-		WHEN (SELECT COUNT(DISTINCT category) FROM epa.airnow_pm25_2022) = '7' 
+		WHEN (SELECT COUNT(DISTINCT category) FROM epa.airnow_pm25_2022) = '6' 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -53,7 +53,7 @@ SELECT
 	'epa.airnow_pm25_2022.category' As table_column,
 	'Mean value' As Testing,
 	CASE 
-		WHEN (SELECT AVG(category) FROM epa.airnow_pm25_2022) BETWEEN -9.281832024146528 AND -9.098033370203034 
+		WHEN (SELECT AVG(category) FROM epa.airnow_pm25_2022) BETWEEN -8.203098767023242 AND -8.040661167676248 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -63,7 +63,7 @@ SELECT
 	'epa.airnow_pm25_2022.category' As table_column,
 	'Variance' As Testing,
 	CASE 
-		WHEN (SELECT VARIANCE(category) FROM epa.airnow_pm25_2022) BETWEEN 10190.738404304393 AND 10396.611907421655 
+		WHEN (SELECT VARIANCE(category) FROM epa.airnow_pm25_2022) BETWEEN 9189.881620272261 AND 9375.535794419176 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -73,7 +73,7 @@ SELECT
 	'epa.airnow_pm25_2022.county' As table_column,
 	'Mean value' As Testing,
 	CASE 
-		WHEN (SELECT AVG(county) FROM epa.airnow_pm25_2022) BETWEEN 28834.996731841922 AND 29417.52191834378 
+		WHEN (SELECT AVG(county) FROM epa.airnow_pm25_2022) BETWEEN 28483.06713313461 AND 29058.482630773695 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -83,7 +83,7 @@ SELECT
 	'epa.airnow_pm25_2022.county' As table_column,
 	'Variance' As Testing,
 	CASE 
-		WHEN (SELECT VARIANCE(county) FROM epa.airnow_pm25_2022) BETWEEN 266210178.3882168 AND 271588161.78999895 
+		WHEN (SELECT VARIANCE(county) FROM epa.airnow_pm25_2022) BETWEEN 270775324.515041 AND 276245533.0911025 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -93,7 +93,7 @@ SELECT
 	'epa.airnow_pm25_2022.countyfp' As table_column,
 	'Mean value' As Testing,
 	CASE 
-		WHEN (SELECT AVG(countyfp) FROM epa.airnow_pm25_2022) BETWEEN 70.29652135963377 AND 71.71665310427284 
+		WHEN (SELECT AVG(countyfp) FROM epa.airnow_pm25_2022) BETWEEN 70.4405800733335 AND 71.863622095017 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -103,7 +103,7 @@ SELECT
 	'epa.airnow_pm25_2022.countyfp' As table_column,
 	'Variance' As Testing,
 	CASE 
-		WHEN (SELECT VARIANCE(countyfp) FROM epa.airnow_pm25_2022) BETWEEN 6359.567011231304 AND 6488.0431124683 
+		WHEN (SELECT VARIANCE(countyfp) FROM epa.airnow_pm25_2022) BETWEEN 6448.332433135411 AND 6578.601775218955 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -113,7 +113,7 @@ SELECT
 	'epa.airnow_pm25_2022.fips5' As table_column,
 	'Mean value' As Testing,
 	CASE 
-		WHEN (SELECT AVG(fips5) FROM epa.airnow_pm25_2022) BETWEEN 28834.996731841922 AND 29417.52191834378 
+		WHEN (SELECT AVG(fips5) FROM epa.airnow_pm25_2022) BETWEEN 28483.06713313461 AND 29058.482630773695 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -123,7 +123,7 @@ SELECT
 	'epa.airnow_pm25_2022.fips5' As table_column,
 	'Variance' As Testing,
 	CASE 
-		WHEN (SELECT VARIANCE(fips5) FROM epa.airnow_pm25_2022) BETWEEN 266210178.3882168 AND 271588161.78999895 
+		WHEN (SELECT VARIANCE(fips5) FROM epa.airnow_pm25_2022) BETWEEN 270775324.515041 AND 276245533.0911025 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -133,7 +133,7 @@ SELECT
 	'epa.airnow_pm25_2022.fullaqscode' As table_column,
 	'count distinct' As Testing,
 	CASE 
-		WHEN (SELECT COUNT(DISTINCT fullaqscode) FROM epa.airnow_pm25_2022) = '1157' 
+		WHEN (SELECT COUNT(DISTINCT fullaqscode) FROM epa.airnow_pm25_2022) = '1054' 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -143,7 +143,7 @@ SELECT
 	'epa.airnow_pm25_2022.fullaqscode' As table_column,
 	'MD5 value' As Testing,
 	CASE 
-		WHEN (SELECT MD5(string_agg(fullaqscode::varchar, '' order by fullaqscode)) FROM epa.airnow_pm25_2022) = 'b3aa2851cfa54db7480f701eac37b0ff' 
+		WHEN (SELECT MD5(string_agg(fullaqscode::varchar, '' order by fullaqscode)) FROM epa.airnow_pm25_2022) = '2060c7bd74b6867dace575cda070171c' 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -153,7 +153,7 @@ SELECT
 	'epa.airnow_pm25_2022.intlaqscode' As table_column,
 	'count distinct' As Testing,
 	CASE 
-		WHEN (SELECT COUNT(DISTINCT intlaqscode) FROM epa.airnow_pm25_2022) = '1157' 
+		WHEN (SELECT COUNT(DISTINCT intlaqscode) FROM epa.airnow_pm25_2022) = '1054' 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -163,7 +163,7 @@ SELECT
 	'epa.airnow_pm25_2022.intlaqscode' As table_column,
 	'MD5 value' As Testing,
 	CASE 
-		WHEN (SELECT MD5(string_agg(intlaqscode::varchar, '' order by intlaqscode)) FROM epa.airnow_pm25_2022) = 'd35ad20fd649999c51e4917a6c024dfe' 
+		WHEN (SELECT MD5(string_agg(intlaqscode::varchar, '' order by intlaqscode)) FROM epa.airnow_pm25_2022) = 'ad368507b3c3d87cbfbb6a3fe00cb8ac' 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -173,7 +173,7 @@ SELECT
 	'epa.airnow_pm25_2022.latitude' As table_column,
 	'Mean value' As Testing,
 	CASE 
-		WHEN (SELECT AVG(latitude) FROM epa.airnow_pm25_2022) BETWEEN 40.37531130098637 AND 41.19097415555176 
+		WHEN (SELECT AVG(latitude) FROM epa.airnow_pm25_2022) BETWEEN 40.41377958304486 AND 41.230219574621515 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -183,7 +183,7 @@ SELECT
 	'epa.airnow_pm25_2022.latitude' As table_column,
 	'Variance' As Testing,
 	CASE 
-		WHEN (SELECT VARIANCE(latitude) FROM epa.airnow_pm25_2022) BETWEEN 41.23567738980816 AND 42.068721377481054 
+		WHEN (SELECT VARIANCE(latitude) FROM epa.airnow_pm25_2022) BETWEEN 41.561173070883854 AND 42.40079272888151 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -193,7 +193,7 @@ SELECT
 	'epa.airnow_pm25_2022.longitude' As table_column,
 	'Mean value' As Testing,
 	CASE 
-		WHEN (SELECT AVG(longitude) FROM epa.airnow_pm25_2022) BETWEEN -99.1896801748497 AND -97.2255280921794 
+		WHEN (SELECT AVG(longitude) FROM epa.airnow_pm25_2022) BETWEEN -99.29274201932638 AND -97.32654910805259 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -203,7 +203,7 @@ SELECT
 	'epa.airnow_pm25_2022.longitude' As table_column,
 	'Variance' As Testing,
 	CASE 
-		WHEN (SELECT VARIANCE(longitude) FROM epa.airnow_pm25_2022) BETWEEN 343.7438091719147 AND 350.68812854912505 
+		WHEN (SELECT VARIANCE(longitude) FROM epa.airnow_pm25_2022) BETWEEN 342.83656587227 AND 349.76255710201286 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -213,7 +213,7 @@ SELECT
 	'epa.airnow_pm25_2022.monitor' As table_column,
 	'count distinct' As Testing,
 	CASE 
-		WHEN (SELECT COUNT(DISTINCT monitor) FROM epa.airnow_pm25_2022) = '1157' 
+		WHEN (SELECT COUNT(DISTINCT monitor) FROM epa.airnow_pm25_2022) = '1054' 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -223,7 +223,7 @@ SELECT
 	'epa.airnow_pm25_2022.monitor' As table_column,
 	'MD5 value' As Testing,
 	CASE 
-		WHEN (SELECT MD5(string_agg(monitor::varchar, '' order by monitor)) FROM epa.airnow_pm25_2022) = '647ad82facaedddf429904ce8115ce37' 
+		WHEN (SELECT MD5(string_agg(monitor::varchar, '' order by monitor)) FROM epa.airnow_pm25_2022) = '8eed7a9fa8459b553ee97b9c791fb7bf' 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -243,7 +243,7 @@ SELECT
 	'epa.airnow_pm25_2022.parameter' As table_column,
 	'MD5 value' As Testing,
 	CASE 
-		WHEN (SELECT MD5(string_agg(parameter::varchar, '' order by parameter)) FROM epa.airnow_pm25_2022) = '5ac82262d1576ff0211e9c263915cad3' 
+		WHEN (SELECT MD5(string_agg(parameter::varchar, '' order by parameter)) FROM epa.airnow_pm25_2022) = '8bc2e46d684aec8b2a5dde5e2ff91011' 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -253,7 +253,7 @@ SELECT
 	'epa.airnow_pm25_2022.record' As table_column,
 	'count distinct' As Testing,
 	CASE 
-		WHEN (SELECT COUNT(DISTINCT record) FROM epa.airnow_pm25_2022) = '266705' 
+		WHEN (SELECT COUNT(DISTINCT record) FROM epa.airnow_pm25_2022) = '46554' 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -263,7 +263,7 @@ SELECT
 	'epa.airnow_pm25_2022.record' As table_column,
 	'MD5 value' As Testing,
 	CASE 
-		WHEN (SELECT MD5(string_agg(record::varchar, '' order by record)) FROM epa.airnow_pm25_2022) = '34067e2f727594be311c09cd8abb1f1e' 
+		WHEN (SELECT MD5(string_agg(record::varchar, '' order by record)) FROM epa.airnow_pm25_2022) = '19183599b0c7aa421d8a7f3e818d097e' 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -273,7 +273,7 @@ SELECT
 	'epa.airnow_pm25_2022.sitename' As table_column,
 	'count distinct' As Testing,
 	CASE 
-		WHEN (SELECT COUNT(DISTINCT sitename) FROM epa.airnow_pm25_2022) = '1142' 
+		WHEN (SELECT COUNT(DISTINCT sitename) FROM epa.airnow_pm25_2022) = '1039' 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -283,7 +283,7 @@ SELECT
 	'epa.airnow_pm25_2022.sitename' As table_column,
 	'MD5 value' As Testing,
 	CASE 
-		WHEN (SELECT MD5(string_agg(sitename::varchar, '' order by sitename)) FROM epa.airnow_pm25_2022) = 'fed34eff122046a5508b9b9c82a61419' 
+		WHEN (SELECT MD5(string_agg(sitename::varchar, '' order by sitename)) FROM epa.airnow_pm25_2022) = '01537deade5987091dda5f7cff18f90b' 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -293,7 +293,7 @@ SELECT
 	'epa.airnow_pm25_2022.state' As table_column,
 	'Mean value' As Testing,
 	CASE 
-		WHEN (SELECT AVG(state) FROM epa.airnow_pm25_2022) BETWEEN 28.764700210482292 AND 29.34580526523951 
+		WHEN (SELECT AVG(state) FROM epa.airnow_pm25_2022) BETWEEN 28.412626553061276 AND 28.986619008678677 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -303,7 +303,7 @@ SELECT
 	'epa.airnow_pm25_2022.state' As table_column,
 	'Variance' As Testing,
 	CASE 
-		WHEN (SELECT VARIANCE(state) FROM epa.airnow_pm25_2022) BETWEEN 266.022493856625 AND 271.3966856517083 
+		WHEN (SELECT VARIANCE(state) FROM epa.airnow_pm25_2022) BETWEEN 270.6109844507679 AND 276.07787302553083 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -313,7 +313,7 @@ SELECT
 	'epa.airnow_pm25_2022.statefp' As table_column,
 	'Mean value' As Testing,
 	CASE 
-		WHEN (SELECT AVG(statefp) FROM epa.airnow_pm25_2022) BETWEEN 28.764700210482292 AND 29.34580526523951 
+		WHEN (SELECT AVG(statefp) FROM epa.airnow_pm25_2022) BETWEEN 28.412626553061276 AND 28.986619008678677 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -323,7 +323,7 @@ SELECT
 	'epa.airnow_pm25_2022.statefp' As table_column,
 	'Variance' As Testing,
 	CASE 
-		WHEN (SELECT VARIANCE(statefp) FROM epa.airnow_pm25_2022) BETWEEN 266.022493856625 AND 271.3966856517083 
+		WHEN (SELECT VARIANCE(statefp) FROM epa.airnow_pm25_2022) BETWEEN 270.6109844507679 AND 276.07787302553083 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -343,7 +343,7 @@ SELECT
 	'epa.airnow_pm25_2022.stusps' As table_column,
 	'MD5 value' As Testing,
 	CASE 
-		WHEN (SELECT MD5(string_agg(stusps::varchar, '' order by stusps)) FROM epa.airnow_pm25_2022) = '6bef9ce45d6c8c9db53d0a25eacc9226' 
+		WHEN (SELECT MD5(string_agg(stusps::varchar, '' order by stusps)) FROM epa.airnow_pm25_2022) = '8236a07d0086d3e5ab2a633438050052' 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -363,7 +363,7 @@ SELECT
 	'epa.airnow_pm25_2022.unit' As table_column,
 	'MD5 value' As Testing,
 	CASE 
-		WHEN (SELECT MD5(string_agg(unit::varchar, '' order by unit)) FROM epa.airnow_pm25_2022) = 'b7926a3a98091e104c71425cde6bd9fb' 
+		WHEN (SELECT MD5(string_agg(unit::varchar, '' order by unit)) FROM epa.airnow_pm25_2022) = 'ce6c89cefcb767a0fc20d8e253896efc' 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -373,7 +373,7 @@ SELECT
 	'epa.airnow_pm25_2022.utc' As table_column,
 	'count distinct' As Testing,
 	CASE 
-		WHEN (SELECT COUNT(DISTINCT utc) FROM epa.airnow_pm25_2022) = '1919' 
+		WHEN (SELECT COUNT(DISTINCT utc) FROM epa.airnow_pm25_2022) = '321' 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -383,7 +383,7 @@ SELECT
 	'epa.airnow_pm25_2022.utc' As table_column,
 	'MD5 value' As Testing,
 	CASE 
-		WHEN (SELECT MD5(string_agg(utc::varchar, '' order by utc)) FROM epa.airnow_pm25_2022) = '21342b947bb298addd3f6ce73ebd9642' 
+		WHEN (SELECT MD5(string_agg(utc::varchar, '' order by utc)) FROM epa.airnow_pm25_2022) = 'ec3dbcfa9fa76326d96a44b6ef21e630' 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -393,7 +393,7 @@ SELECT
 	'epa.airnow_pm25_2022.value' As table_column,
 	'Mean value' As Testing,
 	CASE 
-		WHEN (SELECT AVG(value) FROM epa.airnow_pm25_2022) BETWEEN 3.6543681092309277 AND 3.7281937275992294 
+		WHEN (SELECT AVG(value) FROM epa.airnow_pm25_2022) BETWEEN 4.615041643379898 AND 4.708274807892623 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -403,7 +403,7 @@ SELECT
 	'epa.airnow_pm25_2022.value' As table_column,
 	'Variance' As Testing,
 	CASE 
-		WHEN (SELECT VARIANCE(value) FROM epa.airnow_pm25_2022) BETWEEN 909.5639002320942 AND 927.9389285196113 
+		WHEN (SELECT VARIANCE(value) FROM epa.airnow_pm25_2022) BETWEEN 989.3046217746838 AND 1009.290573729728 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -413,7 +413,7 @@ SELECT
 	'epa.airnow_pm25_2022.zcta' As table_column,
 	'Mean value' As Testing,
 	CASE 
-		WHEN (SELECT AVG(zcta) FROM epa.airnow_pm25_2022) BETWEEN 60264.06892267724 AND 61481.524860509104 
+		WHEN (SELECT AVG(zcta) FROM epa.airnow_pm25_2022) BETWEEN 60512.48924799704 AND 61734.963778259604 
 		THEN true ELSE false END AS passed
 
 -- Test case end
@@ -423,7 +423,7 @@ SELECT
 	'epa.airnow_pm25_2022.zcta' As table_column,
 	'Variance' As Testing,
 	CASE 
-		WHEN (SELECT VARIANCE(zcta) FROM epa.airnow_pm25_2022) BETWEEN 936105341.634869 AND 955016560.6577955 
+		WHEN (SELECT VARIANCE(zcta) FROM epa.airnow_pm25_2022) BETWEEN 922955446.7469195 AND 941601011.3276654 
 		THEN true ELSE false END AS passed
 
 -- Test case end
