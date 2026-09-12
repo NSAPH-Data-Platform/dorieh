@@ -1,0 +1,31 @@
+# Column medicare.ip.diag23
+
+## Overview of column diag23 in table medicare.ip 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.ip](../medicare.ip.md)           |
+| Qualified name                | medicare.ip.diag23  |
+| Datatype                      | varchar        |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+diag23_svg_envelop.md
+```
+
+
+```{figure} diag23.svg
+:align: center
+:alt: Column medicare.ip.diag23 Lineage SVG
+:target: diag23_svg_envelop.html
+
+Data lineage for column medicare.ip.diag23
+
+```
+
+

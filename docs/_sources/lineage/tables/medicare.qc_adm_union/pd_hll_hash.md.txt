@@ -1,0 +1,39 @@
+# Column medicare.qc_adm_union.pd_hll_hash
+
+## Overview of column pd_hll_hash in table medicare.qc_adm_union 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_adm_union](../medicare.qc_adm_union.md)           |
+| Qualified name                | medicare.qc_adm_union.pd_hll_hash  |
+| Datatype                      | HLL_HASHVAL        |
+| Column type | generated |
+
+
+
+## Expressions
+
+```sql
+SELECT GENERATED ALWAYS AS (hll_hash_text(primary_diagnosis)) STORED
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+pd_hll_hash_svg_envelop.md
+```
+
+
+```{figure} pd_hll_hash.svg
+:align: center
+:alt: Column medicare.qc_adm_union.pd_hll_hash Lineage SVG
+:target: pd_hll_hash_svg_envelop.html
+
+Data lineage for column medicare.qc_adm_union.pd_hll_hash
+
+```
+
+

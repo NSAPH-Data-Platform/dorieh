@@ -1,0 +1,45 @@
+# Column medicare._ps.hmo_indicators
+
+## Overview of column hmo_indicators in table medicare._ps 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare._ps](../medicare._ps.md)           |
+| Qualified name                | medicare._ps.hmo_indicators  |
+| Datatype                      | CHAR(1)[12]        |
+| Column type | copied |
+| Reference | [https://resdac.org/cms-data/variables/hmo-indicator](https://resdac.org/cms-data/variables/hmo-indicator) |
+
+
+Array of indicators if the beneficiary was enrolled in HMO during a given month
+
+
+
+
+### Casts:
+
+| Original type | Cast expression      |
+| ------------- | -------------------- |
+| character varying | string_to_array({column_name}, NULL) |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+hmo_indicators_svg_envelop.md
+```
+
+
+```{figure} hmo_indicators.svg
+:align: center
+:alt: Column medicare._ps.hmo_indicators Lineage SVG
+:target: hmo_indicators_svg_envelop.html
+
+Data lineage for column medicare._ps.hmo_indicators
+
+```
+
+

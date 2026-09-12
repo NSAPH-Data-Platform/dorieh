@@ -1,0 +1,39 @@
+# Column medicare.beneficiaries.sex
+
+## Overview of column sex in table medicare.beneficiaries 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.beneficiaries](../medicare.beneficiaries.md)           |
+| Qualified name                | medicare.beneficiaries.sex  |
+| Datatype                      | string        |
+| Column type | copied |
+
+
+
+## Expressions
+
+```sql
+SELECT string_agg(distinct sex, ',')
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+sex_svg_envelop.md
+```
+
+
+```{figure} sex.svg
+:align: center
+:alt: Column medicare.beneficiaries.sex Lineage SVG
+:target: sex_svg_envelop.html
+
+Data lineage for column medicare.beneficiaries.sex
+
+```
+
+

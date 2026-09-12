@@ -1,0 +1,1441 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Column medicare.admissions.diagnoses Lineage SVG &mdash; Dorieh Data Platform 0.5.1.post2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dorieh.css?v=1a3f250d" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=ad30b421"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Column medicare.admissions.discharge_date" href="discharge_date.html" />
+    <link rel="prev" title="Column medicare.admissions.diagnoses" href="diagnoses.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+<div class="dorieh-citeas">
+  <button type="button" class="dorieh-citeas-btn"
+          onclick="document.getElementById('dorieh-citeas-pop').classList.toggle('open')">
+    &#128214; Cite as
+  </button>
+  <div id="dorieh-citeas-pop" class="dorieh-citeas-pop">
+    <p>Bouzinier,&nbsp;M., Etin,&nbsp;D., Khoshnevis,&nbsp;N.,
+       Shad,&nbsp;M., Yockel,&nbsp;S. (2026).
+       <em>Research Data that Can be Trusted.</em>
+       SpringerBriefs in Computer Science. Springer.
+       <a href="https://doi.org/10.1007/978-3-032-21032-6">doi:10.1007/978-3-032-21032-6</a></p>
+    <button type="button" class="dorieh-citeas-copy"
+            onclick="navigator.clipboard.writeText(
+              'Bouzinier, M., Etin, D., Khoshnevis, N., Shad, M., Yockel, S. (2026). ' +
+              'Research Data that Can be Trusted. SpringerBriefs in Computer Science. ' +
+              'Springer. https://doi.org/10.1007/978-3-032-21032-6'
+            ).then(() => { this.textContent = 'Copied!'; });">
+      Copy citation
+    </button>
+    <a class="dorieh-citeas-more" href="../../../citing.html">More ways to cite &rarr;</a>
+  </div>
+</div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../home.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../home.html#introduction-to-data-platform">Introduction to Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../home.html#building-blocks">Building Blocks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../home.html#dorieh-utilities">Dorieh Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../home.html#core-platform">Core Platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../home.html#dorieh-gis-utilities">Dorieh GIS Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../home.html#dorieh-documentation-utilities">Dorieh Documentation Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../home.html#data-processing-and-loading-pipelines">Data Processing and Loading Pipelines</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../home.html#working-with-nsaph-containerized-apps">Working with NSAPH containerized apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../home.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../home.html#using-the-database">Using the Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../home.html#terms-and-acronyms">Terms and Acronyms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../home.html#building-platform-documentation">Building Platform documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../home.html#next-steps">Next steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rationale.html">Why a data platform</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../rationale.html#why-we-need-a-data-platform">Why we need a Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../rationale.html#architecture">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../rationale.html#supported-programming-languages-and-tools">Supported Programming Languages and Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../rationale.html#development-mode">Development Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../rationale.html#where-it-can-be-deployed">Where it can be deployed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../rationale.html#what-makes-dorieh-different">What makes Dorieh different</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../concepts.html">The Dorieh approach</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts.html#two-languages-one-pipeline">Two languages, one pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts.html#medallion-architecture-as-dorieh-implements-it">Medallion architecture as Dorieh implements it</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts.html#dataset-operators-and-field-construction-operators">Dataset operators and field construction operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts.html#families-of-field-transformations">Families of field transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts.html#disambiguation-rules">Disambiguation rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts.html#validation-and-journaling">Validation and journaling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts.html#fine-grained-lineage">Fine-grained lineage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts.html#where-each-concept-lives">Where each concept lives</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about-the-book.html">The companion book</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../about-the-book.html#bibliographic-information">Bibliographic information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../about-the-book.html#chapter-to-documentation-map">Chapter-to-documentation map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../about-the-book.html#using-this-documentation-without-the-book">Using this documentation without the book</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../citing.html">Citing Dorieh</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../citing.html#preferred-citation-the-book">Preferred citation: the book</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../citing.html#citing-the-software-itself">Citing the software itself</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../citing.html#citing-the-tutorials">Citing the tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../citing.html#citing-the-synthetic-dataset">Citing the synthetic dataset</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Learning paths</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../paths/index.html">Choose your path</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../paths/researcher.html">Researchers and analysts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../paths/researcher.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../paths/researcher.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../paths/developer.html">Pipeline developers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../paths/developer.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../paths/developer.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../paths/operator.html">Platform operators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../paths/operator.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../paths/operator.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../paths/book-reader.html">Readers of the book</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../paths/book-reader.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../paths/book-reader.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../paths/auditor.html">Reviewers and auditors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../paths/auditor.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../paths/auditor.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data domains and pipelines</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../domains.html">Data Domains</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../cms.html">Health</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../health_data_overview.html">Health Data in Dorieh (Medicare and Medicaid)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Medicare.html">Medicare: Building a Data Warehouse from ResDac Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Medicaid.html">Medicaid: Building a Data Warehouse from ResDac Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../health_seealso.html">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../climate.html">Climate</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../climate.html#what-is-gridmet">What is gridMET?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../climate.html#using-command-line-gridmet-utility">Using command line gridMET utility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../climate.html#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../climate.html#python-modules">Python modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../climate.html#cwl-pipelines-and-tools">CWL pipelines and tools</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../exposures.html">Exposure (PM2.5, WashU)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../exposures.html#python-packages">Python packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../exposures.html#cwl-workflows">CWL Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../epa.html">Environmental Protection Agency (EPA) data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../epa.html#package-contents">Package Contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../epa.html#querying-data">Querying Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../census.html">Demographics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../census_about.html">About</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../census_env_set_up.html">Setting Up Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../census_quick_start.html">Quick Start</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../census_yaml.html">Census Variable File Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../census_cached_data.html">Stored Data Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../census_modules.html">Modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../census_glossary.html">Glossary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../census_start_guide.html">Working with the <code class="docutils literal notranslate"><span class="pre">census</span></code> Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_assemble.html">census_assemble.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_assemblecwl_src.html">census_assemble.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_density.html">census_density.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_densitycwl_src.html">census_density.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_ingest.html">census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_ingest_1.html">Sub-workflow <em>store</em> from census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_ingest_1cwl_src.html">CWL sub-workflow for step <u><em>store</em></u> of workflow census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_ingestcwl_src.html">census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_interpolate.html">census_interpolate.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_interpolatecwl_src.html">census_interpolate.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_qc.html">census_qc.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_qccwl_src.html">census_qc.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_workflow.html">census_workflow.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_workflowcwl_src.html">census_workflow.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_write.html">census_write.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_writecwl_src.html">census_write.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../census.html#indices-and-tables">Indices and tables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pipelines.html">Data Processing Pipelines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../pipelines.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../pipelines.html#workflow-description-languages">Workflow Description Languages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../pipelines.html#running-workflows">Running Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipelines.html#tested-runners">Tested Runners</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipelines.html#providing-parameters-to-the-pipelines">Providing Parameters to the Pipelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipelines.html#using-toil">Using Toil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipelines.html#troubleshooting-workflows-run-by-toil">Troubleshooting Workflows Run by Toil</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../pipelines.html#testing-workflows">Testing Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../pipelines.html#published-and-tested-workflows">Published and Tested Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/gridmet.html">Pipeline to aggregate data from Climatology Lab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/wustl.html">Pipeline to ingest Monthly Pollution data downloaded from WashU Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/pm25_yearly_download.html">Pipeline to aggregate data in NetCDF format over given geographies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/aqs.html">Full EPA AQS Processing Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/airnow.html">Full EPA AirNow Processing Pipeline (including downloading shapefiles)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/medicare.html">Medicare data ingestion and processing pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/medicaid.html">Full Medicaid Processing Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_workflow.html">census_workflow.cwl</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../pipelines.html#developing-new-workflows">Developing New Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipelines.html#combining-included-cwl-tools-into-a-new-workflow">Combining Included CWL Tools into a New Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipelines.html#ordering-database-steps-with-depends-on">Ordering Database Steps with <code class="docutils literal notranslate"><span class="pre">depends_on</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipelines.html#wrapping-python-modules-as-cwl-tools">Wrapping Python Modules as CWL Tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials and worked examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Tutorials.html">Dorieh Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorial/climate/index.html">Climate tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/climate/building-climate-pipeline.html">Part 1. Building the pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/climate/documenting-a-workflow.html">Part 2. Documenting the workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/climate/constructing-lineage.html">Part 3. Data dictionaries and lineage graphs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorial/medicare/building-medicare-pipeline.html">Medicare claims pipeline tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/medicare/building-medicare-pipeline.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/medicare/building-medicare-pipeline.html#designing-the-pipeline">Designing the pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/medicare/building-medicare-pipeline.html#from-fts-documents-to-machine-readable-schemas">From FTS documents to machine-readable schemas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/medicare/building-medicare-pipeline.html#bronze-one-table-per-source-file">Bronze: one table per source file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/medicare/building-medicare-pipeline.html#silver-harmonize-disambiguate-validate">Silver: harmonize, disambiguate, validate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/medicare/building-medicare-pipeline.html#gold-the-qc-aggregates">Gold: the QC aggregates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/medicare/building-medicare-pipeline.html#orchestration-five-steps-in-medicare-cwl">Orchestration: five steps in medicare.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/medicare/building-medicare-pipeline.html#documentation-and-lineage">Documentation and lineage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/medicare/building-medicare-pipeline.html#running-it-yourself">Running it yourself</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../Example-climate-workflow.html">A CWL workflow example: aggregating a climate variable</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../Example-climate-workflow.html#what-the-sample-workflow-is-doing-aggregating-a-climate-variable">What the sample workflow is doing: aggregating a climate variable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Example-climate-workflow.html#prepare-to-run-a-workflow">Prepare to run a workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Example-climate-workflow.html#running-the-workflow-in-python-virtual-environment">Running the workflow in Python virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Example-climate-workflow.html#running-the-workflow-using-docker">Running the workflow using Docker</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../medicare-example.html">Medicare pipeline with publicly available synthetic data (PostgreSQL + Superset)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../medicare-example.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../medicare-example.html#step-1-download-synthetic-sample-data">Step 1 — Download synthetic sample data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../medicare-example.html#step-3-optional-explore-results-in-apache-superset">Step 3 (Optional) — Explore results in Apache Superset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../medicare-example.html#what-the-pipeline-produces">What the pipeline produces</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#related-how-to-guides">Related how-to guides</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data dictionaries</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../dictionaries.html">Data Dictionaries</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../MedicareLineage.html">Medicare data warehouse</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../medicare.dot.html">Table Lineage Diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../table-list.html">Alphabetic list of all tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../column-list.html">Alphabetic list of all columns in all tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../members/domain_dictionary.html">The Data Dictionary Generation tool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data modeling DSL reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Datamodels.html">Data Modeling for Dorieh Data Platform</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../DataModellingExtensions.html">Data Modeling Extensions: Federated Views Across Years</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../DataModellingExtensions.html#combining-multiple-sources-and-optional-columns">Combining multiple sources and optional columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../DataModellingExtensions.html#exclude">Exclude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../DataModellingExtensions.html#cast">Cast</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../DataModellingExtensions.html#validating-consistency-of-data-across-tables">Validating consistency of data across tables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Datamodels.html#introduction-to-data-modeling-for-dorieh-data-platform">Introduction to data modeling for Dorieh Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Datamodels.html#domain">Domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Datamodels.html#table">Table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#create-statement">Create statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#invalid-record">Invalid Record</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Datamodels.html#column">Column</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#source">Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#index">Index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#generated-columns">Generated columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#computed-columns">Computed columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#file-columns">File columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#record-columns">Record columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#identifier-columns-and-the-identifiers-token">Identifier columns and the <code class="docutils literal notranslate"><span class="pre">{identifiers}</span></code> token</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#transposing-columns">Transposing columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#wildcards">Wildcards</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Datamodels.html#multi-column-indices">Multi-column indices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Datamodels.html#indexing-policies">Indexing policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Datamodels.html#linking-with-nomenclature">Linking with nomenclature</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#us-states">US States</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#county-codes">County codes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Datamodels.html#ingesting-data">Ingesting data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Datamodels.html#where-to-go-next">Where to go next</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../packages.html">Python Packages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../utils.html">General purpose utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../utils.html#overview-of-utilities">Overview of Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../utils.html#current-development">Current Development</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../utils.html#todo">TODO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../utils.html#documentation-indices">Documentation Indices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../CoreLibrary.html">Data platform components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../CoreLibrary.html#package-dorieh-platform">Package dorieh.platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../CoreLibrary.html#package-dorieh-platform-data-model">Package dorieh.platform.data_model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../CoreLibrary.html#package-dorieh-platform-loader">Package dorieh.platform.loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../CoreLibrary.html#package-dorieh-platform-requests">Package dorieh.platform.requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../CoreLibrary.html#package-dorieh-platform-utils">Package dorieh.platform.utils</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../gis.html">GIS utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../gis.html#gis-library-overview">GIS Library Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../gis.html#shape-files-downloader">Shape files Downloader</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../CMSLibrary.html">Health data manipulation tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../CMSLibrary.html#package-cms">Package cms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../CMSLibrary.html#package-dorieh-cms-tools">Package dorieh.cms.tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../CMSLibrary.html#additional-details">Additional details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../rasters.html">Raster data tools (climate and exposure)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../rasters.html#general-tools-for-raster-files">General tools for raster files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../rasters.html#specialized-tools-for-working-with-climate-data">Specialized tools for working with climate data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../rasters.html#specialized-tools-for-working-with-exposure-data">Specialized tools for working with exposure data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guts.html">Data Platform Internals</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../platform.html">Dorieh Core Data Platform</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../DBConnections.html">Managing database connections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../DataLoader.html">Dorieh Data Loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ProjectLoader.html">Project (Directory) Loading Utility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../TerritorialCodes.html">Mapping between different territorial codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../SQLDocumentation.html">SQL Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../platform.html#core-platform-overview">Core platform overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../platform.html#tool-examples">Tool Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../platform.html#project-structure">Project Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../platform.html#documentation-indices">Documentation Indices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../deployment.html">Dorieh Deployment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../deployment.html#using-docker">Using Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../deployment.html#using-python-virtual-environment">Using Python Virtual Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../deployment.html#using-conda-package-manager">Using Conda Package Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../deployment.html#using-toil-with-docker-requirement">Using Toil with Docker requirement</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../capabilities.html">Platform capabilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../SampleQuery.html">How to query the database</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../SampleQuery.html#setup">Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../SampleQuery.html#create-connection-definition-file">Create connection definition file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../SampleQuery.html#executing-the-query">Executing the query</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../SampleQuery.html#using-explain-to-optimize-queries">Using EXPLAIN to optimize queries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../QueringMedicaid.html">Querying Medicaid Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../QueringMedicaid.html#querying-diagnoses">Querying diagnoses</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../MonitoringDB.html">Monitoring database activity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../MonitoringDB.html#module-monitor">Module monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../MonitoringDB.html#cli-usage-for-monitor">CLI Usage for monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../MonitoringDB.html#using-as-api">Using as API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../UsingHLL.html">Approximate distinct counting with HLL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../UserRequests.html">Handling user requests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../UserRequests.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../UserRequests.html#structure">Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../example_request_yaml.html">Example user request</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Operational guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../DBT.html">Database Testing Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../members/create_test.html">Utility to generate test queries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../members/dbt_runner.html">Test runner: Utility to run generated tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../members/gen_dbt_cwl.html">The gen_dbt_cwl Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../members/create_test.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../members/create_test.html#module-dorieh.platform.dbt.create_test">Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../members/dbt_runner.html">Test runner: Utility to run generated tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../members/dbt_runner.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../members/dbt_runner.html#module-dorieh.platform.dbt.dbt_runner">Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../members/gen_dbt_cwl.html">The gen_dbt_cwl Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../members/gen_dbt_cwl.html#dorieh.platform.dbt.gen_dbt_cwl.CWLTestGenerator"><code class="docutils literal notranslate"><span class="pre">CWLTestGenerator</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../TestingWorkflows.html">Testing bundled workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../TestingWorkflows.html#introduction-to-testing-and-prerequisites">Introduction to testing and prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../TestingWorkflows.html#before-running-any-test">Before running any test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../TestingWorkflows.html#testing-aqs-workflow">Testing AQS workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../TestingWorkflows.html#testing-airnow-workflow">Testing Airnow workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../TestingWorkflows.html#testing-climate-workflow">Testing Climate workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../TestingWorkflows.html#testing-exposure-workflow">Testing Exposure workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../TestingWorkflows.html#testing-medicare-workflow">Testing Medicare workflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../adding_data.html">Adding more data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../adding_data.html#what-data-are-you-adding">What data are you adding?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../adding_data.html#data-modeling-vs-data-introspection">Data modeling vs data introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../adding_data.html#adding-new-data-domain">Adding new data domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../adding_data.html#creating-new-single-table">Creating new single table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../adding_data.html#adding-a-table-from-a-remote-data-source">Adding a table from a remote data source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../adding_data.html#adding-data-to-existing-table">Adding data to existing table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../adding_data.html#automatically-ingesting-multiple-files-from-a-file-system">Automatically ingesting multiple files from a file system</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AppPipelineGenerator.html">Executing containerized apps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../AppPipelineGenerator.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../AppPipelineGenerator.html#prerequisites">Prerequisites</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../AppPipelineGenerator.html#docker-or-python-virtual-environment">Docker or Python virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../AppPipelineGenerator.html#setup-dbms-server">Setup DBMS Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../AppPipelineGenerator.html#define-connection">Define connection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../AppPipelineGenerator.html#using-pipeline-generator">Using pipeline generator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../AppPipelineGenerator.html#generate-pipeline-and-metadata">Generate pipeline and metadata</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../AppPipelineGenerator.html#execute-generated-pipeline">Execute generated pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../AppPipelineGenerator.html#appendix-1-metadata-description">Appendix 1: Metadata description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../AppPipelineGenerator.html#file-app-config-yaml">File app.config.yaml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../AppPipelineGenerator.html#file-metadata-yml">File metadata.yml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../AppPipelineGenerator.html#file-dorieh-metadata-yaml">File dorieh-metadata.yaml</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Terms and Acronyms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../glossary.html#concepts">Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../glossary.html#acronyms">Acronyms</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../dictionaries.html">Data Dictionaries</a></li>
+          <li class="breadcrumb-item"><a href="../../../MedicareLineage.html">Data dictionary and lineage for Medicare processing</a></li>
+          <li class="breadcrumb-item"><a href="../../medicare.dot.html">Table Lineage Diagram</a></li>
+          <li class="breadcrumb-item"><a href="../medicare.admissions.html">Table medicare.admissions</a></li>
+          <li class="breadcrumb-item"><a href="diagnoses.html">Column medicare.admissions.diagnoses</a></li>
+      <li class="breadcrumb-item active">Column medicare.admissions.diagnoses Lineage SVG</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/lineage/tables/medicare.admissions/diagnoses_svg_envelop.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="column-medicare-admissions-diagnoses-lineage-svg">
+<h1>Column medicare.admissions.diagnoses Lineage SVG<a class="headerlink" href="#column-medicare-admissions-diagnoses-lineage-svg" title="Link to this heading"></a></h1>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 10.0.1 (20240210.2158)
+ -->
+<!-- Pages: 1 -->
+<svg width="4024pt" height="865pt"
+ viewBox="0.00 0.00 4024.00 865.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 861)">
+<polygon fill="white" stroke="none" points="-4,4 -4,-861 4020,-861 4020,4 -4,4"/>
+<!-- medicare.admissions.diagnoses -->
+<g id="node1" class="node">
+<title>medicare.admissions.diagnoses</title>
+<g id="a_node1"><a xlink:href="../medicare.admissions/diagnoses.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3202.75,-59 953.25,-59 953.25,0 3202.75,0 3202.75,-59"/>
+<text text-anchor="start" x="1987.62" y="-37.7" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.admissions.diagnoses</text>
+<polygon fill="none" stroke="black" points="964.25,-7 964.25,-29.5 3191.75,-29.5 3191.75,-7 964.25,-7"/>
+<text text-anchor="start" x="967.25" y="-13.2" font-family="Times,serif" font-size="14.00">array_remove(ARRAY[btrim(btrim(diag1)),btrim(diag2),btrim(diag3),btrim(diag4),btrim(diag5),btrim(diag6),btrim(diag7),btrim(diag8),btrim(diag9),btrim(diag10),btrim(diag11),btrim(diag12),btrim(diag13),btrim(diag14),btrim(diag15),btrim(diag16),btrim(diag17),btrim(diag18),btrim(diag19),btrim(diag20),btrim(diag21),btrim(diag22),btrim(diag23),btrim(diag24),btrim(diag25)], NULL) As diagnoses</text>
+<polygon fill="none" stroke="black" points="961.25,-4 961.25,-55 3194.75,-55 3194.75,-4 961.25,-4"/>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag7_parent -->
+<g id="node2" class="node">
+<title>medicare.ip.diag7_parent</title>
+<g id="a_node2"><a xlink:href="../medicare.ip/diag7.html" xlink:title="8 incoming links (columns)" target="_blank">
+<path fill="yellow" stroke="black" d="M216,-847.18C216,-852.6 167.59,-857 108,-857 48.41,-857 0,-852.6 0,-847.18 0,-847.18 0,-758.82 0,-758.82 0,-753.4 48.41,-749 108,-749 167.59,-749 216,-753.4 216,-758.82 216,-758.82 216,-847.18 216,-847.18"/>
+<path fill="none" stroke="black" d="M216,-847.18C216,-841.76 167.59,-837.36 108,-837.36 48.41,-837.36 0,-841.76 0,-847.18"/>
+<text text-anchor="middle" x="108" y="-797.95" font-family="Times,serif" font-size="14.00">8 incoming links (columns)</text>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag7 -->
+<g id="node27" class="node">
+<title>medicare.ip.diag7</title>
+<g id="a_node27"><a xlink:href="../medicare.ip/diag7.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="214.12,-676 83.88,-676 83.88,-640 214.12,-640 214.12,-676"/>
+<text text-anchor="start" x="96.88" y="-653.95" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.ip.diag7</text>
+<polygon fill="none" stroke="black" points="91.88,-644.75 91.88,-671.25 206.12,-671.25 206.12,-644.75 91.88,-644.75"/>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag7_parent&#45;&gt;medicare.ip.diag7 -->
+<g id="edge22" class="edge">
+<title>medicare.ip.diag7_parent&#45;&gt;medicare.ip.diag7</title>
+<path fill="none" stroke="goldenrod" stroke-width="6" d="M123.27,-748.75C128.71,-729.77 134.68,-708.96 139.49,-692.16"/>
+<polygon fill="goldenrod" stroke="goldenrod" stroke-width="6" points="144.54,-693.61 142.25,-682.55 134.45,-690.71 144.54,-693.61"/>
+</g>
+<!-- medicare.ip.diag19_parent -->
+<g id="node3" class="node">
+<title>medicare.ip.diag19_parent</title>
+<g id="a_node3"><a xlink:href="../medicare.ip/diag19.html" xlink:title="8 incoming links (columns)" target="_blank">
+<path fill="yellow" stroke="black" d="M450,-847.18C450,-852.6 401.59,-857 342,-857 282.41,-857 234,-852.6 234,-847.18 234,-847.18 234,-758.82 234,-758.82 234,-753.4 282.41,-749 342,-749 401.59,-749 450,-753.4 450,-758.82 450,-758.82 450,-847.18 450,-847.18"/>
+<path fill="none" stroke="black" d="M450,-847.18C450,-841.76 401.59,-837.36 342,-837.36 282.41,-837.36 234,-841.76 234,-847.18"/>
+<text text-anchor="middle" x="342" y="-797.95" font-family="Times,serif" font-size="14.00">8 incoming links (columns)</text>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag19 -->
+<g id="node28" class="node">
+<title>medicare.ip.diag19</title>
+<g id="a_node28"><a xlink:href="../medicare.ip/diag19.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="389.5,-676 252.5,-676 252.5,-640 389.5,-640 389.5,-676"/>
+<text text-anchor="start" x="265.5" y="-653.95" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.ip.diag19</text>
+<polygon fill="none" stroke="black" points="260.5,-644.75 260.5,-671.25 381.5,-671.25 381.5,-644.75 260.5,-644.75"/>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag19_parent&#45;&gt;medicare.ip.diag19 -->
+<g id="edge24" class="edge">
+<title>medicare.ip.diag19_parent&#45;&gt;medicare.ip.diag19</title>
+<path fill="none" stroke="goldenrod" stroke-width="6" d="M334.18,-748.75C331.41,-729.87 328.37,-709.18 325.91,-692.42"/>
+<polygon fill="goldenrod" stroke="goldenrod" stroke-width="6" points="331.13,-691.86 324.48,-682.73 320.74,-693.38 331.13,-691.86"/>
+</g>
+<!-- medicare.ip.diag5_parent -->
+<g id="node4" class="node">
+<title>medicare.ip.diag5_parent</title>
+<g id="a_node4"><a xlink:href="../medicare.ip/diag5.html" xlink:title="8 incoming links (columns)" target="_blank">
+<path fill="yellow" stroke="black" d="M1283,-847.18C1283,-852.6 1234.59,-857 1175,-857 1115.41,-857 1067,-852.6 1067,-847.18 1067,-847.18 1067,-758.82 1067,-758.82 1067,-753.4 1115.41,-749 1175,-749 1234.59,-749 1283,-753.4 1283,-758.82 1283,-758.82 1283,-847.18 1283,-847.18"/>
+<path fill="none" stroke="black" d="M1283,-847.18C1283,-841.76 1234.59,-837.36 1175,-837.36 1115.41,-837.36 1067,-841.76 1067,-847.18"/>
+<text text-anchor="middle" x="1175" y="-797.95" font-family="Times,serif" font-size="14.00">8 incoming links (columns)</text>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag5 -->
+<g id="node29" class="node">
+<title>medicare.ip.diag5</title>
+<g id="a_node29"><a xlink:href="../medicare.ip/diag5.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="1240.12,-676 1109.88,-676 1109.88,-640 1240.12,-640 1240.12,-676"/>
+<text text-anchor="start" x="1122.88" y="-653.95" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.ip.diag5</text>
+<polygon fill="none" stroke="black" points="1117.88,-644.75 1117.88,-671.25 1232.12,-671.25 1232.12,-644.75 1117.88,-644.75"/>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag5_parent&#45;&gt;medicare.ip.diag5 -->
+<g id="edge26" class="edge">
+<title>medicare.ip.diag5_parent&#45;&gt;medicare.ip.diag5</title>
+<path fill="none" stroke="goldenrod" stroke-width="6" d="M1175,-748.75C1175,-729.97 1175,-709.4 1175,-692.69"/>
+<polygon fill="goldenrod" stroke="goldenrod" stroke-width="6" points="1180.25,-692.8 1175,-682.8 1169.75,-692.8 1180.25,-692.8"/>
+</g>
+<!-- medicare.ip.diag8_parent -->
+<g id="node5" class="node">
+<title>medicare.ip.diag8_parent</title>
+<g id="a_node5"><a xlink:href="../medicare.ip/diag8.html" xlink:title="8 incoming links (columns)" target="_blank">
+<path fill="yellow" stroke="black" d="M3782,-847.18C3782,-852.6 3733.59,-857 3674,-857 3614.41,-857 3566,-852.6 3566,-847.18 3566,-847.18 3566,-758.82 3566,-758.82 3566,-753.4 3614.41,-749 3674,-749 3733.59,-749 3782,-753.4 3782,-758.82 3782,-758.82 3782,-847.18 3782,-847.18"/>
+<path fill="none" stroke="black" d="M3782,-847.18C3782,-841.76 3733.59,-837.36 3674,-837.36 3614.41,-837.36 3566,-841.76 3566,-847.18"/>
+<text text-anchor="middle" x="3674" y="-797.95" font-family="Times,serif" font-size="14.00">8 incoming links (columns)</text>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag8 -->
+<g id="node30" class="node">
+<title>medicare.ip.diag8</title>
+<g id="a_node30"><a xlink:href="../medicare.ip/diag8.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3760.12,-676 3629.88,-676 3629.88,-640 3760.12,-640 3760.12,-676"/>
+<text text-anchor="start" x="3642.88" y="-653.95" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.ip.diag8</text>
+<polygon fill="none" stroke="black" points="3637.88,-644.75 3637.88,-671.25 3752.12,-671.25 3752.12,-644.75 3637.88,-644.75"/>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag8_parent&#45;&gt;medicare.ip.diag8 -->
+<g id="edge28" class="edge">
+<title>medicare.ip.diag8_parent&#45;&gt;medicare.ip.diag8</title>
+<path fill="none" stroke="goldenrod" stroke-width="6" d="M3681.82,-748.75C3684.59,-729.87 3687.63,-709.18 3690.09,-692.42"/>
+<polygon fill="goldenrod" stroke="goldenrod" stroke-width="6" points="3695.26,-693.38 3691.52,-682.73 3684.87,-691.86 3695.26,-693.38"/>
+</g>
+<!-- medicare.ip.diag21_parent -->
+<g id="node6" class="node">
+<title>medicare.ip.diag21_parent</title>
+<g id="a_node6"><a xlink:href="../medicare.ip/diag21.html" xlink:title="8 incoming links (columns)" target="_blank">
+<path fill="yellow" stroke="black" d="M4016,-847.18C4016,-852.6 3967.59,-857 3908,-857 3848.41,-857 3800,-852.6 3800,-847.18 3800,-847.18 3800,-758.82 3800,-758.82 3800,-753.4 3848.41,-749 3908,-749 3967.59,-749 4016,-753.4 4016,-758.82 4016,-758.82 4016,-847.18 4016,-847.18"/>
+<path fill="none" stroke="black" d="M4016,-847.18C4016,-841.76 3967.59,-837.36 3908,-837.36 3848.41,-837.36 3800,-841.76 3800,-847.18"/>
+<text text-anchor="middle" x="3908" y="-797.95" font-family="Times,serif" font-size="14.00">8 incoming links (columns)</text>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag21 -->
+<g id="node31" class="node">
+<title>medicare.ip.diag21</title>
+<g id="a_node31"><a xlink:href="../medicare.ip/diag21.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3956.5,-676 3819.5,-676 3819.5,-640 3956.5,-640 3956.5,-676"/>
+<text text-anchor="start" x="3832.5" y="-653.95" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.ip.diag21</text>
+<polygon fill="none" stroke="black" points="3827.5,-644.75 3827.5,-671.25 3948.5,-671.25 3948.5,-644.75 3827.5,-644.75"/>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag21_parent&#45;&gt;medicare.ip.diag21 -->
+<g id="edge30" class="edge">
+<title>medicare.ip.diag21_parent&#45;&gt;medicare.ip.diag21</title>
+<path fill="none" stroke="goldenrod" stroke-width="6" d="M3900.55,-748.75C3897.91,-729.87 3895.02,-709.18 3892.67,-692.42"/>
+<polygon fill="goldenrod" stroke="goldenrod" stroke-width="6" points="3897.9,-691.91 3891.32,-682.73 3887.51,-693.37 3897.9,-691.91"/>
+</g>
+<!-- medicare.ip.diag9_parent -->
+<g id="node7" class="node">
+<title>medicare.ip.diag9_parent</title>
+<g id="a_node7"><a xlink:href="../medicare.ip/diag9.html" xlink:title="8 incoming links (columns)" target="_blank">
+<path fill="yellow" stroke="black" d="M858,-702.18C858,-707.6 809.59,-712 750,-712 690.41,-712 642,-707.6 642,-702.18 642,-702.18 642,-613.82 642,-613.82 642,-608.4 690.41,-604 750,-604 809.59,-604 858,-608.4 858,-613.82 858,-613.82 858,-702.18 858,-702.18"/>
+<path fill="none" stroke="black" d="M858,-702.18C858,-696.76 809.59,-692.36 750,-692.36 690.41,-692.36 642,-696.76 642,-702.18"/>
+<text text-anchor="middle" x="750" y="-652.95" font-family="Times,serif" font-size="14.00">8 incoming links (columns)</text>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag9 -->
+<g id="node32" class="node">
+<title>medicare.ip.diag9</title>
+<g id="a_node32"><a xlink:href="../medicare.ip/diag9.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="849.12,-531 718.88,-531 718.88,-495 849.12,-495 849.12,-531"/>
+<text text-anchor="start" x="731.88" y="-508.95" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.ip.diag9</text>
+<polygon fill="none" stroke="black" points="726.88,-499.75 726.88,-526.25 841.12,-526.25 841.12,-499.75 726.88,-499.75"/>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag9_parent&#45;&gt;medicare.ip.diag9 -->
+<g id="edge32" class="edge">
+<title>medicare.ip.diag9_parent&#45;&gt;medicare.ip.diag9</title>
+<path fill="none" stroke="goldenrod" stroke-width="6" d="M762.66,-603.75C767.17,-584.77 772.12,-563.96 776.12,-547.16"/>
+<polygon fill="goldenrod" stroke="goldenrod" stroke-width="6" points="781.18,-548.56 778.38,-537.62 770.96,-546.14 781.18,-548.56"/>
+</g>
+<!-- medicare.ip.diag6_parent -->
+<g id="node8" class="node">
+<title>medicare.ip.diag6_parent</title>
+<g id="a_node8"><a xlink:href="../medicare.ip/diag6.html" xlink:title="8 incoming links (columns)" target="_blank">
+<path fill="yellow" stroke="black" d="M1092,-702.18C1092,-707.6 1043.59,-712 984,-712 924.41,-712 876,-707.6 876,-702.18 876,-702.18 876,-613.82 876,-613.82 876,-608.4 924.41,-604 984,-604 1043.59,-604 1092,-608.4 1092,-613.82 1092,-613.82 1092,-702.18 1092,-702.18"/>
+<path fill="none" stroke="black" d="M1092,-702.18C1092,-696.76 1043.59,-692.36 984,-692.36 924.41,-692.36 876,-696.76 876,-702.18"/>
+<text text-anchor="middle" x="984" y="-652.95" font-family="Times,serif" font-size="14.00">8 incoming links (columns)</text>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag6 -->
+<g id="node33" class="node">
+<title>medicare.ip.diag6</title>
+<g id="a_node33"><a xlink:href="../medicare.ip/diag6.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="997.12,-531 866.88,-531 866.88,-495 997.12,-495 997.12,-531"/>
+<text text-anchor="start" x="879.88" y="-508.95" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.ip.diag6</text>
+<polygon fill="none" stroke="black" points="874.88,-499.75 874.88,-526.25 989.12,-526.25 989.12,-499.75 874.88,-499.75"/>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag6_parent&#45;&gt;medicare.ip.diag6 -->
+<g id="edge34" class="edge">
+<title>medicare.ip.diag6_parent&#45;&gt;medicare.ip.diag6</title>
+<path fill="none" stroke="goldenrod" stroke-width="6" d="M964.64,-603.75C957.66,-584.58 950.01,-563.52 943.86,-546.63"/>
+<polygon fill="goldenrod" stroke="goldenrod" stroke-width="6" points="948.86,-545.01 940.51,-537.41 939,-548.6 948.86,-545.01"/>
+</g>
+<!-- medicare.ip.diag20_parent -->
+<g id="node9" class="node">
+<title>medicare.ip.diag20_parent</title>
+<g id="a_node9"><a xlink:href="../medicare.ip/diag20.html" xlink:title="8 incoming links (columns)" target="_blank">
+<path fill="yellow" stroke="black" d="M2856,-702.18C2856,-707.6 2807.59,-712 2748,-712 2688.41,-712 2640,-707.6 2640,-702.18 2640,-702.18 2640,-613.82 2640,-613.82 2640,-608.4 2688.41,-604 2748,-604 2807.59,-604 2856,-608.4 2856,-613.82 2856,-613.82 2856,-702.18 2856,-702.18"/>
+<path fill="none" stroke="black" d="M2856,-702.18C2856,-696.76 2807.59,-692.36 2748,-692.36 2688.41,-692.36 2640,-696.76 2640,-702.18"/>
+<text text-anchor="middle" x="2748" y="-652.95" font-family="Times,serif" font-size="14.00">8 incoming links (columns)</text>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag20 -->
+<g id="node34" class="node">
+<title>medicare.ip.diag20</title>
+<g id="a_node34"><a xlink:href="../medicare.ip/diag20.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2816.5,-531 2679.5,-531 2679.5,-495 2816.5,-495 2816.5,-531"/>
+<text text-anchor="start" x="2692.5" y="-508.95" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.ip.diag20</text>
+<polygon fill="none" stroke="black" points="2687.5,-499.75 2687.5,-526.25 2808.5,-526.25 2808.5,-499.75 2687.5,-499.75"/>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag20_parent&#45;&gt;medicare.ip.diag20 -->
+<g id="edge36" class="edge">
+<title>medicare.ip.diag20_parent&#45;&gt;medicare.ip.diag20</title>
+<path fill="none" stroke="goldenrod" stroke-width="6" d="M2748,-603.75C2748,-584.97 2748,-564.4 2748,-547.69"/>
+<polygon fill="goldenrod" stroke="goldenrod" stroke-width="6" points="2753.25,-547.8 2748,-537.8 2742.75,-547.8 2753.25,-547.8"/>
+</g>
+<!-- medicare.ip.diag3_parent -->
+<g id="node10" class="node">
+<title>medicare.ip.diag3_parent</title>
+<g id="a_node10"><a xlink:href="../medicare.ip/diag3.html" xlink:title="8 incoming links (columns)" target="_blank">
+<path fill="yellow" stroke="black" d="M624,-702.18C624,-707.6 575.59,-712 516,-712 456.41,-712 408,-707.6 408,-702.18 408,-702.18 408,-613.82 408,-613.82 408,-608.4 456.41,-604 516,-604 575.59,-604 624,-608.4 624,-613.82 624,-613.82 624,-702.18 624,-702.18"/>
+<path fill="none" stroke="black" d="M624,-702.18C624,-696.76 575.59,-692.36 516,-692.36 456.41,-692.36 408,-696.76 408,-702.18"/>
+<text text-anchor="middle" x="516" y="-652.95" font-family="Times,serif" font-size="14.00">8 incoming links (columns)</text>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag3 -->
+<g id="node35" class="node">
+<title>medicare.ip.diag3</title>
+<g id="a_node35"><a xlink:href="../medicare.ip/diag3.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="701.12,-531 570.88,-531 570.88,-495 701.12,-495 701.12,-531"/>
+<text text-anchor="start" x="583.88" y="-508.95" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.ip.diag3</text>
+<polygon fill="none" stroke="black" points="578.88,-499.75 578.88,-526.25 693.12,-526.25 693.12,-499.75 578.88,-499.75"/>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag3_parent&#45;&gt;medicare.ip.diag3 -->
+<g id="edge38" class="edge">
+<title>medicare.ip.diag3_parent&#45;&gt;medicare.ip.diag3</title>
+<path fill="none" stroke="goldenrod" stroke-width="6" d="M560.68,-603.75C577.7,-583.48 596.47,-561.1 611.02,-543.76"/>
+<polygon fill="goldenrod" stroke="goldenrod" stroke-width="6" points="614.89,-547.32 617.3,-536.29 606.85,-540.57 614.89,-547.32"/>
+</g>
+<!-- medicare.ip.diag1_parent -->
+<g id="node11" class="node">
+<title>medicare.ip.diag1_parent</title>
+<g id="a_node11"><a xlink:href="../medicare.ip/diag1.html" xlink:title="8 incoming links (columns)" target="_blank">
+<path fill="yellow" stroke="black" d="M3612,-702.18C3612,-707.6 3563.59,-712 3504,-712 3444.41,-712 3396,-707.6 3396,-702.18 3396,-702.18 3396,-613.82 3396,-613.82 3396,-608.4 3444.41,-604 3504,-604 3563.59,-604 3612,-608.4 3612,-613.82 3612,-613.82 3612,-702.18 3612,-702.18"/>
+<path fill="none" stroke="black" d="M3612,-702.18C3612,-696.76 3563.59,-692.36 3504,-692.36 3444.41,-692.36 3396,-696.76 3396,-702.18"/>
+<text text-anchor="middle" x="3504" y="-652.95" font-family="Times,serif" font-size="14.00">8 incoming links (columns)</text>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag1 -->
+<g id="node36" class="node">
+<title>medicare.ip.diag1</title>
+<g id="a_node36"><a xlink:href="../medicare.ip/diag1.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3667.12,-531 3536.88,-531 3536.88,-495 3667.12,-495 3667.12,-531"/>
+<text text-anchor="start" x="3549.88" y="-508.95" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.ip.diag1</text>
+<polygon fill="none" stroke="black" points="3544.88,-499.75 3544.88,-526.25 3659.12,-526.25 3659.12,-499.75 3544.88,-499.75"/>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag1_parent&#45;&gt;medicare.ip.diag1 -->
+<g id="edge40" class="edge">
+<title>medicare.ip.diag1_parent&#45;&gt;medicare.ip.diag1</title>
+<path fill="none" stroke="goldenrod" stroke-width="6" d="M3540.49,-603.75C3554.11,-583.88 3569.12,-561.98 3580.9,-544.8"/>
+<polygon fill="goldenrod" stroke="goldenrod" stroke-width="6" points="3585.14,-547.88 3586.47,-536.67 3576.48,-541.95 3585.14,-547.88"/>
+</g>
+<!-- medicare.ip.diag12_parent -->
+<g id="node12" class="node">
+<title>medicare.ip.diag12_parent</title>
+<g id="a_node12"><a xlink:href="../medicare.ip/diag12.html" xlink:title="8 incoming links (columns)" target="_blank">
+<path fill="yellow" stroke="black" d="M1269,-557.18C1269,-562.6 1220.59,-567 1161,-567 1101.41,-567 1053,-562.6 1053,-557.18 1053,-557.18 1053,-468.82 1053,-468.82 1053,-463.4 1101.41,-459 1161,-459 1220.59,-459 1269,-463.4 1269,-468.82 1269,-468.82 1269,-557.18 1269,-557.18"/>
+<path fill="none" stroke="black" d="M1269,-557.18C1269,-551.76 1220.59,-547.36 1161,-547.36 1101.41,-547.36 1053,-551.76 1053,-557.18"/>
+<text text-anchor="middle" x="1161" y="-507.95" font-family="Times,serif" font-size="14.00">8 incoming links (columns)</text>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag12 -->
+<g id="node37" class="node">
+<title>medicare.ip.diag12</title>
+<g id="a_node37"><a xlink:href="../medicare.ip/diag12.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="1210.5,-386 1073.5,-386 1073.5,-350 1210.5,-350 1210.5,-386"/>
+<text text-anchor="start" x="1086.5" y="-363.95" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.ip.diag12</text>
+<polygon fill="none" stroke="black" points="1081.5,-354.75 1081.5,-381.25 1202.5,-381.25 1202.5,-354.75 1081.5,-354.75"/>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag12_parent&#45;&gt;medicare.ip.diag12 -->
+<g id="edge42" class="edge">
+<title>medicare.ip.diag12_parent&#45;&gt;medicare.ip.diag12</title>
+<path fill="none" stroke="goldenrod" stroke-width="6" d="M1153.93,-458.75C1151.42,-439.87 1148.67,-419.18 1146.44,-402.42"/>
+<polygon fill="goldenrod" stroke="goldenrod" stroke-width="6" points="1151.68,-401.96 1145.15,-392.74 1141.27,-403.34 1151.68,-401.96"/>
+</g>
+<!-- medicare.ip.diag18_parent -->
+<g id="node13" class="node">
+<title>medicare.ip.diag18_parent</title>
+<g id="a_node13"><a xlink:href="../medicare.ip/diag18.html" xlink:title="8 incoming links (columns)" target="_blank">
+<path fill="yellow" stroke="black" d="M3051,-557.18C3051,-562.6 3002.59,-567 2943,-567 2883.41,-567 2835,-562.6 2835,-557.18 2835,-557.18 2835,-468.82 2835,-468.82 2835,-463.4 2883.41,-459 2943,-459 3002.59,-459 3051,-463.4 3051,-468.82 3051,-468.82 3051,-557.18 3051,-557.18"/>
+<path fill="none" stroke="black" d="M3051,-557.18C3051,-551.76 3002.59,-547.36 2943,-547.36 2883.41,-547.36 2835,-551.76 2835,-557.18"/>
+<text text-anchor="middle" x="2943" y="-507.95" font-family="Times,serif" font-size="14.00">8 incoming links (columns)</text>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag18 -->
+<g id="node38" class="node">
+<title>medicare.ip.diag18</title>
+<g id="a_node38"><a xlink:href="../medicare.ip/diag18.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3169.5,-386 3032.5,-386 3032.5,-350 3169.5,-350 3169.5,-386"/>
+<text text-anchor="start" x="3045.5" y="-363.95" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.ip.diag18</text>
+<polygon fill="none" stroke="black" points="3040.5,-354.75 3040.5,-381.25 3161.5,-381.25 3161.5,-354.75 3040.5,-354.75"/>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag18_parent&#45;&gt;medicare.ip.diag18 -->
+<g id="edge44" class="edge">
+<title>medicare.ip.diag18_parent&#45;&gt;medicare.ip.diag18</title>
+<path fill="none" stroke="goldenrod" stroke-width="6" d="M3020.6,-460.19C3028.41,-454.02 3036.02,-447.57 3043,-441 3056.27,-428.51 3069.18,-412.93 3079.44,-399.47"/>
+<polygon fill="goldenrod" stroke="goldenrod" stroke-width="6" points="3083.53,-402.77 3085.24,-391.61 3075.08,-396.54 3083.53,-402.77"/>
+</g>
+<!-- medicare.ip.diag4_parent -->
+<g id="node14" class="node">
+<title>medicare.ip.diag4_parent</title>
+<g id="a_node14"><a xlink:href="../medicare.ip/diag4.html" xlink:title="8 incoming links (columns)" target="_blank">
+<path fill="yellow" stroke="black" d="M2551,-557.18C2551,-562.6 2502.59,-567 2443,-567 2383.41,-567 2335,-562.6 2335,-557.18 2335,-557.18 2335,-468.82 2335,-468.82 2335,-463.4 2383.41,-459 2443,-459 2502.59,-459 2551,-463.4 2551,-468.82 2551,-468.82 2551,-557.18 2551,-557.18"/>
+<path fill="none" stroke="black" d="M2551,-557.18C2551,-551.76 2502.59,-547.36 2443,-547.36 2383.41,-547.36 2335,-551.76 2335,-557.18"/>
+<text text-anchor="middle" x="2443" y="-507.95" font-family="Times,serif" font-size="14.00">8 incoming links (columns)</text>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag4 -->
+<g id="node39" class="node">
+<title>medicare.ip.diag4</title>
+<g id="a_node39"><a xlink:href="../medicare.ip/diag4.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2508.12,-386 2377.88,-386 2377.88,-350 2508.12,-350 2508.12,-386"/>
+<text text-anchor="start" x="2390.88" y="-363.95" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.ip.diag4</text>
+<polygon fill="none" stroke="black" points="2385.88,-354.75 2385.88,-381.25 2500.12,-381.25 2500.12,-354.75 2385.88,-354.75"/>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag4_parent&#45;&gt;medicare.ip.diag4 -->
+<g id="edge46" class="edge">
+<title>medicare.ip.diag4_parent&#45;&gt;medicare.ip.diag4</title>
+<path fill="none" stroke="goldenrod" stroke-width="6" d="M2443,-458.75C2443,-439.97 2443,-419.4 2443,-402.69"/>
+<polygon fill="goldenrod" stroke="goldenrod" stroke-width="6" points="2448.25,-402.8 2443,-392.8 2437.75,-402.8 2448.25,-402.8"/>
+</g>
+<!-- medicare.ip.diag15_parent -->
+<g id="node15" class="node">
+<title>medicare.ip.diag15_parent</title>
+<g id="a_node15"><a xlink:href="../medicare.ip/diag15.html" xlink:title="8 incoming links (columns)" target="_blank">
+<path fill="yellow" stroke="black" d="M3519,-557.18C3519,-562.6 3470.59,-567 3411,-567 3351.41,-567 3303,-562.6 3303,-557.18 3303,-557.18 3303,-468.82 3303,-468.82 3303,-463.4 3351.41,-459 3411,-459 3470.59,-459 3519,-463.4 3519,-468.82 3519,-468.82 3519,-557.18 3519,-557.18"/>
+<path fill="none" stroke="black" d="M3519,-557.18C3519,-551.76 3470.59,-547.36 3411,-547.36 3351.41,-547.36 3303,-551.76 3303,-557.18"/>
+<text text-anchor="middle" x="3411" y="-507.95" font-family="Times,serif" font-size="14.00">8 incoming links (columns)</text>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag15 -->
+<g id="node40" class="node">
+<title>medicare.ip.diag15</title>
+<g id="a_node40"><a xlink:href="../medicare.ip/diag15.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3479.5,-386 3342.5,-386 3342.5,-350 3479.5,-350 3479.5,-386"/>
+<text text-anchor="start" x="3355.5" y="-363.95" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.ip.diag15</text>
+<polygon fill="none" stroke="black" points="3350.5,-354.75 3350.5,-381.25 3471.5,-381.25 3471.5,-354.75 3350.5,-354.75"/>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag15_parent&#45;&gt;medicare.ip.diag15 -->
+<g id="edge48" class="edge">
+<title>medicare.ip.diag15_parent&#45;&gt;medicare.ip.diag15</title>
+<path fill="none" stroke="goldenrod" stroke-width="6" d="M3411,-458.75C3411,-439.97 3411,-419.4 3411,-402.69"/>
+<polygon fill="goldenrod" stroke="goldenrod" stroke-width="6" points="3416.25,-402.8 3411,-392.8 3405.75,-402.8 3416.25,-402.8"/>
+</g>
+<!-- medicare.ip.diag17_parent -->
+<g id="node16" class="node">
+<title>medicare.ip.diag17_parent</title>
+<g id="a_node16"><a xlink:href="../medicare.ip/diag17.html" xlink:title="8 incoming links (columns)" target="_blank">
+<path fill="yellow" stroke="black" d="M3285,-557.18C3285,-562.6 3236.59,-567 3177,-567 3117.41,-567 3069,-562.6 3069,-557.18 3069,-557.18 3069,-468.82 3069,-468.82 3069,-463.4 3117.41,-459 3177,-459 3236.59,-459 3285,-463.4 3285,-468.82 3285,-468.82 3285,-557.18 3285,-557.18"/>
+<path fill="none" stroke="black" d="M3285,-557.18C3285,-551.76 3236.59,-547.36 3177,-547.36 3117.41,-547.36 3069,-551.76 3069,-557.18"/>
+<text text-anchor="middle" x="3177" y="-507.95" font-family="Times,serif" font-size="14.00">8 incoming links (columns)</text>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag17 -->
+<g id="node41" class="node">
+<title>medicare.ip.diag17</title>
+<g id="a_node41"><a xlink:href="../medicare.ip/diag17.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3324.5,-386 3187.5,-386 3187.5,-350 3324.5,-350 3324.5,-386"/>
+<text text-anchor="start" x="3200.5" y="-363.95" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.ip.diag17</text>
+<polygon fill="none" stroke="black" points="3195.5,-354.75 3195.5,-381.25 3316.5,-381.25 3316.5,-354.75 3195.5,-354.75"/>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag17_parent&#45;&gt;medicare.ip.diag17 -->
+<g id="edge50" class="edge">
+<title>medicare.ip.diag17_parent&#45;&gt;medicare.ip.diag17</title>
+<path fill="none" stroke="goldenrod" stroke-width="6" d="M3206.42,-458.75C3217.23,-439.18 3229.13,-417.64 3238.56,-400.58"/>
+<polygon fill="goldenrod" stroke="goldenrod" stroke-width="6" points="3243.06,-403.28 3243.3,-391.99 3233.87,-398.21 3243.06,-403.28"/>
+</g>
+<!-- medicare.ip.diag11_parent -->
+<g id="node17" class="node">
+<title>medicare.ip.diag11_parent</title>
+<g id="a_node17"><a xlink:href="../medicare.ip/diag11.html" xlink:title="8 incoming links (columns)" target="_blank">
+<path fill="yellow" stroke="black" d="M2360,-412.18C2360,-417.6 2311.59,-422 2252,-422 2192.41,-422 2144,-417.6 2144,-412.18 2144,-412.18 2144,-323.82 2144,-323.82 2144,-318.4 2192.41,-314 2252,-314 2311.59,-314 2360,-318.4 2360,-323.82 2360,-323.82 2360,-412.18 2360,-412.18"/>
+<path fill="none" stroke="black" d="M2360,-412.18C2360,-406.76 2311.59,-402.36 2252,-402.36 2192.41,-402.36 2144,-406.76 2144,-412.18"/>
+<text text-anchor="middle" x="2252" y="-362.95" font-family="Times,serif" font-size="14.00">8 incoming links (columns)</text>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag11 -->
+<g id="node42" class="node">
+<title>medicare.ip.diag11</title>
+<g id="a_node42"><a xlink:href="../medicare.ip/diag11.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2625.5,-241 2488.5,-241 2488.5,-205 2625.5,-205 2625.5,-241"/>
+<text text-anchor="start" x="2501.5" y="-218.95" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.ip.diag11</text>
+<polygon fill="none" stroke="black" points="2496.5,-209.75 2496.5,-236.25 2617.5,-236.25 2617.5,-209.75 2496.5,-209.75"/>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag11_parent&#45;&gt;medicare.ip.diag11 -->
+<g id="edge52" class="edge">
+<title>medicare.ip.diag11_parent&#45;&gt;medicare.ip.diag11</title>
+<path fill="none" stroke="goldenrod" stroke-width="6" d="M2359.25,-317.91C2362.53,-316.57 2365.78,-315.27 2369,-314 2417,-295.11 2432.8,-299.93 2479,-277 2493.65,-269.73 2508.74,-260.07 2521.7,-250.98"/>
+<polygon fill="goldenrod" stroke="goldenrod" stroke-width="6" points="2524.55,-255.4 2529.57,-245.28 2518.39,-246.89 2524.55,-255.4"/>
+</g>
+<!-- medicare.ip.diag10_parent -->
+<g id="node18" class="node">
+<title>medicare.ip.diag10_parent</title>
+<g id="a_node18"><a xlink:href="../medicare.ip/diag10.html" xlink:title="8 incoming links (columns)" target="_blank">
+<path fill="yellow" stroke="black" d="M1445,-412.18C1445,-417.6 1396.59,-422 1337,-422 1277.41,-422 1229,-417.6 1229,-412.18 1229,-412.18 1229,-323.82 1229,-323.82 1229,-318.4 1277.41,-314 1337,-314 1396.59,-314 1445,-318.4 1445,-323.82 1445,-323.82 1445,-412.18 1445,-412.18"/>
+<path fill="none" stroke="black" d="M1445,-412.18C1445,-406.76 1396.59,-402.36 1337,-402.36 1277.41,-402.36 1229,-406.76 1229,-412.18"/>
+<text text-anchor="middle" x="1337" y="-362.95" font-family="Times,serif" font-size="14.00">8 incoming links (columns)</text>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag10 -->
+<g id="node43" class="node">
+<title>medicare.ip.diag10</title>
+<g id="a_node43"><a xlink:href="../medicare.ip/diag10.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="1143.5,-241 1006.5,-241 1006.5,-205 1143.5,-205 1143.5,-241"/>
+<text text-anchor="start" x="1019.5" y="-218.95" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.ip.diag10</text>
+<polygon fill="none" stroke="black" points="1014.5,-209.75 1014.5,-236.25 1135.5,-236.25 1135.5,-209.75 1014.5,-209.75"/>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag10_parent&#45;&gt;medicare.ip.diag10 -->
+<g id="edge54" class="edge">
+<title>medicare.ip.diag10_parent&#45;&gt;medicare.ip.diag10</title>
+<path fill="none" stroke="goldenrod" stroke-width="6" d="M1230.08,-317.88C1204.46,-305.25 1177.45,-291.19 1153,-277 1139.32,-269.06 1124.85,-259.56 1112.14,-250.81"/>
+<polygon fill="goldenrod" stroke="goldenrod" stroke-width="6" points="1115.16,-246.52 1103.96,-245.08 1109.14,-255.12 1115.16,-246.52"/>
+</g>
+<!-- medicare.ip.diag16_parent -->
+<g id="node19" class="node">
+<title>medicare.ip.diag16_parent</title>
+<g id="a_node19"><a xlink:href="../medicare.ip/diag16.html" xlink:title="8 incoming links (columns)" target="_blank">
+<path fill="yellow" stroke="black" d="M2041,-412.18C2041,-417.6 1992.59,-422 1933,-422 1873.41,-422 1825,-417.6 1825,-412.18 1825,-412.18 1825,-323.82 1825,-323.82 1825,-318.4 1873.41,-314 1933,-314 1992.59,-314 2041,-318.4 2041,-323.82 2041,-323.82 2041,-412.18 2041,-412.18"/>
+<path fill="none" stroke="black" d="M2041,-412.18C2041,-406.76 1992.59,-402.36 1933,-402.36 1873.41,-402.36 1825,-406.76 1825,-412.18"/>
+<text text-anchor="middle" x="1933" y="-362.95" font-family="Times,serif" font-size="14.00">8 incoming links (columns)</text>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag16 -->
+<g id="node44" class="node">
+<title>medicare.ip.diag16</title>
+<g id="a_node44"><a xlink:href="../medicare.ip/diag16.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2001.5,-241 1864.5,-241 1864.5,-205 2001.5,-205 2001.5,-241"/>
+<text text-anchor="start" x="1877.5" y="-218.95" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.ip.diag16</text>
+<polygon fill="none" stroke="black" points="1872.5,-209.75 1872.5,-236.25 1993.5,-236.25 1993.5,-209.75 1872.5,-209.75"/>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag16_parent&#45;&gt;medicare.ip.diag16 -->
+<g id="edge56" class="edge">
+<title>medicare.ip.diag16_parent&#45;&gt;medicare.ip.diag16</title>
+<path fill="none" stroke="goldenrod" stroke-width="6" d="M1933,-313.75C1933,-294.97 1933,-274.4 1933,-257.69"/>
+<polygon fill="goldenrod" stroke="goldenrod" stroke-width="6" points="1938.25,-257.8 1933,-247.8 1927.75,-257.8 1938.25,-257.8"/>
+</g>
+<!-- medicare.ip.diag23_parent -->
+<g id="node20" class="node">
+<title>medicare.ip.diag23_parent</title>
+<g id="a_node20"><a xlink:href="../medicare.ip/diag23.html" xlink:title="8 incoming links (columns)" target="_blank">
+<path fill="yellow" stroke="black" d="M2742,-412.18C2742,-417.6 2693.59,-422 2634,-422 2574.41,-422 2526,-417.6 2526,-412.18 2526,-412.18 2526,-323.82 2526,-323.82 2526,-318.4 2574.41,-314 2634,-314 2693.59,-314 2742,-318.4 2742,-323.82 2742,-323.82 2742,-412.18 2742,-412.18"/>
+<path fill="none" stroke="black" d="M2742,-412.18C2742,-406.76 2693.59,-402.36 2634,-402.36 2574.41,-402.36 2526,-406.76 2526,-412.18"/>
+<text text-anchor="middle" x="2634" y="-362.95" font-family="Times,serif" font-size="14.00">8 incoming links (columns)</text>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag23 -->
+<g id="node45" class="node">
+<title>medicare.ip.diag23</title>
+<g id="a_node45"><a xlink:href="../medicare.ip/diag23.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2819.5,-241 2682.5,-241 2682.5,-205 2819.5,-205 2819.5,-241"/>
+<text text-anchor="start" x="2695.5" y="-218.95" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.ip.diag23</text>
+<polygon fill="none" stroke="black" points="2690.5,-209.75 2690.5,-236.25 2811.5,-236.25 2811.5,-209.75 2690.5,-209.75"/>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag23_parent&#45;&gt;medicare.ip.diag23 -->
+<g id="edge58" class="edge">
+<title>medicare.ip.diag23_parent&#45;&gt;medicare.ip.diag23</title>
+<path fill="none" stroke="goldenrod" stroke-width="6" d="M2678.55,-313.57C2683.44,-307.65 2688.33,-301.71 2693,-296 2704.32,-282.17 2716.76,-266.75 2727.21,-253.74"/>
+<polygon fill="goldenrod" stroke="goldenrod" stroke-width="6" points="2731.05,-257.35 2733.21,-246.26 2722.86,-250.78 2731.05,-257.35"/>
+</g>
+<!-- medicare.ip.diag2_parent -->
+<g id="node21" class="node">
+<title>medicare.ip.diag2_parent</title>
+<g id="a_node21"><a xlink:href="../medicare.ip/diag2.html" xlink:title="8 incoming links (columns)" target="_blank">
+<path fill="yellow" stroke="black" d="M2976,-412.18C2976,-417.6 2927.59,-422 2868,-422 2808.41,-422 2760,-417.6 2760,-412.18 2760,-412.18 2760,-323.82 2760,-323.82 2760,-318.4 2808.41,-314 2868,-314 2927.59,-314 2976,-318.4 2976,-323.82 2976,-323.82 2976,-412.18 2976,-412.18"/>
+<path fill="none" stroke="black" d="M2976,-412.18C2976,-406.76 2927.59,-402.36 2868,-402.36 2808.41,-402.36 2760,-406.76 2760,-412.18"/>
+<text text-anchor="middle" x="2868" y="-362.95" font-family="Times,serif" font-size="14.00">8 incoming links (columns)</text>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag2 -->
+<g id="node46" class="node">
+<title>medicare.ip.diag2</title>
+<g id="a_node46"><a xlink:href="../medicare.ip/diag2.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2968.12,-241 2837.88,-241 2837.88,-205 2968.12,-205 2968.12,-241"/>
+<text text-anchor="start" x="2850.88" y="-218.95" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.ip.diag2</text>
+<polygon fill="none" stroke="black" points="2845.88,-209.75 2845.88,-236.25 2960.12,-236.25 2960.12,-209.75 2845.88,-209.75"/>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag2_parent&#45;&gt;medicare.ip.diag2 -->
+<g id="edge60" class="edge">
+<title>medicare.ip.diag2_parent&#45;&gt;medicare.ip.diag2</title>
+<path fill="none" stroke="goldenrod" stroke-width="6" d="M2881.03,-313.75C2885.68,-294.77 2890.77,-273.96 2894.88,-257.16"/>
+<polygon fill="goldenrod" stroke="goldenrod" stroke-width="6" points="2899.94,-258.57 2897.22,-247.61 2889.74,-256.08 2899.94,-258.57"/>
+</g>
+<!-- medicare.ip.diag22_parent -->
+<g id="node22" class="node">
+<title>medicare.ip.diag22_parent</title>
+<g id="a_node22"><a xlink:href="../medicare.ip/diag22.html" xlink:title="8 incoming links (columns)" target="_blank">
+<path fill="yellow" stroke="black" d="M1378,-267.18C1378,-272.6 1329.59,-277 1270,-277 1210.41,-277 1162,-272.6 1162,-267.18 1162,-267.18 1162,-178.82 1162,-178.82 1162,-173.4 1210.41,-169 1270,-169 1329.59,-169 1378,-173.4 1378,-178.82 1378,-178.82 1378,-267.18 1378,-267.18"/>
+<path fill="none" stroke="black" d="M1378,-267.18C1378,-261.76 1329.59,-257.36 1270,-257.36 1210.41,-257.36 1162,-261.76 1162,-267.18"/>
+<text text-anchor="middle" x="1270" y="-217.95" font-family="Times,serif" font-size="14.00">8 incoming links (columns)</text>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag22 -->
+<g id="node47" class="node">
+<title>medicare.ip.diag22</title>
+<g id="a_node47"><a xlink:href="../medicare.ip/diag22.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="1576.5,-132 1439.5,-132 1439.5,-96 1576.5,-96 1576.5,-132"/>
+<text text-anchor="start" x="1452.5" y="-109.95" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.ip.diag22</text>
+<polygon fill="none" stroke="black" points="1447.5,-100.75 1447.5,-127.25 1568.5,-127.25 1568.5,-100.75 1447.5,-100.75"/>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag22_parent&#45;&gt;medicare.ip.diag22 -->
+<g id="edge62" class="edge">
+<title>medicare.ip.diag22_parent&#45;&gt;medicare.ip.diag22</title>
+<path fill="none" stroke="goldenrod" stroke-width="6" d="M1378.04,-173.03C1381.06,-171.67 1384.05,-170.33 1387,-169 1408.84,-159.18 1432.93,-148.42 1453.82,-139.1"/>
+<polygon fill="goldenrod" stroke="goldenrod" stroke-width="6" points="1455.85,-143.95 1462.84,-135.08 1451.57,-134.36 1455.85,-143.95"/>
+</g>
+<!-- medicare.ip.diag13_parent -->
+<g id="node23" class="node">
+<title>medicare.ip.diag13_parent</title>
+<g id="a_node23"><a xlink:href="../medicare.ip/diag13.html" xlink:title="8 incoming links (columns)" target="_blank">
+<path fill="yellow" stroke="black" d="M2470,-267.18C2470,-272.6 2421.59,-277 2362,-277 2302.41,-277 2254,-272.6 2254,-267.18 2254,-267.18 2254,-178.82 2254,-178.82 2254,-173.4 2302.41,-169 2362,-169 2421.59,-169 2470,-173.4 2470,-178.82 2470,-178.82 2470,-267.18 2470,-267.18"/>
+<path fill="none" stroke="black" d="M2470,-267.18C2470,-261.76 2421.59,-257.36 2362,-257.36 2302.41,-257.36 2254,-261.76 2254,-267.18"/>
+<text text-anchor="middle" x="2362" y="-217.95" font-family="Times,serif" font-size="14.00">8 incoming links (columns)</text>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag13 -->
+<g id="node48" class="node">
+<title>medicare.ip.diag13</title>
+<g id="a_node48"><a xlink:href="../medicare.ip/diag13.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2234.5,-132 2097.5,-132 2097.5,-96 2234.5,-96 2234.5,-132"/>
+<text text-anchor="start" x="2110.5" y="-109.95" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.ip.diag13</text>
+<polygon fill="none" stroke="black" points="2105.5,-100.75 2105.5,-127.25 2226.5,-127.25 2226.5,-100.75 2105.5,-100.75"/>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag13_parent&#45;&gt;medicare.ip.diag13 -->
+<g id="edge64" class="edge">
+<title>medicare.ip.diag13_parent&#45;&gt;medicare.ip.diag13</title>
+<path fill="none" stroke="goldenrod" stroke-width="6" d="M2269.74,-171.63C2249.77,-160.73 2229.49,-149.66 2212.21,-140.23"/>
+<polygon fill="goldenrod" stroke="goldenrod" stroke-width="6" points="2214.85,-135.69 2203.56,-135.5 2209.82,-144.9 2214.85,-135.69"/>
+</g>
+<!-- medicare.ip.diag14_parent -->
+<g id="node24" class="node">
+<title>medicare.ip.diag14_parent</title>
+<g id="a_node24"><a xlink:href="../medicare.ip/diag14.html" xlink:title="8 incoming links (columns)" target="_blank">
+<path fill="yellow" stroke="black" d="M2236,-267.18C2236,-272.6 2187.59,-277 2128,-277 2068.41,-277 2020,-272.6 2020,-267.18 2020,-267.18 2020,-178.82 2020,-178.82 2020,-173.4 2068.41,-169 2128,-169 2187.59,-169 2236,-173.4 2236,-178.82 2236,-178.82 2236,-267.18 2236,-267.18"/>
+<path fill="none" stroke="black" d="M2236,-267.18C2236,-261.76 2187.59,-257.36 2128,-257.36 2068.41,-257.36 2020,-261.76 2020,-267.18"/>
+<text text-anchor="middle" x="2128" y="-217.95" font-family="Times,serif" font-size="14.00">8 incoming links (columns)</text>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag14 -->
+<g id="node49" class="node">
+<title>medicare.ip.diag14</title>
+<g id="a_node49"><a xlink:href="../medicare.ip/diag14.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2041.5,-132 1904.5,-132 1904.5,-96 2041.5,-96 2041.5,-132"/>
+<text text-anchor="start" x="1917.5" y="-109.95" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.ip.diag14</text>
+<polygon fill="none" stroke="black" points="1912.5,-100.75 1912.5,-127.25 2033.5,-127.25 2033.5,-100.75 1912.5,-100.75"/>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag14_parent&#45;&gt;medicare.ip.diag14 -->
+<g id="edge66" class="edge">
+<title>medicare.ip.diag14_parent&#45;&gt;medicare.ip.diag14</title>
+<path fill="none" stroke="goldenrod" stroke-width="6" d="M2052.77,-170.07C2038.42,-160.16 2023.97,-150.19 2011.39,-141.5"/>
+<polygon fill="goldenrod" stroke="goldenrod" stroke-width="6" points="2014.6,-137.34 2003.39,-135.98 2008.63,-145.98 2014.6,-137.34"/>
+</g>
+<!-- medicare.ip.diag24_parent -->
+<g id="node25" class="node">
+<title>medicare.ip.diag24_parent</title>
+<g id="a_node25"><a xlink:href="../medicare.ip/diag24.html" xlink:title="8 incoming links (columns)" target="_blank">
+<path fill="yellow" stroke="black" d="M1846,-267.18C1846,-272.6 1797.59,-277 1738,-277 1678.41,-277 1630,-272.6 1630,-267.18 1630,-267.18 1630,-178.82 1630,-178.82 1630,-173.4 1678.41,-169 1738,-169 1797.59,-169 1846,-173.4 1846,-178.82 1846,-178.82 1846,-267.18 1846,-267.18"/>
+<path fill="none" stroke="black" d="M1846,-267.18C1846,-261.76 1797.59,-257.36 1738,-257.36 1678.41,-257.36 1630,-261.76 1630,-267.18"/>
+<text text-anchor="middle" x="1738" y="-217.95" font-family="Times,serif" font-size="14.00">8 incoming links (columns)</text>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag24 -->
+<g id="node50" class="node">
+<title>medicare.ip.diag24</title>
+<g id="a_node50"><a xlink:href="../medicare.ip/diag24.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="1886.5,-132 1749.5,-132 1749.5,-96 1886.5,-96 1886.5,-132"/>
+<text text-anchor="start" x="1762.5" y="-109.95" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.ip.diag24</text>
+<polygon fill="none" stroke="black" points="1757.5,-100.75 1757.5,-127.25 1878.5,-127.25 1878.5,-100.75 1757.5,-100.75"/>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag24_parent&#45;&gt;medicare.ip.diag24 -->
+<g id="edge68" class="edge">
+<title>medicare.ip.diag24_parent&#45;&gt;medicare.ip.diag24</title>
+<path fill="none" stroke="goldenrod" stroke-width="6" d="M1778,-168.5C1784,-160.48 1790,-152.45 1795.46,-145.15"/>
+<polygon fill="goldenrod" stroke="goldenrod" stroke-width="6" points="1799.5,-148.51 1801.28,-137.36 1791.09,-142.23 1799.5,-148.51"/>
+</g>
+<!-- medicare.ip.diag25_parent -->
+<g id="node26" class="node">
+<title>medicare.ip.diag25_parent</title>
+<g id="a_node26"><a xlink:href="../medicare.ip/diag25.html" xlink:title="8 incoming links (columns)" target="_blank">
+<path fill="yellow" stroke="black" d="M1612,-267.18C1612,-272.6 1563.59,-277 1504,-277 1444.41,-277 1396,-272.6 1396,-267.18 1396,-267.18 1396,-178.82 1396,-178.82 1396,-173.4 1444.41,-169 1504,-169 1563.59,-169 1612,-173.4 1612,-178.82 1612,-178.82 1612,-267.18 1612,-267.18"/>
+<path fill="none" stroke="black" d="M1612,-267.18C1612,-261.76 1563.59,-257.36 1504,-257.36 1444.41,-257.36 1396,-261.76 1396,-267.18"/>
+<text text-anchor="middle" x="1504" y="-217.95" font-family="Times,serif" font-size="14.00">8 incoming links (columns)</text>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag25 -->
+<g id="node51" class="node">
+<title>medicare.ip.diag25</title>
+<g id="a_node51"><a xlink:href="../medicare.ip/diag25.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="1731.5,-132 1594.5,-132 1594.5,-96 1731.5,-96 1731.5,-132"/>
+<text text-anchor="start" x="1607.5" y="-109.95" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.ip.diag25</text>
+<polygon fill="none" stroke="black" points="1602.5,-100.75 1602.5,-127.25 1723.5,-127.25 1723.5,-100.75 1602.5,-100.75"/>
+</a>
+</g>
+</g>
+<!-- medicare.ip.diag25_parent&#45;&gt;medicare.ip.diag25 -->
+<g id="edge70" class="edge">
+<title>medicare.ip.diag25_parent&#45;&gt;medicare.ip.diag25</title>
+<path fill="none" stroke="goldenrod" stroke-width="6" d="M1580.71,-170.38C1595.64,-160.33 1610.7,-150.2 1623.78,-141.39"/>
+<polygon fill="goldenrod" stroke="goldenrod" stroke-width="6" points="1626.38,-145.97 1631.75,-136.03 1620.52,-137.26 1626.38,-145.97"/>
+</g>
+<!-- medicare.ip.diag7&#45;&gt;medicare.admissions.diagnoses -->
+<g id="edge21" class="edge">
+<title>medicare.ip.diag7&#45;&gt;medicare.admissions.diagnoses</title>
+<path fill="none" stroke="black" d="M169.2,-639.85C196.01,-615.05 240,-566.38 240,-514 240,-514 240,-514 240,-113 240,14.23 397.15,-86.91 524,-77 659.01,-66.45 800.79,-58.25 941.5,-51.88"/>
+<polygon fill="black" stroke="black" points="941.58,-55.38 951.42,-51.43 941.27,-48.38 941.58,-55.38"/>
+<text text-anchor="middle" x="278.62" y="-290.45" font-family="Times,serif" font-size="14.00"> &#160;Transformed</text>
+</g>
+<!-- medicare.ip.diag19&#45;&gt;medicare.admissions.diagnoses -->
+<g id="edge23" class="edge">
+<title>medicare.ip.diag19&#45;&gt;medicare.admissions.diagnoses</title>
+<path fill="none" stroke="black" d="M343.46,-639.82C372.67,-615.35 420,-567.45 420,-514 420,-514 420,-514 420,-113 420,-78.53 651.59,-58.3 941.65,-46.49"/>
+<polygon fill="black" stroke="black" points="941.51,-50 951.36,-46.1 941.23,-43 941.51,-50"/>
+<text text-anchor="middle" x="458.62" y="-290.45" font-family="Times,serif" font-size="14.00"> &#160;Transformed</text>
+</g>
+<!-- medicare.ip.diag5&#45;&gt;medicare.admissions.diagnoses -->
+<g id="edge25" class="edge">
+<title>medicare.ip.diag5&#45;&gt;medicare.admissions.diagnoses</title>
+<path fill="none" stroke="black" d="M1151.2,-639.53C1136.79,-629.06 1117.97,-615.58 1101,-604 1076.05,-586.98 1061.45,-591.65 1044,-567 1024.85,-539.94 977.92,-309.92 974,-277 968.33,-229.34 958.57,-214.45 974,-169 987.14,-130.28 993.91,-115.22 1030,-96 1058.03,-81.07 1148.47,-69.41 1265.25,-60.36"/>
+<polygon fill="black" stroke="black" points="1265.42,-63.85 1275.12,-59.6 1264.88,-56.87 1265.42,-63.85"/>
+<text text-anchor="middle" x="1015.62" y="-290.45" font-family="Times,serif" font-size="14.00"> &#160;Transformed</text>
+</g>
+<!-- medicare.ip.diag5&#45;&gt;medicare.ip.diag9 -->
+<!-- medicare.ip.diag5&#45;&gt;medicare.ip.diag6 -->
+<!-- medicare.ip.diag5&#45;&gt;medicare.ip.diag20 -->
+<!-- medicare.ip.diag5&#45;&gt;medicare.ip.diag3 -->
+<!-- medicare.ip.diag5&#45;&gt;medicare.ip.diag1 -->
+<!-- medicare.ip.diag8&#45;&gt;medicare.admissions.diagnoses -->
+<g id="edge27" class="edge">
+<title>medicare.ip.diag8&#45;&gt;medicare.admissions.diagnoses</title>
+<path fill="none" stroke="black" d="M3695,-639.83C3695,-612.98 3695,-559.43 3695,-514 3695,-514 3695,-514 3695,-113 3695,-80.5 3483.89,-60.71 3214.23,-48.7"/>
+<polygon fill="black" stroke="black" points="3214.64,-45.21 3204.5,-48.27 3214.33,-52.21 3214.64,-45.21"/>
+<text text-anchor="middle" x="3733.62" y="-290.45" font-family="Times,serif" font-size="14.00"> &#160;Transformed</text>
+</g>
+<!-- medicare.ip.diag21&#45;&gt;medicare.admissions.diagnoses -->
+<g id="edge29" class="edge">
+<title>medicare.ip.diag21&#45;&gt;medicare.admissions.diagnoses</title>
+<path fill="none" stroke="black" d="M3871.08,-639.71C3848.13,-614.36 3810,-564.62 3810,-514 3810,-514 3810,-514 3810,-113 3810,-75 3540.52,-54.14 3214.16,-42.82"/>
+<polygon fill="black" stroke="black" points="3214.64,-39.33 3204.53,-42.49 3214.4,-46.33 3214.64,-39.33"/>
+<text text-anchor="middle" x="3848.62" y="-290.45" font-family="Times,serif" font-size="14.00"> &#160;Transformed</text>
+</g>
+<!-- medicare.ip.diag9&#45;&gt;medicare.admissions.diagnoses -->
+<g id="edge31" class="edge">
+<title>medicare.ip.diag9&#45;&gt;medicare.admissions.diagnoses</title>
+<path fill="none" stroke="black" d="M789.06,-494.56C796.36,-467.8 809,-414.87 809,-369 809,-369 809,-369 809,-113 809,-60.29 870.09,-86.14 922,-77 958.12,-70.64 1007.46,-65.15 1065.52,-60.4"/>
+<polygon fill="black" stroke="black" points="1065.66,-63.9 1075.34,-59.62 1065.1,-56.93 1065.66,-63.9"/>
+<text text-anchor="middle" x="847.62" y="-217.95" font-family="Times,serif" font-size="14.00"> &#160;Transformed</text>
+</g>
+<!-- medicare.ip.diag6&#45;&gt;medicare.admissions.diagnoses -->
+<g id="edge33" class="edge">
+<title>medicare.ip.diag6&#45;&gt;medicare.admissions.diagnoses</title>
+<path fill="none" stroke="black" d="M925.93,-494.63C917.16,-467.97 902,-415.17 902,-369 902,-369 902,-369 902,-113 902,-93.77 909.23,-86.41 926,-77 937.1,-70.77 989.28,-65.18 1065.78,-60.22"/>
+<polygon fill="black" stroke="black" points="1065.97,-63.71 1075.73,-59.59 1065.53,-56.73 1065.97,-63.71"/>
+<text text-anchor="middle" x="940.62" y="-217.95" font-family="Times,serif" font-size="14.00"> &#160;Transformed</text>
+</g>
+<!-- medicare.ip.diag20&#45;&gt;medicare.admissions.diagnoses -->
+<g id="edge35" class="edge">
+<title>medicare.ip.diag20&#45;&gt;medicare.admissions.diagnoses</title>
+<path fill="none" stroke="black" d="M2768.92,-494.63C2783.95,-482.97 2805.15,-468.13 2826,-459 2892.46,-429.9 2930.82,-470.26 2985,-422 3003.69,-405.36 3004,-394.02 3004,-369 3004,-369 3004,-369 3004,-113 3004,-91.65 2845.72,-73.85 2660.05,-60.32"/>
+<polygon fill="black" stroke="black" points="2660.37,-56.83 2650.14,-59.6 2659.86,-63.81 2660.37,-56.83"/>
+<text text-anchor="middle" x="3042.62" y="-217.95" font-family="Times,serif" font-size="14.00"> &#160;Transformed</text>
+</g>
+<!-- medicare.ip.diag20&#45;&gt;medicare.ip.diag12 -->
+<!-- medicare.ip.diag20&#45;&gt;medicare.ip.diag18 -->
+<!-- medicare.ip.diag20&#45;&gt;medicare.ip.diag4 -->
+<!-- medicare.ip.diag20&#45;&gt;medicare.ip.diag15 -->
+<!-- medicare.ip.diag20&#45;&gt;medicare.ip.diag17 -->
+<!-- medicare.ip.diag3&#45;&gt;medicare.admissions.diagnoses -->
+<g id="edge37" class="edge">
+<title>medicare.ip.diag3&#45;&gt;medicare.admissions.diagnoses</title>
+<path fill="none" stroke="black" d="M653.36,-494.79C676.89,-469.55 716,-419.92 716,-369 716,-369 716,-369 716,-113 716,-89.28 849.39,-72.32 1032.67,-60.22"/>
+<polygon fill="black" stroke="black" points="1032.7,-63.73 1042.46,-59.59 1032.25,-56.74 1032.7,-63.73"/>
+<text text-anchor="middle" x="754.62" y="-217.95" font-family="Times,serif" font-size="14.00"> &#160;Transformed</text>
+</g>
+<!-- medicare.ip.diag1&#45;&gt;medicare.admissions.diagnoses -->
+<g id="edge39" class="edge">
+<title>medicare.ip.diag1&#45;&gt;medicare.admissions.diagnoses</title>
+<path fill="none" stroke="black" d="M3592.26,-494.55C3578.49,-468.2 3555,-416.3 3555,-369 3555,-369 3555,-369 3555,-113 3555,-87.4 3411.69,-69.74 3214.35,-57.57"/>
+<polygon fill="black" stroke="black" points="3214.8,-54.09 3204.61,-56.97 3214.38,-61.07 3214.8,-54.09"/>
+<text text-anchor="middle" x="3593.62" y="-217.95" font-family="Times,serif" font-size="14.00"> &#160;Transformed</text>
+</g>
+<!-- medicare.ip.diag12&#45;&gt;medicare.admissions.diagnoses -->
+<g id="edge41" class="edge">
+<title>medicare.ip.diag12&#45;&gt;medicare.admissions.diagnoses</title>
+<path fill="none" stroke="black" d="M1089.56,-349.58C1056.58,-335.58 1016.66,-312.34 997,-277 973.67,-235.05 968.25,-207.44 997,-169 1065.83,-77 1132.01,-116.84 1245,-96 1325.89,-81.08 1411.82,-69.56 1496.58,-60.66"/>
+<polygon fill="black" stroke="black" points="1496.9,-64.14 1506.48,-59.63 1496.18,-57.18 1496.9,-64.14"/>
+<text text-anchor="middle" x="1051.62" y="-145.45" font-family="Times,serif" font-size="14.00"> &#160;Transformed</text>
+</g>
+<!-- medicare.ip.diag18&#45;&gt;medicare.admissions.diagnoses -->
+<g id="edge43" class="edge">
+<title>medicare.ip.diag18&#45;&gt;medicare.admissions.diagnoses</title>
+<path fill="none" stroke="black" d="M3102.23,-349.63C3104.82,-298.15 3104.56,-145.68 3018,-77 3010.2,-70.81 2971.31,-65.3 2913.44,-60.42"/>
+<polygon fill="black" stroke="black" points="2913.78,-56.94 2903.53,-59.61 2913.21,-63.91 2913.78,-56.94"/>
+<text text-anchor="middle" x="3111.62" y="-145.45" font-family="Times,serif" font-size="14.00"> &#160;Transformed</text>
+</g>
+<!-- medicare.ip.diag4&#45;&gt;medicare.admissions.diagnoses -->
+<g id="edge45" class="edge">
+<title>medicare.ip.diag4&#45;&gt;medicare.admissions.diagnoses</title>
+<path fill="none" stroke="black" d="M2463.55,-349.57C2477.81,-338.18 2497.64,-323.69 2517,-314 2565.77,-289.6 2601.77,-321 2634,-277 2662.37,-238.28 2662.39,-207.7 2634,-169 2596.4,-117.76 2457.83,-83.16 2328.43,-61.37"/>
+<polygon fill="black" stroke="black" points="2329.08,-57.92 2318.64,-59.74 2327.93,-64.83 2329.08,-57.92"/>
+<text text-anchor="middle" x="2654.62" y="-145.45" font-family="Times,serif" font-size="14.00"> &#160;Transformed</text>
+</g>
+<!-- medicare.ip.diag4&#45;&gt;medicare.ip.diag11 -->
+<!-- medicare.ip.diag4&#45;&gt;medicare.ip.diag10 -->
+<!-- medicare.ip.diag4&#45;&gt;medicare.ip.diag16 -->
+<!-- medicare.ip.diag4&#45;&gt;medicare.ip.diag23 -->
+<!-- medicare.ip.diag4&#45;&gt;medicare.ip.diag2 -->
+<!-- medicare.ip.diag15&#45;&gt;medicare.admissions.diagnoses -->
+<g id="edge47" class="edge">
+<title>medicare.ip.diag15&#45;&gt;medicare.admissions.diagnoses</title>
+<path fill="none" stroke="black" d="M3397.72,-349.77C3359.45,-301.41 3243.34,-163.48 3114,-96 3086.94,-81.88 3078.11,-81.99 3048,-77 3009.92,-70.69 2954.43,-65.16 2888.98,-60.31"/>
+<polygon fill="black" stroke="black" points="2889.26,-56.83 2879.03,-59.59 2888.75,-63.81 2889.26,-56.83"/>
+<text text-anchor="middle" x="3237.62" y="-145.45" font-family="Times,serif" font-size="14.00"> &#160;Transformed</text>
+</g>
+<!-- medicare.ip.diag17&#45;&gt;medicare.admissions.diagnoses -->
+<g id="edge49" class="edge">
+<title>medicare.ip.diag17&#45;&gt;medicare.admissions.diagnoses</title>
+<path fill="none" stroke="black" d="M3250.6,-349.7C3231.86,-293.32 3163.46,-116.25 3033,-77 3012.47,-70.82 2961.31,-65.24 2892.74,-60.27"/>
+<polygon fill="black" stroke="black" points="2893.31,-56.81 2883.09,-59.59 2892.82,-63.79 2893.31,-56.81"/>
+<text text-anchor="middle" x="3180.62" y="-145.45" font-family="Times,serif" font-size="14.00"> &#160;Transformed</text>
+</g>
+<!-- medicare.ip.diag11&#45;&gt;medicare.admissions.diagnoses -->
+<g id="edge51" class="edge">
+<title>medicare.ip.diag11&#45;&gt;medicare.admissions.diagnoses</title>
+<path fill="none" stroke="black" d="M2534.77,-204.56C2519.67,-193.31 2498.9,-178.98 2479,-169 2388.1,-123.43 2278.63,-86.73 2197.04,-62.59"/>
+<polygon fill="black" stroke="black" points="2198.26,-59.3 2187.68,-59.84 2196.29,-66.02 2198.26,-59.3"/>
+<text text-anchor="middle" x="2435.62" y="-108.95" font-family="Times,serif" font-size="14.00"> &#160;Transformed</text>
+</g>
+<!-- medicare.ip.diag10&#45;&gt;medicare.admissions.diagnoses -->
+<g id="edge53" class="edge">
+<title>medicare.ip.diag10&#45;&gt;medicare.admissions.diagnoses</title>
+<path fill="none" stroke="black" d="M1096.34,-204.57C1111.38,-193.04 1132.44,-178.37 1153,-169 1268.46,-116.37 1304.16,-118.66 1429,-96 1509.43,-81.4 1596.1,-69.83 1679.1,-60.73"/>
+<polygon fill="black" stroke="black" points="1679.45,-64.21 1689.01,-59.66 1678.69,-57.25 1679.45,-64.21"/>
+<text text-anchor="middle" x="1467.62" y="-108.95" font-family="Times,serif" font-size="14.00"> &#160;Transformed</text>
+</g>
+<!-- medicare.ip.diag16&#45;&gt;medicare.admissions.diagnoses -->
+<g id="edge55" class="edge">
+<title>medicare.ip.diag16&#45;&gt;medicare.admissions.diagnoses</title>
+<path fill="none" stroke="black" d="M1959.35,-204.65C1989.96,-184.03 2037.81,-150.13 2050,-132 2062.28,-113.74 2069.2,-90.21 2073.09,-70.41"/>
+<polygon fill="black" stroke="black" points="2076.51,-71.19 2074.79,-60.73 2069.61,-69.98 2076.51,-71.19"/>
+<text text-anchor="middle" x="2105.62" y="-108.95" font-family="Times,serif" font-size="14.00"> &#160;Transformed</text>
+</g>
+<!-- medicare.ip.diag16&#45;&gt;medicare.ip.diag22 -->
+<!-- medicare.ip.diag16&#45;&gt;medicare.ip.diag13 -->
+<!-- medicare.ip.diag16&#45;&gt;medicare.ip.diag14 -->
+<!-- medicare.ip.diag16&#45;&gt;medicare.ip.diag24 -->
+<!-- medicare.ip.diag16&#45;&gt;medicare.ip.diag25 -->
+<!-- medicare.ip.diag23&#45;&gt;medicare.admissions.diagnoses -->
+<g id="edge57" class="edge">
+<title>medicare.ip.diag23&#45;&gt;medicare.admissions.diagnoses</title>
+<path fill="none" stroke="black" d="M2746.78,-204.69C2738.09,-173.12 2714.92,-106.73 2668,-77 2658.55,-71.01 2635.22,-65.71 2603.01,-61.04"/>
+<polygon fill="black" stroke="black" points="2603.64,-57.6 2593.25,-59.69 2602.68,-64.53 2603.64,-57.6"/>
+<text text-anchor="middle" x="2755.62" y="-108.95" font-family="Times,serif" font-size="14.00"> &#160;Transformed</text>
+</g>
+<!-- medicare.ip.diag2&#45;&gt;medicare.admissions.diagnoses -->
+<g id="edge59" class="edge">
+<title>medicare.ip.diag2&#45;&gt;medicare.admissions.diagnoses</title>
+<path fill="none" stroke="black" d="M2885.61,-204.7C2850.83,-171.53 2768.65,-100.24 2683,-77 2660.52,-70.9 2627.76,-65.52 2588.94,-60.79"/>
+<polygon fill="black" stroke="black" points="2589.67,-57.36 2579.33,-59.65 2588.85,-64.31 2589.67,-57.36"/>
+<text text-anchor="middle" x="2832.62" y="-108.95" font-family="Times,serif" font-size="14.00"> &#160;Transformed</text>
+</g>
+<!-- medicare.ip.diag22&#45;&gt;medicare.admissions.diagnoses -->
+<g id="edge61" class="edge">
+<title>medicare.ip.diag22&#45;&gt;medicare.admissions.diagnoses</title>
+<path fill="none" stroke="black" d="M1576.79,-97.51C1579.56,-96.98 1582.3,-96.48 1585,-96 1660.07,-82.75 1741.99,-70.85 1817.11,-60.94"/>
+<polygon fill="black" stroke="black" points="1817.18,-64.47 1826.64,-59.69 1816.27,-57.52 1817.18,-64.47"/>
+<text text-anchor="middle" x="1738.62" y="-72.45" font-family="Times,serif" font-size="14.00"> &#160;Transformed</text>
+</g>
+<!-- medicare.ip.diag13&#45;&gt;medicare.admissions.diagnoses -->
+<g id="edge63" class="edge">
+<title>medicare.ip.diag13&#45;&gt;medicare.admissions.diagnoses</title>
+<path fill="none" stroke="black" d="M2147.34,-95.5C2138.5,-87.22 2127.59,-76.99 2117.07,-67.13"/>
+<polygon fill="black" stroke="black" points="2119.55,-64.65 2109.86,-60.37 2114.76,-69.76 2119.55,-64.65"/>
+<text text-anchor="middle" x="2167.62" y="-72.45" font-family="Times,serif" font-size="14.00"> &#160;Transformed</text>
+</g>
+<!-- medicare.ip.diag14&#45;&gt;medicare.admissions.diagnoses -->
+<g id="edge65" class="edge">
+<title>medicare.ip.diag14&#45;&gt;medicare.admissions.diagnoses</title>
+<path fill="none" stroke="black" d="M1995.27,-95.5C2006.13,-86.97 2019.6,-76.38 2032.5,-66.25"/>
+<polygon fill="black" stroke="black" points="2034.41,-69.2 2040.11,-60.27 2030.09,-63.69 2034.41,-69.2"/>
+<text text-anchor="middle" x="2056.62" y="-72.45" font-family="Times,serif" font-size="14.00"> &#160;Transformed</text>
+</g>
+<!-- medicare.ip.diag24&#45;&gt;medicare.admissions.diagnoses -->
+<g id="edge67" class="edge">
+<title>medicare.ip.diag24&#45;&gt;medicare.admissions.diagnoses</title>
+<path fill="none" stroke="black" d="M1873.14,-95.5C1902.99,-86.03 1940.84,-74.02 1975.86,-62.91"/>
+<polygon fill="black" stroke="black" points="1976.7,-66.31 1985.18,-59.95 1974.59,-59.64 1976.7,-66.31"/>
+<text text-anchor="middle" x="1967.62" y="-72.45" font-family="Times,serif" font-size="14.00"> &#160;Transformed</text>
+</g>
+<!-- medicare.ip.diag25&#45;&gt;medicare.admissions.diagnoses -->
+<g id="edge69" class="edge">
+<title>medicare.ip.diag25&#45;&gt;medicare.admissions.diagnoses</title>
+<path fill="none" stroke="black" d="M1731.83,-97.71C1734.59,-97.13 1737.32,-96.56 1740,-96 1796.13,-84.37 1857.63,-72.26 1912.61,-61.66"/>
+<polygon fill="black" stroke="black" points="1913.23,-65.11 1922.39,-59.78 1911.91,-58.24 1913.23,-65.11"/>
+<text text-anchor="middle" x="1871.62" y="-72.45" font-family="Times,serif" font-size="14.00"> &#160;Transformed</text>
+</g>
+</g>
+</svg>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="diagnoses.html" class="btn btn-neutral float-left" title="Column medicare.admissions.diagnoses" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="discharge_date.html" class="btn btn-neutral float-right" title="Column medicare.admissions.discharge_date" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2026, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+# Column medicare.ps.ssa3
+
+## Overview of column ssa3 in table medicare.ps 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.ps](../medicare.ps.md)           |
+| Qualified name                | medicare.ps.ssa3  |
+| Datatype                      | string        |
+| Reference | [https://www.nber.org/research/data/ssa-federal-information-processing-series-fips-state-and-county-crosswalk](https://www.nber.org/research/data/ssa-federal-information-processing-series-fips-state-and-county-crosswalk) |
+
+
+Social Security Administration (SSA) three digit code for county
+
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+ssa3_svg_envelop.md
+```
+
+
+```{figure} ssa3.svg
+:align: center
+:alt: Column medicare.ps.ssa3 Lineage SVG
+:target: ssa3_svg_envelop.html
+
+Data lineage for column medicare.ps.ssa3
+
+```
+
+

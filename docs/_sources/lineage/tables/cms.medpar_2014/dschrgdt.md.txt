@@ -1,0 +1,22 @@
+# Column cms.medpar_2014.DSCHRGDT
+
+## Overview of column DSCHRGDT in table cms.medpar_2014 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2014](../cms.medpar_2014.md)           |
+| Qualified name                | cms.medpar_2014.DSCHRGDT  |
+| Datatype                      | DATE        |
+| Reference | [https://resdac.org/cms-data/variables/discharge-date](https://resdac.org/cms-data/variables/discharge-date) |
+
+
+Date beneficiary was discharged or died
+
+| Key | Value |
+| --- | ----- |
+| long_name | DSCHRG_DT |
+| original_type | DATE |
+| width | 8.0 |
+
+
+

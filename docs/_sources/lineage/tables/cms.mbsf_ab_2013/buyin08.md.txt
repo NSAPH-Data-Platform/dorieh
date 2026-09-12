@@ -1,0 +1,22 @@
+# Column cms.mbsf_ab_2013.BUYIN08
+
+## Overview of column BUYIN08 in table cms.mbsf_ab_2013 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_ab_2013](../cms.mbsf_ab_2013.md)           |
+| Qualified name                | cms.mbsf_ab_2013.BUYIN08  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/medicare-entitlementbuy-indicator](https://resdac.org/cms-data/variables/medicare-entitlementbuy-indicator) |
+
+
+Medicare Entitlement/Buy-In Indicator VIII
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_MDCR_ENTLMT_BUYIN_IND_08 |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

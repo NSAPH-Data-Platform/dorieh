@@ -1,0 +1,22 @@
+# Column cms.medpar_2016.ESRD_CD
+
+## Overview of column ESRD_CD in table cms.medpar_2016 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2016](../cms.medpar_2016.md)           |
+| Qualified name                | cms.medpar_2016.ESRD_CD  |
+| Datatype                      | VARCHAR(2)        |
+| Reference | [https://resdac.org/cms-data/variables/end-stage-renal-disease-esrd-condition-indicator-code](https://resdac.org/cms-data/variables/end-stage-renal-disease-esrd-condition-indicator-code) |
+
+
+ESRD condition code
+
+| Key | Value |
+| --- | ----- |
+| long_name | ESRD_COND_CD |
+| original_type | CHAR |
+| width | 2.0 |
+
+
+

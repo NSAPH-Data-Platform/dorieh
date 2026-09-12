@@ -1,0 +1,39 @@
+# Column medicare.qc_enrl_bene.zip
+
+## Overview of column zip in table medicare.qc_enrl_bene 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_enrl_bene](../medicare.qc_enrl_bene.md)           |
+| Qualified name                | medicare.qc_enrl_bene.zip  |
+| Datatype                      | string        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT MAX(zip)
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+zip_svg_envelop.md
+```
+
+
+```{figure} zip.svg
+:align: center
+:alt: Column medicare.qc_enrl_bene.zip Lineage SVG
+:target: zip_svg_envelop.html
+
+Data lineage for column medicare.qc_enrl_bene.zip
+
+```
+
+

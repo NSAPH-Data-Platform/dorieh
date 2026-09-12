@@ -1,0 +1,39 @@
+# Column medicare.beneficiaries.number_of_gap_years
+
+## Overview of column number_of_gap_years in table medicare.beneficiaries 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.beneficiaries](../medicare.beneficiaries.md)           |
+| Qualified name                | medicare.beneficiaries.number_of_gap_years  |
+| Datatype                      | INT        |
+| Column type | generated |
+
+
+
+## Expressions
+
+```sql
+SELECT GENERATED ALWAYS AS (last_enrollment_year - first_enrollment_year + 1 - CARDINALITY(all_enrollment_years)) STORED
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+number_of_gap_years_svg_envelop.md
+```
+
+
+```{figure} number_of_gap_years.svg
+:align: center
+:alt: Column medicare.beneficiaries.number_of_gap_years Lineage SVG
+:target: number_of_gap_years_svg_envelop.html
+
+Data lineage for column medicare.beneficiaries.number_of_gap_years
+
+```
+
+

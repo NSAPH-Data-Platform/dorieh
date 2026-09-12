@@ -19,7 +19,7 @@ the data it produces into Dorieh Data warehouse.
 
 The process of data ingestion consists of two steps:
 
-1. Generation of the piepline for data ingestion
+1. Generation of the pipeline for data ingestion
 2. Execution of the pipeline
 
              
@@ -45,7 +45,7 @@ Alternatively, *instead* of Docker one can set up a
 Once virtual environment is set up, you should install Dorieh packages
 in it with the following command:
 
-    pip install git+https://github.com/NSAPH-Data-Platform/nsaph-core-platform.git@develop
+    pip install git+https://github.com/ForomePlatform/nsaph-core-platform.git@develop
 
 
 ### Setup DBMS Server
@@ -58,7 +58,7 @@ the pipeline does not require the data warehouse.
           
 Dorieh uses database.ini type file to manage connections
 to data warehouse. The format described in
-[documentation](SampleQuery.md#create-connection-definition-file).
+[documentation](DBConnections.md).
 
 If the file with database connections does not exist, you 
 need to create one. For example, named database.ini somewhere

@@ -24,6 +24,8 @@ class: CommandLineTool
 baseCommand: [python, -m, dorieh.platform.dbt.dbt_runner]
 requirements:
   InlineJavascriptRequirement: {}
+  NetworkAccess:
+    networkAccess: True
 
 doc: |
   Executes a test script from a given SQL file.

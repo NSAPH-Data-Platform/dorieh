@@ -48,7 +48,16 @@ class DBConnectionConfig(Context):
         aliases=["connection_name"],
         help = "Section in the database connection parameters file",
         type = str,
-        default = "nsaph2",
+        default = "dorieh",
+        cardinality = Cardinality.single
+    )
+
+    _location = Argument(
+        "location",
+        aliases=["path", "p", "l"],
+        help = "URI or path to file(s) or directory containing data (e.g., in Parquet format). Wildcards are supported",
+        required = False,
+        type = str,
         cardinality = Cardinality.single
     )
 
@@ -75,6 +84,9 @@ class DBConnectionConfig(Context):
 
         self.connection = None
         ''' Section in the database connection parameters file '''
+
+        self.location = None
+        ''' URI or path to file(s) or directory containing data (e.g., in Parquet format). Wildcards are supported '''
 
         self.verbose = None
         ''' Generate verbose output '''

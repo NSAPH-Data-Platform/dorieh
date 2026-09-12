@@ -1,0 +1,22 @@
+# Column cms.medpar_2015.SPCLUNIT
+
+## Overview of column SPCLUNIT in table cms.medpar_2015 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2015](../cms.medpar_2015.md)           |
+| Qualified name                | cms.medpar_2015.SPCLUNIT  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/provider-number-special-unit-code](https://resdac.org/cms-data/variables/provider-number-special-unit-code) |
+
+
+Special num system code for hosp units that are PPS/SNF SB dsgntn excl.
+
+| Key | Value |
+| --- | ----- |
+| long_name | PRVDR_NUM_SPCL_UNIT_CD |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

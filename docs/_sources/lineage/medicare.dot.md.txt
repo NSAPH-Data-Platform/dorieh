@@ -1,0 +1,57 @@
+# Table Lineage Diagram
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+medicare.dot_svg_envelop.md
+tables/cms.mbsf_ab_2011.md
+tables/cms.mbsf_ab_2012.md
+tables/cms.mbsf_ab_2013.md
+tables/cms.mbsf_ab_2014.md
+tables/cms.mbsf_abcd_2015.md
+tables/cms.mbsf_abcd_2016.md
+tables/cms.mbsf_abcd_2017.md
+tables/cms.mbsf_abcd_2018.md
+tables/cms.mbsf_d_2011.md
+tables/cms.mbsf_d_2012.md
+tables/cms.mbsf_d_2013.md
+tables/cms.mbsf_d_2014.md
+tables/cms.medpar_2011.md
+tables/cms.medpar_2012.md
+tables/cms.medpar_2013.md
+tables/cms.medpar_2014.md
+tables/cms.medpar_2015.md
+tables/cms.medpar_2016.md
+tables/cms.medpar_2017.md
+tables/cms.medpar_2018.md
+tables/medicare._beneficiaries.md
+tables/medicare._enrollments.md
+tables/medicare._ps.md
+tables/medicare.admissions.md
+tables/medicare.beneficiaries.md
+tables/medicare.enrollments.md
+tables/medicare.ip.md
+tables/medicare.mbsf_d.md
+tables/medicare.ps.md
+tables/medicare.qc_adm_union.md
+tables/medicare.qc_admissions.md
+tables/medicare.qc_enrl_bene.md
+tables/medicare.qc_enrollments.md
+```
+
+
+
+```{figure} medicare.dot.svg
+:align: center
+:alt: Table Lineage Diagram
+:target: medicare.dot_svg_envelop.html
+
+Diagram illustrating data flow during transformations
+
+```
+
+

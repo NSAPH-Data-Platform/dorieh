@@ -15,7 +15,7 @@ For example, in the following code we want to see all available variables for `a
 
 .. code-block:: python3
      
-    from census.census_info import get_varlist
+    from dorieh.census.census_info import get_varlist
 
     varlist = get_varlist(2011, "acs1")
     print(f"{Number of downloaded variables: len(varlist)}")

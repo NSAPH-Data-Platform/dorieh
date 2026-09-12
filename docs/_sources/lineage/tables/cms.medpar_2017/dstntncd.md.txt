@@ -1,0 +1,22 @@
+# Column cms.medpar_2017.DSTNTNCD
+
+## Overview of column DSTNTNCD in table cms.medpar_2017 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2017](../cms.medpar_2017.md)           |
+| Qualified name                | cms.medpar_2017.DSTNTNCD  |
+| Datatype                      | VARCHAR(2)        |
+| Reference | [https://resdac.org/cms-data/variables/medpar-discharge-destination-code](https://resdac.org/cms-data/variables/medpar-discharge-destination-code) |
+
+
+Destination upon discharge from facility code
+
+| Key | Value |
+| --- | ----- |
+| long_name | DSCHRG_DSTNTN_CD |
+| original_type | CHAR |
+| width | 2.0 |
+
+
+

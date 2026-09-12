@@ -1,6 +1,6 @@
 """
 Utility to execute SQL statement or statements taken from
-command line arguments
+command line arguments in an instance of PostgreSQL
 """
 
 #  Copyright (c) 2022. Harvard University
@@ -32,6 +32,11 @@ def execute(args):
     with Connection(args.db, args.connection) as cnxn:
         with cnxn.cursor() as cursor:
             cursor.execute(sql)
+            if cursor.pgresult_ptr is not None:
+                for row in cursor:
+                    print(row)
+            else:
+                print("No results")
         cnxn.commit()
 
 

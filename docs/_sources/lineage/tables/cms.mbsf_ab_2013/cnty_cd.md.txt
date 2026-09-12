@@ -1,0 +1,22 @@
+# Column cms.mbsf_ab_2013.CNTY_CD
+
+## Overview of column CNTY_CD in table cms.mbsf_ab_2013 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_ab_2013](../cms.mbsf_ab_2013.md)           |
+| Qualified name                | cms.mbsf_ab_2013.CNTY_CD  |
+| Datatype                      | VARCHAR(3)        |
+| Reference | [https://resdac.org/sites/datadocumentation.resdac.org/files/Introduction%20to%20DE-SynPUF%20%28Slides%29.pdf](https://resdac.org/sites/datadocumentation.resdac.org/files/Introduction%20to%20DE-SynPUF%20%28Slides%29.pdf) |
+
+
+County Code
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_COUNTY_CD |
+| original_type | CHAR |
+| width | 3.0 |
+
+
+

@@ -1,0 +1,22 @@
+# Column cms.medpar_2013.POA_DGNS_21_IND_CD
+
+## Overview of column POA_DGNS_21_IND_CD in table cms.medpar_2013 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2013](../cms.medpar_2013.md)           |
+| Qualified name                | cms.medpar_2013.POA_DGNS_21_IND_CD  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/medpar-diagnosis-present-admission-indicator-21](https://resdac.org/cms-data/variables/medpar-diagnosis-present-admission-indicator-21) |
+
+
+Diagnosis Present on Admission Indicator 21
+
+| Key | Value |
+| --- | ----- |
+| long_name | POA_DGNS_21_IND_CD |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

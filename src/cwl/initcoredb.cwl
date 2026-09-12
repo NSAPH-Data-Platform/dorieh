@@ -24,6 +24,8 @@ class: CommandLineTool
 baseCommand: [python, -m, dorieh.platform.util.init_core_db]
 requirements:
   InlineJavascriptRequirement: {}
+  NetworkAccess:
+    networkAccess: True
 
 doc: |
   This tool ensures that PgPL/SQL functions are updated to the latest

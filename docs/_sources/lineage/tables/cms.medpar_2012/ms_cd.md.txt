@@ -1,0 +1,22 @@
+# Column cms.medpar_2012.MS_CD
+
+## Overview of column MS_CD in table cms.medpar_2012 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2012](../cms.medpar_2012.md)           |
+| Qualified name                | cms.medpar_2012.MS_CD  |
+| Datatype                      | VARCHAR(2)        |
+| Reference | [https://resdac.org/cms-data/variables/reason-entitlement-medicare-benefits-clmthrudt](https://resdac.org/cms-data/variables/reason-entitlement-medicare-benefits-clmthrudt) |
+
+
+Reason for entitlement to Medicare benefits as of CLM_THRU_DT
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_MDCR_STUS_CD |
+| original_type | CHAR |
+| width | 2.0 |
+
+
+

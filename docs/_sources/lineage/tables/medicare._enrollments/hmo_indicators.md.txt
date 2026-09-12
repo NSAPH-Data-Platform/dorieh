@@ -1,0 +1,39 @@
+# Column medicare._enrollments.hmo_indicators
+
+## Overview of column hmo_indicators in table medicare._enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare._enrollments](../medicare._enrollments.md)           |
+| Qualified name                | medicare._enrollments.hmo_indicators  |
+| Datatype                      | string        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT MAX(hmo_indicators)
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+hmo_indicators_svg_envelop.md
+```
+
+
+```{figure} hmo_indicators.svg
+:align: center
+:alt: Column medicare._enrollments.hmo_indicators Lineage SVG
+:target: hmo_indicators_svg_envelop.html
+
+Data lineage for column medicare._enrollments.hmo_indicators
+
+```
+
+

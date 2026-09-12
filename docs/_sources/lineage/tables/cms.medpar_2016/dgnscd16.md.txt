@@ -1,0 +1,22 @@
+# Column cms.medpar_2016.DGNSCD16
+
+## Overview of column DGNSCD16 in table cms.medpar_2016 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2016](../cms.medpar_2016.md)           |
+| Qualified name                | cms.medpar_2016.DGNSCD16  |
+| Datatype                      | VARCHAR(7)        |
+| Reference | [https://resdac.org/cms-data/variables/medpar-icd-9-cm-diagnosis-code-16](https://resdac.org/cms-data/variables/medpar-icd-9-cm-diagnosis-code-16) |
+
+
+ICD-9-CM Diagnosis code XVI
+
+| Key | Value |
+| --- | ----- |
+| long_name | DGNS_16_CD |
+| original_type | CHAR |
+| width | 7.0 |
+
+
+

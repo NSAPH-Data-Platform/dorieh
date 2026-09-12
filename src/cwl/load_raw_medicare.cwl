@@ -24,6 +24,8 @@ class: CommandLineTool
 baseCommand: [python, -m, dorieh.cms.tools.mcr_fts2db]
 requirements:
   InlineJavascriptRequirement: {}
+  NetworkAccess:
+    networkAccess: True
 
 doc: |
   This tool loads CMS Medicare data from *.dat files accompanied by FTS

@@ -1,0 +1,22 @@
+# Column cms.medpar_2011.STATE_CD
+
+## Overview of column STATE_CD in table cms.medpar_2011 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2011](../cms.medpar_2011.md)           |
+| Qualified name                | cms.medpar_2011.STATE_CD  |
+| Datatype                      | VARCHAR(2)        |
+| Reference | [https://resdac.org/cms-data/variables/state-code-beneficiary-ssa-code](https://resdac.org/cms-data/variables/state-code-beneficiary-ssa-code) |
+
+
+SSA standard state code of a beneficiarys residence.
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_RSDNC_SSA_STATE_CD |
+| original_type | CHAR |
+| width | 2.0 |
+
+
+

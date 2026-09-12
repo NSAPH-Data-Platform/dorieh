@@ -1,0 +1,22 @@
+# Column cms.medpar_2016.ONCLGYSW
+
+## Overview of column ONCLGYSW in table cms.medpar_2016 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2016](../cms.medpar_2016.md)           |
+| Qualified name                | cms.medpar_2016.ONCLGYSW  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/oncology-indicator](https://resdac.org/cms-data/variables/oncology-indicator) |
+
+
+Radiology oncology services indicator
+
+| Key | Value |
+| --- | ----- |
+| long_name | RDLGY_ONCLGY_IND_SW |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

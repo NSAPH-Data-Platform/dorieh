@@ -1,0 +1,39 @@
+# Column medicare.qc_enrollments.state_iso
+
+## Overview of column state_iso in table medicare.qc_enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_enrollments](../medicare.qc_enrollments.md)           |
+| Qualified name                | medicare.qc_enrollments.state_iso  |
+| Datatype                      | CHAR(5)        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT MAX(state_iso)
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+state_iso_svg_envelop.md
+```
+
+
+```{figure} state_iso.svg
+:align: center
+:alt: Column medicare.qc_enrollments.state_iso Lineage SVG
+:target: state_iso_svg_envelop.html
+
+Data lineage for column medicare.qc_enrollments.state_iso
+
+```
+
+

@@ -1,0 +1,31 @@
+# Column medicare.ip.diag19
+
+## Overview of column diag19 in table medicare.ip 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.ip](../medicare.ip.md)           |
+| Qualified name                | medicare.ip.diag19  |
+| Datatype                      | varchar        |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+diag19_svg_envelop.md
+```
+
+
+```{figure} diag19.svg
+:align: center
+:alt: Column medicare.ip.diag19 Lineage SVG
+:target: diag19_svg_envelop.html
+
+Data lineage for column medicare.ip.diag19
+
+```
+
+

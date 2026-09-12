@@ -1,0 +1,392 @@
+table_name: beneficiaries
+main_dttm_col: dob
+description: null
+default_endpoint: null
+offset: 0
+cache_timeout: 86400
+schema: medicare
+sql: ''
+params:
+  database_name: DORIEH2
+template_params: null
+filter_select_enabled: false
+fetch_values_predicate: null
+extra: null
+normalize_columns: false
+always_filter_main_dttm: false
+uuid: 80bf97c0-f153-5252-a115-c1f0566180c6
+metrics:
+- metric_name: count
+  verbose_name: COUNT(*)
+  metric_type: count
+  expression: COUNT(*)
+  description: null
+  d3format: null
+  currency: null
+  extra:
+    warning_markdown: ''
+  warning_text: null
+- metric_name: approximate_count
+  verbose_name: ''
+  metric_type: null
+  expression: (public.hll_cardinality(public.hll_add_agg(bene)))::INT
+  description: null
+  d3format: null
+  currency: null
+  extra:
+    warning_markdown: ''
+  warning_text: null
+columns:
+- column_name: Consistency
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: null
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: "CASE WHEN \n    dod_earliest is not NULL\n    OR dob_latest is not\
+    \ NULL\n    OR sex LIKE '%,%'\n    OR race LIKE '%,%'\n    THEN 'Ambiguous' \n\
+    \  WHEN  dob is NULL THEN 'Missing DOB'\n  ELSE 'Consistent' END"
+  description: null
+  python_date_format: null
+  extra: {}
+- column_name: dob_diff_in_decades
+  verbose_name: Days
+  is_dttm: false
+  is_active: true
+  type: null
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: "CASE WHEN dob_latest is NULL THEN NULL ELSE \n        ((dob_latest\
+    \ - dob) / 10) * 10\n    END"
+  description: Differences between dob records in 10 days incrememnts
+  python_date_format: null
+  extra: {}
+- column_name: DOB_diff
+  verbose_name: diff_in_dob
+  is_dttm: true
+  is_active: true
+  type: null
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: CASE WHEN dob_latest is NULL THEN NULL ELSE age(dob_latest, dob) END
+  description: Difference between the earliest and latest recorded DOB
+  python_date_format: null
+  extra: {}
+- column_name: dob_diff_days
+  verbose_name: dob_diff_in_days
+  is_dttm: false
+  is_active: true
+  type: null
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: CASE WHEN dob_latest is NULL THEN NULL ELSE (dob_latest - dob) END
+  description: null
+  python_date_format: null
+  extra: {}
+- column_name: AmbiguousDOB
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: null
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: 'CASE WHEN dob_latest is not NULL THEN ''Ambiguous DOB'' end '
+  description: null
+  python_date_format: null
+  extra: {}
+- column_name: AmbiguousDOD
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: null
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: 'CASE WHEN dod_earliest is not NULL THEN ''Ambiguous DOD'' end '
+  description: null
+  python_date_format: null
+  extra: {}
+- column_name: AmbiguousSex
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: null
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: CASE WHEN sex LIKE '%,%' THEN 'Ambiguous Sex'  End
+  description: null
+  python_date_format: null
+  extra: {}
+- column_name: MissingDOB
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: null
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: 'CASE WHEN DOB is NULL THEN ''Missing DOB'' end '
+  description: null
+  python_date_format: null
+  extra: {}
+- column_name: AmbiguousRace
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: null
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: CASE WHEN race LIKE '%,%' THEN 'Ambiguous Race' End
+  description: null
+  python_date_format: null
+  extra: {}
+- column_name: enrollment_period
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: null
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: last_enrollment_year - first_enrollment_year + 1
+  description: null
+  python_date_format: null
+  extra: {}
+- column_name: num_enrollment_years
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: null
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: CARDINALITY(ARRAY (SELECT DISTINCT UNNEST(all_enrollment_years)))
+  description: null
+  python_date_format: null
+  extra: {}
+- column_name: yob1
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: null
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: EXTRACT (YEAR FROM dob)
+  description: null
+  python_date_format: null
+  extra: {}
+- column_name: bene_id
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: VARCHAR
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  extra: {}
+- column_name: dob_latest
+  verbose_name: null
+  is_dttm: true
+  is_active: true
+  type: DATE
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  extra: {}
+- column_name: dod_earliest
+  verbose_name: null
+  is_dttm: true
+  is_active: true
+  type: DATE
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  extra: {}
+- column_name: dob
+  verbose_name: null
+  is_dttm: true
+  is_active: true
+  type: DATE
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  extra: {}
+- column_name: dod
+  verbose_name: null
+  is_dttm: true
+  is_active: true
+  type: DATE
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  extra: {}
+- column_name: discrepancies
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: BIGINT
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  extra: {}
+- column_name: all_enrollment_years
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: INTEGER[]
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  extra: {}
+- column_name: number_of_gap_years
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: INTEGER
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  extra: {}
+- column_name: yob_latest
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: INTEGER
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  extra: {}
+- column_name: yob
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: INTEGER
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  extra: {}
+- column_name: orec
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: INTEGER
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  extra: {}
+- column_name: last_enrollment_year
+  verbose_name: null
+  is_dttm: true
+  is_active: true
+  type: INTEGER
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  extra: {}
+- column_name: first_enrollment_year
+  verbose_name: null
+  is_dttm: true
+  is_active: true
+  type: INTEGER
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  extra: {}
+- column_name: race_rti
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: TEXT
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  extra: {}
+- column_name: race
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: TEXT
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  extra: {}
+- column_name: sex
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: TEXT
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  extra: {}
+- column_name: bene
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: UNKNOWN
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  extra: {}
+version: 1.0.0
+database_uuid: 8ac67aae-57e2-4e55-8436-4443320e3798

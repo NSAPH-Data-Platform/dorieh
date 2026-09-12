@@ -16,7 +16,7 @@
 * [random_selector](members/random_selector.rst) Selects random lines
   from a CSV-like file
 * [random_selector](members/mcr_create_test_data) Selects random lines
-  from a set of CMS files described by an [FTS file](../../../fts)
+  from a set of CMS files described by an [FTS file](fts.md)
 * [medicare data loader](members/mcr_data_loader.rst)  Subclass of generic 
     [Data Loader](members/data_loader.rst) 
     aware of the raw Medicare CMS
@@ -26,11 +26,11 @@
 ## Package dorieh.cms.tools 
 
 * [CMS Test data generator](members/mcr_create_test_data) Selects random lines
-  from a set of CMS files described by an [FTS file](../../../fts)
+  from a set of CMS files described by an [FTS file](fts.md)
 * [mcr_combine_tables](members/mcr_combine_tables.rst) Command-line
     tool to combine disparate tables with raw medicare CMS data
     into a single consolidated view. 
-    See [details](Medicare.md#combining-raw-files-into-a-single-view)
+    See [details](Medicare.md#combining-raw-files-into-unified-views)
 * [medpar_converter](members/medpar_converter.rst) Converter for CMS `DAT` 
     files described by `FTS` to `CSV`
 * [mcr_file](members/mcr_file.rst) Module to manipulate with a single

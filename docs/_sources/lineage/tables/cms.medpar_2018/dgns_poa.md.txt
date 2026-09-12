@@ -1,0 +1,22 @@
+# Column cms.medpar_2018.DGNS_POA
+
+## Overview of column DGNS_POA in table cms.medpar_2018 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2018](../cms.medpar_2018.md)           |
+| Qualified name                | cms.medpar_2018.DGNS_POA  |
+| Datatype                      | VARCHAR(10)        |
+| Reference | [https://resdac.org/cms-data/variables/diagnosis-code-poa-array](https://resdac.org/cms-data/variables/diagnosis-code-poa-array) |
+
+
+Diagnosis Code POA Array
+
+| Key | Value |
+| --- | ----- |
+| long_name | DGNS_POA_CD |
+| original_type | CHAR |
+| width | 10.0 |
+
+
+

@@ -1,0 +1,41 @@
+# Column medicare.admissions.admission_date
+
+## Overview of column admission_date in table medicare.admissions 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.admissions](../medicare.admissions.md)           |
+| Qualified name                | medicare.admissions.admission_date  |
+| Datatype                      | DATE        |
+| Column type | copied |
+
+
+
+### Casts:
+
+| Original type | Cast expression      |
+| ------------- | -------------------- |
+| character varying | public.parse_date({column_name}) |
+| numeric | public.parse_date({column_name}) |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+admission_date_svg_envelop.md
+```
+
+
+```{figure} admission_date.svg
+:align: center
+:alt: Column medicare.admissions.admission_date Lineage SVG
+:target: admission_date_svg_envelop.html
+
+Data lineage for column medicare.admissions.admission_date
+
+```
+
+

@@ -1,0 +1,52 @@
+# Column medicare._enrollments.curec_latest
+
+## Overview of column curec_latest in table medicare._enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare._enrollments](../medicare._enrollments.md)           |
+| Qualified name                | medicare._enrollments.curec_latest  |
+| Datatype                      | string        |
+| Column type | computed |
+
+
+Non-null only when duplicate source records disagree on CUREC
+within a (bene_id, year, state) group. Drives consistent_curec.
+Defensive / future-proofing: this multiplicity does not occur in
+the synthetic dataset (every group is a single row) but can arise
+in real Medicare data from overlapping or reissued MBSF files,
+where MAX(curec) would otherwise silently pick one value.
+
+
+
+
+
+## Expressions
+
+```sql
+SELECT CASE
+  WHEN MIN(curec) <> MAX(curec) THEN MAX(curec)
+END
+
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+curec_latest_svg_envelop.md
+```
+
+
+```{figure} curec_latest.svg
+:align: center
+:alt: Column medicare._enrollments.curec_latest Lineage SVG
+:target: curec_latest_svg_envelop.html
+
+Data lineage for column medicare._enrollments.curec_latest
+
+```
+
+

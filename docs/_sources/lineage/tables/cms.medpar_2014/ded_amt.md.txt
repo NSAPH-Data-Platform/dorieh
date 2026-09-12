@@ -1,0 +1,22 @@
+# Column cms.medpar_2014.DED_AMT
+
+## Overview of column DED_AMT in table cms.medpar_2014 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2014](../cms.medpar_2014.md)           |
+| Qualified name                | cms.medpar_2014.DED_AMT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/beneficiarys-liability-deductible-stay](https://resdac.org/cms-data/variables/beneficiarys-liability-deductible-stay) |
+
+
+Beneficiarys liability for stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_IP_DDCTBL_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

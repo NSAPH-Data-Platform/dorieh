@@ -1,0 +1,22 @@
+# Column cms.mbsf_ab_2014.BENE_ZIP
+
+## Overview of column BENE_ZIP in table cms.mbsf_ab_2014 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_ab_2014](../cms.mbsf_ab_2014.md)           |
+| Qualified name                | cms.mbsf_ab_2014.BENE_ZIP  |
+| Datatype                      | VARCHAR(9)        |
+| Reference | [https://resdac.org/cms-data/variables/zip-code-beneficiary-home-or-mailing-address-latest-year](https://resdac.org/cms-data/variables/zip-code-beneficiary-home-or-mailing-address-latest-year) |
+
+
+Zip Code of Residence
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_ZIP_CD |
+| original_type | CHAR |
+| width | 9.0 |
+
+
+

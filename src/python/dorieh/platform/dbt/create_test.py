@@ -21,6 +21,12 @@ Individual queries are separated by a comment strings:
 
 so a test runner can execute them individually if desired
 
+Note that the generated queries pin the expected values (MD5 hashes,
+distinct counts, means and variances) to the table content at the time
+of generation: if an upstream data source legitimately revises its data,
+previously generated test scripts become stale and must be regenerated
+by re-running this tool against a freshly loaded database.
+
 """
 #  Copyright (c) 2021. Harvard University
 #

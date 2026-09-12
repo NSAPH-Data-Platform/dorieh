@@ -1,0 +1,22 @@
+# Column cms.medpar_2013.PRCDRSW
+
+## Overview of column PRCDRSW in table cms.medpar_2013 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2013](../cms.medpar_2013.md)           |
+| Qualified name                | cms.medpar_2013.PRCDRSW  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/surgical-procedure-indicator](https://resdac.org/cms-data/variables/surgical-procedure-indicator) |
+
+
+Surgical procedures indicator
+
+| Key | Value |
+| --- | ----- |
+| long_name | SRGCL_PRCDR_IND_SW |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

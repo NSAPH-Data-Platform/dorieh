@@ -1,0 +1,43 @@
+slice_name: Filter
+description: null
+certified_by: null
+certification_details: null
+viz_type: filter_box
+params:
+  adhoc_filters: []
+  date_filter: false
+  extra_form_data: {}
+  filter_configs:
+  - asc: true
+    clearable: true
+    column: year
+    key: yYI3GzVxE
+    multiple: true
+    searchAllOptions: false
+  - asc: true
+    clearable: true
+    column: state_iso
+    key: hMwRqVj0s
+    label: state
+    multiple: true
+    searchAllOptions: false
+  granularity_sqla: null
+  instant_filtering: true
+  slice_id: 39
+  time_grain_sqla: P1D
+  time_range: No filter
+  time_range_endpoints:
+  - inclusive
+  - exclusive
+  url_params: {}
+  viz_type: filter_box
+  datasource_name: qc_admissions
+  schema: medicare
+  database_name: DORIEH2
+  datasource: 15__table
+  annotation_layers: []
+query_context: null
+cache_timeout: null
+uuid: f0be4d3e-7034-59e3-af53-d3363f0a766a
+version: 1.0.0
+dataset_uuid: 2a27c90f-3df0-57b4-9f7c-a0f8b61e9c6e

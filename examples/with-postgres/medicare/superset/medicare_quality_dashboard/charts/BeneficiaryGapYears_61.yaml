@@ -1,0 +1,63 @@
+slice_name: BeneficiaryGapYears
+description: null
+certified_by: null
+certification_details: null
+viz_type: dist_bar
+params:
+  adhoc_filters:
+  - clause: WHERE
+    comparator: '2015'
+    expressionType: SIMPLE
+    filterOptionName: filter_7ohofln7x4_zc4vdf8uc7j
+    isExtra: false
+    isNew: false
+    operator: <
+    operatorId: LESS_THAN
+    sqlExpression: null
+    subject: last_enrollment_year
+  - clause: WHERE
+    comparator: '0'
+    expressionType: SIMPLE
+    filterOptionName: filter_m9h6v1xckg9_xj92elnx2vn
+    isExtra: false
+    isNew: false
+    operator: '>'
+    operatorId: GREATER_THAN
+    sqlExpression: null
+    subject: number_of_gap_years
+  bar_stacked: true
+  bottom_margin: auto
+  color_scheme: supersetColors
+  columns:
+  - orec
+  extra_form_data: {}
+  granularity_sqla: dob
+  groupby:
+  - number_of_gap_years
+  metrics:
+  - count
+  order_desc: true
+  row_limit: 10000
+  show_legend: true
+  slice_id: 44
+  time_range: No filter
+  time_range_endpoints:
+  - inclusive
+  - exclusive
+  url_params: {}
+  viz_type: dist_bar
+  x_ticks_layout: auto
+  y_axis_bounds:
+  - null
+  - null
+  y_axis_format: SMART_NUMBER
+  datasource_name: beneficiaries
+  schema: medicare
+  database_name: DORIEH2
+  datasource: 13__table
+  annotation_layers: []
+query_context: null
+cache_timeout: null
+uuid: bb894a3c-8b54-5dbc-96d5-1f19bd6e6ebf
+version: 1.0.0
+dataset_uuid: 80bf97c0-f153-5252-a115-c1f0566180c6

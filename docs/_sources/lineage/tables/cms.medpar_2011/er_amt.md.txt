@@ -1,0 +1,22 @@
+# Column cms.medpar_2011.ER_AMT
+
+## Overview of column ER_AMT in table cms.medpar_2011 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2011](../cms.medpar_2011.md)           |
+| Qualified name                | cms.medpar_2011.ER_AMT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/emergency-room-er-charge-amount](https://resdac.org/cms-data/variables/emergency-room-er-charge-amount) |
+
+
+Emergency room services provided during beneficiarys stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | ER_CHRG_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

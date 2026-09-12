@@ -1,0 +1,39 @@
+# Column medicare._ps.yob
+
+## Overview of column yob in table medicare._ps 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare._ps](../medicare._ps.md)           |
+| Qualified name                | medicare._ps.yob  |
+| Datatype                      | string        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT CASE WHEN age is not NULL THEN (year - age) ELSE NULL END as yob
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+yob_svg_envelop.md
+```
+
+
+```{figure} yob.svg
+:align: center
+:alt: Column medicare._ps.yob Lineage SVG
+:target: yob_svg_envelop.html
+
+Data lineage for column medicare._ps.yob
+
+```
+
+

@@ -1,0 +1,34 @@
+# Column medicare.qc_enrl_bene.consistent_orec
+
+## Overview of column consistent_orec in table medicare.qc_enrl_bene 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_enrl_bene](../medicare.qc_enrl_bene.md)           |
+| Qualified name                | medicare.qc_enrl_bene.consistent_orec  |
+| Datatype                      | VARCHAR(12)        |
+| Column type | computed |
+
+
+QC flag for OREC (Original Reason for Entitlement) consistency
+across the beneficiary's records. AMBIGUOUS means OREC changed
+over the years, which should not happen for a genuine "original"
+code and indicates a data-quality issue. Mirrors consistent_dob /
+consistent_dod.
+
+
+
+
+
+## Expressions
+
+```sql
+SELECT (CASE
+  WHEN orec IS NULL THEN 'MISSING'
+  WHEN orec_latest IS NOT NULL THEN 'AMBIGUOUS'
+  ELSE 'CONSISTENT'
+END)
+
+```
+
+

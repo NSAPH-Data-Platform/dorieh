@@ -1,0 +1,41 @@
+# Export a table or a query result to a file system
+
+
+ [Source code](exportcwl_src.md) 
+
+
+```{contents}
+---
+local:
+---
+```
+
+**Tool**. Runs: [dorieh.platform.util.pg_export](../members/pg_export)
+
+## Description
+
+This tool builds all indices for the specified table.
+Log file displays real-time progress of building indices
+
+
+## Inputs
+
+| Name            | Type      | Default | Description                                                      | 
+|:----------------|:----------|:--------|:-----------------------------------------------------------------|
+| table           | string?   |         | the name of the table                                            | 
+| sql             | string?   |         | SQL query                                                        | 
+| partition       | string[]? |         | List of columns to be used for partitioning                      | 
+| output          | string    |         | the name of the newly created file or directory                  | 
+| format          | string    |         | Format of the export, one of jsonl, parquet, csv, hdf5           | 
+| database        | File      |         | Path to database connection file, usually database.ini           | 
+| connection_name | string    |         | The name of the section in the database.ini file                 | 
+| depends_on      | Any?      |         | a special field used to enforce dependencies and execution order | 
+
+## Outputs
+
+| Name   | Type   | Description | 
+|:-------|:-------|:------------|
+| data   | ['File', 'Directory'] |             | 
+| log    | File   |             | 
+| errors | stderr |             | 
+

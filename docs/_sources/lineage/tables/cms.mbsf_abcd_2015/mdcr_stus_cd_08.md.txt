@@ -1,0 +1,22 @@
+# Column cms.mbsf_abcd_2015.MDCR_STUS_CD_08
+
+## Overview of column MDCR_STUS_CD_08 in table cms.mbsf_abcd_2015 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_abcd_2015](../cms.mbsf_abcd_2015.md)           |
+| Qualified name                | cms.mbsf_abcd_2015.MDCR_STUS_CD_08  |
+| Datatype                      | VARCHAR(2)        |
+| Reference | [https://resdac.org/cms-data/variables/medicare-status-code-august](https://resdac.org/cms-data/variables/medicare-status-code-august) |
+
+
+Medicare Status Code: August
+
+| Key | Value |
+| --- | ----- |
+| long_name | MDCR_STATUS_CODE_08 |
+| original_type | CHAR |
+| width | 2.0 |
+
+
+

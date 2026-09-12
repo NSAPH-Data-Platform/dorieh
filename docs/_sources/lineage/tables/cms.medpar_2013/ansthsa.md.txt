@@ -1,0 +1,22 @@
+# Column cms.medpar_2013.ANSTHSA
+
+## Overview of column ANSTHSA in table cms.medpar_2013 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2013](../cms.medpar_2013.md)           |
+| Qualified name                | cms.medpar_2013.ANSTHSA  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/anesthesia-charge-amount](https://resdac.org/cms-data/variables/anesthesia-charge-amount) |
+
+
+Anesthesia services provided during beneficiarys stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | ANSTHSA_CHRG_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

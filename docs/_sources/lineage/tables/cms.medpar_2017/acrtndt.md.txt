@@ -1,0 +1,22 @@
+# Column cms.medpar_2017.ACRTNDT
+
+## Overview of column ACRTNDT in table cms.medpar_2017 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2017](../cms.medpar_2017.md)           |
+| Qualified name                | cms.medpar_2017.ACRTNDT  |
+| Datatype                      | DATE        |
+| Reference | [https://resdac.org/cms-data/variables/latest-claim-accretion-date](https://resdac.org/cms-data/variables/latest-claim-accretion-date) |
+
+
+Date latest claim incl in stay accreted to bene mstr rec at the CWF host
+
+| Key | Value |
+| --- | ----- |
+| long_name | LTST_CLM_ACRTN_DT |
+| original_type | DATE |
+| width | 8.0 |
+
+
+

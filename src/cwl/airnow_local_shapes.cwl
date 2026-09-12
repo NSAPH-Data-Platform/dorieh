@@ -32,6 +32,12 @@ doc: |
   servers, introspects it to infer the database schema
   and ingests the data into the database
 
+  Starting with version 0.5.0, the workflow initializes the database
+  (via initcoredb.cwl) before ingesting the data, hence it can be run
+  against a pristine, empty database. Earlier versions required the
+  database to be initialized beforehand (e.g., by running another
+  pipeline first).
+
 inputs:
   proxy:
     type: string?
@@ -92,10 +98,21 @@ steps:
         valueFrom: epa.yaml
     out: [log, model]
 
+  initdb:
+    run: initcoredb.cwl
+    doc: Ensure that database utilities are at their latest version
+    in:
+      database: database
+      connection_name: connection_name
+    out:
+      - log
+      - err
+
   ingest:
     run: ingest.cwl
     doc: Uploads data into the database
     in:
+      depends_on: initdb/log
       registry: introspect/model
       domain:
         valueFrom: "epa"

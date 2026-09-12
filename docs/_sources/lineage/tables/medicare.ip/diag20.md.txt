@@ -1,0 +1,31 @@
+# Column medicare.ip.diag20
+
+## Overview of column diag20 in table medicare.ip 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.ip](../medicare.ip.md)           |
+| Qualified name                | medicare.ip.diag20  |
+| Datatype                      | varchar        |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+diag20_svg_envelop.md
+```
+
+
+```{figure} diag20.svg
+:align: center
+:alt: Column medicare.ip.diag20 Lineage SVG
+:target: diag20_svg_envelop.html
+
+Data lineage for column medicare.ip.diag20
+
+```
+
+

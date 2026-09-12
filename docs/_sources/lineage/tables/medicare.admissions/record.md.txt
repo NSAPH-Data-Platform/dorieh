@@ -1,0 +1,32 @@
+# Column medicare.admissions.record
+
+## Overview of column record in table medicare.admissions 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.admissions](../medicare.admissions.md)           |
+| Qualified name                | medicare.admissions.record  |
+| Datatype                      | string        |
+| Column type | copied |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+record_svg_envelop.md
+```
+
+
+```{figure} record.svg
+:align: center
+:alt: Column medicare.admissions.record Lineage SVG
+:target: record_svg_envelop.html
+
+Data lineage for column medicare.admissions.record
+
+```
+
+

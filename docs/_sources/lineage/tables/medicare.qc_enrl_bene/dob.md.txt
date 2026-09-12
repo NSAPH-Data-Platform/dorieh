@@ -1,0 +1,39 @@
+# Column medicare.qc_enrl_bene.dob
+
+## Overview of column dob in table medicare.qc_enrl_bene 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_enrl_bene](../medicare.qc_enrl_bene.md)           |
+| Qualified name                | medicare.qc_enrl_bene.dob  |
+| Datatype                      | string        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT MIN(dob)
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+dob_svg_envelop.md
+```
+
+
+```{figure} dob.svg
+:align: center
+:alt: Column medicare.qc_enrl_bene.dob Lineage SVG
+:target: dob_svg_envelop.html
+
+Data lineage for column medicare.qc_enrl_bene.dob
+
+```
+
+

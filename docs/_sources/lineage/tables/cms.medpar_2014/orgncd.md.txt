@@ -1,0 +1,22 @@
+# Column cms.medpar_2014.ORGNCD
+
+## Overview of column ORGNCD in table cms.medpar_2014 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2014](../cms.medpar_2014.md)           |
+| Qualified name                | cms.medpar_2014.ORGNCD  |
+| Datatype                      | VARCHAR(2)        |
+| Reference | [https://resdac.org/cms-data/variables/organ-acquisition-type-code](https://resdac.org/cms-data/variables/organ-acquisition-type-code) |
+
+
+Organ acquisition type code
+
+| Key | Value |
+| --- | ----- |
+| long_name | ORGN_ACQSTN_IND_CD |
+| original_type | CHAR |
+| width | 2.0 |
+
+
+

@@ -1,0 +1,20 @@
+# Column medicare.qc_adm_union.state_iso
+
+## Overview of column state_iso in table medicare.qc_adm_union 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_adm_union](../medicare.qc_adm_union.md)           |
+| Qualified name                | medicare.qc_adm_union.state_iso  |
+| Datatype                      | char(5)        |
+| Column type | generated |
+
+
+
+## Expressions
+
+```sql
+SELECT GENERATED ALWAYS AS ('US-' || state)  STORED
+```
+
+

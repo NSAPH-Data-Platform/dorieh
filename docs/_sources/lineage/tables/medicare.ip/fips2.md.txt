@@ -1,0 +1,39 @@
+# Column medicare.ip.fips2
+
+## Overview of column fips2 in table medicare.ip 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.ip](../medicare.ip.md)           |
+| Qualified name                | medicare.ip.fips2  |
+| Datatype                      | string        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+(SELECT fips2 FROM public.us_states as s WHERE s.ssa2 = "state")
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+fips2_svg_envelop.md
+```
+
+
+```{figure} fips2.svg
+:align: center
+:alt: Column medicare.ip.fips2 Lineage SVG
+:target: fips2_svg_envelop.html
+
+Data lineage for column medicare.ip.fips2
+
+```
+
+

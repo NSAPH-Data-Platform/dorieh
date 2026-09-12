@@ -1,0 +1,22 @@
+# Column cms.medpar_2011.DGNSCD24
+
+## Overview of column DGNSCD24 in table cms.medpar_2011 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2011](../cms.medpar_2011.md)           |
+| Qualified name                | cms.medpar_2011.DGNSCD24  |
+| Datatype                      | VARCHAR(7)        |
+| Reference | [https://resdac.org/cms-data/variables/medpar-icd-9-cm-diagnosis-code-24](https://resdac.org/cms-data/variables/medpar-icd-9-cm-diagnosis-code-24) |
+
+
+ICD-9-CM Diagnosis code XXIV
+
+| Key | Value |
+| --- | ----- |
+| long_name | DGNS_24_CD |
+| original_type | CHAR |
+| width | 7.0 |
+
+
+

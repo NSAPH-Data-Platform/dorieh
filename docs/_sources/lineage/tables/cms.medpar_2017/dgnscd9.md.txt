@@ -1,0 +1,22 @@
+# Column cms.medpar_2017.DGNSCD9
+
+## Overview of column DGNSCD9 in table cms.medpar_2017 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2017](../cms.medpar_2017.md)           |
+| Qualified name                | cms.medpar_2017.DGNSCD9  |
+| Datatype                      | VARCHAR(7)        |
+| Reference | [https://resdac.org/cms-data/variables/medpar-diagnosis-code-9](https://resdac.org/cms-data/variables/medpar-diagnosis-code-9) |
+
+
+ICD-9-CM Diagnosis code IX
+
+| Key | Value |
+| --- | ----- |
+| long_name | DGNS_9_CD |
+| original_type | CHAR |
+| width | 7.0 |
+
+
+

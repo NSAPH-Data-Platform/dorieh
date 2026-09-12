@@ -1,0 +1,39 @@
+# Column medicare.enrollments.ssa2_list
+
+## Overview of column ssa2_list in table medicare.enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.enrollments](../medicare.enrollments.md)           |
+| Qualified name                | medicare.enrollments.ssa2_list  |
+| Datatype                      | string        |
+| Column type | copied |
+
+
+
+## Expressions
+
+```sql
+SELECT string_agg(distinct ssa2, ',')
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+ssa2_list_svg_envelop.md
+```
+
+
+```{figure} ssa2_list.svg
+:align: center
+:alt: Column medicare.enrollments.ssa2_list Lineage SVG
+:target: ssa2_list_svg_envelop.html
+
+Data lineage for column medicare.enrollments.ssa2_list
+
+```
+
+

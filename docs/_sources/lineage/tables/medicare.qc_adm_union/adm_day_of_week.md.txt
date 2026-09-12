@@ -1,0 +1,41 @@
+# Column medicare.qc_adm_union.adm_day_of_week
+
+## Overview of column adm_day_of_week in table medicare.qc_adm_union 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_adm_union](../medicare.qc_adm_union.md)           |
+| Qualified name                | medicare.qc_adm_union.adm_day_of_week  |
+| Datatype                      | INT        |
+| Column type | copied |
+
+
+
+### Casts:
+
+| Original type | Cast expression      |
+| ------------- | -------------------- |
+| character varying | {column_name}::INT |
+| numeric | {column_name}::INT |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+adm_day_of_week_svg_envelop.md
+```
+
+
+```{figure} adm_day_of_week.svg
+:align: center
+:alt: Column medicare.qc_adm_union.adm_day_of_week Lineage SVG
+:target: adm_day_of_week_svg_envelop.html
+
+Data lineage for column medicare.qc_adm_union.adm_day_of_week
+
+```
+
+

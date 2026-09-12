@@ -1,0 +1,39 @@
+# Column medicare._enrollments.residence_county
+
+## Overview of column residence_county in table medicare._enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare._enrollments](../medicare._enrollments.md)           |
+| Qualified name                | medicare._enrollments.residence_county  |
+| Datatype                      | string        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT MAX(fips3)
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+residence_county_svg_envelop.md
+```
+
+
+```{figure} residence_county.svg
+:align: center
+:alt: Column medicare._enrollments.residence_county Lineage SVG
+:target: residence_county_svg_envelop.html
+
+Data lineage for column medicare._enrollments.residence_county
+
+```
+
+

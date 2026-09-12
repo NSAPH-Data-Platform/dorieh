@@ -1,30 +1,43 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Medicare Files Handling &mdash; Dorieh Data Platform 0.0.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+  <title>Medicare: Building a Data Warehouse from ResDac Files &mdash; Dorieh Data Platform 0.5.1.post2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
       <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
-      <link rel="stylesheet" type="text/css" href="_static/css/dorieh.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/dorieh.css?v=1a3f250d" />
 
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=ad30b421"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs"></script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
+      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+      <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+      <script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";
+window.addEventListener("load", () => mermaid.run());
+</script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="The mcr_sas2yaml Module" href="members/mcr_sas2yaml.html" />
-    <link rel="prev" title="Full Medicaid Processing Pipeline" href="pipeline/medicaid.html" /> 
+    <link rel="prev" title="Health Data in Dorieh (Medicare and Medicaid)" href="health_data_overview.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -32,6 +45,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
+
 
           
           
@@ -45,46 +59,457 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
+<div class="dorieh-citeas">
+  <button type="button" class="dorieh-citeas-btn"
+          onclick="document.getElementById('dorieh-citeas-pop').classList.toggle('open')">
+    &#128214; Cite as
+  </button>
+  <div id="dorieh-citeas-pop" class="dorieh-citeas-pop">
+    <p>Bouzinier,&nbsp;M., Etin,&nbsp;D., Khoshnevis,&nbsp;N.,
+       Shad,&nbsp;M., Yockel,&nbsp;S. (2026).
+       <em>Research Data that Can be Trusted.</em>
+       SpringerBriefs in Computer Science. Springer.
+       <a href="https://doi.org/10.1007/978-3-032-21032-6">doi:10.1007/978-3-032-21032-6</a></p>
+    <button type="button" class="dorieh-citeas-copy"
+            onclick="navigator.clipboard.writeText(
+              'Bouzinier, M., Etin, D., Khoshnevis, N., Shad, M., Yockel, S. (2026). ' +
+              'Research Data that Can be Trusted. SpringerBriefs in Computer Science. ' +
+              'Springer. https://doi.org/10.1007/978-3-032-21032-6'
+            ).then(() => { this.textContent = 'Copied!'; });">
+      Copy citation
+    </button>
+    <a class="dorieh-citeas-more" href="citing.html">More ways to cite &rarr;</a>
+  </div>
+</div>
+
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="home.html#introduction-to-data-platform">Introduction to Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#building-blocks">Building Blocks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="home.html#dorieh-utilities">Dorieh Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="home.html#core-platform">Core Platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="home.html#dorieh-gis-utilities">Dorieh GIS Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="home.html#dorieh-documentation-utilities">Dorieh Documentation Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="home.html#data-processing-and-loading-pipelines">Data Processing and Loading Pipelines</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#working-with-nsaph-containerized-apps">Working with NSAPH containerized apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#using-the-database">Using the Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#terms-and-acronyms">Terms and Acronyms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#building-platform-documentation">Building Platform documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#next-steps">Next steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rationale.html">Why a data platform</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rationale.html#why-we-need-a-data-platform">Why we need a Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rationale.html#architecture">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rationale.html#supported-programming-languages-and-tools">Supported Programming Languages and Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rationale.html#development-mode">Development Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rationale.html#where-it-can-be-deployed">Where it can be deployed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rationale.html#what-makes-dorieh-different">What makes Dorieh different</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">The Dorieh approach</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#two-languages-one-pipeline">Two languages, one pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#medallion-architecture-as-dorieh-implements-it">Medallion architecture as Dorieh implements it</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#dataset-operators-and-field-construction-operators">Dataset operators and field construction operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#families-of-field-transformations">Families of field transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#disambiguation-rules">Disambiguation rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#validation-and-journaling">Validation and journaling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#fine-grained-lineage">Fine-grained lineage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#where-each-concept-lives">Where each concept lives</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="about-the-book.html">The companion book</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about-the-book.html#bibliographic-information">Bibliographic information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about-the-book.html#chapter-to-documentation-map">Chapter-to-documentation map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about-the-book.html#using-this-documentation-without-the-book">Using this documentation without the book</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="citing.html">Citing Dorieh</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="citing.html#preferred-citation-the-book">Preferred citation: the book</a></li>
+<li class="toctree-l2"><a class="reference internal" href="citing.html#citing-the-software-itself">Citing the software itself</a></li>
+<li class="toctree-l2"><a class="reference internal" href="citing.html#citing-the-tutorials">Citing the tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="citing.html#citing-the-synthetic-dataset">Citing the synthetic dataset</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Learning paths</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="paths/index.html">Choose your path</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="paths/researcher.html">Researchers and analysts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="paths/researcher.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paths/researcher.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="paths/developer.html">Pipeline developers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="paths/developer.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paths/developer.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="paths/operator.html">Platform operators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="paths/operator.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paths/operator.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="paths/book-reader.html">Readers of the book</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="paths/book-reader.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paths/book-reader.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="paths/auditor.html">Reviewers and auditors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="paths/auditor.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paths/auditor.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data domains and pipelines</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="domains.html">Data Domains</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="cms.html">Health</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="Medicaid.html">Handling Medicaid data</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Medicare Files Handling</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="members/mcr_sas2yaml.html">The mcr_sas2yaml Module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="members/mcr_sas2db.html">The mcr_sas2db Module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="members/fts2yaml.html">Parser for FTS files that accompany CMS data from ResDac</a></li>
-<li class="toctree-l4"><a class="reference internal" href="members/medicare_yaml.html">Medicare.yaml</a></li>
-<li class="toctree-l4"><a class="reference internal" href="Medicaid.html">Handling Medicaid data</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#processing-pipeline">Processing pipeline</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#ingesting-raw-files">Ingesting Raw Files</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#combining-raw-files-into-a-single-view">Combining raw files into a single view</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#creating-qc-tables">Creating QC Tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="health_data_overview.html">Health Data in Dorieh (Medicare and Medicaid)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Medicare: Building a Data Warehouse from ResDac Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Medicaid.html">Medicaid: Building a Data Warehouse from ResDac Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="health_seealso.html">See also</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="QueringMedicaid.html">Querying Medicaid Data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cms.html#overview-of-health-data-medicare-and-medicaid">Overview of health data (Medicare and Medicaid)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cms.html#project-structure">Project Structure</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cms.html#documentation-indices">Documentation Indices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="climate.html">Climate</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="climate.html#what-is-gridmet">What is gridMET?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="climate.html#using-command-line-gridmet-utility">Using command line gridMET utility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="climate.html#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="climate.html#python-modules">Python modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="climate.html#cwl-pipelines-and-tools">CWL pipelines and tools</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="climate.html">Climate</a></li>
-<li class="toctree-l2"><a class="reference internal" href="exposures.html">Exposure (from Atmospheric Composition Analysis Group of Washington University in St. Louis)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="epa.html">Environmental Protection Agency (EPA) data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="census.html">Demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exposures.html">Exposure (PM2.5, WashU)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="exposures.html#python-packages">Python packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exposures.html#cwl-workflows">CWL Workflows</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="DBT.html">Database Testing Framework</a></li>
-<li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="AppPipelineGenerator.html">Executing containerized apps</a></li>
-<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="epa.html">Environmental Protection Agency (EPA) data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="epa.html#package-contents">Package Contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="epa.html#querying-data">Querying Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="census.html">Demographics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="census_about.html">About</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_env_set_up.html">Setting Up Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_quick_start.html">Quick Start</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_yaml.html">Census Variable File Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_cached_data.html">Stored Data Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_modules.html">Modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_glossary.html">Glossary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_start_guide.html">Working with the <code class="docutils literal notranslate"><span class="pre">census</span></code> Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_assemble.html">census_assemble.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_assemblecwl_src.html">census_assemble.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_density.html">census_density.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_densitycwl_src.html">census_density.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_ingest.html">census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_ingest_1.html">Sub-workflow <em>store</em> from census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_ingest_1cwl_src.html">CWL sub-workflow for step <u><em>store</em></u> of workflow census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_ingestcwl_src.html">census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_interpolate.html">census_interpolate.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_interpolatecwl_src.html">census_interpolate.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_qc.html">census_qc.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_qccwl_src.html">census_qc.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_workflow.html">census_workflow.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_workflowcwl_src.html">census_workflow.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_write.html">census_write.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_writecwl_src.html">census_write.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census.html#indices-and-tables">Indices and tables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipelines.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipelines.html#workflow-description-languages">Workflow Description Languages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipelines.html#running-workflows">Running Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pipelines.html#tested-runners">Tested Runners</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipelines.html#providing-parameters-to-the-pipelines">Providing Parameters to the Pipelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipelines.html#using-toil">Using Toil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipelines.html#troubleshooting-workflows-run-by-toil">Troubleshooting Workflows Run by Toil</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pipelines.html#testing-workflows">Testing Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipelines.html#published-and-tested-workflows">Published and Tested Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/gridmet.html">Pipeline to aggregate data from Climatology Lab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/wustl.html">Pipeline to ingest Monthly Pollution data downloaded from WashU Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/pm25_yearly_download.html">Pipeline to aggregate data in NetCDF format over given geographies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/aqs.html">Full EPA AQS Processing Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/airnow.html">Full EPA AirNow Processing Pipeline (including downloading shapefiles)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/medicare.html">Medicare data ingestion and processing pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/medicaid.html">Full Medicaid Processing Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_workflow.html">census_workflow.cwl</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pipelines.html#developing-new-workflows">Developing New Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pipelines.html#combining-included-cwl-tools-into-a-new-workflow">Combining Included CWL Tools into a New Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipelines.html#ordering-database-steps-with-depends-on">Ordering Database Steps with <code class="docutils literal notranslate"><span class="pre">depends_on</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipelines.html#wrapping-python-modules-as-cwl-tools">Wrapping Python Modules as CWL Tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials and worked examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Tutorials.html">Dorieh Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/climate/index.html">Climate tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/climate/building-climate-pipeline.html">Part 1. Building the pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/climate/documenting-a-workflow.html">Part 2. Documenting the workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/climate/constructing-lineage.html">Part 3. Data dictionaries and lineage graphs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html">Medicare claims pipeline tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#designing-the-pipeline">Designing the pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#from-fts-documents-to-machine-readable-schemas">From FTS documents to machine-readable schemas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#bronze-one-table-per-source-file">Bronze: one table per source file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#silver-harmonize-disambiguate-validate">Silver: harmonize, disambiguate, validate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#gold-the-qc-aggregates">Gold: the QC aggregates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#orchestration-five-steps-in-medicare-cwl">Orchestration: five steps in medicare.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#documentation-and-lineage">Documentation and lineage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#running-it-yourself">Running it yourself</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Example-climate-workflow.html">A CWL workflow example: aggregating a climate variable</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Example-climate-workflow.html#what-the-sample-workflow-is-doing-aggregating-a-climate-variable">What the sample workflow is doing: aggregating a climate variable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Example-climate-workflow.html#prepare-to-run-a-workflow">Prepare to run a workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Example-climate-workflow.html#running-the-workflow-in-python-virtual-environment">Running the workflow in Python virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Example-climate-workflow.html#running-the-workflow-using-docker">Running the workflow using Docker</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="medicare-example.html">Medicare pipeline with publicly available synthetic data (PostgreSQL + Superset)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="medicare-example.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="medicare-example.html#step-1-download-synthetic-sample-data">Step 1 — Download synthetic sample data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="medicare-example.html#step-3-optional-explore-results-in-apache-superset">Step 3 (Optional) — Explore results in Apache Superset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="medicare-example.html#what-the-pipeline-produces">What the pipeline produces</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#related-how-to-guides">Related how-to guides</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data dictionaries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dictionaries.html">Data Dictionaries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="MedicareLineage.html">Medicare data warehouse</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lineage/medicare.dot.html">Table Lineage Diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lineage/table-list.html">Alphabetic list of all tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lineage/column-list.html">Alphabetic list of all columns in all tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="members/domain_dictionary.html">The Data Dictionary Generation tool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data modeling DSL reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Datamodels.html">Data Modeling for Dorieh Data Platform</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="DataModellingExtensions.html">Data Modeling Extensions: Federated Views Across Years</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="DataModellingExtensions.html#combining-multiple-sources-and-optional-columns">Combining multiple sources and optional columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DataModellingExtensions.html#exclude">Exclude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DataModellingExtensions.html#cast">Cast</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DataModellingExtensions.html#validating-consistency-of-data-across-tables">Validating consistency of data across tables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#introduction-to-data-modeling-for-dorieh-data-platform">Introduction to data modeling for Dorieh Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#domain">Domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#table">Table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#create-statement">Create statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#invalid-record">Invalid Record</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#column">Column</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#source">Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#index">Index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#generated-columns">Generated columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#computed-columns">Computed columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#file-columns">File columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#record-columns">Record columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#identifier-columns-and-the-identifiers-token">Identifier columns and the <code class="docutils literal notranslate"><span class="pre">{identifiers}</span></code> token</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#transposing-columns">Transposing columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#wildcards">Wildcards</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#multi-column-indices">Multi-column indices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#indexing-policies">Indexing policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#linking-with-nomenclature">Linking with nomenclature</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#us-states">US States</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#county-codes">County codes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#ingesting-data">Ingesting data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#where-to-go-next">Where to go next</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">General purpose utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#overview-of-utilities">Overview of Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#current-development">Current Development</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#todo">TODO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#documentation-indices">Documentation Indices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="CoreLibrary.html">Data platform components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="CoreLibrary.html#package-dorieh-platform">Package dorieh.platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CoreLibrary.html#package-dorieh-platform-data-model">Package dorieh.platform.data_model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CoreLibrary.html#package-dorieh-platform-loader">Package dorieh.platform.loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CoreLibrary.html#package-dorieh-platform-requests">Package dorieh.platform.requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CoreLibrary.html#package-dorieh-platform-utils">Package dorieh.platform.utils</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gis.html">GIS utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gis.html#gis-library-overview">GIS Library Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gis.html#shape-files-downloader">Shape files Downloader</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="CMSLibrary.html">Health data manipulation tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="CMSLibrary.html#package-cms">Package cms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CMSLibrary.html#package-dorieh-cms-tools">Package dorieh.cms.tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CMSLibrary.html#additional-details">Additional details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rasters.html">Raster data tools (climate and exposure)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rasters.html#general-tools-for-raster-files">General tools for raster files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rasters.html#specialized-tools-for-working-with-climate-data">Specialized tools for working with climate data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rasters.html#specialized-tools-for-working-with-exposure-data">Specialized tools for working with exposure data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="platform.html">Dorieh Core Data Platform</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="DBConnections.html">Managing database connections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DataLoader.html">Dorieh Data Loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ProjectLoader.html">Project (Directory) Loading Utility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TerritorialCodes.html">Mapping between different territorial codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SQLDocumentation.html">SQL Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="platform.html#core-platform-overview">Core platform overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="platform.html#tool-examples">Tool Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="platform.html#project-structure">Project Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="platform.html#documentation-indices">Documentation Indices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Dorieh Deployment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#using-docker">Using Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#using-python-virtual-environment">Using Python Virtual Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#using-conda-package-manager">Using Conda Package Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#using-toil-with-docker-requirement">Using Toil with Docker requirement</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="capabilities.html">Platform capabilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="SampleQuery.html">How to query the database</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="SampleQuery.html#setup">Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SampleQuery.html#create-connection-definition-file">Create connection definition file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SampleQuery.html#executing-the-query">Executing the query</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SampleQuery.html#using-explain-to-optimize-queries">Using EXPLAIN to optimize queries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="QueringMedicaid.html">Querying Medicaid Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="QueringMedicaid.html#querying-diagnoses">Querying diagnoses</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="MonitoringDB.html">Monitoring database activity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="MonitoringDB.html#module-monitor">Module monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MonitoringDB.html#cli-usage-for-monitor">CLI Usage for monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MonitoringDB.html#using-as-api">Using as API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="UsingHLL.html">Approximate distinct counting with HLL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UserRequests.html">Handling user requests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="UserRequests.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UserRequests.html#structure">Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="example_request_yaml.html">Example user request</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Operational guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DBT.html">Database Testing Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="members/create_test.html">Utility to generate test queries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="members/dbt_runner.html">Test runner: Utility to run generated tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="members/gen_dbt_cwl.html">The gen_dbt_cwl Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="members/create_test.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="members/create_test.html#module-dorieh.platform.dbt.create_test">Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="members/dbt_runner.html">Test runner: Utility to run generated tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="members/dbt_runner.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="members/dbt_runner.html#module-dorieh.platform.dbt.dbt_runner">Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="members/gen_dbt_cwl.html">The gen_dbt_cwl Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="members/gen_dbt_cwl.html#dorieh.platform.dbt.gen_dbt_cwl.CWLTestGenerator"><code class="docutils literal notranslate"><span class="pre">CWLTestGenerator</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="TestingWorkflows.html">Testing bundled workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#introduction-to-testing-and-prerequisites">Introduction to testing and prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#before-running-any-test">Before running any test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#testing-aqs-workflow">Testing AQS workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#testing-airnow-workflow">Testing Airnow workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#testing-climate-workflow">Testing Climate workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#testing-exposure-workflow">Testing Exposure workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#testing-medicare-workflow">Testing Medicare workflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#what-data-are-you-adding">What data are you adding?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#data-modeling-vs-data-introspection">Data modeling vs data introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#adding-new-data-domain">Adding new data domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#creating-new-single-table">Creating new single table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#adding-a-table-from-a-remote-data-source">Adding a table from a remote data source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#adding-data-to-existing-table">Adding data to existing table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#automatically-ingesting-multiple-files-from-a-file-system">Automatically ingesting multiple files from a file system</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="AppPipelineGenerator.html">Executing containerized apps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="AppPipelineGenerator.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AppPipelineGenerator.html#prerequisites">Prerequisites</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#docker-or-python-virtual-environment">Docker or Python virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#setup-dbms-server">Setup DBMS Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#define-connection">Define connection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AppPipelineGenerator.html#using-pipeline-generator">Using pipeline generator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#generate-pipeline-and-metadata">Generate pipeline and metadata</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AppPipelineGenerator.html#execute-generated-pipeline">Execute generated pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AppPipelineGenerator.html#appendix-1-metadata-description">Appendix 1: Metadata description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#file-app-config-yaml">File app.config.yaml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#file-metadata-yml">File metadata.yml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#file-dorieh-metadata-yaml">File dorieh-metadata.yaml</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="glossary.html#concepts">Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="glossary.html#acronyms">Acronyms</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
 </ul>
 
@@ -103,8 +528,8 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="domains.html">Data Domains</a></li>
-          <li class="breadcrumb-item"><a href="cms.html">Dorieh CMS Package (manipulating with Health Data)</a></li>
-      <li class="breadcrumb-item active">Medicare Files Handling</li>
+          <li class="breadcrumb-item"><a href="cms.html">Dorieh CMS Package (manipulating ResDac Health Data)</a></li>
+      <li class="breadcrumb-item active">Medicare: Building a Data Warehouse from ResDac Files</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/Medicare.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -114,95 +539,171 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="medicare-files-handling">
-<h1>Medicare Files Handling<a class="headerlink" href="#medicare-files-handling" title="Permalink to this heading"></a></h1>
+  <section id="medicare-building-a-data-warehouse-from-resdac-files">
+<h1>Medicare: Building a Data Warehouse from ResDac Files<a class="headerlink" href="#medicare-building-a-data-warehouse-from-resdac-files" title="Link to this heading"></a></h1>
 <div class="toctree-wrapper compound">
 </div>
+<p>See also the sibling case study:
+<a class="reference internal" href="Medicaid.html"><span class="std std-doc">Medicaid: Building a Data Warehouse from ResDac Files</span></a>.</p>
 <nav class="contents local" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#processing-pipeline" id="id1">Processing pipeline</a></p>
+<li><p><a class="reference internal" href="#medallion-architecture-of-the-medicare-warehouse" id="id2">Medallion architecture of the Medicare warehouse</a></p></li>
+<li><p><a class="reference internal" href="#processing-pipeline" id="id3">Processing pipeline</a></p>
 <ul>
-<li><p><a class="reference internal" href="#medicare-pipeline-steps" id="id2">Medicare Pipeline Steps</a></p></li>
-<li><p><a class="reference internal" href="#ingestion-of-raw-data" id="id3">Ingestion of raw data</a></p></li>
-<li><p><a class="reference internal" href="#processing-data-in-the-database" id="id4">Processing Data in the Database</a></p></li>
-<li><p><a class="reference internal" href="#medicare-pipeline-references" id="id5">Medicare Pipeline References</a></p></li>
+<li><p><a class="reference internal" href="#medicare-pipeline-steps" id="id4">Medicare Pipeline Steps</a></p></li>
+<li><p><a class="reference internal" href="#ingestion-of-raw-data" id="id5">Ingestion of raw data</a></p></li>
+<li><p><a class="reference internal" href="#processing-data-in-the-database" id="id6">Processing Data in the Database</a></p></li>
+<li><p><a class="reference internal" href="#medicare-pipeline-references" id="id7">Medicare Pipeline References</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#ingesting-raw-files" id="id6">Ingesting Raw Files</a></p>
+<li><p><a class="reference internal" href="#ingesting-raw-files" id="id8">Ingesting Raw Files</a></p>
 <ul>
-<li><p><a class="reference internal" href="#overview-of-ingesting-raw-medicare-files" id="id7">Overview of Ingesting Raw Medicare Files</a></p></li>
-<li><p><a class="reference internal" href="#storing-raw-data-in-the-database" id="id8">Storing raw data in the Database</a></p></li>
-<li><p><a class="reference internal" href="#files-for-1999-to-2010" id="id9">Files for 1999 to 2010</a></p></li>
-<li><p><a class="reference internal" href="#files-for-years-2011-and-later" id="id10">Files for Years 2011 and later</a></p></li>
+<li><p><a class="reference internal" href="#overview-of-ingesting-raw-medicare-files" id="id9">Overview of Ingesting Raw Medicare Files</a></p></li>
+<li><p><a class="reference internal" href="#storing-raw-data-in-the-database" id="id10">Storing raw data in the Database</a></p></li>
+<li><p><a class="reference internal" href="#files-for-1999-to-2010" id="id11">Files for 1999 to 2010</a></p></li>
+<li><p><a class="reference internal" href="#files-for-years-2011-and-later" id="id12">Files for Years 2011 and later</a></p>
+<ul>
+<li><p><a class="reference internal" href="#metadata-extraction" id="id13">Metadata Extraction</a></p>
+<ul>
+<li><p><a class="reference internal" href="#supported-file-types" id="id14">Supported File Types</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#combining-raw-files-into-a-single-view" id="id11">Combining raw files into a single view</a></p>
-<ul>
-<li><p><a class="reference internal" href="#eventual-database-schema" id="id12">Eventual database schema</a></p></li>
-<li><p><a class="reference internal" href="#cwl-workflows" id="id13">CWL workflows</a></p></li>
-<li><p><a class="reference internal" href="#creating-federated-patient-summary" id="id14">Creating Federated Patient Summary</a></p>
-<ul>
-<li><p><a class="reference internal" href="#first-step-initial-in-database-data-conditioning" id="id15">First step: Initial in-database data conditioning</a></p></li>
-<li><p><a class="reference internal" href="#second-step-mapping-to-county-fips-codes" id="id16">Second step: Mapping to county FIPS codes</a></p></li>
+<li><p><a class="reference internal" href="#ingestion-process" id="id15">Ingestion process</a></p></li>
+<li><p><a class="reference internal" href="#directory-layout-expectation" id="id16">Directory Layout Expectation</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#creating-beneficiaries-table" id="id17">Creating Beneficiaries table</a></p></li>
-<li><p><a class="reference internal" href="#creating-enrollments-table" id="id18">Creating Enrollments table</a></p>
-<ul>
-<li><p><a class="reference internal" href="#enrollments-overview" id="id19">Enrollments overview</a></p></li>
-<li><p><a class="reference internal" href="#enrollments-primary-key-unique-identifier" id="id20">Enrollments Primary key (unique identifier)</a></p></li>
-<li><p><a class="reference internal" href="#enrollments-data-cleansing" id="id21">Enrollments data cleansing</a></p></li>
-<li><p><a class="reference internal" href="#enrollments-columns-definitions" id="id22">Enrollments columns definitions</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#creating-federated-admissions-view" id="id23">Creating Federated Admissions view</a></p></li>
-<li><p><a class="reference internal" href="#creating-inpatient-admissions-table" id="id24">Creating Inpatient Admissions table</a></p></li>
+<li><p><a class="reference internal" href="#combining-raw-files-into-unified-views" id="id17">Combining raw files into unified views</a></p>
+<ul>
+<li><p><a class="reference internal" href="#eventual-database-schema" id="id18">Eventual database schema</a></p></li>
+<li><p><a class="reference internal" href="#cwl-workflows" id="id19">CWL workflows</a></p></li>
+<li><p><a class="reference internal" href="#creating-federated-patient-summary" id="id20">Creating Federated Patient Summary</a></p>
+<ul>
+<li><p><a class="reference internal" href="#first-step-initial-in-database-data-conditioning" id="id21">First step: Initial in-database data conditioning</a></p></li>
+<li><p><a class="reference internal" href="#second-step-mapping-to-county-fips-codes" id="id22">Second step: Mapping to county FIPS codes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#creating-qc-tables" id="id25">Creating QC Tables</a></p>
+<li><p><a class="reference internal" href="#creating-the-mbsf-d-dual-eligibility-view" id="id23">Creating the mbsf_d dual-eligibility view</a></p></li>
+<li><p><a class="reference internal" href="#creating-beneficiaries-table" id="id24">Creating Beneficiaries table</a></p>
 <ul>
-<li><p><a class="reference internal" href="#medicare-qc-approach" id="id26">Medicare QC approach</a></p></li>
-<li><p><a class="reference internal" href="#enrollments-qc-table" id="id27">Enrollments QC Table</a></p>
-<ul>
-<li><p><a class="reference internal" href="#enrollments-qc-table-definition" id="id28">Enrollments QC Table Definition</a></p></li>
-<li><p><a class="reference internal" href="#enrollments-qc-table-dimensions" id="id29">Enrollments QC Table Dimensions</a></p></li>
-<li><p><a class="reference internal" href="#enrollments-qc-table-measures" id="id30">Enrollments QC Table Measures</a></p></li>
+<li><p><a class="reference internal" href="#beneficiary-enrollment-span-columns" id="id25">Beneficiary enrollment-span columns</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#admissions-qc-table" id="id31">Admissions QC Table</a></p>
+<li><p><a class="reference internal" href="#creating-enrollments-table" id="id26">Creating Enrollments table</a></p>
 <ul>
-<li><p><a class="reference internal" href="#admissions-qc-table-definition" id="id32">Admissions QC Table Definition</a></p></li>
-<li><p><a class="reference internal" href="#admissions-qc-table-dimensions" id="id33">Admissions QC Table Dimensions</a></p></li>
-<li><p><a class="reference internal" href="#admissions-qc-table-measures" id="id34">Admissions QC Table Measures</a></p></li>
+<li><p><a class="reference internal" href="#enrollments-overview" id="id27">Enrollments overview</a></p></li>
+<li><p><a class="reference internal" href="#enrollments-primary-key-unique-identifier" id="id28">Enrollments Primary key (unique identifier)</a></p></li>
+<li><p><a class="reference internal" href="#enrollments-data-cleansing" id="id29">Enrollments data cleansing</a></p></li>
+<li><p><a class="reference internal" href="#enrollments-columns-definitions" id="id30">Enrollments columns definitions</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#entitlement-reason-codes-orec-and-curec" id="id31">Entitlement reason codes: OREC and CUREC</a></p></li>
+<li><p><a class="reference internal" href="#creating-federated-admissions-view" id="id32">Creating Federated Admissions view</a></p></li>
+<li><p><a class="reference internal" href="#creating-inpatient-admissions-table" id="id33">Creating Inpatient Admissions table</a></p>
+<ul>
+<li><p><a class="reference internal" href="#additional-admissions-columns" id="id34">Additional admissions columns</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#creating-qc-tables" id="id35">Creating QC Tables</a></p>
+<ul>
+<li><p><a class="reference internal" href="#medicare-qc-approach" id="id36">Medicare QC approach</a></p></li>
+<li><p><a class="reference internal" href="#enrollments-qc-table" id="id37">Enrollments QC Table</a></p>
+<ul>
+<li><p><a class="reference internal" href="#enrollments-qc-table-definition" id="id38">Enrollments QC Table Definition</a></p></li>
+<li><p><a class="reference internal" href="#enrollments-qc-table-dimensions" id="id39">Enrollments QC Table Dimensions</a></p></li>
+<li><p><a class="reference internal" href="#enrollments-qc-table-measures" id="id40">Enrollments QC Table Measures</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#admissions-qc-table" id="id41">Admissions QC Table</a></p>
+<ul>
+<li><p><a class="reference internal" href="#admissions-qc-table-definition" id="id42">Admissions QC Table Definition</a></p></li>
+<li><p><a class="reference internal" href="#admissions-qc-table-dimensions" id="id43">Admissions QC Table Dimensions</a></p></li>
+<li><p><a class="reference internal" href="#admissions-qc-table-measures" id="id44">Admissions QC Table Measures</a></p></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </nav>
+<p>This page is the reference documentation for the Medicare data warehouse
+that Dorieh builds from raw ResDAC files. It walks through the pipeline
+layer by layer: ingestion of the raw files (Bronze), the cleansed and
+unified tables and views (Silver), and the QC aggregates (Gold). For a
+guided path through this page, from the raw ResDAC files to the QC
+aggregates, start with the tutorial
+<a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html"><span class="std std-doc">Building the Medicare Claims Pipeline</span></a>;
+for a hands-on run against synthetic data, see the example below.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="medicare-example.html"><span class="std std-doc">Example: Medicare Processing Pipeline with Synthetic Data</span></a> —
+a step-by-step guide to running the full pipeline against a <strong>publicly
+available</strong> synthetic dataset (no data use agreement required) and exploring
+the results in a pre-built Apache Superset dashboard.</p></li>
+<li><p><a class="reference internal" href="MedicareLineage.html"><span class="std std-doc">Data dictionary and lineage for Medicare processing</span></a> —
+the generated reference for every table and column described on this page,
+with clickable table- and column-level lineage diagrams.</p></li>
+</ul>
+</div>
+<section id="medallion-architecture-of-the-medicare-warehouse">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Medallion architecture of the Medicare warehouse</a><a class="headerlink" href="#medallion-architecture-of-the-medicare-warehouse" title="Link to this heading"></a></h2>
+<p>The Medicare warehouse is organized as a Medallion architecture: data moves
+through Bronze, Silver, and Gold layers, and each layer is derived only from
+the layer beneath it.</p>
+<ul class="simple">
+<li><p><strong>Bronze</strong>: the raw <code class="docutils literal notranslate"><span class="pre">cms.*</span></code> tables. Every original ResDac file is loaded
+into its own table, with the data kept as delivered.</p></li>
+<li><p><strong>Silver</strong>: the cleansed and unified layer. It contains the federated
+views that combine the per-file Bronze tables (<code class="docutils literal notranslate"><span class="pre">medicare.ps</span></code> and its
+companion <code class="docutils literal notranslate"><span class="pre">medicare._ps</span></code>, <code class="docutils literal notranslate"><span class="pre">medicare.mbsf_d</span></code>, and the admissions view
+<code class="docutils literal notranslate"><span class="pre">medicare.ip</span></code>) and the curated tables built from them:
+<code class="docutils literal notranslate"><span class="pre">medicare.beneficiaries</span></code>, <code class="docutils literal notranslate"><span class="pre">medicare.enrollments</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">medicare.admissions</span></code>.</p></li>
+<li><p><strong>Gold</strong>: the QC aggregates — the <code class="docutils literal notranslate"><span class="pre">medicare.qc_*</span></code> materialized views
+described in <a class="reference internal" href="#creating-qc-tables">Creating QC Tables</a>.</p></li>
+</ul>
+<p>Every ingested (Bronze) table carries two provenance columns: <code class="docutils literal notranslate"><span class="pre">FILE</span></code>, the
+name of the original raw file, and <code class="docutils literal notranslate"><span class="pre">RECORD</span></code>, the line number of the record
+within that file (see
+<a class="reference internal" href="#storing-raw-data-in-the-database">Storing raw data in the Database</a>).
+These two columns are what make Dorieh’s lineage fine-grained. Column-level
+lineage records how each output column is computed from input columns, while
+<code class="docutils literal notranslate"><span class="pre">FILE</span></code> and <code class="docutils literal notranslate"><span class="pre">RECORD</span></code> add row-level lineage by anchoring every row to the
+exact line of the exact source file it came from. Cell-level lineage is the
+combination of the two: for any single value in a Silver table you can
+recover both the formula that produced it and the raw record it was derived
+from.</p>
+</section>
 <section id="processing-pipeline">
-<h2><a class="toc-backref" href="#id1" role="doc-backlink">Processing pipeline</a><a class="headerlink" href="#processing-pipeline" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Processing pipeline</a><a class="headerlink" href="#processing-pipeline" title="Link to this heading"></a></h2>
 <section id="medicare-pipeline-steps">
-<h3><a class="toc-backref" href="#id2" role="doc-backlink">Medicare Pipeline Steps</a><a class="headerlink" href="#medicare-pipeline-steps" title="Permalink to this heading"></a></h3>
-<p>Current pipeline consists of 5 steps, each represented as a sub-workflow:</p>
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Medicare Pipeline Steps</a><a class="headerlink" href="#medicare-pipeline-steps" title="Link to this heading"></a></h3>
+<p>Current pipeline (<a class="reference internal" href="pipeline/medicare.html"><span class="doc std std-doc">medicare.cwl</span></a>) consists of 5
+steps, most of them represented as sub-workflows:</p>
 <ol class="arabic simple">
-<li><p><a class="reference internal" href="pipeline/load_raw_medicare.html"><span class="doc std std-doc">Ingest raw data</span></a></p></li>
-<li><p><a class="reference internal" href="pipeline/medicare_beneficiaries.html"><span class="doc std std-doc">Process beneficiaries and their enrollment in Medicare</span></a></p></li>
-<li><p><a class="reference internal" href="pipeline/medicare_admissions.html"><span class="doc std std-doc">Process Admissions</span></a></p></li>
-<li><p><a class="reference internal" href="pipeline/medicare_qc.html"><span class="doc std std-doc">Create QC Tables</span></a></p></li>
-<li><p><a class="reference internal" href="pipeline/grant.html"><span class="doc std std-doc">Grant <code class="docutils literal notranslate"><span class="pre">SELECT</span></code></span></a>
-privileges (i.e., read access) to all newly created tables
-(this step is actually a command line tool, not a workflow)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">initdb</span></code>: update the Dorieh utilities in the database
+(see <a class="reference internal" href="pipeline/initdb.html"><span class="doc std std-doc">initdb</span></a>)</p></li>
+<li><p><a class="reference internal" href="pipeline/load_raw_medicare.html"><span class="doc std std-doc">Ingest raw data</span></a> (<code class="docutils literal notranslate"><span class="pre">load_raw_data</span></code>)</p></li>
+<li><p><a class="reference internal" href="pipeline/medicare_beneficiaries.html"><span class="doc std std-doc">Process beneficiaries and their enrollment in Medicare</span></a>
+(<code class="docutils literal notranslate"><span class="pre">enrollments</span></code>)</p></li>
+<li><p><a class="reference internal" href="pipeline/medicare_admissions.html"><span class="doc std std-doc">Process Admissions</span></a> (<code class="docutils literal notranslate"><span class="pre">admissions</span></code>)</p></li>
+<li><p><a class="reference internal" href="pipeline/medicare_qc.html"><span class="doc std std-doc">Create QC Tables</span></a> (<code class="docutils literal notranslate"><span class="pre">qc</span></code>)</p></li>
 </ol>
+<p>Granting <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> privileges (i.e., read access) to newly created
+tables is done separately with the standalone
+<a class="reference internal" href="pipeline/grant.html"><span class="doc std std-doc">grant</span></a> command line tool; it is not a step of
+<code class="docutils literal notranslate"><span class="pre">medicare.cwl</span></code>.</p>
 </section>
 <section id="ingestion-of-raw-data">
-<h3><a class="toc-backref" href="#id3" role="doc-backlink">Ingestion of raw data</a><a class="headerlink" href="#ingestion-of-raw-data" title="Permalink to this heading"></a></h3>
-<p>Ingestion of raw data is incremental, i.e. tables that are already in
-the database
-will not be dropped (deleted). However, any table with the name found
-in input path will be replaced. Please note, that every raw record
-is identified by the tuple consisting of the original file name and
-the line number in that file.</p>
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Ingestion of raw data</a><a class="headerlink" href="#ingestion-of-raw-data" title="Link to this heading"></a></h3>
+<p>Ingestion is incremental: tables already in the database are kept, but
+any table whose source file is present in the input path is re-created
+from that file. Every raw record is identified by the tuple
+(original file name, line number) — the <code class="docutils literal notranslate"><span class="pre">FILE</span></code> and <code class="docutils literal notranslate"><span class="pre">RECORD</span></code> provenance
+columns described above.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If no raw data is given or <code class="docutils literal notranslate"><span class="pre">--input</span></code> parameters points
@@ -211,36 +712,38 @@ step and will process the raw data that is already in the database.</p>
 </div>
 <p>Ingestion as a part of the data pipeline is only implemented for
 data in the format as it comes from ResDac. Metadata for ingestion
-is taken from <a class="reference internal" href="fts.html"><span class="doc std std-doc">FTS</span></a> files that accompany ResDac deliverables.</p>
+is taken from <a class="reference internal" href="fts.html"><span class="std std-doc">FTS</span></a> files that accompany ResDac deliverables.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>In case of Medicare data in posession of NSAPH organization, we
-only have original ResDac data for years 2011-2014 and 2016-2018.
-Therefore, the pipeline is unable to ingest the data for other years
-(1999-2010 and 2015).</p>
+<p>For example, in the NSAPH deployment, original ResDAC files in the
+organization’s possession exist only for the years 2011-2014 and
+2016-2018, so in that deployment the pipeline is unable to ingest the
+data for the other years (1999-2010 and 2015). Readers without access to ResDAC data
+can run the pipeline against the synthetic dataset described in
+<a class="reference internal" href="medicare-example.html"><span class="std std-doc">Example: Medicare Processing Pipeline with Synthetic Data</span></a>.</p>
 </div>
 <p>See <a class="reference internal" href="#files-for-1999-to-2010"><span class="std std-ref">Files for 1999 to 2010</span></a> for more information.</p>
 <p>See <a class="reference internal" href="#ingesting-raw-files"><span class="std std-ref">Ingesting Raw Files</span></a> for processing details</p>
 </section>
 <section id="processing-data-in-the-database">
-<h3><a class="toc-backref" href="#id4" role="doc-backlink">Processing Data in the Database</a><a class="headerlink" href="#processing-data-in-the-database" title="Permalink to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">Processing Data in the Database</a><a class="headerlink" href="#processing-data-in-the-database" title="Link to this heading"></a></h3>
 <p>During in-database processing all tables, views and materialized views
 are completely replaced. Old tables are dropped and new ones are created
 from scratch.</p>
-<p>See <a class="reference internal" href="#combining-raw-files-into-a-single-view"><span class="std std-ref">Combining raw files into a single view</span></a> for processing details.</p>
+<p>See <a class="reference internal" href="#combining-raw-files-into-unified-views"><span class="std std-ref">Combining raw files into unified views</span></a> for processing details.</p>
 </section>
 <section id="medicare-pipeline-references">
-<h3><a class="toc-backref" href="#id5" role="doc-backlink">Medicare Pipeline References</a><a class="headerlink" href="#medicare-pipeline-references" title="Permalink to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">Medicare Pipeline References</a><a class="headerlink" href="#medicare-pipeline-references" title="Link to this heading"></a></h3>
 <p>See <a class="reference internal" href="pipeline/medicare.html"><span class="doc std std-doc">Medicare data ingestion and processing pipeline</span></a> for the pipeline code</p>
 <p>See <a class="reference internal" href="members/medicare_yaml.html"><span class="std std-doc">Medicare data model definition</span></a> for formal
 data model definition.</p>
 </section>
 </section>
 <section id="ingesting-raw-files">
-<h2><a class="toc-backref" href="#id6" role="doc-backlink">Ingesting Raw Files</a><a class="headerlink" href="#ingesting-raw-files" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Ingesting Raw Files</a><a class="headerlink" href="#ingesting-raw-files" title="Link to this heading"></a></h2>
 <p><a class="reference internal" href="pipeline/load_raw_medicare.html"><span class="doc std std-doc">Pipeline</span></a></p>
 <section id="overview-of-ingesting-raw-medicare-files">
-<h3><a class="toc-backref" href="#id7" role="doc-backlink">Overview of Ingesting Raw Medicare Files</a><a class="headerlink" href="#overview-of-ingesting-raw-medicare-files" title="Permalink to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">Overview of Ingesting Raw Medicare Files</a><a class="headerlink" href="#overview-of-ingesting-raw-medicare-files" title="Link to this heading"></a></h3>
 <p>There are two types of tables:</p>
 <ul class="simple">
 <li><p>Patient summary, aka enrollment, aka denominator</p></li>
@@ -260,13 +763,15 @@ almost every year.</p>
 <p>Inpatient admissions files always follow <code class="docutils literal notranslate"><span class="pre">medpar_all_file</span></code> pattern.</p>
 <p>Columns vary from year to year even for similarly named files,
 new columns are being added and column names are sometimes changed.</p>
-<p>To add insult to injury, for years prior to 2011 (1999-2010) we do not
+<p>A further complication is that for years prior to 2011 (1999-2010) we do not
 have original files, but preprocessed files with patient summary
 (called denominators) and admissions. They are in SAS 7BDAT format,
-however columns are also different for different years.</p>
+however columns are also different for different years. Please
+refer to <a class="reference internal" href="#files-for-1999-to-2010">Files for 1999 to 2010</a> section
+for details.</p>
 </section>
 <section id="storing-raw-data-in-the-database">
-<h3><a class="toc-backref" href="#id8" role="doc-backlink">Storing raw data in the Database</a><a class="headerlink" href="#storing-raw-data-in-the-database" title="Permalink to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">Storing raw data in the Database</a><a class="headerlink" href="#storing-raw-data-in-the-database" title="Link to this heading"></a></h3>
 <p>Given the difference in file structures we create a separate table
 for every file. However, to make it easier to join these tables we:</p>
 <ul class="simple">
@@ -280,90 +785,254 @@ for every file. However, to make it easier to join these tables we:</p>
 </ul>
 </li>
 </ul>
-<p>Originally, these data is stored in columns with the following possible names:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;bene_id&quot;:  (None, [&quot;bene_id&quot;, &quot;intbid&quot;, &quot;qid&quot;, &quot;bid_5333*&quot;]),
-&quot;state&quot;:  (None, [&quot;state&quot;, &quot;ssa_state&quot;, &quot;state_code&quot;,
-                  &quot;bene_rsdnc_ssa_state_cd&quot;, &quot;state_cd&quot;,
-                  &quot;medpar_bene_rsdnc_ssa_state_cd&quot;]),
-&quot;zip&quot;: (None, [&quot;zip&quot;, &quot;zipcode&quot;, &quot;bene_zip_cd&quot;, &quot;bene_zip&quot;,
-               &quot;bene_mlg_cntct_zip_cd&quot;,
-               &quot;medpar_bene_mlg_cntct_zip_cd&quot;]),
-&quot;year&quot;: (None, [&quot;year&quot;, &quot;enrolyr&quot;, &quot;bene_enrollmt_ref_yr&quot;,
-                &quot;rfrnc_yr&quot;])
-</pre></div>
-</div>
+<p>In the original files, these data are stored in columns with the
+following possible names:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Uniform column</p></th>
+<th class="head"><p>Possible source column names</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bene_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bene_id</span></code>, <code class="docutils literal notranslate"><span class="pre">intbid</span></code>, <code class="docutils literal notranslate"><span class="pre">qid</span></code>, <code class="docutils literal notranslate"><span class="pre">bid_5333*</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">state</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">state</span></code>, <code class="docutils literal notranslate"><span class="pre">ssa_state</span></code>, <code class="docutils literal notranslate"><span class="pre">state_code</span></code>, <code class="docutils literal notranslate"><span class="pre">bene_rsdnc_ssa_state_cd</span></code>, <code class="docutils literal notranslate"><span class="pre">state_cd</span></code>, <code class="docutils literal notranslate"><span class="pre">medpar_bene_rsdnc_ssa_state_cd</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">zip</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">zip</span></code>, <code class="docutils literal notranslate"><span class="pre">zipcode</span></code>, <code class="docutils literal notranslate"><span class="pre">bene_zip_cd</span></code>, <code class="docutils literal notranslate"><span class="pre">bene_zip</span></code>, <code class="docutils literal notranslate"><span class="pre">bene_mlg_cntct_zip_cd</span></code>, <code class="docutils literal notranslate"><span class="pre">medpar_bene_mlg_cntct_zip_cd</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">year</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">year</span></code>, <code class="docutils literal notranslate"><span class="pre">enrolyr</span></code>, <code class="docutils literal notranslate"><span class="pre">bene_enrollmt_ref_yr</span></code>, <code class="docutils literal notranslate"><span class="pre">rfrnc_yr</span></code></p></td>
+</tr>
+</tbody>
+</table>
 <p>When a table has no natural primary key (admission tables) we add a record
-number column. This column ha sno meaning but allows to trace a record to the
-original data.</p>
+number column. This column has no meaning but makes it possible to trace a
+record to the original data.</p>
 </section>
 <section id="files-for-1999-to-2010">
-<h3><a class="toc-backref" href="#id9" role="doc-backlink">Files for 1999 to 2010</a><a class="headerlink" href="#files-for-1999-to-2010" title="Permalink to this heading"></a></h3>
-<p>These files are in SAS7BDAT format. They have been stored on RCE
-in two directories:</p>
+<span id="id1"></span><h3><a class="toc-backref" href="#id11" role="doc-backlink">Files for 1999 to 2010</a><a class="headerlink" href="#files-for-1999-to-2010" title="Link to this heading"></a></h3>
+<p>In the NSAPH deployment, for example, original Medicare ResDAC raw datasets
+for 1999 to 2010 are not available. Instead, only partially preprocessed
+files provided by external collaborators exist. These have been stored
+historically in two separate directories:</p>
 <ul class="simple">
-<li><p>denominator</p></li>
-<li><p>inpatient</p></li>
+<li><p>denominator/</p></li>
+<li><p>inpatient/</p></li>
 </ul>
-<p>One file per year. SAS7BDAT format contains metadata with column
-names and types. We use this metadata to generate appropriate database schema.</p>
-<p>See the code for handling these files:</p>
+<p>Each directory contains one file per year. These files use the SAS7BDAT
+format, which is a binary data format native to
+SAS analytics software. Each file embeds metadata about its schema
+(i.e., field names, types, order), but column names
+and formats still vary from year to year.</p>
+<p>To handle this variation:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="members/mcr_sas2yaml.html"><span class="std std-doc">Metadata and data model</span></a></p></li>
-<li><p><a class="reference internal" href="members/mcr_sas2db.html"><span class="std std-doc">Ingesting data</span></a></p></li>
+<li><p>Each file is individually introspected using the SAS Introspector.</p></li>
+<li><p>A YAML schema is automatically generated and stored in a central
+registry.</p></li>
+<li><p>This schema is then used to create the appropriate database table for
+ingestion.</p></li>
 </ul>
-</section>
+<p>For more details on implementation:</p>
+<ul class="simple">
+<li><p>See the <a class="reference internal" href="members/mcr_sas2yaml.html"><span class="std std-doc">SAS Introspector</span></a> for how
+metadata is extracted.</p></li>
+<li><p>See the class <a class="reference internal" href="members/mcr_sas2db.html"><span class="std std-doc">SAS Data Loader</span></a> for how
+these files are ingested into the database.</p></li>
+</ul>
+<p>Because of schema variability:</p>
+<ul class="simple">
+<li><p>Special heuristics are used to detect core fields like beneficiary ID (
+bene_id), year, zip code, and state code, based
+on a list of possible alternative names.</p></li>
+<li><p>Missing expected columns (e.g., year) are sometimes generated using
+information inferred from directory or file naming.</p></li>
+</ul>
+<p>Each resulting table includes:</p>
+<ul class="simple">
+<li><p>A standardized structure with additional generated columns (e.g., record
+ID, file name).</p></li>
+<li><p>Uniform field naming conventions to support unioning across years.</p></li>
+<li><p>Consistent indexing to support later join operations with downstream
+tables (e.g., beneficiaries and admissions).</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Because of the variability and limited provenance of these
+files, this step is distinct from the ResDAC
+ingestion workflow and is not based on FTS metadata.</p>
+</div>
+<pre  class="mermaid">
+        graph TD;
+    A[SAS 7BDAT File] --&gt; B[Inspect schema using SAS Introspector]
+    B --&gt; C[Generate YAML metadata]
+    C --&gt; D[Update main metadata registry: used for combining tables for all years]
+    C --&gt; L[Generate DDL]
+    C --&gt; E[Configure SAS Data Loader]
+    E --&gt; F[Create SQL table]
+    L --&gt; F
+    F --&gt; I[Ingest data]
+    A --&gt; I
+    I --&gt; G[Add synthetic keys and indexes]
+    </pre></section>
 <section id="files-for-years-2011-and-later">
-<h3><a class="toc-backref" href="#id10" role="doc-backlink">Files for Years 2011 and later</a><a class="headerlink" href="#files-for-years-2011-and-later" title="Permalink to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id12" role="doc-backlink">Files for Years 2011 and later</a><a class="headerlink" href="#files-for-years-2011-and-later" title="Link to this heading"></a></h3>
+<section id="metadata-extraction">
+<h4><a class="toc-backref" href="#id13" role="doc-backlink">Metadata Extraction</a><a class="headerlink" href="#metadata-extraction" title="Link to this heading"></a></h4>
 <p>These files are original files from ResDac. They come in Fixed Width Format
-(FWF). For each file the structure is described in File Transfer
-Summary (FTS) file. Unfortunately these files are intended for reading by
-a human and is difficult to parse automatically. A
-<a class="reference internal" href="members/fts2yaml.html"><span class="std std-doc">partial parser</span></a> that
-relies on a known file type is implemented in Python. The information
-extarcted by the parser is used to:</p>
+(FWF) typically using the .dat extension. Each data file
+delivered by ResDAC is accompanied
+by a plain-text metadata file known as a File Transfer Summary (FTS),
+which describes the structure of the corresponding data file—including:</p>
 <ul class="simple">
-<li><p>Generate data model (database schema)</p></li>
-<li><p>Generate metadata for the FWF Reader</p></li>
+<li><p>Column names</p></li>
+<li><p>Data types (e.g., NUM, CHAR, DATE)</p></li>
+<li><p>Column widths and formats</p></li>
+<li><p>Record and file length metadata</p></li>
+</ul>
+<p>These FTS files are designed primarily for human readability
+and are not machine-friendly. To address this,
+Dorieh includes a partial FTS parser:
+the <a class="reference internal" href="members/fts2yaml.html"><span class="std std-doc">fts2yaml module</span></a>.</p>
+<p>This parser performs the following:</p>
+<ul class="simple">
+<li><p>Extracts structured metadata directly from .fts files</p></li>
+<li><p>Converts it to a standardized YAML-based data model.</p>
+<ul>
+<li><p>The YaML model describes table and column definitions.</p></li>
+<li><p>The YaML model includes types, column widths, descriptions,
+and indexing hints</p></li>
+</ul>
+</li>
+<li><p>Supports both Medicare and Medicaid FTS formats</p></li>
+</ul>
+<p>Once the YAML schema is generated, it is used for:</p>
+<ul class="simple">
+<li><p>Generating SQL DDL scripts to create staging tables</p></li>
+<li><p>Feeding column layout metadata to the FWF reader (FWFReader)</p></li>
+<li><p>Automatically identifying and indexing key fields such as:</p>
+<ul>
+<li><p>BENE_ID (Beneficiary ID)</p></li>
+<li><p>YEAR</p></li>
+<li><p>STATE</p></li>
+<li><p>ZIP</p></li>
+</ul>
+</li>
+</ul>
+<section id="supported-file-types">
+<h5><a class="toc-backref" href="#id14" role="doc-backlink">Supported File Types</a><a class="headerlink" href="#supported-file-types" title="Link to this heading"></a></h5>
+<p>The parser supports:</p>
+<ul class="simple">
+<li><p>Medicare files: identified based on prefixes like mbsf_abcd_XXXX.fts</p></li>
+<li><p>Medicaid files: using filenames like maxdata_ps_STATE_YEAR.fts</p></li>
 </ul>
 </section>
 </section>
-<section id="combining-raw-files-into-a-single-view">
-<h2><a class="toc-backref" href="#id11" role="doc-backlink">Combining raw files into a single view</a><a class="headerlink" href="#combining-raw-files-into-a-single-view" title="Permalink to this heading"></a></h2>
+<section id="ingestion-process">
+<h4><a class="toc-backref" href="#id15" role="doc-backlink">Ingestion process</a><a class="headerlink" href="#ingestion-process" title="Link to this heading"></a></h4>
+<p>Once metadata extraction is complete, raw data ingestion
+takes place using:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="members/mcr_data_loader.html"><span class="doc std std-doc">MedicareDataLoader</span></a>
+to parse FWF records row-by-row</p></li>
+<li><p><a class="reference internal" href="members/mcr_fts2db.html"><span class="doc std std-doc">MedicareLoader</span></a> to coordinate:</p>
+<ul>
+<li><p>FTS parsing</p></li>
+<li><p>Schema registration</p></li>
+<li><p>Loader selection (DAT or CSV)</p></li>
+<li><p>Data loading, indexing, and optimization (VACUUM)</p></li>
+</ul>
+</li>
+</ul>
+<p>The MedicareLoader module orchestrates the end-to-end process, including:</p>
+<ul class="simple">
+<li><p>Scanning input directories recursively for *.fts files</p></li>
+<li><p>Parsing each FTS file to generate a schema</p></li>
+<li><p>Locating the corresponding *.dat (or *.csv.gz) files</p></li>
+<li><p>Triggering the appropriate file loader</p></li>
+<li><p>Writing data to the database</p></li>
+</ul>
+<pre  class="mermaid">
+        graph TD;
+    A[SAS FTS file] --&gt; B[YAML schema via fts2yaml]
+    B --&gt; C[Extract layout for fixed-width reader]
+    B --&gt; E[Generate DDL]
+    S[SAS DAT FILE] --&gt; D 
+    C --&gt; D[Run MedicareLoader calling MedicareDataLoader]
+    E --&gt; D
+    D --&gt; F[Load data to SQL table]
+    F --&gt; G[Apply indexing and VACUUM]
+    </pre></section>
+<section id="directory-layout-expectation">
+<h4><a class="toc-backref" href="#id16" role="doc-backlink">Directory Layout Expectation</a><a class="headerlink" href="#directory-layout-expectation" title="Link to this heading"></a></h4>
+<p>To function correctly with the Dorieh ingestion pipeline,
+the directory layout for ResDAC raw files must follow this structure:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>project_root/
+└── medicare/
+    └── 2018/
+        ├── mbsf_abcd_2018.fts
+        ├── mbsf_abcd_2018.dat
+        └── medpar_2018.fts
+</pre></div>
+</div>
+<p>Specifically:</p>
+<ul class="simple">
+<li><p>Each year must have its own directory</p></li>
+<li><p>Table names are inferred from FTS file name and containing year</p></li>
+<li><p>The FTS filename must match the .dat or .csv.gz data file (just differing in extension)</p></li>
+</ul>
+<p>For a full example of metadata schema outputs, see the
+<a class="reference internal" href="members/medicare_yaml.html"><span class="doc std std-doc">Generated Medicare data model</span></a>.</p>
+</section>
+</section>
+</section>
+<section id="combining-raw-files-into-unified-views">
+<span id="combining-raw-files-into-a-single-view"></span><h2><a class="toc-backref" href="#id17" role="doc-backlink">Combining raw files into unified views</a><a class="headerlink" href="#combining-raw-files-into-unified-views" title="Link to this heading"></a></h2>
 <p><a class="reference internal" href="pipeline/medicare_beneficiaries.html"><span class="doc std std-doc">Pipeline</span></a></p>
 <section id="eventual-database-schema">
-<h3><a class="toc-backref" href="#id12" role="doc-backlink">Eventual database schema</a><a class="headerlink" href="#eventual-database-schema" title="Permalink to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id18" role="doc-backlink">Eventual database schema</a><a class="headerlink" href="#eventual-database-schema" title="Link to this heading"></a></h3>
 <p>Once all raw files are ingested into the database they are combined
-into two views:</p>
+into the unified objects that form the Silver layer of the warehouse:</p>
 <ol class="arabic simple">
-<li><p>Patient summary (aka MBSF, aka Beneficiary summary)</p></li>
-<li><p>Inpatient Admissions (aka hospitalizations, aka medpar)</p></li>
+<li><p>Patient summary (aka MBSF, aka Beneficiary summary): the
+<code class="docutils literal notranslate"><span class="pre">medicare.ps</span></code> view, its companion materialized view <code class="docutils literal notranslate"><span class="pre">medicare._ps</span></code>,
+and the <code class="docutils literal notranslate"><span class="pre">medicare.mbsf_d</span></code> materialized view uniting the split
+dual-eligibility component files</p></li>
+<li><p>Inpatient Admissions (aka hospitalizations, aka medpar): the
+<code class="docutils literal notranslate"><span class="pre">medicare.ip</span></code> view</p></li>
+<li><p>The curated tables built from them: <code class="docutils literal notranslate"><span class="pre">medicare.beneficiaries</span></code>,
+<code class="docutils literal notranslate"><span class="pre">medicare.enrollments</span></code>, and <code class="docutils literal notranslate"><span class="pre">medicare.admissions</span></code></p></li>
 </ol>
 <p>The figure below visualizes the database schema.</p>
-<a class="reference internal image-reference" href="_images/medicare-db.png"><img alt="_images/medicare-db.png" src="_images/medicare-db.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/medicare-db.png"><img alt="_images/medicare-db.png" src="_images/medicare-db.png" style="width: 600px;" />
+</a>
 <p>The tables above are defined in
 <a class="reference internal" href="members/medicare_yaml.html"><span class="std std-doc">Medicare data model definition</span></a>. This file
-uses <a class="reference internal" href="DataModellingExtensions.html"><span class="std std-doc">Extensions used for creating federated view of different years</span></a>.</p>
+uses <a class="reference internal" href="DataModellingExtensions.html"><span class="std std-doc">Data Modeling Extensions: Federated Views Across Years</span></a>.</p>
 </section>
 <section id="cwl-workflows">
-<h3><a class="toc-backref" href="#id13" role="doc-backlink">CWL workflows</a><a class="headerlink" href="#cwl-workflows" title="Permalink to this heading"></a></h3>
-<p>The
-<a class="reference internal" href="pipeline/medicare.html"><span class="doc std std-doc">full pipeline</span></a> consists of two steps:</p>
+<h3><a class="toc-backref" href="#id19" role="doc-backlink">CWL workflows</a><a class="headerlink" href="#cwl-workflows" title="Link to this heading"></a></h3>
+<p>The in-database processing part of the five-step
+<a class="reference internal" href="pipeline/medicare.html"><span class="doc std std-doc">pipeline</span></a> consists of two sub-workflows:</p>
 <ol class="arabic simple">
-<li><p>Creating <a class="reference internal" href="pipeline/medicare_beneficiaries.html"><span class="doc std std-doc">beneficiary federated summary and enrollments table</span></a></p></li>
-<li><p>Creating <a class="reference internal" href="pipeline/medicare_admissions.html"><span class="doc std std-doc">inpatient admissions table</span></a></p></li>
+<li><p>Creating the <a class="reference internal" href="pipeline/medicare_beneficiaries.html"><span class="doc std std-doc">beneficiary federated summary and enrollments table</span></a></p></li>
+<li><p>Creating the <a class="reference internal" href="pipeline/medicare_admissions.html"><span class="doc std std-doc">inpatient admissions table</span></a></p></li>
 </ol>
+<p>The QC step is described in <a class="reference internal" href="#creating-qc-tables">Creating QC Tables</a>.</p>
 </section>
 <section id="creating-federated-patient-summary">
-<h3><a class="toc-backref" href="#id14" role="doc-backlink">Creating Federated Patient Summary</a><a class="headerlink" href="#creating-federated-patient-summary" title="Permalink to this heading"></a></h3>
-<p>The federated patient summary view is created in two steps, though the division
-into steps is purely technical. The reasons are
-given some limitations of readability in SQL.</p>
-<p>This step uses data modelling extensions described in
-<a class="reference internal" href="DataModellingExtensions.html"><span class="std std-doc">Extensions used for creating federated view of different years</span></a>.</p>
+<h3><a class="toc-backref" href="#id20" role="doc-backlink">Creating Federated Patient Summary</a><a class="headerlink" href="#creating-federated-patient-summary" title="Link to this heading"></a></h3>
+<p>The federated patient summary view is created in two steps for purely
+technical reasons: the second step depends on columns (<code class="docutils literal notranslate"><span class="pre">ssa3</span></code>, <code class="docutils literal notranslate"><span class="pre">zip</span></code>)
+that are cleansed in the first, and splitting the SQL keeps it readable.</p>
+<p>This step uses data modeling extensions described in
+<a class="reference internal" href="DataModellingExtensions.html"><span class="std std-doc">Data Modeling Extensions: Federated Views Across Years</span></a>.</p>
 <p>These steps are part of
 <a class="reference internal" href="pipeline/medicare_beneficiaries.html"><span class="doc std std-doc">Medicare Beneficiaries data in-database processing pipeline</span></a></p>
 <section id="first-step-initial-in-database-data-conditioning">
-<h4><a class="toc-backref" href="#id15" role="doc-backlink">First step: Initial in-database data conditioning</a><a class="headerlink" href="#first-step-initial-in-database-data-conditioning" title="Permalink to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id21" role="doc-backlink">First step: Initial in-database data conditioning</a><a class="headerlink" href="#first-step-initial-in-database-data-conditioning" title="Link to this heading"></a></h4>
 <p>The first step creates a view called <code class="docutils literal notranslate"><span class="pre">medicare.ps</span></code>.</p>
 <p>This step technically combines all <code class="docutils literal notranslate"><span class="pre">cms.mbsf_ab*</span></code> and <code class="docutils literal notranslate"><span class="pre">cms.mcr_bene_*</span></code>
 tables into a single view using <code class="docutils literal notranslate"><span class="pre">CREATE</span> <span class="pre">VIEW</span></code> SQL statement.</p>
@@ -379,13 +1048,13 @@ tables into a single view using <code class="docutils literal notranslate"><span
 SAS numeric form</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">dod</span></code> (date of death): converted to SQL <code class="docutils literal notranslate"><span class="pre">DATE</span></code> type,
 from either character or SAS numeric form</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">age</span></code> as recorded in the raw data. It is the beneficiary’s age on the last day of the prior year</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">age</span></code> as recorded in the raw data: the beneficiary’s age on January 1
+of the given year, if provided in the raw data</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">sex</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">race</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">rti_race</span></code> Research Triangle Institute race code</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">race_rti</span></code> Research Triangle Institute (RTI) race code</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">hmo_indicators</span></code> Monthly Medicare Advantage (MA) enrollment indicator</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">hmo_cvg_count</span></code> Number of months the beneficiary was enrolled</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">yob</span></code> year of birth calculated with the age variable (year - age)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">state</span></code>: added a column with text state id</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ssa2</span></code>: Social Security Administration (SSA) two digit code for state</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ssa3</span></code>: Social Security Administration (SSA) three digit code for county</p></li>
@@ -401,13 +1070,19 @@ zip code</p></li>
 is responsible to perform it.</p>
 </section>
 <section id="second-step-mapping-to-county-fips-codes">
-<h4><a class="toc-backref" href="#id16" role="doc-backlink">Second step: Mapping to county FIPS codes</a><a class="headerlink" href="#second-step-mapping-to-county-fips-codes" title="Permalink to this heading"></a></h4>
-<p>At the second step, a view called <code class="docutils literal notranslate"><span class="pre">medicare._ps</span></code> is created.<br />
-The only difference between  <code class="docutils literal notranslate"><span class="pre">medicare.ps</span></code> and <code class="docutils literal notranslate"><span class="pre">medicare._ps</span></code>
-is that the latter has county FIPS code (<code class="docutils literal notranslate"><span class="pre">fips3</span></code> column)
-inferred either SSA county code (<code class="docutils literal notranslate"><span class="pre">ssa3</span></code> column), if it is
-available or from the zip code (<code class="docutils literal notranslate"><span class="pre">zip</span></code> column)
-if SSA county code is absent. The reason this has to happen
+<h4><a class="toc-backref" href="#id22" role="doc-backlink">Second step: Mapping to county FIPS codes</a><a class="headerlink" href="#second-step-mapping-to-county-fips-codes" title="Link to this heading"></a></h4>
+<p>At the second step, a materialized view called <code class="docutils literal notranslate"><span class="pre">medicare._ps</span></code> is created.
+It adds four computed columns on top of <code class="docutils literal notranslate"><span class="pre">medicare.ps</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fips3</span></code>: county FIPS code, inferred from the SSA county code
+(<code class="docutils literal notranslate"><span class="pre">ssa3</span></code> column) when it is available, or from the zip code
+(<code class="docutils literal notranslate"><span class="pre">zip</span></code> column) when the SSA county code is absent</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fips3_is_approximated</span></code>: flags rows where <code class="docutils literal notranslate"><span class="pre">fips3</span></code> had to be inferred
+from the zip code</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fips3_list</span></code>: all county FIPS codes consistent with the source record</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">yob</span></code>: year of birth, calculated from the age variable (<code class="docutils literal notranslate"><span class="pre">year</span> <span class="pre">-</span> <span class="pre">age</span></code>)</p></li>
+</ul>
+<p>The reason this has to happen
 in a separate second step is that both <code class="docutils literal notranslate"><span class="pre">ssa3</span></code> and <code class="docutils literal notranslate"><span class="pre">zip</span></code> are
 being cleansed in the first step.</p>
 <p>The second step is performed by a general loader utility
@@ -415,8 +1090,19 @@ based on the
 <a class="reference internal" href="members/medicare_yaml.html"><span class="std std-doc">Medicare data model definition</span></a>.</p>
 </section>
 </section>
+<section id="creating-the-mbsf-d-dual-eligibility-view">
+<h3><a class="toc-backref" href="#id23" role="doc-backlink">Creating the mbsf_d dual-eligibility view</a><a class="headerlink" href="#creating-the-mbsf-d-dual-eligibility-view" title="Link to this heading"></a></h3>
+<p>The same sub-workflow (<a class="reference internal" href="pipeline/medicare_beneficiaries.html"><span class="doc std std-doc">Medicare Beneficiaries data in-database processing pipeline</span></a>) also creates
+<code class="docutils literal notranslate"><span class="pre">medicare.mbsf_d</span></code>, a materialized view that unites the raw <code class="docutils literal notranslate"><span class="pre">cms.mbsf_*d*</span></code>
+component tables — the split files that carry the monthly dual-eligibility
+data for the years in which it is delivered separately. The view keeps the
+beneficiary id, the year, the number of months of dual coverage
+(<code class="docutils literal notranslate"><span class="pre">dual_mo</span></code>) and the array of 12 monthly dual-status indicators
+(<code class="docutils literal notranslate"><span class="pre">dual_indicators</span></code>), and it feeds the <code class="docutils literal notranslate"><span class="pre">dual_*</span></code> column family of the
+<a class="reference internal" href="#enrollments-columns-definitions">Enrollments table</a>.</p>
+</section>
 <section id="creating-beneficiaries-table">
-<h3><a class="toc-backref" href="#id17" role="doc-backlink">Creating Beneficiaries table</a><a class="headerlink" href="#creating-beneficiaries-table" title="Permalink to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id24" role="doc-backlink">Creating Beneficiaries table</a><a class="headerlink" href="#creating-beneficiaries-table" title="Link to this heading"></a></h3>
 <p>This is also part of
 <a class="reference internal" href="pipeline/medicare_beneficiaries.html"><span class="doc std std-doc">Medicare Beneficiaries data in-database processing pipeline</span></a></p>
 <p>See also <a class="reference internal" href="Medicaid.html#beneficiaries"><span class="std std-ref">creating Medicaid Beneficiaries table</span></a></p>
@@ -432,36 +1118,75 @@ discrepancies in the data related to:</p>
 <li><p>race</p></li>
 <li><p>race_rti</p></li>
 <li><p>sex</p></li>
+<li><p>orec (the Original Reason for Entitlement Code — see
+<a class="reference internal" href="#entitlement-reason-codes-orec-and-curec">Entitlement reason codes: OREC and CUREC</a>)</p></li>
 </ul>
 <p>If there is any discrepancy for a given <code class="docutils literal notranslate"><span class="pre">bene_id</span></code>, then:</p>
 <ul class="simple">
 <li><p>The earliest <em><strong>DOB</strong></em> is selected as <code class="docutils literal notranslate"><span class="pre">dob</span></code></p></li>
 <li><p>The latest <em><strong>DOD</strong></em> (date of death) is selected  as <code class="docutils literal notranslate"><span class="pre">dod</span></code></p></li>
 <li><p>A comma-separated string containing all race codes is used for <code class="docutils literal notranslate"><span class="pre">race</span></code></p></li>
-<li><p>A comma-separated string containing all race codes is used for <code class="docutils literal notranslate"><span class="pre">race_rti</span></code></p></li>
-<li><p>comma-separated string containing all sex codes is used for <code class="docutils literal notranslate"><span class="pre">sex</span></code></p></li>
+<li><p>A comma-separated string containing all RTI race codes is used for <code class="docutils literal notranslate"><span class="pre">race_rti</span></code></p></li>
+<li><p>A comma-separated string containing all sex codes is used for <code class="docutils literal notranslate"><span class="pre">sex</span></code></p></li>
+<li><p>The OREC value from the earliest enrollment year is selected as <code class="docutils literal notranslate"><span class="pre">orec</span></code>
+(with ties broken by the smallest code, so the result is deterministic)</p></li>
 </ul>
 <p>The following columns are added:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">duplciates</span></code>: a numeric column showing the number of inconsistent
-values for this beneficiary. If it is greater than 1, it means
-there is a discrepancy in the data for this beneficiary</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">discrepancies</span></code>: a numeric column counting the alternative values recorded
+for this beneficiary. It is computed as the number of distinct
+<code class="docutils literal notranslate"><span class="pre">(dob,</span> <span class="pre">race,</span> <span class="pre">sex)</span></code> combinations minus one, plus the number of extra
+distinct non-null dates of death. A value of <code class="docutils literal notranslate"><span class="pre">0</span></code> means the records are
+consistent; any value greater than <code class="docutils literal notranslate"><span class="pre">0</span></code> indicates a discrepancy in the raw
+data for this beneficiary. (Earlier revisions of this page referred to
+this column as “duplicates”; the physical column name is <code class="docutils literal notranslate"><span class="pre">discrepancies</span></code>.)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">dob_latest</span></code>: the latest DOB found in the records for this
 beneficiary. The value of this column is NULL for consistent records</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">dod_earliest</span></code>: the earliest DOD found in the records for this
 beneficiary. The value of this column is NULL for consistent records</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">orec_latest</span></code>: non-null only when OREC varied across the beneficiary’s
+records; it then holds the alternative value (computed as <code class="docutils literal notranslate"><span class="pre">MAX(orec)</span></code>,
+by analogy with <code class="docutils literal notranslate"><span class="pre">dob_latest</span></code>) (see
+<a class="reference internal" href="#entitlement-reason-codes-orec-and-curec">Entitlement reason codes: OREC and CUREC</a>)</p></li>
 <li><p>Beneficiary id HLL hash (<code class="docutils literal notranslate"><span class="pre">bene</span></code> column), to be used for
 <code class="docutils literal notranslate"><span class="pre">approximate</span> <span class="pre">count</span> <span class="pre">distinct</span></code> queries. <a class="reference internal" href="UsingHLL.html"><span class="std std-doc">See more</span></a></p></li>
 </ul>
-<p>This topic is discussed in more details in the
-<a class="reference internal" href="Medicaid.html#deduplication-and-data-cleansing"><span class="std std-ref">Medicaid documentation</span></a></p>
+<p>The general pattern is defined in
+<a class="reference internal" href="concepts.html#disambiguation-rules"><span class="std std-ref">Disambiguation rules</span></a>; the
+<a class="reference internal" href="Medicaid.html#deduplication-and-data-cleansing"><span class="std std-ref">Medicaid page</span></a> shows an
+earlier variant of the same approach.</p>
+<section id="beneficiary-enrollment-span-columns">
+<h4><a class="toc-backref" href="#id25" role="doc-backlink">Beneficiary enrollment-span columns</a><a class="headerlink" href="#beneficiary-enrollment-span-columns" title="Link to this heading"></a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">beneficiaries</span></code> table also summarizes each beneficiary’s enrollment
+history:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">first_enrollment_year</span></code>: the earliest year in which the beneficiary
+appears in the patient summary data (<code class="docutils literal notranslate"><span class="pre">MIN(year)</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">last_enrollment_year</span></code>: the latest such year (<code class="docutils literal notranslate"><span class="pre">MAX(year)</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">all_enrollment_years</span></code>: an integer array of all distinct enrollment
+years, in ascending order</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">yob</span></code>: year of birth, the earliest value of <code class="docutils literal notranslate"><span class="pre">year</span> <span class="pre">-</span> <span class="pre">age</span></code> computed across
+the beneficiary’s records; <code class="docutils literal notranslate"><span class="pre">yob_latest</span></code> is non-null only when the
+computed year of birth is not the same in all records</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">number_of_gap_years</span></code>: the number of years inside the enrollment span
+for which no enrollment record exists. This column is a worked example
+of a SQL generated column — it is declared in the data model as</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">GENERATED</span><span class="w"> </span><span class="n">ALWAYS</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="n">last_enrollment_year</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">first_enrollment_year</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">                     </span><span class="o">-</span><span class="w"> </span><span class="k">CARDINALITY</span><span class="p">(</span><span class="n">all_enrollment_years</span><span class="p">))</span><span class="w"> </span><span class="n">STORED</span>
+</pre></div>
+</div>
+<p>so PostgreSQL computes and stores the value automatically from the three
+enrollment-span columns above.</p>
+</li>
+</ul>
+</section>
 </section>
 <section id="creating-enrollments-table">
-<h3><a class="toc-backref" href="#id18" role="doc-backlink">Creating Enrollments table</a><a class="headerlink" href="#creating-enrollments-table" title="Permalink to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id26" role="doc-backlink">Creating Enrollments table</a><a class="headerlink" href="#creating-enrollments-table" title="Link to this heading"></a></h3>
 <p>This is also part of
 <a class="reference internal" href="pipeline/medicare_beneficiaries.html"><span class="doc std std-doc">Medicare Beneficiaries data in-database processing pipeline</span></a></p>
 <section id="enrollments-overview">
-<h4><a class="toc-backref" href="#id19" role="doc-backlink">Enrollments overview</a><a class="headerlink" href="#enrollments-overview" title="Permalink to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id27" role="doc-backlink">Enrollments overview</a><a class="headerlink" href="#enrollments-overview" title="Link to this heading"></a></h4>
 <p>Enrollments table contains information about yearly beneficiaries
 enrollments in different states and tracks changes in eligibility
 (i.e. beginning of the eligibility and beneficiaries death) and
@@ -478,21 +1203,21 @@ as a real table, adds primary key and builds indices to make queries
 more efficient.</p>
 </section>
 <section id="enrollments-primary-key-unique-identifier">
-<h4><a class="toc-backref" href="#id20" role="doc-backlink">Enrollments Primary key (unique identifier)</a><a class="headerlink" href="#enrollments-primary-key-unique-identifier" title="Permalink to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id28" role="doc-backlink">Enrollments Primary key (unique identifier)</a><a class="headerlink" href="#enrollments-primary-key-unique-identifier" title="Link to this heading"></a></h4>
 <ul class="simple">
 <li><p>bene_id</p></li>
 <li><p>year</p></li>
 <li><p>state</p></li>
 </ul>
 <p>In other words, a record in the table describes a given beneficiary
-leaving in a given state during a given year. If beneficiary has moved
+living in a given state during a given year. If beneficiary has moved
 from one state to another during the year, more than one record for such
 a beneficiary will be created in the table. This is consistent with
 <a class="reference internal" href="Medicaid.html#enrollments"><span class="std std-ref">Medicaid Enrollments</span></a>, though, arguably,
 makes less sense for Medicare.</p>
 </section>
 <section id="enrollments-data-cleansing">
-<h4><a class="toc-backref" href="#id21" role="doc-backlink">Enrollments data cleansing</a><a class="headerlink" href="#enrollments-data-cleansing" title="Permalink to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id29" role="doc-backlink">Enrollments data cleansing</a><a class="headerlink" href="#enrollments-data-cleansing" title="Link to this heading"></a></h4>
 <p>Beneficiaries can move during a year therefore address columns can have
 multiple values. These columns are:</p>
 <ul class="simple">
@@ -502,41 +1227,28 @@ multiple values. These columns are:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">ssa3</span></code>: SSA county code</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">zip</span></code>: beneficiary address zip code</p></li>
 </ul>
-<p>The policy for all of this columns is the following:</p>
+<p>The policy for all of these columns is the following:</p>
 <ul class="simple">
-<li><p>For corresponding column in the enrollments table, an arbitrary but
+<li><p>For the corresponding column in the enrollments table, an arbitrary but
 deterministic value is selected</p></li>
-<li><p>An additional column is added, containing the list of all encountered
-values</p></li>
+<li><p>For most of these columns an additional companion column is added,
+containing the list of all encountered values (<code class="docutils literal notranslate"><span class="pre">fips2</span></code>, which is
+derivable from the state, has no list column)</p></li>
 </ul>
-<p>The additional columns are:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">ssa2_list</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ssa3_list</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">residence_counties</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">zips</span></code></p></li>
-</ul>
-<p>Additional columns reflecting data quality and cleansing are added to
-the <strong>Enrollments</strong> tables:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">state_count</span></code>: Number of states associated with the given beneficiary
-in a given year</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">fips3_is_approximated</span></code>: A boolean column, indicating whether the value
-was taken from original record as is or approximated.
-If true, it means that there was no valid county code in the original
-ResDac record, hence, the county code was inferred from other data
-(in most cases, zip code)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">fips3_valdiated</span></code>: A boolean column indicating that the value
-of county code is consistent with the values of state code and zip code.</p></li>
-</ul>
+<p>Additional columns reflecting data quality and cleansing
+(<code class="docutils literal notranslate"><span class="pre">state_count</span></code>, <code class="docutils literal notranslate"><span class="pre">fips3_is_approximated</span></code>, <code class="docutils literal notranslate"><span class="pre">fips3_valdiated</span></code>) are also
+added to the <strong>Enrollments</strong> table. All of these columns are described
+in <a class="reference internal" href="#enrollments-columns-definitions">Enrollments columns definitions</a>
+below.</p>
 </section>
 <section id="enrollments-columns-definitions">
-<h4><a class="toc-backref" href="#id22" role="doc-backlink">Enrollments columns definitions</a><a class="headerlink" href="#enrollments-columns-definitions" title="Permalink to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id30" role="doc-backlink">Enrollments columns definitions</a><a class="headerlink" href="#enrollments-columns-definitions" title="Link to this heading"></a></h4>
 <p>The following columns are created for Enrollments:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">ssa2</span></code>: SSA state code</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ssa3</span></code>: SSA county code</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ssa2_list</span></code>: list of all SSA county codes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ssa2_list</span></code>: list of all SSA state codes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ssa3_list</span></code>: list of all SSA county codes</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">state_iso</span></code>: ISO code of the state, used for mapping</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">residence_county</span></code>: one of the “latest” residence
 counties where
@@ -553,32 +1265,114 @@ numerical order</p></li>
 “latest” zip codes, where a beneficiary was
 registered during the year</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">state_count</span></code>: number of states, where the beneficiary
-was enrolled in medicaid during the year. Note,
+was enrolled in Medicare during the year. Note,
 this is also the number of records for this beneficiary and this year
-in the Enrollments` table.</p></li>
+in the <code class="docutils literal notranslate"><span class="pre">Enrollments</span></code> table.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">died</span></code>: a boolean flag indicating that the beneficiary has
 died during this year while being registered
-for medicaid in this state.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">hmo_indicators</span></code>: the maximum value of all the monthly hmo indicators</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">hmo_cvg_count</span></code>: the number of months the beneficiary was enrolled in a Medicare Advantage (MA)</p></li>
+for Medicare in this state.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hmo_indicators</span></code>: the array of 12 monthly HMO indicators; when the
+group contains multiple source records, the maximum (by array
+comparison) of the encountered arrays is kept</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hmo_cvg_count</span></code>: the number of months the beneficiary was enrolled in a Medicare Advantage (MA) plan</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hmo</span></code>: a generated boolean column, true when <code class="docutils literal notranslate"><span class="pre">hmo_cvg_count</span></code> is greater
+than zero, i.e. when the beneficiary received benefits through a managed
+care plan for at least one month of the year; NULL when the count is
+unknown</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">buyin_indicators</span></code>, <code class="docutils literal notranslate"><span class="pre">buyin_cvg_count</span></code>, <code class="docutils literal notranslate"><span class="pre">buyin</span></code> (added in a later
+revision of the data model): the Part B premium buy-in family — an array of the
+monthly buy-in indicator codes, the number of months during the year when
+the beneficiary’s premium was paid by the state, and a generated boolean
+that is true when that count is greater than zero</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dual_indicators</span></code>, <code class="docutils literal notranslate"><span class="pre">dual_cvg_count</span></code>, <code class="docutils literal notranslate"><span class="pre">dual</span></code> (added in a later
+revision of the data model): the dual-eligibility family, taken from the
+<code class="docutils literal notranslate"><span class="pre">medicare.mbsf_d</span></code> materialized view (built from the raw <code class="docutils literal notranslate"><span class="pre">mbsf_*d*</span></code>
+component files) — an array of the monthly dual-status indicator codes,
+the number of months of dual coverage during the year (NULL when no
+<code class="docutils literal notranslate"><span class="pre">mbsf_d</span></code> data exists for the beneficiary and year), and a generated
+boolean that is true when that count is greater than zero</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">curec</span></code>, <code class="docutils literal notranslate"><span class="pre">curec_latest</span></code>, <code class="docutils literal notranslate"><span class="pre">consistent_curec</span></code>: the Current Reason for
+Entitlement Code and its consistency tracking — see
+<a class="reference internal" href="#entitlement-reason-codes-orec-and-curec">Entitlement reason codes: OREC and CUREC</a></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">fips3_is_approximated</span></code>: A boolean column, indicating whether the value
 was taken from original record as is or approximated.
 If true, it means that there was no valid county code in the original
 ResDac record, hence, the county code was inferred from other data
 (in most cases, zip code)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">fips3_valdiated</span></code>: A boolean column indicating that the value
-of county code is consistent with the values of state code and zip code.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fips3_valdiated</span></code> (sic): A boolean column indicating that the value
+of county code is consistent with the values of state code and zip code.
+The physical column name in the database is misspelled exactly as shown
+here (<code class="docutils literal notranslate"><span class="pre">valdiated</span></code>, not <code class="docutils literal notranslate"><span class="pre">validated</span></code>); use this spelling in queries.</p></li>
 <li><p>Beneficiary id HLL hash (<code class="docutils literal notranslate"><span class="pre">bene</span></code> column), to be used for
 <code class="docutils literal notranslate"><span class="pre">approximate</span> <span class="pre">count</span> <span class="pre">distinct</span></code> queries. <a class="reference internal" href="UsingHLL.html"><span class="std std-doc">See more</span></a></p></li>
 </ul>
 </section>
 </section>
+<section id="entitlement-reason-codes-orec-and-curec">
+<h3><a class="toc-backref" href="#id31" role="doc-backlink">Entitlement reason codes: OREC and CUREC</a><a class="headerlink" href="#entitlement-reason-codes-orec-and-curec" title="Link to this heading"></a></h3>
+<p>Medicare records carry two entitlement reason codes:</p>
+<ul class="simple">
+<li><p><strong>OREC</strong> (Original Reason for Entitlement Code) records why the
+beneficiary first became entitled to Medicare. It is set at the time of
+enrollment and, by definition, never changes for the life of the
+beneficiary. It is therefore a per-beneficiary invariant and is stored on
+the <code class="docutils literal notranslate"><span class="pre">beneficiaries</span></code> table.</p></li>
+<li><p><strong>CUREC</strong> (Current Reason for Entitlement Code) records the current
+reason for entitlement and can legitimately change from year to year. It
+is therefore a year-varying attribute and is stored on the <code class="docutils literal notranslate"><span class="pre">enrollments</span></code>
+table.</p></li>
+</ul>
+<p>This split is a rule of the data model, not just tidiness. The QC view
+<code class="docutils literal notranslate"><span class="pre">qc_enrl_bene</span></code> is defined as <code class="docutils literal notranslate"><span class="pre">enrollments</span> <span class="pre">NATURAL</span> <span class="pre">JOIN</span> <span class="pre">beneficiaries</span></code>, and
+in a natural join every column present in both tables becomes part of the
+implicit join key. If a column such as <code class="docutils literal notranslate"><span class="pre">orec</span></code> were kept on both tables,
+every row where the two values disagree would silently drop out of the
+join — no error, no warning, just missing rows and understated counts
+downstream. To keep the natural join keyed only on the true relationship
+(the beneficiary id), per-person invariants must live only on
+<code class="docutils literal notranslate"><span class="pre">beneficiaries</span></code> and year-varying attributes only on <code class="docutils literal notranslate"><span class="pre">enrollments</span></code>.</p>
+<p>How the two codes are computed:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">beneficiaries.orec</span></code> takes its canonical value from the earliest
+enrollment year, with ties broken by the smallest code so that the result
+is deterministic: <code class="docutils literal notranslate"><span class="pre">(array_agg(orec</span> <span class="pre">ORDER</span> <span class="pre">BY</span> <span class="pre">year,</span> <span class="pre">orec))[1]</span></code>. If the raw
+data nevertheless shows OREC changing over the years,
+<code class="docutils literal notranslate"><span class="pre">beneficiaries.orec_latest</span></code> is non-null (holding the alternative value,
+<code class="docutils literal notranslate"><span class="pre">MAX(orec)</span></code>), and
+the <code class="docutils literal notranslate"><span class="pre">consistent_orec</span></code> flag in <code class="docutils literal notranslate"><span class="pre">qc_enrl_bene</span></code> reports the discrepancy:
+<code class="docutils literal notranslate"><span class="pre">MISSING</span></code> when OREC is absent, <code class="docutils literal notranslate"><span class="pre">AMBIGUOUS</span></code> when it varied, and
+<code class="docutils literal notranslate"><span class="pre">CONSISTENT</span></code> otherwise. This is the same earliest-value-canonical,
+alternative-value-in-a-secondary-column disambiguation pattern used for
+the date of birth (<code class="docutils literal notranslate"><span class="pre">dob</span></code> / <code class="docutils literal notranslate"><span class="pre">dob_latest</span></code> / <code class="docutils literal notranslate"><span class="pre">consistent_dob</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enrollments.curec</span></code> is aggregated as <code class="docutils literal notranslate"><span class="pre">MAX(curec)</span></code> within each
+<code class="docutils literal notranslate"><span class="pre">(bene_id,</span> <span class="pre">year,</span> <span class="pre">state)</span></code> group. This is a defensive de-duplication: in
+the synthetic dataset every such group is a single row, but real Medicare
+data can contain duplicate source rows (for example, from overlapping or
+reissued MBSF files) that disagree on CUREC. When that happens,
+<code class="docutils literal notranslate"><span class="pre">curec_latest</span></code> is non-null and the <code class="docutils literal notranslate"><span class="pre">consistent_curec</span></code> flag is
+<code class="docutils literal notranslate"><span class="pre">AMBIGUOUS</span></code>; otherwise it is <code class="docutils literal notranslate"><span class="pre">CONSISTENT</span></code> (or <code class="docutils literal notranslate"><span class="pre">MISSING</span></code> when CUREC is
+absent). Because CUREC consistency is a property of a single enrollment
+year — not of the beneficiary across years — <code class="docutils literal notranslate"><span class="pre">consistent_curec</span></code> is a
+generated, stored column on the <code class="docutils literal notranslate"><span class="pre">enrollments</span></code> table itself, deliberately
+not one of the beneficiary-grain flags computed in <code class="docutils literal notranslate"><span class="pre">qc_enrl_bene</span></code>. It
+still reaches the <code class="docutils literal notranslate"><span class="pre">qc_enrollments</span></code> aggregates through the join.</p></li>
+</ul>
+<div class="note admonition">
+<p class="admonition-title">Design note — evolved after the book</p>
+<p>Earlier revisions of the data model kept a per-year <code class="docutils literal notranslate"><span class="pre">orec</span></code> column on
+<code class="docutils literal notranslate"><span class="pre">enrollments</span></code>, making it an implicit key of the natural join described
+above. The current model removes it and surfaces disagreements through
+<code class="docutils literal notranslate"><span class="pre">orec_latest</span></code> / <code class="docutils literal notranslate"><span class="pre">consistent_orec</span></code>, with <code class="docutils literal notranslate"><span class="pre">curec_latest</span></code> /
+<code class="docutils literal notranslate"><span class="pre">consistent_curec</span></code> doing the same for CUREC.</p>
+</div>
+</section>
 <section id="creating-federated-admissions-view">
-<h3><a class="toc-backref" href="#id23" role="doc-backlink">Creating Federated Admissions view</a><a class="headerlink" href="#creating-federated-admissions-view" title="Permalink to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id32" role="doc-backlink">Creating Federated Admissions view</a><a class="headerlink" href="#creating-federated-admissions-view" title="Link to this heading"></a></h3>
 <p>This step is part of
 <a class="reference internal" href="pipeline/medicare_admissions.html"><span class="doc std std-doc">Process Medicare inpatient admissions data inside the database</span></a></p>
 <p>This step technically combines all <code class="docutils literal notranslate"><span class="pre">cms.medpar*</span></code> and <code class="docutils literal notranslate"><span class="pre">cms.mcr_ip_*</span></code>
-tables into a single view using <code class="docutils literal notranslate"><span class="pre">CREATE</span> <span class="pre">VIEW</span></code> SQL statement.</p>
+tables into a single view using <code class="docutils literal notranslate"><span class="pre">CREATE</span> <span class="pre">VIEW</span></code> SQL statement. The result
+is the <code class="docutils literal notranslate"><span class="pre">medicare.ip</span></code> view.</p>
 <p>It also cleanses and conditions data from the following columns:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">year</span></code></p>
@@ -599,12 +1393,14 @@ SAS numeric form</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">discharge_date</span></code>: converted to SQL <code class="docutils literal notranslate"><span class="pre">DATE</span></code> type,
 from either character or SAS numeric form</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">adm_day_of_week</span></code>: converted to <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
-<li><p>Diagnoses: separate columns combined into a single <code class="docutils literal notranslate"><span class="pre">ARRAY</span></code> column
+<li><p>Diagnoses: the federated view keeps the up to 25 separate diagnosis
+columns (<code class="docutils literal notranslate"><span class="pre">diag1</span></code> … <code class="docutils literal notranslate"><span class="pre">diag25</span></code>) as-is; they are combined into a single
+<code class="docutils literal notranslate"><span class="pre">ARRAY</span></code> column later, when the Inpatient Admissions table is created
 (read more about <a class="reference external" href="https://www.postgresql.org/docs/current/arrays.html">PostgreSQL Arrays</a>)</p></li>
 </ul>
 </section>
 <section id="creating-inpatient-admissions-table">
-<h3><a class="toc-backref" href="#id24" role="doc-backlink">Creating Inpatient Admissions table</a><a class="headerlink" href="#creating-inpatient-admissions-table" title="Permalink to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id33" role="doc-backlink">Creating Inpatient Admissions table</a><a class="headerlink" href="#creating-inpatient-admissions-table" title="Link to this heading"></a></h3>
 <p>This step is also part of
 <a class="reference internal" href="pipeline/medicare_admissions.html"><span class="doc std std-doc">Process Medicare inpatient admissions data inside the database</span></a></p>
 <p>Table with all inpatient admissions billed to Medicare with
@@ -623,230 +1419,219 @@ admission and discharge dates and ICD codes.</p>
 </li>
 </ul>
 </li>
-<li><p>Performed validation of admission data. Records that failed
-validation are excluded from the resulting <code class="docutils literal notranslate"><span class="pre">Admissions</span></code> table but are stored
-in a special <code class="docutils literal notranslate"><span class="pre">medicare_audit.admissions</span></code> table, together with the reason
-for validation failure. We distinguish three reasons for validation failure:</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">Primary</span> <span class="pre">key</span></code>: this indicates missing data, for example:</p>
-<ul>
-<li><p>Missing beneficiary id</p></li>
-<li><p>Missing admission or discharge date</p></li>
-<li><p>Missing US State, where the admission happened</p></li>
-</ul>
+<li><p>Performed validation of admission data. Three named validation checks
+are applied:</p>
+<ol class="arabic simple">
+<li><p><strong>Primary key integrity</strong>: every admission must carry a complete set
+of key attributes. Records with missing data — for example, a missing
+beneficiary id, a missing admission or discharge date, or a missing
+US state — fail this check and are journaled with the reason
+<code class="docutils literal notranslate"><span class="pre">PRIMARY</span> <span class="pre">KEY</span></code>.</p></li>
+<li><p><strong>Referential integrity</strong> against enrollments: the beneficiary
+referred to by the admission record must have an enrollment record
+for the given year (<code class="docutils literal notranslate"><span class="pre">admissions</span></code> is defined as a child of
+<code class="docutils literal notranslate"><span class="pre">enrollments</span></code>). Records referring to a beneficiary who was not
+enrolled are journaled with the reason <code class="docutils literal notranslate"><span class="pre">FOREIGN</span> <span class="pre">KEY</span></code>.</p></li>
+<li><p><strong>Duplicate elimination</strong>: when several records describe the same
+admission (the same primary key values), only one record is kept in
+the <code class="docutils literal notranslate"><span class="pre">admissions</span></code> table; the others are journaled with the reason
+<code class="docutils literal notranslate"><span class="pre">DUPLICATE</span></code>. The kept record has its <code class="docutils literal notranslate"><span class="pre">quality</span></code> column set to
+<code class="docutils literal notranslate"><span class="pre">DUPLICATE</span></code> (the default value is <code class="docutils literal notranslate"><span class="pre">PASS</span></code>), so it remains identifiable.</p></li>
+</ol>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Foreign</span> <span class="pre">key</span></code>: means that the beneficiary referred in the admission
-record was not eligible for Medicare in the given year</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Duplicate</span></code>: a duplicate record was found. Only one record out of
-several duplicates is stored in the <code class="docutils literal notranslate"><span class="pre">admissions</span></code> table, others are
-copied to <code class="docutils literal notranslate"><span class="pre">medicare_audit.admissions</span></code> table.</p></li>
 </ul>
-</li>
-</ul>
+<p>The invalid-records policy for this table is journaling rather than silent
+deletion: the data model declares <code class="docutils literal notranslate"><span class="pre">invalid.records</span></code> with <code class="docutils literal notranslate"><span class="pre">action:</span> <span class="pre">INSERT</span></code>
+targeting the audit schema, so every record that fails a check is excluded
+from <code class="docutils literal notranslate"><span class="pre">medicare.admissions</span></code> but inserted into <code class="docutils literal notranslate"><span class="pre">medicare_audit.admissions</span></code>
+together with the <code class="docutils literal notranslate"><span class="pre">REASON</span></code> code listed above. No record is silently
+dropped, and the <a class="reference internal" href="#admissions-qc-table">Admissions QC Table</a> reports valid
+and journaled records side by side.</p>
 <p>See more information about handling records that have failed validation in:
 <a class="reference internal" href="Datamodels.html#invalid-record"><span class="std std-ref">Data Modeling</span></a></p>
+<section id="additional-admissions-columns">
+<h4><a class="toc-backref" href="#id34" role="doc-backlink">Additional admissions columns</a><a class="headerlink" href="#additional-admissions-columns" title="Link to this heading"></a></h4>
+<p>Beyond the identifying and date columns, the <code class="docutils literal notranslate"><span class="pre">admissions</span></code> table carries the
+following groups of columns:</p>
+<ul class="simple">
+<li><p>Admission characteristics (added in a later revision of the data model):
+<code class="docutils literal notranslate"><span class="pre">admsn_type_cd</span></code> (inpatient admission type code), <code class="docutils literal notranslate"><span class="pre">src_admsn_cd</span></code> (source
+of admission), <code class="docutils literal notranslate"><span class="pre">dschrgcd</span></code> (discharge status code), and
+<code class="docutils literal notranslate"><span class="pre">dschrg_dstntn_cd</span></code> (discharge destination code)</p></li>
+<li><p>Length of stay (added in a later revision of the data model): <code class="docutils literal notranslate"><span class="pre">los_day_cnt</span></code>,
+the total length of the beneficiary’s stay in days</p></li>
+<li><p>DRG and payment amounts (added in a later revision of the data model):
+<code class="docutils literal notranslate"><span class="pre">drg_price_amt</span></code>, <code class="docutils literal notranslate"><span class="pre">drg_outlier_pmt_amt</span></code>, <code class="docutils literal notranslate"><span class="pre">pass_thru_amt</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">mdcr_pmt_amt</span></code></p></li>
+<li><p>Beneficiary liability amounts (added in a later revision of the data model):
+<code class="docutils literal notranslate"><span class="pre">bene_blood_ddctbl_amt</span></code>, <code class="docutils literal notranslate"><span class="pre">bene_prmry_pyr_amt</span></code>, <code class="docutils literal notranslate"><span class="pre">bene_ip_ddctbl_amt</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">bene_pta_coinsrnc_amt</span></code></p></li>
+<li><p>Diagnoses: <code class="docutils literal notranslate"><span class="pre">primary_diagnosis</span></code> and the <code class="docutils literal notranslate"><span class="pre">diagnoses</span></code> array, which collects
+the non-null, whitespace-trimmed diagnosis codes from the up to 25
+separate diagnosis columns of the raw files (only NULL entries are
+removed from the array)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">quality</span></code>: <code class="docutils literal notranslate"><span class="pre">PASS</span></code> by default; set to <code class="docutils literal notranslate"><span class="pre">DUPLICATE</span></code> on a record that was
+kept while its duplicates were journaled (see above)</p></li>
+</ul>
+<p>All of these columns are defined in the
+<a class="reference internal" href="members/medicare_yaml.html"><span class="std std-doc">Medicare data model definition</span></a>.</p>
+</section>
 </section>
 </section>
 <section id="creating-qc-tables">
-<h2><a class="toc-backref" href="#id25" role="doc-backlink">Creating QC Tables</a><a class="headerlink" href="#creating-qc-tables" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id35" role="doc-backlink">Creating QC Tables</a><a class="headerlink" href="#creating-qc-tables" title="Link to this heading"></a></h2>
 <p><a class="reference internal" href="pipeline/medicare_qc.html"><span class="doc std std-doc">Pipeline</span></a></p>
 <section id="medicare-qc-approach">
-<h3><a class="toc-backref" href="#id26" role="doc-backlink">Medicare QC approach</a><a class="headerlink" href="#medicare-qc-approach" title="Permalink to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id36" role="doc-backlink">Medicare QC approach</a><a class="headerlink" href="#medicare-qc-approach" title="Link to this heading"></a></h3>
 <p>QC tables (materialized views to be precise) are created by
 <a class="reference internal" href="pipeline/medicare_qc.html"><span class="doc std std-doc">Medicare QC Pipeline</span></a></p>
-<p>Two tables are created:</p>
+<p>Two aggregate QC tables are created, each backed by a helper view:</p>
 <ul class="simple">
-<li><p>Enrollments QC</p></li>
-<li><p>Admissions QC</p></li>
+<li><p>Enrollments QC: the <code class="docutils literal notranslate"><span class="pre">qc_enrollments</span></code> materialized view, built over the
+<code class="docutils literal notranslate"><span class="pre">qc_enrl_bene</span></code> join view</p></li>
+<li><p>Admissions QC: the <code class="docutils literal notranslate"><span class="pre">qc_admissions</span></code> materialized view, built over the
+<code class="docutils literal notranslate"><span class="pre">qc_adm_union</span></code> view</p></li>
 </ul>
-<p>These are aggregate tables, defined in
-<a class="reference internal" href="members/medicare_yaml.html"><span class="std std-doc">Medicare data model definition</span></a>
-(qc_enrollments and qc_admissions).</p>
-<p>In these tables we define dimensions and measures, including count measures
-and percent measures.</p>
+<p>These objects form the Gold layer of the warehouse. They are defined in the
+<a class="reference internal" href="members/medicare_yaml.html"><span class="std std-doc">Medicare data model definition</span></a>, which is the
+authoritative source for their exact SQL; the sections below describe their
+structure. In these tables we define dimensions and count measures; percent
+measures are computed on top of them by the QC dashboard.</p>
 </section>
 <section id="enrollments-qc-table">
-<h3><a class="toc-backref" href="#id27" role="doc-backlink">Enrollments QC Table</a><a class="headerlink" href="#enrollments-qc-table" title="Permalink to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id37" role="doc-backlink">Enrollments QC Table</a><a class="headerlink" href="#enrollments-qc-table" title="Link to this heading"></a></h3>
 <section id="enrollments-qc-table-definition">
-<h4><a class="toc-backref" href="#id28" role="doc-backlink">Enrollments QC Table Definition</a><a class="headerlink" href="#enrollments-qc-table-definition" title="Permalink to this heading"></a></h4>
-<p>Enrollment QC is roughly defined by the following SQL:</p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span>
-<span class="w">    </span><span class="k">year</span><span class="p">,</span>
-<span class="w">    </span><span class="k">state</span><span class="p">,</span>
-<span class="w">    </span><span class="n">zip</span><span class="p">,</span>
-<span class="w">    </span><span class="n">fips3</span><span class="p">,</span>
-<span class="w">    </span><span class="k">CASE</span>
-<span class="w">        </span><span class="k">WHEN</span><span class="w"> </span><span class="p">(</span><span class="w"> </span>
-<span class="w">                </span><span class="n">beneficiaries</span><span class="p">.</span><span class="n">dob</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="p">)</span><span class="w"> </span>
-<span class="w">        </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;MISSING&#39;</span><span class="p">::</span><span class="nb">TEXT</span>
-<span class="w">        </span><span class="k">WHEN</span><span class="w"> </span><span class="p">(</span><span class="w"> </span>
-<span class="w">                </span><span class="n">beneficiaries</span><span class="p">.</span><span class="n">dob_latest</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">)</span><span class="w"> </span>
-<span class="w">        </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;AMBIGUOUS&#39;</span><span class="p">::</span><span class="w"> </span><span class="nb">TEXT</span>
-<span class="w">        </span><span class="k">ELSE</span><span class="w"> </span><span class="s1">&#39;CONSISTENT&#39;</span><span class="p">::</span><span class="nb">TEXT</span>
-<span class="w">    </span><span class="k">END</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">consistent_dob</span><span class="p">,</span>
-<span class="w">    </span><span class="k">CASE</span>
-<span class="w">        </span><span class="k">WHEN</span><span class="w"> </span><span class="p">(</span><span class="w"> </span>
-<span class="w">                </span><span class="n">beneficiaries</span><span class="p">.</span><span class="n">dod</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="p">)</span><span class="w"> </span>
-<span class="w">        </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;NONE&#39;</span><span class="p">::</span><span class="nb">TEXT</span>
-<span class="w">        </span><span class="k">WHEN</span><span class="w"> </span><span class="p">(</span><span class="w"> </span>
-<span class="w">                </span><span class="n">beneficiaries</span><span class="p">.</span><span class="n">dod_earliest</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">)</span><span class="w"> </span>
-<span class="w">        </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;AMBIGUOUS&#39;</span><span class="p">::</span><span class="w"> </span><span class="nb">TEXT</span>
-<span class="w">        </span><span class="k">ELSE</span><span class="w"> </span><span class="s1">&#39;CONSISTENT&#39;</span><span class="p">::</span><span class="nb">TEXT</span>
-<span class="w">    </span><span class="k">END</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">consistent_dod</span><span class="p">,</span>
-<span class="w">    </span><span class="k">CASE</span>
-<span class="w">        </span><span class="k">WHEN</span><span class="w"> </span><span class="p">(</span><span class="w"> </span>
-<span class="w">                </span><span class="n">beneficiaries</span><span class="p">.</span><span class="n">sex</span><span class="w"> </span><span class="o">~~</span><span class="w"> </span><span class="s1">&#39;%,%&#39;</span><span class="p">::</span><span class="nb">TEXT</span><span class="p">)</span><span class="w"> </span>
-<span class="w">        </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;AMBIGUOUS&#39;</span><span class="p">::</span><span class="w"> </span><span class="nb">TEXT</span>
-<span class="w">        </span><span class="k">ELSE</span><span class="w"> </span><span class="s1">&#39;CONSISTENT&#39;</span><span class="p">::</span><span class="nb">TEXT</span>
-<span class="w">    </span><span class="k">END</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">consistent_sex</span><span class="p">,</span>
-<span class="w">    </span><span class="k">CASE</span>
-<span class="w">        </span><span class="k">WHEN</span><span class="w"> </span><span class="p">(</span><span class="w"> </span>
-<span class="w">                </span><span class="n">beneficiaries</span><span class="p">.</span><span class="n">race</span><span class="w"> </span><span class="o">~~</span><span class="w"> </span><span class="s1">&#39;%,%&#39;</span><span class="p">::</span><span class="nb">TEXT</span><span class="p">)</span><span class="w"> </span>
-<span class="w">        </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;AMBIGUOUS&#39;</span><span class="p">::</span><span class="w"> </span><span class="nb">TEXT</span>
-<span class="w">        </span><span class="k">ELSE</span><span class="w"> </span><span class="s1">&#39;CONSISTENT&#39;</span><span class="p">::</span><span class="nb">TEXT</span>
-<span class="w">    </span><span class="k">END</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">consistent_race</span>
-<span class="w">    </span><span class="n">fips3_is_approximated</span><span class="p">,</span>
-<span class="w">    </span><span class="n">fips3_valdiated</span><span class="p">,</span>
-<span class="w">    </span><span class="n">state_iso</span><span class="p">,</span>
-<span class="w">    </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w">                        </span><span class="k">AS</span><span class="w"> </span><span class="n">numrecords</span><span class="p">,</span>
-<span class="w">    </span><span class="p">((</span><span class="o">#</span><span class="w"> </span><span class="n">hll_add_agg</span><span class="p">(</span><span class="n">bene</span><span class="p">)))::</span><span class="nb">bigint</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">numdistinctbeneficaries</span><span class="p">,</span>
-<span class="w">    </span><span class="n">hll_add_agg</span><span class="p">(</span><span class="n">bene</span><span class="p">)</span><span class="w">               </span><span class="k">AS</span><span class="w"> </span><span class="n">bene_hll</span>
-<span class="k">FROM</span><span class="w"> </span>
-<span class="w">    </span><span class="n">medicare</span><span class="p">.</span><span class="n">enrollments</span><span class="w"> </span><span class="k">natural</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">medicare</span><span class="p">.</span><span class="n">beneficiaries</span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span>
-<span class="w">    </span><span class="k">year</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="k">state</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="n">zip</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="n">fips3</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="n">consistent_dob</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="n">consistent_dod</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="n">consistent_sex</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="n">consistent_race</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="n">fips3_is_approximated</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="n">fips3_valdiated</span><span class="p">;</span>
-</pre></div>
-</div>
+<h4><a class="toc-backref" href="#id38" role="doc-backlink">Enrollments QC Table Definition</a><a class="headerlink" href="#enrollments-qc-table-definition" title="Link to this heading"></a></h4>
+<p>The enrollments QC is built in two steps, both defined in the
+<a class="reference internal" href="members/medicare_yaml.html"><span class="std std-doc">Medicare data model definition</span></a> — refer to it
+for the exact SQL rather than to any copy in this page:</p>
+<ol class="arabic">
+<li><p><code class="docutils literal notranslate"><span class="pre">medicare.qc_enrl_bene</span></code> is a view defined as
+<code class="docutils literal notranslate"><span class="pre">enrollments</span> <span class="pre">NATURAL</span> <span class="pre">JOIN</span> <span class="pre">beneficiaries</span></code> (see
+<a class="reference internal" href="#entitlement-reason-codes-orec-and-curec">Entitlement reason codes: OREC and CUREC</a>
+for the design rule that keeps this natural join safe). On top of the
+joined columns it computes the beneficiary-grain consistency flags:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">consistent_dob</span></code>: <code class="docutils literal notranslate"><span class="pre">MISSING</span></code> when <code class="docutils literal notranslate"><span class="pre">dob</span></code> is null, <code class="docutils literal notranslate"><span class="pre">AMBIGUOUS</span></code> when
+<code class="docutils literal notranslate"><span class="pre">dob_latest</span></code> is set (the records disagreed), otherwise <code class="docutils literal notranslate"><span class="pre">CONSISTENT</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">consistent_dod</span></code>: <code class="docutils literal notranslate"><span class="pre">NONE</span></code> when no date of death is recorded (which is
+not an inconsistency — most beneficiaries are alive), <code class="docutils literal notranslate"><span class="pre">AMBIGUOUS</span></code>
+when <code class="docutils literal notranslate"><span class="pre">dod_earliest</span></code> is set, otherwise <code class="docutils literal notranslate"><span class="pre">CONSISTENT</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">consistent_sex</span></code> and <code class="docutils literal notranslate"><span class="pre">consistent_race</span></code>: <code class="docutils literal notranslate"><span class="pre">AMBIGUOUS</span></code> when the
+aggregated value contains a comma (more than one distinct code was
+recorded for the beneficiary), otherwise <code class="docutils literal notranslate"><span class="pre">CONSISTENT</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">consistent_orec</span></code>: <code class="docutils literal notranslate"><span class="pre">MISSING</span></code>, <code class="docutils literal notranslate"><span class="pre">AMBIGUOUS</span></code> or <code class="docutils literal notranslate"><span class="pre">CONSISTENT</span></code>, as
+described in
+<a class="reference internal" href="#entitlement-reason-codes-orec-and-curec">Entitlement reason codes: OREC and CUREC</a></p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">consistent_curec</span></code> flag is not computed here: it is a single-year
+property stored directly on the <code class="docutils literal notranslate"><span class="pre">enrollments</span></code> table, and it reaches the
+QC view through the join.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">medicare.qc_enrollments</span></code> is a materialized view that aggregates
+<code class="docutils literal notranslate"><span class="pre">qc_enrl_bene</span></code>, grouping by the dimensions and computing the measures
+listed below.</p></li>
+</ol>
 </section>
 <section id="enrollments-qc-table-dimensions">
-<h4><a class="toc-backref" href="#id29" role="doc-backlink">Enrollments QC Table Dimensions</a><a class="headerlink" href="#enrollments-qc-table-dimensions" title="Permalink to this heading"></a></h4>
-<p>Therefore, the following QC dimensions are defined:</p>
+<h4><a class="toc-backref" href="#id39" role="doc-backlink">Enrollments QC Table Dimensions</a><a class="headerlink" href="#enrollments-qc-table-dimensions" title="Link to this heading"></a></h4>
+<p>The following QC dimensions are defined:</p>
 <ul class="simple">
-<li><p>year,</p></li>
-<li><p>state,</p></li>
-<li><p>zip,</p></li>
-<li><p>fips3,</p></li>
-<li><p>consistent_dob,</p></li>
-<li><p>consistent_dod,</p></li>
-<li><p>consistent_sex,</p></li>
-<li><p>consistent_race,</p></li>
-<li><p>fips3_is_approximated,</p></li>
-<li><p>fips3_valdiated</p></li>
+<li><p>year</p></li>
+<li><p>state</p></li>
+<li><p>zip</p></li>
+<li><p>fips3</p></li>
+<li><p>orec</p></li>
+<li><p>curec</p></li>
+<li><p>hmo</p></li>
+<li><p>dual</p></li>
+<li><p>buyin</p></li>
+<li><p>consistent_dob</p></li>
+<li><p>consistent_dod</p></li>
+<li><p>consistent_sex</p></li>
+<li><p>consistent_race</p></li>
+<li><p>consistent_orec</p></li>
+<li><p>consistent_curec</p></li>
+<li><p>fips3_is_approximated</p></li>
+<li><p>fips3_valdiated (the physical column name is misspelled; use this
+spelling in queries)</p></li>
 </ul>
+<p>The grouping treats NULL dimension values as regular values, so records
+with missing attributes are counted rather than excluded.</p>
 </section>
 <section id="enrollments-qc-table-measures">
-<h4><a class="toc-backref" href="#id30" role="doc-backlink">Enrollments QC Table Measures</a><a class="headerlink" href="#enrollments-qc-table-measures" title="Permalink to this heading"></a></h4>
-<p>In Apache Superset, the following metrics are defined for this table:</p>
-<ul>
-<li><p>Number of consistent beneficiaries:</p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">#</span><span class="p">(</span><span class="n">hll_union_agg</span><span class="p">(</span><span class="n">bene_hll</span><span class="p">)</span><span class="w"> </span><span class="n">FILTER</span><span class="w"> </span><span class="p">(</span>
-<span class="w">        </span><span class="k">WHERE</span><span class="w"> </span><span class="n">consistent_dob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;CONSISTENT&#39;</span>
-<span class="w">        </span><span class="k">AND</span><span class="w"> </span><span class="n">consistent_dod</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="s1">&#39;AMBIGUOUS&#39;</span>
-<span class="w">        </span><span class="k">AND</span><span class="w"> </span><span class="n">consistent_race</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;CONSISTENT&#39;</span>
-<span class="w">        </span><span class="k">AND</span><span class="w"> </span><span class="n">consistent_sex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;CONSISTENT&#39;</span>
-<span class="w">        </span><span class="p">))</span>
-<span class="w">        </span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="p">.</span><span class="mi">0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="o">#</span><span class="p">(</span><span class="n">hll_union_agg</span><span class="p">(</span><span class="n">bene_hll</span><span class="p">)))</span>
-</pre></div>
-</div>
-</li>
-<li><p>Number of distinct beneficiaries</p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">#</span><span class="p">(</span><span class="n">hll_union_agg</span><span class="p">(</span><span class="n">bene_hll</span><span class="p">)))::</span><span class="nb">INT</span>
-</pre></div>
-</div>
-</li>
-<li><p>Number of enrollment records</p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SUM</span><span class="p">(</span><span class="n">numrecords</span><span class="p">)</span>
-</pre></div>
-</div>
-</li>
+<h4><a class="toc-backref" href="#id40" role="doc-backlink">Enrollments QC Table Measures</a><a class="headerlink" href="#enrollments-qc-table-measures" title="Link to this heading"></a></h4>
+<p>Each combination of the dimensions above carries three measures:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">NumRecords</span></code>: the number of enrollment records in the group
+(<code class="docutils literal notranslate"><span class="pre">COUNT(*)</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NumDistinctBeneficaries</span></code> (sic — the physical column name is misspelled,
+<code class="docutils literal notranslate"><span class="pre">Beneficaries</span></code> instead of <code class="docutils literal notranslate"><span class="pre">Beneficiaries</span></code>; use this spelling in
+queries): the approximate number of distinct beneficiaries in the group,
+computed from the HLL hashes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bene_hll</span></code>: the <a class="reference internal" href="UsingHLL.html"><span class="std std-doc">HLL sketch</span></a> itself. Keeping the sketch as
+a column allows distinct-beneficiary counts to be re-aggregated over any
+subset of groups without returning to the detail data.</p></li>
 </ul>
+<p>The percent metrics shown in the QC dashboard (for example, the share of
+beneficiaries with fully consistent records) are defined in Apache Superset
+on top of these measures; see the
+<a class="reference internal" href="medicare-example.html"><span class="std std-doc">Medicare example</span></a> for the committed dashboard bundle.</p>
 </section>
 </section>
 <section id="admissions-qc-table">
-<h3><a class="toc-backref" href="#id31" role="doc-backlink">Admissions QC Table</a><a class="headerlink" href="#admissions-qc-table" title="Permalink to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id41" role="doc-backlink">Admissions QC Table</a><a class="headerlink" href="#admissions-qc-table" title="Link to this heading"></a></h3>
 <section id="admissions-qc-table-definition">
-<h4><a class="toc-backref" href="#id32" role="doc-backlink">Admissions QC Table Definition</a><a class="headerlink" href="#admissions-qc-table-definition" title="Permalink to this heading"></a></h4>
-<p>Enrollment QC is roughly defined by the following SQL:</p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span>
-<span class="w">    </span><span class="k">year</span><span class="p">,</span>
-<span class="w">    </span><span class="k">state</span><span class="p">,</span>
-<span class="w">    </span><span class="n">zip</span><span class="p">,</span>
-<span class="w">    </span><span class="n">reason</span><span class="p">,</span>
-<span class="w">    </span><span class="n">state_iso</span><span class="p">,</span>
-<span class="w">    </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w">                        </span><span class="k">AS</span><span class="w"> </span><span class="n">numrecords</span><span class="p">,</span>
-<span class="w">    </span><span class="p">((</span><span class="o">#</span><span class="w"> </span><span class="n">hll_add_agg</span><span class="p">(</span><span class="n">bene</span><span class="p">)))::</span><span class="nb">bigint</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">numdistinctbeneficaries</span><span class="p">,</span>
-<span class="w">    </span><span class="n">hll_add_agg</span><span class="p">(</span><span class="n">bene</span><span class="p">)</span><span class="w">               </span><span class="k">AS</span><span class="w"> </span><span class="n">bene_hll</span>
-<span class="k">FROM</span><span class="w"> </span>
-<span class="w">    </span><span class="n">medicare</span><span class="p">.</span><span class="n">admissions</span><span class="w"> </span><span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="n">medicare_audit</span><span class="p">.</span><span class="n">admissions</span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span>
-<span class="w">    </span><span class="k">year</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="k">state</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="n">zip</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="n">reason</span><span class="p">;</span>
-</pre></div>
-</div>
+<h4><a class="toc-backref" href="#id42" role="doc-backlink">Admissions QC Table Definition</a><a class="headerlink" href="#admissions-qc-table-definition" title="Link to this heading"></a></h4>
+<p>The admissions QC is also built in two steps, defined in the
+<a class="reference internal" href="members/medicare_yaml.html"><span class="std std-doc">Medicare data model definition</span></a>:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">medicare.qc_adm_union</span></code> is a view that unions the journaled records in
+<code class="docutils literal notranslate"><span class="pre">medicare_audit.admissions</span></code> — each carrying the <code class="docutils literal notranslate"><span class="pre">REASON</span></code> recorded when
+it failed validation — with the records of <code class="docutils literal notranslate"><span class="pre">medicare.admissions</span></code>,
+labelled with the literal reason <code class="docutils literal notranslate"><span class="pre">OK</span></code>. This makes valid and rejected
+records visible side by side, so the QC can report what was filtered
+out, not only what was kept.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">medicare.qc_admissions</span></code> is a materialized view that aggregates
+<code class="docutils literal notranslate"><span class="pre">qc_adm_union</span></code> by the dimensions below, with the same measures as the
+enrollments QC.</p></li>
+</ol>
 </section>
 <section id="admissions-qc-table-dimensions">
-<h4><a class="toc-backref" href="#id33" role="doc-backlink">Admissions QC Table Dimensions</a><a class="headerlink" href="#admissions-qc-table-dimensions" title="Permalink to this heading"></a></h4>
-<p>Therefore, the following QC dimensions are defined:</p>
+<h4><a class="toc-backref" href="#id43" role="doc-backlink">Admissions QC Table Dimensions</a><a class="headerlink" href="#admissions-qc-table-dimensions" title="Link to this heading"></a></h4>
+<p>The following QC dimensions are defined:</p>
 <ul class="simple">
-<li><p>year,</p></li>
-<li><p>state,</p></li>
-<li><p>zip,</p></li>
-<li><p>reason (reason is either literal ‘OK’ or a reason why a
-record failed validation)</p></li>
+<li><p>year</p></li>
+<li><p>state</p></li>
+<li><p>zip</p></li>
+<li><p>reason — one of:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">OK</span></code>: the record passed validation and is in <code class="docutils literal notranslate"><span class="pre">medicare.admissions</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PRIMARY</span> <span class="pre">KEY</span></code>: missing key data (see
+<a class="reference internal" href="#creating-inpatient-admissions-table">Creating Inpatient Admissions table</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FOREIGN</span> <span class="pre">KEY</span></code>: no matching enrollment record was found</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DUPLICATE</span></code>: a duplicate of a record that was kept</p></li>
+</ul>
+</li>
 </ul>
 </section>
 <section id="admissions-qc-table-measures">
-<h4><a class="toc-backref" href="#id34" role="doc-backlink">Admissions QC Table Measures</a><a class="headerlink" href="#admissions-qc-table-measures" title="Permalink to this heading"></a></h4>
-<p>In Apache Superset, the following metrics are defined for this table:</p>
-<p>Count metrics:</p>
-<ul>
-<li><p>Number of admission records</p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SUM</span><span class="p">(</span><span class="n">numrecords</span><span class="p">)</span>
-</pre></div>
+<h4><a class="toc-backref" href="#id44" role="doc-backlink">Admissions QC Table Measures</a><a class="headerlink" href="#admissions-qc-table-measures" title="Link to this heading"></a></h4>
+<p>Each combination of the dimensions above carries the same three measures
+as the enrollments QC: <code class="docutils literal notranslate"><span class="pre">NumRecords</span></code>, <code class="docutils literal notranslate"><span class="pre">NumDistinctBeneficaries</span></code> (sic; see
+the note on the spelling above) and the <code class="docutils literal notranslate"><span class="pre">bene_hll</span></code> sketch.</p>
+<p>Percent metrics — the share of records that passed validation and the
+shares journaled for each failure reason — are defined in Apache Superset
+on top of these counts; see the <a class="reference internal" href="medicare-example.html"><span class="std std-doc">Medicare example</span></a>
+for the committed dashboard bundle.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><strong>Further reading:</strong> Chapter 8 (“Dorieh Medicare Claims Data Pipeline”) of
+the companion book
+<a class="reference internal" href="about-the-book.html"><span class="std std-doc"><em>Research Data that Can Be Trusted</em></span></a> develops the ideas
+behind this page in depth. This documentation is self-contained; the book
+is optional enrichment.</p>
 </div>
-</li>
-<li><p>Number of distinct beneficiaries</p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">#</span><span class="p">(</span><span class="n">hll_union_agg</span><span class="p">(</span><span class="n">bene_hll</span><span class="p">)))::</span><span class="nb">INT</span>
-</pre></div>
-</div>
-</li>
-</ul>
-<p>Percent metrics:</p>
-<ul>
-<li><p>Percent of valid records (passed validation)</p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="k">SUM</span><span class="p">(</span><span class="n">numrecords</span><span class="p">)</span><span class="w"> </span><span class="n">FILTER</span><span class="w"> </span><span class="p">(</span><span class="k">WHERE</span><span class="w"> </span><span class="n">reason</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;OK&#39;</span><span class="p">))</span><span class="o">*</span><span class="mi">100</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="k">SUM</span><span class="p">(</span><span class="n">numrecords</span><span class="p">)</span>
-</pre></div>
-</div>
-</li>
-<li><p>Percent of admission records, for which corresponding enrollment data
-was not found (failed validation)</p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="k">SUM</span><span class="p">(</span><span class="n">numrecords</span><span class="p">)</span><span class="w"> </span><span class="n">FILTER</span><span class="w"> </span><span class="p">(</span><span class="k">WHERE</span><span class="w"> </span><span class="n">reason</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;FOREIGN KEY&#39;</span><span class="p">))</span><span class="o">*</span><span class="mi">100</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="k">SUM</span><span class="p">(</span><span class="n">numrecords</span><span class="p">)</span>
-</pre></div>
-</div>
-</li>
-<li><p>Percent of duplicate records (failed validation, one apparent
-admission recorded more than once)</p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="k">SUM</span><span class="p">(</span><span class="n">numrecords</span><span class="p">)</span><span class="w"> </span><span class="n">FILTER</span><span class="w"> </span><span class="p">(</span><span class="k">WHERE</span><span class="w"> </span><span class="n">reason</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;DUPLICATE&#39;</span><span class="p">))</span><span class="o">*</span><span class="mi">100</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="k">SUM</span><span class="p">(</span><span class="n">numrecords</span><span class="p">)</span>
-</pre></div>
-</div>
-</li>
-<li><p>Percent of valid records with missing data (failed validation)</p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="k">SUM</span><span class="p">(</span><span class="n">numrecords</span><span class="p">)</span><span class="w"> </span><span class="n">FILTER</span><span class="w"> </span><span class="p">(</span><span class="k">WHERE</span><span class="w"> </span><span class="n">reason</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;PRIMARY KEY&#39;</span><span class="p">))</span><span class="o">*</span><span class="mi">100</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="k">SUM</span><span class="p">(</span><span class="n">numrecords</span><span class="p">)</span>
-</pre></div>
-</div>
-</li>
-</ul>
 </section>
 </section>
 </section>
@@ -856,14 +1641,14 @@ admission recorded more than once)</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="pipeline/medicaid.html" class="btn btn-neutral float-left" title="Full Medicaid Processing Pipeline" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="health_data_overview.html" class="btn btn-neutral float-left" title="Health Data in Dorieh (Medicare and Medicaid)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="members/mcr_sas2yaml.html" class="btn btn-neutral float-right" title="The mcr_sas2yaml Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2021-2024, Harvard University.</p>
+    <p>&#169; Copyright 2021-2026, Harvard University.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

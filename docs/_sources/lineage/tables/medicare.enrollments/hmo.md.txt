@@ -1,0 +1,20 @@
+# Column medicare.enrollments.hmo
+
+## Overview of column hmo in table medicare.enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.enrollments](../medicare.enrollments.md)           |
+| Qualified name                | medicare.enrollments.hmo  |
+| Datatype                      | boolean        |
+| Column type | generated |
+
+
+
+## Expressions
+
+```sql
+SELECT GENERATED ALWAYS AS (CASE WHEN hmo_cvg_count IS NULL THEN NULL WHEN hmo_cvg_count > 0 THEN TRUE ELSE FALSE END) STORED
+```
+
+

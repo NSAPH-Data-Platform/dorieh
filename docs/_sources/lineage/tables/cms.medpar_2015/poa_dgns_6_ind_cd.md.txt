@@ -1,0 +1,22 @@
+# Column cms.medpar_2015.POA_DGNS_6_IND_CD
+
+## Overview of column POA_DGNS_6_IND_CD in table cms.medpar_2015 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2015](../cms.medpar_2015.md)           |
+| Qualified name                | cms.medpar_2015.POA_DGNS_6_IND_CD  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/medpar-diagnosis-present-admission-indicator-6](https://resdac.org/cms-data/variables/medpar-diagnosis-present-admission-indicator-6) |
+
+
+Diagnosis Present on Admission Indicator 6
+
+| Key | Value |
+| --- | ----- |
+| long_name | POA_DGNS_6_IND_CD |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

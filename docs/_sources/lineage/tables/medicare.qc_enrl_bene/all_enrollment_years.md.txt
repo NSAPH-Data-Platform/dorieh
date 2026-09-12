@@ -1,0 +1,20 @@
+# Column medicare.qc_enrl_bene.all_enrollment_years
+
+## Overview of column all_enrollment_years in table medicare.qc_enrl_bene 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_enrl_bene](../medicare.qc_enrl_bene.md)           |
+| Qualified name                | medicare.qc_enrl_bene.all_enrollment_years  |
+| Datatype                      | INT[]        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT ARRAY_AGG(DISTINCT year ORDER BY year)
+```
+
+

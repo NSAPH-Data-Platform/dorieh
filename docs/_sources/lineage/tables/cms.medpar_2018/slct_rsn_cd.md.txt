@@ -1,0 +1,22 @@
+# Column cms.medpar_2018.SLCT_RSN_CD
+
+## Overview of column SLCT_RSN_CD in table cms.medpar_2018 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2018](../cms.medpar_2018.md)           |
+| Qualified name                | cms.medpar_2018.SLCT_RSN_CD  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/specifies-whether-record-case-or-control-record](https://resdac.org/cms-data/variables/specifies-whether-record-case-or-control-record) |
+
+
+Specifies whether this record is a case or control record.
+
+| Key | Value |
+| --- | ----- |
+| long_name | SLCT_RSN_CD |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

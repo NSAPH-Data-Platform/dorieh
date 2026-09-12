@@ -1,0 +1,22 @@
+# Column medicare.ip.zip
+
+## Overview of column zip in table medicare.ip 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.ip](../medicare.ip.md)           |
+| Qualified name                | medicare.ip.zip  |
+| Datatype                      | INT        |
+| Column type | transformed |
+
+
+
+### Casts:
+
+| Original type | Cast expression      |
+| ------------- | -------------------- |
+| numeric | (CASE WHEN {column_name} < 100000 THEN {column_name}::int ELSE ({column_name}/10000)::INT END) |
+| character varying | SUBSTRING({column_name} FROM 1 FOR 5)::INT |
+
+
+

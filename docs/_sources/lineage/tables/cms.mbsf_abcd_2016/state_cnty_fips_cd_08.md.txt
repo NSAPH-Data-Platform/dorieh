@@ -1,0 +1,22 @@
+# Column cms.mbsf_abcd_2016.STATE_CNTY_FIPS_CD_08
+
+## Overview of column STATE_CNTY_FIPS_CD_08 in table cms.mbsf_abcd_2016 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_abcd_2016](../cms.mbsf_abcd_2016.md)           |
+| Qualified name                | cms.mbsf_abcd_2016.STATE_CNTY_FIPS_CD_08  |
+| Datatype                      | VARCHAR(5)        |
+| Reference | [https://resdac.org/cms-data/variables/state-and-county-fips-code-august](https://resdac.org/cms-data/variables/state-and-county-fips-code-august) |
+
+
+FIPS State-County Code: August
+
+| Key | Value |
+| --- | ----- |
+| long_name | STATE_CNTY_FIPS_CD_08 |
+| original_type | CHAR |
+| width | 5.0 |
+
+
+

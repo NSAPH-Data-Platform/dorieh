@@ -1,0 +1,22 @@
+# Column cms.mbsf_ab_2013.B_MO_CNT
+
+## Overview of column B_MO_CNT in table cms.mbsf_ab_2013 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_ab_2013](../cms.mbsf_ab_2013.md)           |
+| Qualified name                | cms.mbsf_ab_2013.B_MO_CNT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/part-b-months-count](https://resdac.org/cms-data/variables/part-b-months-count) |
+
+
+SMI Coverage Count
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_SMI_CVRAGE_TOT_MONS |
+| original_type | NUM |
+| width | 3.0 |
+
+
+

@@ -1,19 +1,17 @@
-# Computational Utilities for working with Exposure data from Washington University in St. Louis
-       
-## Exposure data by Atmospheric Composition Analysis Group
+# Exposure Data from the Atmospheric Composition Analysis Group at Washington University in St. Louis
 
+This page describes the PM2.5 exposure datasets published by the
+[Atmospheric Composition Analysis Group](https://sites.wustl.edu/acag/datasets/surface-pm2-5)
+at Washington University in St. Louis, and the Dorieh utilities and
+pipelines that download them, convert component percentages to absolute
+values, and combine the results into a single tabular dataset.
 
-Various datasets of the exposure data are 
-available for download from this website: 
-[Atmospheric Composition Analysis Group](https://sites.wustl.edu/acag/datasets/surface-pm2-5).
+We use monthly data for absolute PM2.5 values and annual data for
+PM2.5 and its components. The absolute values are provided in ug/m3
+units, but the PM2.5 components are published as percentage values,
+which are not usable for aggregation; Dorieh utilities convert them
+into absolute values before combining the results.
 
-We have used monthly data for the PM25 absolute values and annual data for 
-PM25 and its components due to their relevance in assessing air 
-quality and potential health impacts. The data is provided 
-as absolute values in ug/m3 units. However, PM25 components are provided as 
-percentage values not usable for aggregation. Dorieh utilities convert 
-these values into absolute values and combine the result as a single tabular dataset.
-          
 
 ## Python packages
 
@@ -29,11 +27,8 @@ members/netCDF*
                   
 ## CWL Workflows
 
-```{toctree}
----
-maxdepth: 2
-glob:
----
-pipeline/pm25_yearly_download
-pipeline/wustl
-```
+The exposure pipelines are documented in the
+[Data Processing Pipelines](pipelines.md) section:
+
+* [PM2.5 yearly download](pipeline/pm25_yearly_download.md)
+* [WashU exposure pipeline](pipeline/wustl.md)

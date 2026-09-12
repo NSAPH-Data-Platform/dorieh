@@ -1,0 +1,22 @@
+# Column cms.medpar_2015.OTHRAMT
+
+## Overview of column OTHRAMT in table cms.medpar_2015 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2015](../cms.medpar_2015.md)           |
+| Qualified name                | cms.medpar_2015.OTHRAMT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/other-service-charge-amount](https://resdac.org/cms-data/variables/other-service-charge-amount) |
+
+
+Other services related to beneficiarys stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | OTHR_SRVC_CHRG_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

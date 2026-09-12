@@ -1,0 +1,276 @@
+# Table medicare.admissions
+
+## Overview for medicare.admissions
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+medicare.admissions/adm_day_of_week.md
+medicare.admissions/admission_date.md
+medicare.admissions/admission_date_raw.md
+medicare.admissions/admission_year.md
+medicare.admissions/admsn_type_cd.md
+medicare.admissions/bene.md
+medicare.admissions/bene_blood_ddctbl_amt.md
+medicare.admissions/bene_id.md
+medicare.admissions/bene_ip_ddctbl_amt.md
+medicare.admissions/bene_prmry_pyr_amt.md
+medicare.admissions/bene_pta_coinsrnc_amt.md
+medicare.admissions/diagnoses.md
+medicare.admissions/discharge_date.md
+medicare.admissions/discharge_date_raw.md
+medicare.admissions/drg_outlier_pmt_amt.md
+medicare.admissions/drg_price_amt.md
+medicare.admissions/dschrg_dstntn_cd.md
+medicare.admissions/dschrgcd.md
+medicare.admissions/file.md
+medicare.admissions/fips2.md
+medicare.admissions/icd_hll.md
+medicare.admissions/los_day_cnt.md
+medicare.admissions/mdcr_pmt_amt.md
+medicare.admissions/pass_thru_amt.md
+medicare.admissions/pd_hll_hash.md
+medicare.admissions/primary_diagnosis.md
+medicare.admissions/quality.md
+medicare.admissions/record.md
+medicare.admissions/src_admsn_cd.md
+medicare.admissions/ssa2.md
+medicare.admissions/state.md
+medicare.admissions/state_iso.md
+medicare.admissions/year.md
+medicare.admissions/zip.md
+medicare.admissions/zip4.md
+```
+
+
+Medicare inpatient admissions
+
+
+Child table of [medicare.enrollments](medicare.enrollments.md)
+
+Transformed from [medicare.ip](medicare.ip.md)
+
+Primary Key: bene_id, year, state, admission_date, discharge_date
+
+
+<details>
+
+<summary>SQL/DDL Statement</summary>
+
+```sql
+CREATE table medicare.admissions AS SELECT bene_id,
+file,
+record,
+year,
+state,
+ssa2,
+fips2,
+zip,
+zip4,
+admission_date_raw,
+discharge_date_raw,
+admission_date,
+discharge_date,
+adm_day_of_week,
+dschrgcd,
+dschrg_dstntn_cd,
+admsn_type_cd,
+src_admsn_cd,
+btrim(diag1) As primary_diagnosis,
+array_remove(ARRAY[
+btrim(btrim(diag1)),
+btrim(diag2),
+btrim(diag3),
+btrim(diag4),
+btrim(diag5),
+btrim(diag6),
+btrim(diag7),
+btrim(diag8),
+btrim(diag9),
+btrim(diag10),
+btrim(diag11),
+btrim(diag12),
+btrim(diag13),
+btrim(diag14),
+btrim(diag15),
+btrim(diag16),
+btrim(diag17),
+btrim(diag18),
+btrim(diag19),
+btrim(diag20),
+btrim(diag21),
+btrim(diag22),
+btrim(diag23),
+btrim(diag24),
+btrim(diag25)
+], NULL) As diagnoses,
+los_day_cnt,
+drg_price_amt,
+drg_outlier_pmt_amt,
+pass_thru_amt,
+mdcr_pmt_amt,
+bene_blood_ddctbl_amt,
+bene_prmry_pyr_amt,
+bene_ip_ddctbl_amt,
+bene_pta_coinsrnc_amt 
+FROM medicare.ip
+WHERE 1 = 0;
+ALTER table medicare.admissions ADD COLUMN quality VARCHAR(12) DEFAULT 'PASS';
+ALTER table medicare.admissions ADD COLUMN admission_year INT GENERATED ALWAYS AS (EXTRACT (YEAR FROM admission_date)) STORED;
+ALTER table medicare.admissions ADD COLUMN state_iso CHAR(5) GENERATED ALWAYS AS ('US-' || state)  STORED;
+ALTER table medicare.admissions ADD COLUMN bene HLL_HASHVAL GENERATED ALWAYS AS (hll_hash_text(bene_id)) STORED;
+ALTER table medicare.admissions ADD COLUMN pd_hll_hash HLL_HASHVAL GENERATED ALWAYS AS (hll_hash_text(primary_diagnosis)) STORED;
+ALTER table medicare.admissions ADD COLUMN icd_hll HLL GENERATED ALWAYS AS (hll_arr_agg(diagnoses)) STORED;
+ALTER table medicare.admissions ADD PRIMARY KEY (bene_id, year, state, admission_date, discharge_date);
+ALTER table medicare.admissions ADD CONSTRAINT admissions_to_enrollments FOREIGN KEY (bene_id, year, state) REFERENCES medicare.enrollments (bene_id, year, state);
+
+CREATE TABLE  medicare_audit.admissions (
+	quality VARCHAR(12) DEFAULT 'PASS',
+	admission_year INT GENERATED ALWAYS AS (EXTRACT (YEAR FROM admission_date)) STORED,
+	diagnoses VARCHAR(12)[10],
+	state_iso CHAR(5) GENERATED ALWAYS AS ('US-' || state)  STORED,
+	bene HLL_HASHVAL GENERATED ALWAYS AS (hll_hash_text(bene_id)) STORED,
+	pd_hll_hash HLL_HASHVAL GENERATED ALWAYS AS (hll_hash_text(primary_diagnosis)) STORED,
+	icd_hll HLL GENERATED ALWAYS AS (hll_arr_agg(diagnoses)) STORED,
+	bene_id VARCHAR,
+	file VARCHAR,
+	record VARCHAR,
+	year INT,
+	state VARCHAR,
+	ssa2 VARCHAR,
+	fips2 VARCHAR,
+	zip INT,
+	zip4 INT,
+	admission_date_raw VARCHAR,
+	discharge_date_raw VARCHAR,
+	admission_date DATE,
+	discharge_date DATE,
+	adm_day_of_week INT,
+	dschrgcd CHAR(1),
+	dschrg_dstntn_cd CHAR(2),
+	admsn_type_cd CHAR(1),
+	src_admsn_cd CHAR(1),
+	primary_diagnosis VARCHAR,
+	los_day_cnt INT,
+	drg_price_amt NUMERIC,
+	drg_outlier_pmt_amt NUMERIC,
+	pass_thru_amt NUMERIC,
+	mdcr_pmt_amt NUMERIC,
+	bene_blood_ddctbl_amt NUMERIC,
+	bene_prmry_pyr_amt NUMERIC,
+	bene_ip_ddctbl_amt NUMERIC,
+	bene_pta_coinsrnc_amt NUMERIC,
+	REASON VARCHAR(16),
+	REFCTID TID,
+	recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
+);
+CREATE INDEX  admissions_REFCTID_idx ON medicare_audit.admissions USING BTREE (REFCTID) ;
+
+CREATE OR REPLACE FUNCTION medicare.validate_admissions() RETURNS TRIGGER 
+-- Validate foreign key for medicare.admissions
+AS $body$
+    DECLARE rctid tid;
+    BEGIN
+        IF (NEW.bene_id IS NULL 
+				OR NEW.year IS NULL 
+				OR NEW.state IS NULL 
+				OR NEW.admission_date IS NULL 
+				OR NEW.discharge_date IS NULL ) THEN
+            INSERT INTO medicare_audit.admissions 
+                (quality,diagnoses,bene_id,file,record,year,state,ssa2,fips2,zip,zip4,admission_date_raw,discharge_date_raw,admission_date,discharge_date,adm_day_of_week,dschrgcd,dschrg_dstntn_cd,admsn_type_cd,src_admsn_cd,primary_diagnosis,los_day_cnt,drg_price_amt,drg_outlier_pmt_amt,pass_thru_amt,mdcr_pmt_amt,bene_blood_ddctbl_amt,bene_prmry_pyr_amt,bene_ip_ddctbl_amt,bene_pta_coinsrnc_amt, REASON) 
+                VALUES (NEW.quality,NEW.diagnoses,NEW.bene_id,NEW.file,NEW.record,NEW.year,NEW.state,NEW.ssa2,NEW.fips2,NEW.zip,NEW.zip4,NEW.admission_date_raw,NEW.discharge_date_raw,NEW.admission_date,NEW.discharge_date,NEW.adm_day_of_week,NEW.dschrgcd,NEW.dschrg_dstntn_cd,NEW.admsn_type_cd,NEW.src_admsn_cd,NEW.primary_diagnosis,NEW.los_day_cnt,NEW.drg_price_amt,NEW.drg_outlier_pmt_amt,NEW.pass_thru_amt,NEW.mdcr_pmt_amt,NEW.bene_blood_ddctbl_amt,NEW.bene_prmry_pyr_amt,NEW.bene_ip_ddctbl_amt,NEW.bene_pta_coinsrnc_amt, 'PRIMARY KEY');
+            RETURN NULL;
+        END IF;
+        IF NOT EXISTS (
+            SELECT FROM medicare.enrollments as t
+            WHERE
+                NEW.bene_id = t.bene_id
+				AND NEW.year = t.year
+				AND NEW.state = t.state 
+        ) THEN
+            INSERT INTO medicare_audit.admissions 
+                (quality,diagnoses,bene_id,file,record,year,state,ssa2,fips2,zip,zip4,admission_date_raw,discharge_date_raw,admission_date,discharge_date,adm_day_of_week,dschrgcd,dschrg_dstntn_cd,admsn_type_cd,src_admsn_cd,primary_diagnosis,los_day_cnt,drg_price_amt,drg_outlier_pmt_amt,pass_thru_amt,mdcr_pmt_amt,bene_blood_ddctbl_amt,bene_prmry_pyr_amt,bene_ip_ddctbl_amt,bene_pta_coinsrnc_amt, REASON) 
+                VALUES (NEW.quality,NEW.diagnoses,NEW.bene_id,NEW.file,NEW.record,NEW.year,NEW.state,NEW.ssa2,NEW.fips2,NEW.zip,NEW.zip4,NEW.admission_date_raw,NEW.discharge_date_raw,NEW.admission_date,NEW.discharge_date,NEW.adm_day_of_week,NEW.dschrgcd,NEW.dschrg_dstntn_cd,NEW.admsn_type_cd,NEW.src_admsn_cd,NEW.primary_diagnosis,NEW.los_day_cnt,NEW.drg_price_amt,NEW.drg_outlier_pmt_amt,NEW.pass_thru_amt,NEW.mdcr_pmt_amt,NEW.bene_blood_ddctbl_amt,NEW.bene_prmry_pyr_amt,NEW.bene_ip_ddctbl_amt,NEW.bene_pta_coinsrnc_amt, 'FOREIGN KEY');
+            RETURN NULL;
+        END IF;
+        IF EXISTS (
+            SELECT FROM medicare.admissions as t
+            WHERE
+                NEW.bene_id = t.bene_id
+				AND NEW.year = t.year
+				AND NEW.state = t.state
+				AND NEW.admission_date = t.admission_date
+				AND NEW.discharge_date = t.discharge_date 
+        ) THEN
+            
+            SELECT 
+                ctid 
+            FROM medicare.admissions AS t 
+            WHERE NEW.bene_id = t.bene_id
+				AND NEW.year = t.year
+				AND NEW.state = t.state
+				AND NEW.admission_date = t.admission_date
+				AND NEW.discharge_date = t.discharge_date 
+            INTO rctid;
+INSERT INTO medicare_audit.admissions 
+                (quality,diagnoses,bene_id,file,record,year,state,ssa2,fips2,zip,zip4,admission_date_raw,discharge_date_raw,admission_date,discharge_date,adm_day_of_week,dschrgcd,dschrg_dstntn_cd,admsn_type_cd,src_admsn_cd,primary_diagnosis,los_day_cnt,drg_price_amt,drg_outlier_pmt_amt,pass_thru_amt,mdcr_pmt_amt,bene_blood_ddctbl_amt,bene_prmry_pyr_amt,bene_ip_ddctbl_amt,bene_pta_coinsrnc_amt,REFCTID, REASON) 
+                VALUES (NEW.quality,NEW.diagnoses,NEW.bene_id,NEW.file,NEW.record,NEW.year,NEW.state,NEW.ssa2,NEW.fips2,NEW.zip,NEW.zip4,NEW.admission_date_raw,NEW.discharge_date_raw,NEW.admission_date,NEW.discharge_date,NEW.adm_day_of_week,NEW.dschrgcd,NEW.dschrg_dstntn_cd,NEW.admsn_type_cd,NEW.src_admsn_cd,NEW.primary_diagnosis,NEW.los_day_cnt,NEW.drg_price_amt,NEW.drg_outlier_pmt_amt,NEW.pass_thru_amt,NEW.mdcr_pmt_amt,NEW.bene_blood_ddctbl_amt,NEW.bene_prmry_pyr_amt,NEW.bene_ip_ddctbl_amt,NEW.bene_pta_coinsrnc_amt,rctid, 'DUPLICATE');
+            RETURN NULL;
+        END IF;
+        RETURN NEW;
+    END;
+ 
+$body$ LANGUAGE plpgsql;
+
+CREATE TRIGGER medicare_admissions_validation BEFORE INSERT ON medicare.admissions
+        FOR EACH ROW EXECUTE FUNCTION medicare.validate_admissions();
+COMMENT ON table medicare.admissions IS 'CREATED BY Dorieh: {"version": "0.5.1.post2", "url": "file://<local checkout>", "commit": null}. Created at 2026-09-12 15:03:07.746480';
+```
+
+</details>
+
+---
+## Columns:
+
+| Column Name | Column Type | Datatype |
+| --- | --- | --- |
+| [adm_day_of_week](medicare.admissions/adm_day_of_week.md) | copied | INT |
+| [admission_date](medicare.admissions/admission_date.md) | copied | DATE |
+| [admission_date_raw](medicare.admissions/admission_date_raw.md) | copied | VARCHAR |
+| [admission_year](medicare.admissions/admission_year.md) | generated | INT |
+| [admsn_type_cd](medicare.admissions/admsn_type_cd.md) | copied | CHAR(1) |
+| [bene](medicare.admissions/bene.md) | generated | HLL_HASHVAL |
+| [bene_blood_ddctbl_amt](medicare.admissions/bene_blood_ddctbl_amt.md) | copied | NUMERIC |
+| [bene_id](medicare.admissions/bene_id.md) | copied | string |
+| [bene_ip_ddctbl_amt](medicare.admissions/bene_ip_ddctbl_amt.md) | copied | NUMERIC |
+| [bene_prmry_pyr_amt](medicare.admissions/bene_prmry_pyr_amt.md) | copied | NUMERIC |
+| [bene_pta_coinsrnc_amt](medicare.admissions/bene_pta_coinsrnc_amt.md) | copied | NUMERIC |
+| [diagnoses](medicare.admissions/diagnoses.md) | computed | string |
+| [discharge_date](medicare.admissions/discharge_date.md) | copied | DATE |
+| [discharge_date_raw](medicare.admissions/discharge_date_raw.md) | copied | VARCHAR |
+| [drg_outlier_pmt_amt](medicare.admissions/drg_outlier_pmt_amt.md) | copied | NUMERIC |
+| [drg_price_amt](medicare.admissions/drg_price_amt.md) | copied | NUMERIC |
+| [dschrg_dstntn_cd](medicare.admissions/dschrg_dstntn_cd.md) | copied | CHAR(2) |
+| [dschrgcd](medicare.admissions/dschrgcd.md) | copied | CHAR(1) |
+| [file](medicare.admissions/file.md) |  | string |
+| [fips2](medicare.admissions/fips2.md) | copied | string |
+| [icd_hll](medicare.admissions/icd_hll.md) | generated | HLL |
+| [los_day_cnt](medicare.admissions/los_day_cnt.md) | copied | INT |
+| [mdcr_pmt_amt](medicare.admissions/mdcr_pmt_amt.md) | copied | NUMERIC |
+| [pass_thru_amt](medicare.admissions/pass_thru_amt.md) | copied | NUMERIC |
+| [pd_hll_hash](medicare.admissions/pd_hll_hash.md) | generated | HLL_HASHVAL |
+| [primary_diagnosis](medicare.admissions/primary_diagnosis.md) | computed | string |
+| [quality](medicare.admissions/quality.md) |  | VARCHAR(12) DEFAULT 'PASS' |
+| [record](medicare.admissions/record.md) | copied | string |
+| [src_admsn_cd](medicare.admissions/src_admsn_cd.md) | copied | CHAR(1) |
+| [ssa2](medicare.admissions/ssa2.md) | copied | string |
+| [state](medicare.admissions/state.md) | copied | string |
+| [state_iso](medicare.admissions/state_iso.md) | generated | char(5) |
+| [year](medicare.admissions/year.md) | computed | INT |
+| [zip](medicare.admissions/zip.md) | copied | INT |
+| [zip4](medicare.admissions/zip4.md) | copied | INT |
+
+

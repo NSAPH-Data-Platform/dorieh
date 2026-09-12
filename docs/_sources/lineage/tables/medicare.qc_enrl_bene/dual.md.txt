@@ -1,0 +1,20 @@
+# Column medicare.qc_enrl_bene.dual
+
+## Overview of column dual in table medicare.qc_enrl_bene 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_enrl_bene](../medicare.qc_enrl_bene.md)           |
+| Qualified name                | medicare.qc_enrl_bene.dual  |
+| Datatype                      | boolean        |
+| Column type | generated |
+
+
+
+## Expressions
+
+```sql
+SELECT GENERATED ALWAYS AS (CASE WHEN dual_cvg_count IS NULL THEN NULL WHEN dual_cvg_count > 0 THEN TRUE ELSE FALSE END) STORED
+```
+
+

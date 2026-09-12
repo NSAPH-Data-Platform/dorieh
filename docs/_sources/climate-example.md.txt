@@ -1,3 +1,7 @@
+---
+orphan: true
+---
+
 # Sample workflow to download and aggregate a given variable (default: maximum temperature) for a given date
 
 
@@ -42,4 +46,3 @@ local:
 | download   | [download.cwl](pipeline/download.md)               | Downloads NetCDF file with gridMET data from Atmospheric Composition Analysis Group                                                                                                   | 
 | get_shapes | [get_shapes.cwl](pipeline/get_shapes.md)           | This step downloads Shape files from a given collection (TIGER/Line or GENZ)  and a geography (ZCTA or Counties) from the US Census website, for a given year or for the closest one. | 
 | aggregate  | [aggregate_daily.cwl](pipeline/aggregate_daily.md) | This step aggregates gridded data from a NetCDF file over polygons from the provided shapefiles                                                                                       | 
-

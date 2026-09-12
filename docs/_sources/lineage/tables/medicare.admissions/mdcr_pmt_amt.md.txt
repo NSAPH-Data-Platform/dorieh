@@ -1,0 +1,40 @@
+# Column medicare.admissions.mdcr_pmt_amt
+
+## Overview of column mdcr_pmt_amt in table medicare.admissions 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.admissions](../medicare.admissions.md)           |
+| Qualified name                | medicare.admissions.mdcr_pmt_amt  |
+| Datatype                      | NUMERIC        |
+| Column type | copied |
+| Reference | [https://resdac.org/cms-data/variables/total-medicare-payment-amount](https://resdac.org/cms-data/variables/total-medicare-payment-amount) |
+
+
+Amount of payment made from the Medicare trust fund for the services covered by the claim record.
+For hospital services, this amount does not include the claim pass-through per diem payments 
+made by Medicare.
+
+
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+mdcr_pmt_amt_svg_envelop.md
+```
+
+
+```{figure} mdcr_pmt_amt.svg
+:align: center
+:alt: Column medicare.admissions.mdcr_pmt_amt Lineage SVG
+:target: mdcr_pmt_amt_svg_envelop.html
+
+Data lineage for column medicare.admissions.mdcr_pmt_amt
+
+```
+
+

@@ -1,0 +1,24 @@
+# Column medicare.qc_enrl_bene.consistent_race
+
+## Overview of column consistent_race in table medicare.qc_enrl_bene 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_enrl_bene](../medicare.qc_enrl_bene.md)           |
+| Qualified name                | medicare.qc_enrl_bene.consistent_race  |
+| Datatype                      | VARCHAR(12)        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT (CASE
+  WHEN race LIKE '%,%' THEN 'AMBIGUOUS'
+  ELSE 'CONSISTENT'
+END)
+
+```
+
+

@@ -1,0 +1,22 @@
+# Column cms.medpar_2017.BENE_ZIP
+
+## Overview of column BENE_ZIP in table cms.medpar_2017 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2017](../cms.medpar_2017.md)           |
+| Qualified name                | cms.medpar_2017.BENE_ZIP  |
+| Datatype                      | VARCHAR(5)        |
+| Reference | [https://resdac.org/cms-data/variables/zip-code-beneficiary-home-or-mailing-address-latest-year](https://resdac.org/cms-data/variables/zip-code-beneficiary-home-or-mailing-address-latest-year) |
+
+
+Zip code of the mailing address where the beneficiary may be contacted.
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_MLG_CNTCT_ZIP_CD |
+| original_type | CHAR |
+| width | 5.0 |
+
+
+

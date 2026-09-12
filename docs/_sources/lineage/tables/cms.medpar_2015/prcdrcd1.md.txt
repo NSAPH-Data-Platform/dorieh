@@ -1,0 +1,22 @@
+# Column cms.medpar_2015.PRCDRCD1
+
+## Overview of column PRCDRCD1 in table cms.medpar_2015 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2015](../cms.medpar_2015.md)           |
+| Qualified name                | cms.medpar_2015.PRCDRCD1  |
+| Datatype                      | VARCHAR(7)        |
+| Reference | [https://resdac.org/cms-data/variables/principal-procedure-code](https://resdac.org/cms-data/variables/principal-procedure-code) |
+
+
+Principal Procedure code
+
+| Key | Value |
+| --- | ----- |
+| long_name | SRGCL_PRCDR_1_CD |
+| original_type | CHAR |
+| width | 7.0 |
+
+
+

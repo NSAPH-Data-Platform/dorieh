@@ -1,0 +1,22 @@
+# Column cms.medpar_2014.ADMSNDT
+
+## Overview of column ADMSNDT in table cms.medpar_2014 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2014](../cms.medpar_2014.md)           |
+| Qualified name                | cms.medpar_2014.ADMSNDT  |
+| Datatype                      | DATE        |
+| Reference | [https://resdac.org/cms-data/variables/date-beneficiary-admitted-inpatient-care-or-date-care-started](https://resdac.org/cms-data/variables/date-beneficiary-admitted-inpatient-care-or-date-care-started) |
+
+
+Date beneficiary admitted for Inpatient care or date care started
+
+| Key | Value |
+| --- | ----- |
+| long_name | ADMSN_DT |
+| original_type | DATE |
+| width | 8.0 |
+
+
+

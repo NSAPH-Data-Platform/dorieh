@@ -1,0 +1,22 @@
+# Column cms.mbsf_ab_2013.FIVEPCT
+
+## Overview of column FIVEPCT in table cms.mbsf_ab_2013 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_ab_2013](../cms.mbsf_ab_2013.md)           |
+| Qualified name                | cms.mbsf_ab_2013.FIVEPCT  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/enhanced-medicare-5-sample-indicator](https://resdac.org/cms-data/variables/enhanced-medicare-5-sample-indicator) |
+
+
+Strict 5% Flag
+
+| Key | Value |
+| --- | ----- |
+| long_name | FIVE_PERCENT_FLAG |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

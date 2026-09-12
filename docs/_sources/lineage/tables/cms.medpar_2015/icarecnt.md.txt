@@ -1,0 +1,22 @@
+# Column cms.medpar_2015.ICARECNT
+
+## Overview of column ICARECNT in table cms.medpar_2015 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2015](../cms.medpar_2015.md)           |
+| Qualified name                | cms.medpar_2015.ICARECNT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/intensive-care-day-count](https://resdac.org/cms-data/variables/intensive-care-day-count) |
+
+
+Intensive care days used by beneficiary for stay
+
+| Key | Value |
+| --- | ----- |
+| long_name | INTNSV_CARE_DAY_CNT |
+| original_type | NUM |
+| width | 5.0 |
+
+
+

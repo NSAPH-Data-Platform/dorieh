@@ -1,0 +1,22 @@
+# Column cms.medpar_2017.SMPLSIZE
+
+## Overview of column SMPLSIZE in table cms.medpar_2017 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2017](../cms.medpar_2017.md)           |
+| Qualified name                | cms.medpar_2017.SMPLSIZE  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/internal-use-medpar-sample-size](https://resdac.org/cms-data/variables/internal-use-medpar-sample-size) |
+
+
+For internal use. MEDPAR sample size.
+
+| Key | Value |
+| --- | ----- |
+| long_name | INTRNL_USE_SMPL_SIZE_CD |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

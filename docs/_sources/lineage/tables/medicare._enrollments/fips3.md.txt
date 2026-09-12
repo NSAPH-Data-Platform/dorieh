@@ -1,0 +1,39 @@
+# Column medicare._enrollments.fips3
+
+## Overview of column fips3 in table medicare._enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare._enrollments](../medicare._enrollments.md)           |
+| Qualified name                | medicare._enrollments.fips3  |
+| Datatype                      | string        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT MAX(fips3)
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+fips3_svg_envelop.md
+```
+
+
+```{figure} fips3.svg
+:align: center
+:alt: Column medicare._enrollments.fips3 Lineage SVG
+:target: fips3_svg_envelop.html
+
+Data lineage for column medicare._enrollments.fips3
+
+```
+
+

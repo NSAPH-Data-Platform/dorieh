@@ -1,0 +1,22 @@
+# Column cms.medpar_2016.OPRTG_ROOM_AMT
+
+## Overview of column OPRTG_ROOM_AMT in table cms.medpar_2016 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2016](../cms.medpar_2016.md)           |
+| Qualified name                | cms.medpar_2016.OPRTG_ROOM_AMT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/operating-and-recovery-room-amount](https://resdac.org/cms-data/variables/operating-and-recovery-room-amount) |
+
+
+Operating Room Amount
+
+| Key | Value |
+| --- | ----- |
+| long_name | OPRTG_ROOM_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

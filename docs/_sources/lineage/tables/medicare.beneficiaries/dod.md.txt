@@ -1,0 +1,39 @@
+# Column medicare.beneficiaries.dod
+
+## Overview of column dod in table medicare.beneficiaries 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.beneficiaries](../medicare.beneficiaries.md)           |
+| Qualified name                | medicare.beneficiaries.dod  |
+| Datatype                      | string        |
+| Column type | copied |
+
+
+
+## Expressions
+
+```sql
+SELECT MAX(dod)
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+dod_svg_envelop.md
+```
+
+
+```{figure} dod.svg
+:align: center
+:alt: Column medicare.beneficiaries.dod Lineage SVG
+:target: dod_svg_envelop.html
+
+Data lineage for column medicare.beneficiaries.dod
+
+```
+
+

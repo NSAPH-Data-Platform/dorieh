@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS superset;
+CREATE DATABASE superset WITH OWNER dorieh;

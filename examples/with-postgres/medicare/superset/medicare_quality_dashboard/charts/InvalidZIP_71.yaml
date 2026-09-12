@@ -1,0 +1,55 @@
+slice_name: InvalidZIP
+description: null
+certified_by: null
+certification_details: null
+viz_type: dist_bar
+params:
+  adhoc_filters:
+  - clause: WHERE
+    comparator: false
+    expressionType: SIMPLE
+    filterOptionName: filter_cyjo6hl8v1p_w4f4owvp7o
+    isExtra: false
+    isNew: false
+    operator: ==
+    operatorId: IS_FALSE
+    sqlExpression: null
+    subject: fips3_valdiated
+  bottom_margin: auto
+  color_scheme: supersetColors
+  columns: []
+  extra_form_data: {}
+  groupby:
+  - year
+  metrics:
+  - aggregate: null
+    column: null
+    expressionType: SQL
+    hasCustomLabel: false
+    isNew: false
+    label: COUNT(*)
+    optionName: metric_hfbgbbkrt0a_h00sza1ujm6
+    sqlExpression: COUNT(*)
+  order_desc: false
+  row_limit: 10000
+  time_range: No filter
+  time_range_endpoints:
+  - inclusive
+  - exclusive
+  url_params: {}
+  viz_type: dist_bar
+  x_ticks_layout: auto
+  y_axis_bounds:
+  - null
+  - null
+  y_axis_format: SMART_NUMBER
+  datasource_name: enrollments
+  schema: medicare
+  database_name: DORIEH2
+  datasource: 14__table
+  annotation_layers: []
+query_context: null
+cache_timeout: null
+uuid: 71a4e929-773e-5fc5-9997-35cc72af322d
+version: 1.0.0
+dataset_uuid: b49ed92b-db05-5f17-a3a1-aa1a2fc79b3f

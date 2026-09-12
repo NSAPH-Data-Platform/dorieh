@@ -1,0 +1,32 @@
+# Column medicare._enrollments.year
+
+## Overview of column year in table medicare._enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare._enrollments](../medicare._enrollments.md)           |
+| Qualified name                | medicare._enrollments.year  |
+| Datatype                      | string        |
+| Column type | grouping |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+year_svg_envelop.md
+```
+
+
+```{figure} year.svg
+:align: center
+:alt: Column medicare._enrollments.year Lineage SVG
+:target: year_svg_envelop.html
+
+Data lineage for column medicare._enrollments.year
+
+```
+
+

@@ -1,0 +1,22 @@
+# Column cms.mbsf_abcd_2015.EFIVEPCT
+
+## Overview of column EFIVEPCT in table cms.mbsf_abcd_2015 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_abcd_2015](../cms.mbsf_abcd_2015.md)           |
+| Qualified name                | cms.mbsf_abcd_2015.EFIVEPCT  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/enhanced-medicare-5-sample-indicator](https://resdac.org/cms-data/variables/enhanced-medicare-5-sample-indicator) |
+
+
+Medicare Enhanced 5% Sample Indicator
+
+| Key | Value |
+| --- | ----- |
+| long_name | ENHANCED_FIVE_PERCENT_FLAG |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

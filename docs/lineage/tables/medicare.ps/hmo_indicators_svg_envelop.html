@@ -1,0 +1,2410 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Column medicare.ps.hmo_indicators Lineage SVG &mdash; Dorieh Data Platform 0.5.1.post2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dorieh.css?v=1a3f250d" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=ad30b421"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Column medicare.ps.orec" href="orec.html" />
+    <link rel="prev" title="Column medicare.ps.hmo_indicators" href="hmo_indicators.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+<div class="dorieh-citeas">
+  <button type="button" class="dorieh-citeas-btn"
+          onclick="document.getElementById('dorieh-citeas-pop').classList.toggle('open')">
+    &#128214; Cite as
+  </button>
+  <div id="dorieh-citeas-pop" class="dorieh-citeas-pop">
+    <p>Bouzinier,&nbsp;M., Etin,&nbsp;D., Khoshnevis,&nbsp;N.,
+       Shad,&nbsp;M., Yockel,&nbsp;S. (2026).
+       <em>Research Data that Can be Trusted.</em>
+       SpringerBriefs in Computer Science. Springer.
+       <a href="https://doi.org/10.1007/978-3-032-21032-6">doi:10.1007/978-3-032-21032-6</a></p>
+    <button type="button" class="dorieh-citeas-copy"
+            onclick="navigator.clipboard.writeText(
+              'Bouzinier, M., Etin, D., Khoshnevis, N., Shad, M., Yockel, S. (2026). ' +
+              'Research Data that Can be Trusted. SpringerBriefs in Computer Science. ' +
+              'Springer. https://doi.org/10.1007/978-3-032-21032-6'
+            ).then(() => { this.textContent = 'Copied!'; });">
+      Copy citation
+    </button>
+    <a class="dorieh-citeas-more" href="../../../citing.html">More ways to cite &rarr;</a>
+  </div>
+</div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../home.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../home.html#introduction-to-data-platform">Introduction to Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../home.html#building-blocks">Building Blocks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../home.html#dorieh-utilities">Dorieh Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../home.html#core-platform">Core Platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../home.html#dorieh-gis-utilities">Dorieh GIS Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../home.html#dorieh-documentation-utilities">Dorieh Documentation Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../home.html#data-processing-and-loading-pipelines">Data Processing and Loading Pipelines</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../home.html#working-with-nsaph-containerized-apps">Working with NSAPH containerized apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../home.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../home.html#using-the-database">Using the Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../home.html#terms-and-acronyms">Terms and Acronyms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../home.html#building-platform-documentation">Building Platform documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../home.html#next-steps">Next steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rationale.html">Why a data platform</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../rationale.html#why-we-need-a-data-platform">Why we need a Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../rationale.html#architecture">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../rationale.html#supported-programming-languages-and-tools">Supported Programming Languages and Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../rationale.html#development-mode">Development Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../rationale.html#where-it-can-be-deployed">Where it can be deployed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../rationale.html#what-makes-dorieh-different">What makes Dorieh different</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../concepts.html">The Dorieh approach</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts.html#two-languages-one-pipeline">Two languages, one pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts.html#medallion-architecture-as-dorieh-implements-it">Medallion architecture as Dorieh implements it</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts.html#dataset-operators-and-field-construction-operators">Dataset operators and field construction operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts.html#families-of-field-transformations">Families of field transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts.html#disambiguation-rules">Disambiguation rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts.html#validation-and-journaling">Validation and journaling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts.html#fine-grained-lineage">Fine-grained lineage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts.html#where-each-concept-lives">Where each concept lives</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about-the-book.html">The companion book</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../about-the-book.html#bibliographic-information">Bibliographic information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../about-the-book.html#chapter-to-documentation-map">Chapter-to-documentation map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../about-the-book.html#using-this-documentation-without-the-book">Using this documentation without the book</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../citing.html">Citing Dorieh</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../citing.html#preferred-citation-the-book">Preferred citation: the book</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../citing.html#citing-the-software-itself">Citing the software itself</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../citing.html#citing-the-tutorials">Citing the tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../citing.html#citing-the-synthetic-dataset">Citing the synthetic dataset</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Learning paths</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../paths/index.html">Choose your path</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../paths/researcher.html">Researchers and analysts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../paths/researcher.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../paths/researcher.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../paths/developer.html">Pipeline developers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../paths/developer.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../paths/developer.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../paths/operator.html">Platform operators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../paths/operator.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../paths/operator.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../paths/book-reader.html">Readers of the book</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../paths/book-reader.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../paths/book-reader.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../paths/auditor.html">Reviewers and auditors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../paths/auditor.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../paths/auditor.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data domains and pipelines</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../domains.html">Data Domains</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../cms.html">Health</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../health_data_overview.html">Health Data in Dorieh (Medicare and Medicaid)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Medicare.html">Medicare: Building a Data Warehouse from ResDac Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Medicaid.html">Medicaid: Building a Data Warehouse from ResDac Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../health_seealso.html">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../climate.html">Climate</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../climate.html#what-is-gridmet">What is gridMET?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../climate.html#using-command-line-gridmet-utility">Using command line gridMET utility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../climate.html#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../climate.html#python-modules">Python modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../climate.html#cwl-pipelines-and-tools">CWL pipelines and tools</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../exposures.html">Exposure (PM2.5, WashU)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../exposures.html#python-packages">Python packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../exposures.html#cwl-workflows">CWL Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../epa.html">Environmental Protection Agency (EPA) data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../epa.html#package-contents">Package Contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../epa.html#querying-data">Querying Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../census.html">Demographics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../census_about.html">About</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../census_env_set_up.html">Setting Up Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../census_quick_start.html">Quick Start</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../census_yaml.html">Census Variable File Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../census_cached_data.html">Stored Data Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../census_modules.html">Modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../census_glossary.html">Glossary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../census_start_guide.html">Working with the <code class="docutils literal notranslate"><span class="pre">census</span></code> Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_assemble.html">census_assemble.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_assemblecwl_src.html">census_assemble.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_density.html">census_density.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_densitycwl_src.html">census_density.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_ingest.html">census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_ingest_1.html">Sub-workflow <em>store</em> from census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_ingest_1cwl_src.html">CWL sub-workflow for step <u><em>store</em></u> of workflow census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_ingestcwl_src.html">census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_interpolate.html">census_interpolate.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_interpolatecwl_src.html">census_interpolate.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_qc.html">census_qc.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_qccwl_src.html">census_qc.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_workflow.html">census_workflow.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_workflowcwl_src.html">census_workflow.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_write.html">census_write.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_writecwl_src.html">census_write.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../census.html#indices-and-tables">Indices and tables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pipelines.html">Data Processing Pipelines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../pipelines.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../pipelines.html#workflow-description-languages">Workflow Description Languages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../pipelines.html#running-workflows">Running Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipelines.html#tested-runners">Tested Runners</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipelines.html#providing-parameters-to-the-pipelines">Providing Parameters to the Pipelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipelines.html#using-toil">Using Toil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipelines.html#troubleshooting-workflows-run-by-toil">Troubleshooting Workflows Run by Toil</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../pipelines.html#testing-workflows">Testing Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../pipelines.html#published-and-tested-workflows">Published and Tested Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/gridmet.html">Pipeline to aggregate data from Climatology Lab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/wustl.html">Pipeline to ingest Monthly Pollution data downloaded from WashU Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/pm25_yearly_download.html">Pipeline to aggregate data in NetCDF format over given geographies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/aqs.html">Full EPA AQS Processing Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/airnow.html">Full EPA AirNow Processing Pipeline (including downloading shapefiles)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/medicare.html">Medicare data ingestion and processing pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/medicaid.html">Full Medicaid Processing Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_workflow.html">census_workflow.cwl</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../pipelines.html#developing-new-workflows">Developing New Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipelines.html#combining-included-cwl-tools-into-a-new-workflow">Combining Included CWL Tools into a New Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipelines.html#ordering-database-steps-with-depends-on">Ordering Database Steps with <code class="docutils literal notranslate"><span class="pre">depends_on</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipelines.html#wrapping-python-modules-as-cwl-tools">Wrapping Python Modules as CWL Tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials and worked examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Tutorials.html">Dorieh Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorial/climate/index.html">Climate tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/climate/building-climate-pipeline.html">Part 1. Building the pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/climate/documenting-a-workflow.html">Part 2. Documenting the workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/climate/constructing-lineage.html">Part 3. Data dictionaries and lineage graphs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorial/medicare/building-medicare-pipeline.html">Medicare claims pipeline tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/medicare/building-medicare-pipeline.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/medicare/building-medicare-pipeline.html#designing-the-pipeline">Designing the pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/medicare/building-medicare-pipeline.html#from-fts-documents-to-machine-readable-schemas">From FTS documents to machine-readable schemas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/medicare/building-medicare-pipeline.html#bronze-one-table-per-source-file">Bronze: one table per source file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/medicare/building-medicare-pipeline.html#silver-harmonize-disambiguate-validate">Silver: harmonize, disambiguate, validate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/medicare/building-medicare-pipeline.html#gold-the-qc-aggregates">Gold: the QC aggregates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/medicare/building-medicare-pipeline.html#orchestration-five-steps-in-medicare-cwl">Orchestration: five steps in medicare.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/medicare/building-medicare-pipeline.html#documentation-and-lineage">Documentation and lineage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/medicare/building-medicare-pipeline.html#running-it-yourself">Running it yourself</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../Example-climate-workflow.html">A CWL workflow example: aggregating a climate variable</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../Example-climate-workflow.html#what-the-sample-workflow-is-doing-aggregating-a-climate-variable">What the sample workflow is doing: aggregating a climate variable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Example-climate-workflow.html#prepare-to-run-a-workflow">Prepare to run a workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Example-climate-workflow.html#running-the-workflow-in-python-virtual-environment">Running the workflow in Python virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Example-climate-workflow.html#running-the-workflow-using-docker">Running the workflow using Docker</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../medicare-example.html">Medicare pipeline with publicly available synthetic data (PostgreSQL + Superset)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../medicare-example.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../medicare-example.html#step-1-download-synthetic-sample-data">Step 1 — Download synthetic sample data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../medicare-example.html#step-3-optional-explore-results-in-apache-superset">Step 3 (Optional) — Explore results in Apache Superset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../medicare-example.html#what-the-pipeline-produces">What the pipeline produces</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#related-how-to-guides">Related how-to guides</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data dictionaries</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../dictionaries.html">Data Dictionaries</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../MedicareLineage.html">Medicare data warehouse</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../medicare.dot.html">Table Lineage Diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../table-list.html">Alphabetic list of all tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../column-list.html">Alphabetic list of all columns in all tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../members/domain_dictionary.html">The Data Dictionary Generation tool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data modeling DSL reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Datamodels.html">Data Modeling for Dorieh Data Platform</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../DataModellingExtensions.html">Data Modeling Extensions: Federated Views Across Years</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../DataModellingExtensions.html#combining-multiple-sources-and-optional-columns">Combining multiple sources and optional columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../DataModellingExtensions.html#exclude">Exclude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../DataModellingExtensions.html#cast">Cast</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../DataModellingExtensions.html#validating-consistency-of-data-across-tables">Validating consistency of data across tables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Datamodels.html#introduction-to-data-modeling-for-dorieh-data-platform">Introduction to data modeling for Dorieh Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Datamodels.html#domain">Domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Datamodels.html#table">Table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#create-statement">Create statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#invalid-record">Invalid Record</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Datamodels.html#column">Column</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#source">Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#index">Index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#generated-columns">Generated columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#computed-columns">Computed columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#file-columns">File columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#record-columns">Record columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#identifier-columns-and-the-identifiers-token">Identifier columns and the <code class="docutils literal notranslate"><span class="pre">{identifiers}</span></code> token</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#transposing-columns">Transposing columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#wildcards">Wildcards</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Datamodels.html#multi-column-indices">Multi-column indices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Datamodels.html#indexing-policies">Indexing policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Datamodels.html#linking-with-nomenclature">Linking with nomenclature</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#us-states">US States</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#county-codes">County codes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Datamodels.html#ingesting-data">Ingesting data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Datamodels.html#where-to-go-next">Where to go next</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../packages.html">Python Packages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../utils.html">General purpose utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../utils.html#overview-of-utilities">Overview of Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../utils.html#current-development">Current Development</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../utils.html#todo">TODO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../utils.html#documentation-indices">Documentation Indices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../CoreLibrary.html">Data platform components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../CoreLibrary.html#package-dorieh-platform">Package dorieh.platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../CoreLibrary.html#package-dorieh-platform-data-model">Package dorieh.platform.data_model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../CoreLibrary.html#package-dorieh-platform-loader">Package dorieh.platform.loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../CoreLibrary.html#package-dorieh-platform-requests">Package dorieh.platform.requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../CoreLibrary.html#package-dorieh-platform-utils">Package dorieh.platform.utils</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../gis.html">GIS utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../gis.html#gis-library-overview">GIS Library Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../gis.html#shape-files-downloader">Shape files Downloader</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../CMSLibrary.html">Health data manipulation tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../CMSLibrary.html#package-cms">Package cms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../CMSLibrary.html#package-dorieh-cms-tools">Package dorieh.cms.tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../CMSLibrary.html#additional-details">Additional details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../rasters.html">Raster data tools (climate and exposure)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../rasters.html#general-tools-for-raster-files">General tools for raster files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../rasters.html#specialized-tools-for-working-with-climate-data">Specialized tools for working with climate data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../rasters.html#specialized-tools-for-working-with-exposure-data">Specialized tools for working with exposure data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guts.html">Data Platform Internals</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../platform.html">Dorieh Core Data Platform</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../DBConnections.html">Managing database connections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../DataLoader.html">Dorieh Data Loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ProjectLoader.html">Project (Directory) Loading Utility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../TerritorialCodes.html">Mapping between different territorial codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../SQLDocumentation.html">SQL Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../platform.html#core-platform-overview">Core platform overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../platform.html#tool-examples">Tool Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../platform.html#project-structure">Project Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../platform.html#documentation-indices">Documentation Indices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../deployment.html">Dorieh Deployment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../deployment.html#using-docker">Using Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../deployment.html#using-python-virtual-environment">Using Python Virtual Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../deployment.html#using-conda-package-manager">Using Conda Package Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../deployment.html#using-toil-with-docker-requirement">Using Toil with Docker requirement</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../capabilities.html">Platform capabilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../SampleQuery.html">How to query the database</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../SampleQuery.html#setup">Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../SampleQuery.html#create-connection-definition-file">Create connection definition file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../SampleQuery.html#executing-the-query">Executing the query</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../SampleQuery.html#using-explain-to-optimize-queries">Using EXPLAIN to optimize queries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../QueringMedicaid.html">Querying Medicaid Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../QueringMedicaid.html#querying-diagnoses">Querying diagnoses</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../MonitoringDB.html">Monitoring database activity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../MonitoringDB.html#module-monitor">Module monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../MonitoringDB.html#cli-usage-for-monitor">CLI Usage for monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../MonitoringDB.html#using-as-api">Using as API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../UsingHLL.html">Approximate distinct counting with HLL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../UserRequests.html">Handling user requests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../UserRequests.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../UserRequests.html#structure">Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../example_request_yaml.html">Example user request</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Operational guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../DBT.html">Database Testing Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../members/create_test.html">Utility to generate test queries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../members/dbt_runner.html">Test runner: Utility to run generated tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../members/gen_dbt_cwl.html">The gen_dbt_cwl Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../members/create_test.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../members/create_test.html#module-dorieh.platform.dbt.create_test">Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../members/dbt_runner.html">Test runner: Utility to run generated tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../members/dbt_runner.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../members/dbt_runner.html#module-dorieh.platform.dbt.dbt_runner">Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../members/gen_dbt_cwl.html">The gen_dbt_cwl Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../members/gen_dbt_cwl.html#dorieh.platform.dbt.gen_dbt_cwl.CWLTestGenerator"><code class="docutils literal notranslate"><span class="pre">CWLTestGenerator</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../TestingWorkflows.html">Testing bundled workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../TestingWorkflows.html#introduction-to-testing-and-prerequisites">Introduction to testing and prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../TestingWorkflows.html#before-running-any-test">Before running any test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../TestingWorkflows.html#testing-aqs-workflow">Testing AQS workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../TestingWorkflows.html#testing-airnow-workflow">Testing Airnow workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../TestingWorkflows.html#testing-climate-workflow">Testing Climate workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../TestingWorkflows.html#testing-exposure-workflow">Testing Exposure workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../TestingWorkflows.html#testing-medicare-workflow">Testing Medicare workflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../adding_data.html">Adding more data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../adding_data.html#what-data-are-you-adding">What data are you adding?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../adding_data.html#data-modeling-vs-data-introspection">Data modeling vs data introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../adding_data.html#adding-new-data-domain">Adding new data domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../adding_data.html#creating-new-single-table">Creating new single table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../adding_data.html#adding-a-table-from-a-remote-data-source">Adding a table from a remote data source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../adding_data.html#adding-data-to-existing-table">Adding data to existing table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../adding_data.html#automatically-ingesting-multiple-files-from-a-file-system">Automatically ingesting multiple files from a file system</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AppPipelineGenerator.html">Executing containerized apps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../AppPipelineGenerator.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../AppPipelineGenerator.html#prerequisites">Prerequisites</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../AppPipelineGenerator.html#docker-or-python-virtual-environment">Docker or Python virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../AppPipelineGenerator.html#setup-dbms-server">Setup DBMS Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../AppPipelineGenerator.html#define-connection">Define connection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../AppPipelineGenerator.html#using-pipeline-generator">Using pipeline generator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../AppPipelineGenerator.html#generate-pipeline-and-metadata">Generate pipeline and metadata</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../AppPipelineGenerator.html#execute-generated-pipeline">Execute generated pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../AppPipelineGenerator.html#appendix-1-metadata-description">Appendix 1: Metadata description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../AppPipelineGenerator.html#file-app-config-yaml">File app.config.yaml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../AppPipelineGenerator.html#file-metadata-yml">File metadata.yml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../AppPipelineGenerator.html#file-dorieh-metadata-yaml">File dorieh-metadata.yaml</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Terms and Acronyms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../glossary.html#concepts">Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../glossary.html#acronyms">Acronyms</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../dictionaries.html">Data Dictionaries</a></li>
+          <li class="breadcrumb-item"><a href="../../../MedicareLineage.html">Data dictionary and lineage for Medicare processing</a></li>
+          <li class="breadcrumb-item"><a href="../../medicare.dot.html">Table Lineage Diagram</a></li>
+          <li class="breadcrumb-item"><a href="../medicare.ps.html">View medicare.ps</a></li>
+          <li class="breadcrumb-item"><a href="hmo_indicators.html">Column medicare.ps.hmo_indicators</a></li>
+      <li class="breadcrumb-item active">Column medicare.ps.hmo_indicators Lineage SVG</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/lineage/tables/medicare.ps/hmo_indicators_svg_envelop.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="column-medicare-ps-hmo-indicators-lineage-svg">
+<h1>Column medicare.ps.hmo_indicators Lineage SVG<a class="headerlink" href="#column-medicare-ps-hmo-indicators-lineage-svg" title="Link to this heading"></a></h1>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 10.0.1 (20240210.2158)
+ -->
+<!-- Pages: 1 -->
+<svg width="6609pt" height="1528pt"
+ viewBox="0.00 0.00 6609.00 1527.50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 1523.5)">
+<polygon fill="white" stroke="none" points="-4,4 -4,-1523.5 6605,-1523.5 6605,4 -4,4"/>
+<!-- medicare.ps.hmo_indicators -->
+<g id="node1" class="node">
+<title>medicare.ps.hmo_indicators</title>
+<g id="a_node1"><a xlink:href="../medicare.ps/hmo_indicators.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2671.88,-119.5 2359.12,-119.5 2359.12,0 2671.88,0 2671.88,-119.5"/>
+<text text-anchor="start" x="2433" y="-98.2" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.ps.hmo_indicators</text>
+<text text-anchor="start" x="2415.38" y="-51.7" font-family="Times,serif" font-size="14.00">Array of indicators if the beneficiary</text>
+<text text-anchor="start" x="2395.12" y="-35.2" font-family="Times,serif" font-size="14.00">was enrolled in HMO during a given month</text>
+<polygon fill="none" stroke="black" points="2367.12,-4 2367.12,-115.5 2663.88,-115.5 2663.88,-4 2367.12,-4"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2011.HMOIND11 -->
+<g id="node2" class="node">
+<title>cms.mbsf_ab_2011.HMOIND11</title>
+<g id="a_node2"><a xlink:href="../cms.mbsf_ab_2011/HMOIND11.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="215,-1519.5 0,-1519.5 0,-1416.5 215,-1416.5 215,-1519.5"/>
+<text text-anchor="start" x="13" y="-1498.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2011.HMOIND11</text>
+<text text-anchor="start" x="36" y="-1451.7" font-family="Times,serif" font-size="14.00">HMO Indicator XI</text>
+<polygon fill="none" stroke="black" points="8,-1420.5 8,-1515.5 207,-1515.5 207,-1420.5 8,-1420.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2011.HMOIND11&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge87" class="edge">
+<title>cms.mbsf_ab_2011.HMOIND11&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M107.5,-1416.21C107.5,-1390.14 107.5,-1357.87 107.5,-1329 107.5,-1329 107.5,-1329 107.5,-207 107.5,-94.7 1798.04,-67.91 2346.16,-62.18"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2345.91,-65.68 2355.87,-62.08 2345.83,-58.68 2345.91,-65.68"/>
+<text text-anchor="middle" x="122.88" y="-762.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND11 -->
+<g id="node3" class="node">
+<title>cms.mbsf_ab_2012.HMOIND11</title>
+<g id="a_node3"><a xlink:href="../cms.mbsf_ab_2012/HMOIND11.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="448,-1519.5 233,-1519.5 233,-1416.5 448,-1416.5 448,-1519.5"/>
+<text text-anchor="start" x="246" y="-1498.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2012.HMOIND11</text>
+<text text-anchor="start" x="269" y="-1451.7" font-family="Times,serif" font-size="14.00">HMO Indicator XI</text>
+<polygon fill="none" stroke="black" points="241,-1420.5 241,-1515.5 440,-1515.5 440,-1420.5 241,-1420.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND11&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge88" class="edge">
+<title>cms.mbsf_ab_2012.HMOIND11&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M340.5,-1416.21C340.5,-1390.14 340.5,-1357.87 340.5,-1329 340.5,-1329 340.5,-1329 340.5,-207 340.5,-106.66 1833.64,-72.19 2345.62,-63.32"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2345.68,-66.82 2355.62,-63.15 2345.56,-59.82 2345.68,-66.82"/>
+<text text-anchor="middle" x="355.88" y="-762.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2013.HMOIND11 -->
+<g id="node4" class="node">
+<title>cms.mbsf_ab_2013.HMOIND11</title>
+<g id="a_node4"><a xlink:href="../cms.mbsf_ab_2013/HMOIND11.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="681,-1519.5 466,-1519.5 466,-1416.5 681,-1416.5 681,-1519.5"/>
+<text text-anchor="start" x="479" y="-1498.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2013.HMOIND11</text>
+<text text-anchor="start" x="502" y="-1451.7" font-family="Times,serif" font-size="14.00">HMO Indicator XI</text>
+<polygon fill="none" stroke="black" points="474,-1420.5 474,-1515.5 673,-1515.5 673,-1420.5 474,-1420.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2013.HMOIND11&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge89" class="edge">
+<title>cms.mbsf_ab_2013.HMOIND11&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M573.5,-1416.21C573.5,-1390.14 573.5,-1357.87 573.5,-1329 573.5,-1329 573.5,-1329 573.5,-207 573.5,-118.5 1872.89,-76.93 2345.91,-64.73"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2345.7,-68.23 2355.61,-64.48 2345.52,-61.23 2345.7,-68.23"/>
+<text text-anchor="middle" x="588.88" y="-762.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND11 -->
+<g id="node5" class="node">
+<title>cms.mbsf_ab_2014.HMOIND11</title>
+<g id="a_node5"><a xlink:href="../cms.mbsf_ab_2014/HMOIND11.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="914,-1519.5 699,-1519.5 699,-1416.5 914,-1416.5 914,-1519.5"/>
+<text text-anchor="start" x="712" y="-1498.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2014.HMOIND11</text>
+<text text-anchor="start" x="735" y="-1451.7" font-family="Times,serif" font-size="14.00">HMO Indicator XI</text>
+<polygon fill="none" stroke="black" points="707,-1420.5 707,-1515.5 906,-1515.5 906,-1420.5 707,-1420.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND11&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge90" class="edge">
+<title>cms.mbsf_ab_2014.HMOIND11&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M806.5,-1416.21C806.5,-1390.14 806.5,-1357.87 806.5,-1329 806.5,-1329 806.5,-1329 806.5,-207 806.5,-182.15 811.2,-172.16 830.5,-156.5 858.54,-133.75 873.75,-142.61 909.5,-137.5 1182.63,-98.48 1991.58,-73.96 2345.96,-64.81"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2345.96,-68.31 2355.87,-64.56 2345.78,-61.31 2345.96,-68.31"/>
+<text text-anchor="middle" x="821.88" y="-762.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2015.HMOIND11 -->
+<g id="node6" class="node">
+<title>cms.mbsf_abcd_2015.HMOIND11</title>
+<g id="a_node6"><a xlink:href="../cms.mbsf_abcd_2015/HMOIND11.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="1160.75,-1519.5 932.25,-1519.5 932.25,-1416.5 1160.75,-1416.5 1160.75,-1519.5"/>
+<text text-anchor="start" x="945.25" y="-1498.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2015.HMOIND11</text>
+<text text-anchor="start" x="968.25" y="-1451.7" font-family="Times,serif" font-size="14.00">HMO Indicator: November</text>
+<polygon fill="none" stroke="black" points="940.25,-1420.5 940.25,-1515.5 1152.75,-1515.5 1152.75,-1420.5 940.25,-1420.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2015.HMOIND11&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge91" class="edge">
+<title>cms.mbsf_abcd_2015.HMOIND11&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M932.11,-1417.34C913.12,-1406.39 894.44,-1393.74 878.5,-1379.5 858.32,-1361.47 844.5,-1356.06 844.5,-1329 844.5,-1329 844.5,-1329 844.5,-207 844.5,-182.15 848.78,-171.62 868.5,-156.5 905.79,-127.92 925.82,-142.9 972.5,-137.5 1469.42,-80 2061.28,-65.55 2345.98,-61.94"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2345.91,-65.44 2355.86,-61.81 2345.82,-58.44 2345.91,-65.44"/>
+<text text-anchor="middle" x="859.88" y="-762.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND11 -->
+<g id="node7" class="node">
+<title>cms.mbsf_abcd_2016.HMOIND11</title>
+<g id="a_node7"><a xlink:href="../cms.mbsf_abcd_2016/HMOIND11.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2099.75,-1519.5 1871.25,-1519.5 1871.25,-1416.5 2099.75,-1416.5 2099.75,-1519.5"/>
+<text text-anchor="start" x="1884.25" y="-1498.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2016.HMOIND11</text>
+<text text-anchor="start" x="1907.25" y="-1451.7" font-family="Times,serif" font-size="14.00">HMO Indicator: November</text>
+<polygon fill="none" stroke="black" points="1879.25,-1420.5 1879.25,-1515.5 2091.75,-1515.5 2091.75,-1420.5 1879.25,-1420.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND11&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge92" class="edge">
+<title>cms.mbsf_abcd_2016.HMOIND11&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M1870.77,-1461.04C1599.77,-1446.51 939.79,-1408.35 901.5,-1379.5 882.35,-1365.07 882.5,-1352.98 882.5,-1329 882.5,-1329 882.5,-1329 882.5,-207 882.5,-182.15 887.22,-172.18 906.5,-156.5 934.18,-133.98 949.19,-142.64 984.5,-137.5 1242.73,-99.92 2003.73,-74.88 2345.69,-65.22"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2345.75,-68.72 2355.65,-64.94 2345.56,-61.72 2345.75,-68.72"/>
+<text text-anchor="middle" x="897.88" y="-762.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2013.HMOIND01 -->
+<g id="node12" class="node">
+<title>cms.mbsf_ab_2013.HMOIND01</title>
+<g id="a_node12"><a xlink:href="../cms.mbsf_ab_2013/HMOIND01.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="1126,-1379.5 911,-1379.5 911,-1276.5 1126,-1276.5 1126,-1379.5"/>
+<text text-anchor="start" x="924" y="-1358.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2013.HMOIND01</text>
+<text text-anchor="start" x="947" y="-1311.7" font-family="Times,serif" font-size="14.00">HMO Indicator I</text>
+<polygon fill="none" stroke="black" points="919,-1280.5 919,-1375.5 1118,-1375.5 1118,-1280.5 919,-1280.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND11&#45;&gt;cms.mbsf_ab_2013.HMOIND01 -->
+<!-- cms.mbsf_ab_2014.HMOIND01 -->
+<g id="node13" class="node">
+<title>cms.mbsf_ab_2014.HMOIND01</title>
+<g id="a_node13"><a xlink:href="../cms.mbsf_ab_2014/HMOIND01.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="1359,-1379.5 1144,-1379.5 1144,-1276.5 1359,-1276.5 1359,-1379.5"/>
+<text text-anchor="start" x="1157" y="-1358.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2014.HMOIND01</text>
+<text text-anchor="start" x="1180" y="-1311.7" font-family="Times,serif" font-size="14.00">HMO Indicator I</text>
+<polygon fill="none" stroke="black" points="1152,-1280.5 1152,-1375.5 1351,-1375.5 1351,-1280.5 1152,-1280.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND11&#45;&gt;cms.mbsf_ab_2014.HMOIND01 -->
+<!-- cms.mbsf_abcd_2015.HMOIND01 -->
+<g id="node14" class="node">
+<title>cms.mbsf_abcd_2015.HMOIND01</title>
+<g id="a_node14"><a xlink:href="../cms.mbsf_abcd_2015/HMOIND01.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="1605.75,-1379.5 1377.25,-1379.5 1377.25,-1276.5 1605.75,-1276.5 1605.75,-1379.5"/>
+<text text-anchor="start" x="1390.25" y="-1358.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2015.HMOIND01</text>
+<text text-anchor="start" x="1413.25" y="-1311.7" font-family="Times,serif" font-size="14.00">HMO Indicator: January</text>
+<polygon fill="none" stroke="black" points="1385.25,-1280.5 1385.25,-1375.5 1597.75,-1375.5 1597.75,-1280.5 1385.25,-1280.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND11&#45;&gt;cms.mbsf_abcd_2015.HMOIND01 -->
+<!-- cms.mbsf_abcd_2016.HMOIND01 -->
+<g id="node15" class="node">
+<title>cms.mbsf_abcd_2016.HMOIND01</title>
+<g id="a_node15"><a xlink:href="../cms.mbsf_abcd_2016/HMOIND01.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="1852.75,-1379.5 1624.25,-1379.5 1624.25,-1276.5 1852.75,-1276.5 1852.75,-1379.5"/>
+<text text-anchor="start" x="1637.25" y="-1358.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2016.HMOIND01</text>
+<text text-anchor="start" x="1660.25" y="-1311.7" font-family="Times,serif" font-size="14.00">HMO Indicator: January</text>
+<polygon fill="none" stroke="black" points="1632.25,-1280.5 1632.25,-1375.5 1844.75,-1375.5 1844.75,-1280.5 1632.25,-1280.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND11&#45;&gt;cms.mbsf_abcd_2016.HMOIND01 -->
+<!-- cms.mbsf_abcd_2017.HMOIND01 -->
+<g id="node16" class="node">
+<title>cms.mbsf_abcd_2017.HMOIND01</title>
+<g id="a_node16"><a xlink:href="../cms.mbsf_abcd_2017/HMOIND01.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2099.75,-1379.5 1871.25,-1379.5 1871.25,-1276.5 2099.75,-1276.5 2099.75,-1379.5"/>
+<text text-anchor="start" x="1884.25" y="-1358.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2017.HMOIND01</text>
+<text text-anchor="start" x="1907.25" y="-1311.7" font-family="Times,serif" font-size="14.00">HMO Indicator: January</text>
+<polygon fill="none" stroke="black" points="1879.25,-1280.5 1879.25,-1375.5 2091.75,-1375.5 2091.75,-1280.5 1879.25,-1280.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND11&#45;&gt;cms.mbsf_abcd_2017.HMOIND01 -->
+<!-- cms.mbsf_abcd_2018.HMOIND01 -->
+<g id="node17" class="node">
+<title>cms.mbsf_abcd_2018.HMOIND01</title>
+<g id="a_node17"><a xlink:href="../cms.mbsf_abcd_2018/HMOIND01.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2347.75,-1379.5 2119.25,-1379.5 2119.25,-1276.5 2347.75,-1276.5 2347.75,-1379.5"/>
+<text text-anchor="start" x="2132.25" y="-1358.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2018.HMOIND01</text>
+<text text-anchor="start" x="2155.25" y="-1311.7" font-family="Times,serif" font-size="14.00">HMO Indicator: January</text>
+<polygon fill="none" stroke="black" points="2127.25,-1280.5 2127.25,-1375.5 2339.75,-1375.5 2339.75,-1280.5 2127.25,-1280.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND11&#45;&gt;cms.mbsf_abcd_2018.HMOIND01 -->
+<!-- cms.mbsf_ab_2011.HMOIND07 -->
+<g id="node18" class="node">
+<title>cms.mbsf_ab_2011.HMOIND07</title>
+<g id="a_node18"><a xlink:href="../cms.mbsf_ab_2011/HMOIND07.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3848,-1379.5 3633,-1379.5 3633,-1276.5 3848,-1276.5 3848,-1379.5"/>
+<text text-anchor="start" x="3646" y="-1358.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2011.HMOIND07</text>
+<text text-anchor="start" x="3669" y="-1311.7" font-family="Times,serif" font-size="14.00">HMO Indicator VII</text>
+<polygon fill="none" stroke="black" points="3641,-1280.5 3641,-1375.5 3840,-1375.5 3840,-1280.5 3641,-1280.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND11&#45;&gt;cms.mbsf_ab_2011.HMOIND07 -->
+<!-- cms.mbsf_ab_2012.HMOIND07 -->
+<g id="node19" class="node">
+<title>cms.mbsf_ab_2012.HMOIND07</title>
+<g id="a_node19"><a xlink:href="../cms.mbsf_ab_2012/HMOIND07.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="4831,-1379.5 4616,-1379.5 4616,-1276.5 4831,-1276.5 4831,-1379.5"/>
+<text text-anchor="start" x="4629" y="-1358.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2012.HMOIND07</text>
+<text text-anchor="start" x="4652" y="-1311.7" font-family="Times,serif" font-size="14.00">HMO Indicator VII</text>
+<polygon fill="none" stroke="black" points="4624,-1280.5 4624,-1375.5 4823,-1375.5 4823,-1280.5 4624,-1280.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND11&#45;&gt;cms.mbsf_ab_2012.HMOIND07 -->
+<!-- cms.mbsf_ab_2013.HMOIND07 -->
+<g id="node20" class="node">
+<title>cms.mbsf_ab_2013.HMOIND07</title>
+<g id="a_node20"><a xlink:href="../cms.mbsf_ab_2013/HMOIND07.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="5439,-1379.5 5224,-1379.5 5224,-1276.5 5439,-1276.5 5439,-1379.5"/>
+<text text-anchor="start" x="5237" y="-1358.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2013.HMOIND07</text>
+<text text-anchor="start" x="5260" y="-1311.7" font-family="Times,serif" font-size="14.00">HMO Indicator VII</text>
+<polygon fill="none" stroke="black" points="5232,-1280.5 5232,-1375.5 5431,-1375.5 5431,-1280.5 5232,-1280.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND11&#45;&gt;cms.mbsf_ab_2013.HMOIND07 -->
+<!-- cms.mbsf_ab_2014.HMOIND07 -->
+<g id="node21" class="node">
+<title>cms.mbsf_ab_2014.HMOIND07</title>
+<g id="a_node21"><a xlink:href="../cms.mbsf_ab_2014/HMOIND07.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="5860,-1379.5 5645,-1379.5 5645,-1276.5 5860,-1276.5 5860,-1379.5"/>
+<text text-anchor="start" x="5658" y="-1358.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2014.HMOIND07</text>
+<text text-anchor="start" x="5681" y="-1311.7" font-family="Times,serif" font-size="14.00">HMO Indicator VII</text>
+<polygon fill="none" stroke="black" points="5653,-1280.5 5653,-1375.5 5852,-1375.5 5852,-1280.5 5653,-1280.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND11&#45;&gt;cms.mbsf_ab_2014.HMOIND07 -->
+<!-- cms.mbsf_abcd_2017.HMOIND11 -->
+<g id="node8" class="node">
+<title>cms.mbsf_abcd_2017.HMOIND11</title>
+<g id="a_node8"><a xlink:href="../cms.mbsf_abcd_2017/HMOIND11.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="5887.75,-1519.5 5659.25,-1519.5 5659.25,-1416.5 5887.75,-1416.5 5887.75,-1519.5"/>
+<text text-anchor="start" x="5672.25" y="-1498.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2017.HMOIND11</text>
+<text text-anchor="start" x="5695.25" y="-1451.7" font-family="Times,serif" font-size="14.00">HMO Indicator: November</text>
+<polygon fill="none" stroke="black" points="5667.25,-1420.5 5667.25,-1515.5 5879.75,-1515.5 5879.75,-1420.5 5667.25,-1420.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2017.HMOIND11&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge93" class="edge">
+<title>cms.mbsf_abcd_2017.HMOIND11&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M5883.2,-1416.1C5933.66,-1389.04 5982.5,-1355.9 5982.5,-1329 5982.5,-1329 5982.5,-1329 5982.5,-207 5982.5,-118.75 5884.51,-143.94 5796.5,-137.5 5182.35,-92.54 3266.17,-68.79 2684.57,-62.48"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2684.98,-58.99 2674.94,-62.38 2684.91,-65.99 2684.98,-58.99"/>
+<text text-anchor="middle" x="5997.88" y="-762.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND11 -->
+<g id="node9" class="node">
+<title>cms.mbsf_abcd_2018.HMOIND11</title>
+<g id="a_node9"><a xlink:href="../cms.mbsf_abcd_2018/HMOIND11.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="6134.75,-1519.5 5906.25,-1519.5 5906.25,-1416.5 6134.75,-1416.5 6134.75,-1519.5"/>
+<text text-anchor="start" x="5919.25" y="-1498.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2018.HMOIND11</text>
+<text text-anchor="start" x="5942.25" y="-1451.7" font-family="Times,serif" font-size="14.00">HMO Indicator: November</text>
+<polygon fill="none" stroke="black" points="5914.25,-1420.5 5914.25,-1515.5 6126.75,-1515.5 6126.75,-1420.5 5914.25,-1420.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND11&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge94" class="edge">
+<title>cms.mbsf_abcd_2018.HMOIND11&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M6020.5,-1416.21C6020.5,-1390.14 6020.5,-1357.87 6020.5,-1329 6020.5,-1329 6020.5,-1329 6020.5,-207 6020.5,-112.06 5913.24,-143.65 5818.5,-137.5 5199.52,-97.34 3268.88,-70.26 2684.67,-62.82"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.03,-59.32 2674.99,-62.7 2684.94,-66.32 2685.03,-59.32"/>
+<text text-anchor="middle" x="6035.88" y="-762.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2011.HMOIND01 -->
+<g id="node10" class="node">
+<title>cms.mbsf_ab_2011.HMOIND01</title>
+<g id="a_node10"><a xlink:href="../cms.mbsf_ab_2011/HMOIND01.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="6368,-1519.5 6153,-1519.5 6153,-1416.5 6368,-1416.5 6368,-1519.5"/>
+<text text-anchor="start" x="6166" y="-1498.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2011.HMOIND01</text>
+<text text-anchor="start" x="6189" y="-1451.7" font-family="Times,serif" font-size="14.00">HMO Indicator I</text>
+<polygon fill="none" stroke="black" points="6161,-1420.5 6161,-1515.5 6360,-1515.5 6360,-1420.5 6161,-1420.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2011.HMOIND01&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge95" class="edge">
+<title>cms.mbsf_ab_2011.HMOIND01&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M6260.5,-1416.21C6260.5,-1390.14 6260.5,-1357.87 6260.5,-1329 6260.5,-1329 6260.5,-1329 6260.5,-207 6260.5,-43.17 6061.79,-150.71 5898.5,-137.5 5264,-86.16 3279.41,-66.74 2685.23,-61.99"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.37,-58.49 2675.34,-61.91 2685.31,-65.49 2685.37,-58.49"/>
+<text text-anchor="middle" x="6275.88" y="-762.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND01 -->
+<g id="node11" class="node">
+<title>cms.mbsf_ab_2012.HMOIND01</title>
+<g id="a_node11"><a xlink:href="../cms.mbsf_ab_2012/HMOIND01.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="6601,-1519.5 6386,-1519.5 6386,-1416.5 6601,-1416.5 6601,-1519.5"/>
+<text text-anchor="start" x="6399" y="-1498.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2012.HMOIND01</text>
+<text text-anchor="start" x="6422" y="-1451.7" font-family="Times,serif" font-size="14.00">HMO Indicator I</text>
+<polygon fill="none" stroke="black" points="6394,-1420.5 6394,-1515.5 6593,-1515.5 6593,-1420.5 6394,-1420.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND01&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge96" class="edge">
+<title>cms.mbsf_ab_2012.HMOIND01&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M6493.5,-1416.21C6493.5,-1390.14 6493.5,-1357.87 6493.5,-1329 6493.5,-1329 6493.5,-1329 6493.5,-207 6493.5,-22.18 6267.99,-148.64 6083.5,-137.5 5410.02,-96.82 3300.06,-69.81 2685.22,-62.65"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.36,-59.15 2675.32,-62.54 2685.28,-66.15 2685.36,-59.15"/>
+<text text-anchor="middle" x="6508.88" y="-762.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2013.HMOIND01&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge97" class="edge">
+<title>cms.mbsf_ab_2013.HMOIND01&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M960.08,-1276.05C939.09,-1252.17 920.5,-1221.76 920.5,-1189 920.5,-1189 920.5,-1189 920.5,-207 920.5,-182.15 924.75,-171.58 944.5,-156.5 982.54,-127.45 1002.95,-142.98 1050.5,-137.5 1517.48,-83.63 2072.62,-67.54 2346.05,-62.76"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2345.89,-66.26 2355.83,-62.59 2345.77,-59.26 2345.89,-66.26"/>
+<text text-anchor="middle" x="935.88" y="-692.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND01&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge98" class="edge">
+<title>cms.mbsf_ab_2014.HMOIND01&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M1143.68,-1279.75C1140.6,-1278.63 1137.53,-1277.54 1134.5,-1276.5 1051.89,-1248.1 958.5,-1276.36 958.5,-1189 958.5,-1189 958.5,-1189 958.5,-207 958.5,-182.15 963.18,-172.13 982.5,-156.5 1010.91,-133.52 1026.33,-142.71 1062.5,-137.5 1523.37,-71.15 2073.84,-60.56 2345.96,-59.83"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2345.69,-63.33 2355.68,-59.81 2345.67,-56.33 2345.69,-63.33"/>
+<text text-anchor="middle" x="973.88" y="-692.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2015.HMOIND01&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge99" class="edge">
+<title>cms.mbsf_abcd_2015.HMOIND01&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M1377.05,-1278.99C1373.85,-1278.1 1370.66,-1277.27 1367.5,-1276.5 1294.27,-1258.78 1094.33,-1279.52 1030.5,-1239.5 1007.58,-1225.13 996.5,-1216.06 996.5,-1189 996.5,-1189 996.5,-1189 996.5,-207 996.5,-182.15 1000.76,-171.6 1020.5,-156.5 1058.17,-127.68 1078.4,-143.04 1125.5,-137.5 1563.73,-85.95 2083.87,-68.89 2346.2,-63.35"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2345.92,-66.85 2355.85,-63.15 2345.78,-59.86 2345.92,-66.85"/>
+<text text-anchor="middle" x="1011.88" y="-692.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND01&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge100" class="edge">
+<title>cms.mbsf_abcd_2016.HMOIND01&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M1623.75,-1278.7C1620.65,-1277.9 1617.57,-1277.17 1614.5,-1276.5 1519.09,-1255.78 1272.56,-1269.06 1175.5,-1258.5 1106.04,-1250.94 1034.5,-1258.87 1034.5,-1189 1034.5,-1189 1034.5,-1189 1034.5,-207 1034.5,-182.15 1039.27,-172.24 1058.5,-156.5 1085.44,-134.44 1100.07,-142.71 1134.5,-137.5 1567.53,-71.94 2084.51,-60.84 2346.02,-59.88"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2345.65,-63.38 2355.64,-59.85 2345.63,-56.38 2345.65,-63.38"/>
+<text text-anchor="middle" x="1049.88" y="-692.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2017.HMOIND01&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge101" class="edge">
+<title>cms.mbsf_abcd_2017.HMOIND01&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M1870.77,-1278.64C1867.66,-1277.86 1864.57,-1277.14 1861.5,-1276.5 1714.42,-1245.66 1334.48,-1278.18 1185.5,-1258.5 1127.05,-1250.78 1072.5,-1247.96 1072.5,-1189 1072.5,-1189 1072.5,-1189 1072.5,-207 1072.5,-182.15 1076.7,-171.52 1096.5,-156.5 1136.02,-126.51 1157.21,-143.18 1206.5,-137.5 1613.84,-90.53 2095.98,-71.66 2346.02,-64.6"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2345.92,-68.11 2355.82,-64.33 2345.73,-61.11 2345.92,-68.11"/>
+<text text-anchor="middle" x="1087.88" y="-692.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND01&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge102" class="edge">
+<title>cms.mbsf_abcd_2018.HMOIND01&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M2118.86,-1278.95C2115.39,-1278.06 2111.93,-1277.23 2108.5,-1276.5 2002.06,-1253.72 1217.82,-1303.13 1129.5,-1239.5 1110.04,-1225.48 1110.5,-1212.98 1110.5,-1189 1110.5,-1189 1110.5,-1189 1110.5,-207 1110.5,-151.78 1158.97,-146.21 1213.5,-137.5 1616.1,-73.17 2096.46,-61.37 2346.03,-60.02"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2345.83,-63.52 2355.81,-59.98 2345.8,-56.52 2345.83,-63.52"/>
+<text text-anchor="middle" x="1125.88" y="-692.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2015.HMOIND07 -->
+<g id="node22" class="node">
+<title>cms.mbsf_abcd_2015.HMOIND07</title>
+<g id="a_node22"><a xlink:href="../cms.mbsf_abcd_2015/HMOIND07.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="1366.75,-1239.5 1138.25,-1239.5 1138.25,-1136.5 1366.75,-1136.5 1366.75,-1239.5"/>
+<text text-anchor="start" x="1151.25" y="-1218.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2015.HMOIND07</text>
+<text text-anchor="start" x="1174.25" y="-1171.7" font-family="Times,serif" font-size="14.00">HMO Indicator: July</text>
+<polygon fill="none" stroke="black" points="1146.25,-1140.5 1146.25,-1235.5 1358.75,-1235.5 1358.75,-1140.5 1146.25,-1140.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND01&#45;&gt;cms.mbsf_abcd_2015.HMOIND07 -->
+<!-- cms.mbsf_abcd_2016.HMOIND07 -->
+<g id="node23" class="node">
+<title>cms.mbsf_abcd_2016.HMOIND07</title>
+<g id="a_node23"><a xlink:href="../cms.mbsf_abcd_2016/HMOIND07.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="1613.75,-1239.5 1385.25,-1239.5 1385.25,-1136.5 1613.75,-1136.5 1613.75,-1239.5"/>
+<text text-anchor="start" x="1398.25" y="-1218.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2016.HMOIND07</text>
+<text text-anchor="start" x="1421.25" y="-1171.7" font-family="Times,serif" font-size="14.00">HMO Indicator: July</text>
+<polygon fill="none" stroke="black" points="1393.25,-1140.5 1393.25,-1235.5 1605.75,-1235.5 1605.75,-1140.5 1393.25,-1140.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND01&#45;&gt;cms.mbsf_abcd_2016.HMOIND07 -->
+<!-- cms.mbsf_abcd_2017.HMOIND07 -->
+<g id="node24" class="node">
+<title>cms.mbsf_abcd_2017.HMOIND07</title>
+<g id="a_node24"><a xlink:href="../cms.mbsf_abcd_2017/HMOIND07.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="1860.75,-1239.5 1632.25,-1239.5 1632.25,-1136.5 1860.75,-1136.5 1860.75,-1239.5"/>
+<text text-anchor="start" x="1645.25" y="-1218.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2017.HMOIND07</text>
+<text text-anchor="start" x="1668.25" y="-1171.7" font-family="Times,serif" font-size="14.00">HMO Indicator: July</text>
+<polygon fill="none" stroke="black" points="1640.25,-1140.5 1640.25,-1235.5 1852.75,-1235.5 1852.75,-1140.5 1640.25,-1140.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND01&#45;&gt;cms.mbsf_abcd_2017.HMOIND07 -->
+<!-- cms.mbsf_abcd_2018.HMOIND07 -->
+<g id="node25" class="node">
+<title>cms.mbsf_abcd_2018.HMOIND07</title>
+<g id="a_node25"><a xlink:href="../cms.mbsf_abcd_2018/HMOIND07.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2107.75,-1239.5 1879.25,-1239.5 1879.25,-1136.5 2107.75,-1136.5 2107.75,-1239.5"/>
+<text text-anchor="start" x="1892.25" y="-1218.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2018.HMOIND07</text>
+<text text-anchor="start" x="1915.25" y="-1171.7" font-family="Times,serif" font-size="14.00">HMO Indicator: July</text>
+<polygon fill="none" stroke="black" points="1887.25,-1140.5 1887.25,-1235.5 2099.75,-1235.5 2099.75,-1140.5 1887.25,-1140.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND01&#45;&gt;cms.mbsf_abcd_2018.HMOIND07 -->
+<!-- cms.mbsf_ab_2011.HMOIND03 -->
+<g id="node26" class="node">
+<title>cms.mbsf_ab_2011.HMOIND03</title>
+<g id="a_node26"><a xlink:href="../cms.mbsf_ab_2011/HMOIND03.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2341,-1239.5 2126,-1239.5 2126,-1136.5 2341,-1136.5 2341,-1239.5"/>
+<text text-anchor="start" x="2139" y="-1218.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2011.HMOIND03</text>
+<text text-anchor="start" x="2162" y="-1171.7" font-family="Times,serif" font-size="14.00">HMO Indicator III</text>
+<polygon fill="none" stroke="black" points="2134,-1140.5 2134,-1235.5 2333,-1235.5 2333,-1140.5 2134,-1140.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND01&#45;&gt;cms.mbsf_ab_2011.HMOIND03 -->
+<!-- cms.mbsf_ab_2012.HMOIND03 -->
+<g id="node27" class="node">
+<title>cms.mbsf_ab_2012.HMOIND03</title>
+<g id="a_node27"><a xlink:href="../cms.mbsf_ab_2012/HMOIND03.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2574,-1239.5 2359,-1239.5 2359,-1136.5 2574,-1136.5 2574,-1239.5"/>
+<text text-anchor="start" x="2372" y="-1218.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2012.HMOIND03</text>
+<text text-anchor="start" x="2395" y="-1171.7" font-family="Times,serif" font-size="14.00">HMO Indicator III</text>
+<polygon fill="none" stroke="black" points="2367,-1140.5 2367,-1235.5 2566,-1235.5 2566,-1140.5 2367,-1140.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND01&#45;&gt;cms.mbsf_ab_2012.HMOIND03 -->
+<!-- cms.mbsf_ab_2013.HMOIND03 -->
+<g id="node28" class="node">
+<title>cms.mbsf_ab_2013.HMOIND03</title>
+<g id="a_node28"><a xlink:href="../cms.mbsf_ab_2013/HMOIND03.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3862,-1239.5 3647,-1239.5 3647,-1136.5 3862,-1136.5 3862,-1239.5"/>
+<text text-anchor="start" x="3660" y="-1218.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2013.HMOIND03</text>
+<text text-anchor="start" x="3683" y="-1171.7" font-family="Times,serif" font-size="14.00">HMO Indicator III</text>
+<polygon fill="none" stroke="black" points="3655,-1140.5 3655,-1235.5 3854,-1235.5 3854,-1140.5 3655,-1140.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND01&#45;&gt;cms.mbsf_ab_2013.HMOIND03 -->
+<!-- cms.mbsf_ab_2014.HMOIND03 -->
+<g id="node29" class="node">
+<title>cms.mbsf_ab_2014.HMOIND03</title>
+<g id="a_node29"><a xlink:href="../cms.mbsf_ab_2014/HMOIND03.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="4738,-1239.5 4523,-1239.5 4523,-1136.5 4738,-1136.5 4738,-1239.5"/>
+<text text-anchor="start" x="4536" y="-1218.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2014.HMOIND03</text>
+<text text-anchor="start" x="4559" y="-1171.7" font-family="Times,serif" font-size="14.00">HMO Indicator III</text>
+<polygon fill="none" stroke="black" points="4531,-1140.5 4531,-1235.5 4730,-1235.5 4730,-1140.5 4531,-1140.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND01&#45;&gt;cms.mbsf_ab_2014.HMOIND03 -->
+<!-- cms.mbsf_abcd_2015.HMOIND03 -->
+<g id="node30" class="node">
+<title>cms.mbsf_abcd_2015.HMOIND03</title>
+<g id="a_node30"><a xlink:href="../cms.mbsf_abcd_2015/HMOIND03.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="5306.75,-1239.5 5078.25,-1239.5 5078.25,-1136.5 5306.75,-1136.5 5306.75,-1239.5"/>
+<text text-anchor="start" x="5091.25" y="-1218.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2015.HMOIND03</text>
+<text text-anchor="start" x="5114.25" y="-1171.7" font-family="Times,serif" font-size="14.00">HMO Indicator: March</text>
+<polygon fill="none" stroke="black" points="5086.25,-1140.5 5086.25,-1235.5 5298.75,-1235.5 5298.75,-1140.5 5086.25,-1140.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND01&#45;&gt;cms.mbsf_abcd_2015.HMOIND03 -->
+<!-- cms.mbsf_abcd_2016.HMOIND03 -->
+<g id="node31" class="node">
+<title>cms.mbsf_abcd_2016.HMOIND03</title>
+<g id="a_node31"><a xlink:href="../cms.mbsf_abcd_2016/HMOIND03.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="5714.75,-1239.5 5486.25,-1239.5 5486.25,-1136.5 5714.75,-1136.5 5714.75,-1239.5"/>
+<text text-anchor="start" x="5499.25" y="-1218.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2016.HMOIND03</text>
+<text text-anchor="start" x="5522.25" y="-1171.7" font-family="Times,serif" font-size="14.00">HMO Indicator: March</text>
+<polygon fill="none" stroke="black" points="5494.25,-1140.5 5494.25,-1235.5 5706.75,-1235.5 5706.75,-1140.5 5494.25,-1140.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND01&#45;&gt;cms.mbsf_abcd_2016.HMOIND03 -->
+<!-- cms.mbsf_ab_2011.HMOIND07&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge103" class="edge">
+<title>cms.mbsf_ab_2011.HMOIND07&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M3848.46,-1319.83C4012.27,-1309.15 4333.44,-1288.98 4606.5,-1276.5 4730.55,-1270.83 5603.26,-1270.51 5723.5,-1239.5 5771.33,-1227.16 5822.5,-1238.39 5822.5,-1189 5822.5,-1189 5822.5,-1189 5822.5,-207 5822.5,-128.25 5738,-143.8 5659.5,-137.5 5073.8,-90.47 3250.56,-68.27 2684.73,-62.39"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.07,-58.89 2675.03,-62.29 2685,-65.89 2685.07,-58.89"/>
+<text text-anchor="middle" x="5837.88" y="-692.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND07&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge104" class="edge">
+<title>cms.mbsf_ab_2012.HMOIND07&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M4831.13,-1314.58C4930.53,-1303.43 5082.32,-1287.22 5214.5,-1276.5 5348.96,-1265.6 5382.88,-1267.24 5517.5,-1258.5 5595.11,-1253.46 5860.5,-1266.77 5860.5,-1189 5860.5,-1189 5860.5,-1189 5860.5,-207 5860.5,-121.66 5766.61,-143.73 5681.5,-137.5 5091.05,-94.26 3253.49,-69.45 2684.91,-62.67"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.19,-59.17 2675.15,-62.55 2685.11,-66.17 2685.19,-59.17"/>
+<text text-anchor="middle" x="5875.88" y="-692.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2013.HMOIND07&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge105" class="edge">
+<title>cms.mbsf_ab_2013.HMOIND07&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M5439.38,-1308.87C5587.7,-1283.88 5836.95,-1241.68 5841.5,-1239.5 5872.01,-1224.86 5898.5,-1222.85 5898.5,-1189 5898.5,-1189 5898.5,-1189 5898.5,-207 5898.5,-114.99 5795.3,-143.69 5703.5,-137.5 5108.36,-97.35 3256.41,-70.41 2685.08,-62.89"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.31,-59.39 2675.26,-62.76 2685.21,-66.39 2685.31,-59.39"/>
+<text text-anchor="middle" x="5913.88" y="-692.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND07&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge106" class="edge">
+<title>cms.mbsf_ab_2014.HMOIND07&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M5860.33,-1288.31C5900.49,-1266.44 5936.5,-1234.22 5936.5,-1189 5936.5,-1189 5936.5,-1189 5936.5,-207 5936.5,-128.65 5852.59,-143.78 5774.5,-137.5 5165.32,-88.55 3264.52,-67.57 2684.96,-62.2"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.4,-58.71 2675.37,-62.11 2685.34,-65.71 2685.4,-58.71"/>
+<text text-anchor="middle" x="5951.88" y="-692.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2015.HMOIND07&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge107" class="edge">
+<title>cms.mbsf_abcd_2015.HMOIND07&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M1194.95,-1136.26C1174.07,-1112.31 1155.5,-1081.8 1155.5,-1049 1155.5,-1049 1155.5,-1049 1155.5,-767 1155.5,-612.11 1155.5,-573.39 1155.5,-418.5 1155.5,-418.5 1155.5,-418.5 1155.5,-207 1155.5,-182.15 1159.53,-171.29 1179.5,-156.5 1225.72,-122.28 1250.31,-143.55 1307.5,-137.5 1676.87,-98.42 2112.03,-76.72 2346.06,-67.03"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2345.9,-70.54 2355.75,-66.63 2345.61,-63.54 2345.9,-70.54"/>
+<text text-anchor="middle" x="1170.88" y="-622.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND07&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge108" class="edge">
+<title>cms.mbsf_abcd_2016.HMOIND07&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M1384.86,-1139.65C1381.72,-1138.56 1378.59,-1137.51 1375.5,-1136.5 1311.05,-1115.44 1283.01,-1138.43 1227.5,-1099.5 1205.35,-1083.96 1193.5,-1076.06 1193.5,-1049 1193.5,-1049 1193.5,-1049 1193.5,-207 1193.5,-182.15 1197.82,-171.67 1217.5,-156.5 1253.68,-128.62 1273.18,-143.19 1318.5,-137.5 1683,-91.7 2113.57,-72.58 2346.05,-65.11"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2346.12,-68.61 2356,-64.8 2345.89,-61.62 2346.12,-68.61"/>
+<text text-anchor="middle" x="1208.88" y="-622.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2017.HMOIND07&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge109" class="edge">
+<title>cms.mbsf_abcd_2017.HMOIND07&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M1632.07,-1138.9C1628.87,-1138.03 1625.67,-1137.23 1622.5,-1136.5 1544.78,-1118.58 1331.48,-1144.31 1265.5,-1099.5 1243.12,-1084.3 1231.5,-1076.06 1231.5,-1049 1231.5,-1049 1231.5,-1049 1231.5,-207 1231.5,-182.15 1236.38,-172.37 1255.5,-156.5 1280.97,-135.37 1294.83,-142.81 1327.5,-137.5 1686.88,-79.04 2114.24,-64.69 2345.82,-61.43"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2345.76,-64.93 2355.71,-61.3 2345.67,-57.93 2345.76,-64.93"/>
+<text text-anchor="middle" x="1246.88" y="-622.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND07&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge110" class="edge">
+<title>cms.mbsf_abcd_2018.HMOIND07&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M1878.75,-1138.69C1875.66,-1137.9 1872.57,-1137.16 1869.5,-1136.5 1737.8,-1108.02 1269.5,-1183.74 1269.5,-1049 1269.5,-1049 1269.5,-1049 1269.5,-207 1269.5,-182.15 1273.52,-171.27 1293.5,-156.5 1340.1,-122.05 1364.89,-143.76 1422.5,-137.5 1748.44,-102.1 2130.93,-79.58 2346.08,-68.64"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2346.22,-72.14 2356.03,-68.14 2345.87,-65.15 2346.22,-72.14"/>
+<text text-anchor="middle" x="1284.88" y="-622.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2011.HMOIND03&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge111" class="edge">
+<title>cms.mbsf_ab_2011.HMOIND03&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M2125.62,-1138.72C2122.57,-1137.91 2119.52,-1137.17 2116.5,-1136.5 1965.4,-1103.24 1573.89,-1138.7 1420.5,-1118.5 1362.04,-1110.8 1307.5,-1107.96 1307.5,-1049 1307.5,-1049 1307.5,-1049 1307.5,-207 1307.5,-182.15 1311.79,-171.63 1331.5,-156.5 1368.42,-128.15 1388.32,-143.38 1434.5,-137.5 1755.27,-96.66 2132.55,-76.06 2345.9,-66.94"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2345.9,-70.44 2355.74,-66.52 2345.61,-63.45 2345.9,-70.44"/>
+<text text-anchor="middle" x="1322.88" y="-622.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND03&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge112" class="edge">
+<title>cms.mbsf_ab_2012.HMOIND03&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M2358.61,-1138.77C2355.56,-1137.94 2352.52,-1137.18 2349.5,-1136.5 2242.68,-1112.33 1453.37,-1163.51 1364.5,-1099.5 1345.04,-1085.48 1345.5,-1072.98 1345.5,-1049 1345.5,-1049 1345.5,-1049 1345.5,-207 1345.5,-182.15 1350.32,-172.3 1369.5,-156.5 1395.7,-134.91 1409.99,-142.96 1443.5,-137.5 1759.56,-86.04 2133.63,-69.08 2345.89,-63.5"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2345.76,-67 2355.67,-63.25 2345.58,-60 2345.76,-67"/>
+<text text-anchor="middle" x="1360.88" y="-622.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2017.HMOIND03 -->
+<g id="node32" class="node">
+<title>cms.mbsf_abcd_2017.HMOIND03</title>
+<g id="a_node32"><a xlink:href="../cms.mbsf_abcd_2017/HMOIND03.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="1601.75,-1099.5 1373.25,-1099.5 1373.25,-996.5 1601.75,-996.5 1601.75,-1099.5"/>
+<text text-anchor="start" x="1386.25" y="-1078.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2017.HMOIND03</text>
+<text text-anchor="start" x="1409.25" y="-1031.7" font-family="Times,serif" font-size="14.00">HMO Indicator: March</text>
+<polygon fill="none" stroke="black" points="1381.25,-1000.5 1381.25,-1095.5 1593.75,-1095.5 1593.75,-1000.5 1381.25,-1000.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND03&#45;&gt;cms.mbsf_abcd_2017.HMOIND03 -->
+<!-- cms.mbsf_abcd_2018.HMOIND03 -->
+<g id="node33" class="node">
+<title>cms.mbsf_abcd_2018.HMOIND03</title>
+<g id="a_node33"><a xlink:href="../cms.mbsf_abcd_2018/HMOIND03.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="1848.75,-1099.5 1620.25,-1099.5 1620.25,-996.5 1848.75,-996.5 1848.75,-1099.5"/>
+<text text-anchor="start" x="1633.25" y="-1078.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2018.HMOIND03</text>
+<text text-anchor="start" x="1656.25" y="-1031.7" font-family="Times,serif" font-size="14.00">HMO Indicator: March</text>
+<polygon fill="none" stroke="black" points="1628.25,-1000.5 1628.25,-1095.5 1840.75,-1095.5 1840.75,-1000.5 1628.25,-1000.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND03&#45;&gt;cms.mbsf_abcd_2018.HMOIND03 -->
+<!-- cms.mbsf_ab_2011.HMOIND06 -->
+<g id="node34" class="node">
+<title>cms.mbsf_ab_2011.HMOIND06</title>
+<g id="a_node34"><a xlink:href="../cms.mbsf_ab_2011/HMOIND06.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2082,-1099.5 1867,-1099.5 1867,-996.5 2082,-996.5 2082,-1099.5"/>
+<text text-anchor="start" x="1880" y="-1078.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2011.HMOIND06</text>
+<text text-anchor="start" x="1903" y="-1031.7" font-family="Times,serif" font-size="14.00">HMO Indicator VI</text>
+<polygon fill="none" stroke="black" points="1875,-1000.5 1875,-1095.5 2074,-1095.5 2074,-1000.5 1875,-1000.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND03&#45;&gt;cms.mbsf_ab_2011.HMOIND06 -->
+<!-- cms.mbsf_ab_2012.HMOIND06 -->
+<g id="node35" class="node">
+<title>cms.mbsf_ab_2012.HMOIND06</title>
+<g id="a_node35"><a xlink:href="../cms.mbsf_ab_2012/HMOIND06.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2315,-1099.5 2100,-1099.5 2100,-996.5 2315,-996.5 2315,-1099.5"/>
+<text text-anchor="start" x="2113" y="-1078.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2012.HMOIND06</text>
+<text text-anchor="start" x="2136" y="-1031.7" font-family="Times,serif" font-size="14.00">HMO Indicator VI</text>
+<polygon fill="none" stroke="black" points="2108,-1000.5 2108,-1095.5 2307,-1095.5 2307,-1000.5 2108,-1000.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND03&#45;&gt;cms.mbsf_ab_2012.HMOIND06 -->
+<!-- cms.mbsf_ab_2013.HMOIND06 -->
+<g id="node36" class="node">
+<title>cms.mbsf_ab_2013.HMOIND06</title>
+<g id="a_node36"><a xlink:href="../cms.mbsf_ab_2013/HMOIND06.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2548,-1099.5 2333,-1099.5 2333,-996.5 2548,-996.5 2548,-1099.5"/>
+<text text-anchor="start" x="2346" y="-1078.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2013.HMOIND06</text>
+<text text-anchor="start" x="2369" y="-1031.7" font-family="Times,serif" font-size="14.00">HMO Indicator VI</text>
+<polygon fill="none" stroke="black" points="2341,-1000.5 2341,-1095.5 2540,-1095.5 2540,-1000.5 2341,-1000.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND03&#45;&gt;cms.mbsf_ab_2013.HMOIND06 -->
+<!-- cms.mbsf_ab_2014.HMOIND06 -->
+<g id="node37" class="node">
+<title>cms.mbsf_ab_2014.HMOIND06</title>
+<g id="a_node37"><a xlink:href="../cms.mbsf_ab_2014/HMOIND06.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2781,-1099.5 2566,-1099.5 2566,-996.5 2781,-996.5 2781,-1099.5"/>
+<text text-anchor="start" x="2579" y="-1078.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2014.HMOIND06</text>
+<text text-anchor="start" x="2602" y="-1031.7" font-family="Times,serif" font-size="14.00">HMO Indicator VI</text>
+<polygon fill="none" stroke="black" points="2574,-1000.5 2574,-1095.5 2773,-1095.5 2773,-1000.5 2574,-1000.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND03&#45;&gt;cms.mbsf_ab_2014.HMOIND06 -->
+<!-- cms.mbsf_abcd_2015.HMOIND06 -->
+<g id="node38" class="node">
+<title>cms.mbsf_abcd_2015.HMOIND06</title>
+<g id="a_node38"><a xlink:href="../cms.mbsf_abcd_2015/HMOIND06.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3874.75,-1099.5 3646.25,-1099.5 3646.25,-996.5 3874.75,-996.5 3874.75,-1099.5"/>
+<text text-anchor="start" x="3659.25" y="-1078.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2015.HMOIND06</text>
+<text text-anchor="start" x="3682.25" y="-1031.7" font-family="Times,serif" font-size="14.00">HMO Indicator: June</text>
+<polygon fill="none" stroke="black" points="3654.25,-1000.5 3654.25,-1095.5 3866.75,-1095.5 3866.75,-1000.5 3654.25,-1000.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND03&#45;&gt;cms.mbsf_abcd_2015.HMOIND06 -->
+<!-- cms.mbsf_abcd_2016.HMOIND06 -->
+<g id="node39" class="node">
+<title>cms.mbsf_abcd_2016.HMOIND06</title>
+<g id="a_node39"><a xlink:href="../cms.mbsf_abcd_2016/HMOIND06.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="4669.75,-1099.5 4441.25,-1099.5 4441.25,-996.5 4669.75,-996.5 4669.75,-1099.5"/>
+<text text-anchor="start" x="4454.25" y="-1078.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2016.HMOIND06</text>
+<text text-anchor="start" x="4477.25" y="-1031.7" font-family="Times,serif" font-size="14.00">HMO Indicator: June</text>
+<polygon fill="none" stroke="black" points="4449.25,-1000.5 4449.25,-1095.5 4661.75,-1095.5 4661.75,-1000.5 4449.25,-1000.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND03&#45;&gt;cms.mbsf_abcd_2016.HMOIND06 -->
+<!-- cms.mbsf_abcd_2017.HMOIND06 -->
+<g id="node40" class="node">
+<title>cms.mbsf_abcd_2017.HMOIND06</title>
+<g id="a_node40"><a xlink:href="../cms.mbsf_abcd_2017/HMOIND06.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="5190.75,-1099.5 4962.25,-1099.5 4962.25,-996.5 5190.75,-996.5 5190.75,-1099.5"/>
+<text text-anchor="start" x="4975.25" y="-1078.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2017.HMOIND06</text>
+<text text-anchor="start" x="4998.25" y="-1031.7" font-family="Times,serif" font-size="14.00">HMO Indicator: June</text>
+<polygon fill="none" stroke="black" points="4970.25,-1000.5 4970.25,-1095.5 5182.75,-1095.5 5182.75,-1000.5 4970.25,-1000.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND03&#45;&gt;cms.mbsf_abcd_2017.HMOIND06 -->
+<!-- cms.mbsf_abcd_2018.HMOIND06 -->
+<g id="node41" class="node">
+<title>cms.mbsf_abcd_2018.HMOIND06</title>
+<g id="a_node41"><a xlink:href="../cms.mbsf_abcd_2018/HMOIND06.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="5574.75,-1099.5 5346.25,-1099.5 5346.25,-996.5 5574.75,-996.5 5574.75,-1099.5"/>
+<text text-anchor="start" x="5359.25" y="-1078.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2018.HMOIND06</text>
+<text text-anchor="start" x="5382.25" y="-1031.7" font-family="Times,serif" font-size="14.00">HMO Indicator: June</text>
+<polygon fill="none" stroke="black" points="5354.25,-1000.5 5354.25,-1095.5 5566.75,-1095.5 5566.75,-1000.5 5354.25,-1000.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND03&#45;&gt;cms.mbsf_abcd_2018.HMOIND06 -->
+<!-- cms.mbsf_ab_2013.HMOIND03&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge113" class="edge">
+<title>cms.mbsf_ab_2013.HMOIND03&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M3862.22,-1178.75C4009.28,-1167.73 4281.2,-1148.24 4513.5,-1136.5 4632.31,-1130.49 5469.18,-1132.4 5583.5,-1099.5 5626.46,-1087.13 5670.5,-1093.71 5670.5,-1049 5670.5,-1049 5670.5,-1049 5670.5,-837.5 5670.5,-651.28 5670.5,-604.72 5670.5,-418.5 5670.5,-418.5 5670.5,-418.5 5670.5,-207 5670.5,-111.64 5562.64,-143.95 5467.5,-137.5 4410.86,-65.87 3137.31,-59.86 2684.95,-60.22"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.16,-56.72 2675.16,-60.23 2685.16,-63.72 2685.16,-56.72"/>
+<text text-anchor="middle" x="5685.88" y="-622.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND03&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge114" class="edge">
+<title>cms.mbsf_ab_2014.HMOIND03&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M4738.11,-1172.74C4826.87,-1161.43 4956.16,-1146 5069.5,-1136.5 5220.74,-1123.82 5259.08,-1128.72 5410.5,-1118.5 5546.19,-1109.34 5708.5,-1185 5708.5,-1049 5708.5,-1049 5708.5,-1049 5708.5,-837.5 5708.5,-682.61 5708.5,-643.89 5708.5,-489 5708.5,-489 5708.5,-489 5708.5,-207 5708.5,-129.47 5625.77,-143.85 5548.5,-137.5 4985.65,-91.21 3237.64,-68.62 2684.88,-62.5"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.11,-59 2675.07,-62.39 2685.03,-66 2685.11,-59"/>
+<text text-anchor="middle" x="5723.88" y="-622.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2015.HMOIND03&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge115" class="edge">
+<title>cms.mbsf_abcd_2015.HMOIND03&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M5307.15,-1166.08C5359.11,-1156.76 5421.36,-1145.8 5477.5,-1136.5 5583.98,-1118.86 5628.5,-1160.55 5717.5,-1099.5 5738.84,-1084.86 5746.5,-1074.88 5746.5,-1049 5746.5,-1049 5746.5,-1049 5746.5,-207 5746.5,-122.49 5653.78,-143.78 5569.5,-137.5 5002.08,-95.24 3240.5,-69.91 2685.06,-62.81"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.23,-59.31 2675.19,-62.68 2685.15,-66.31 2685.23,-59.31"/>
+<text text-anchor="middle" x="5761.88" y="-622.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND03&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge116" class="edge">
+<title>cms.mbsf_abcd_2016.HMOIND03&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M5715.2,-1144.44C5752.51,-1122.7 5784.5,-1091.63 5784.5,-1049 5784.5,-1049 5784.5,-1049 5784.5,-207 5784.5,-115.83 5682.46,-143.74 5591.5,-137.5 5019.43,-98.28 3243.59,-70.86 2685.29,-63.04"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.41,-59.54 2675.36,-62.9 2685.31,-66.54 2685.41,-59.54"/>
+<text text-anchor="middle" x="5799.88" y="-622.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2017.HMOIND03&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge117" class="edge">
+<title>cms.mbsf_abcd_2017.HMOIND03&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M1424.9,-996.06C1402.88,-972.39 1383.5,-942.15 1383.5,-909 1383.5,-909 1383.5,-909 1383.5,-207 1383.5,-182.15 1387.58,-171.36 1407.5,-156.5 1451.49,-123.69 1474.99,-143.86 1529.5,-137.5 1815.28,-104.17 2149.4,-81.59 2346.13,-69.97"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2346.09,-73.48 2355.86,-69.4 2345.68,-66.49 2346.09,-73.48"/>
+<text text-anchor="middle" x="1398.88" y="-552.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND03&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge118" class="edge">
+<title>cms.mbsf_abcd_2018.HMOIND03&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M1619.88,-999.6C1616.73,-998.53 1613.6,-997.49 1610.5,-996.5 1522.36,-968.21 1421.5,-1001.57 1421.5,-909 1421.5,-909 1421.5,-909 1421.5,-207 1421.5,-182.15 1425.9,-171.78 1445.5,-156.5 1479.46,-130.02 1497.85,-143.42 1540.5,-137.5 1821.36,-98.5 2150.69,-77.72 2345.74,-67.99"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2345.84,-71.49 2355.66,-67.5 2345.5,-64.5 2345.84,-71.49"/>
+<text text-anchor="middle" x="1436.88" y="-552.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2011.HMOIND06&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge119" class="edge">
+<title>cms.mbsf_ab_2011.HMOIND06&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M1866.59,-998.85C1863.55,-998 1860.51,-997.21 1857.5,-996.5 1724.08,-964.85 1684.08,-1004.77 1549.5,-978.5 1499.9,-968.82 1459.5,-959.54 1459.5,-909 1459.5,-909 1459.5,-909 1459.5,-207 1459.5,-182.15 1464.55,-172.58 1483.5,-156.5 1506.77,-136.75 1519.47,-142.96 1549.5,-137.5 1825.52,-87.33 2151.82,-69.96 2345.79,-63.94"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2345.74,-67.44 2355.63,-63.64 2345.53,-60.44 2345.74,-67.44"/>
+<text text-anchor="middle" x="1474.88" y="-552.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND06&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge120" class="edge">
+<title>cms.mbsf_ab_2012.HMOIND06&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M2099.61,-998.75C2096.56,-997.93 2093.52,-997.18 2090.5,-996.5 1974.43,-970.48 1667.18,-1019.47 1555.5,-978.5 1517.73,-964.64 1497.5,-949.23 1497.5,-909 1497.5,-909 1497.5,-909 1497.5,-207 1497.5,-166.77 1517,-149.18 1555.5,-137.5 1698.66,-94.05 2110.79,-73.84 2345.89,-65.61"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2345.79,-69.12 2355.66,-65.28 2345.54,-62.12 2345.79,-69.12"/>
+<text text-anchor="middle" x="1512.88" y="-552.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2013.HMOIND06&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge121" class="edge">
+<title>cms.mbsf_ab_2013.HMOIND06&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M2332.62,-998.71C2329.57,-997.9 2326.53,-997.16 2323.5,-996.5 2282.03,-987.42 1593.78,-1003.54 1559.5,-978.5 1533.11,-959.22 1535.5,-941.68 1535.5,-909 1535.5,-909 1535.5,-909 1535.5,-207 1535.5,-174.32 1533.67,-157.52 1559.5,-137.5 1620.07,-90.57 2087.83,-71.45 2345.88,-64.41"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2345.84,-67.91 2355.74,-64.14 2345.65,-60.91 2345.84,-67.91"/>
+<text text-anchor="middle" x="1550.88" y="-552.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND06&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge122" class="edge">
+<title>cms.mbsf_ab_2014.HMOIND06&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M2565.61,-998.77C2562.56,-997.95 2559.52,-997.19 2556.5,-996.5 2452.61,-972.94 1687.9,-1017.42 1598.5,-959.5 1577.48,-945.88 1573.5,-934.04 1573.5,-909 1573.5,-909 1573.5,-909 1573.5,-207 1573.5,-149.17 1626.57,-147.67 1683.5,-137.5 1910.7,-96.92 2176.86,-77.14 2345.8,-67.97"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2345.98,-71.47 2355.78,-67.44 2345.6,-64.48 2345.98,-71.47"/>
+<text text-anchor="middle" x="1588.88" y="-552.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2011.HMOIND02 -->
+<g id="node42" class="node">
+<title>cms.mbsf_ab_2011.HMOIND02</title>
+<g id="a_node42"><a xlink:href="../cms.mbsf_ab_2011/HMOIND02.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="1823,-959.5 1608,-959.5 1608,-856.5 1823,-856.5 1823,-959.5"/>
+<text text-anchor="start" x="1621" y="-938.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2011.HMOIND02</text>
+<text text-anchor="start" x="1644" y="-891.7" font-family="Times,serif" font-size="14.00">HMO Indicator II</text>
+<polygon fill="none" stroke="black" points="1616,-860.5 1616,-955.5 1815,-955.5 1815,-860.5 1616,-860.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND06&#45;&gt;cms.mbsf_ab_2011.HMOIND02 -->
+<!-- cms.mbsf_ab_2012.HMOIND02 -->
+<g id="node43" class="node">
+<title>cms.mbsf_ab_2012.HMOIND02</title>
+<g id="a_node43"><a xlink:href="../cms.mbsf_ab_2012/HMOIND02.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2059,-959.5 1844,-959.5 1844,-856.5 2059,-856.5 2059,-959.5"/>
+<text text-anchor="start" x="1857" y="-938.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2012.HMOIND02</text>
+<text text-anchor="start" x="1880" y="-891.7" font-family="Times,serif" font-size="14.00">HMO Indicator II</text>
+<polygon fill="none" stroke="black" points="1852,-860.5 1852,-955.5 2051,-955.5 2051,-860.5 1852,-860.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND06&#45;&gt;cms.mbsf_ab_2012.HMOIND02 -->
+<!-- cms.mbsf_ab_2013.HMOIND02 -->
+<g id="node44" class="node">
+<title>cms.mbsf_ab_2013.HMOIND02</title>
+<g id="a_node44"><a xlink:href="../cms.mbsf_ab_2013/HMOIND02.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2292,-959.5 2077,-959.5 2077,-856.5 2292,-856.5 2292,-959.5"/>
+<text text-anchor="start" x="2090" y="-938.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2013.HMOIND02</text>
+<text text-anchor="start" x="2113" y="-891.7" font-family="Times,serif" font-size="14.00">HMO Indicator II</text>
+<polygon fill="none" stroke="black" points="2085,-860.5 2085,-955.5 2284,-955.5 2284,-860.5 2085,-860.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND06&#45;&gt;cms.mbsf_ab_2013.HMOIND02 -->
+<!-- cms.mbsf_ab_2014.HMOIND02 -->
+<g id="node45" class="node">
+<title>cms.mbsf_ab_2014.HMOIND02</title>
+<g id="a_node45"><a xlink:href="../cms.mbsf_ab_2014/HMOIND02.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2527,-959.5 2312,-959.5 2312,-856.5 2527,-856.5 2527,-959.5"/>
+<text text-anchor="start" x="2325" y="-938.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2014.HMOIND02</text>
+<text text-anchor="start" x="2348" y="-891.7" font-family="Times,serif" font-size="14.00">HMO Indicator II</text>
+<polygon fill="none" stroke="black" points="2320,-860.5 2320,-955.5 2519,-955.5 2519,-860.5 2320,-860.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND06&#45;&gt;cms.mbsf_ab_2014.HMOIND02 -->
+<!-- cms.mbsf_abcd_2015.HMOIND02 -->
+<g id="node46" class="node">
+<title>cms.mbsf_abcd_2015.HMOIND02</title>
+<g id="a_node46"><a xlink:href="../cms.mbsf_abcd_2015/HMOIND02.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2774.75,-959.5 2546.25,-959.5 2546.25,-856.5 2774.75,-856.5 2774.75,-959.5"/>
+<text text-anchor="start" x="2559.25" y="-938.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2015.HMOIND02</text>
+<text text-anchor="start" x="2582.25" y="-891.7" font-family="Times,serif" font-size="14.00">HMO Indicator: February</text>
+<polygon fill="none" stroke="black" points="2554.25,-860.5 2554.25,-955.5 2766.75,-955.5 2766.75,-860.5 2554.25,-860.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND06&#45;&gt;cms.mbsf_abcd_2015.HMOIND02 -->
+<!-- cms.mbsf_abcd_2016.HMOIND02 -->
+<g id="node47" class="node">
+<title>cms.mbsf_abcd_2016.HMOIND02</title>
+<g id="a_node47"><a xlink:href="../cms.mbsf_abcd_2016/HMOIND02.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3021.75,-959.5 2793.25,-959.5 2793.25,-856.5 3021.75,-856.5 3021.75,-959.5"/>
+<text text-anchor="start" x="2806.25" y="-938.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2016.HMOIND02</text>
+<text text-anchor="start" x="2829.25" y="-891.7" font-family="Times,serif" font-size="14.00">HMO Indicator: February</text>
+<polygon fill="none" stroke="black" points="2801.25,-860.5 2801.25,-955.5 3013.75,-955.5 3013.75,-860.5 2801.25,-860.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND06&#45;&gt;cms.mbsf_abcd_2016.HMOIND02 -->
+<!-- cms.mbsf_abcd_2017.HMOIND02 -->
+<g id="node48" class="node">
+<title>cms.mbsf_abcd_2017.HMOIND02</title>
+<g id="a_node48"><a xlink:href="../cms.mbsf_abcd_2017/HMOIND02.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3915.75,-959.5 3687.25,-959.5 3687.25,-856.5 3915.75,-856.5 3915.75,-959.5"/>
+<text text-anchor="start" x="3700.25" y="-938.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2017.HMOIND02</text>
+<text text-anchor="start" x="3723.25" y="-891.7" font-family="Times,serif" font-size="14.00">HMO Indicator: February</text>
+<polygon fill="none" stroke="black" points="3695.25,-860.5 3695.25,-955.5 3907.75,-955.5 3907.75,-860.5 3695.25,-860.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND06&#45;&gt;cms.mbsf_abcd_2017.HMOIND02 -->
+<!-- cms.mbsf_abcd_2018.HMOIND02 -->
+<g id="node49" class="node">
+<title>cms.mbsf_abcd_2018.HMOIND02</title>
+<g id="a_node49"><a xlink:href="../cms.mbsf_abcd_2018/HMOIND02.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="4618.75,-959.5 4390.25,-959.5 4390.25,-856.5 4618.75,-856.5 4618.75,-959.5"/>
+<text text-anchor="start" x="4403.25" y="-938.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2018.HMOIND02</text>
+<text text-anchor="start" x="4426.25" y="-891.7" font-family="Times,serif" font-size="14.00">HMO Indicator: February</text>
+<polygon fill="none" stroke="black" points="4398.25,-860.5 4398.25,-955.5 4610.75,-955.5 4610.75,-860.5 4398.25,-860.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND06&#45;&gt;cms.mbsf_abcd_2018.HMOIND02 -->
+<!-- cms.mbsf_ab_2011.HMOIND05 -->
+<g id="node50" class="node">
+<title>cms.mbsf_ab_2011.HMOIND05</title>
+<g id="a_node50"><a xlink:href="../cms.mbsf_ab_2011/HMOIND05.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="5080,-959.5 4865,-959.5 4865,-856.5 5080,-856.5 5080,-959.5"/>
+<text text-anchor="start" x="4878" y="-938.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2011.HMOIND05</text>
+<text text-anchor="start" x="4901" y="-891.7" font-family="Times,serif" font-size="14.00">HMO Indicator V</text>
+<polygon fill="none" stroke="black" points="4873,-860.5 4873,-955.5 5072,-955.5 5072,-860.5 4873,-860.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND06&#45;&gt;cms.mbsf_ab_2011.HMOIND05 -->
+<!-- cms.mbsf_ab_2012.HMOIND05 -->
+<g id="node51" class="node">
+<title>cms.mbsf_ab_2012.HMOIND05</title>
+<g id="a_node51"><a xlink:href="../cms.mbsf_ab_2012/HMOIND05.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="5427,-959.5 5212,-959.5 5212,-856.5 5427,-856.5 5427,-959.5"/>
+<text text-anchor="start" x="5225" y="-938.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2012.HMOIND05</text>
+<text text-anchor="start" x="5248" y="-891.7" font-family="Times,serif" font-size="14.00">HMO Indicator V</text>
+<polygon fill="none" stroke="black" points="5220,-860.5 5220,-955.5 5419,-955.5 5419,-860.5 5220,-860.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND06&#45;&gt;cms.mbsf_ab_2012.HMOIND05 -->
+<!-- cms.mbsf_abcd_2015.HMOIND06&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge123" class="edge">
+<title>cms.mbsf_abcd_2015.HMOIND06&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M3875.16,-1037.05C4008.85,-1025.75 4236.55,-1007.47 4432.5,-996.5 4543.85,-990.26 5329.25,-993.38 5435.5,-959.5 5474.49,-947.07 5512.5,-949.93 5512.5,-909 5512.5,-909 5512.5,-909 5512.5,-207 5512.5,-122.9 5420.36,-143.87 5336.5,-137.5 4816.75,-98.04 3212.1,-71.15 2685.12,-63.2"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.19,-59.7 2675.14,-63.05 2685.08,-66.7 2685.19,-59.7"/>
+<text text-anchor="middle" x="5527.88" y="-552.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND06&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge124" class="edge">
+<title>cms.mbsf_abcd_2016.HMOIND06&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M4670.22,-1030.28C4749.6,-1019.24 4857.78,-1005.25 4953.5,-996.5 5095.8,-983.5 5131.98,-988.82 5274.5,-978.5 5400.67,-969.36 5550.5,-1035.5 5550.5,-909 5550.5,-909 5550.5,-909 5550.5,-207 5550.5,-116.25 5449.03,-143.83 5358.5,-137.5 4345.82,-66.7 3126.02,-60.12 2684.95,-60.27"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.16,-56.77 2675.16,-60.27 2685.16,-63.77 2685.16,-56.77"/>
+<text text-anchor="middle" x="5565.88" y="-552.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2017.HMOIND06&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge125" class="edge">
+<title>cms.mbsf_abcd_2017.HMOIND06&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M5191.05,-1024.17C5236.58,-1015.27 5289.47,-1005.15 5337.5,-996.5 5435.94,-978.78 5477.36,-1016.58 5559.5,-959.5 5580.75,-944.73 5588.5,-934.88 5588.5,-909 5588.5,-909 5588.5,-909 5588.5,-207 5588.5,-127.43 5502.82,-143.87 5423.5,-137.5 4886.22,-94.34 3223.19,-69.79 2685.25,-62.83"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.43,-59.33 2675.39,-62.7 2685.34,-66.33 2685.43,-59.33"/>
+<text text-anchor="middle" x="5603.88" y="-552.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND06&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge126" class="edge">
+<title>cms.mbsf_abcd_2018.HMOIND06&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M5572.15,-996.16C5602.17,-974.56 5626.5,-945.73 5626.5,-909 5626.5,-909 5626.5,-909 5626.5,-207 5626.5,-120.83 5531.44,-143.81 5445.5,-137.5 4903.4,-97.69 3225.53,-70.87 2685.09,-63.09"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.23,-59.59 2675.18,-62.95 2685.13,-66.59 2685.23,-59.59"/>
+<text text-anchor="middle" x="5641.88" y="-552.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2011.HMOIND02&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge127" class="edge">
+<title>cms.mbsf_ab_2011.HMOIND02&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M1672.77,-856.22C1664.92,-844.74 1657.61,-832.17 1652.5,-819.5 1629.01,-761.2 1637.85,-742.13 1632.5,-679.5 1622.6,-563.61 1576.63,-243.79 1653.5,-156.5 1698.36,-105.56 2107.64,-78.88 2345.75,-67.55"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2345.87,-71.05 2355.69,-67.09 2345.54,-64.06 2345.87,-71.05"/>
+<text text-anchor="middle" x="1634.88" y="-482.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND02&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge128" class="edge">
+<title>cms.mbsf_ab_2012.HMOIND02&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M1843.61,-860.43C1839.54,-859.05 1835.5,-857.73 1831.5,-856.5 1772.05,-838.18 1732.37,-870.33 1696.5,-819.5 1611.55,-699.12 1612.59,-276.91 1697.5,-156.5 1734.27,-104.35 2117.46,-78.38 2346.1,-67.43"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2346.05,-70.93 2355.87,-66.96 2345.72,-63.94 2346.05,-70.93"/>
+<text text-anchor="middle" x="1649.88" y="-482.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2013.HMOIND02&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge129" class="edge">
+<title>cms.mbsf_ab_2013.HMOIND02&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M2076.59,-858.85C2073.55,-858 2070.51,-857.21 2067.5,-856.5 1929.73,-823.95 1884.29,-881.76 1749.5,-838.5 1734.47,-833.68 1727.55,-833.08 1719.5,-819.5 1681.93,-756.13 1683.42,-220.15 1720.5,-156.5 1751.56,-103.18 2121.96,-77.76 2346.05,-67.19"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2346.08,-70.69 2355.91,-66.73 2345.75,-63.7 2346.08,-70.69"/>
+<text text-anchor="middle" x="1707.88" y="-482.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND02&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge130" class="edge">
+<title>cms.mbsf_ab_2014.HMOIND02&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M2311.75,-859.29C2307.98,-858.26 2304.23,-857.32 2300.5,-856.5 2270.81,-849.95 1774.97,-860.03 1753.5,-838.5 1698.5,-783.35 1700.39,-194.48 1753.5,-137.5 1793.12,-94.99 2133.92,-74.75 2346.12,-66.19"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2346.08,-69.69 2355.93,-65.8 2345.8,-62.7 2346.08,-69.69"/>
+<text text-anchor="middle" x="1729.88" y="-482.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2015.HMOIND02&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge131" class="edge">
+<title>cms.mbsf_abcd_2015.HMOIND02&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M2545.88,-858.89C2542.4,-858.01 2538.94,-857.21 2535.5,-856.5 2495.01,-848.12 1824.88,-862.9 1791.5,-838.5 1765.12,-819.21 1767.5,-801.68 1767.5,-769 1767.5,-769 1767.5,-769 1767.5,-207 1767.5,-174.32 1765.93,-157.84 1791.5,-137.5 1833.99,-103.7 2145.57,-80.7 2345.9,-69.23"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2345.82,-72.74 2355.61,-68.67 2345.42,-65.75 2345.82,-72.74"/>
+<text text-anchor="middle" x="1782.88" y="-482.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND02&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge132" class="edge">
+<title>cms.mbsf_abcd_2016.HMOIND02&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M2792.76,-858.67C2789.66,-857.88 2786.57,-857.16 2783.5,-856.5 2679.23,-834.19 1910.86,-882.06 1824.5,-819.5 1805.08,-805.43 1805.5,-792.98 1805.5,-769 1805.5,-769 1805.5,-769 1805.5,-207 1805.5,-182.15 1809.9,-171.78 1829.5,-156.5 1863.46,-130.02 1882.01,-144.5 1924.5,-137.5 2066.09,-114.17 2227.74,-93.6 2346.14,-79.63"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2346.38,-83.13 2355.9,-78.49 2345.56,-76.18 2346.38,-83.13"/>
+<text text-anchor="middle" x="1820.88" y="-482.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2013.HMOIND05 -->
+<g id="node52" class="node">
+<title>cms.mbsf_ab_2013.HMOIND05</title>
+<g id="a_node52"><a xlink:href="../cms.mbsf_ab_2013/HMOIND05.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2049,-819.5 1834,-819.5 1834,-716.5 2049,-716.5 2049,-819.5"/>
+<text text-anchor="start" x="1847" y="-798.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2013.HMOIND05</text>
+<text text-anchor="start" x="1870" y="-751.7" font-family="Times,serif" font-size="14.00">HMO Indicator V</text>
+<polygon fill="none" stroke="black" points="1842,-720.5 1842,-815.5 2041,-815.5 2041,-720.5 1842,-720.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND02&#45;&gt;cms.mbsf_ab_2013.HMOIND05 -->
+<!-- cms.mbsf_ab_2014.HMOIND05 -->
+<g id="node53" class="node">
+<title>cms.mbsf_ab_2014.HMOIND05</title>
+<g id="a_node53"><a xlink:href="../cms.mbsf_ab_2014/HMOIND05.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2282,-819.5 2067,-819.5 2067,-716.5 2282,-716.5 2282,-819.5"/>
+<text text-anchor="start" x="2080" y="-798.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2014.HMOIND05</text>
+<text text-anchor="start" x="2103" y="-751.7" font-family="Times,serif" font-size="14.00">HMO Indicator V</text>
+<polygon fill="none" stroke="black" points="2075,-720.5 2075,-815.5 2274,-815.5 2274,-720.5 2075,-720.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND02&#45;&gt;cms.mbsf_ab_2014.HMOIND05 -->
+<!-- cms.mbsf_abcd_2015.HMOIND05 -->
+<g id="node54" class="node">
+<title>cms.mbsf_abcd_2015.HMOIND05</title>
+<g id="a_node54"><a xlink:href="../cms.mbsf_abcd_2015/HMOIND05.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2528.75,-819.5 2300.25,-819.5 2300.25,-716.5 2528.75,-716.5 2528.75,-819.5"/>
+<text text-anchor="start" x="2313.25" y="-798.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2015.HMOIND05</text>
+<text text-anchor="start" x="2336.25" y="-751.7" font-family="Times,serif" font-size="14.00">HMO Indicator: May</text>
+<polygon fill="none" stroke="black" points="2308.25,-720.5 2308.25,-815.5 2520.75,-815.5 2520.75,-720.5 2308.25,-720.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND02&#45;&gt;cms.mbsf_abcd_2015.HMOIND05 -->
+<!-- cms.mbsf_abcd_2016.HMOIND05 -->
+<g id="node55" class="node">
+<title>cms.mbsf_abcd_2016.HMOIND05</title>
+<g id="a_node55"><a xlink:href="../cms.mbsf_abcd_2016/HMOIND05.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2775.75,-819.5 2547.25,-819.5 2547.25,-716.5 2775.75,-716.5 2775.75,-819.5"/>
+<text text-anchor="start" x="2560.25" y="-798.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2016.HMOIND05</text>
+<text text-anchor="start" x="2583.25" y="-751.7" font-family="Times,serif" font-size="14.00">HMO Indicator: May</text>
+<polygon fill="none" stroke="black" points="2555.25,-720.5 2555.25,-815.5 2767.75,-815.5 2767.75,-720.5 2555.25,-720.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND02&#45;&gt;cms.mbsf_abcd_2016.HMOIND05 -->
+<!-- cms.mbsf_abcd_2017.HMOIND05 -->
+<g id="node56" class="node">
+<title>cms.mbsf_abcd_2017.HMOIND05</title>
+<g id="a_node56"><a xlink:href="../cms.mbsf_abcd_2017/HMOIND05.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3022.75,-819.5 2794.25,-819.5 2794.25,-716.5 3022.75,-716.5 3022.75,-819.5"/>
+<text text-anchor="start" x="2807.25" y="-798.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2017.HMOIND05</text>
+<text text-anchor="start" x="2830.25" y="-751.7" font-family="Times,serif" font-size="14.00">HMO Indicator: May</text>
+<polygon fill="none" stroke="black" points="2802.25,-720.5 2802.25,-815.5 3014.75,-815.5 3014.75,-720.5 2802.25,-720.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND02&#45;&gt;cms.mbsf_abcd_2017.HMOIND05 -->
+<!-- cms.mbsf_abcd_2018.HMOIND05 -->
+<g id="node57" class="node">
+<title>cms.mbsf_abcd_2018.HMOIND05</title>
+<g id="a_node57"><a xlink:href="../cms.mbsf_abcd_2018/HMOIND05.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3269.75,-819.5 3041.25,-819.5 3041.25,-716.5 3269.75,-716.5 3269.75,-819.5"/>
+<text text-anchor="start" x="3054.25" y="-798.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2018.HMOIND05</text>
+<text text-anchor="start" x="3077.25" y="-751.7" font-family="Times,serif" font-size="14.00">HMO Indicator: May</text>
+<polygon fill="none" stroke="black" points="3049.25,-720.5 3049.25,-815.5 3261.75,-815.5 3261.75,-720.5 3049.25,-720.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND02&#45;&gt;cms.mbsf_abcd_2018.HMOIND05 -->
+<!-- cms.mbsf_ab_2011.HMOIND10 -->
+<g id="node58" class="node">
+<title>cms.mbsf_ab_2011.HMOIND10</title>
+<g id="a_node58"><a xlink:href="../cms.mbsf_ab_2011/HMOIND10.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3950,-819.5 3735,-819.5 3735,-716.5 3950,-716.5 3950,-819.5"/>
+<text text-anchor="start" x="3748" y="-798.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2011.HMOIND10</text>
+<text text-anchor="start" x="3771" y="-751.7" font-family="Times,serif" font-size="14.00">HMO Indicator X</text>
+<polygon fill="none" stroke="black" points="3743,-720.5 3743,-815.5 3942,-815.5 3942,-720.5 3743,-720.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND02&#45;&gt;cms.mbsf_ab_2011.HMOIND10 -->
+<!-- cms.mbsf_ab_2012.HMOIND10 -->
+<g id="node59" class="node">
+<title>cms.mbsf_ab_2012.HMOIND10</title>
+<g id="a_node59"><a xlink:href="../cms.mbsf_ab_2012/HMOIND10.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="4547,-819.5 4332,-819.5 4332,-716.5 4547,-716.5 4547,-819.5"/>
+<text text-anchor="start" x="4345" y="-798.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2012.HMOIND10</text>
+<text text-anchor="start" x="4368" y="-751.7" font-family="Times,serif" font-size="14.00">HMO Indicator X</text>
+<polygon fill="none" stroke="black" points="4340,-720.5 4340,-815.5 4539,-815.5 4539,-720.5 4340,-720.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND02&#45;&gt;cms.mbsf_ab_2012.HMOIND10 -->
+<!-- cms.mbsf_ab_2013.HMOIND10 -->
+<g id="node60" class="node">
+<title>cms.mbsf_ab_2013.HMOIND10</title>
+<g id="a_node60"><a xlink:href="../cms.mbsf_ab_2013/HMOIND10.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="4962,-819.5 4747,-819.5 4747,-716.5 4962,-716.5 4962,-819.5"/>
+<text text-anchor="start" x="4760" y="-798.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2013.HMOIND10</text>
+<text text-anchor="start" x="4783" y="-751.7" font-family="Times,serif" font-size="14.00">HMO Indicator X</text>
+<polygon fill="none" stroke="black" points="4755,-720.5 4755,-815.5 4954,-815.5 4954,-720.5 4755,-720.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND02&#45;&gt;cms.mbsf_ab_2013.HMOIND10 -->
+<!-- cms.mbsf_ab_2014.HMOIND10 -->
+<g id="node61" class="node">
+<title>cms.mbsf_ab_2014.HMOIND10</title>
+<g id="a_node61"><a xlink:href="../cms.mbsf_ab_2014/HMOIND10.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="5286,-819.5 5071,-819.5 5071,-716.5 5286,-716.5 5286,-819.5"/>
+<text text-anchor="start" x="5084" y="-798.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2014.HMOIND10</text>
+<text text-anchor="start" x="5107" y="-751.7" font-family="Times,serif" font-size="14.00">HMO Indicator X</text>
+<polygon fill="none" stroke="black" points="5079,-720.5 5079,-815.5 5278,-815.5 5278,-720.5 5079,-720.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND02&#45;&gt;cms.mbsf_ab_2014.HMOIND10 -->
+<!-- cms.mbsf_abcd_2017.HMOIND02&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge133" class="edge">
+<title>cms.mbsf_abcd_2017.HMOIND02&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M3916.11,-895.44C4033.02,-884.03 4219.73,-866.82 4381.5,-856.5 4432.16,-853.27 5257.74,-854.51 5294.5,-819.5 5401.18,-717.88 5394.44,-263.83 5293.5,-156.5 5203.92,-61.24 3274.12,-58.65 2684.86,-60.1"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.05,-56.6 2675.06,-60.12 2685.07,-63.6 2685.05,-56.6"/>
+<text text-anchor="middle" x="5387.88" y="-482.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND02&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge134" class="edge">
+<title>cms.mbsf_abcd_2018.HMOIND02&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M4619.19,-887.89C4687.62,-877.14 4776.32,-864.35 4855.5,-856.5 4908.73,-851.22 5294.78,-854.19 5335.5,-819.5 5384.86,-777.46 5365.18,-743.34 5376.5,-679.5 5396.86,-564.66 5415.9,-238.03 5332.5,-156.5 5237.57,-63.71 3279.08,-59.43 2684.91,-60.28"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.01,-56.78 2675.01,-60.29 2685.02,-63.78 2685.01,-56.78"/>
+<text text-anchor="middle" x="5409.88" y="-482.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2011.HMOIND05&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge135" class="edge">
+<title>cms.mbsf_ab_2011.HMOIND05&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M5080.37,-883.3C5197.05,-857.65 5366.82,-820.27 5368.5,-819.5 5402.75,-803.87 5436.5,-806.64 5436.5,-769 5436.5,-769 5436.5,-769 5436.5,-207 5436.5,-138.33 5366.46,-147.39 5298.5,-137.5 4790.22,-63.53 3207.72,-59.48 2684.99,-60.24"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.11,-56.74 2675.11,-60.25 2685.12,-63.74 2685.11,-56.74"/>
+<text text-anchor="middle" x="5451.88" y="-482.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND05&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge136" class="edge">
+<title>cms.mbsf_ab_2012.HMOIND05&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M5421.59,-856.19C5450.61,-834.26 5474.5,-805.21 5474.5,-769 5474.5,-769 5474.5,-769 5474.5,-207 5474.5,-129.88 5392.35,-143.94 5315.5,-137.5 4800.39,-94.33 3209.81,-69.93 2685.26,-62.9"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.38,-59.4 2675.34,-62.77 2685.29,-66.4 2685.38,-59.4"/>
+<text text-anchor="middle" x="5489.88" y="-482.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2013.HMOIND05&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge137" class="edge">
+<title>cms.mbsf_ab_2013.HMOIND05&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M1883.08,-716.05C1862.09,-692.17 1843.5,-661.76 1843.5,-629 1843.5,-629 1843.5,-629 1843.5,-207 1843.5,-182.15 1848.55,-172.58 1867.5,-156.5 1890.77,-136.75 1903.62,-143.73 1933.5,-137.5 2071.01,-108.81 2229.16,-88.76 2345.86,-76.37"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2346.22,-79.85 2355.8,-75.33 2345.49,-72.89 2346.22,-79.85"/>
+<text text-anchor="middle" x="1858.88" y="-412.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND05&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge138" class="edge">
+<title>cms.mbsf_ab_2014.HMOIND05&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M2066.82,-719.33C2063.69,-718.33 2060.58,-717.38 2057.5,-716.5 2006.51,-701.87 1988.14,-719.67 1939.5,-698.5 1902.61,-682.44 1881.5,-669.23 1881.5,-629 1881.5,-629 1881.5,-629 1881.5,-207 1881.5,-166.77 1901.32,-150.19 1939.5,-137.5 2071.79,-93.51 2229.11,-74.65 2345.88,-66.6"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2346.07,-70.1 2355.82,-65.94 2345.61,-63.11 2346.07,-70.1"/>
+<text text-anchor="middle" x="1896.88" y="-412.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2015.HMOIND05&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge139" class="edge">
+<title>cms.mbsf_abcd_2015.HMOIND05&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M2300.09,-718.83C2296.88,-717.99 2293.68,-717.21 2290.5,-716.5 2252.82,-708.1 1974.35,-721.71 1943.5,-698.5 1917.39,-678.85 1919.5,-661.68 1919.5,-629 1919.5,-629 1919.5,-629 1919.5,-207 1919.5,-174.32 1918.21,-158.2 1943.5,-137.5 2003.54,-88.37 2200.26,-70.59 2346.32,-64.22"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2346.09,-67.73 2355.93,-63.81 2345.8,-60.73 2346.09,-67.73"/>
+<text text-anchor="middle" x="1934.88" y="-412.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND05&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge140" class="edge">
+<title>cms.mbsf_abcd_2016.HMOIND05&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M2546.76,-718.66C2543.66,-717.88 2540.57,-717.15 2537.5,-716.5 2507.27,-710.07 2006.37,-716.84 1981.5,-698.5 1955.2,-679.11 1957.5,-661.68 1957.5,-629 1957.5,-629 1957.5,-629 1957.5,-207 1957.5,-174.32 1956.31,-158.31 1981.5,-137.5 2035.84,-92.6 2210.89,-73.97 2345.91,-66.24"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2346.03,-69.73 2355.83,-65.69 2345.65,-62.74 2346.03,-69.73"/>
+<text text-anchor="middle" x="1972.88" y="-412.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2017.HMOIND05&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge141" class="edge">
+<title>cms.mbsf_abcd_2017.HMOIND05&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M2793.77,-718.63C2790.67,-717.85 2787.57,-717.14 2784.5,-716.5 2742.88,-707.84 2053.83,-723.58 2019.5,-698.5 1993.11,-679.22 1995.5,-661.68 1995.5,-629 1995.5,-629 1995.5,-629 1995.5,-207 1995.5,-174.32 1994.42,-158.45 2019.5,-137.5 2068.27,-96.76 2222.5,-77.53 2346.17,-68.52"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2346.05,-72.04 2355.77,-67.84 2345.55,-65.06 2346.05,-72.04"/>
+<text text-anchor="middle" x="2010.88" y="-412.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND05&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge142" class="edge">
+<title>cms.mbsf_abcd_2018.HMOIND05&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M3040.76,-718.69C3037.66,-717.89 3034.57,-717.16 3031.5,-716.5 2925.09,-693.57 2140.82,-743.13 2052.5,-679.5 2033.04,-665.48 2033.5,-652.98 2033.5,-629 2033.5,-629 2033.5,-629 2033.5,-207 2033.5,-161.56 2064.99,-150.62 2108.5,-137.5 2185.29,-114.34 2272.43,-96.79 2346.33,-84.36"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2346.74,-87.84 2356.03,-82.75 2345.59,-80.93 2346.74,-87.84"/>
+<text text-anchor="middle" x="2048.88" y="-412.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2015.HMOIND10 -->
+<g id="node62" class="node">
+<title>cms.mbsf_abcd_2015.HMOIND10</title>
+<g id="a_node62"><a xlink:href="../cms.mbsf_abcd_2015/HMOIND10.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2289.75,-679.5 2061.25,-679.5 2061.25,-576.5 2289.75,-576.5 2289.75,-679.5"/>
+<text text-anchor="start" x="2074.25" y="-658.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2015.HMOIND10</text>
+<text text-anchor="start" x="2097.25" y="-611.7" font-family="Times,serif" font-size="14.00">HMO Indicator: October</text>
+<polygon fill="none" stroke="black" points="2069.25,-580.5 2069.25,-675.5 2281.75,-675.5 2281.75,-580.5 2069.25,-580.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND05&#45;&gt;cms.mbsf_abcd_2015.HMOIND10 -->
+<!-- cms.mbsf_abcd_2016.HMOIND10 -->
+<g id="node63" class="node">
+<title>cms.mbsf_abcd_2016.HMOIND10</title>
+<g id="a_node63"><a xlink:href="../cms.mbsf_abcd_2016/HMOIND10.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2536.75,-679.5 2308.25,-679.5 2308.25,-576.5 2536.75,-576.5 2536.75,-679.5"/>
+<text text-anchor="start" x="2321.25" y="-658.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2016.HMOIND10</text>
+<text text-anchor="start" x="2344.25" y="-611.7" font-family="Times,serif" font-size="14.00">HMO Indicator: October</text>
+<polygon fill="none" stroke="black" points="2316.25,-580.5 2316.25,-675.5 2528.75,-675.5 2528.75,-580.5 2316.25,-580.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND05&#45;&gt;cms.mbsf_abcd_2016.HMOIND10 -->
+<!-- cms.mbsf_abcd_2017.HMOIND10 -->
+<g id="node64" class="node">
+<title>cms.mbsf_abcd_2017.HMOIND10</title>
+<g id="a_node64"><a xlink:href="../cms.mbsf_abcd_2017/HMOIND10.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2783.75,-679.5 2555.25,-679.5 2555.25,-576.5 2783.75,-576.5 2783.75,-679.5"/>
+<text text-anchor="start" x="2568.25" y="-658.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2017.HMOIND10</text>
+<text text-anchor="start" x="2591.25" y="-611.7" font-family="Times,serif" font-size="14.00">HMO Indicator: October</text>
+<polygon fill="none" stroke="black" points="2563.25,-580.5 2563.25,-675.5 2775.75,-675.5 2775.75,-580.5 2563.25,-580.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND05&#45;&gt;cms.mbsf_abcd_2017.HMOIND10 -->
+<!-- cms.mbsf_abcd_2018.HMOIND10 -->
+<g id="node65" class="node">
+<title>cms.mbsf_abcd_2018.HMOIND10</title>
+<g id="a_node65"><a xlink:href="../cms.mbsf_abcd_2018/HMOIND10.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3030.75,-679.5 2802.25,-679.5 2802.25,-576.5 3030.75,-576.5 3030.75,-679.5"/>
+<text text-anchor="start" x="2815.25" y="-658.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2018.HMOIND10</text>
+<text text-anchor="start" x="2838.25" y="-611.7" font-family="Times,serif" font-size="14.00">HMO Indicator: October</text>
+<polygon fill="none" stroke="black" points="2810.25,-580.5 2810.25,-675.5 3022.75,-675.5 3022.75,-580.5 2810.25,-580.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND05&#45;&gt;cms.mbsf_abcd_2018.HMOIND10 -->
+<!-- cms.mbsf_ab_2011.HMOIND08 -->
+<g id="node66" class="node">
+<title>cms.mbsf_ab_2011.HMOIND08</title>
+<g id="a_node66"><a xlink:href="../cms.mbsf_ab_2011/HMOIND08.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3264,-679.5 3049,-679.5 3049,-576.5 3264,-576.5 3264,-679.5"/>
+<text text-anchor="start" x="3062" y="-658.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2011.HMOIND08</text>
+<text text-anchor="start" x="3085" y="-611.7" font-family="Times,serif" font-size="14.00">HMO Indicator VIII</text>
+<polygon fill="none" stroke="black" points="3057,-580.5 3057,-675.5 3256,-675.5 3256,-580.5 3057,-580.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND05&#45;&gt;cms.mbsf_ab_2011.HMOIND08 -->
+<!-- cms.mbsf_ab_2012.HMOIND08 -->
+<g id="node67" class="node">
+<title>cms.mbsf_ab_2012.HMOIND08</title>
+<g id="a_node67"><a xlink:href="../cms.mbsf_ab_2012/HMOIND08.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3497,-679.5 3282,-679.5 3282,-576.5 3497,-576.5 3497,-679.5"/>
+<text text-anchor="start" x="3295" y="-658.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2012.HMOIND08</text>
+<text text-anchor="start" x="3318" y="-611.7" font-family="Times,serif" font-size="14.00">HMO Indicator VIII</text>
+<polygon fill="none" stroke="black" points="3290,-580.5 3290,-675.5 3489,-675.5 3489,-580.5 3290,-580.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND05&#45;&gt;cms.mbsf_ab_2012.HMOIND08 -->
+<!-- cms.mbsf_ab_2013.HMOIND08 -->
+<g id="node68" class="node">
+<title>cms.mbsf_ab_2013.HMOIND08</title>
+<g id="a_node68"><a xlink:href="../cms.mbsf_ab_2013/HMOIND08.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3841,-679.5 3626,-679.5 3626,-576.5 3841,-576.5 3841,-679.5"/>
+<text text-anchor="start" x="3639" y="-658.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2013.HMOIND08</text>
+<text text-anchor="start" x="3662" y="-611.7" font-family="Times,serif" font-size="14.00">HMO Indicator VIII</text>
+<polygon fill="none" stroke="black" points="3634,-580.5 3634,-675.5 3833,-675.5 3833,-580.5 3634,-580.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND05&#45;&gt;cms.mbsf_ab_2013.HMOIND08 -->
+<!-- cms.mbsf_ab_2014.HMOIND08 -->
+<g id="node69" class="node">
+<title>cms.mbsf_ab_2014.HMOIND08</title>
+<g id="a_node69"><a xlink:href="../cms.mbsf_ab_2014/HMOIND08.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="4433,-679.5 4218,-679.5 4218,-576.5 4433,-576.5 4433,-679.5"/>
+<text text-anchor="start" x="4231" y="-658.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2014.HMOIND08</text>
+<text text-anchor="start" x="4254" y="-611.7" font-family="Times,serif" font-size="14.00">HMO Indicator VIII</text>
+<polygon fill="none" stroke="black" points="4226,-580.5 4226,-675.5 4425,-675.5 4425,-580.5 4226,-580.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND05&#45;&gt;cms.mbsf_ab_2014.HMOIND08 -->
+<!-- cms.mbsf_abcd_2015.HMOIND08 -->
+<g id="node70" class="node">
+<title>cms.mbsf_abcd_2015.HMOIND08</title>
+<g id="a_node70"><a xlink:href="../cms.mbsf_abcd_2015/HMOIND08.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="4821.75,-679.5 4593.25,-679.5 4593.25,-576.5 4821.75,-576.5 4821.75,-679.5"/>
+<text text-anchor="start" x="4606.25" y="-658.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2015.HMOIND08</text>
+<text text-anchor="start" x="4629.25" y="-611.7" font-family="Times,serif" font-size="14.00">HMO Indicator: August</text>
+<polygon fill="none" stroke="black" points="4601.25,-580.5 4601.25,-675.5 4813.75,-675.5 4813.75,-580.5 4601.25,-580.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND05&#45;&gt;cms.mbsf_abcd_2015.HMOIND08 -->
+<!-- cms.mbsf_abcd_2016.HMOIND08 -->
+<g id="node71" class="node">
+<title>cms.mbsf_abcd_2016.HMOIND08</title>
+<g id="a_node71"><a xlink:href="../cms.mbsf_abcd_2016/HMOIND08.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="5139.75,-679.5 4911.25,-679.5 4911.25,-576.5 5139.75,-576.5 5139.75,-679.5"/>
+<text text-anchor="start" x="4924.25" y="-658.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2016.HMOIND08</text>
+<text text-anchor="start" x="4947.25" y="-611.7" font-family="Times,serif" font-size="14.00">HMO Indicator: August</text>
+<polygon fill="none" stroke="black" points="4919.25,-580.5 4919.25,-675.5 5131.75,-675.5 5131.75,-580.5 4919.25,-580.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND05&#45;&gt;cms.mbsf_abcd_2016.HMOIND08 -->
+<!-- cms.mbsf_ab_2011.HMOIND10&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge143" class="edge">
+<title>cms.mbsf_ab_2011.HMOIND10&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M3950.04,-753.82C4047.21,-742.35 4194.24,-726.11 4322.5,-716.5 4368.31,-713.07 5114.61,-710.51 5148.5,-679.5 5234.24,-601.03 5225.96,-238.41 5143.5,-156.5 5056.23,-69.81 3252.9,-61.22 2685.11,-60.67"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.37,-57.17 2675.37,-60.66 2685.36,-64.17 2685.37,-57.17"/>
+<text text-anchor="middle" x="5224.88" y="-412.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND10&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge144" class="edge">
+<title>cms.mbsf_ab_2012.HMOIND10&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M4547.39,-745.91C4603.83,-735.59 4674.17,-723.84 4737.5,-716.5 4787.23,-710.74 5149.01,-712.67 5186.5,-679.5 5273.55,-602.49 5263.43,-238.94 5181.5,-156.5 5093.42,-67.86 3258.48,-60.62 2685.13,-60.54"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.26,-57.04 2675.26,-60.54 2685.26,-64.04 2685.26,-57.04"/>
+<text text-anchor="middle" x="5262.88" y="-412.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2013.HMOIND10&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge145" class="edge">
+<title>cms.mbsf_ab_2013.HMOIND10&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M4962.39,-740.33C4994.28,-732.54 5029.27,-724.09 5061.5,-716.5 5133.81,-699.47 5171.58,-731.63 5224.5,-679.5 5307.3,-597.93 5301.28,-239.09 5219.5,-156.5 5130.19,-66.31 3263.76,-60.16 2685.06,-60.43"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.07,-56.93 2675.07,-60.44 2685.08,-63.93 2685.07,-56.93"/>
+<text text-anchor="middle" x="5299.88" y="-412.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND10&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge146" class="edge">
+<title>cms.mbsf_ab_2014.HMOIND10&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M5234.82,-716.45C5244.9,-705.14 5254.43,-692.58 5261.5,-679.5 5316.74,-577.24 5339,-239.36 5257.5,-156.5 5167.12,-64.61 3269.1,-59.66 2685.02,-60.32"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.33,-56.82 2675.33,-60.33 2685.34,-63.82 2685.33,-56.82"/>
+<text text-anchor="middle" x="5326.88" y="-412.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2015.HMOIND10&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge147" class="edge">
+<title>cms.mbsf_abcd_2015.HMOIND10&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M2116.99,-576.37C2107.52,-565.23 2099.02,-552.76 2093.5,-539.5 2060.8,-460.92 2047.1,-227.85 2093.5,-156.5 2121.66,-113.19 2241.37,-88.78 2346.12,-75.46"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2346.32,-78.96 2355.81,-74.26 2345.46,-72.02 2346.32,-78.96"/>
+<text text-anchor="middle" x="2082.88" y="-342.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND10&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge148" class="edge">
+<title>cms.mbsf_abcd_2016.HMOIND10&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M2308.03,-579.09C2304.83,-578.17 2301.65,-577.3 2298.5,-576.5 2264.04,-567.71 2163.93,-584.34 2139.5,-558.5 2075.23,-490.51 2075.92,-208.79 2136.5,-137.5 2164.21,-104.89 2258.3,-85.73 2345.8,-74.7"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2346.14,-78.19 2355.64,-73.5 2345.29,-71.24 2346.14,-78.19"/>
+<text text-anchor="middle" x="2108.88" y="-342.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2017.HMOIND10&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge149" class="edge">
+<title>cms.mbsf_abcd_2017.HMOIND10&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M2555.09,-578.82C2551.88,-577.98 2548.68,-577.2 2545.5,-576.5 2505.53,-567.65 2206.65,-587.24 2177.5,-558.5 2110.89,-492.81 2114.46,-209.26 2174.5,-137.5 2197.6,-109.89 2272.52,-91.39 2346.28,-79.48"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2346.73,-82.96 2356.06,-77.95 2345.64,-76.04 2346.73,-82.96"/>
+<text text-anchor="middle" x="2145.88" y="-342.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND10&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge150" class="edge">
+<title>cms.mbsf_abcd_2018.HMOIND10&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M2801.76,-578.66C2798.66,-577.87 2795.57,-577.15 2792.5,-576.5 2761.13,-569.85 2238.6,-580.74 2215.5,-558.5 2148.1,-493.61 2153.2,-209.86 2212.5,-137.5 2230.96,-114.97 2287.23,-97.84 2346.35,-85.54"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2346.92,-88.99 2356.03,-83.59 2345.54,-82.13 2346.92,-88.99"/>
+<text text-anchor="middle" x="2184.88" y="-342.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2011.HMOIND08&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge151" class="edge">
+<title>cms.mbsf_ab_2011.HMOIND08&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M3048.62,-578.71C3045.57,-577.9 3042.53,-577.16 3039.5,-576.5 2996.83,-567.17 2285.18,-588.56 2253.5,-558.5 2185.63,-494.1 2192.2,-210.67 2250.5,-137.5 2264.31,-120.16 2302.77,-105.33 2346.25,-93.46"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2346.93,-96.9 2355.71,-90.96 2345.14,-90.13 2346.93,-96.9"/>
+<text text-anchor="middle" x="2222.88" y="-342.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND08&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge152" class="edge">
+<title>cms.mbsf_ab_2012.HMOIND08&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M3281.61,-578.77C3278.56,-577.94 3275.52,-577.18 3272.5,-576.5 3219.03,-564.4 2324.53,-578.98 2286.5,-539.5 2246.05,-497.51 2196.48,-335.26 2294.5,-156.5 2306.75,-134.15 2325.7,-117.02 2347.46,-103.88"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2349.07,-106.99 2356.07,-99.04 2345.64,-100.89 2349.07,-106.99"/>
+<text text-anchor="middle" x="2259.88" y="-342.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2017.HMOIND08 -->
+<g id="node72" class="node">
+<title>cms.mbsf_abcd_2017.HMOIND08</title>
+<g id="a_node72"><a xlink:href="../cms.mbsf_abcd_2017/HMOIND08.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2523.75,-539.5 2295.25,-539.5 2295.25,-436.5 2523.75,-436.5 2523.75,-539.5"/>
+<text text-anchor="start" x="2308.25" y="-518.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2017.HMOIND08</text>
+<text text-anchor="start" x="2331.25" y="-471.7" font-family="Times,serif" font-size="14.00">HMO Indicator: August</text>
+<polygon fill="none" stroke="black" points="2303.25,-440.5 2303.25,-535.5 2515.75,-535.5 2515.75,-440.5 2303.25,-440.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND08&#45;&gt;cms.mbsf_abcd_2017.HMOIND08 -->
+<!-- cms.mbsf_abcd_2018.HMOIND08 -->
+<g id="node73" class="node">
+<title>cms.mbsf_abcd_2018.HMOIND08</title>
+<g id="a_node73"><a xlink:href="../cms.mbsf_abcd_2018/HMOIND08.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2770.75,-539.5 2542.25,-539.5 2542.25,-436.5 2770.75,-436.5 2770.75,-539.5"/>
+<text text-anchor="start" x="2555.25" y="-518.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2018.HMOIND08</text>
+<text text-anchor="start" x="2578.25" y="-471.7" font-family="Times,serif" font-size="14.00">HMO Indicator: August</text>
+<polygon fill="none" stroke="black" points="2550.25,-440.5 2550.25,-535.5 2762.75,-535.5 2762.75,-440.5 2550.25,-440.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND08&#45;&gt;cms.mbsf_abcd_2018.HMOIND08 -->
+<!-- cms.mbsf_ab_2011.HMOIND12 -->
+<g id="node74" class="node">
+<title>cms.mbsf_ab_2011.HMOIND12</title>
+<g id="a_node74"><a xlink:href="../cms.mbsf_ab_2011/HMOIND12.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3004,-539.5 2789,-539.5 2789,-436.5 3004,-436.5 3004,-539.5"/>
+<text text-anchor="start" x="2802" y="-518.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2011.HMOIND12</text>
+<text text-anchor="start" x="2825" y="-471.7" font-family="Times,serif" font-size="14.00">HMO Indicator XII</text>
+<polygon fill="none" stroke="black" points="2797,-440.5 2797,-535.5 2996,-535.5 2996,-440.5 2797,-440.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND08&#45;&gt;cms.mbsf_ab_2011.HMOIND12 -->
+<!-- cms.mbsf_ab_2012.HMOIND12 -->
+<g id="node75" class="node">
+<title>cms.mbsf_ab_2012.HMOIND12</title>
+<g id="a_node75"><a xlink:href="../cms.mbsf_ab_2012/HMOIND12.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3237,-539.5 3022,-539.5 3022,-436.5 3237,-436.5 3237,-539.5"/>
+<text text-anchor="start" x="3035" y="-518.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2012.HMOIND12</text>
+<text text-anchor="start" x="3058" y="-471.7" font-family="Times,serif" font-size="14.00">HMO Indicator XII</text>
+<polygon fill="none" stroke="black" points="3030,-440.5 3030,-535.5 3229,-535.5 3229,-440.5 3030,-440.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND08&#45;&gt;cms.mbsf_ab_2012.HMOIND12 -->
+<!-- cms.mbsf_ab_2013.HMOIND12 -->
+<g id="node76" class="node">
+<title>cms.mbsf_ab_2013.HMOIND12</title>
+<g id="a_node76"><a xlink:href="../cms.mbsf_ab_2013/HMOIND12.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3470,-539.5 3255,-539.5 3255,-436.5 3470,-436.5 3470,-539.5"/>
+<text text-anchor="start" x="3268" y="-518.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2013.HMOIND12</text>
+<text text-anchor="start" x="3291" y="-471.7" font-family="Times,serif" font-size="14.00">HMO Indicator XII</text>
+<polygon fill="none" stroke="black" points="3263,-440.5 3263,-535.5 3462,-535.5 3462,-440.5 3263,-440.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND08&#45;&gt;cms.mbsf_ab_2013.HMOIND12 -->
+<!-- cms.mbsf_ab_2014.HMOIND12 -->
+<g id="node77" class="node">
+<title>cms.mbsf_ab_2014.HMOIND12</title>
+<g id="a_node77"><a xlink:href="../cms.mbsf_ab_2014/HMOIND12.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3703,-539.5 3488,-539.5 3488,-436.5 3703,-436.5 3703,-539.5"/>
+<text text-anchor="start" x="3501" y="-518.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2014.HMOIND12</text>
+<text text-anchor="start" x="3524" y="-471.7" font-family="Times,serif" font-size="14.00">HMO Indicator XII</text>
+<polygon fill="none" stroke="black" points="3496,-440.5 3496,-535.5 3695,-535.5 3695,-440.5 3496,-440.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND08&#45;&gt;cms.mbsf_ab_2014.HMOIND12 -->
+<!-- cms.mbsf_abcd_2015.HMOIND12 -->
+<g id="node78" class="node">
+<title>cms.mbsf_abcd_2015.HMOIND12</title>
+<g id="a_node78"><a xlink:href="../cms.mbsf_abcd_2015/HMOIND12.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3970.75,-539.5 3742.25,-539.5 3742.25,-436.5 3970.75,-436.5 3970.75,-539.5"/>
+<text text-anchor="start" x="3755.25" y="-518.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2015.HMOIND12</text>
+<text text-anchor="start" x="3778.25" y="-471.7" font-family="Times,serif" font-size="14.00">HMO Indicator: December</text>
+<polygon fill="none" stroke="black" points="3750.25,-440.5 3750.25,-535.5 3962.75,-535.5 3962.75,-440.5 3750.25,-440.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND08&#45;&gt;cms.mbsf_abcd_2015.HMOIND12 -->
+<!-- cms.mbsf_abcd_2016.HMOIND12 -->
+<g id="node79" class="node">
+<title>cms.mbsf_abcd_2016.HMOIND12</title>
+<g id="a_node79"><a xlink:href="../cms.mbsf_abcd_2016/HMOIND12.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="4383.75,-539.5 4155.25,-539.5 4155.25,-436.5 4383.75,-436.5 4383.75,-539.5"/>
+<text text-anchor="start" x="4168.25" y="-518.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2016.HMOIND12</text>
+<text text-anchor="start" x="4191.25" y="-471.7" font-family="Times,serif" font-size="14.00">HMO Indicator: December</text>
+<polygon fill="none" stroke="black" points="4163.25,-440.5 4163.25,-535.5 4375.75,-535.5 4375.75,-440.5 4163.25,-440.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND08&#45;&gt;cms.mbsf_abcd_2016.HMOIND12 -->
+<!-- cms.mbsf_abcd_2017.HMOIND12 -->
+<g id="node80" class="node">
+<title>cms.mbsf_abcd_2017.HMOIND12</title>
+<g id="a_node80"><a xlink:href="../cms.mbsf_abcd_2017/HMOIND12.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="4713.75,-539.5 4485.25,-539.5 4485.25,-436.5 4713.75,-436.5 4713.75,-539.5"/>
+<text text-anchor="start" x="4498.25" y="-518.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2017.HMOIND12</text>
+<text text-anchor="start" x="4521.25" y="-471.7" font-family="Times,serif" font-size="14.00">HMO Indicator: December</text>
+<polygon fill="none" stroke="black" points="4493.25,-440.5 4493.25,-535.5 4705.75,-535.5 4705.75,-440.5 4493.25,-440.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND08&#45;&gt;cms.mbsf_abcd_2017.HMOIND12 -->
+<!-- cms.mbsf_abcd_2018.HMOIND12 -->
+<g id="node81" class="node">
+<title>cms.mbsf_abcd_2018.HMOIND12</title>
+<g id="a_node81"><a xlink:href="../cms.mbsf_abcd_2018/HMOIND12.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="5001.75,-539.5 4773.25,-539.5 4773.25,-436.5 5001.75,-436.5 5001.75,-539.5"/>
+<text text-anchor="start" x="4786.25" y="-518.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2018.HMOIND12</text>
+<text text-anchor="start" x="4809.25" y="-471.7" font-family="Times,serif" font-size="14.00">HMO Indicator: December</text>
+<polygon fill="none" stroke="black" points="4781.25,-440.5 4781.25,-535.5 4993.75,-535.5 4993.75,-440.5 4781.25,-440.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND08&#45;&gt;cms.mbsf_abcd_2018.HMOIND12 -->
+<!-- cms.mbsf_ab_2013.HMOIND08&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge153" class="edge">
+<title>cms.mbsf_ab_2013.HMOIND08&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M3841.33,-613.68C3937.5,-602.24 4082.19,-586.12 4208.5,-576.5 4252.97,-573.11 4979.57,-571.64 5010.5,-539.5 5069.61,-478.07 5048.41,-217.15 4988.5,-156.5 4907.63,-74.64 3229.96,-62.73 2684.91,-61.03"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.29,-57.53 2675.28,-61 2685.27,-64.53 2685.29,-57.53"/>
+<text text-anchor="middle" x="5061.88" y="-342.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND08&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge154" class="edge">
+<title>cms.mbsf_ab_2014.HMOIND08&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M4433.35,-602.59C4479.65,-592.99 4534.5,-582.78 4584.5,-576.5 4635.05,-570.15 5005.2,-575.24 5041.5,-539.5 5102.21,-479.73 5083.22,-218.22 5024.5,-156.5 4943.92,-71.8 3235.95,-61.82 2685.11,-60.81"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.35,-57.31 2675.34,-60.79 2685.34,-64.31 2685.35,-57.31"/>
+<text text-anchor="middle" x="5094.88" y="-342.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2015.HMOIND08&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge155" class="edge">
+<title>cms.mbsf_abcd_2015.HMOIND08&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M4822.25,-596.32C4848.56,-589.56 4876.45,-582.6 4902.5,-576.5 4940.52,-567.6 4950.33,-566.76 4988.5,-558.5 5026.33,-550.31 5047.02,-567.74 5073.5,-539.5 5190.02,-415.25 5175.5,-281.24 5059.5,-156.5 4978.66,-69.57 3241.3,-61.11 2685.14,-60.64"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.25,-57.14 2675.25,-60.63 2685.25,-64.14 2685.25,-57.14"/>
+<text text-anchor="middle" x="5169.88" y="-342.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND08&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge156" class="edge">
+<title>cms.mbsf_abcd_2016.HMOIND08&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M5091.42,-576.44C5102.74,-565.29 5113.43,-552.8 5121.5,-539.5 5182.3,-439.24 5187.08,-389.54 5152.5,-277.5 5135.67,-222.97 5152.09,-194.5 5109.5,-156.5 5019.03,-75.78 3247.06,-63.11 2685.01,-61.12"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.4,-57.62 2675.39,-61.09 2685.38,-64.62 2685.4,-57.62"/>
+<text text-anchor="middle" x="5189.88" y="-342.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2017.HMOIND08&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge157" class="edge">
+<title>cms.mbsf_abcd_2017.HMOIND08&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M2329.83,-436.25C2325.04,-430.77 2320.83,-424.85 2317.5,-418.5 2288.47,-363.18 2289.07,-187.52 2326.5,-137.5 2332.84,-129.03 2340.26,-121.5 2348.44,-114.79"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2350.47,-117.65 2356.35,-108.83 2346.26,-112.05 2350.47,-117.65"/>
+<text text-anchor="middle" x="2312.88" y="-272.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND08&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge158" class="edge">
+<title>cms.mbsf_abcd_2018.HMOIND08&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M2542.04,-439.04C2538.84,-438.14 2535.66,-437.29 2532.5,-436.5 2494.14,-426.95 2382.52,-447.36 2355.5,-418.5 2312.8,-372.9 2329.22,-189.06 2364.5,-137.5 2366.49,-134.59 2368.63,-131.78 2370.9,-129.07"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2373.31,-131.61 2377.57,-121.91 2368.19,-126.84 2373.31,-131.61"/>
+<text text-anchor="middle" x="2346.88" y="-272.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2011.HMOIND12&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge159" class="edge">
+<title>cms.mbsf_ab_2011.HMOIND12&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M2788.6,-438.81C2785.56,-437.97 2782.52,-437.2 2779.5,-436.5 2737.67,-426.84 2423.69,-449.02 2393.5,-418.5 2349.56,-374.08 2370.54,-191.19 2402.5,-137.5 2404.09,-134.83 2405.81,-132.24 2407.64,-129.72"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2410.25,-132.06 2413.87,-122.1 2404.83,-127.63 2410.25,-132.06"/>
+<text text-anchor="middle" x="2385.88" y="-272.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND12&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge160" class="edge">
+<title>cms.mbsf_ab_2012.HMOIND12&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M3021.62,-438.74C3018.57,-437.92 3015.52,-437.17 3012.5,-436.5 2980.98,-429.48 2454.31,-441.36 2431.5,-418.5 2387.38,-374.27 2414.27,-194.2 2440.5,-137.5 2441.56,-135.22 2442.71,-132.96 2443.95,-130.74"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2446.8,-132.78 2449.16,-122.45 2440.87,-129.05 2446.8,-132.78"/>
+<text text-anchor="middle" x="2425.88" y="-272.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2013.HMOIND12&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge161" class="edge">
+<title>cms.mbsf_ab_2013.HMOIND12&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M3254.62,-438.71C3251.57,-437.9 3248.53,-437.16 3245.5,-436.5 3203.37,-427.29 2500.18,-448.8 2469.5,-418.5 2425.05,-374.6 2461.57,-197.64 2478.5,-137.5 2479.01,-135.68 2479.57,-133.84 2480.16,-132"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2483.41,-133.31 2483.5,-122.72 2476.82,-130.95 2483.41,-133.31"/>
+<text text-anchor="middle" x="2467.88" y="-272.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND12&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge162" class="edge">
+<title>cms.mbsf_ab_2014.HMOIND12&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M3487.61,-438.77C3484.56,-437.94 3481.52,-437.18 3478.5,-436.5 3425.58,-424.52 2540.13,-438.59 2502.5,-399.5 2467.14,-362.78 2485.59,-220.64 2501.21,-132.57"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2504.62,-133.43 2502.95,-122.96 2497.73,-132.18 2504.62,-133.43"/>
+<text text-anchor="middle" x="2498.88" y="-272.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2011.HMOIND09 -->
+<g id="node82" class="node">
+<title>cms.mbsf_ab_2011.HMOIND09</title>
+<g id="a_node82"><a xlink:href="../cms.mbsf_ab_2011/HMOIND09.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2727,-399.5 2512,-399.5 2512,-296.5 2727,-296.5 2727,-399.5"/>
+<text text-anchor="start" x="2525" y="-378.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2011.HMOIND09</text>
+<text text-anchor="start" x="2548" y="-331.7" font-family="Times,serif" font-size="14.00">HMO Indicator IX</text>
+<polygon fill="none" stroke="black" points="2520,-300.5 2520,-395.5 2719,-395.5 2719,-300.5 2520,-300.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND12&#45;&gt;cms.mbsf_ab_2011.HMOIND09 -->
+<!-- cms.mbsf_ab_2012.HMOIND09 -->
+<g id="node83" class="node">
+<title>cms.mbsf_ab_2012.HMOIND09</title>
+<g id="a_node83"><a xlink:href="../cms.mbsf_ab_2012/HMOIND09.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2960,-399.5 2745,-399.5 2745,-296.5 2960,-296.5 2960,-399.5"/>
+<text text-anchor="start" x="2758" y="-378.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2012.HMOIND09</text>
+<text text-anchor="start" x="2781" y="-331.7" font-family="Times,serif" font-size="14.00">HMO Indicator IX</text>
+<polygon fill="none" stroke="black" points="2753,-300.5 2753,-395.5 2952,-395.5 2952,-300.5 2753,-300.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND12&#45;&gt;cms.mbsf_ab_2012.HMOIND09 -->
+<!-- cms.mbsf_ab_2013.HMOIND09 -->
+<g id="node84" class="node">
+<title>cms.mbsf_ab_2013.HMOIND09</title>
+<g id="a_node84"><a xlink:href="../cms.mbsf_ab_2013/HMOIND09.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3193,-399.5 2978,-399.5 2978,-296.5 3193,-296.5 3193,-399.5"/>
+<text text-anchor="start" x="2991" y="-378.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2013.HMOIND09</text>
+<text text-anchor="start" x="3014" y="-331.7" font-family="Times,serif" font-size="14.00">HMO Indicator IX</text>
+<polygon fill="none" stroke="black" points="2986,-300.5 2986,-395.5 3185,-395.5 3185,-300.5 2986,-300.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND12&#45;&gt;cms.mbsf_ab_2013.HMOIND09 -->
+<!-- cms.mbsf_ab_2014.HMOIND09 -->
+<g id="node85" class="node">
+<title>cms.mbsf_ab_2014.HMOIND09</title>
+<g id="a_node85"><a xlink:href="../cms.mbsf_ab_2014/HMOIND09.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3426,-399.5 3211,-399.5 3211,-296.5 3426,-296.5 3426,-399.5"/>
+<text text-anchor="start" x="3224" y="-378.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2014.HMOIND09</text>
+<text text-anchor="start" x="3247" y="-331.7" font-family="Times,serif" font-size="14.00">HMO Indicator IX</text>
+<polygon fill="none" stroke="black" points="3219,-300.5 3219,-395.5 3418,-395.5 3418,-300.5 3219,-300.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND12&#45;&gt;cms.mbsf_ab_2014.HMOIND09 -->
+<!-- cms.mbsf_abcd_2015.HMOIND09 -->
+<g id="node86" class="node">
+<title>cms.mbsf_abcd_2015.HMOIND09</title>
+<g id="a_node86"><a xlink:href="../cms.mbsf_abcd_2015/HMOIND09.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3672.75,-399.5 3444.25,-399.5 3444.25,-296.5 3672.75,-296.5 3672.75,-399.5"/>
+<text text-anchor="start" x="3457.25" y="-378.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2015.HMOIND09</text>
+<text text-anchor="start" x="3480.25" y="-331.7" font-family="Times,serif" font-size="14.00">HMO Indicator: September</text>
+<polygon fill="none" stroke="black" points="3452.25,-300.5 3452.25,-395.5 3664.75,-395.5 3664.75,-300.5 3452.25,-300.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND12&#45;&gt;cms.mbsf_abcd_2015.HMOIND09 -->
+<!-- cms.mbsf_abcd_2016.HMOIND09 -->
+<g id="node87" class="node">
+<title>cms.mbsf_abcd_2016.HMOIND09</title>
+<g id="a_node87"><a xlink:href="../cms.mbsf_abcd_2016/HMOIND09.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3919.75,-399.5 3691.25,-399.5 3691.25,-296.5 3919.75,-296.5 3919.75,-399.5"/>
+<text text-anchor="start" x="3704.25" y="-378.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2016.HMOIND09</text>
+<text text-anchor="start" x="3727.25" y="-331.7" font-family="Times,serif" font-size="14.00">HMO Indicator: September</text>
+<polygon fill="none" stroke="black" points="3699.25,-300.5 3699.25,-395.5 3911.75,-395.5 3911.75,-300.5 3699.25,-300.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND12&#45;&gt;cms.mbsf_abcd_2016.HMOIND09 -->
+<!-- cms.mbsf_abcd_2017.HMOIND09 -->
+<g id="node88" class="node">
+<title>cms.mbsf_abcd_2017.HMOIND09</title>
+<g id="a_node88"><a xlink:href="../cms.mbsf_abcd_2017/HMOIND09.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="4166.75,-399.5 3938.25,-399.5 3938.25,-296.5 4166.75,-296.5 4166.75,-399.5"/>
+<text text-anchor="start" x="3951.25" y="-378.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2017.HMOIND09</text>
+<text text-anchor="start" x="3974.25" y="-331.7" font-family="Times,serif" font-size="14.00">HMO Indicator: September</text>
+<polygon fill="none" stroke="black" points="3946.25,-300.5 3946.25,-395.5 4158.75,-395.5 4158.75,-300.5 3946.25,-300.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND12&#45;&gt;cms.mbsf_abcd_2017.HMOIND09 -->
+<!-- cms.mbsf_abcd_2018.HMOIND09 -->
+<g id="node89" class="node">
+<title>cms.mbsf_abcd_2018.HMOIND09</title>
+<g id="a_node89"><a xlink:href="../cms.mbsf_abcd_2018/HMOIND09.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="4413.75,-399.5 4185.25,-399.5 4185.25,-296.5 4413.75,-296.5 4413.75,-399.5"/>
+<text text-anchor="start" x="4198.25" y="-378.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2018.HMOIND09</text>
+<text text-anchor="start" x="4221.25" y="-331.7" font-family="Times,serif" font-size="14.00">HMO Indicator: September</text>
+<polygon fill="none" stroke="black" points="4193.25,-300.5 4193.25,-395.5 4405.75,-395.5 4405.75,-300.5 4193.25,-300.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND12&#45;&gt;cms.mbsf_abcd_2018.HMOIND09 -->
+<!-- cms.mbsf_ab_2011.HMOIND04 -->
+<g id="node90" class="node">
+<title>cms.mbsf_ab_2011.HMOIND04</title>
+<g id="a_node90"><a xlink:href="../cms.mbsf_ab_2011/HMOIND04.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="4647,-399.5 4432,-399.5 4432,-296.5 4647,-296.5 4647,-399.5"/>
+<text text-anchor="start" x="4445" y="-378.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2011.HMOIND04</text>
+<text text-anchor="start" x="4468" y="-331.7" font-family="Times,serif" font-size="14.00">HMO Indicator IV</text>
+<polygon fill="none" stroke="black" points="4440,-300.5 4440,-395.5 4639,-395.5 4639,-300.5 4440,-300.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND12&#45;&gt;cms.mbsf_ab_2011.HMOIND04 -->
+<!-- cms.mbsf_ab_2012.HMOIND04 -->
+<g id="node91" class="node">
+<title>cms.mbsf_ab_2012.HMOIND04</title>
+<g id="a_node91"><a xlink:href="../cms.mbsf_ab_2012/HMOIND04.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="4880,-399.5 4665,-399.5 4665,-296.5 4880,-296.5 4880,-399.5"/>
+<text text-anchor="start" x="4678" y="-378.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2012.HMOIND04</text>
+<text text-anchor="start" x="4701" y="-331.7" font-family="Times,serif" font-size="14.00">HMO Indicator IV</text>
+<polygon fill="none" stroke="black" points="4673,-300.5 4673,-395.5 4872,-395.5 4872,-300.5 4673,-300.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND12&#45;&gt;cms.mbsf_ab_2012.HMOIND04 -->
+<!-- cms.mbsf_abcd_2015.HMOIND12&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge163" class="edge">
+<title>cms.mbsf_abcd_2015.HMOIND12&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M3971.05,-463.72C4024.2,-453.78 4088.35,-442.99 4146.5,-436.5 4187.52,-431.92 4860.05,-429.4 4888.5,-399.5 4920.05,-366.33 4910.89,-336.43 4888.5,-296.5 4768.01,-81.62 4603.52,-150.36 4357.5,-137.5 3741.84,-105.31 3009.86,-78.11 2685.13,-66.62"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.47,-63.13 2675.36,-66.27 2685.23,-70.12 2685.47,-63.13"/>
+<text text-anchor="middle" x="4893.88" y="-272.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND12&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge164" class="edge">
+<title>cms.mbsf_abcd_2016.HMOIND12&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M4384.01,-455.22C4413.91,-447.98 4446.23,-441.08 4476.5,-436.5 4524.68,-429.2 4881.38,-436.14 4913.5,-399.5 4990.27,-311.94 4917.04,-213.51 4815.5,-156.5 4722.97,-104.55 3200.57,-72.89 2684.8,-63.61"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.15,-60.12 2675.09,-63.44 2685.02,-67.12 2685.15,-60.12"/>
+<text text-anchor="middle" x="4952.88" y="-272.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2017.HMOIND12&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge165" class="edge">
+<title>cms.mbsf_abcd_2017.HMOIND12&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M4713.96,-450.02C4730.82,-445.15 4748.05,-440.47 4764.5,-436.5 4808.82,-425.81 4820.88,-427.9 4865.5,-418.5 4900.41,-411.14 4921.46,-427.56 4943.5,-399.5 5012.1,-312.19 4975.41,-221.65 4885.5,-156.5 4796.63,-92.11 3211.92,-68.56 2684.59,-62.48"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.02,-58.99 2674.98,-62.37 2684.94,-65.99 2685.02,-58.99"/>
+<text text-anchor="middle" x="4991.88" y="-272.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND12&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge166" class="edge">
+<title>cms.mbsf_abcd_2018.HMOIND12&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M4950.53,-436.4C4960.54,-425.33 4969.54,-412.88 4975.5,-399.5 5019.83,-299.93 5024.96,-227.77 4942.5,-156.5 4857.26,-82.82 3222.15,-65.42 2684.93,-61.69"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.11,-58.19 2675.09,-61.62 2685.06,-65.19 2685.11,-58.19"/>
+<text text-anchor="middle" x="5022.88" y="-272.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2011.HMOIND09&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge167" class="edge">
+<title>cms.mbsf_ab_2011.HMOIND09&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M2573.99,-296.12C2569.55,-290.33 2565.3,-284.39 2561.5,-278.5 2533.5,-235.05 2522.2,-177.54 2517.79,-132.53"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2521.29,-132.28 2516.94,-122.61 2514.31,-132.87 2521.29,-132.28"/>
+<text text-anchor="middle" x="2565.88" y="-202.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND09&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge168" class="edge">
+<title>cms.mbsf_ab_2012.HMOIND09&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M2744.52,-299.14C2741.5,-298.21 2738.49,-297.32 2735.5,-296.5 2676.3,-280.18 2648.14,-314.66 2598.5,-278.5 2590.95,-273 2593.05,-268.14 2589.5,-259.5 2571.09,-214.64 2570.45,-201.94 2553.5,-156.5 2550.52,-148.51 2547.33,-140.17 2544.11,-131.89"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2547.41,-130.71 2540.5,-122.67 2540.89,-133.26 2547.41,-130.71"/>
+<text text-anchor="middle" x="2604.88" y="-202.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2013.HMOIND09&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge169" class="edge">
+<title>cms.mbsf_ab_2013.HMOIND09&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M2977.59,-298.84C2974.55,-297.99 2971.52,-297.21 2968.5,-296.5 2932.43,-288.03 2666.26,-299.15 2635.5,-278.5 2627.74,-273.29 2630.05,-268.14 2626.5,-259.5 2608.09,-214.64 2613.76,-199.05 2590.5,-156.5 2585.73,-147.77 2580.17,-139.01 2574.28,-130.53"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2577.13,-128.49 2568.45,-122.42 2571.44,-132.58 2577.13,-128.49"/>
+<text text-anchor="middle" x="2641.88" y="-202.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND09&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge170" class="edge">
+<title>cms.mbsf_ab_2014.HMOIND09&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M3210.61,-298.75C3207.56,-297.93 3204.52,-297.18 3201.5,-296.5 3144.12,-283.62 2721.65,-310.79 2672.5,-278.5 2624.2,-246.77 2660.13,-204.2 2627.5,-156.5 2620.85,-146.78 2612.98,-137.47 2604.53,-128.72"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2607.27,-126.5 2597.7,-121.95 2602.34,-131.47 2607.27,-126.5"/>
+<text text-anchor="middle" x="2668.88" y="-202.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2015.HMOIND09&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge171" class="edge">
+<title>cms.mbsf_abcd_2015.HMOIND09&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M3443.77,-298.63C3440.66,-297.86 3437.57,-297.14 3434.5,-296.5 3395.06,-288.27 2743.28,-300.47 2709.5,-278.5 2660.23,-246.46 2695.64,-202.05 2658.5,-156.5 2650.2,-146.32 2640.54,-136.82 2630.22,-128.05"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2632.47,-125.37 2622.5,-121.79 2628.06,-130.81 2632.47,-125.37"/>
+<text text-anchor="middle" x="2705.88" y="-202.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND09&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge172" class="edge">
+<title>cms.mbsf_abcd_2016.HMOIND09&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M3690.76,-298.68C3687.66,-297.89 3684.57,-297.16 3681.5,-296.5 3578.33,-274.34 2817.53,-321.99 2732.5,-259.5 2693.3,-230.69 2727.33,-193.28 2695.5,-156.5 2686.18,-145.74 2675.35,-135.99 2663.71,-127.21"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2665.92,-124.48 2655.75,-121.5 2661.84,-130.17 2665.92,-124.48"/>
+<text text-anchor="middle" x="2747.88" y="-202.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2013.HMOIND04 -->
+<g id="node92" class="node">
+<title>cms.mbsf_ab_2013.HMOIND04</title>
+<g id="a_node92"><a xlink:href="../cms.mbsf_ab_2013/HMOIND04.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="2958,-259.5 2743,-259.5 2743,-156.5 2958,-156.5 2958,-259.5"/>
+<text text-anchor="start" x="2756" y="-238.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2013.HMOIND04</text>
+<text text-anchor="start" x="2779" y="-191.7" font-family="Times,serif" font-size="14.00">HMO Indicator IV</text>
+<polygon fill="none" stroke="black" points="2751,-160.5 2751,-255.5 2950,-255.5 2950,-160.5 2751,-160.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND09&#45;&gt;cms.mbsf_ab_2013.HMOIND04 -->
+<!-- cms.mbsf_ab_2014.HMOIND04 -->
+<g id="node93" class="node">
+<title>cms.mbsf_ab_2014.HMOIND04</title>
+<g id="a_node93"><a xlink:href="../cms.mbsf_ab_2014/HMOIND04.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3191,-259.5 2976,-259.5 2976,-156.5 3191,-156.5 3191,-259.5"/>
+<text text-anchor="start" x="2989" y="-238.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_ab_2014.HMOIND04</text>
+<text text-anchor="start" x="3012" y="-191.7" font-family="Times,serif" font-size="14.00">HMO Indicator IV</text>
+<polygon fill="none" stroke="black" points="2984,-160.5 2984,-255.5 3183,-255.5 3183,-160.5 2984,-160.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND09&#45;&gt;cms.mbsf_ab_2014.HMOIND04 -->
+<!-- cms.mbsf_abcd_2015.HMOIND04 -->
+<g id="node94" class="node">
+<title>cms.mbsf_abcd_2015.HMOIND04</title>
+<g id="a_node94"><a xlink:href="../cms.mbsf_abcd_2015/HMOIND04.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3437.75,-259.5 3209.25,-259.5 3209.25,-156.5 3437.75,-156.5 3437.75,-259.5"/>
+<text text-anchor="start" x="3222.25" y="-238.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2015.HMOIND04</text>
+<text text-anchor="start" x="3245.25" y="-191.7" font-family="Times,serif" font-size="14.00">HMO Indicator: April</text>
+<polygon fill="none" stroke="black" points="3217.25,-160.5 3217.25,-255.5 3429.75,-255.5 3429.75,-160.5 3217.25,-160.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND09&#45;&gt;cms.mbsf_abcd_2015.HMOIND04 -->
+<!-- cms.mbsf_abcd_2016.HMOIND04 -->
+<g id="node95" class="node">
+<title>cms.mbsf_abcd_2016.HMOIND04</title>
+<g id="a_node95"><a xlink:href="../cms.mbsf_abcd_2016/HMOIND04.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3684.75,-259.5 3456.25,-259.5 3456.25,-156.5 3684.75,-156.5 3684.75,-259.5"/>
+<text text-anchor="start" x="3469.25" y="-238.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2016.HMOIND04</text>
+<text text-anchor="start" x="3492.25" y="-191.7" font-family="Times,serif" font-size="14.00">HMO Indicator: April</text>
+<polygon fill="none" stroke="black" points="3464.25,-160.5 3464.25,-255.5 3676.75,-255.5 3676.75,-160.5 3464.25,-160.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND09&#45;&gt;cms.mbsf_abcd_2016.HMOIND04 -->
+<!-- cms.mbsf_abcd_2017.HMOIND04 -->
+<g id="node96" class="node">
+<title>cms.mbsf_abcd_2017.HMOIND04</title>
+<g id="a_node96"><a xlink:href="../cms.mbsf_abcd_2017/HMOIND04.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="3931.75,-259.5 3703.25,-259.5 3703.25,-156.5 3931.75,-156.5 3931.75,-259.5"/>
+<text text-anchor="start" x="3716.25" y="-238.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2017.HMOIND04</text>
+<text text-anchor="start" x="3739.25" y="-191.7" font-family="Times,serif" font-size="14.00">HMO Indicator: April</text>
+<polygon fill="none" stroke="black" points="3711.25,-160.5 3711.25,-255.5 3923.75,-255.5 3923.75,-160.5 3711.25,-160.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND09&#45;&gt;cms.mbsf_abcd_2017.HMOIND04 -->
+<!-- cms.mbsf_abcd_2018.HMOIND04 -->
+<g id="node97" class="node">
+<title>cms.mbsf_abcd_2018.HMOIND04</title>
+<g id="a_node97"><a xlink:href="../cms.mbsf_abcd_2018/HMOIND04.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="4178.75,-259.5 3950.25,-259.5 3950.25,-156.5 4178.75,-156.5 4178.75,-259.5"/>
+<text text-anchor="start" x="3963.25" y="-238.2" font-family="Times,serif" font-weight="bold" font-size="14.00">cms.mbsf_abcd_2018.HMOIND04</text>
+<text text-anchor="start" x="3986.25" y="-191.7" font-family="Times,serif" font-size="14.00">HMO Indicator: April</text>
+<polygon fill="none" stroke="black" points="3958.25,-160.5 3958.25,-255.5 4170.75,-255.5 4170.75,-160.5 3958.25,-160.5"/>
+</a>
+</g>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND09&#45;&gt;cms.mbsf_abcd_2018.HMOIND04 -->
+<!-- cms.mbsf_abcd_2017.HMOIND09&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge173" class="edge">
+<title>cms.mbsf_abcd_2017.HMOIND09&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M4156.29,-296.21C4168.8,-285.8 4179.83,-273.61 4187.5,-259.5 4209.36,-219.28 4218.93,-189.78 4187.5,-156.5 4136.48,-102.48 3100.47,-73.67 2685.35,-64.26"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.45,-60.76 2675.37,-64.04 2685.29,-67.76 2685.45,-60.76"/>
+<text text-anchor="middle" x="4223.88" y="-202.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND09&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge174" class="edge">
+<title>cms.mbsf_abcd_2018.HMOIND09&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M4289.17,-296.02C4277.82,-252.86 4255.34,-192.44 4213.5,-156.5 4189.69,-136.06 4176.48,-142.49 4145.5,-137.5 3868.38,-92.85 3043.6,-71.34 2685.07,-63.89"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.35,-60.4 2675.28,-63.69 2685.2,-67.4 2685.35,-60.4"/>
+<text text-anchor="middle" x="4293.88" y="-202.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2011.HMOIND04&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge175" class="edge">
+<title>cms.mbsf_ab_2011.HMOIND04&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M4487.41,-296.13C4438.8,-251.81 4362.13,-189.6 4283.5,-156.5 4233.73,-135.55 4217.22,-142.99 4163.5,-137.5 3625.22,-82.52 2983.95,-66.89 2684.82,-62.47"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.22,-58.98 2675.17,-62.33 2685.12,-65.98 2685.22,-58.98"/>
+<text text-anchor="middle" x="4459.88" y="-202.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2012.HMOIND04&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge176" class="edge">
+<title>cms.mbsf_ab_2012.HMOIND04&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M4707.23,-296.12C4644.88,-250.64 4546.31,-186.67 4449.5,-156.5 4283.69,-104.83 3125.35,-74.19 2684.92,-64.29"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.2,-60.8 2675.13,-64.07 2685.05,-67.8 2685.2,-60.8"/>
+<text text-anchor="middle" x="4669.88" y="-202.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2013.HMOIND04&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge177" class="edge">
+<title>cms.mbsf_ab_2013.HMOIND04&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M2772.7,-156.13C2761.12,-149.45 2749.16,-143.02 2737.5,-137.5 2720.49,-129.45 2702.4,-121.81 2684.18,-114.69"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.6,-111.49 2675.01,-111.17 2683.09,-118.02 2685.6,-111.49"/>
+<text text-anchor="middle" x="2752.88" y="-132.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_ab_2014.HMOIND04&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge178" class="edge">
+<title>cms.mbsf_ab_2014.HMOIND04&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M2975.74,-159.57C2972.64,-158.5 2969.56,-157.47 2966.5,-156.5 2875.09,-127.39 2770.42,-104.55 2684.94,-88.49"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.65,-85.06 2675.18,-86.67 2684.37,-91.94 2685.65,-85.06"/>
+<text text-anchor="middle" x="2918.88" y="-132.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2015.HMOIND04&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge179" class="edge">
+<title>cms.mbsf_abcd_2015.HMOIND04&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M3209,-159.2C3205.81,-158.25 3202.64,-157.35 3199.5,-156.5 3027.57,-110.23 2824.96,-85.42 2685.11,-72.74"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.49,-69.26 2675.22,-71.86 2684.87,-76.24 2685.49,-69.26"/>
+<text text-anchor="middle" x="3137.88" y="-132.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2016.HMOIND04&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge180" class="edge">
+<title>cms.mbsf_abcd_2016.HMOIND04&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M3456.04,-159.05C3452.84,-158.14 3449.66,-157.29 3446.5,-156.5 3185.87,-91.44 2873.58,-70.48 2685.06,-63.79"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.4,-60.3 2675.29,-63.46 2685.16,-67.3 2685.4,-60.3"/>
+<text text-anchor="middle" x="3381.88" y="-132.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2017.HMOIND04&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge181" class="edge">
+<title>cms.mbsf_abcd_2017.HMOIND04&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M3703.06,-158.96C3699.86,-158.08 3696.67,-157.25 3693.5,-156.5 3506.75,-112 2963.61,-81.4 2684.87,-68.15"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.39,-64.67 2675.24,-67.69 2685.06,-71.66 2685.39,-64.67"/>
+<text text-anchor="middle" x="3608.88" y="-132.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+<!-- cms.mbsf_abcd_2018.HMOIND04&#45;&gt;medicare.ps.hmo_indicators -->
+<g id="edge182" class="edge">
+<title>cms.mbsf_abcd_2018.HMOIND04&#45;&gt;medicare.ps.hmo_indicators</title>
+<path fill="none" stroke="chocolate" stroke-width="2" d="M3950.07,-158.9C3946.87,-158.04 3943.67,-157.23 3940.5,-156.5 3706.26,-102.41 3009.29,-75.33 2684.98,-65.37"/>
+<polygon fill="chocolate" stroke="chocolate" stroke-width="2" points="2685.31,-61.88 2675.21,-65.07 2685.1,-68.88 2685.31,-61.88"/>
+<text text-anchor="middle" x="3854.88" y="-132.95" font-family="Times,serif" font-size="14.00">union</text>
+</g>
+</g>
+</svg>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="hmo_indicators.html" class="btn btn-neutral float-left" title="Column medicare.ps.hmo_indicators" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="orec.html" class="btn btn-neutral float-right" title="Column medicare.ps.orec" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2026, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

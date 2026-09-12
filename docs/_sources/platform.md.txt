@@ -1,21 +1,31 @@
 # Dorieh Core Data Platform
 
-[Documentation Home](home)
-
 ```{toctree}
 ---
 maxdepth: 4
 hidden: 
 ---
-Datamodels
 DBConnections
 DataLoader
 ProjectLoader
 TerritorialCodes
-SampleQuery
-UserRequests
 SQLDocumentation
 ```
+
+Related pages that live in other sections of this documentation:
+
+* [Data Modeling for Dorieh Data Platform](Datamodels.md) — the DSL reference
+* [How to query the database](SampleQuery.md)
+* [Handling user requests](UserRequests.md)
+
+In this section:
+
+* [Managing database connections](DBConnections.md)
+* [Dorieh Data Loader](DataLoader.md) — the guide to the Universal
+  Database Loader
+* [Project (Directory) Loading Utility](ProjectLoader.md)
+* [Mapping between different territorial codes](TerritorialCodes.md)
+* [SQL Documentation](SQLDocumentation.md)
 
 ```{contents}
 ---
@@ -25,18 +35,18 @@ local:
 
 ## Core platform overview
 
-The data platform provides generic functionality for Dorieh Data Platform
-with APIs and command line utilities dependent on the infrastructure
-and the environment. For instance, its components assume presence of PostgreSQL
-DBMS (version 13 or later) and CWL runtime environment.
+The core platform provides the domain-independent functionality of
+Dorieh: APIs and command-line utilities that do not depend on any
+particular data domain, but do assume the infrastructure — a
+PostgreSQL DBMS (version 13 or later) and a CWL runtime environment.
 
 Some mapping (or crosswalk) tables are also included in the Core
-Platform module. These tables include between different
+Platform module. These tables include mappings between different
 territorial codes, such as USPS ZIP codes, Census ZCTA codes,
 FIPS codes for US states
 and counties, SSA codes for US states
 and counties. See more information in the
-[Mapping between different territorial codes](https://nsaph-data-platform.github.io/nsaph-platform-docs/common/core-platform/doc/TerritorialCodes.html)
+[Mapping between different territorial codes](TerritorialCodes) page.
 
 See also: [](DBConnections).
 
@@ -45,19 +55,17 @@ See also: [](DBConnections).
 
 Examples of tools included in this package are:
 
-* [Universal Data Loader](members/data_loader)
+* [Universal Database Loader](DataLoader.md)
 * A [utility to monitor progress of long-running database](MonitoringDB) processes like indexing.
 * A [utility to infer database schema and generate DDL](members/introspector) from a CSV file
-* A [utility to link a table to GIS](members/link_gis) from a CSV file
+* A [utility to link a table to GIS](members/link_gis)
 * A [wrapper around database connection to PostgreSQL](members/db)
 * A [utility to import/export JSONLines](members/pg_json_dump) files into/from PostgreSQL
-* A [utility to export Parquet files](members/pg_export_parquet) files from PostgreSQL
+* A [utility to export Parquet files](members/pg_export_parquet) from PostgreSQL
 * An [Executor with a bounded queue](members/executors)
 
 (core-prj-struct)=
 ## Project Structure 
-
-**The package is under intensive development, the project structure is in flux**
 
 Top level directories are:
 
@@ -143,20 +151,11 @@ Utilities, implementing the following:
     This can be used to map public tables available to anybody
     to a more secure database, containing health data
 * [Tables and functions](members/zip2fips.sql) to 
-    [map between different territorial codes](#territorial-codes-mappings), 
+    [map between different territorial codes](TerritorialCodes), 
     including USPS ZIP codes, Census ZCTA codes, 
     FIPS codes for US states
-    and counties, SSA codes for codes for US states
+    and counties, SSA codes for US states
     and counties. 
-
-## Territorial Codes Mappings
-
-An important part of the data platform is the mappings between different
-territorial codes, such as USPS ZIP codes, Census ZCTA codes,
-FIPS codes for US states and counties, SSA codes for codes for US states
-and counties. See more information in the
-[Mapping between different territorial codes](TerritorialCodes)
-page.
 
 (core-soft-idx)=
 ## Documentation Indices 

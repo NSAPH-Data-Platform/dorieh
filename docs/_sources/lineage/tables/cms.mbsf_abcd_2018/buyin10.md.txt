@@ -1,0 +1,22 @@
+# Column cms.mbsf_abcd_2018.BUYIN10
+
+## Overview of column BUYIN10 in table cms.mbsf_abcd_2018 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_abcd_2018](../cms.mbsf_abcd_2018.md)           |
+| Qualified name                | cms.mbsf_abcd_2018.BUYIN10  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/medicare-entitlementbuy-indicator](https://resdac.org/cms-data/variables/medicare-entitlementbuy-indicator) |
+
+
+Medicare Entitlement/ Buy-In Indicator: October
+
+| Key | Value |
+| --- | ----- |
+| long_name | MDCR_ENTLMT_BUYIN_IND_10 |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

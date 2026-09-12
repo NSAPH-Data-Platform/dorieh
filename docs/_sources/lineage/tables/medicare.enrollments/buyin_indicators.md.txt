@@ -1,0 +1,39 @@
+# Column medicare.enrollments.buyin_indicators
+
+## Overview of column buyin_indicators in table medicare.enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.enrollments](../medicare.enrollments.md)           |
+| Qualified name                | medicare.enrollments.buyin_indicators  |
+| Datatype                      | string        |
+| Column type | copied |
+
+
+
+## Expressions
+
+```sql
+SELECT MAX(buyin_indicators)
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+buyin_indicators_svg_envelop.md
+```
+
+
+```{figure} buyin_indicators.svg
+:align: center
+:alt: Column medicare.enrollments.buyin_indicators Lineage SVG
+:target: buyin_indicators_svg_envelop.html
+
+Data lineage for column medicare.enrollments.buyin_indicators
+
+```
+
+

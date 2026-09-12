@@ -1,0 +1,39 @@
+# Column medicare._beneficiaries.dob
+
+## Overview of column dob in table medicare._beneficiaries 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare._beneficiaries](../medicare._beneficiaries.md)           |
+| Qualified name                | medicare._beneficiaries.dob  |
+| Datatype                      | string        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT MIN(dob)
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+dob_svg_envelop.md
+```
+
+
+```{figure} dob.svg
+:align: center
+:alt: Column medicare._beneficiaries.dob Lineage SVG
+:target: dob_svg_envelop.html
+
+Data lineage for column medicare._beneficiaries.dob
+
+```
+
+

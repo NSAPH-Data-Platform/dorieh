@@ -54,15 +54,36 @@ class QueryBuilder:
         return self
 
     @staticmethod
-    def split(t:str) -> Tuple[str]:
-        return tuple(t.split('.'))
+    def is_quoted(s) -> bool:
+        return len(s) >= 2 and s[0] == s[-1] and s[0] in ('"', "'")
+
+    @classmethod
+    def unquote(cls, s):
+        if cls.is_quoted(s):
+            return s[1:-1]
+        return s
+
+    @staticmethod
+    def quote(s):
+        return f'"{s}"'
+
+    @classmethod
+    def split(cls, fqn:str) -> Tuple[str, ...]:
+        tt = fqn.split('.')
+        return tuple(tt)
+
+    @classmethod
+    def quote_column(cls, table: str, column: str) -> str:
+        if cls.is_quoted(table):
+            column = cls.quote(column)
+        return f"{table}.{column}"
 
     def get_columns(self, table_fqn: str) -> List[str]:
         schema, table = self.split(table_fqn)
-        sql = SQL_TABLE_COLUMNS.format(schema=schema, table=table)
+        sql = SQL_TABLE_COLUMNS.format(schema=self.unquote(schema), table=self.unquote(table))
         with (self.connection.cursor()) as cursor:
             cursor.execute(sql)
-            columns = [table + '.' + r[0] for r in cursor]
+            columns = [self.quote_column(table, r[0]) for r in cursor]
         return columns
 
     def query(self) -> str:

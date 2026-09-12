@@ -1,0 +1,22 @@
+# Column cms.medpar_2015.PASSTHRU
+
+## Overview of column PASSTHRU in table cms.medpar_2015 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2015](../cms.medpar_2015.md)           |
+| Qualified name                | cms.medpar_2015.PASSTHRU  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/pass-thru-diem-amount-stay](https://resdac.org/cms-data/variables/pass-thru-diem-amount-stay) |
+
+
+Total of all claim pass thru for stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | PASS_THRU_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

@@ -1,0 +1,37 @@
+# Column medicare.ip.bene_blood_ddctbl_amt
+
+## Overview of column bene_blood_ddctbl_amt in table medicare.ip 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.ip](../medicare.ip.md)           |
+| Qualified name                | medicare.ip.bene_blood_ddctbl_amt  |
+| Datatype                      | NUMERIC        |
+| Reference | [https://resdac.org/cms-data/variables/beneficiarys-liability-blood-deductible-stay](https://resdac.org/cms-data/variables/beneficiarys-liability-blood-deductible-stay) |
+
+
+The amount of money (rounded to whole dollars) identified as the beneficiary's liability for the blood deductible for the stay.
+
+
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+bene_blood_ddctbl_amt_svg_envelop.md
+```
+
+
+```{figure} bene_blood_ddctbl_amt.svg
+:align: center
+:alt: Column medicare.ip.bene_blood_ddctbl_amt Lineage SVG
+:target: bene_blood_ddctbl_amt_svg_envelop.html
+
+Data lineage for column medicare.ip.bene_blood_ddctbl_amt
+
+```
+
+

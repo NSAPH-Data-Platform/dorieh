@@ -1,0 +1,22 @@
+# Column cms.medpar_2018.WARDDAY
+
+## Overview of column WARDDAY in table cms.medpar_2018 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2018](../cms.medpar_2018.md)           |
+| Qualified name                | cms.medpar_2018.WARDDAY  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/ward-day-count](https://resdac.org/cms-data/variables/ward-day-count) |
+
+
+Ward days used by beneficiary for stay
+
+| Key | Value |
+| --- | ----- |
+| long_name | WARD_DAY_CNT |
+| original_type | NUM |
+| width | 5.0 |
+
+
+

@@ -1,0 +1,39 @@
+# Column medicare.qc_enrollments.NumDistinctBeneficaries
+
+## Overview of column NumDistinctBeneficaries in table medicare.qc_enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_enrollments](../medicare.qc_enrollments.md)           |
+| Qualified name                | medicare.qc_enrollments.NumDistinctBeneficaries  |
+| Datatype                      | BIGINT        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT (#(hll_add_agg(bene)))::BIGINT
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+numdistinctbeneficaries_svg_envelop.md
+```
+
+
+```{figure} numdistinctbeneficaries.svg
+:align: center
+:alt: Column medicare.qc_enrollments.NumDistinctBeneficaries Lineage SVG
+:target: numdistinctbeneficaries_svg_envelop.html
+
+Data lineage for column medicare.qc_enrollments.NumDistinctBeneficaries
+
+```
+
+

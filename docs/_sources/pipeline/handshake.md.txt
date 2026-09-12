@@ -1,0 +1,43 @@
+# Workflow checking handshake with the database
+
+
+ [Source code](handshakecwl_src.md) 
+
+
+![](handshake.png)
+
+```{contents}
+---
+local:
+---
+```
+
+**Workflow**
+
+## Description
+
+This workflow executes an SQL statement to connect to the database,
+display version and list tables. SQL can be overridden
+
+
+## Inputs
+
+| Name            | Type     | Default                                                                                                                                                                                | Description                                            | 
+|:----------------|:---------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------|
+| database        | File     |                                                                                                                                                                                        | Path to database connection file, usually database.ini | 
+| connection_name | string   |                                                                                                                                                                                        | The name of the section in the database.ini file       | 
+| sql             | string[] | `["SELECT '___', version()\nUNION\nSELECT table_schema, TABLE_NAME \nFROM information_schema.tables WHERE table_schema not in ('pg_catalog', 'information_schema')\nORDER BY 1\n;\n"]` |                                                        | 
+
+## Outputs
+
+| Name     | Type | Description | 
+|:---------|:-----|:------------|
+| psql_log | File |             | 
+| psql_err | File |             | 
+
+## Steps
+
+| Name | Runs                                    | Description | 
+|:-----|:----------------------------------------|:------------|
+| psql | [alter_database.cwl](alter_database.md) |             | 
+

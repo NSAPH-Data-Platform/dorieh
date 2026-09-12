@@ -1,0 +1,22 @@
+# Column cms.medpar_2018.DGNS_VRSN_CD
+
+## Overview of column DGNS_VRSN_CD in table cms.medpar_2018 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2018](../cms.medpar_2018.md)           |
+| Qualified name                | cms.medpar_2018.DGNS_VRSN_CD  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/medpar-diagnosis-version-code-icd-9-or-icd-10](https://resdac.org/cms-data/variables/medpar-diagnosis-version-code-icd-9-or-icd-10) |
+
+
+Version Code - Indicate if diagnosis code is ICD-9 or ICD-10 (Earlier Version)
+
+| Key | Value |
+| --- | ----- |
+| long_name | DGNS_VRSN_CD |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

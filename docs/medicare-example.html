@@ -1,0 +1,980 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Example: Medicare Processing Pipeline with Synthetic Data &mdash; Dorieh Data Platform 0.5.1.post2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/dorieh.css?v=1a3f250d" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=ad30b421"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Data Dictionaries" href="dictionaries.html" />
+    <link rel="prev" title="Example of a workflow: aggregating a climate variable" href="Example-climate-workflow.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+<div class="dorieh-citeas">
+  <button type="button" class="dorieh-citeas-btn"
+          onclick="document.getElementById('dorieh-citeas-pop').classList.toggle('open')">
+    &#128214; Cite as
+  </button>
+  <div id="dorieh-citeas-pop" class="dorieh-citeas-pop">
+    <p>Bouzinier,&nbsp;M., Etin,&nbsp;D., Khoshnevis,&nbsp;N.,
+       Shad,&nbsp;M., Yockel,&nbsp;S. (2026).
+       <em>Research Data that Can be Trusted.</em>
+       SpringerBriefs in Computer Science. Springer.
+       <a href="https://doi.org/10.1007/978-3-032-21032-6">doi:10.1007/978-3-032-21032-6</a></p>
+    <button type="button" class="dorieh-citeas-copy"
+            onclick="navigator.clipboard.writeText(
+              'Bouzinier, M., Etin, D., Khoshnevis, N., Shad, M., Yockel, S. (2026). ' +
+              'Research Data that Can be Trusted. SpringerBriefs in Computer Science. ' +
+              'Springer. https://doi.org/10.1007/978-3-032-21032-6'
+            ).then(() => { this.textContent = 'Copied!'; });">
+      Copy citation
+    </button>
+    <a class="dorieh-citeas-more" href="citing.html">More ways to cite &rarr;</a>
+  </div>
+</div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="home.html#introduction-to-data-platform">Introduction to Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#building-blocks">Building Blocks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="home.html#dorieh-utilities">Dorieh Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="home.html#core-platform">Core Platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="home.html#dorieh-gis-utilities">Dorieh GIS Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="home.html#dorieh-documentation-utilities">Dorieh Documentation Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="home.html#data-processing-and-loading-pipelines">Data Processing and Loading Pipelines</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#working-with-nsaph-containerized-apps">Working with NSAPH containerized apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#using-the-database">Using the Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#terms-and-acronyms">Terms and Acronyms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#building-platform-documentation">Building Platform documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#next-steps">Next steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rationale.html">Why a data platform</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rationale.html#why-we-need-a-data-platform">Why we need a Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rationale.html#architecture">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rationale.html#supported-programming-languages-and-tools">Supported Programming Languages and Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rationale.html#development-mode">Development Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rationale.html#where-it-can-be-deployed">Where it can be deployed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rationale.html#what-makes-dorieh-different">What makes Dorieh different</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">The Dorieh approach</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#two-languages-one-pipeline">Two languages, one pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#medallion-architecture-as-dorieh-implements-it">Medallion architecture as Dorieh implements it</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#dataset-operators-and-field-construction-operators">Dataset operators and field construction operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#families-of-field-transformations">Families of field transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#disambiguation-rules">Disambiguation rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#validation-and-journaling">Validation and journaling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#fine-grained-lineage">Fine-grained lineage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#where-each-concept-lives">Where each concept lives</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="about-the-book.html">The companion book</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about-the-book.html#bibliographic-information">Bibliographic information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about-the-book.html#chapter-to-documentation-map">Chapter-to-documentation map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about-the-book.html#using-this-documentation-without-the-book">Using this documentation without the book</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="citing.html">Citing Dorieh</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="citing.html#preferred-citation-the-book">Preferred citation: the book</a></li>
+<li class="toctree-l2"><a class="reference internal" href="citing.html#citing-the-software-itself">Citing the software itself</a></li>
+<li class="toctree-l2"><a class="reference internal" href="citing.html#citing-the-tutorials">Citing the tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="citing.html#citing-the-synthetic-dataset">Citing the synthetic dataset</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Learning paths</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="paths/index.html">Choose your path</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="paths/researcher.html">Researchers and analysts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="paths/researcher.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paths/researcher.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="paths/developer.html">Pipeline developers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="paths/developer.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paths/developer.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="paths/operator.html">Platform operators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="paths/operator.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paths/operator.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="paths/book-reader.html">Readers of the book</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="paths/book-reader.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paths/book-reader.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="paths/auditor.html">Reviewers and auditors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="paths/auditor.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paths/auditor.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data domains and pipelines</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cms.html">Health</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="health_data_overview.html">Health Data in Dorieh (Medicare and Medicaid)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Medicare.html">Medicare: Building a Data Warehouse from ResDac Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Medicaid.html">Medicaid: Building a Data Warehouse from ResDac Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="health_seealso.html">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="climate.html">Climate</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="climate.html#what-is-gridmet">What is gridMET?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="climate.html#using-command-line-gridmet-utility">Using command line gridMET utility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="climate.html#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="climate.html#python-modules">Python modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="climate.html#cwl-pipelines-and-tools">CWL pipelines and tools</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="exposures.html">Exposure (PM2.5, WashU)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="exposures.html#python-packages">Python packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exposures.html#cwl-workflows">CWL Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="epa.html">Environmental Protection Agency (EPA) data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="epa.html#package-contents">Package Contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="epa.html#querying-data">Querying Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="census.html">Demographics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="census_about.html">About</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_env_set_up.html">Setting Up Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_quick_start.html">Quick Start</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_yaml.html">Census Variable File Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_cached_data.html">Stored Data Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_modules.html">Modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_glossary.html">Glossary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_start_guide.html">Working with the <code class="docutils literal notranslate"><span class="pre">census</span></code> Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_assemble.html">census_assemble.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_assemblecwl_src.html">census_assemble.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_density.html">census_density.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_densitycwl_src.html">census_density.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_ingest.html">census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_ingest_1.html">Sub-workflow <em>store</em> from census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_ingest_1cwl_src.html">CWL sub-workflow for step <u><em>store</em></u> of workflow census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_ingestcwl_src.html">census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_interpolate.html">census_interpolate.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_interpolatecwl_src.html">census_interpolate.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_qc.html">census_qc.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_qccwl_src.html">census_qc.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_workflow.html">census_workflow.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_workflowcwl_src.html">census_workflow.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_write.html">census_write.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_writecwl_src.html">census_write.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census.html#indices-and-tables">Indices and tables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipelines.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipelines.html#workflow-description-languages">Workflow Description Languages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipelines.html#running-workflows">Running Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pipelines.html#tested-runners">Tested Runners</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipelines.html#providing-parameters-to-the-pipelines">Providing Parameters to the Pipelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipelines.html#using-toil">Using Toil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipelines.html#troubleshooting-workflows-run-by-toil">Troubleshooting Workflows Run by Toil</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pipelines.html#testing-workflows">Testing Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipelines.html#published-and-tested-workflows">Published and Tested Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/gridmet.html">Pipeline to aggregate data from Climatology Lab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/wustl.html">Pipeline to ingest Monthly Pollution data downloaded from WashU Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/pm25_yearly_download.html">Pipeline to aggregate data in NetCDF format over given geographies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/aqs.html">Full EPA AQS Processing Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/airnow.html">Full EPA AirNow Processing Pipeline (including downloading shapefiles)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/medicare.html">Medicare data ingestion and processing pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/medicaid.html">Full Medicaid Processing Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_workflow.html">census_workflow.cwl</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pipelines.html#developing-new-workflows">Developing New Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pipelines.html#combining-included-cwl-tools-into-a-new-workflow">Combining Included CWL Tools into a New Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipelines.html#ordering-database-steps-with-depends-on">Ordering Database Steps with <code class="docutils literal notranslate"><span class="pre">depends_on</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipelines.html#wrapping-python-modules-as-cwl-tools">Wrapping Python Modules as CWL Tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials and worked examples</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Tutorials.html">Dorieh Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/climate/index.html">Climate tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/climate/building-climate-pipeline.html">Part 1. Building the pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/climate/documenting-a-workflow.html">Part 2. Documenting the workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/climate/constructing-lineage.html">Part 3. Data dictionaries and lineage graphs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html">Medicare claims pipeline tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#designing-the-pipeline">Designing the pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#from-fts-documents-to-machine-readable-schemas">From FTS documents to machine-readable schemas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#bronze-one-table-per-source-file">Bronze: one table per source file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#silver-harmonize-disambiguate-validate">Silver: harmonize, disambiguate, validate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#gold-the-qc-aggregates">Gold: the QC aggregates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#orchestration-five-steps-in-medicare-cwl">Orchestration: five steps in medicare.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#documentation-and-lineage">Documentation and lineage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#running-it-yourself">Running it yourself</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Example-climate-workflow.html">A CWL workflow example: aggregating a climate variable</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Example-climate-workflow.html#what-the-sample-workflow-is-doing-aggregating-a-climate-variable">What the sample workflow is doing: aggregating a climate variable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Example-climate-workflow.html#prepare-to-run-a-workflow">Prepare to run a workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Example-climate-workflow.html#running-the-workflow-in-python-virtual-environment">Running the workflow in Python virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Example-climate-workflow.html#running-the-workflow-using-docker">Running the workflow using Docker</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Medicare pipeline with publicly available synthetic data (PostgreSQL + Superset)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-download-synthetic-sample-data">Step 1 — Download synthetic sample data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-3-optional-explore-results-in-apache-superset">Step 3 (Optional) — Explore results in Apache Superset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#what-the-pipeline-produces">What the pipeline produces</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#related-how-to-guides">Related how-to guides</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data dictionaries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dictionaries.html">Data Dictionaries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="MedicareLineage.html">Medicare data warehouse</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lineage/medicare.dot.html">Table Lineage Diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lineage/table-list.html">Alphabetic list of all tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lineage/column-list.html">Alphabetic list of all columns in all tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="members/domain_dictionary.html">The Data Dictionary Generation tool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data modeling DSL reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Datamodels.html">Data Modeling for Dorieh Data Platform</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="DataModellingExtensions.html">Data Modeling Extensions: Federated Views Across Years</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="DataModellingExtensions.html#combining-multiple-sources-and-optional-columns">Combining multiple sources and optional columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DataModellingExtensions.html#exclude">Exclude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DataModellingExtensions.html#cast">Cast</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DataModellingExtensions.html#validating-consistency-of-data-across-tables">Validating consistency of data across tables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#introduction-to-data-modeling-for-dorieh-data-platform">Introduction to data modeling for Dorieh Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#domain">Domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#table">Table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#create-statement">Create statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#invalid-record">Invalid Record</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#column">Column</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#source">Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#index">Index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#generated-columns">Generated columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#computed-columns">Computed columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#file-columns">File columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#record-columns">Record columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#identifier-columns-and-the-identifiers-token">Identifier columns and the <code class="docutils literal notranslate"><span class="pre">{identifiers}</span></code> token</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#transposing-columns">Transposing columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#wildcards">Wildcards</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#multi-column-indices">Multi-column indices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#indexing-policies">Indexing policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#linking-with-nomenclature">Linking with nomenclature</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#us-states">US States</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#county-codes">County codes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#ingesting-data">Ingesting data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#where-to-go-next">Where to go next</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">General purpose utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#overview-of-utilities">Overview of Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#current-development">Current Development</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#todo">TODO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#documentation-indices">Documentation Indices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="CoreLibrary.html">Data platform components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="CoreLibrary.html#package-dorieh-platform">Package dorieh.platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CoreLibrary.html#package-dorieh-platform-data-model">Package dorieh.platform.data_model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CoreLibrary.html#package-dorieh-platform-loader">Package dorieh.platform.loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CoreLibrary.html#package-dorieh-platform-requests">Package dorieh.platform.requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CoreLibrary.html#package-dorieh-platform-utils">Package dorieh.platform.utils</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gis.html">GIS utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gis.html#gis-library-overview">GIS Library Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gis.html#shape-files-downloader">Shape files Downloader</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="CMSLibrary.html">Health data manipulation tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="CMSLibrary.html#package-cms">Package cms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CMSLibrary.html#package-dorieh-cms-tools">Package dorieh.cms.tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CMSLibrary.html#additional-details">Additional details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rasters.html">Raster data tools (climate and exposure)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rasters.html#general-tools-for-raster-files">General tools for raster files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rasters.html#specialized-tools-for-working-with-climate-data">Specialized tools for working with climate data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rasters.html#specialized-tools-for-working-with-exposure-data">Specialized tools for working with exposure data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="platform.html">Dorieh Core Data Platform</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="DBConnections.html">Managing database connections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DataLoader.html">Dorieh Data Loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ProjectLoader.html">Project (Directory) Loading Utility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TerritorialCodes.html">Mapping between different territorial codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SQLDocumentation.html">SQL Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="platform.html#core-platform-overview">Core platform overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="platform.html#tool-examples">Tool Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="platform.html#project-structure">Project Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="platform.html#documentation-indices">Documentation Indices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Dorieh Deployment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#using-docker">Using Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#using-python-virtual-environment">Using Python Virtual Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#using-conda-package-manager">Using Conda Package Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#using-toil-with-docker-requirement">Using Toil with Docker requirement</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="capabilities.html">Platform capabilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="SampleQuery.html">How to query the database</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="SampleQuery.html#setup">Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SampleQuery.html#create-connection-definition-file">Create connection definition file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SampleQuery.html#executing-the-query">Executing the query</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SampleQuery.html#using-explain-to-optimize-queries">Using EXPLAIN to optimize queries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="QueringMedicaid.html">Querying Medicaid Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="QueringMedicaid.html#querying-diagnoses">Querying diagnoses</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="MonitoringDB.html">Monitoring database activity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="MonitoringDB.html#module-monitor">Module monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MonitoringDB.html#cli-usage-for-monitor">CLI Usage for monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MonitoringDB.html#using-as-api">Using as API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="UsingHLL.html">Approximate distinct counting with HLL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UserRequests.html">Handling user requests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="UserRequests.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UserRequests.html#structure">Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="example_request_yaml.html">Example user request</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Operational guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DBT.html">Database Testing Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="members/create_test.html">Utility to generate test queries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="members/dbt_runner.html">Test runner: Utility to run generated tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="members/gen_dbt_cwl.html">The gen_dbt_cwl Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="members/create_test.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="members/create_test.html#module-dorieh.platform.dbt.create_test">Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="members/dbt_runner.html">Test runner: Utility to run generated tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="members/dbt_runner.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="members/dbt_runner.html#module-dorieh.platform.dbt.dbt_runner">Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="members/gen_dbt_cwl.html">The gen_dbt_cwl Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="members/gen_dbt_cwl.html#dorieh.platform.dbt.gen_dbt_cwl.CWLTestGenerator"><code class="docutils literal notranslate"><span class="pre">CWLTestGenerator</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="TestingWorkflows.html">Testing bundled workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#introduction-to-testing-and-prerequisites">Introduction to testing and prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#before-running-any-test">Before running any test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#testing-aqs-workflow">Testing AQS workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#testing-airnow-workflow">Testing Airnow workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#testing-climate-workflow">Testing Climate workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#testing-exposure-workflow">Testing Exposure workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#testing-medicare-workflow">Testing Medicare workflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#what-data-are-you-adding">What data are you adding?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#data-modeling-vs-data-introspection">Data modeling vs data introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#adding-new-data-domain">Adding new data domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#creating-new-single-table">Creating new single table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#adding-a-table-from-a-remote-data-source">Adding a table from a remote data source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#adding-data-to-existing-table">Adding data to existing table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#automatically-ingesting-multiple-files-from-a-file-system">Automatically ingesting multiple files from a file system</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="AppPipelineGenerator.html">Executing containerized apps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="AppPipelineGenerator.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AppPipelineGenerator.html#prerequisites">Prerequisites</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#docker-or-python-virtual-environment">Docker or Python virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#setup-dbms-server">Setup DBMS Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#define-connection">Define connection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AppPipelineGenerator.html#using-pipeline-generator">Using pipeline generator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#generate-pipeline-and-metadata">Generate pipeline and metadata</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AppPipelineGenerator.html#execute-generated-pipeline">Execute generated pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AppPipelineGenerator.html#appendix-1-metadata-description">Appendix 1: Metadata description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#file-app-config-yaml">File app.config.yaml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#file-metadata-yml">File metadata.yml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#file-dorieh-metadata-yaml">File dorieh-metadata.yaml</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="glossary.html#concepts">Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="glossary.html#acronyms">Acronyms</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="examples.html">Examples</a></li>
+      <li class="breadcrumb-item active">Example: Medicare Processing Pipeline with Synthetic Data</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/medicare-example.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="example-medicare-processing-pipeline-with-synthetic-data">
+<h1>Example: Medicare Processing Pipeline with Synthetic Data<a class="headerlink" href="#example-medicare-processing-pipeline-with-synthetic-data" title="Link to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#prerequisites" id="id1">Prerequisites</a></p></li>
+<li><p><a class="reference internal" href="#step-1-download-synthetic-sample-data" id="id2">Step 1 — Download synthetic sample data</a></p>
+<ul>
+<li><p><a class="reference internal" href="#troubleshooting-postgresql-runs-out-of-disk-space" id="id3">Troubleshooting: PostgreSQL runs out of disk space</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#step-3-optional-explore-results-in-apache-superset" id="id4">Step 3 (Optional) — Explore results in Apache Superset</a></p>
+<ul>
+<li><p><a class="reference internal" href="#stop-the-simple-postgresql-container-if-running" id="id5">3.1 — Stop the simple PostgreSQL container (if running)</a></p></li>
+<li><p><a class="reference internal" href="#start-postgresql-superset" id="id6">3.2 — Start PostgreSQL + Superset</a></p></li>
+<li><p><a class="reference internal" href="#log-in-to-superset" id="id7">3.3 — Log in to Superset</a></p></li>
+<li><p><a class="reference internal" href="#add-the-dorieh-database-connection" id="id8">3.4 — Add the Dorieh database connection</a></p></li>
+<li><p><a class="reference internal" href="#import-the-medicare-qc-dashboard" id="id9">3.5 — Import the Medicare QC dashboard</a></p></li>
+<li><p><a class="reference internal" href="#explore-the-dashboard" id="id10">3.6 — Explore the dashboard</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#what-the-pipeline-produces" id="id11">What the pipeline produces</a></p></li>
+</ul>
+</nav>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="Medicare.html"><span class="std std-doc">Medicare: Building a Data Warehouse from ResDac Files</span></a> —
+the case-study reference documentation</p></li>
+<li><p><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html"><span class="std std-doc">Building the Medicare Claims Pipeline</span></a> —
+the guided tutorial</p></li>
+<li><p><a class="reference internal" href="UsingHLL.html"><span class="std std-doc">Using HLL for Approximate Count Distinct</span></a> — how the QC
+tables count distinct beneficiaries</p></li>
+<li><p><a class="reference external" href="https://github.com/ForomePlatform/dorieh/tree/main/examples/with-postgres">Using Dorieh with PostgreSQL Backend</a> —
+environment setup for all PostgreSQL examples</p></li>
+</ul>
+</div>
+<p>This example demonstrates a full Dorieh data processing pipeline running
+against a local PostgreSQL database, using a <strong>publicly available synthetic</strong>
+Medicare-like dataset.  Because the data are
+synthetic and published openly on <a class="reference external" href="https://doi.org/10.5281/zenodo.18915557">Zenodo</a>,
+no institutional data access agreement is required to follow this example.
+It covers:</p>
+<ul class="simple">
+<li><p>Downloading synthetic sample data from Zenodo</p></li>
+<li><p>Running the Medicare CWL workflow with <a class="reference external" href="https://toil.readthedocs.io/en/latest/">Toil</a>
+against a local PostgreSQL instance</p></li>
+<li><p>(Optional) Exploring the results in a pre-built
+<a class="reference external" href="https://superset.apache.org/">Apache Superset</a> dashboard</p></li>
+</ul>
+<p>The source files for this example live in
+<a class="reference external" href="https://github.com/ForomePlatform/dorieh/tree/main/examples/with-postgres/medicare"><code class="docutils literal notranslate"><span class="pre">examples/with-postgres/medicare/</span></code></a>.</p>
+<hr class="docutils" />
+<section id="prerequisites">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Prerequisites</a><a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
+<p>Before starting, make sure you have:</p>
+<ol class="arabic">
+<li><p><strong>PostgreSQL running</strong> and a <code class="docutils literal notranslate"><span class="pre">database.ini</span></code> ready — follow the steps in
+<a class="reference external" href="https://github.com/ForomePlatform/dorieh/tree/main/examples/with-postgres">Using Dorieh with PostgreSQL Backend</a>.
+If you want a quick non-production setup, use the bundled Docker Compose file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span><span class="nv">$WORKDIR</span>/dorieh/docker/pg-hll/
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</pre></div>
+</div>
+</li>
+<li><p><strong>Toil installed</strong> and tested — see the <a class="reference internal" href="examples.html"><span class="std std-doc">Examples</span></a> page
+for installing Dorieh and testing the installation.</p></li>
+<li><p>The <strong><code class="docutils literal notranslate"><span class="pre">dorieh</span></code> repository cloned</strong> under <code class="docutils literal notranslate"><span class="pre">$WORKDIR</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ForomePlatform/dorieh.git<span class="w"> </span><span class="nv">$WORKDIR</span>/dorieh
+</pre></div>
+</div>
+</li>
+<li><p><strong>Enough disk space allocated to Docker.</strong> The synthetic 5M-beneficiary
+dataset grows the PostgreSQL data volume past 20 GB during ingestion,
+plus WAL. On Docker Desktop the limit that matters is the <em>virtual
+machine</em> disk (Settings → Resources → Disk usage limit), not the free
+space on your host: allocate at least 100 GB before running this example.
+The failure mode when space runs out is described in
+<a class="reference internal" href="#troubleshooting-postgresql-runs-out-of-disk-space">Troubleshooting</a>
+below.</p></li>
+</ol>
+<p>Then move into the Medicare example directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span><span class="nv">$WORKDIR</span>/dorieh/examples/with-postgres/medicare
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="step-1-download-synthetic-sample-data">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Step 1 — Download synthetic sample data</a><a class="headerlink" href="#step-1-download-synthetic-sample-data" title="Link to this heading"></a></h2>
+<p>The synthetic Medicare-like dataset is hosted on
+<a class="reference external" href="https://zenodo.org/records/18915558">Zenodo</a> and is <strong>publicly available</strong> —
+no data use agreement or institutional access is required.  It:</p>
+<ul class="simple">
+<li><p>Mimics the raw fixed-width files (<code class="docutils literal notranslate"><span class="pre">.dat</span></code>) delivered by ResDAC</p></li>
+<li><p>Reproduces the File Transfer Summary (FTS) layout metadata</p></li>
+<li><p>Contains <strong>no real PHI / PII</strong> — it is safe for testing, demonstrations,
+and sharing</p></li>
+</ul>
+<p>Download and unpack it (about a 770 MB download):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-fLo<span class="w"> </span>medicare-synthetic-database.zip<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s1">&#39;https://zenodo.org/records/18915558/files/medicare-synthetic-database-v1.zip?download=1&#39;</span>
+
+unzip<span class="w"> </span>medicare-synthetic-database.zip
+</pre></div>
+</div>
+<p>The archive unpacks into <code class="docutils literal notranslate"><span class="pre">data/&lt;cohort&gt;/&lt;year&gt;/</span></code> with the fixed-width <code class="docutils literal notranslate"><span class="pre">.dat</span></code>
+files and, next to each of them, the ResDAC-style FTS layout file the loader
+reads. The layouts ship inside every dataset bundle (their source of truth is
+the synthetic data generator), so nothing else needs to be present under
+<code class="docutils literal notranslate"><span class="pre">data/</span></code> — do not unpack the archive <em>inside</em> an existing <code class="docutils literal notranslate"><span class="pre">data/</span></code> directory,
+or the files end up nested one level too deep (<code class="docutils literal notranslate"><span class="pre">data/data/...</span></code>).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This example pins <strong>version 1</strong> of the dataset (about 770 MB, roughly 600,000
+synthetic beneficiaries) so that the numbers in this walkthrough — and the
+golden test values shipped with Dorieh — are reproducible. Newer, larger
+versions, including v0.2.0 with five million beneficiaries (about 9 GB
+compressed), are published under the same concept DOI:
+<a class="reference external" href="https://doi.org/10.5281/zenodo.18915557">https://doi.org/10.5281/zenodo.18915557</a>. Any version runs through the same
+pipeline commands; only the download URL, size, run time, and resulting
+counts differ.</p>
+<p class="rubric" id="using-the-latest-dataset-version-instead">Using the latest dataset version instead</p>
+<p>The link above pins a specific version for a reproducible walkthrough.
+The dataset’s <strong>concept DOI</strong>,
+<a class="reference external" href="https://doi.org/10.5281/zenodo.18915557">https://doi.org/10.5281/zenodo.18915557</a>, always resolves to the
+newest version — open it in a browser to see (and download) the latest
+release. To fetch the latest version’s archive from the command line,
+resolve it through the Zenodo API:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">LATEST_ZIP</span><span class="o">=</span><span class="k">$(</span>curl<span class="w"> </span>-sL<span class="w"> </span>https://zenodo.org/api/records/18915557<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="p">|</span><span class="w"> </span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import sys,json; \</span>
+<span class="s2">      f=[f for f in json.load(sys.stdin)[&#39;files&#39;] if f[&#39;key&#39;].endswith(&#39;.zip&#39;)][0]; \</span>
+<span class="s2">      print(f[&#39;links&#39;][&#39;self&#39;])&quot;</span><span class="k">)</span>
+curl<span class="w"> </span>-fLo<span class="w"> </span>medicare-synthetic-database.zip<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LATEST_ZIP</span><span class="s2">&quot;</span>
+unzip<span class="w"> </span>medicare-synthetic-database.zip
+</pre></div>
+</div>
+</div>
+<p>(<code class="docutils literal notranslate"><span class="pre">https://zenodo.org/api/records/18915557</span></code> is the concept record: Zenodo
+redirects it to the latest version, whatever it is at the time.) Newer
+versions are larger — see the disk-space prerequisite above — and run
+through the same pipeline commands; only sizes, run times, and resulting
+counts differ.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+The extracted directory tree follows the layout expected by the ingestion
+pipeline — one sub-directory per year, each containing `.fts` metadata files
+and the corresponding `.dat` data files.
+
+---
+
+## Step 2 — Run the Medicare processing pipeline
+
+Activate your Toil virtual environment:
+
+```bash
+source $TOIL_VENV/bin/activate
+</pre></div>
+</div>
+<p>Run the Medicare CWL workflow:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>toil-cwl-runner<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--jobStore<span class="w"> </span>j1<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--retryCount<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cleanWorkDir<span class="w"> </span>never<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--outdir<span class="w"> </span>outputs<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--workDir<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://raw.githubusercontent.com/ForomePlatform/dorieh/refs/heads/main/src/workflows/medicare.cwl<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--input<span class="w"> </span>data/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--database<span class="w"> </span>https://raw.githubusercontent.com/ForomePlatform/dorieh/refs/heads/main/examples/with-postgres/database.ini<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--connection_name<span class="w"> </span>dorieh
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">src/workflows/medicare.cwl</span></code> (used in the command above) and
+<code class="docutils literal notranslate"><span class="pre">src/cwl/medicare.cwl</span></code> (cited elsewhere, including in the companion book)
+are the same workflow — the files are byte-identical except for a single
+leading blank line — and both paths are kept in the repository.</p>
+</div>
+<p>After the workflow completes:</p>
+<ul class="simple">
+<li><p>Processed data is stored in your PostgreSQL backend under the <code class="docutils literal notranslate"><span class="pre">medicare</span></code>
+schema (beneficiaries, enrollments, admissions, and QC tables).</p></li>
+<li><p>Any additional output files are written to the <code class="docutils literal notranslate"><span class="pre">outputs/</span></code> directory.</p></li>
+</ul>
+<p>For a detailed description of the pipeline steps, see
+<a class="reference internal" href="Medicare.html"><span class="std std-doc">Medicare: Building a Data Warehouse from ResDac Files</span></a>.</p>
+<section id="troubleshooting-postgresql-runs-out-of-disk-space">
+<h3><a class="toc-backref" href="#id3" role="doc-backlink">Troubleshooting: PostgreSQL runs out of disk space</a><a class="headerlink" href="#troubleshooting-postgresql-runs-out-of-disk-space" title="Link to this heading"></a></h3>
+<p>If the ingestion step (<code class="docutils literal notranslate"><span class="pre">load_medicare_data</span></code>) fails with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">psycopg2</span><span class="o">.</span><span class="n">OperationalError</span><span class="p">:</span> <span class="n">connection</span> <span class="n">to</span> <span class="n">server</span> <span class="o">...</span> <span class="n">failed</span><span class="p">:</span>
+<span class="n">FATAL</span><span class="p">:</span>  <span class="n">the</span> <span class="n">database</span> <span class="n">system</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">yet</span> <span class="n">accepting</span> <span class="n">connections</span>
+<span class="n">DETAIL</span><span class="p">:</span>  <span class="n">Consistent</span> <span class="n">recovery</span> <span class="n">state</span> <span class="n">has</span> <span class="ow">not</span> <span class="n">been</span> <span class="n">yet</span> <span class="n">reached</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>the PostgreSQL container has almost certainly filled its disk. Confirm with
+<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">logs</span> <span class="pre">&lt;postgres</span> <span class="pre">container&gt;</span></code> — the telltale sign is a <em>crash loop</em>:
+recovery completes, then the end-of-recovery checkpoint dies, repeatedly:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PANIC</span><span class="p">:</span>  <span class="n">could</span> <span class="ow">not</span> <span class="n">write</span> <span class="n">to</span> <span class="n">file</span> <span class="s2">&quot;pg_logical/replorigin_checkpoint.tmp&quot;</span><span class="p">:</span> <span class="n">No</span> <span class="n">space</span> <span class="n">left</span> <span class="n">on</span> <span class="n">device</span>
+<span class="n">LOG</span><span class="p">:</span>  <span class="n">checkpointer</span> <span class="n">process</span> <span class="o">...</span> <span class="n">was</span> <span class="n">terminated</span> <span class="n">by</span> <span class="n">signal</span> <span class="mi">6</span><span class="p">:</span> <span class="n">Aborted</span>
+<span class="n">LOG</span><span class="p">:</span>  <span class="n">database</span> <span class="n">system</span> <span class="n">was</span> <span class="ow">not</span> <span class="n">properly</span> <span class="n">shut</span> <span class="n">down</span><span class="p">;</span> <span class="n">automatic</span> <span class="n">recovery</span> <span class="ow">in</span> <span class="n">progress</span>
+</pre></div>
+</div>
+<p>On Docker Desktop this means the <em>Docker VM</em> disk is full even when the host
+has plenty of space; check with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>system<span class="w"> </span>df<span class="w">                       </span><span class="c1"># what is using the space</span>
+docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>alpine<span class="w"> </span>df<span class="w"> </span>-h<span class="w"> </span>/<span class="w">        </span><span class="c1"># free space inside the Docker VM</span>
+</pre></div>
+</div>
+<p>To recover:</p>
+<ol class="arabic">
+<li><p>Free any amount of space — PostgreSQL recovers by itself as soon as the
+checkpoint can be written; no data committed before the failure is lost.
+Safe reclaims that touch no data volumes:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>buildx<span class="w"> </span>prune<span class="w"> </span>-a<span class="w">    </span><span class="c1"># build cache</span>
+docker<span class="w"> </span>image<span class="w"> </span>prune<span class="w">        </span><span class="c1"># dangling images</span>
+</pre></div>
+</div>
+</li>
+<li><p>Raise the Docker Desktop disk limit (Settings → Resources → Disk usage
+limit) before restarting the workflow, or the ingestion will fill the
+disk again.</p></li>
+<li><p>Restart the failed workflow (the Toil job store from the failed run can
+be reused with <code class="docutils literal notranslate"><span class="pre">--restart</span></code>).</p></li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="step-3-optional-explore-results-in-apache-superset">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Step 3 (Optional) — Explore results in Apache Superset</a><a class="headerlink" href="#step-3-optional-explore-results-in-apache-superset" title="Link to this heading"></a></h2>
+<p>A pre-built <strong>Medicare Quality Control</strong> Superset dashboard is included with
+the example.  The steps below show how to launch PostgreSQL together with
+Superset using Docker Compose and import the dashboard.</p>
+<section id="stop-the-simple-postgresql-container-if-running">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">3.1 — Stop the simple PostgreSQL container (if running)</a><a class="headerlink" href="#stop-the-simple-postgresql-container-if-running" title="Link to this heading"></a></h3>
+<p>If you started the basic <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> stack earlier, bring it down
+first:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span><span class="nv">$WORKDIR</span>/dorieh/docker/pg-hll/
+docker<span class="w"> </span>compose<span class="w"> </span>down
+</pre></div>
+</div>
+</section>
+<section id="start-postgresql-superset">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">3.2 — Start PostgreSQL + Superset</a><a class="headerlink" href="#start-postgresql-superset" title="Link to this heading"></a></h3>
+<p>From the same directory, first create the <code class="docutils literal notranslate"><span class="pre">.env</span></code> file that the Superset
+stack requires. <code class="docutils literal notranslate"><span class="pre">SUPERSET_SECRET_KEY</span></code> has no default and Compose will refuse
+to start without it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span><span class="nv">$WORKDIR</span>/dorieh/docker/pg-hll/
+cp<span class="w"> </span>.env.template<span class="w"> </span>.env
+<span class="c1"># Generate a secret key and write it into .env:</span>
+python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import secrets; print(secrets.token_hex(42))&quot;</span>
+<span class="c1"># then edit .env and replace the ???? placeholder on the SUPERSET_SECRET_KEY line</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">.env</span></code> is deliberately excluded from version control, so this step is
+required on every fresh clone. Every other variable in <code class="docutils literal notranslate"><span class="pre">.env.template</span></code>
+(ports, Superset version, admin credentials) already has a working default.</p>
+<p>Then start the extended stack:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span><span class="nv">$WORKDIR</span>/dorieh/docker/pg-hll/
+docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span>docker-compose-superset.yml<span class="w"> </span>up<span class="w"> </span>--build
+<span class="c1"># Or, to run detached:</span>
+<span class="c1"># docker compose -f docker-compose-superset.yml up -d</span>
+</pre></div>
+</div>
+<p><strong>If PostgreSQL was ever started in this directory before</strong> (either compose
+stack), the <code class="docutils literal notranslate"><span class="pre">pgdata</span></code> volume already exists and PostgreSQL will <em>not</em> re-run
+the <code class="docutils literal notranslate"><span class="pre">init-db/</span></code> scripts — they execute only when the data directory is
+initialized for the first time. In that case the <code class="docutils literal notranslate"><span class="pre">superset</span></code> metadata database
+is missing and Superset fails with <code class="docutils literal notranslate"><span class="pre">FATAL:</span> <span class="pre">database</span> <span class="pre">&quot;superset&quot;</span> <span class="pre">does</span> <span class="pre">not</span> <span class="pre">exist</span></code>. Create it manually in the running <code class="docutils literal notranslate"><span class="pre">postgres</span></code> container:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>postgres<span class="w"> </span>psql<span class="w"> </span>-U<span class="w"> </span>dorieh<span class="w"> </span>-d<span class="w"> </span>dorieh<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;CREATE DATABASE superset WITH OWNER dorieh;&#39;</span>
+</pre></div>
+</div>
+<p>This brings up:</p>
+<ul class="simple">
+<li><p>A PostgreSQL instance (with the HLL extension)</p></li>
+<li><p>The Superset web UI</p></li>
+<li><p>Superset background worker services</p></li>
+</ul>
+</section>
+<section id="log-in-to-superset">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">3.3 — Log in to Superset</a><a class="headerlink" href="#log-in-to-superset" title="Link to this heading"></a></h3>
+<p>Once the services are running, open <code class="docutils literal notranslate"><span class="pre">http://localhost:8088/</span></code> in your browser.</p>
+<p>Default credentials (defined in <code class="docutils literal notranslate"><span class="pre">docker-compose-superset.yml</span></code>):</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Username</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">admin</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Password</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">admin</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>If initialization did not complete and you cannot log in, create the admin
+user manually:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span><span class="nv">$WORKDIR</span>/dorieh/docker/pg-hll/
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>superset<span class="w"> </span>superset<span class="w"> </span>fab<span class="w"> </span>create-admin<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--username<span class="w"> </span>admin<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--firstname<span class="w"> </span>Admin<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--lastname<span class="w"> </span>User<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--email<span class="w"> </span>admin@example.com<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--password<span class="w"> </span>admin
+</pre></div>
+</div>
+</section>
+<section id="add-the-dorieh-database-connection">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">3.4 — Add the Dorieh database connection</a><a class="headerlink" href="#add-the-dorieh-database-connection" title="Link to this heading"></a></h3>
+<p>In the Superset UI:</p>
+<ol class="arabic simple">
+<li><p>Open <strong>Settings → Database Connections</strong> (under <em>Data</em>).</p></li>
+<li><p>Click <strong>+ DATABASE</strong> and choose <strong>PostgreSQL</strong>.</p></li>
+<li><p>At the bottom of the dialog click
+<strong>“Connect this database with a SQL Alchemy URL string instead”</strong>.</p></li>
+<li><p>Fill in:</p>
+<ul class="simple">
+<li><p><strong>Display Name:</strong> <code class="docutils literal notranslate"><span class="pre">DORIEH</span></code></p></li>
+<li><p><strong>SQLAlchemy URI:</strong> <code class="docutils literal notranslate"><span class="pre">postgresql+psycopg2://dorieh:dorieh_secret&#64;postgres:5432/dorieh</span></code></p></li>
+</ul>
+</li>
+<li><p>Click <strong>TEST CONNECTION</strong> — if it succeeds, click <strong>CONNECT</strong>.</p></li>
+</ol>
+</section>
+<section id="import-the-medicare-qc-dashboard">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">3.5 — Import the Medicare QC dashboard</a><a class="headerlink" href="#import-the-medicare-qc-dashboard" title="Link to this heading"></a></h3>
+<p>The dashboard is committed as a native Superset bundle under
+<code class="docutils literal notranslate"><span class="pre">examples/with-postgres/medicare/superset/medicare_quality_dashboard/</span></code>. Import
+it by running the <code class="docutils literal notranslate"><span class="pre">dorieh.platform.superset.import_dashboard</span></code> module, which resolves
+your <code class="docutils literal notranslate"><span class="pre">DORIEH</span></code> connection by name, re-points the bundle onto it on the fly, and
+imports it through Superset’s REST API (the native importer the UI uses):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>dorieh.platform.superset.import_dashboard<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">$WORKDIR</span>/dorieh/examples/with-postgres/medicare/superset/medicare_quality_dashboard<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--base-url<span class="w"> </span>http://localhost:8088/<span class="w"> </span>--username<span class="w"> </span>admin
+</pre></div>
+</div>
+<p>Enter the admin password when prompted (<code class="docutils literal notranslate"><span class="pre">admin</span></code> by default). The importer
+is standard-library-only. Because each Superset instance assigns its own
+connection UUID, it looks the UUID up by name at import time rather than relying
+on a value baked into the bundle, so the same committed bundle imports on any
+machine. Re-running updates the dashboard in place (uuids are preserved, so the
+import is idempotent and never multiplies charts or datasets); add <code class="docutils literal notranslate"><span class="pre">--copy</span></code>
+(with <code class="docutils literal notranslate"><span class="pre">--connection-name</span></code> / <code class="docutils literal notranslate"><span class="pre">--dashboard-name</span></code>) to stand up an independent
+coexisting copy on another connection. The companion
+<code class="docutils literal notranslate"><span class="pre">export_dashboard</span> <span class="pre">&lt;dashboard-id&gt;</span></code> command exports a dashboard back to a native
+bundle.</p>
+</section>
+<section id="explore-the-dashboard">
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">3.6 — Explore the dashboard</a><a class="headerlink" href="#explore-the-dashboard" title="Link to this heading"></a></h3>
+<p>In the Superset UI:</p>
+<ol class="arabic simple">
+<li><p>Click the <strong>Dashboards</strong> tab.</p></li>
+<li><p>Open <strong>“Medicare Demo Quality Dashboard”</strong>.</p></li>
+<li><p>Use the available charts and filters to examine data quality across
+enrollments and admissions for the synthetic dataset.</p></li>
+</ol>
+<p>The dashboard surfaces the QC metrics described in
+<a class="reference internal" href="Medicare.html#creating-qc-tables"><span class="std std-ref">Creating QC Tables</span></a>, including:</p>
+<ul class="simple">
+<li><p>Percent of beneficiaries with consistent date-of-birth / date-of-death
+records</p></li>
+<li><p>Percent of valid admission records (passed primary-key, foreign-key, and
+duplicate checks)</p></li>
+<li><p>Approximate distinct-beneficiary counts computed with
+<a class="reference internal" href="UsingHLL.html"><span class="std std-doc">HLL sketches</span></a></p></li>
+</ul>
+<p>Note that all numbers shown are produced from the synthetic dataset and
+differ from any figures computed on real Medicare data.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="what-the-pipeline-produces">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">What the pipeline produces</a><a class="headerlink" href="#what-the-pipeline-produces" title="Link to this heading"></a></h2>
+<p>After a successful run the following tables and views are available in the
+<code class="docutils literal notranslate"><span class="pre">medicare</span></code> schema of your PostgreSQL database:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Object</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">medicare.ps</span></code></p></td>
+<td><p>View</p></td>
+<td><p>Federated patient summary across all raw years</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">medicare.beneficiaries</span></code></p></td>
+<td><p>Table</p></td>
+<td><p>One row per unique beneficiary (deduplicated)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">medicare.enrollments</span></code></p></td>
+<td><p>Table</p></td>
+<td><p>Yearly enrollment records per beneficiary/state</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">medicare.admissions</span></code></p></td>
+<td><p>Table</p></td>
+<td><p>Validated inpatient admission records</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">medicare_audit.admissions</span></code></p></td>
+<td><p>Table</p></td>
+<td><p>Records that failed validation (with reason)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">medicare.qc_enrollments</span></code></p></td>
+<td><p>Materialized View</p></td>
+<td><p>Aggregate QC dimensions for enrollments</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">medicare.qc_admissions</span></code></p></td>
+<td><p>Materialized View</p></td>
+<td><p>Aggregate QC dimensions for admissions</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Example-climate-workflow.html" class="btn btn-neutral float-left" title="Example of a workflow: aggregating a climate variable" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dictionaries.html" class="btn btn-neutral float-right" title="Data Dictionaries" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2026, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+# Column cms.medpar_2012.WRNGCD
+
+## Overview of column WRNGCD in table cms.medpar_2012 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2012](../cms.medpar_2012.md)           |
+| Qualified name                | cms.medpar_2012.WRNGCD  |
+| Datatype                      | VARCHAR(18)        |
+| Reference | [https://resdac.org/cms-data/variables/warning-indicators-code-specifying-detailed-billing-info](https://resdac.org/cms-data/variables/warning-indicators-code-specifying-detailed-billing-info) |
+
+
+Warn ind spcfyng dtld billing info obtnd frm clms analyzd for stay prcss
+
+| Key | Value |
+| --- | ----- |
+| long_name | WRNG_IND_CD |
+| original_type | CHAR |
+| width | 18.0 |
+
+
+

@@ -1,0 +1,25 @@
+# Column medicare._ps.race_rti
+
+## Overview of column race_rti in table medicare._ps 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare._ps](../medicare._ps.md)           |
+| Qualified name                | medicare._ps.race_rti  |
+| Datatype                      | string        |
+| Column type | copied |
+| Reference | [https://resdac.org/cms-data/variables/research-triangle-institute-rti-race-code](https://resdac.org/cms-data/variables/research-triangle-institute-rti-race-code) |
+
+
+Research Triangle Institute (RTI) Race Code
+
+
+
+
+## Expressions
+
+```sql
+SELECT rti_race_cd
+```
+
+

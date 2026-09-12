@@ -1,0 +1,22 @@
+# Column cms.medpar_2016.PMT_AMT
+
+## Overview of column PMT_AMT in table cms.medpar_2016 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2016](../cms.medpar_2016.md)           |
+| Qualified name                | cms.medpar_2016.PMT_AMT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/total-medicare-payment-amount](https://resdac.org/cms-data/variables/total-medicare-payment-amount) |
+
+
+Amt of payment from Medicare trust fund for srvcs covered by claim ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | MDCR_PMT_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

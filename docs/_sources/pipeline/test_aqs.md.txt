@@ -24,7 +24,7 @@ local:
 | parameter_code  | string   |         | Parameter code. Either a numeric code (e.g. 88101, 44201) or symbolic name (e.g. PM25, NO2). See more: [AQS Code List](https://www.epa.gov/aqs/aqs-code-list)  | 
 | proxy           | string?  |         | HTTP/HTTPS Proxy if required                                                                                                                                   | 
 | table           | string   |         | Name of the table to be created in the database                                                                                                                | 
-| test_script     | ['File', 'File[]'] |         | File containing SQL test script                                                                                                                                | 
+| test_script     | ['File[]'] |         | File containing SQL test script                                                                                                                                | 
 | years           | string[] |         | Years to download                                                                                                                                              | 
 
 ## Outputs
@@ -45,6 +45,9 @@ local:
 | execute_vacuum_err     | File |             | 
 | verify_log             | File |             | 
 | verify_errors          | File |             | 
+| execute_export_data    | ['File', 'Directory'] |             | 
+| execute_export_log     | File |             | 
+| execute_export_err     | File |             | 
 
 ## Steps
 

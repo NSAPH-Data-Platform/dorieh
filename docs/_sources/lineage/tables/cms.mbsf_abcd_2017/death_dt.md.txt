@@ -1,0 +1,22 @@
+# Column cms.mbsf_abcd_2017.DEATH_DT
+
+## Overview of column DEATH_DT in table cms.mbsf_abcd_2017 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_abcd_2017](../cms.mbsf_abcd_2017.md)           |
+| Qualified name                | cms.mbsf_abcd_2017.DEATH_DT  |
+| Datatype                      | DATE        |
+| Reference | [https://resdac.org/cms-data/variables/date-death](https://resdac.org/cms-data/variables/date-death) |
+
+
+Beneficiary Date of Death
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_DEATH_DT |
+| original_type | DATE |
+| width | 8.0 |
+
+
+

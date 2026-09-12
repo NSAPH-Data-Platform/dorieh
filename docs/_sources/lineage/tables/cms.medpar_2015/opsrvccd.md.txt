@@ -1,0 +1,22 @@
+# Column cms.medpar_2015.OPSRVCCD
+
+## Overview of column OPSRVCCD in table cms.medpar_2015 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2015](../cms.medpar_2015.md)           |
+| Qualified name                | cms.medpar_2015.OPSRVCCD  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/outpatient-servicesambulatory-surgical-care-indicator-code](https://resdac.org/cms-data/variables/outpatient-servicesambulatory-surgical-care-indicator-code) |
+
+
+Outpatient services/ambulatory surgical care code
+
+| Key | Value |
+| --- | ----- |
+| long_name | OP_SRVC_IND_CD |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

@@ -1,0 +1,22 @@
+# Column cms.medpar_2018.INCDNT_DGNSTC_SRVCS_AMT
+
+## Overview of column INCDNT_DGNSTC_SRVCS_AMT in table cms.medpar_2018 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2018](../cms.medpar_2018.md)           |
+| Qualified name                | cms.medpar_2018.INCDNT_DGNSTC_SRVCS_AMT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/medicalsurgical-supplies-incident-diagnostic-services-amount](https://resdac.org/cms-data/variables/medicalsurgical-supplies-incident-diagnostic-services-amount) |
+
+
+Incident Diagnostic Services Amount
+
+| Key | Value |
+| --- | ----- |
+| long_name | INCDNT_DGNSTC_SRVCS_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

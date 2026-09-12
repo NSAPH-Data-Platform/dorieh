@@ -1,0 +1,22 @@
+# Column cms.medpar_2018.PGM_RDCTN_IND_SW
+
+## Overview of column PGM_RDCTN_IND_SW in table cms.medpar_2018 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2018](../cms.medpar_2018.md)           |
+| Qualified name                | cms.medpar_2018.PGM_RDCTN_IND_SW  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/electronic-health-records-ehr-program-reduction-indicator](https://resdac.org/cms-data/variables/electronic-health-records-ehr-program-reduction-indicator) |
+
+
+Electronic Health Records (EHR) Program Reduction Indicator Switch
+
+| Key | Value |
+| --- | ----- |
+| long_name | PGM_RDCTN_IND_SW |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

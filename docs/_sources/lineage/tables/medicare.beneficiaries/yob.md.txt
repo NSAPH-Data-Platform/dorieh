@@ -1,0 +1,39 @@
+# Column medicare.beneficiaries.yob
+
+## Overview of column yob in table medicare.beneficiaries 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.beneficiaries](../medicare.beneficiaries.md)           |
+| Qualified name                | medicare.beneficiaries.yob  |
+| Datatype                      | string        |
+| Column type | copied |
+
+
+
+## Expressions
+
+```sql
+SELECT MIN(yob)
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+yob_svg_envelop.md
+```
+
+
+```{figure} yob.svg
+:align: center
+:alt: Column medicare.beneficiaries.yob Lineage SVG
+:target: yob_svg_envelop.html
+
+Data lineage for column medicare.beneficiaries.yob
+
+```
+
+

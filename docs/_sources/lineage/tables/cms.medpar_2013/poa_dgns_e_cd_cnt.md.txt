@@ -1,0 +1,22 @@
+# Column cms.medpar_2013.POA_DGNS_E_CD_CNT
+
+## Overview of column POA_DGNS_E_CD_CNT in table cms.medpar_2013 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2013](../cms.medpar_2013.md)           |
+| Qualified name                | cms.medpar_2013.POA_DGNS_E_CD_CNT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/count-present-admission-poa-diagnosis-e-codes](https://resdac.org/cms-data/variables/count-present-admission-poa-diagnosis-e-codes) |
+
+
+MEDPAR Claim Present on Admission Diagnosis E Code Count
+
+| Key | Value |
+| --- | ----- |
+| long_name | POA_DGNS_E_CD_CNT |
+| original_type | NUM |
+| width | 3.0 |
+
+
+

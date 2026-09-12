@@ -24,8 +24,10 @@ Configuration
 -------------
 .. automodule:: dorieh.platform.loader.common
    :members:
+   :noindex:
 .. automodule:: dorieh.platform.loader.loader_config
    :members:
+   :noindex:
 
 
 .. toctree::

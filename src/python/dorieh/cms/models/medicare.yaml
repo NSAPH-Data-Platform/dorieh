@@ -213,6 +213,7 @@ medicare:
             type: INT
             optional: true
             source:
+               - crec
                - cur_ent
                - bene_entlmt_rsn_curr
             cast:
@@ -520,7 +521,25 @@ medicare:
             source: "string_agg(distinct sex, ',')"
             identifier: true
         - orec:
-            source: MAX(orec)
+            reference: "https://resdac.org/cms-data/variables/original-reason-entitlement-code"
+            description: |
+              Original Reason for Entitlement Code (OREC). Set at the time of
+              enrollment and invariant for the life of the beneficiary, hence a
+              beneficiary-level attribute. The canonical value is taken from the
+              earliest enrollment year (ties broken by smallest code, for
+              reproducibility). If the raw data is inconsistent across years the
+              divergence is surfaced via orec_latest / consistent_orec rather
+              than silently affecting joins.
+            source: "(array_agg(orec ORDER BY year, orec))[1]"
+        - orec_latest:
+            description: |
+              Non-null only when OREC was not consistent across the
+              beneficiary's records (i.e. it changed over the years). Drives
+              consistent_orec, analogously to dob_latest -> consistent_dob.
+            source: |
+              CASE
+                WHEN MIN(orec) <> MAX(orec) THEN MAX(orec)
+              END
         - discrepancies:
             source: >
               (
@@ -569,10 +588,26 @@ medicare:
               CASE
                 WHEN MIN(age) <> MAX(age) THEN MIN(age)
               END
-        - orec:
-            source: MAX(orec)
+        # OREC (Original Reason for Entitlement) is invariant per beneficiary
+        # and is therefore a beneficiary-level attribute (see the `beneficiaries`
+        # table). It is intentionally NOT kept here: as a per-year MAX it would
+        # become an implicit NATURAL JOIN key in qc_enrl_bene and silently drop
+        # every enrollment-year where it differs from the beneficiary value.
+        # `curec` (Current Reason) legitimately varies by year and stays.
         - curec:
             source: MAX(curec)
+        - curec_latest:
+            description: |
+              Non-null only when duplicate source records disagree on CUREC
+              within a (bene_id, year, state) group. Drives consistent_curec.
+              Defensive / future-proofing: this multiplicity does not occur in
+              the synthetic dataset (every group is a single row) but can arise
+              in real Medicare data from overlapping or reissued MBSF files,
+              where MAX(curec) would otherwise silently pick one value.
+            source: |
+              CASE
+                WHEN MIN(curec) <> MAX(curec) THEN MAX(curec)
+              END
         - state_iso:
             type: "char(5)"
             source: "('US-' || state) "
@@ -702,6 +737,21 @@ medicare:
                 source:
                   type: generated
                   code: "GENERATED ALWAYS AS (CASE WHEN dual_cvg_count IS NULL THEN NULL WHEN dual_cvg_count > 0 THEN TRUE ELSE FALSE END) STORED"
+            - consistent_curec:
+                type: VARCHAR(12)
+                description: |
+                  QC flag for CUREC (Current Reason for Entitlement) consistency
+                  within this single enrollment record (bene_id, year, state).
+                  CUREC legitimately varies across years, so this is a per-year
+                  property of the enrollment and lives on this table, not on the
+                  beneficiary-grain qc_enrl_bene. AMBIGUOUS means duplicate source
+                  records disagreed on CUREC within the year and MAX(curec) picked
+                  one. Defensive: expected CONSISTENT on the synthetic dataset
+                  (every group is a single row); meaningful on real data with
+                  overlapping or reissued MBSF files.
+                source:
+                  type: generated
+                  code: "GENERATED ALWAYS AS (CASE WHEN curec IS NULL THEN 'MISSING' WHEN curec_latest IS NOT NULL THEN 'AMBIGUOUS' ELSE 'CONSISTENT' END) STORED"
             - bene:
                 type: HLL_HASHVAL
                 description: |
@@ -920,6 +970,20 @@ medicare:
                 WHEN race LIKE '%,%' THEN 'AMBIGUOUS'
                 ELSE 'CONSISTENT'
               END)
+        - consistent_orec:
+            type: VARCHAR(12)
+            description: |
+              QC flag for OREC (Original Reason for Entitlement) consistency
+              across the beneficiary's records. AMBIGUOUS means OREC changed
+              over the years, which should not happen for a genuine "original"
+              code and indicates a data-quality issue. Mirrors consistent_dob /
+              consistent_dod.
+            source: |
+              (CASE
+                WHEN orec IS NULL THEN 'MISSING'
+                WHEN orec_latest IS NOT NULL THEN 'AMBIGUOUS'
+                ELSE 'CONSISTENT'
+              END)
     qc_enrollments:
       description: |
         Aggregate data for beneficiaries and enrollments
@@ -940,6 +1004,8 @@ medicare:
           - consistent_dod
           - consistent_sex
           - consistent_race
+          - consistent_orec
+          - consistent_curec
           - fips3_is_approximated
           - fips3_valdiated
       columns:
@@ -956,6 +1022,8 @@ medicare:
         - consistent_dod
         - consistent_sex
         - consistent_race
+        - consistent_orec
+        - consistent_curec
         - fips3_is_approximated
         - fips3_valdiated
         - state_iso:

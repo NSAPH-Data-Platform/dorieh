@@ -1,0 +1,31 @@
+# Column medicare.qc_admissions.reason
+
+## Overview of column reason in table medicare.qc_admissions 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_admissions](../medicare.qc_admissions.md)           |
+| Qualified name                | medicare.qc_admissions.reason  |
+| Datatype                      | string        |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+reason_svg_envelop.md
+```
+
+
+```{figure} reason.svg
+:align: center
+:alt: Column medicare.qc_admissions.reason Lineage SVG
+:target: reason_svg_envelop.html
+
+Data lineage for column medicare.qc_admissions.reason
+
+```
+
+

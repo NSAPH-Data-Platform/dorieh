@@ -1,0 +1,22 @@
+# Column cms.medpar_2016.MEDPAR_YR_NUM
+
+## Overview of column MEDPAR_YR_NUM in table cms.medpar_2016 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2016](../cms.medpar_2016.md)           |
+| Qualified name                | cms.medpar_2016.MEDPAR_YR_NUM  |
+| Datatype                      | VARCHAR(4)        |
+| Reference | [https://resdac.org/cms-data/variables/year-medpar-record](https://resdac.org/cms-data/variables/year-medpar-record) |
+
+
+Year of MedPAR Record
+
+| Key | Value |
+| --- | ----- |
+| long_name | MEDPAR_YR_NUM |
+| original_type | CHAR |
+| width | 4.0 |
+
+
+

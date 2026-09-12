@@ -1,0 +1,22 @@
+# Column cms.medpar_2016.PPS_CPTL
+
+## Overview of column PPS_CPTL in table cms.medpar_2016 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2016](../cms.medpar_2016.md)           |
+| Qualified name                | cms.medpar_2016.PPS_CPTL  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/total-pps-capital-amount](https://resdac.org/cms-data/variables/total-pps-capital-amount) |
+
+
+Total payable for capital PPS ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | TOT_PPS_CPTL_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

@@ -1,3 +1,7 @@
+---
+orphan: true
+---
+
 # Dorieh documentation utilities
                                 
 ## Documentation utilities overview

@@ -1,0 +1,22 @@
+# Column cms.medpar_2014.PRVTDAY
+
+## Overview of column PRVTDAY in table cms.medpar_2014 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2014](../cms.medpar_2014.md)           |
+| Qualified name                | cms.medpar_2014.PRVTDAY  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/private-room-day-count](https://resdac.org/cms-data/variables/private-room-day-count) |
+
+
+Private room days used by beneficiary for stay
+
+| Key | Value |
+| --- | ----- |
+| long_name | PRVT_ROOM_DAY_CNT |
+| original_type | NUM |
+| width | 5.0 |
+
+
+

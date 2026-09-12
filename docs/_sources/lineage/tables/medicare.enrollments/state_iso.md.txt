@@ -1,0 +1,20 @@
+# Column medicare.enrollments.state_iso
+
+## Overview of column state_iso in table medicare.enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.enrollments](../medicare.enrollments.md)           |
+| Qualified name                | medicare.enrollments.state_iso  |
+| Datatype                      | char(5)        |
+| Column type | copied |
+
+
+
+## Expressions
+
+```sql
+SELECT ('US-' || state) 
+```
+
+

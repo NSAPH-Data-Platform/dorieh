@@ -1,0 +1,22 @@
+# Column cms.medpar_2014.SEX
+
+## Overview of column SEX in table cms.medpar_2014 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2014](../cms.medpar_2014.md)           |
+| Qualified name                | cms.medpar_2014.SEX  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/sites/datadocumentation.resdac.org/files/Introduction%20to%20DE-SynPUF%20%28Slides%29.pdf](https://resdac.org/sites/datadocumentation.resdac.org/files/Introduction%20to%20DE-SynPUF%20%28Slides%29.pdf) |
+
+
+Sex of Beneficiary
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_SEX_CD |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

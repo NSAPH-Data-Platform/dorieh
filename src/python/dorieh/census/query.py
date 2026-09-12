@@ -30,8 +30,8 @@ import os
 import pandas as pd
 import requests
 
-from .census_info import get_endpoint, get_varlist
-from .exceptions import CensusException
+from dorieh.census.census_info import get_endpoint, get_varlist
+from dorieh.census.exceptions import CensusException
 
 # Code for downloading the census data
 

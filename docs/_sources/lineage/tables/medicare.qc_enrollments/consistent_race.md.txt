@@ -1,0 +1,31 @@
+# Column medicare.qc_enrollments.consistent_race
+
+## Overview of column consistent_race in table medicare.qc_enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_enrollments](../medicare.qc_enrollments.md)           |
+| Qualified name                | medicare.qc_enrollments.consistent_race  |
+| Datatype                      | string        |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+consistent_race_svg_envelop.md
+```
+
+
+```{figure} consistent_race.svg
+:align: center
+:alt: Column medicare.qc_enrollments.consistent_race Lineage SVG
+:target: consistent_race_svg_envelop.html
+
+Data lineage for column medicare.qc_enrollments.consistent_race
+
+```
+
+

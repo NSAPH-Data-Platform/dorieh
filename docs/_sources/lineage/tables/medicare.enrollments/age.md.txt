@@ -1,0 +1,39 @@
+# Column medicare.enrollments.age
+
+## Overview of column age in table medicare.enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.enrollments](../medicare.enrollments.md)           |
+| Qualified name                | medicare.enrollments.age  |
+| Datatype                      | string        |
+| Column type | copied |
+
+
+
+## Expressions
+
+```sql
+SELECT MAX(age)
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+age_svg_envelop.md
+```
+
+
+```{figure} age.svg
+:align: center
+:alt: Column medicare.enrollments.age Lineage SVG
+:target: age_svg_envelop.html
+
+Data lineage for column medicare.enrollments.age
+
+```
+
+

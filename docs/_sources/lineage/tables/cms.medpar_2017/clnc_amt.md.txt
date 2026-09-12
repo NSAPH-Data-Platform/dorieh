@@ -1,0 +1,22 @@
+# Column cms.medpar_2017.CLNC_AMT
+
+## Overview of column CLNC_AMT in table cms.medpar_2017 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2017](../cms.medpar_2017.md)           |
+| Qualified name                | cms.medpar_2017.CLNC_AMT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/clinic-visit-charge-amount](https://resdac.org/cms-data/variables/clinic-visit-charge-amount) |
+
+
+Clinic visits related to beneficiarys stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | CLNC_VISIT_CHRG_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

@@ -1,0 +1,20 @@
+# Column medicare.enrollments.dual
+
+## Overview of column dual in table medicare.enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.enrollments](../medicare.enrollments.md)           |
+| Qualified name                | medicare.enrollments.dual  |
+| Datatype                      | boolean        |
+| Column type | generated |
+
+
+
+## Expressions
+
+```sql
+SELECT GENERATED ALWAYS AS (CASE WHEN dual_cvg_count IS NULL THEN NULL WHEN dual_cvg_count > 0 THEN TRUE ELSE FALSE END) STORED
+```
+
+

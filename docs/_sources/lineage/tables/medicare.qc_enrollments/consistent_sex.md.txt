@@ -1,0 +1,31 @@
+# Column medicare.qc_enrollments.consistent_sex
+
+## Overview of column consistent_sex in table medicare.qc_enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_enrollments](../medicare.qc_enrollments.md)           |
+| Qualified name                | medicare.qc_enrollments.consistent_sex  |
+| Datatype                      | string        |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+consistent_sex_svg_envelop.md
+```
+
+
+```{figure} consistent_sex.svg
+:align: center
+:alt: Column medicare.qc_enrollments.consistent_sex Lineage SVG
+:target: consistent_sex_svg_envelop.html
+
+Data lineage for column medicare.qc_enrollments.consistent_sex
+
+```
+
+

@@ -1,0 +1,25 @@
+# Column medicare.ps.dod_ndi
+
+## Overview of column dod_ndi in table medicare.ps 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.ps](../medicare.ps.md)           |
+| Qualified name                | medicare.ps.dod_ndi  |
+| Datatype                      | DATE        |
+| Column type | computed |
+| Reference | [https://resdac.org/cms-data/variables/ndi-date-deathmbsf](https://resdac.org/cms-data/variables/ndi-date-deathmbsf) |
+
+
+This variable is the date of death as reported on the Beneficiary’s death certificate.
+
+
+
+
+## Expressions
+
+```sql
+SELECT ndi_death_dt
+```
+
+

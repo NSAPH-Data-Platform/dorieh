@@ -1,0 +1,39 @@
+# Column medicare.qc_admissions.state_iso
+
+## Overview of column state_iso in table medicare.qc_admissions 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_admissions](../medicare.qc_admissions.md)           |
+| Qualified name                | medicare.qc_admissions.state_iso  |
+| Datatype                      | CHAR(5)        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT MAX(state_iso)
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+state_iso_svg_envelop.md
+```
+
+
+```{figure} state_iso.svg
+:align: center
+:alt: Column medicare.qc_admissions.state_iso Lineage SVG
+:target: state_iso_svg_envelop.html
+
+Data lineage for column medicare.qc_admissions.state_iso
+
+```
+
+

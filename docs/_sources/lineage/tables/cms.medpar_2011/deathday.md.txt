@@ -1,0 +1,22 @@
+# Column cms.medpar_2011.DEATHDAY
+
+## Overview of column DEATHDAY in table cms.medpar_2011 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2011](../cms.medpar_2011.md)           |
+| Qualified name                | cms.medpar_2011.DEATHDAY  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/days-date-admitted-facility-date-death](https://resdac.org/cms-data/variables/days-date-admitted-facility-date-death) |
+
+
+Days from date admitted to facility to date of death
+
+| Key | Value |
+| --- | ----- |
+| long_name | ADMSN_DEATH_DAY_CNT |
+| original_type | NUM |
+| width | 7.0 |
+
+
+

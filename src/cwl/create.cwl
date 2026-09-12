@@ -24,6 +24,8 @@ class: CommandLineTool
 baseCommand: [python, -m, dorieh.platform.loader.data_loader]
 requirements:
   InlineJavascriptRequirement: {}
+  NetworkAccess:
+    networkAccess: True
 
 doc: |
   This tool executes DDL to drop and recreate
@@ -64,7 +66,7 @@ inputs:
     inputBinding:
       prefix: --action
   registry:
-    type: string?
+    type: File?
     inputBinding:
       prefix: --registry
   input_data:

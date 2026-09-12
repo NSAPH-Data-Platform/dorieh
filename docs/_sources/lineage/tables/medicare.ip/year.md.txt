@@ -1,0 +1,20 @@
+# Column medicare.ip.year
+
+## Overview of column year in table medicare.ip 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.ip](../medicare.ip.md)           |
+| Qualified name                | medicare.ip.year  |
+| Datatype                      | INT        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT (CASE WHEN "year"::int < 20 THEN (2000 + "year"::int) WHEN (20 < "year"::int AND "year"::int < 100) THEN (1900 + "year"::int) WHEN "year" IS NULL THEN 2000 ELSE "year"::int END)
+```
+
+

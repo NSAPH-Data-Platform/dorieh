@@ -1,0 +1,20 @@
+# Column medicare.qc_enrl_bene.state_iso
+
+## Overview of column state_iso in table medicare.qc_enrl_bene 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_enrl_bene](../medicare.qc_enrl_bene.md)           |
+| Qualified name                | medicare.qc_enrl_bene.state_iso  |
+| Datatype                      | char(5)        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT ('US-' || state) 
+```
+
+

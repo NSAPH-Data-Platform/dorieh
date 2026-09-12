@@ -1,0 +1,22 @@
+# Column cms.medpar_2016.DGNS_E_12_CD
+
+## Overview of column DGNS_E_12_CD in table cms.medpar_2016 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2016](../cms.medpar_2016.md)           |
+| Qualified name                | cms.medpar_2016.DGNS_E_12_CD  |
+| Datatype                      | VARCHAR(7)        |
+| Reference | [https://resdac.org/cms-data/variables/diagnosis-e-version-code-1](https://resdac.org/cms-data/variables/diagnosis-e-version-code-1) |
+
+
+E Diagnosis Code 12 - Extrnl cause of injury, poisoning, or oth adverse effect
+
+| Key | Value |
+| --- | ----- |
+| long_name | DGNS_E_12_CD |
+| original_type | CHAR |
+| width | 7.0 |
+
+
+

@@ -1,0 +1,22 @@
+# Column cms.medpar_2011.DGNS_E_7_CD
+
+## Overview of column DGNS_E_7_CD in table cms.medpar_2011 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2011](../cms.medpar_2011.md)           |
+| Qualified name                | cms.medpar_2011.DGNS_E_7_CD  |
+| Datatype                      | VARCHAR(7)        |
+| Reference | [https://resdac.org/cms-data/variables/diagnosis-e-code-7](https://resdac.org/cms-data/variables/diagnosis-e-code-7) |
+
+
+E Diagnosis Code  7 - Extrnl cause of injury, poisoning, or oth adverse
+
+| Key | Value |
+| --- | ----- |
+| long_name | DGNS_E_7_CD |
+| original_type | CHAR |
+| width | 7.0 |
+
+
+

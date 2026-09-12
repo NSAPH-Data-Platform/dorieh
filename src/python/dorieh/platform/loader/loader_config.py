@@ -190,8 +190,8 @@ class LoaderConfig(CommonConfig):
 
         self.pattern = None
         """
-        pattern for files in a directory or an archive, 
-        e.g., \"\*\*/maxdata\_\*_ps_\*.csv\"
+        pattern for files in a directory or an archive,
+        e.g., ``**/maxdata_*_ps_*.csv``
         """
 
         self.incremental = None

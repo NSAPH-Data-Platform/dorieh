@@ -5,7 +5,7 @@ with data in certain knowledge domain
 
 See 
 """
-
+import datetime
 #  Copyright (c) 2021. Harvard University
 #
 #  Developed by Research Software Engineering,
@@ -371,7 +371,7 @@ class Domain:
         ptable = None
         fk_columns = None
         create = None
-        object_type = None
+        object_type = "table"
         is_view = False
         is_select_from = False
         if "create" in definition:
@@ -525,7 +525,8 @@ class Domain:
             self.add_column_indices(table, columns)
         self.add_multi_column_indices(table, definition)
 
-        comment = f"CREATED BY Dorieh: {get_version()}"
+        cts = str(datetime.datetime.now())
+        comment = f"CREATED BY Dorieh: {get_version()}. Created at {cts}"
         comment_sql = f"COMMENT ON {object_type} {table} IS '{comment}';"
         self.append_ddl(table, comment_sql)
 
@@ -580,6 +581,8 @@ class Domain:
 
     def is_populate_on_create(self, table) -> bool:
         definition = self.find(table)
+        if not "create" in definition:
+            return False
         create = definition["create"]
         if "populate" in create and create["populate"] is False:
             return False

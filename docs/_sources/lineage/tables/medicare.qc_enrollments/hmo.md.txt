@@ -1,0 +1,31 @@
+# Column medicare.qc_enrollments.hmo
+
+## Overview of column hmo in table medicare.qc_enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_enrollments](../medicare.qc_enrollments.md)           |
+| Qualified name                | medicare.qc_enrollments.hmo  |
+| Datatype                      | string        |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+hmo_svg_envelop.md
+```
+
+
+```{figure} hmo.svg
+:align: center
+:alt: Column medicare.qc_enrollments.hmo Lineage SVG
+:target: hmo_svg_envelop.html
+
+Data lineage for column medicare.qc_enrollments.hmo
+
+```
+
+

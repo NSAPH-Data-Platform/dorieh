@@ -1,0 +1,108 @@
+# View medicare._beneficiaries
+
+## Overview for medicare._beneficiaries
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+medicare._beneficiaries/all_enrollment_years.md
+medicare._beneficiaries/bene_id.md
+medicare._beneficiaries/discrepancies.md
+medicare._beneficiaries/dob.md
+medicare._beneficiaries/dob_latest.md
+medicare._beneficiaries/dod.md
+medicare._beneficiaries/dod_earliest.md
+medicare._beneficiaries/first_enrollment_year.md
+medicare._beneficiaries/last_enrollment_year.md
+medicare._beneficiaries/orec.md
+medicare._beneficiaries/orec_latest.md
+medicare._beneficiaries/race.md
+medicare._beneficiaries/race_rti.md
+medicare._beneficiaries/sex.md
+medicare._beneficiaries/yob.md
+medicare._beneficiaries/yob_latest.md
+```
+
+
+internal intermediate view adding some data conversions
+
+Aggregated from [medicare._ps](medicare._ps.md) on On bene_id
+
+Primary Key: bene_id
+
+
+<details>
+
+<summary>SQL/DDL Statement</summary>
+
+```sql
+
+CREATE view  medicare._beneficiaries AS
+SELECT
+    bene_id,
+	MIN(dob) AS dob,
+	MIN(yob) AS yob,
+	MAX(dod) AS dod,
+	MIN(year) AS first_enrollment_year,
+	MAX(year) AS last_enrollment_year,
+	ARRAY_AGG(DISTINCT year ORDER BY year) AS all_enrollment_years,
+	string_agg(distinct race, ',') AS race,
+	string_agg(distinct race_rti, ',') AS race_rti,
+	string_agg(distinct sex, ',') AS sex,
+	(array_agg(orec ORDER BY year, orec))[1] AS orec,
+	CASE
+		  WHEN MIN(orec) <> MAX(orec) THEN MAX(orec)
+		END AS orec_latest,
+	(
+		  COUNT(distinct (dob, race, sex)) - 1 +
+		  CASE
+		    (COUNT(DISTINCT dod) FILTER (WHERE dod is not null))
+		    WHEN 0 THEN 0
+		    ELSE COUNT(DISTINCT dod) FILTER (WHERE dod is not null) - 1
+		  END
+		) AS discrepancies,
+	CASE
+		  WHEN MAX(dob) <> MIN(dob) THEN  MAX(dob)
+		END AS dob_latest,
+	CASE
+		  WHEN MAX(yob) <> MIN(yob) THEN  MAX(yob)
+		END AS yob_latest,
+	CASE
+		  WHEN MIN(dod) <> MAX(dod) THEN MIN(dod)
+		END AS dod_earliest
+FROM medicare._ps
+
+WHERE bene_id IS NOT NULL
+GROUP BY bene_id;
+
+COMMENT ON view medicare._beneficiaries IS 'CREATED BY Dorieh: {"version": "0.5.1.post2", "url": "file://<local checkout>", "commit": null}. Created at 2026-09-12 15:03:07.735677';
+```
+
+</details>
+
+---
+## Columns:
+
+| Column Name | Column Type | Datatype |
+| --- | --- | --- |
+| [all_enrollment_years](medicare._beneficiaries/all_enrollment_years.md) | computed | INT[] |
+| [bene_id](medicare._beneficiaries/bene_id.md) | grouping | string |
+| [discrepancies](medicare._beneficiaries/discrepancies.md) | computed | string |
+| [dob](medicare._beneficiaries/dob.md) | computed | string |
+| [dob_latest](medicare._beneficiaries/dob_latest.md) | computed | string |
+| [dod](medicare._beneficiaries/dod.md) | computed | string |
+| [dod_earliest](medicare._beneficiaries/dod_earliest.md) | computed | string |
+| [first_enrollment_year](medicare._beneficiaries/first_enrollment_year.md) | computed | string |
+| [last_enrollment_year](medicare._beneficiaries/last_enrollment_year.md) | computed | string |
+| [orec](medicare._beneficiaries/orec.md) | computed | string |
+| [orec_latest](medicare._beneficiaries/orec_latest.md) | computed | string |
+| [race](medicare._beneficiaries/race.md) | computed | string |
+| [race_rti](medicare._beneficiaries/race_rti.md) | computed | string |
+| [sex](medicare._beneficiaries/sex.md) | computed | string |
+| [yob](medicare._beneficiaries/yob.md) | computed | string |
+| [yob_latest](medicare._beneficiaries/yob_latest.md) | computed | string |
+
+

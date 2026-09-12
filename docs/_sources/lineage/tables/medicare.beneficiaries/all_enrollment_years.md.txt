@@ -1,0 +1,20 @@
+# Column medicare.beneficiaries.all_enrollment_years
+
+## Overview of column all_enrollment_years in table medicare.beneficiaries 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.beneficiaries](../medicare.beneficiaries.md)           |
+| Qualified name                | medicare.beneficiaries.all_enrollment_years  |
+| Datatype                      | INT[]        |
+| Column type | copied |
+
+
+
+## Expressions
+
+```sql
+SELECT ARRAY_AGG(DISTINCT year ORDER BY year)
+```
+
+

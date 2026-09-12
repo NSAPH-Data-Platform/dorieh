@@ -1,0 +1,110 @@
+# Materialized view medicare._ps
+
+## Overview for medicare._ps
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+medicare._ps/age.md
+medicare._ps/bene_id.md
+medicare._ps/buyin_cvg_count.md
+medicare._ps/buyin_indicators.md
+medicare._ps/curec.md
+medicare._ps/dob.md
+medicare._ps/dod.md
+medicare._ps/dod_ndi.md
+medicare._ps/file.md
+medicare._ps/fips2.md
+medicare._ps/fips3.md
+medicare._ps/fips3_is_approximated.md
+medicare._ps/fips3_list.md
+medicare._ps/hmo_cvg_count.md
+medicare._ps/hmo_indicators.md
+medicare._ps/orec.md
+medicare._ps/race.md
+medicare._ps/race_rti.md
+medicare._ps/record.md
+medicare._ps/sex.md
+medicare._ps/ssa2.md
+medicare._ps/ssa3.md
+medicare._ps/state.md
+medicare._ps/year.md
+medicare._ps/yob.md
+medicare._ps/zip.md
+medicare._ps/zip4.md
+```
+
+
+internal intermediate view adding some data conversions
+
+Transformed from [medicare.ps](medicare.ps.md)
+
+
+<details>
+
+<summary>SQL/DDL Statement</summary>
+
+```sql
+CREATE materialized view medicare._ps AS SELECT *,
+CASE WHEN ssa3 is NOT NULL THEN
+  CASE WHEN year > 2010 THEN
+      (SELECT fips3 from public.ssa as s where ps.ssa3 = s.ssa3 and ps.year = s.year and ps.fips2 = s.fips2 ORDER BY 1 DESC LIMIT 1)
+    ELSE
+      (SELECT fips3 from public.ssa as s where ps.ssa3 = s.ssa3 and 2003 = s.year and ps.fips2 = s.fips2 ORDER BY 1 DESC LIMIT 1)
+  END
+ELSE
+  (SELECT public.zip_to_fips3(year, zip))
+END AS fips3,
+CASE WHEN ssa3 is NOT NULL THEN
+    False
+  ELSE
+    (SELECT NOT public.is_zip_to_fips_exact(year, zip))
+END AS fips3_is_approximated,
+CASE WHEN year > 2010 THEN (SELECT string_agg(distinct fips3::varchar, ',') from public.ssa as s where ps.ssa3 = s.ssa3 and ps.year = s.year and ps.fips2 = s.fips2)
+    ELSE (SELECT string_agg(distinct fips3::varchar, ',') from public.ssa as s where ps.ssa3 = s.ssa3 and 2003 = s.year and ps.fips2 = s.fips2) END AS fips3_list,
+CASE WHEN age is not NULL THEN (year - age) ELSE NULL END as yob 
+FROM medicare.ps
+;
+
+COMMENT ON materialized view medicare._ps IS 'CREATED BY Dorieh: {"version": "0.5.1.post2", "url": "file://<local checkout>", "commit": null}. Created at 2026-09-12 15:03:07.735454';
+```
+
+</details>
+
+---
+## Columns:
+
+| Column Name | Column Type | Datatype |
+| --- | --- | --- |
+| [age](medicare._ps/age.md) | copied | INT |
+| [bene_id](medicare._ps/bene_id.md) | copied | string |
+| [buyin_cvg_count](medicare._ps/buyin_cvg_count.md) | copied | INT |
+| [buyin_indicators](medicare._ps/buyin_indicators.md) | copied | CHAR(1)[12] |
+| [curec](medicare._ps/curec.md) | copied | INT |
+| [dob](medicare._ps/dob.md) | copied | date |
+| [dod](medicare._ps/dod.md) | copied | date |
+| [dod_ndi](medicare._ps/dod_ndi.md) | copied | DATE |
+| [file](medicare._ps/file.md) | copied | string |
+| [fips2](medicare._ps/fips2.md) | copied | string |
+| [fips3](medicare._ps/fips3.md) | computed | string |
+| [fips3_is_approximated](medicare._ps/fips3_is_approximated.md) | computed | string |
+| [fips3_list](medicare._ps/fips3_list.md) | computed | string |
+| [hmo_cvg_count](medicare._ps/hmo_cvg_count.md) | copied | INT |
+| [hmo_indicators](medicare._ps/hmo_indicators.md) | copied | CHAR(1)[12] |
+| [orec](medicare._ps/orec.md) | copied | INT |
+| [race](medicare._ps/race.md) | copied | VARCHAR |
+| [race_rti](medicare._ps/race_rti.md) | copied | string |
+| [record](medicare._ps/record.md) | copied | string |
+| [sex](medicare._ps/sex.md) | copied | VARCHAR |
+| [ssa2](medicare._ps/ssa2.md) | copied | string |
+| [ssa3](medicare._ps/ssa3.md) | copied | string |
+| [state](medicare._ps/state.md) | copied | string |
+| [year](medicare._ps/year.md) | copied | string |
+| [yob](medicare._ps/yob.md) | computed | string |
+| [zip](medicare._ps/zip.md) | copied | INT |
+| [zip4](medicare._ps/zip4.md) | copied | INT |
+
+

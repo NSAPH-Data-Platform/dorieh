@@ -1,0 +1,22 @@
+# Column cms.medpar_2012.DGNS_E_2_CD
+
+## Overview of column DGNS_E_2_CD in table cms.medpar_2012 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2012](../cms.medpar_2012.md)           |
+| Qualified name                | cms.medpar_2012.DGNS_E_2_CD  |
+| Datatype                      | VARCHAR(7)        |
+| Reference | [https://resdac.org/cms-data/variables/diagnosis-e-code-2](https://resdac.org/cms-data/variables/diagnosis-e-code-2) |
+
+
+E Diagnosis Code  2 - Extrnl cause of injury, poisoning, or oth adverse
+
+| Key | Value |
+| --- | ----- |
+| long_name | DGNS_E_2_CD |
+| original_type | CHAR |
+| width | 7.0 |
+
+
+

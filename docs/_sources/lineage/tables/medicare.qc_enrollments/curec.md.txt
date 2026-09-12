@@ -1,0 +1,31 @@
+# Column medicare.qc_enrollments.curec
+
+## Overview of column curec in table medicare.qc_enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_enrollments](../medicare.qc_enrollments.md)           |
+| Qualified name                | medicare.qc_enrollments.curec  |
+| Datatype                      | string        |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+curec_svg_envelop.md
+```
+
+
+```{figure} curec.svg
+:align: center
+:alt: Column medicare.qc_enrollments.curec Lineage SVG
+:target: curec_svg_envelop.html
+
+Data lineage for column medicare.qc_enrollments.curec
+
+```
+
+

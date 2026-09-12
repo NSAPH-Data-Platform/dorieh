@@ -1,0 +1,22 @@
+# Column cms.medpar_2017.PROD_RPLCMT_RCLL_SW
+
+## Overview of column PROD_RPLCMT_RCLL_SW in table cms.medpar_2017 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2017](../cms.medpar_2017.md)           |
+| Qualified name                | cms.medpar_2017.PROD_RPLCMT_RCLL_SW  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/product-replacement-recall-product](https://resdac.org/cms-data/variables/product-replacement-recall-product) |
+
+
+Prod Replacement Recall Switch
+
+| Key | Value |
+| --- | ----- |
+| long_name | PROD_RPLCMT_RCLL_SW |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

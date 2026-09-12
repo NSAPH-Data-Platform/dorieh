@@ -25,6 +25,8 @@ baseCommand: [python, -m, dorieh.epa.aqs_expand]
 
 requirements:
   InlineJavascriptRequirement: {}
+  NetworkAccess:
+    networkAccess: True
 
 doc: |
   This tool downloads AQS data from EPA website

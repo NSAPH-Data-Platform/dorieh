@@ -1,0 +1,39 @@
+# Column medicare.enrollments.record
+
+## Overview of column record in table medicare.enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.enrollments](../medicare.enrollments.md)           |
+| Qualified name                | medicare.enrollments.record  |
+| Datatype                      | string        |
+| Column type | copied |
+
+
+
+## Expressions
+
+```sql
+SELECT string_agg(distinct RECORD::VARCHAR, ',')
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+record_svg_envelop.md
+```
+
+
+```{figure} record.svg
+:align: center
+:alt: Column medicare.enrollments.record Lineage SVG
+:target: record_svg_envelop.html
+
+Data lineage for column medicare.enrollments.record
+
+```
+
+

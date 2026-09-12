@@ -1,0 +1,22 @@
+# Column cms.medpar_2015.SRC_ADMS
+
+## Overview of column SRC_ADMS in table cms.medpar_2015 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2015](../cms.medpar_2015.md)           |
+| Qualified name                | cms.medpar_2015.SRC_ADMS  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/source-admission-inpatient-facility-newborn-admit-type-delivery-code](https://resdac.org/cms-data/variables/source-admission-inpatient-facility-newborn-admit-type-delivery-code) |
+
+
+Admssn to an Inp facility or, for newborn admssn, type of delivery code
+
+| Key | Value |
+| --- | ----- |
+| long_name | SRC_IP_ADMSN_CD |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

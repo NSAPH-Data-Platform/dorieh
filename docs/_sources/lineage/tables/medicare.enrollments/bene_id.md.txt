@@ -1,0 +1,32 @@
+# Column medicare.enrollments.bene_id
+
+## Overview of column bene_id in table medicare.enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.enrollments](../medicare.enrollments.md)           |
+| Qualified name                | medicare.enrollments.bene_id  |
+| Datatype                      | string        |
+| Column type | copied |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+bene_id_svg_envelop.md
+```
+
+
+```{figure} bene_id.svg
+:align: center
+:alt: Column medicare.enrollments.bene_id Lineage SVG
+:target: bene_id_svg_envelop.html
+
+Data lineage for column medicare.enrollments.bene_id
+
+```
+
+

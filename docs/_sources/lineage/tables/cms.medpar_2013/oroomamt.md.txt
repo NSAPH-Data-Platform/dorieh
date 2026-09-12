@@ -1,0 +1,22 @@
+# Column cms.medpar_2013.OROOMAMT
+
+## Overview of column OROOMAMT in table cms.medpar_2013 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2013](../cms.medpar_2013.md)           |
+| Qualified name                | cms.medpar_2013.OROOMAMT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/operating-room-charge-amount](https://resdac.org/cms-data/variables/operating-room-charge-amount) |
+
+
+OR, recovery rm, and labor rm delivery used by bene during stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | OPRTG_ROOM_CHRG_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

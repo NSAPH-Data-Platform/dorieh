@@ -1,0 +1,22 @@
+# Column cms.mbsf_abcd_2018.STATE_CNTY_FIPS_CD_09
+
+## Overview of column STATE_CNTY_FIPS_CD_09 in table cms.mbsf_abcd_2018 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_abcd_2018](../cms.mbsf_abcd_2018.md)           |
+| Qualified name                | cms.mbsf_abcd_2018.STATE_CNTY_FIPS_CD_09  |
+| Datatype                      | VARCHAR(5)        |
+| Reference | [https://resdac.org/cms-data/variables/state-and-county-fips-code-september](https://resdac.org/cms-data/variables/state-and-county-fips-code-september) |
+
+
+FIPS State-County Code: September
+
+| Key | Value |
+| --- | ----- |
+| long_name | STATE_CNTY_FIPS_CD_09 |
+| original_type | CHAR |
+| width | 5.0 |
+
+
+

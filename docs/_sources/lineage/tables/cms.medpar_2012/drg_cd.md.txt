@@ -1,0 +1,22 @@
+# Column cms.medpar_2012.DRG_CD
+
+## Overview of column DRG_CD in table cms.medpar_2012 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2012](../cms.medpar_2012.md)           |
+| Qualified name                | cms.medpar_2012.DRG_CD  |
+| Datatype                      | VARCHAR(3)        |
+| Reference | [https://resdac.org/cms-data/variables/diagnosis-related-group-drg-code](https://resdac.org/cms-data/variables/diagnosis-related-group-drg-code) |
+
+
+DRG Code
+
+| Key | Value |
+| --- | ----- |
+| long_name | DRG_CD |
+| original_type | CHAR |
+| width | 3.0 |
+
+
+

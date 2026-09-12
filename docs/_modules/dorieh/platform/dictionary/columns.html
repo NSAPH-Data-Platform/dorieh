@@ -1,24 +1,37 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>dorieh.platform.dictionary.columns &mdash; Dorieh Data Platform 0.0.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css" />
+  <title>dorieh.platform.dictionary.columns &mdash; Dorieh Data Platform 0.5.1.post2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_paramlinks.css" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/dorieh.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/dorieh.css?v=1a3f250d" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-        <script src="../../../../_static/jquery.js"></script>
-        <script src="../../../../_static/underscore.js"></script>
-        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../../_static/doctools.js"></script>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=ad30b421"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs"></script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
+      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+      <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+      <script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";
+window.addEventListener("load", () => mermaid.run());
+</script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
@@ -29,6 +42,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
+
 
           
           
@@ -42,20 +56,457 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
+<div class="dorieh-citeas">
+  <button type="button" class="dorieh-citeas-btn"
+          onclick="document.getElementById('dorieh-citeas-pop').classList.toggle('open')">
+    &#128214; Cite as
+  </button>
+  <div id="dorieh-citeas-pop" class="dorieh-citeas-pop">
+    <p>Bouzinier,&nbsp;M., Etin,&nbsp;D., Khoshnevis,&nbsp;N.,
+       Shad,&nbsp;M., Yockel,&nbsp;S. (2026).
+       <em>Research Data that Can be Trusted.</em>
+       SpringerBriefs in Computer Science. Springer.
+       <a href="https://doi.org/10.1007/978-3-032-21032-6">doi:10.1007/978-3-032-21032-6</a></p>
+    <button type="button" class="dorieh-citeas-copy"
+            onclick="navigator.clipboard.writeText(
+              'Bouzinier, M., Etin, D., Khoshnevis, N., Shad, M., Yockel, S. (2026). ' +
+              'Research Data that Can be Trusted. SpringerBriefs in Computer Science. ' +
+              'Springer. https://doi.org/10.1007/978-3-032-21032-6'
+            ).then(() => { this.textContent = 'Copied!'; });">
+      Copy citation
+    </button>
+    <a class="dorieh-citeas-more" href="../../../../citing.html">More ways to cite &rarr;</a>
+  </div>
+</div>
+
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../../home.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../rationale.html">What is Data Platform</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../domains.html">Data Domains</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../pipelines.html">Data Processing Pipelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../packages.html">Python Packages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../examples.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../guts.html">Data Platform Internals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../DBT.html">Database Testing Framework</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../adding_data.html">Adding more data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../AppPipelineGenerator.html">Executing containerized apps</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../home.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../home.html#introduction-to-data-platform">Introduction to Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../home.html#building-blocks">Building Blocks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../home.html#dorieh-utilities">Dorieh Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../home.html#core-platform">Core Platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../home.html#dorieh-gis-utilities">Dorieh GIS Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../home.html#dorieh-documentation-utilities">Dorieh Documentation Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../home.html#data-processing-and-loading-pipelines">Data Processing and Loading Pipelines</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../home.html#working-with-nsaph-containerized-apps">Working with NSAPH containerized apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../home.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../home.html#using-the-database">Using the Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../home.html#terms-and-acronyms">Terms and Acronyms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../home.html#building-platform-documentation">Building Platform documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../home.html#next-steps">Next steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../rationale.html">Why a data platform</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../rationale.html#why-we-need-a-data-platform">Why we need a Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../rationale.html#architecture">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../rationale.html#supported-programming-languages-and-tools">Supported Programming Languages and Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../rationale.html#development-mode">Development Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../rationale.html#where-it-can-be-deployed">Where it can be deployed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../rationale.html#what-makes-dorieh-different">What makes Dorieh different</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../concepts.html">The Dorieh approach</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../concepts.html#two-languages-one-pipeline">Two languages, one pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../concepts.html#medallion-architecture-as-dorieh-implements-it">Medallion architecture as Dorieh implements it</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../concepts.html#dataset-operators-and-field-construction-operators">Dataset operators and field construction operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../concepts.html#families-of-field-transformations">Families of field transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../concepts.html#disambiguation-rules">Disambiguation rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../concepts.html#validation-and-journaling">Validation and journaling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../concepts.html#fine-grained-lineage">Fine-grained lineage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../concepts.html#where-each-concept-lives">Where each concept lives</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../about-the-book.html">The companion book</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../about-the-book.html#bibliographic-information">Bibliographic information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../about-the-book.html#chapter-to-documentation-map">Chapter-to-documentation map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../about-the-book.html#using-this-documentation-without-the-book">Using this documentation without the book</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../citing.html">Citing Dorieh</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../citing.html#preferred-citation-the-book">Preferred citation: the book</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../citing.html#citing-the-software-itself">Citing the software itself</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../citing.html#citing-the-tutorials">Citing the tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../citing.html#citing-the-synthetic-dataset">Citing the synthetic dataset</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Learning paths</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../paths/index.html">Choose your path</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../paths/researcher.html">Researchers and analysts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../paths/researcher.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../paths/researcher.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../paths/developer.html">Pipeline developers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../paths/developer.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../paths/developer.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../paths/operator.html">Platform operators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../paths/operator.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../paths/operator.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../paths/book-reader.html">Readers of the book</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../paths/book-reader.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../paths/book-reader.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../paths/auditor.html">Reviewers and auditors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../paths/auditor.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../paths/auditor.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data domains and pipelines</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../domains.html">Data Domains</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cms.html">Health</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../health_data_overview.html">Health Data in Dorieh (Medicare and Medicaid)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../Medicare.html">Medicare: Building a Data Warehouse from ResDac Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../Medicaid.html">Medicaid: Building a Data Warehouse from ResDac Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../health_seealso.html">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../climate.html">Climate</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../climate.html#what-is-gridmet">What is gridMET?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../climate.html#using-command-line-gridmet-utility">Using command line gridMET utility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../climate.html#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../climate.html#python-modules">Python modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../climate.html#cwl-pipelines-and-tools">CWL pipelines and tools</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../exposures.html">Exposure (PM2.5, WashU)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../exposures.html#python-packages">Python packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../exposures.html#cwl-workflows">CWL Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../epa.html">Environmental Protection Agency (EPA) data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../epa.html#package-contents">Package Contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../epa.html#querying-data">Querying Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../census.html">Demographics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../census_about.html">About</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../census_env_set_up.html">Setting Up Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../census_quick_start.html">Quick Start</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../census_yaml.html">Census Variable File Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../census_cached_data.html">Stored Data Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../census_modules.html">Modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../census_glossary.html">Glossary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../census_start_guide.html">Working with the <code class="docutils literal notranslate"><span class="pre">census</span></code> Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pipeline/census_assemble.html">census_assemble.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pipeline/census_assemblecwl_src.html">census_assemble.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pipeline/census_density.html">census_density.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pipeline/census_densitycwl_src.html">census_density.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pipeline/census_ingest.html">census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pipeline/census_ingest_1.html">Sub-workflow <em>store</em> from census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pipeline/census_ingest_1cwl_src.html">CWL sub-workflow for step <u><em>store</em></u> of workflow census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pipeline/census_ingestcwl_src.html">census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pipeline/census_interpolate.html">census_interpolate.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pipeline/census_interpolatecwl_src.html">census_interpolate.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pipeline/census_qc.html">census_qc.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pipeline/census_qccwl_src.html">census_qc.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pipeline/census_workflow.html">census_workflow.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pipeline/census_workflowcwl_src.html">census_workflow.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pipeline/census_write.html">census_write.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pipeline/census_writecwl_src.html">census_write.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../census.html#indices-and-tables">Indices and tables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pipelines.html">Data Processing Pipelines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../pipelines.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../pipelines.html#workflow-description-languages">Workflow Description Languages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../pipelines.html#running-workflows">Running Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pipelines.html#tested-runners">Tested Runners</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pipelines.html#providing-parameters-to-the-pipelines">Providing Parameters to the Pipelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pipelines.html#using-toil">Using Toil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pipelines.html#troubleshooting-workflows-run-by-toil">Troubleshooting Workflows Run by Toil</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../pipelines.html#testing-workflows">Testing Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../pipelines.html#published-and-tested-workflows">Published and Tested Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pipeline/gridmet.html">Pipeline to aggregate data from Climatology Lab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pipeline/wustl.html">Pipeline to ingest Monthly Pollution data downloaded from WashU Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pipeline/pm25_yearly_download.html">Pipeline to aggregate data in NetCDF format over given geographies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pipeline/aqs.html">Full EPA AQS Processing Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pipeline/airnow.html">Full EPA AirNow Processing Pipeline (including downloading shapefiles)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pipeline/medicare.html">Medicare data ingestion and processing pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pipeline/medicaid.html">Full Medicaid Processing Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pipeline/census_workflow.html">census_workflow.cwl</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../pipelines.html#developing-new-workflows">Developing New Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pipelines.html#combining-included-cwl-tools-into-a-new-workflow">Combining Included CWL Tools into a New Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pipelines.html#ordering-database-steps-with-depends-on">Ordering Database Steps with <code class="docutils literal notranslate"><span class="pre">depends_on</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pipelines.html#wrapping-python-modules-as-cwl-tools">Wrapping Python Modules as CWL Tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials and worked examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Tutorials.html">Dorieh Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tutorial/climate/index.html">Climate tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../tutorial/climate/building-climate-pipeline.html">Part 1. Building the pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../tutorial/climate/documenting-a-workflow.html">Part 2. Documenting the workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../tutorial/climate/constructing-lineage.html">Part 3. Data dictionaries and lineage graphs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tutorial/medicare/building-medicare-pipeline.html">Medicare claims pipeline tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../tutorial/medicare/building-medicare-pipeline.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../tutorial/medicare/building-medicare-pipeline.html#designing-the-pipeline">Designing the pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../tutorial/medicare/building-medicare-pipeline.html#from-fts-documents-to-machine-readable-schemas">From FTS documents to machine-readable schemas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../tutorial/medicare/building-medicare-pipeline.html#bronze-one-table-per-source-file">Bronze: one table per source file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../tutorial/medicare/building-medicare-pipeline.html#silver-harmonize-disambiguate-validate">Silver: harmonize, disambiguate, validate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../tutorial/medicare/building-medicare-pipeline.html#gold-the-qc-aggregates">Gold: the QC aggregates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../tutorial/medicare/building-medicare-pipeline.html#orchestration-five-steps-in-medicare-cwl">Orchestration: five steps in medicare.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../tutorial/medicare/building-medicare-pipeline.html#documentation-and-lineage">Documentation and lineage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../tutorial/medicare/building-medicare-pipeline.html#running-it-yourself">Running it yourself</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Example-climate-workflow.html">A CWL workflow example: aggregating a climate variable</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../Example-climate-workflow.html#what-the-sample-workflow-is-doing-aggregating-a-climate-variable">What the sample workflow is doing: aggregating a climate variable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../Example-climate-workflow.html#prepare-to-run-a-workflow">Prepare to run a workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../Example-climate-workflow.html#running-the-workflow-in-python-virtual-environment">Running the workflow in Python virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../Example-climate-workflow.html#running-the-workflow-using-docker">Running the workflow using Docker</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../medicare-example.html">Medicare pipeline with publicly available synthetic data (PostgreSQL + Superset)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../medicare-example.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../medicare-example.html#step-1-download-synthetic-sample-data">Step 1 — Download synthetic sample data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../medicare-example.html#step-3-optional-explore-results-in-apache-superset">Step 3 (Optional) — Explore results in Apache Superset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../medicare-example.html#what-the-pipeline-produces">What the pipeline produces</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples.html#related-how-to-guides">Related how-to guides</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data dictionaries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dictionaries.html">Data Dictionaries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../MedicareLineage.html">Medicare data warehouse</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../lineage/medicare.dot.html">Table Lineage Diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../lineage/table-list.html">Alphabetic list of all tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../lineage/column-list.html">Alphabetic list of all columns in all tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../members/domain_dictionary.html">The Data Dictionary Generation tool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data modeling DSL reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Datamodels.html">Data Modeling for Dorieh Data Platform</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../DataModellingExtensions.html">Data Modeling Extensions: Federated Views Across Years</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../DataModellingExtensions.html#combining-multiple-sources-and-optional-columns">Combining multiple sources and optional columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../DataModellingExtensions.html#exclude">Exclude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../DataModellingExtensions.html#cast">Cast</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../DataModellingExtensions.html#validating-consistency-of-data-across-tables">Validating consistency of data across tables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Datamodels.html#introduction-to-data-modeling-for-dorieh-data-platform">Introduction to data modeling for Dorieh Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Datamodels.html#domain">Domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Datamodels.html#table">Table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../Datamodels.html#create-statement">Create statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../Datamodels.html#invalid-record">Invalid Record</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Datamodels.html#column">Column</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../Datamodels.html#source">Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../Datamodels.html#index">Index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../Datamodels.html#generated-columns">Generated columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../Datamodels.html#computed-columns">Computed columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../Datamodels.html#file-columns">File columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../Datamodels.html#record-columns">Record columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../Datamodels.html#identifier-columns-and-the-identifiers-token">Identifier columns and the <code class="docutils literal notranslate"><span class="pre">{identifiers}</span></code> token</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../Datamodels.html#transposing-columns">Transposing columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../Datamodels.html#wildcards">Wildcards</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Datamodels.html#multi-column-indices">Multi-column indices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Datamodels.html#indexing-policies">Indexing policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Datamodels.html#linking-with-nomenclature">Linking with nomenclature</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../Datamodels.html#us-states">US States</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../Datamodels.html#county-codes">County codes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Datamodels.html#ingesting-data">Ingesting data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Datamodels.html#where-to-go-next">Where to go next</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../packages.html">Python Packages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../utils.html">General purpose utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../utils.html#overview-of-utilities">Overview of Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../utils.html#current-development">Current Development</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../utils.html#todo">TODO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../utils.html#documentation-indices">Documentation Indices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../CoreLibrary.html">Data platform components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CoreLibrary.html#package-dorieh-platform">Package dorieh.platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CoreLibrary.html#package-dorieh-platform-data-model">Package dorieh.platform.data_model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CoreLibrary.html#package-dorieh-platform-loader">Package dorieh.platform.loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CoreLibrary.html#package-dorieh-platform-requests">Package dorieh.platform.requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CoreLibrary.html#package-dorieh-platform-utils">Package dorieh.platform.utils</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../gis.html">GIS utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../gis.html#gis-library-overview">GIS Library Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../gis.html#shape-files-downloader">Shape files Downloader</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../CMSLibrary.html">Health data manipulation tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CMSLibrary.html#package-cms">Package cms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CMSLibrary.html#package-dorieh-cms-tools">Package dorieh.cms.tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CMSLibrary.html#additional-details">Additional details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../rasters.html">Raster data tools (climate and exposure)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../rasters.html#general-tools-for-raster-files">General tools for raster files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../rasters.html#specialized-tools-for-working-with-climate-data">Specialized tools for working with climate data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../rasters.html#specialized-tools-for-working-with-exposure-data">Specialized tools for working with exposure data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../guts.html">Data Platform Internals</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../platform.html">Dorieh Core Data Platform</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../DBConnections.html">Managing database connections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../DataLoader.html">Dorieh Data Loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../ProjectLoader.html">Project (Directory) Loading Utility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../TerritorialCodes.html">Mapping between different territorial codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../SQLDocumentation.html">SQL Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../platform.html#core-platform-overview">Core platform overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../platform.html#tool-examples">Tool Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../platform.html#project-structure">Project Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../platform.html#documentation-indices">Documentation Indices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../deployment.html">Dorieh Deployment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../deployment.html#using-docker">Using Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../deployment.html#using-python-virtual-environment">Using Python Virtual Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../deployment.html#using-conda-package-manager">Using Conda Package Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../deployment.html#using-toil-with-docker-requirement">Using Toil with Docker requirement</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../capabilities.html">Platform capabilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../SampleQuery.html">How to query the database</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../SampleQuery.html#setup">Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../SampleQuery.html#create-connection-definition-file">Create connection definition file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../SampleQuery.html#executing-the-query">Executing the query</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../SampleQuery.html#using-explain-to-optimize-queries">Using EXPLAIN to optimize queries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../QueringMedicaid.html">Querying Medicaid Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../QueringMedicaid.html#querying-diagnoses">Querying diagnoses</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../MonitoringDB.html">Monitoring database activity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../MonitoringDB.html#module-monitor">Module monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../MonitoringDB.html#cli-usage-for-monitor">CLI Usage for monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../MonitoringDB.html#using-as-api">Using as API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../UsingHLL.html">Approximate distinct counting with HLL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../UserRequests.html">Handling user requests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../UserRequests.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../UserRequests.html#structure">Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../example_request_yaml.html">Example user request</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Operational guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../DBT.html">Database Testing Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../members/create_test.html">Utility to generate test queries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../members/dbt_runner.html">Test runner: Utility to run generated tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../members/gen_dbt_cwl.html">The gen_dbt_cwl Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../members/create_test.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../members/create_test.html#module-dorieh.platform.dbt.create_test">Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../members/dbt_runner.html">Test runner: Utility to run generated tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../members/dbt_runner.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../members/dbt_runner.html#module-dorieh.platform.dbt.dbt_runner">Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../members/gen_dbt_cwl.html">The gen_dbt_cwl Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../members/gen_dbt_cwl.html#dorieh.platform.dbt.gen_dbt_cwl.CWLTestGenerator"><code class="docutils literal notranslate"><span class="pre">CWLTestGenerator</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../TestingWorkflows.html">Testing bundled workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../TestingWorkflows.html#introduction-to-testing-and-prerequisites">Introduction to testing and prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../TestingWorkflows.html#before-running-any-test">Before running any test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../TestingWorkflows.html#testing-aqs-workflow">Testing AQS workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../TestingWorkflows.html#testing-airnow-workflow">Testing Airnow workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../TestingWorkflows.html#testing-climate-workflow">Testing Climate workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../TestingWorkflows.html#testing-exposure-workflow">Testing Exposure workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../TestingWorkflows.html#testing-medicare-workflow">Testing Medicare workflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../adding_data.html">Adding more data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../adding_data.html#what-data-are-you-adding">What data are you adding?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../adding_data.html#data-modeling-vs-data-introspection">Data modeling vs data introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../adding_data.html#adding-new-data-domain">Adding new data domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../adding_data.html#creating-new-single-table">Creating new single table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../adding_data.html#adding-a-table-from-a-remote-data-source">Adding a table from a remote data source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../adding_data.html#adding-data-to-existing-table">Adding data to existing table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../adding_data.html#automatically-ingesting-multiple-files-from-a-file-system">Automatically ingesting multiple files from a file system</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../AppPipelineGenerator.html">Executing containerized apps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../AppPipelineGenerator.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../AppPipelineGenerator.html#prerequisites">Prerequisites</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../AppPipelineGenerator.html#docker-or-python-virtual-environment">Docker or Python virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../AppPipelineGenerator.html#setup-dbms-server">Setup DBMS Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../AppPipelineGenerator.html#define-connection">Define connection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../AppPipelineGenerator.html#using-pipeline-generator">Using pipeline generator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../AppPipelineGenerator.html#generate-pipeline-and-metadata">Generate pipeline and metadata</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../AppPipelineGenerator.html#execute-generated-pipeline">Execute generated pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../AppPipelineGenerator.html#appendix-1-metadata-description">Appendix 1: Metadata description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../AppPipelineGenerator.html#file-app-config-yaml">File app.config.yaml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../AppPipelineGenerator.html#file-metadata-yml">File metadata.yml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../AppPipelineGenerator.html#file-dorieh-metadata-yaml">File dorieh-metadata.yaml</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Terms and Acronyms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../glossary.html#concepts">Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../glossary.html#acronyms">Acronyms</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../docindices.html">Indices</a></li>
 </ul>
 
@@ -103,23 +554,34 @@
 <span class="c1">#  See the License for the specific language governing permissions and</span>
 <span class="c1">#  limitations under the License.</span>
 <span class="c1">#</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Set</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">textwrap</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Callable</span>
 
-<span class="kn">import</span> <span class="nn">sqlparse</span>
-<span class="kn">import</span> <span class="nn">yaml</span>
-<span class="kn">from</span> <span class="nn">sqlparse.sql</span> <span class="kn">import</span> <span class="n">IdentifierList</span><span class="p">,</span> <span class="n">Parenthesis</span><span class="p">,</span> <span class="n">Function</span><span class="p">,</span> <span class="n">Identifier</span>
-<span class="kn">import</span> <span class="nn">html</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sqlparse</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlparse.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">IdentifierList</span><span class="p">,</span> <span class="n">Parenthesis</span><span class="p">,</span> <span class="n">Function</span><span class="p">,</span> <span class="n">Identifier</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">html</span>
 
-<span class="kn">from</span> <span class="nn">dorieh.platform.dictionary.element</span> <span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">DataModelElement</span><span class="p">,</span> <span class="n">qstr</span><span class="p">,</span> <span class="n">attrs2string</span>
-<span class="kn">from</span> <span class="nn">dorieh.platform.data_model.domain</span> <span class="kn">import</span> <span class="n">Domain</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dorieh.platform.dictionary</span><span class="w"> </span><span class="kn">import</span> <span class="n">RenderMode</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dorieh.platform.dictionary.element</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">DataModelElement</span><span class="p">,</span> <span class="n">qstr</span><span class="p">,</span> <span class="n">attrs2string</span><span class="p">,</span> <span class="n">hr</span><span class="p">,</span> <span class="n">create_graph_envelop</span><span class="p">,</span> <span class="n">PANDOC</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dorieh.platform.data_model.domain</span><span class="w"> </span><span class="kn">import</span> <span class="n">Domain</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dorieh.platform.dictionary.resdac_crawler</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_resdac_mapping</span>
 
 
-<div class="viewcode-block" id="noop"><a class="viewcode-back" href="../../../../members/columns.html#dorieh.platform.dictionary.columns.noop">[docs]</a><span class="k">def</span> <span class="nf">noop</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<div class="viewcode-block" id="noop">
+<a class="viewcode-back" href="../../../../members/columns.html#dorieh.platform.dictionary.columns.noop">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">noop</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span></div>
 
 
-<div class="viewcode-block" id="Column"><a class="viewcode-back" href="../../../../members/columns.html#dorieh.platform.dictionary.columns.Column">[docs]</a><span class="k">class</span> <span class="nc">Column</span><span class="p">(</span><span class="n">DataModelElement</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">column_block</span><span class="p">:</span> <span class="n">Dict</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Column">
+<a class="viewcode-back" href="../../../../members/columns.html#dorieh.platform.dictionary.columns.Column">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Column</span><span class="p">(</span><span class="n">DataModelElement</span><span class="p">):</span>
+    <span class="n">column_mapping</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">column_block</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">describe_column_type</span><span class="p">:</span> <span class="n">Callable</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">column_block</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">column_block</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
@@ -137,39 +599,61 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">copied</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">casts</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">requires</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">describe_column_type</span> <span class="o">=</span> <span class="n">describe_column_type</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">block</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span>
-        <span class="k">if</span> <span class="s2">&quot;type&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">datatype</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s2">&quot;source&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">expand_macro2</span><span class="p">()</span>
-            <span class="n">src_block</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">]</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">src_block</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-                <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">src_block</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">predecessors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">src_block</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-                <span class="k">if</span> <span class="s2">&quot;type&quot;</span> <span class="ow">in</span> <span class="n">src_block</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">column_type</span> <span class="o">=</span> <span class="n">src_block</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span>
-                <span class="k">if</span> <span class="s2">&quot;code&quot;</span> <span class="ow">in</span> <span class="n">src_block</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">parse_expr</span><span class="p">(</span><span class="n">src_block</span><span class="p">[</span><span class="s2">&quot;code&quot;</span><span class="p">])</span>
-            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">src_block</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">parse_expr</span><span class="p">(</span><span class="n">src_block</span><span class="p">)</span>
-        <span class="k">if</span> <span class="s2">&quot;requires&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="p">:</span>
-            <span class="n">req</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="p">[</span><span class="s2">&quot;requires&quot;</span><span class="p">]</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">requires</span> <span class="o">=</span> <span class="n">req</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">predecessors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;type&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">datatype</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="s2">&quot;source&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">expand_macro2</span><span class="p">()</span>
+                <span class="n">src_block</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">src_block</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">src_block</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">predecessors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">src_block</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="s2">&quot;type&quot;</span> <span class="ow">in</span> <span class="n">src_block</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">column_type</span> <span class="o">=</span> <span class="n">src_block</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="s2">&quot;code&quot;</span> <span class="ow">in</span> <span class="n">src_block</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">parse_expr</span><span class="p">(</span><span class="n">src_block</span><span class="p">[</span><span class="s2">&quot;code&quot;</span><span class="p">])</span>
+                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">src_block</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">parse_expr</span><span class="p">(</span><span class="n">src_block</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s2">&quot;requires&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="p">:</span>
+                <span class="n">req</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="p">[</span><span class="s2">&quot;requires&quot;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">requires</span> <span class="o">=</span> <span class="n">req</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">requires</span> <span class="o">=</span> <span class="p">[</span><span class="n">req</span><span class="p">]</span>
+            <span class="k">if</span> <span class="s2">&quot;cast&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="p">[</span><span class="s2">&quot;cast&quot;</span><span class="p">]:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">casts</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="p">[</span><span class="s2">&quot;cast&quot;</span><span class="p">][</span><span class="n">t</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_in_mapping</span><span class="p">():</span>
+            <span class="n">descr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">column_mapping</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span><span class="o">.</span><span class="n">description</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">descr</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">descr</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">requires</span> <span class="o">=</span> <span class="p">[</span><span class="n">req</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s2">&quot;cast&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="p">[</span><span class="s2">&quot;cast&quot;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">casts</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="p">[</span><span class="s2">&quot;cast&quot;</span><span class="p">][</span><span class="n">t</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">descr</span><span class="p">}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reference</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_in_mapping</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reference</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">column_mapping</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span><span class="o">.</span><span class="n">url</span>
         <span class="k">return</span>
 
-<div class="viewcode-block" id="Column.is_transformed"><a class="viewcode-back" href="../../../../members/columns.html#dorieh.platform.dictionary.columns.Column.is_transformed">[docs]</a>    <span class="k">def</span> <span class="nf">is_transformed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Column.is_in_mapping">
+<a class="viewcode-back" href="../../../../members/columns.html#dorieh.platform.dictionary.columns.Column.is_in_mapping">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_in_mapping</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">column_mapping</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">column_mapping</span></div>
+
+
+<div class="viewcode-block" id="Column.is_transformed">
+<a class="viewcode-back" href="../../../../members/columns.html#dorieh.platform.dictionary.columns.Column.is_transformed">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_transformed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">expression</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">casts</span></div>
 
-<div class="viewcode-block" id="Column.expand_macro1"><a class="viewcode-back" href="../../../../members/columns.html#dorieh.platform.dictionary.columns.Column.expand_macro1">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">expand_macro1</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">block</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">]]:</span>
+
+<div class="viewcode-block" id="Column.expand_macro1">
+<a class="viewcode-back" href="../../../../members/columns.html#dorieh.platform.dictionary.columns.Column.expand_macro1">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">expand_macro1</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">block</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">]]:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">block</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
             <span class="k">return</span> <span class="p">[</span><span class="n">block</span><span class="p">]</span>
         <span class="n">name</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">block</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
@@ -186,7 +670,10 @@
                 <span class="k">return</span> <span class="n">expansion</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">block</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="Column.expand_macro2"><a class="viewcode-back" href="../../../../members/columns.html#dorieh.platform.dictionary.columns.Column.expand_macro2">[docs]</a>    <span class="k">def</span> <span class="nf">expand_macro2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Column.expand_macro2">
+<a class="viewcode-back" href="../../../../members/columns.html#dorieh.platform.dictionary.columns.Column.expand_macro2">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">expand_macro2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">src_block</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">]</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">src_block</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="n">original</span> <span class="o">=</span> <span class="n">src_block</span>
@@ -209,7 +696,10 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">expansion</span>
         <span class="k">return</span></div>
 
-<div class="viewcode-block" id="Column.describe"><a class="viewcode-back" href="../../../../members/columns.html#dorieh.platform.dictionary.columns.Column.describe">[docs]</a>    <span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+
+<div class="viewcode-block" id="Column.describe_txt">
+<a class="viewcode-back" href="../../../../members/columns.html#dorieh.platform.dictionary.columns.Column.describe_txt">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">describe_txt</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">datatype</span><span class="si">}</span><span class="s1">) </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">column_type</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reference</span><span class="p">:</span>
             <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;See: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">reference</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span>
@@ -229,21 +719,30 @@
             <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">exp</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="k">return</span> <span class="n">text</span></div>
 
-<div class="viewcode-block" id="Column.describe_html"><a class="viewcode-back" href="../../../../members/columns.html#dorieh.platform.dictionary.columns.Column.describe_html">[docs]</a>    <span class="k">def</span> <span class="nf">describe_html</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+
+<div class="viewcode-block" id="Column.describe">
+<a class="viewcode-back" href="../../../../members/columns.html#dorieh.platform.dictionary.columns.Column.describe">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">format</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;html&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">describe_html</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">describe_markdown</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Column.describe_html">
+<a class="viewcode-back" href="../../../../members/columns.html#dorieh.platform.dictionary.columns.Column.describe_html">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">describe_html</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&lt;TABLE&gt;</span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;&lt;tr&gt;&quot;</span>
         <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;&lt;td align = &quot;center&quot; border = &quot;0&quot;&gt;&lt;FONT POINT-SIZE=&quot;20&quot;&gt;&lt;b&gt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">qualified_name</span><span class="si">}</span><span class="s1">&lt;/b&gt;&lt;/FONT&gt;&lt;/td&gt;&#39;</span>
-        <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;&lt;td align = &quot;center&quot; border = &quot;0&quot;&gt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">datatype</span><span class="si">}</span><span class="s1">&lt;/td&gt;&#39;</span>
         <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;&lt;/tr&gt;</span><span class="se">\n</span><span class="s2">&quot;</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">column_type</span><span class="p">:</span>
             <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;&lt;tr&gt;&lt;td  align = &quot;center&quot; border = &quot;0&quot;&gt;&lt;i&gt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">column_type</span><span class="si">}</span><span class="s1">&lt;/i&gt;&lt;/td&gt;&lt;/tr&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
-
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reference</span><span class="p">:</span>
             <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;&lt;tr&gt;&lt;td  align = &quot;center&quot; border = &quot;0&quot;&gt;&lt;i&gt;For more information see: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">reference</span><span class="si">}</span><span class="s1">&lt;/i&gt;&lt;/td&gt;&lt;/tr&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="ow">and</span> <span class="s2">&quot;text&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">:</span>
             <span class="n">value</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">])</span>
-            <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;&lt;tr&gt;&lt;td  align = &quot;center&quot; border = &quot;0&quot;&gt;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s1">&lt;/td&gt;&lt;/tr&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;&lt;tr&gt;&lt;td align = &quot;center&quot; border = &quot;0&quot;&gt;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s1">&lt;/td&gt;&lt;/tr&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
 
         <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -270,11 +769,103 @@
         <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&lt;/TABLE&gt;</span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="k">return</span> <span class="n">text</span></div>
 
-<div class="viewcode-block" id="Column.html"><a class="viewcode-back" href="../../../../members/columns.html#dorieh.platform.dictionary.columns.Column.html">[docs]</a>    <span class="k">def</span> <span class="nf">html</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">of</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">svg</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="n">body</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">describe_html</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Column.describe_node">
+<a class="viewcode-back" href="../../../../members/columns.html#dorieh.platform.dictionary.columns.Column.describe_node">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">describe_node</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&lt;TABLE&gt;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;&lt;tr&gt;&quot;</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;&lt;td align = &quot;center&quot; border = &quot;0&quot;&gt;&lt;b&gt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">qualified_name</span><span class="si">}</span><span class="s1">&lt;/b&gt;&lt;/td&gt;&#39;</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;&lt;/tr&gt;</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="ow">and</span> <span class="s2">&quot;text&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">:</span>
+            <span class="n">description</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
+            <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">html</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">40</span><span class="p">)]</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;&lt;br/&gt;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+            <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;&lt;tr&gt;&lt;td align = &quot;left&quot; border = &quot;0&quot; cellpadding=&quot;25&quot;&gt;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s1">&lt;/td&gt;&lt;/tr&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">expression</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">exp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">expression</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">exp</span><span class="p">)</span>
+                <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&lt;tr&gt;&lt;td align = &quot;left&quot;&gt;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s1">&lt;/td&gt;&lt;/tr&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">casts</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">casts</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">casts</span><span class="p">[</span><span class="n">key</span><span class="p">]))</span>
+                <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;&lt;tr&gt;&lt;td align = &quot;left&quot;&gt;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1"> &amp;rarr;&lt;/td&gt;&lt;td align = &quot;left&quot;&gt;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s1">&lt;/td&gt;&lt;/tr&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&lt;/TABLE&gt;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="n">text</span></div>
+
+
+<div class="viewcode-block" id="Column.describe_markdown">
+<a class="viewcode-back" href="../../../../members/columns.html#dorieh.platform.dictionary.columns.Column.describe_markdown">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">describe_markdown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">t</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">qualified_name</span><span class="p">)</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="n">RenderMode</span><span class="o">.</span><span class="n">standalone</span><span class="p">:</span>
+            <span class="n">ext</span> <span class="o">=</span> <span class="s2">&quot;.html&quot;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="n">RenderMode</span><span class="o">.</span><span class="n">sphinx</span><span class="p">:</span>
+            <span class="n">ext</span> <span class="o">=</span> <span class="s2">&quot;.md&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ext</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">tpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">ext</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;## Overview of column </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2"> in table </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2"> </span><span class="se">\n\n</span><span class="s2">&quot;</span>
+        <span class="n">text</span> <span class="o">+=</span>  <span class="s2">&quot;|                               |                        |</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">text</span> <span class="o">+=</span>  <span class="s2">&quot;| ----------------------------- | ---------------------- |</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;| Table                         | [</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">](</span><span class="si">{</span><span class="n">tpath</span><span class="si">}</span><span class="s2">)           |</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;| Qualified name                | </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">qualified_name</span><span class="si">}</span><span class="s2">  |</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;| Datatype                      | </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">datatype</span><span class="si">}</span><span class="s2">        |</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">ctype</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">describe_column_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ctype</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;| Column type | </span><span class="si">{</span><span class="n">ctype</span><span class="si">}</span><span class="s2"> |</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">requires</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;| Tables, required for computation | </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">requires</span><span class="si">}</span><span class="s2"> |</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reference</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;| Reference | [</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">reference</span><span class="si">}</span><span class="s2">](</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">reference</span><span class="si">}</span><span class="s2">) |</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+        <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="ow">and</span> <span class="s2">&quot;text&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+
+        <span class="c1"># Add additional description details as a Markdown table</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">key</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="k">if</span> <span class="n">key</span> <span class="o">!=</span> <span class="s2">&quot;text&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">keys</span><span class="p">:</span>
+                <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;| Key | Value |</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;| --- | ----- |</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+                    <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;| </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2"> |</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">expression</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">## Expressions</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+            <span class="k">for</span> <span class="n">exp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">expression</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s2">&quot;select&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">exp</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+                    <span class="n">exp</span> <span class="o">=</span> <span class="s2">&quot;SELECT &quot;</span> <span class="o">+</span> <span class="n">exp</span>
+                <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;```sql</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">exp</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;```</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">casts</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">### Casts:</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+            <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;| Original type | Cast expression      |</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;| ------------- | -------------------- |</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">casts</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">casts</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+                <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;| </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2"> |</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+
+        <span class="k">return</span> <span class="n">text</span></div>
+
+
+<div class="viewcode-block" id="Column.html">
+<a class="viewcode-back" href="../../../../members/columns.html#dorieh.platform.dictionary.columns.Column.html">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">html</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">of</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">svg</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">fmt</span> <span class="o">=</span> <span class="s1">&#39;html&#39;</span>
+        <span class="n">body</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="n">fmt</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">svg</span><span class="p">:</span>
-            <span class="n">body</span> <span class="o">+=</span> <span class="s2">&quot;&lt;hr/&gt;</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="n">body</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;&lt;object data=&quot;</span><span class="si">{</span><span class="n">svg</span><span class="si">}</span><span class="s1">&quot; type=&quot;image/svg+xml&quot;&gt; &lt;/object&gt;&#39;</span>
+            <span class="n">body</span> <span class="o">+=</span> <span class="n">hr</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="n">fmt</span><span class="p">)</span>
+            <span class="n">body</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;&lt;object data=&quot;</span><span class="si">{</span><span class="n">svg</span><span class="si">}</span><span class="s1">&quot; type=&quot;image/svg+xml&quot;&gt;&lt;/object&gt;&#39;</span>
         <span class="n">block</span> <span class="o">=</span> <span class="n">HTML</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="n">title</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Column </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">qualified_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
             <span class="n">body</span> <span class="o">=</span> <span class="n">body</span>
@@ -282,27 +873,85 @@
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">of</span><span class="p">,</span> <span class="s2">&quot;wt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">block</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">out</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Column.to_dot"><a class="viewcode-back" href="../../../../members/columns.html#dorieh.platform.dictionary.columns.Column.to_dot">[docs]</a>    <span class="k">def</span> <span class="nf">to_dot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">node_id</span> <span class="o">=</span> <span class="n">qstr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">qualified_name</span><span class="p">)</span>
-        <span class="n">node_label</span> <span class="o">=</span> <span class="s1">&#39;&lt;&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">describe_html</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;&gt;&#39;</span>
+
+<div class="viewcode-block" id="Column.column_toctree">
+<a class="viewcode-back" href="../../../../members/columns.html#dorieh.platform.dictionary.columns.Column.column_toctree">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">column_toctree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">targets</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">```</span><span class="si">{toctree}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;---</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;maxdepth: 1</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;hidden:</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;---</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">for</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">targets</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;```</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="n">text</span></div>
+
+
+<div class="viewcode-block" id="Column.markdown">
+<a class="viewcode-back" href="../../../../members/columns.html#dorieh.platform.dictionary.columns.Column.markdown">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">markdown</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">of</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">svg</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">fmt</span> <span class="o">=</span> <span class="s1">&#39;markdown&#39;</span>
+        <span class="n">body</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="n">fmt</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">svg</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="n">RenderMode</span><span class="o">.</span><span class="n">standalone</span><span class="p">:</span>
+                <span class="n">body</span> <span class="o">+=</span> <span class="n">hr</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="n">fmt</span><span class="p">)</span>
+                <span class="n">body</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;&lt;object data=&quot;</span><span class="si">{</span><span class="n">svg</span><span class="si">}</span><span class="s1">&quot; type=&quot;image/svg+xml&quot;&gt;&lt;/object&gt;&#39;</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="n">RenderMode</span><span class="o">.</span><span class="n">sphinx</span><span class="p">:</span>
+                <span class="n">alt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Column </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">qualified_name</span><span class="si">}</span><span class="s2"> Lineage SVG&quot;</span>
+                <span class="n">target</span> <span class="o">=</span> <span class="n">create_graph_envelop</span><span class="p">(</span><span class="n">of</span><span class="p">,</span> <span class="n">alt</span><span class="p">,</span> <span class="n">svg</span><span class="p">)</span>
+                <span class="n">body</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">column_toctree</span><span class="p">([</span><span class="n">target</span> <span class="o">+</span> <span class="s2">&quot;.md&quot;</span><span class="p">])</span>
+                <span class="n">body</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">```</span><span class="se">{{</span><span class="s2">figure</span><span class="se">}}</span><span class="s2"> </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">svg</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="n">body</span> <span class="o">+=</span> <span class="s2">&quot;:align: center</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="n">body</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;:alt: </span><span class="si">{</span><span class="n">alt</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="n">body</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;:target: </span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s2">.html</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="n">body</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="n">body</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Data lineage for column </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">qualified_name</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="n">body</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="n">body</span> <span class="o">+=</span> <span class="s2">&quot;```</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;# Column </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">qualified_name</span><span class="si">}</span><span class="se">\n\n</span><span class="si">{</span><span class="n">body</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">of</span><span class="p">,</span> <span class="s2">&quot;wt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="n">RenderMode</span><span class="o">.</span><span class="n">standalone</span><span class="p">:</span>
+            <span class="n">fhtml</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">of</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;.html&quot;</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">PANDOC</span><span class="si">}</span><span class="s2"> --from markdown  --to html </span><span class="si">{</span><span class="n">of</span><span class="si">}</span><span class="s2"> &gt; </span><span class="si">{</span><span class="n">fhtml</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Column.to_dot">
+<a class="viewcode-back" href="../../../../members/columns.html#dorieh.platform.dictionary.columns.Column.to_dot">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">node_label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">attributes</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">node_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">node_id</span> <span class="o">=</span> <span class="n">qstr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">qualified_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">node_label</span><span class="p">:</span>
+            <span class="n">node_label</span> <span class="o">=</span> <span class="s1">&#39;&lt;&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">describe_node</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;&gt;&#39;</span>
         <span class="n">attrs</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="n">node_label</span><span class="p">,</span>
             <span class="s2">&quot;shape&quot;</span><span class="p">:</span> <span class="s2">&quot;box&quot;</span>
         <span class="p">}</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reference</span><span class="p">:</span>
-            <span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;URL&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">qstr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reference</span><span class="p">)</span>
-            <span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;_blank&quot;</span>
+        <span class="k">if</span> <span class="n">attributes</span><span class="p">:</span>
+            <span class="n">attrs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">attributes</span><span class="p">)</span>
+        <span class="n">t</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">qualified_name</span><span class="p">)</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="n">cpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.html&quot;</span>
+        <span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;URL&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">qstr</span><span class="p">(</span><span class="n">cpath</span><span class="p">)</span>
+        <span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;_blank&quot;</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">node_id</span><span class="si">}</span><span class="s2"> [</span><span class="si">{</span><span class="n">attrs2string</span><span class="p">(</span><span class="n">attrs</span><span class="p">)</span><span class="si">}</span><span class="s2">];&quot;</span></div>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_dot</span><span class="p">()</span>
 
-<div class="viewcode-block" id="Column.parse_expr"><a class="viewcode-back" href="../../../../members/columns.html#dorieh.platform.dictionary.columns.Column.parse_expr">[docs]</a>    <span class="k">def</span> <span class="nf">parse_expr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exp</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<div class="viewcode-block" id="Column.parse_expr">
+<a class="viewcode-back" href="../../../../members/columns.html#dorieh.platform.dictionary.columns.Column.parse_expr">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parse_expr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exp</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">parsed</span> <span class="o">=</span> <span class="n">sqlparse</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">exp</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">find_all_names</span><span class="p">(</span><span class="n">parsed</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">expression</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">exp</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Column.find_all_names"><a class="viewcode-back" href="../../../../members/columns.html#dorieh.platform.dictionary.columns.Column.find_all_names">[docs]</a>    <span class="k">def</span> <span class="nf">find_all_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Column.find_all_names">
+<a class="viewcode-back" href="../../../../members/columns.html#dorieh.platform.dictionary.columns.Column.find_all_names">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_all_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="s2">&quot;tokens&quot;</span><span class="p">):</span>
             <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">tokens</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
@@ -325,7 +974,8 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">find_all_names</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
         <span class="k">return</span></div>
 
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="nb">repr</span> <span class="o">=</span> <span class="s2">&quot;Column: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">predecessors</span><span class="p">:</span>
             <span class="nb">repr</span> <span class="o">+=</span> <span class="s2">&quot; &lt;= &quot;</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">predecessors</span><span class="p">)</span>
@@ -334,36 +984,21 @@
         <span class="k">return</span> <span class="nb">repr</span></div>
 
 
-<span class="n">c1</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">age_min:</span>
-<span class="s2">    source: |</span>
-<span class="s2">      CASE</span>
-<span class="s2">        WHEN MIN(age) &lt;&gt; MAX(age) THEN MIN(age)</span>
-<span class="s2">      END</span>
-<span class="s2">&quot;&quot;&quot;</span>
 
-<span class="n">c2</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">fips3_valdiated:</span>
-<span class="s2">    source: public.validate_zip_fips(MAX(zip), MAX(fips2), MAX(fips3))</span>
-<span class="s2">&quot;&quot;&quot;</span>
-
-<span class="n">c3</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">ssa2_list:</span>
-<span class="s2">    source: &quot;string_agg(distinct ssa2, &#39;,&#39;)&quot;</span>
-<span class="s2">&quot;&quot;&quot;</span>
-
-<span class="n">c4</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">fips5:</span>
-<span class="s2">    source: &quot;(MAX(fips2) || MAX(fips3))&quot;</span>
-
-<span class="s2">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="CMSColumn">
+<a class="viewcode-back" href="../../../../members/columns.html#dorieh.platform.dictionary.columns.CMSColumn">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CMSColumn</span><span class="p">(</span><span class="n">Column</span><span class="p">):</span>
+<div class="viewcode-block" id="CMSColumn.init_column_mapping">
+<a class="viewcode-back" href="../../../../members/columns.html#dorieh.platform.dictionary.columns.CMSColumn.init_column_mapping">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">init_column_mapping</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">column_mapping</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">column_mapping</span> <span class="o">=</span> <span class="n">get_resdac_mapping</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span></div>
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">[</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">c3</span><span class="p">,</span> <span class="n">c4</span><span class="p">]:</span>
-        <span class="n">a</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-        <span class="n">column</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="s2">&quot;xxx&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">column_block</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">describe_column_type</span><span class="p">:</span> <span class="n">Callable</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">table_name</span><span class="p">,</span> <span class="n">column_block</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">describe_column_type</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">init_column_mapping</span><span class="p">()</span></div>
 
 
 </pre></div>
@@ -375,7 +1010,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2021-2024, Harvard University.</p>
+    <p>&#169; Copyright 2021-2026, Harvard University.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -1,0 +1,22 @@
+# Column cms.medpar_2018.TYPE_ADM
+
+## Overview of column TYPE_ADM in table cms.medpar_2018 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2018](../cms.medpar_2018.md)           |
+| Qualified name                | cms.medpar_2018.TYPE_ADM  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/inpatient-admission-type-code](https://resdac.org/cms-data/variables/inpatient-admission-type-code) |
+
+
+Type and priority of benes admission to facility for Inp hosp stay code
+
+| Key | Value |
+| --- | ----- |
+| long_name | IP_ADMSN_TYPE_CD |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

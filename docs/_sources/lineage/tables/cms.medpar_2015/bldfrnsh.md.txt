@@ -1,0 +1,22 @@
+# Column cms.medpar_2015.BLDFRNSH
+
+## Overview of column BLDFRNSH in table cms.medpar_2015 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2015](../cms.medpar_2015.md)           |
+| Qualified name                | cms.medpar_2015.BLDFRNSH  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/blood-pints-furnished-quantity](https://resdac.org/cms-data/variables/blood-pints-furnished-quantity) |
+
+
+Quantity of blood (whole pints) furnished to beneficiary during stay
+
+| Key | Value |
+| --- | ----- |
+| long_name | BLOOD_PT_FRNSH_QTY |
+| original_type | NUM |
+| width | 5.0 |
+
+
+

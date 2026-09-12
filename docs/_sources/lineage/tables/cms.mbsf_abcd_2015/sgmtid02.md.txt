@@ -1,0 +1,22 @@
+# Column cms.mbsf_abcd_2015.SGMTID02
+
+## Overview of column SGMTID02 in table cms.mbsf_abcd_2015 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_abcd_2015](../cms.mbsf_abcd_2015.md)           |
+| Qualified name                | cms.mbsf_abcd_2015.SGMTID02  |
+| Datatype                      | VARCHAR(3)        |
+| Reference | [https://resdac.org/cms-data/variables/monthly-part-d-market-segment-identifier-february](https://resdac.org/cms-data/variables/monthly-part-d-market-segment-identifier-february) |
+
+
+Part D Segment ID: February
+
+| Key | Value |
+| --- | ----- |
+| long_name | PTD_SGMT_ID_02 |
+| original_type | CHAR |
+| width | 3.0 |
+
+
+

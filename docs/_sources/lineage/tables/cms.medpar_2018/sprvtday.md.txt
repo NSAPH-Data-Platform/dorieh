@@ -1,0 +1,22 @@
+# Column cms.medpar_2018.SPRVTDAY
+
+## Overview of column SPRVTDAY in table cms.medpar_2018 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2018](../cms.medpar_2018.md)           |
+| Qualified name                | cms.medpar_2018.SPRVTDAY  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/semi-private-room-day-count](https://resdac.org/cms-data/variables/semi-private-room-day-count) |
+
+
+Semi-private room days used by beneficiary for stay
+
+| Key | Value |
+| --- | ----- |
+| long_name | SEMIPRVT_ROOM_DAY_CNT |
+| original_type | NUM |
+| width | 5.0 |
+
+
+

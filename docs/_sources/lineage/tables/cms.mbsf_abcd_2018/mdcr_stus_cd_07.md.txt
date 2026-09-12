@@ -1,0 +1,22 @@
+# Column cms.mbsf_abcd_2018.MDCR_STUS_CD_07
+
+## Overview of column MDCR_STUS_CD_07 in table cms.mbsf_abcd_2018 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_abcd_2018](../cms.mbsf_abcd_2018.md)           |
+| Qualified name                | cms.mbsf_abcd_2018.MDCR_STUS_CD_07  |
+| Datatype                      | VARCHAR(2)        |
+| Reference | [https://resdac.org/cms-data/variables/medicare-status-code-july](https://resdac.org/cms-data/variables/medicare-status-code-july) |
+
+
+Medicare Status Code: July
+
+| Key | Value |
+| --- | ----- |
+| long_name | MDCR_STATUS_CODE_07 |
+| original_type | CHAR |
+| width | 2.0 |
+
+
+

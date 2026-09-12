@@ -1,0 +1,51 @@
+# Column medicare.beneficiaries.discrepancies
+
+## Overview of column discrepancies in table medicare.beneficiaries 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.beneficiaries](../medicare.beneficiaries.md)           |
+| Qualified name                | medicare.beneficiaries.discrepancies  |
+| Datatype                      | string        |
+| Column type | copied |
+
+
+Number of possible discrepancies for the beneficiary, .i.e., records that use alternative DOB, race, ethnicity or DOD
+
+
+
+
+## Expressions
+
+```sql
+SELECT (
+  COUNT(distinct {identifiers}) - 1 +
+  CASE
+    (COUNT(DISTINCT dod) FILTER (WHERE dod is not null))
+    WHEN 0 THEN 0
+    ELSE COUNT(DISTINCT dod) FILTER (WHERE dod is not null) - 1
+  END
+)
+
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+discrepancies_svg_envelop.md
+```
+
+
+```{figure} discrepancies.svg
+:align: center
+:alt: Column medicare.beneficiaries.discrepancies Lineage SVG
+:target: discrepancies_svg_envelop.html
+
+Data lineage for column medicare.beneficiaries.discrepancies
+
+```
+
+

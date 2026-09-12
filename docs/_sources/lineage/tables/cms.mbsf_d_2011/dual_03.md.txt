@@ -1,0 +1,22 @@
+# Column cms.mbsf_d_2011.DUAL_03
+
+## Overview of column DUAL_03 in table cms.mbsf_d_2011 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_d_2011](../cms.mbsf_d_2011.md)           |
+| Qualified name                | cms.mbsf_d_2011.DUAL_03  |
+| Datatype                      | VARCHAR(2)        |
+| Reference | [https://resdac.org/cms-data/variables/monthly-medicare-medicaid-dual-eligibility-code-march](https://resdac.org/cms-data/variables/monthly-medicare-medicaid-dual-eligibility-code-march) |
+
+
+Mar. Dual Status Code
+
+| Key | Value |
+| --- | ----- |
+| long_name | DUAL_STUS_CD_03 |
+| original_type | CHAR |
+| width | 2.0 |
+
+
+

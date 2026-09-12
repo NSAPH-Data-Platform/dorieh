@@ -1,0 +1,22 @@
+# Column cms.medpar_2013.PRCDRCNT
+
+## Overview of column PRCDRCNT in table cms.medpar_2013 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2013](../cms.medpar_2013.md)           |
+| Qualified name                | cms.medpar_2013.PRCDRCNT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/surgical-procedure-codes-included-stay](https://resdac.org/cms-data/variables/surgical-procedure-codes-included-stay) |
+
+
+Surgical procedure codes included in stay
+
+| Key | Value |
+| --- | ----- |
+| long_name | SRGCL_PRCDR_CD_CNT |
+| original_type | NUM |
+| width | 3.0 |
+
+
+

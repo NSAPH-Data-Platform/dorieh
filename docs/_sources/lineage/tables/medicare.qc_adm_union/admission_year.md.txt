@@ -1,0 +1,39 @@
+# Column medicare.qc_adm_union.admission_year
+
+## Overview of column admission_year in table medicare.qc_adm_union 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_adm_union](../medicare.qc_adm_union.md)           |
+| Qualified name                | medicare.qc_adm_union.admission_year  |
+| Datatype                      | INT        |
+| Column type | generated |
+
+
+
+## Expressions
+
+```sql
+SELECT GENERATED ALWAYS AS (EXTRACT (YEAR FROM admission_date)) STORED
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+admission_year_svg_envelop.md
+```
+
+
+```{figure} admission_year.svg
+:align: center
+:alt: Column medicare.qc_adm_union.admission_year Lineage SVG
+:target: admission_year_svg_envelop.html
+
+Data lineage for column medicare.qc_adm_union.admission_year
+
+```
+
+

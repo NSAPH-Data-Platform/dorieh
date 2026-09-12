@@ -1,0 +1,40 @@
+# Column medicare.enrollments.dual_indicators
+
+## Overview of column dual_indicators in table medicare.enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.enrollments](../medicare.enrollments.md)           |
+| Qualified name                | medicare.enrollments.dual_indicators  |
+| Datatype                      | string        |
+| Column type | copied |
+| Tables, required for computation | ['medicare.mbsf_d'] |
+
+
+
+## Expressions
+
+```sql
+(SELECT MAX(dual_indicators) FROM medicare.mbsf_d AS d WHERE medicare._ps.year = d.year and medicare._ps.bene_id = d.bene_id)
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+dual_indicators_svg_envelop.md
+```
+
+
+```{figure} dual_indicators.svg
+:align: center
+:alt: Column medicare.enrollments.dual_indicators Lineage SVG
+:target: dual_indicators_svg_envelop.html
+
+Data lineage for column medicare.enrollments.dual_indicators
+
+```
+
+

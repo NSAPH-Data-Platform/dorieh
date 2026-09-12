@@ -1,0 +1,93 @@
+digraph G {
+    rankdir=LR;
+    bgcolor="white";
+    fontname="Helvetica";
+    node [fontname="Helvetica", fontsize=11, style=filled, shape=box, margin="0.15,0.08"];
+    edge [color="#555555", arrowsize=0.7];
+
+    // --- Workflow Inputs (compact) ---
+    subgraph cluster_inputs {
+        label="Inputs";
+        labeljust=l;
+        style=dashed;
+        color="#888888";
+        fontsize=10;
+        fontcolor="#555555";
+        node [fillcolor="#ddeeff", shape=oval, fontsize=9];
+        date; band; geography;
+        db_config [label="db config"];
+    }
+
+    // --- Data Acquisition ---
+    subgraph cluster_acquire {
+        label="Acquire";
+        labeljust=l;
+        style=rounded;
+        color="#7799aa";
+        fontsize=10;
+        fontcolor="#556677";
+        bgcolor="#eef5f8";
+        extract_year [label="extract_year", fillcolor="#c8dce8"];
+        download     [label="download\n(gridded data)", fillcolor="#c8dce8"];
+        get_shapes   [label="get_shapes\n(polygons)",    fillcolor="#c8dce8"];
+    }
+
+    // --- Bronze ---
+    subgraph cluster_bronze {
+        label="Bronze";
+        labeljust=l;
+        style=rounded;
+        color="#b8860b";
+        fontsize=10;
+        fontcolor="#8b6508";
+        bgcolor="#fdf5e6";
+        aggregate [label="aggregate\n(spatial join)", fillcolor="#f5deb3"];
+        initdb    [label="initdb",                    fillcolor="#f5deb3"];
+        ingest    [label="ingest",                    fillcolor="#f5deb3"];
+    }
+
+    // --- Silver ---
+    subgraph cluster_silver {
+        label="Silver";
+        labeljust=l;
+        style=rounded;
+        color="#999999";
+        fontsize=10;
+        fontcolor="#666666";
+        bgcolor="#f0f0f0";
+        build_silver [label="build_silver\n(unit conversion,\nenrichment)", fillcolor="#d8d8d8"];
+    }
+
+    // --- Gold ---
+    subgraph cluster_gold {
+        label="Gold";
+        labeljust=l;
+        style=rounded;
+        color="#daa520";
+        fontsize=10;
+        fontcolor="#b8860b";
+        bgcolor="#fffbe6";
+        build_gold [label="build_gold\n(analytic\naggregates)", fillcolor="#ffe066"];
+    }
+
+    // --- Edges: inputs → steps ---
+    date       -> extract_year;
+    band       -> download;
+    band       -> aggregate;
+    geography  -> get_shapes;
+    db_config  -> initdb;
+
+    // --- Edges: step flow ---
+    extract_year -> download;
+    extract_year -> get_shapes;
+    download     -> aggregate;
+    get_shapes   -> aggregate;
+    aggregate    -> ingest;
+    initdb       -> ingest;
+    ingest       -> build_silver;
+    build_silver -> build_gold;
+
+    // --- Output ---
+    build_gold -> output [arrowhead=none, style=dashed];
+    output [label="Parquet / DB\n(queryable tables)", fillcolor="#e6ffe6", shape=oval, fontsize=9];
+}

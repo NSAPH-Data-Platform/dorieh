@@ -1,0 +1,22 @@
+# Column cms.medpar_2013.EXHST_DT
+
+## Overview of column EXHST_DT in table cms.medpar_2013 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2013](../cms.medpar_2013.md)           |
+| Qualified name                | cms.medpar_2013.EXHST_DT  |
+| Datatype                      | DATE        |
+| Reference | [https://resdac.org/cms-data/variables/beneficiary-medicare-benefit-exhausted-date](https://resdac.org/cms-data/variables/beneficiary-medicare-benefit-exhausted-date) |
+
+
+Last date beneficiary had Medicare coverage
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_MDCR_BNFT_EXHST_DT |
+| original_type | DATE |
+| width | 8.0 |
+
+
+

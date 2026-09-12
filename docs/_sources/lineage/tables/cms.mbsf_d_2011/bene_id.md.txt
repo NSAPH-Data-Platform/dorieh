@@ -1,0 +1,22 @@
+# Column cms.mbsf_d_2011.BENE_ID
+
+## Overview of column BENE_ID in table cms.mbsf_d_2011 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_d_2011](../cms.mbsf_d_2011.md)           |
+| Qualified name                | cms.mbsf_d_2011.BENE_ID  |
+| Datatype                      | VARCHAR(15)        |
+| Reference | [https://resdac.org/cms-data/variables/ccw-beneficiary-id](https://resdac.org/cms-data/variables/ccw-beneficiary-id) |
+
+
+Encrypted 723 Beneficiary ID (Unique Key)
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_ID |
+| original_type | CHAR |
+| width | 15.0 |
+
+
+

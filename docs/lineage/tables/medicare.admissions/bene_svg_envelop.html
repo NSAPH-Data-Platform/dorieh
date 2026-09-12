@@ -1,0 +1,774 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Column medicare.admissions.bene Lineage SVG &mdash; Dorieh Data Platform 0.5.1.post2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dorieh.css?v=1a3f250d" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=ad30b421"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Column medicare.admissions.bene_blood_ddctbl_amt" href="bene_blood_ddctbl_amt.html" />
+    <link rel="prev" title="Column medicare.admissions.bene" href="bene.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Dorieh Data Platform
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+<div class="dorieh-citeas">
+  <button type="button" class="dorieh-citeas-btn"
+          onclick="document.getElementById('dorieh-citeas-pop').classList.toggle('open')">
+    &#128214; Cite as
+  </button>
+  <div id="dorieh-citeas-pop" class="dorieh-citeas-pop">
+    <p>Bouzinier,&nbsp;M., Etin,&nbsp;D., Khoshnevis,&nbsp;N.,
+       Shad,&nbsp;M., Yockel,&nbsp;S. (2026).
+       <em>Research Data that Can be Trusted.</em>
+       SpringerBriefs in Computer Science. Springer.
+       <a href="https://doi.org/10.1007/978-3-032-21032-6">doi:10.1007/978-3-032-21032-6</a></p>
+    <button type="button" class="dorieh-citeas-copy"
+            onclick="navigator.clipboard.writeText(
+              'Bouzinier, M., Etin, D., Khoshnevis, N., Shad, M., Yockel, S. (2026). ' +
+              'Research Data that Can be Trusted. SpringerBriefs in Computer Science. ' +
+              'Springer. https://doi.org/10.1007/978-3-032-21032-6'
+            ).then(() => { this.textContent = 'Copied!'; });">
+      Copy citation
+    </button>
+    <a class="dorieh-citeas-more" href="../../../citing.html">More ways to cite &rarr;</a>
+  </div>
+</div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../home.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../home.html#introduction-to-data-platform">Introduction to Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../home.html#building-blocks">Building Blocks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../home.html#dorieh-utilities">Dorieh Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../home.html#core-platform">Core Platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../home.html#dorieh-gis-utilities">Dorieh GIS Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../home.html#dorieh-documentation-utilities">Dorieh Documentation Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../home.html#data-processing-and-loading-pipelines">Data Processing and Loading Pipelines</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../home.html#working-with-nsaph-containerized-apps">Working with NSAPH containerized apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../home.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../home.html#using-the-database">Using the Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../home.html#terms-and-acronyms">Terms and Acronyms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../home.html#building-platform-documentation">Building Platform documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../home.html#next-steps">Next steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rationale.html">Why a data platform</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../rationale.html#why-we-need-a-data-platform">Why we need a Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../rationale.html#architecture">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../rationale.html#supported-programming-languages-and-tools">Supported Programming Languages and Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../rationale.html#development-mode">Development Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../rationale.html#where-it-can-be-deployed">Where it can be deployed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../rationale.html#what-makes-dorieh-different">What makes Dorieh different</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../concepts.html">The Dorieh approach</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts.html#two-languages-one-pipeline">Two languages, one pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts.html#medallion-architecture-as-dorieh-implements-it">Medallion architecture as Dorieh implements it</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts.html#dataset-operators-and-field-construction-operators">Dataset operators and field construction operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts.html#families-of-field-transformations">Families of field transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts.html#disambiguation-rules">Disambiguation rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts.html#validation-and-journaling">Validation and journaling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts.html#fine-grained-lineage">Fine-grained lineage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts.html#where-each-concept-lives">Where each concept lives</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about-the-book.html">The companion book</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../about-the-book.html#bibliographic-information">Bibliographic information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../about-the-book.html#chapter-to-documentation-map">Chapter-to-documentation map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../about-the-book.html#using-this-documentation-without-the-book">Using this documentation without the book</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../citing.html">Citing Dorieh</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../citing.html#preferred-citation-the-book">Preferred citation: the book</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../citing.html#citing-the-software-itself">Citing the software itself</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../citing.html#citing-the-tutorials">Citing the tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../citing.html#citing-the-synthetic-dataset">Citing the synthetic dataset</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Learning paths</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../paths/index.html">Choose your path</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../paths/researcher.html">Researchers and analysts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../paths/researcher.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../paths/researcher.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../paths/developer.html">Pipeline developers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../paths/developer.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../paths/developer.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../paths/operator.html">Platform operators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../paths/operator.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../paths/operator.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../paths/book-reader.html">Readers of the book</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../paths/book-reader.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../paths/book-reader.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../paths/auditor.html">Reviewers and auditors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../paths/auditor.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../paths/auditor.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data domains and pipelines</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../domains.html">Data Domains</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../cms.html">Health</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../health_data_overview.html">Health Data in Dorieh (Medicare and Medicaid)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Medicare.html">Medicare: Building a Data Warehouse from ResDac Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Medicaid.html">Medicaid: Building a Data Warehouse from ResDac Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../health_seealso.html">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../climate.html">Climate</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../climate.html#what-is-gridmet">What is gridMET?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../climate.html#using-command-line-gridmet-utility">Using command line gridMET utility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../climate.html#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../climate.html#python-modules">Python modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../climate.html#cwl-pipelines-and-tools">CWL pipelines and tools</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../exposures.html">Exposure (PM2.5, WashU)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../exposures.html#python-packages">Python packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../exposures.html#cwl-workflows">CWL Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../epa.html">Environmental Protection Agency (EPA) data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../epa.html#package-contents">Package Contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../epa.html#querying-data">Querying Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../census.html">Demographics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../census_about.html">About</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../census_env_set_up.html">Setting Up Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../census_quick_start.html">Quick Start</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../census_yaml.html">Census Variable File Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../census_cached_data.html">Stored Data Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../census_modules.html">Modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../census_glossary.html">Glossary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../census_start_guide.html">Working with the <code class="docutils literal notranslate"><span class="pre">census</span></code> Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_assemble.html">census_assemble.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_assemblecwl_src.html">census_assemble.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_density.html">census_density.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_densitycwl_src.html">census_density.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_ingest.html">census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_ingest_1.html">Sub-workflow <em>store</em> from census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_ingest_1cwl_src.html">CWL sub-workflow for step <u><em>store</em></u> of workflow census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_ingestcwl_src.html">census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_interpolate.html">census_interpolate.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_interpolatecwl_src.html">census_interpolate.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_qc.html">census_qc.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_qccwl_src.html">census_qc.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_workflow.html">census_workflow.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_workflowcwl_src.html">census_workflow.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_write.html">census_write.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_writecwl_src.html">census_write.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../census.html#indices-and-tables">Indices and tables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pipelines.html">Data Processing Pipelines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../pipelines.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../pipelines.html#workflow-description-languages">Workflow Description Languages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../pipelines.html#running-workflows">Running Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipelines.html#tested-runners">Tested Runners</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipelines.html#providing-parameters-to-the-pipelines">Providing Parameters to the Pipelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipelines.html#using-toil">Using Toil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipelines.html#troubleshooting-workflows-run-by-toil">Troubleshooting Workflows Run by Toil</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../pipelines.html#testing-workflows">Testing Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../pipelines.html#published-and-tested-workflows">Published and Tested Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/gridmet.html">Pipeline to aggregate data from Climatology Lab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/wustl.html">Pipeline to ingest Monthly Pollution data downloaded from WashU Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/pm25_yearly_download.html">Pipeline to aggregate data in NetCDF format over given geographies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/aqs.html">Full EPA AQS Processing Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/airnow.html">Full EPA AirNow Processing Pipeline (including downloading shapefiles)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/medicare.html">Medicare data ingestion and processing pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/medicaid.html">Full Medicaid Processing Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipeline/census_workflow.html">census_workflow.cwl</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../pipelines.html#developing-new-workflows">Developing New Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipelines.html#combining-included-cwl-tools-into-a-new-workflow">Combining Included CWL Tools into a New Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipelines.html#ordering-database-steps-with-depends-on">Ordering Database Steps with <code class="docutils literal notranslate"><span class="pre">depends_on</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pipelines.html#wrapping-python-modules-as-cwl-tools">Wrapping Python Modules as CWL Tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials and worked examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Tutorials.html">Dorieh Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorial/climate/index.html">Climate tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/climate/building-climate-pipeline.html">Part 1. Building the pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/climate/documenting-a-workflow.html">Part 2. Documenting the workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/climate/constructing-lineage.html">Part 3. Data dictionaries and lineage graphs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorial/medicare/building-medicare-pipeline.html">Medicare claims pipeline tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/medicare/building-medicare-pipeline.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/medicare/building-medicare-pipeline.html#designing-the-pipeline">Designing the pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/medicare/building-medicare-pipeline.html#from-fts-documents-to-machine-readable-schemas">From FTS documents to machine-readable schemas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/medicare/building-medicare-pipeline.html#bronze-one-table-per-source-file">Bronze: one table per source file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/medicare/building-medicare-pipeline.html#silver-harmonize-disambiguate-validate">Silver: harmonize, disambiguate, validate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/medicare/building-medicare-pipeline.html#gold-the-qc-aggregates">Gold: the QC aggregates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/medicare/building-medicare-pipeline.html#orchestration-five-steps-in-medicare-cwl">Orchestration: five steps in medicare.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/medicare/building-medicare-pipeline.html#documentation-and-lineage">Documentation and lineage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorial/medicare/building-medicare-pipeline.html#running-it-yourself">Running it yourself</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../Example-climate-workflow.html">A CWL workflow example: aggregating a climate variable</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../Example-climate-workflow.html#what-the-sample-workflow-is-doing-aggregating-a-climate-variable">What the sample workflow is doing: aggregating a climate variable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Example-climate-workflow.html#prepare-to-run-a-workflow">Prepare to run a workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Example-climate-workflow.html#running-the-workflow-in-python-virtual-environment">Running the workflow in Python virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Example-climate-workflow.html#running-the-workflow-using-docker">Running the workflow using Docker</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../medicare-example.html">Medicare pipeline with publicly available synthetic data (PostgreSQL + Superset)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../medicare-example.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../medicare-example.html#step-1-download-synthetic-sample-data">Step 1 — Download synthetic sample data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../medicare-example.html#step-3-optional-explore-results-in-apache-superset">Step 3 (Optional) — Explore results in Apache Superset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../medicare-example.html#what-the-pipeline-produces">What the pipeline produces</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#related-how-to-guides">Related how-to guides</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data dictionaries</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../dictionaries.html">Data Dictionaries</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../MedicareLineage.html">Medicare data warehouse</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../medicare.dot.html">Table Lineage Diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../table-list.html">Alphabetic list of all tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../column-list.html">Alphabetic list of all columns in all tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../members/domain_dictionary.html">The Data Dictionary Generation tool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data modeling DSL reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Datamodels.html">Data Modeling for Dorieh Data Platform</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../DataModellingExtensions.html">Data Modeling Extensions: Federated Views Across Years</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../DataModellingExtensions.html#combining-multiple-sources-and-optional-columns">Combining multiple sources and optional columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../DataModellingExtensions.html#exclude">Exclude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../DataModellingExtensions.html#cast">Cast</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../DataModellingExtensions.html#validating-consistency-of-data-across-tables">Validating consistency of data across tables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Datamodels.html#introduction-to-data-modeling-for-dorieh-data-platform">Introduction to data modeling for Dorieh Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Datamodels.html#domain">Domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Datamodels.html#table">Table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#create-statement">Create statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#invalid-record">Invalid Record</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Datamodels.html#column">Column</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#source">Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#index">Index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#generated-columns">Generated columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#computed-columns">Computed columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#file-columns">File columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#record-columns">Record columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#identifier-columns-and-the-identifiers-token">Identifier columns and the <code class="docutils literal notranslate"><span class="pre">{identifiers}</span></code> token</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#transposing-columns">Transposing columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#wildcards">Wildcards</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Datamodels.html#multi-column-indices">Multi-column indices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Datamodels.html#indexing-policies">Indexing policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Datamodels.html#linking-with-nomenclature">Linking with nomenclature</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#us-states">US States</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Datamodels.html#county-codes">County codes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Datamodels.html#ingesting-data">Ingesting data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Datamodels.html#where-to-go-next">Where to go next</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../packages.html">Python Packages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../utils.html">General purpose utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../utils.html#overview-of-utilities">Overview of Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../utils.html#current-development">Current Development</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../utils.html#todo">TODO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../utils.html#documentation-indices">Documentation Indices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../CoreLibrary.html">Data platform components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../CoreLibrary.html#package-dorieh-platform">Package dorieh.platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../CoreLibrary.html#package-dorieh-platform-data-model">Package dorieh.platform.data_model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../CoreLibrary.html#package-dorieh-platform-loader">Package dorieh.platform.loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../CoreLibrary.html#package-dorieh-platform-requests">Package dorieh.platform.requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../CoreLibrary.html#package-dorieh-platform-utils">Package dorieh.platform.utils</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../gis.html">GIS utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../gis.html#gis-library-overview">GIS Library Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../gis.html#shape-files-downloader">Shape files Downloader</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../CMSLibrary.html">Health data manipulation tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../CMSLibrary.html#package-cms">Package cms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../CMSLibrary.html#package-dorieh-cms-tools">Package dorieh.cms.tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../CMSLibrary.html#additional-details">Additional details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../rasters.html">Raster data tools (climate and exposure)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../rasters.html#general-tools-for-raster-files">General tools for raster files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../rasters.html#specialized-tools-for-working-with-climate-data">Specialized tools for working with climate data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../rasters.html#specialized-tools-for-working-with-exposure-data">Specialized tools for working with exposure data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guts.html">Data Platform Internals</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../platform.html">Dorieh Core Data Platform</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../DBConnections.html">Managing database connections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../DataLoader.html">Dorieh Data Loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ProjectLoader.html">Project (Directory) Loading Utility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../TerritorialCodes.html">Mapping between different territorial codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../SQLDocumentation.html">SQL Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../platform.html#core-platform-overview">Core platform overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../platform.html#tool-examples">Tool Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../platform.html#project-structure">Project Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../platform.html#documentation-indices">Documentation Indices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../deployment.html">Dorieh Deployment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../deployment.html#using-docker">Using Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../deployment.html#using-python-virtual-environment">Using Python Virtual Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../deployment.html#using-conda-package-manager">Using Conda Package Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../deployment.html#using-toil-with-docker-requirement">Using Toil with Docker requirement</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../capabilities.html">Platform capabilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../SampleQuery.html">How to query the database</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../SampleQuery.html#setup">Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../SampleQuery.html#create-connection-definition-file">Create connection definition file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../SampleQuery.html#executing-the-query">Executing the query</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../SampleQuery.html#using-explain-to-optimize-queries">Using EXPLAIN to optimize queries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../QueringMedicaid.html">Querying Medicaid Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../QueringMedicaid.html#querying-diagnoses">Querying diagnoses</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../MonitoringDB.html">Monitoring database activity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../MonitoringDB.html#module-monitor">Module monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../MonitoringDB.html#cli-usage-for-monitor">CLI Usage for monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../MonitoringDB.html#using-as-api">Using as API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../UsingHLL.html">Approximate distinct counting with HLL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../UserRequests.html">Handling user requests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../UserRequests.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../UserRequests.html#structure">Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../example_request_yaml.html">Example user request</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Operational guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../DBT.html">Database Testing Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../members/create_test.html">Utility to generate test queries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../members/dbt_runner.html">Test runner: Utility to run generated tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../members/gen_dbt_cwl.html">The gen_dbt_cwl Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../members/create_test.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../members/create_test.html#module-dorieh.platform.dbt.create_test">Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../members/dbt_runner.html">Test runner: Utility to run generated tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../members/dbt_runner.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../members/dbt_runner.html#module-dorieh.platform.dbt.dbt_runner">Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../members/gen_dbt_cwl.html">The gen_dbt_cwl Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../members/gen_dbt_cwl.html#dorieh.platform.dbt.gen_dbt_cwl.CWLTestGenerator"><code class="docutils literal notranslate"><span class="pre">CWLTestGenerator</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../TestingWorkflows.html">Testing bundled workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../TestingWorkflows.html#introduction-to-testing-and-prerequisites">Introduction to testing and prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../TestingWorkflows.html#before-running-any-test">Before running any test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../TestingWorkflows.html#testing-aqs-workflow">Testing AQS workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../TestingWorkflows.html#testing-airnow-workflow">Testing Airnow workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../TestingWorkflows.html#testing-climate-workflow">Testing Climate workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../TestingWorkflows.html#testing-exposure-workflow">Testing Exposure workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../TestingWorkflows.html#testing-medicare-workflow">Testing Medicare workflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../adding_data.html">Adding more data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../adding_data.html#what-data-are-you-adding">What data are you adding?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../adding_data.html#data-modeling-vs-data-introspection">Data modeling vs data introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../adding_data.html#adding-new-data-domain">Adding new data domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../adding_data.html#creating-new-single-table">Creating new single table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../adding_data.html#adding-a-table-from-a-remote-data-source">Adding a table from a remote data source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../adding_data.html#adding-data-to-existing-table">Adding data to existing table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../adding_data.html#automatically-ingesting-multiple-files-from-a-file-system">Automatically ingesting multiple files from a file system</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AppPipelineGenerator.html">Executing containerized apps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../AppPipelineGenerator.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../AppPipelineGenerator.html#prerequisites">Prerequisites</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../AppPipelineGenerator.html#docker-or-python-virtual-environment">Docker or Python virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../AppPipelineGenerator.html#setup-dbms-server">Setup DBMS Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../AppPipelineGenerator.html#define-connection">Define connection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../AppPipelineGenerator.html#using-pipeline-generator">Using pipeline generator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../AppPipelineGenerator.html#generate-pipeline-and-metadata">Generate pipeline and metadata</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../AppPipelineGenerator.html#execute-generated-pipeline">Execute generated pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../AppPipelineGenerator.html#appendix-1-metadata-description">Appendix 1: Metadata description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../AppPipelineGenerator.html#file-app-config-yaml">File app.config.yaml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../AppPipelineGenerator.html#file-metadata-yml">File metadata.yml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../AppPipelineGenerator.html#file-dorieh-metadata-yaml">File dorieh-metadata.yaml</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Terms and Acronyms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../glossary.html#concepts">Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../glossary.html#acronyms">Acronyms</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docindices.html">Indices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Dorieh Data Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../dictionaries.html">Data Dictionaries</a></li>
+          <li class="breadcrumb-item"><a href="../../../MedicareLineage.html">Data dictionary and lineage for Medicare processing</a></li>
+          <li class="breadcrumb-item"><a href="../../medicare.dot.html">Table Lineage Diagram</a></li>
+          <li class="breadcrumb-item"><a href="../medicare.admissions.html">Table medicare.admissions</a></li>
+          <li class="breadcrumb-item"><a href="bene.html">Column medicare.admissions.bene</a></li>
+      <li class="breadcrumb-item active">Column medicare.admissions.bene Lineage SVG</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/lineage/tables/medicare.admissions/bene_svg_envelop.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="column-medicare-admissions-bene-lineage-svg">
+<h1>Column medicare.admissions.bene Lineage SVG<a class="headerlink" href="#column-medicare-admissions-bene-lineage-svg" title="Link to this heading"></a></h1>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 10.0.1 (20240210.2158)
+ -->
+<!-- Pages: 1 -->
+<svg width="522pt" height="852pt"
+ viewBox="0.00 0.00 522.00 851.50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 847.5)">
+<polygon fill="white" stroke="none" points="-4,4 -4,-847.5 518,-847.5 518,4 -4,4"/>
+<!-- medicare.admissions.bene -->
+<g id="node1" class="node">
+<title>medicare.admissions.bene</title>
+<g id="a_node1"><a xlink:href="../medicare.admissions/bene.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="393.25,-226.5 12.75,-226.5 12.75,0 393.25,0 393.25,-226.5"/>
+<text text-anchor="start" x="126.88" y="-205.2" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.admissions.bene</text>
+<text text-anchor="start" x="48.75" y="-158.7" font-family="Times,serif" font-size="14.00">HLL hash (see https://en.wikipedia.org/w</text>
+<text text-anchor="start" x="67.5" y="-142.2" font-family="Times,serif" font-size="14.00">iki/HyperLogLog). Can be used to</text>
+<text text-anchor="start" x="70.88" y="-125.7" font-family="Times,serif" font-size="14.00">calculate number of beneficiaries</text>
+<text text-anchor="start" x="53.62" y="-109.2" font-family="Times,serif" font-size="14.00">satisfying a certain given condition Use</text>
+<text text-anchor="start" x="95.62" y="-92.7" font-family="Times,serif" font-size="14.00">#(hll_add_agg(bene)) or</text>
+<text text-anchor="start" x="67.12" y="-76.2" font-family="Times,serif" font-size="14.00">hll_cardinality(hll_add_agg(bene))</text>
+<text text-anchor="start" x="132.75" y="-59.7" font-family="Times,serif" font-size="14.00">aggregator</text>
+<polygon fill="none" stroke="black" points="23.75,-7 23.75,-29.5 382.25,-29.5 382.25,-7 23.75,-7"/>
+<text text-anchor="start" x="26.75" y="-13.2" font-family="Times,serif" font-size="14.00">GENERATED ALWAYS AS (hll_hash_text(bene_id)) STORED</text>
+<polygon fill="none" stroke="black" points="20.75,-4 20.75,-222.5 385.25,-222.5 385.25,-4 20.75,-4"/>
+</a>
+</g>
+</g>
+<!-- medicare.ip.bene_id -->
+<g id="node2" class="node">
+<title>medicare.ip.bene_id</title>
+<g id="a_node2"><a xlink:href="../medicare.ip/bene_id.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="179.88,-299.5 36.12,-299.5 36.12,-263.5 179.88,-263.5 179.88,-299.5"/>
+<text text-anchor="start" x="49.12" y="-277.45" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.ip.bene_id</text>
+<polygon fill="none" stroke="black" points="44.12,-268.25 44.12,-294.75 171.88,-294.75 171.88,-268.25 44.12,-268.25"/>
+</a>
+</g>
+</g>
+<!-- medicare.ip.bene_id&#45;&gt;medicare.admissions.bene -->
+<g id="edge1" class="edge">
+<title>medicare.ip.bene_id&#45;&gt;medicare.admissions.bene</title>
+<path fill="none" stroke="black" d="M117.99,-263.02C122.1,-255.82 127.25,-246.81 132.96,-236.81"/>
+<polygon fill="black" stroke="black" points="135.93,-238.68 137.85,-228.27 129.85,-235.21 135.93,-238.68"/>
+<text text-anchor="middle" x="167.62" y="-239.95" font-family="Times,serif" font-size="14.00"> &#160;Transformed</text>
+</g>
+<!-- medicare.ip.bene_id_parent -->
+<g id="node3" class="node">
+<title>medicare.ip.bene_id_parent</title>
+<g id="a_node3"><a xlink:href="../medicare.ip/bene_id.html" xlink:title="8 incoming links (columns)" target="_blank">
+<path fill="yellow" stroke="black" d="M216,-434.68C216,-440.1 167.59,-444.5 108,-444.5 48.41,-444.5 0,-440.1 0,-434.68 0,-434.68 0,-346.32 0,-346.32 0,-340.9 48.41,-336.5 108,-336.5 167.59,-336.5 216,-340.9 216,-346.32 216,-346.32 216,-434.68 216,-434.68"/>
+<path fill="none" stroke="black" d="M216,-434.68C216,-429.26 167.59,-424.86 108,-424.86 48.41,-424.86 0,-429.26 0,-434.68"/>
+<text text-anchor="middle" x="108" y="-385.45" font-family="Times,serif" font-size="14.00">8 incoming links (columns)</text>
+</a>
+</g>
+</g>
+<!-- medicare.ip.bene_id_parent&#45;&gt;medicare.ip.bene_id -->
+<g id="edge2" class="edge">
+<title>medicare.ip.bene_id_parent&#45;&gt;medicare.ip.bene_id</title>
+<path fill="none" stroke="goldenrod" stroke-width="6" d="M108,-336C108,-329.21 108,-322.42 108,-316.07"/>
+<polygon fill="goldenrod" stroke="goldenrod" stroke-width="6" points="113.25,-316.15 108,-306.15 102.75,-316.15 113.25,-316.15"/>
+</g>
+<!-- medicare.enrollments.bene_id -->
+<g id="node4" class="node">
+<title>medicare.enrollments.bene_id</title>
+<g id="a_node4"><a xlink:href="../medicare.enrollments/bene_id.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="399.75,-299.5 198.25,-299.5 198.25,-263.5 399.75,-263.5 399.75,-299.5"/>
+<text text-anchor="start" x="211.25" y="-277.45" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.enrollments.bene_id</text>
+<polygon fill="none" stroke="black" points="206.25,-268.25 206.25,-294.75 391.75,-294.75 391.75,-268.25 206.25,-268.25"/>
+</a>
+</g>
+</g>
+<!-- medicare.enrollments.bene_id&#45;&gt;medicare.admissions.bene -->
+<g id="edge3" class="edge">
+<title>medicare.enrollments.bene_id&#45;&gt;medicare.admissions.bene</title>
+<path fill="none" stroke="darkorchid" stroke-width="2" d="M288.91,-263.02C284.92,-256.12 279.97,-247.55 274.49,-238.05"/>
+<polygon fill="darkorchid" stroke="darkorchid" stroke-width="2" points="277.62,-236.48 269.59,-229.57 271.56,-239.98 277.62,-236.48"/>
+<text text-anchor="middle" x="310.62" y="-239.95" font-family="Times,serif" font-size="14.00">parent&#45;child</text>
+</g>
+<!-- medicare._enrollments.bene_id -->
+<g id="node5" class="node">
+<title>medicare._enrollments.bene_id</title>
+<g id="a_node5"><a xlink:href="../medicare._enrollments/bene_id.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="381.12,-498.5 172.88,-498.5 172.88,-462.5 381.12,-462.5 381.12,-498.5"/>
+<text text-anchor="start" x="185.88" y="-476.45" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare._enrollments.bene_id</text>
+<polygon fill="none" stroke="black" points="180.88,-467.25 180.88,-493.75 373.12,-493.75 373.12,-467.25 180.88,-467.25"/>
+</a>
+</g>
+</g>
+<!-- medicare._enrollments.bene_id&#45;&gt;medicare.enrollments.bene_id -->
+<g id="edge4" class="edge">
+<title>medicare._enrollments.bene_id&#45;&gt;medicare.enrollments.bene_id</title>
+<path fill="none" stroke="black" d="M278.41,-462.3C280.67,-435.41 285.43,-381.81 291,-336.5 292.01,-328.28 293.26,-319.39 294.47,-311.23"/>
+<polygon fill="black" stroke="black" points="297.91,-311.89 295.96,-301.48 290.99,-310.84 297.91,-311.89"/>
+<text text-anchor="middle" x="310.5" y="-385.45" font-family="Times,serif" font-size="14.00">Copied</text>
+</g>
+<!-- medicare._ps.bene_id -->
+<g id="node6" class="node">
+<title>medicare._ps.bene_id</title>
+<g id="a_node6"><a xlink:href="../medicare._ps/bene_id.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="362,-625.5 210,-625.5 210,-589.5 362,-589.5 362,-625.5"/>
+<text text-anchor="start" x="223" y="-603.45" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare._ps.bene_id</text>
+<polygon fill="none" stroke="black" points="218,-594.25 218,-620.75 354,-620.75 354,-594.25 218,-594.25"/>
+</a>
+</g>
+</g>
+<!-- medicare._ps.bene_id&#45;&gt;medicare._enrollments.bene_id -->
+<g id="edge5" class="edge">
+<title>medicare._ps.bene_id&#45;&gt;medicare._enrollments.bene_id</title>
+<path fill="none" stroke="blue" stroke-width="5" d="M284.75,-589.12C283.37,-570 281.13,-538.8 279.41,-514.91"/>
+<polygon fill="blue" stroke="blue" stroke-width="5" points="283.77,-514.61 278.69,-504.95 275.04,-515.24 283.77,-514.61"/>
+<text text-anchor="middle" x="397.38" y="-565.95" font-family="Times,serif" font-size="14.00">	 &#160;Aggregated On bene_id, year, state</text>
+</g>
+<!-- medicare._beneficiaries.bene_id -->
+<g id="node10" class="node">
+<title>medicare._beneficiaries.bene_id</title>
+<g id="a_node10"><a xlink:href="../medicare._beneficiaries/bene_id.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="514,-552.5 302,-552.5 302,-516.5 514,-516.5 514,-552.5"/>
+<text text-anchor="start" x="315" y="-530.45" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare._beneficiaries.bene_id</text>
+<polygon fill="none" stroke="black" points="310,-521.25 310,-547.75 506,-547.75 506,-521.25 310,-521.25"/>
+</a>
+</g>
+</g>
+<!-- medicare._ps.bene_id&#45;&gt;medicare._beneficiaries.bene_id -->
+<g id="edge10" class="edge">
+<title>medicare._ps.bene_id&#45;&gt;medicare._beneficiaries.bene_id</title>
+<path fill="none" stroke="blue" stroke-width="5" d="M315.84,-589.13C330.47,-580.62 348.35,-570.21 364.47,-560.84"/>
+<polygon fill="blue" stroke="blue" stroke-width="5" points="366.21,-564.88 372.65,-556.07 361.81,-557.32 366.21,-564.88"/>
+<text text-anchor="middle" x="430.25" y="-565.95" font-family="Times,serif" font-size="14.00">	 &#160;Aggregated On bene_id</text>
+</g>
+<!-- medicare.ps.bene_id -->
+<g id="node7" class="node">
+<title>medicare.ps.bene_id</title>
+<g id="a_node7"><a xlink:href="../medicare.ps/bene_id.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="358.62,-698.5 213.38,-698.5 213.38,-662.5 358.62,-662.5 358.62,-698.5"/>
+<text text-anchor="start" x="226.38" y="-676.45" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.ps.bene_id</text>
+<polygon fill="none" stroke="black" points="221.38,-667.25 221.38,-693.75 350.62,-693.75 350.62,-667.25 221.38,-667.25"/>
+</a>
+</g>
+</g>
+<!-- medicare.ps.bene_id&#45;&gt;medicare._ps.bene_id -->
+<g id="edge6" class="edge">
+<title>medicare.ps.bene_id&#45;&gt;medicare._ps.bene_id</title>
+<path fill="none" stroke="black" d="M284.21,-662.07C283.71,-656.47 283.25,-650.23 283,-644.5 282.9,-642.1 282.89,-639.62 282.96,-637.12"/>
+<polygon fill="black" stroke="black" points="286.45,-637.41 283.59,-627.21 279.46,-636.96 286.45,-637.41"/>
+<text text-anchor="middle" x="302.5" y="-638.95" font-family="Times,serif" font-size="14.00">Copied</text>
+</g>
+<!-- medicare.ps.bene_id&#45;&gt;medicare._ps.bene_id -->
+<g id="edge11" class="edge">
+<title>medicare.ps.bene_id&#45;&gt;medicare._ps.bene_id</title>
+<path fill="none" stroke="black" d="M286,-662.31C286,-654.73 286,-645.6 286,-637.04"/>
+<polygon fill="black" stroke="black" points="289.5,-637.04 286,-627.04 282.5,-637.04 289.5,-637.04"/>
+<text text-anchor="middle" x="305.5" y="-638.95" font-family="Times,serif" font-size="14.00">Copied</text>
+</g>
+<!-- medicare.ps.bene_id_parent -->
+<g id="node8" class="node">
+<title>medicare.ps.bene_id_parent</title>
+<g id="a_node8"><a xlink:href="../medicare.ps/bene_id.html" xlink:title="8 incoming links (columns)" target="_blank">
+<path fill="yellow" stroke="black" d="M394,-833.68C394,-839.1 345.59,-843.5 286,-843.5 226.41,-843.5 178,-839.1 178,-833.68 178,-833.68 178,-745.32 178,-745.32 178,-739.9 226.41,-735.5 286,-735.5 345.59,-735.5 394,-739.9 394,-745.32 394,-745.32 394,-833.68 394,-833.68"/>
+<path fill="none" stroke="black" d="M394,-833.68C394,-828.26 345.59,-823.86 286,-823.86 226.41,-823.86 178,-828.26 178,-833.68"/>
+<text text-anchor="middle" x="286" y="-784.45" font-family="Times,serif" font-size="14.00">8 incoming links (columns)</text>
+</a>
+</g>
+</g>
+<!-- medicare.ps.bene_id_parent&#45;&gt;medicare.ps.bene_id -->
+<g id="edge7" class="edge">
+<title>medicare.ps.bene_id_parent&#45;&gt;medicare.ps.bene_id</title>
+<path fill="none" stroke="goldenrod" stroke-width="6" d="M279.25,-735C279.25,-728.21 279.39,-721.42 279.68,-715.07"/>
+<polygon fill="goldenrod" stroke="goldenrod" stroke-width="6" points="284.92,-715.49 280.41,-705.13 274.45,-714.72 284.92,-715.49"/>
+</g>
+<!-- medicare.ps.bene_id_parent&#45;&gt;medicare.ps.bene_id -->
+<g id="edge12" class="edge">
+<title>medicare.ps.bene_id_parent&#45;&gt;medicare.ps.bene_id</title>
+<path fill="none" stroke="goldenrod" stroke-width="6" d="M292.75,-735C292.75,-728.21 292.61,-721.42 292.32,-715.07"/>
+<polygon fill="goldenrod" stroke="goldenrod" stroke-width="6" points="297.55,-714.72 291.59,-705.13 287.08,-715.49 297.55,-714.72"/>
+</g>
+<!-- medicare.beneficiaries.bene_id -->
+<g id="node9" class="node">
+<title>medicare.beneficiaries.bene_id</title>
+<g id="a_node9"><a xlink:href="../medicare.beneficiaries/bene_id.html" xlink:title="&lt;TABLE&gt;" target="_blank">
+<polygon fill="none" stroke="black" points="506.62,-408.5 301.38,-408.5 301.38,-372.5 506.62,-372.5 506.62,-408.5"/>
+<text text-anchor="start" x="314.38" y="-386.45" font-family="Times,serif" font-weight="bold" font-size="14.00">medicare.beneficiaries.bene_id</text>
+<polygon fill="none" stroke="black" points="309.38,-377.25 309.38,-403.75 498.62,-403.75 498.62,-377.25 309.38,-377.25"/>
+</a>
+</g>
+</g>
+<!-- medicare.beneficiaries.bene_id&#45;&gt;medicare.enrollments.bene_id -->
+<g id="edge8" class="edge">
+<title>medicare.beneficiaries.bene_id&#45;&gt;medicare.enrollments.bene_id</title>
+<path fill="none" stroke="darkorchid" stroke-width="2" d="M387.13,-372.31C370.29,-355.15 344.19,-328.55 324.76,-308.75"/>
+<polygon fill="darkorchid" stroke="darkorchid" stroke-width="2" points="327.45,-306.5 317.95,-301.81 322.45,-311.4 327.45,-306.5"/>
+<text text-anchor="middle" x="352.5" y="-312.95" font-family="Times,serif" font-size="14.00">Copied</text>
+</g>
+<!-- medicare._beneficiaries.bene_id&#45;&gt;medicare.beneficiaries.bene_id -->
+<g id="edge9" class="edge">
+<title>medicare._beneficiaries.bene_id&#45;&gt;medicare.beneficiaries.bene_id</title>
+<path fill="none" stroke="black" d="M407.51,-516.09C406.83,-492.11 405.61,-448.64 404.8,-419.92"/>
+<polygon fill="black" stroke="black" points="408.3,-420.02 404.52,-410.12 401.31,-420.22 408.3,-420.02"/>
+<text text-anchor="middle" x="425.5" y="-475.45" font-family="Times,serif" font-size="14.00">Copied</text>
+</g>
+</g>
+</svg>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bene.html" class="btn btn-neutral float-left" title="Column medicare.admissions.bene" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bene_blood_ddctbl_amt.html" class="btn btn-neutral float-right" title="Column medicare.admissions.bene_blood_ddctbl_amt" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2026, Harvard University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

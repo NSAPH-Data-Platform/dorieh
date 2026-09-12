@@ -1,0 +1,22 @@
+# Column cms.medpar_2014.COIN_DAY
+
+## Overview of column COIN_DAY in table cms.medpar_2014 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2014](../cms.medpar_2014.md)           |
+| Qualified name                | cms.medpar_2014.COIN_DAY  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/medpar-beneficiary-total-coinsurance-day-count](https://resdac.org/cms-data/variables/medpar-beneficiary-total-coinsurance-day-count) |
+
+
+MEDPAR Beneficiary Total Coinsurance Day Count
+
+| Key | Value |
+| --- | ----- |
+| long_name | TOT_COINSRNC_DAY_CNT |
+| original_type | NUM |
+| width | 5.0 |
+
+
+

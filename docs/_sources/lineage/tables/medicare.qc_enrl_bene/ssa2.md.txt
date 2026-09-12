@@ -1,0 +1,39 @@
+# Column medicare.qc_enrl_bene.ssa2
+
+## Overview of column ssa2 in table medicare.qc_enrl_bene 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_enrl_bene](../medicare.qc_enrl_bene.md)           |
+| Qualified name                | medicare.qc_enrl_bene.ssa2  |
+| Datatype                      | string        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT MAX(ssa2)
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+ssa2_svg_envelop.md
+```
+
+
+```{figure} ssa2.svg
+:align: center
+:alt: Column medicare.qc_enrl_bene.ssa2 Lineage SVG
+:target: ssa2_svg_envelop.html
+
+Data lineage for column medicare.qc_enrl_bene.ssa2
+
+```
+
+

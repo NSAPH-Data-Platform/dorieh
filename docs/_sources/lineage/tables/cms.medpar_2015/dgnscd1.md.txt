@@ -1,0 +1,22 @@
+# Column cms.medpar_2015.DGNSCD1
+
+## Overview of column DGNSCD1 in table cms.medpar_2015 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2015](../cms.medpar_2015.md)           |
+| Qualified name                | cms.medpar_2015.DGNSCD1  |
+| Datatype                      | VARCHAR(7)        |
+| Reference | [https://resdac.org/cms-data/variables/medpar-principal-diagnosis-code](https://resdac.org/cms-data/variables/medpar-principal-diagnosis-code) |
+
+
+Primary ICD-9-CM code
+
+| Key | Value |
+| --- | ----- |
+| long_name | DGNS_1_CD |
+| original_type | CHAR |
+| width | 7.0 |
+
+
+

@@ -1,0 +1,22 @@
+# Column cms.mbsf_d_2013.RFRNC_YR
+
+## Overview of column RFRNC_YR in table cms.mbsf_d_2013 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_d_2013](../cms.mbsf_d_2013.md)           |
+| Qualified name                | cms.mbsf_d_2013.RFRNC_YR  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/reference-year-base](https://resdac.org/cms-data/variables/reference-year-base) |
+
+
+Beneficiary Enrollment Reference Year
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_ENROLLMT_REF_YR |
+| original_type | NUM |
+| width | 4.0 |
+
+
+

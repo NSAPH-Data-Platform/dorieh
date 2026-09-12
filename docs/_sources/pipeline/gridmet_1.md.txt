@@ -16,13 +16,14 @@ local:
 
 ## Inputs
 
-| Name            | Type   | Default | Description | 
-|:----------------|:-------|:--------|:------------|
-| connection_name | string |         |             | 
-| database        | File   |         |             | 
-| domain          | string |         |             | 
-| registry        | File   |         |             | 
-| table           | string |         |             | 
+| Name            | Type   | Default | Description                                                      | 
+|:----------------|:-------|:--------|:-----------------------------------------------------------------|
+| connection_name | string |         |                                                                  | 
+| database        | File   |         |                                                                  | 
+| depends_on      | Any?   |         | a special field used to enforce dependencies and execution order | 
+| domain          | string |         |                                                                  | 
+| registry        | File   |         |                                                                  | 
+| table           | string |         |                                                                  | 
 
 ## Outputs
 

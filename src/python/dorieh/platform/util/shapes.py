@@ -49,7 +49,8 @@ def install(dest: str) -> List[str]:
 
 
 if __name__ == '__main__':
+    import tempfile
     print(get_resources("shapes.zips."))
     print(get_resources("shapes.counties."))
-    shps = install("/tmp/shapes")
+    shps = install(tempfile.mkdtemp(prefix="dorieh-shapes-"))
     print(shps)

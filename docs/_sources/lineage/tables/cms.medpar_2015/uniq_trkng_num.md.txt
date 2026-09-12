@@ -1,0 +1,22 @@
+# Column cms.medpar_2015.UNIQ_TRKNG_NUM
+
+## Overview of column UNIQ_TRKNG_NUM in table cms.medpar_2015 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2015](../cms.medpar_2015.md)           |
+| Qualified name                | cms.medpar_2015.UNIQ_TRKNG_NUM  |
+| Datatype                      | VARCHAR(14)        |
+| Reference | [https://resdac.org/cms-data/variables/unique-tracking-number](https://resdac.org/cms-data/variables/unique-tracking-number) |
+
+
+Claim Unique Tracking Number
+
+| Key | Value |
+| --- | ----- |
+| long_name | UNIQ_TRKNG_NUM |
+| original_type | CHAR |
+| width | 14.0 |
+
+
+

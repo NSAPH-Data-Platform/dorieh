@@ -1,0 +1,22 @@
+# Column cms.mbsf_abcd_2016.SGMTID03
+
+## Overview of column SGMTID03 in table cms.mbsf_abcd_2016 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_abcd_2016](../cms.mbsf_abcd_2016.md)           |
+| Qualified name                | cms.mbsf_abcd_2016.SGMTID03  |
+| Datatype                      | VARCHAR(3)        |
+| Reference | [https://resdac.org/cms-data/variables/monthly-part-d-market-segment-identifier-march](https://resdac.org/cms-data/variables/monthly-part-d-market-segment-identifier-march) |
+
+
+Part D Segment ID: March
+
+| Key | Value |
+| --- | ----- |
+| long_name | PTD_SGMT_ID_03 |
+| original_type | CHAR |
+| width | 3.0 |
+
+
+

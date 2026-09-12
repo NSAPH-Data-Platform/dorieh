@@ -1,0 +1,22 @@
+# Column cms.medpar_2011.POA_DGNS_E_2_IND_CD
+
+## Overview of column POA_DGNS_E_2_IND_CD in table cms.medpar_2011 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2011](../cms.medpar_2011.md)           |
+| Qualified name                | cms.medpar_2011.POA_DGNS_E_2_IND_CD  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/diagnosis-e-code-present-admission-indicator-2](https://resdac.org/cms-data/variables/diagnosis-e-code-present-admission-indicator-2) |
+
+
+Diagnosis E Code Present on Admission Indicator 2
+
+| Key | Value |
+| --- | ----- |
+| long_name | POA_DGNS_E_2_IND_CD |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

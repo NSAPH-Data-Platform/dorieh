@@ -1,0 +1,22 @@
+# Column cms.medpar_2013.DGNSCD4
+
+## Overview of column DGNSCD4 in table cms.medpar_2013 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2013](../cms.medpar_2013.md)           |
+| Qualified name                | cms.medpar_2013.DGNSCD4  |
+| Datatype                      | VARCHAR(7)        |
+| Reference | [https://resdac.org/cms-data/variables/medpar-diagnosis-code-4](https://resdac.org/cms-data/variables/medpar-diagnosis-code-4) |
+
+
+ICD-9-CM Diagnosis code IV
+
+| Key | Value |
+| --- | ----- |
+| long_name | DGNS_4_CD |
+| original_type | CHAR |
+| width | 7.0 |
+
+
+

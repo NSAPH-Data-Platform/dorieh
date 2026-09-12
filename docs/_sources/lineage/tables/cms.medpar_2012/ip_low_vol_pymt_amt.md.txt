@@ -1,0 +1,22 @@
+# Column cms.medpar_2012.IP_LOW_VOL_PYMT_AMT
+
+## Overview of column IP_LOW_VOL_PYMT_AMT in table cms.medpar_2012 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2012](../cms.medpar_2012.md)           |
+| Qualified name                | cms.medpar_2012.IP_LOW_VOL_PYMT_AMT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/inpatient-low-volume-payment-amount](https://resdac.org/cms-data/variables/inpatient-low-volume-payment-amount) |
+
+
+Inpatient Low Volume Payment Amount.
+
+| Key | Value |
+| --- | ----- |
+| long_name | IP_LOW_VOL_PYMT_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

@@ -1,0 +1,22 @@
+# Column cms.medpar_2017.CLM_IP_INITL_MS_DRG_CD
+
+## Overview of column CLM_IP_INITL_MS_DRG_CD in table cms.medpar_2017 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2017](../cms.medpar_2017.md)           |
+| Qualified name                | cms.medpar_2017.CLM_IP_INITL_MS_DRG_CD  |
+| Datatype                      | VARCHAR(4)        |
+| Reference | [https://resdac.org/cms-data/variables/medpar-claim-inpatient-initial-ms-drg-code](https://resdac.org/cms-data/variables/medpar-claim-inpatient-initial-ms-drg-code) |
+
+
+Claim Inpatient Initial MS-DRG Code
+
+| Key | Value |
+| --- | ----- |
+| long_name | CLM_IP_INITL_MS_DRG_CD |
+| original_type | CHAR |
+| width | 4.0 |
+
+
+

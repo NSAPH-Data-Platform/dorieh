@@ -1,0 +1,125 @@
+# Table medicare.enrollments
+
+## Overview for medicare.enrollments
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+medicare.enrollments/age.md
+medicare.enrollments/age_min.md
+medicare.enrollments/bene.md
+medicare.enrollments/bene_id.md
+medicare.enrollments/buyin.md
+medicare.enrollments/buyin_cvg_count.md
+medicare.enrollments/buyin_indicators.md
+medicare.enrollments/consistent_curec.md
+medicare.enrollments/curec.md
+medicare.enrollments/curec_latest.md
+medicare.enrollments/died.md
+medicare.enrollments/dual.md
+medicare.enrollments/dual_cvg_count.md
+medicare.enrollments/dual_indicators.md
+medicare.enrollments/file.md
+medicare.enrollments/fips2.md
+medicare.enrollments/fips3.md
+medicare.enrollments/fips3_is_approximated.md
+medicare.enrollments/fips3_valdiated.md
+medicare.enrollments/fips5.md
+medicare.enrollments/hmo.md
+medicare.enrollments/hmo_cvg_count.md
+medicare.enrollments/hmo_indicators.md
+medicare.enrollments/record.md
+medicare.enrollments/residence_counties.md
+medicare.enrollments/residence_county.md
+medicare.enrollments/ssa2.md
+medicare.enrollments/ssa2_list.md
+medicare.enrollments/ssa3.md
+medicare.enrollments/ssa3_list.md
+medicare.enrollments/state.md
+medicare.enrollments/state_count.md
+medicare.enrollments/state_iso.md
+medicare.enrollments/year.md
+medicare.enrollments/zip.md
+medicare.enrollments/zips.md
+```
+
+
+Cleaned up and unified Medicare beneficiaries enrollments table,
+by state and year. This table is indexed and optimized
+for efficient queries
+
+
+Child table of [medicare.beneficiaries](medicare.beneficiaries.md)
+
+Transformed from [medicare._enrollments](medicare._enrollments.md)
+
+Primary Key: bene_id, year, state
+
+
+<details>
+
+<summary>SQL/DDL Statement</summary>
+
+```sql
+CREATE table medicare.enrollments AS SELECT * 
+FROM medicare._enrollments
+;
+ALTER table medicare.enrollments ADD COLUMN hmo BOOLEAN GENERATED ALWAYS AS (CASE WHEN hmo_cvg_count IS NULL THEN NULL WHEN hmo_cvg_count > 0 THEN TRUE ELSE FALSE END) STORED;
+ALTER table medicare.enrollments ADD COLUMN buyin BOOLEAN GENERATED ALWAYS AS (CASE WHEN buyin_cvg_count IS NULL THEN NULL WHEN buyin_cvg_count > 0 THEN TRUE ELSE FALSE END) STORED;
+ALTER table medicare.enrollments ADD COLUMN dual BOOLEAN GENERATED ALWAYS AS (CASE WHEN dual_cvg_count IS NULL THEN NULL WHEN dual_cvg_count > 0 THEN TRUE ELSE FALSE END) STORED;
+ALTER table medicare.enrollments ADD COLUMN consistent_curec VARCHAR(12) GENERATED ALWAYS AS (CASE WHEN curec IS NULL THEN 'MISSING' WHEN curec_latest IS NOT NULL THEN 'AMBIGUOUS' ELSE 'CONSISTENT' END) STORED;
+ALTER table medicare.enrollments ADD COLUMN bene HLL_HASHVAL GENERATED ALWAYS AS (hll_hash_text(bene_id)) STORED;
+ALTER table medicare.enrollments ADD PRIMARY KEY (bene_id, year, state);
+ALTER table medicare.enrollments ADD CONSTRAINT enrollments_to_beneficiaries FOREIGN KEY (bene_id) REFERENCES medicare.beneficiaries (bene_id);
+
+COMMENT ON table medicare.enrollments IS 'CREATED BY Dorieh: {"version": "0.5.1.post2", "url": "file://<local checkout>", "commit": null}. Created at 2026-09-12 15:03:07.736584';
+```
+
+</details>
+
+---
+## Columns:
+
+| Column Name | Column Type | Datatype |
+| --- | --- | --- |
+| [age](medicare.enrollments/age.md) | copied | string |
+| [age_min](medicare.enrollments/age_min.md) | copied | string |
+| [bene](medicare.enrollments/bene.md) | generated | HLL_HASHVAL |
+| [bene_id](medicare.enrollments/bene_id.md) | copied | string |
+| [buyin](medicare.enrollments/buyin.md) | generated | boolean |
+| [buyin_cvg_count](medicare.enrollments/buyin_cvg_count.md) | copied | string |
+| [buyin_indicators](medicare.enrollments/buyin_indicators.md) | copied | string |
+| [consistent_curec](medicare.enrollments/consistent_curec.md) | generated | VARCHAR(12) |
+| [curec](medicare.enrollments/curec.md) | copied | string |
+| [curec_latest](medicare.enrollments/curec_latest.md) | copied | string |
+| [died](medicare.enrollments/died.md) | copied | string |
+| [dual](medicare.enrollments/dual.md) | generated | boolean |
+| [dual_cvg_count](medicare.enrollments/dual_cvg_count.md) | copied | string |
+| [dual_indicators](medicare.enrollments/dual_indicators.md) | copied | string |
+| [file](medicare.enrollments/file.md) | copied | string |
+| [fips2](medicare.enrollments/fips2.md) | copied | string |
+| [fips3](medicare.enrollments/fips3.md) | copied | string |
+| [fips3_is_approximated](medicare.enrollments/fips3_is_approximated.md) | copied | string |
+| [fips3_valdiated](medicare.enrollments/fips3_valdiated.md) | copied | string |
+| [fips5](medicare.enrollments/fips5.md) | copied | string |
+| [hmo](medicare.enrollments/hmo.md) | generated | boolean |
+| [hmo_cvg_count](medicare.enrollments/hmo_cvg_count.md) | copied | string |
+| [hmo_indicators](medicare.enrollments/hmo_indicators.md) | copied | string |
+| [record](medicare.enrollments/record.md) | copied | string |
+| [residence_counties](medicare.enrollments/residence_counties.md) | copied | string |
+| [residence_county](medicare.enrollments/residence_county.md) | copied | string |
+| [ssa2](medicare.enrollments/ssa2.md) | copied | string |
+| [ssa2_list](medicare.enrollments/ssa2_list.md) | copied | string |
+| [ssa3](medicare.enrollments/ssa3.md) | copied | string |
+| [ssa3_list](medicare.enrollments/ssa3_list.md) | copied | string |
+| [state](medicare.enrollments/state.md) | copied | string |
+| [state_count](medicare.enrollments/state_count.md) | copied | string |
+| [state_iso](medicare.enrollments/state_iso.md) | copied | char(5) |
+| [year](medicare.enrollments/year.md) | copied | string |
+| [zip](medicare.enrollments/zip.md) | copied | string |
+| [zips](medicare.enrollments/zips.md) | copied | string |
+
+

@@ -1,0 +1,22 @@
+# Column cms.mbsf_abcd_2016.ESRD_IND
+
+## Overview of column ESRD_IND in table cms.mbsf_abcd_2016 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_abcd_2016](../cms.mbsf_abcd_2016.md)           |
+| Qualified name                | cms.mbsf_abcd_2016.ESRD_IND  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/sites/datadocumentation.resdac.org/files/Introduction%20to%20DE-SynPUF%20%28Slides%29.pdf](https://resdac.org/sites/datadocumentation.resdac.org/files/Introduction%20to%20DE-SynPUF%20%28Slides%29.pdf) |
+
+
+End-Stage Renal Disease (ESRD) Indicator
+
+| Key | Value |
+| --- | ----- |
+| long_name | ESRD_IND |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

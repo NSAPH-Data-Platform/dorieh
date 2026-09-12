@@ -1,0 +1,45 @@
+# Column medicare._ps.dod
+
+## Overview of column dod in table medicare._ps 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare._ps](../medicare._ps.md)           |
+| Qualified name                | medicare._ps.dod  |
+| Datatype                      | date        |
+| Column type | copied |
+
+
+Date of beneficiary death, if available
+
+
+
+
+### Casts:
+
+| Original type | Cast expression      |
+| ------------- | -------------------- |
+| character varying | (CASE WHEN {column_name} = '00000000' THEN NULL ELSE public.parse_date({column_name}) END) |
+| numeric | (CASE WHEN {column_name} < 19000000 THEN NULL ELSE to_date(to_char({column_name}, '00000000'), 'YYYYMMDD') END) |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+dod_svg_envelop.md
+```
+
+
+```{figure} dod.svg
+:align: center
+:alt: Column medicare._ps.dod Lineage SVG
+:target: dod_svg_envelop.html
+
+Data lineage for column medicare._ps.dod
+
+```
+
+

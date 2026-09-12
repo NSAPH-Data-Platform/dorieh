@@ -1,6 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Aggregate original file  (downscale, county) " type="PythonConfigurationType" factoryName="Python" folderName="Python - Aggregations - Exposures">
     <module name="dorieh" />
+    <option name="ENV_FILES" value="" />
     <option name="INTERPRETER_OPTIONS" value="" />
     <option name="PARENT_ENVS" value="true" />
     <envs>
@@ -24,7 +25,7 @@
       </ENTRIES>
     </EXTENSION>
     <option name="SCRIPT_NAME" value="dorieh.rasters.file_processors.wustl_file_processor" />
-    <option name="PARAMETERS" value="--raw_downloads pm25/V4NA03_PM25_NA_201601_201612-RH35.nc --strategy downscale --geography county --shape_files $USER_HOME$/nsaph/gridmet/shapes/2010/gz_2010_us_050_00_500k.shp --var PM25 -d data/processed/auto --ram 16GB" />
+    <option name="PARAMETERS" value="--raw_downloads $PROJECT_DIR$/../../projects/gridmet/pm25/V4NA03_PM25_NA_201601_201612-RH35.nc --strategy auto --geography county --shape_files $PROJECT_DIR$/../../projects/data_server/cwl-rundir/shapes/2010/gz_2010_us_050_00_500k.shp --var PM25 -d data/processed/auto --ram 96GB" />
     <option name="SHOW_COMMAND_LINE" value="false" />
     <option name="EMULATE_TERMINAL" value="false" />
     <option name="MODULE_MODE" value="true" />

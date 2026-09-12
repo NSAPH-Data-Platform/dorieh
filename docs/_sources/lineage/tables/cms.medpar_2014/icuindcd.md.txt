@@ -1,0 +1,22 @@
+# Column cms.medpar_2014.ICUINDCD
+
+## Overview of column ICUINDCD in table cms.medpar_2014 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2014](../cms.medpar_2014.md)           |
+| Qualified name                | cms.medpar_2014.ICUINDCD  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/intensive-care-unit-icu-indicator-code](https://resdac.org/cms-data/variables/intensive-care-unit-icu-indicator-code) |
+
+
+ICU type code
+
+| Key | Value |
+| --- | ----- |
+| long_name | ICU_IND_CD |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

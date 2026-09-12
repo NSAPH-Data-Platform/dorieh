@@ -1,0 +1,22 @@
+# Column cms.medpar_2014.PPS_IND
+
+## Overview of column PPS_IND in table cms.medpar_2014 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2014](../cms.medpar_2014.md)           |
+| Qualified name                | cms.medpar_2014.PPS_IND  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/prospective-payment-system-pps-indicator-code](https://resdac.org/cms-data/variables/prospective-payment-system-pps-indicator-code) |
+
+
+Code indicating whether or not facility is being paid under PPS
+
+| Key | Value |
+| --- | ----- |
+| long_name | PPS_IND_CD |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

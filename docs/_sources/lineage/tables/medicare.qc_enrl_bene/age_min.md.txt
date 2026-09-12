@@ -1,0 +1,42 @@
+# Column medicare.qc_enrl_bene.age_min
+
+## Overview of column age_min in table medicare.qc_enrl_bene 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_enrl_bene](../medicare.qc_enrl_bene.md)           |
+| Qualified name                | medicare.qc_enrl_bene.age_min  |
+| Datatype                      | string        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT CASE
+  WHEN MIN(age) <> MAX(age) THEN MIN(age)
+END
+
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+age_min_svg_envelop.md
+```
+
+
+```{figure} age_min.svg
+:align: center
+:alt: Column medicare.qc_enrl_bene.age_min Lineage SVG
+:target: age_min_svg_envelop.html
+
+Data lineage for column medicare.qc_enrl_bene.age_min
+
+```
+
+

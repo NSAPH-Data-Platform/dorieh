@@ -1,0 +1,22 @@
+# Column cms.mbsf_abcd_2015.CRNT_BIC
+
+## Overview of column CRNT_BIC in table cms.mbsf_abcd_2015 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_abcd_2015](../cms.mbsf_abcd_2015.md)           |
+| Qualified name                | cms.mbsf_abcd_2015.CRNT_BIC  |
+| Datatype                      | VARCHAR(2)        |
+| Reference | [https://resdac.org/cms-data/variables/current-beneficiary-identification-code](https://resdac.org/cms-data/variables/current-beneficiary-identification-code) |
+
+
+Current Beneficiary Identification Code
+
+| Key | Value |
+| --- | ----- |
+| long_name | CRNT_BIC_CD |
+| original_type | CHAR |
+| width | 2.0 |
+
+
+

@@ -1,0 +1,39 @@
+# Column medicare.qc_enrl_bene.fips3_is_approximated
+
+## Overview of column fips3_is_approximated in table medicare.qc_enrl_bene 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_enrl_bene](../medicare.qc_enrl_bene.md)           |
+| Qualified name                | medicare.qc_enrl_bene.fips3_is_approximated  |
+| Datatype                      | string        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT every(fips3_is_approximated)
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+fips3_is_approximated_svg_envelop.md
+```
+
+
+```{figure} fips3_is_approximated.svg
+:align: center
+:alt: Column medicare.qc_enrl_bene.fips3_is_approximated Lineage SVG
+:target: fips3_is_approximated_svg_envelop.html
+
+Data lineage for column medicare.qc_enrl_bene.fips3_is_approximated
+
+```
+
+

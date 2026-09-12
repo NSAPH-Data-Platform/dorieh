@@ -1,0 +1,22 @@
+# Column cms.medpar_2014.BLDADMIN
+
+## Overview of column BLDADMIN in table cms.medpar_2014 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2014](../cms.medpar_2014.md)           |
+| Qualified name                | cms.medpar_2014.BLDADMIN  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/blood-storage-and-processing-charge-amount](https://resdac.org/cms-data/variables/blood-storage-and-processing-charge-amount) |
+
+
+Blood storage and processing related to beneficiarys stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | BLOOD_ADMIN_CHRG_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

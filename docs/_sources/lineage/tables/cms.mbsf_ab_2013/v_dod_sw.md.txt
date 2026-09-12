@@ -1,0 +1,22 @@
+# Column cms.mbsf_ab_2013.V_DOD_SW
+
+## Overview of column V_DOD_SW in table cms.mbsf_ab_2013 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_ab_2013](../cms.mbsf_ab_2013.md)           |
+| Qualified name                | cms.mbsf_ab_2013.V_DOD_SW  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/date-death](https://resdac.org/cms-data/variables/date-death) |
+
+
+Valid Date of Death Switch
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_VALID_DEATH_DT_SW |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

@@ -1,0 +1,40 @@
+# Column medicare._ps.curec
+
+## Overview of column curec in table medicare._ps 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare._ps](../medicare._ps.md)           |
+| Qualified name                | medicare._ps.curec  |
+| Datatype                      | INT        |
+| Column type | copied |
+
+
+
+### Casts:
+
+| Original type | Cast expression      |
+| ------------- | -------------------- |
+| * | {column_name}::INT |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+curec_svg_envelop.md
+```
+
+
+```{figure} curec.svg
+:align: center
+:alt: Column medicare._ps.curec Lineage SVG
+:target: curec_svg_envelop.html
+
+Data lineage for column medicare._ps.curec
+
+```
+
+

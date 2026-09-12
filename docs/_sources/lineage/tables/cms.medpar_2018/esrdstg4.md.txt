@@ -1,0 +1,22 @@
+# Column cms.medpar_2018.ESRDSTG4
+
+## Overview of column ESRDSTG4 in table cms.medpar_2018 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2018](../cms.medpar_2018.md)           |
+| Qualified name                | cms.medpar_2018.ESRDSTG4  |
+| Datatype                      | VARCHAR(2)        |
+| Reference | [https://resdac.org/cms-data/variables/dialysis-service-type-code-4](https://resdac.org/cms-data/variables/dialysis-service-type-code-4) |
+
+
+Dialysis type code IV
+
+| Key | Value |
+| --- | ----- |
+| long_name | ESRD_SETG_IND_4_CD |
+| original_type | CHAR |
+| width | 2.0 |
+
+
+

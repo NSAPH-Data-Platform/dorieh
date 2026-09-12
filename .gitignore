@@ -158,3 +158,41 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+
+# Generated Medicare data dictionary and lineage pages.
+# Built at documentation-build time by build_documentation.sh; regeneration
+# recipe is documented in doc/MedicareLineage.md. Only the *.eps exports
+# (book figure sources) and the tracked snapshot .dot files are committed.
+doc/lineage/*.md
+doc/lineage/*.svg
+doc/lineage/tables/**/*.md
+doc/lineage/tables/**/*.svg
+doc/lineage/tables/**/*.dot
+doc/lineage/tables/*.md
+
+# Generated climate tutorial data dictionary (doc/tutorial/climate/mddocs).
+# Built at documentation-build time by build_documentation.sh, same policy
+# as doc/lineage above: only the curated pages (example1.md, example1.png,
+# example1cwl_src.md) and the book figure sources (table-lineage.dot, *.eps)
+# are committed.
+doc/tutorial/climate/mddocs/*.html
+doc/tutorial/climate/mddocs/example1.dot
+doc/tutorial/climate/mddocs/example1.dot.md
+doc/tutorial/climate/mddocs/example1.dot.svg
+doc/tutorial/climate/mddocs/example1.dot_svg_envelop.md
+doc/tutorial/climate/mddocs/table-list.md
+doc/tutorial/climate/mddocs/column-list.md
+doc/tutorial/climate/mddocs/tables/
+
+# Generated documentation templates: collector output (doc/members, one .rst
+# per Python module) and cwl2md output (doc/pipeline), both produced by
+# build_documentation.sh at build time. A small legacy snapshot of these
+# remains tracked; a deliberately curated page can be added with git add -f.
+doc/members/
+doc/pipeline/
+
+# The Medicare example's input data (DAT + FTS bundles) is downloaded from
+# Zenodo (see examples/with-postgres/medicare/README.md). FTS layouts are
+# owned by the synthetic-resdac-claims generator and ship inside each
+# dataset bundle; no copy belongs in this repository.
+examples/with-postgres/medicare/data/

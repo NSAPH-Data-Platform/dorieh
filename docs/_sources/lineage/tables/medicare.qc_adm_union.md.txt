@@ -1,0 +1,102 @@
+# View medicare.qc_adm_union
+
+## Overview for medicare.qc_adm_union
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+medicare.qc_adm_union/adm_day_of_week.md
+medicare.qc_adm_union/admission_date.md
+medicare.qc_adm_union/admission_year.md
+medicare.qc_adm_union/bene.md
+medicare.qc_adm_union/bene_id.md
+medicare.qc_adm_union/diagnoses.md
+medicare.qc_adm_union/discharge_date.md
+medicare.qc_adm_union/icd_hll.md
+medicare.qc_adm_union/pd_hll_hash.md
+medicare.qc_adm_union/primary_diagnosis.md
+medicare.qc_adm_union/reason.md
+medicare.qc_adm_union/state.md
+medicare.qc_adm_union/state_iso.md
+medicare.qc_adm_union/year.md
+medicare.qc_adm_union/zip.md
+```
+
+
+Union of data from admissions table with the records
+discarded because of validation issues
+
+
+Transformed from [medicare.admissions](medicare.admissions.md)
+
+
+<details>
+
+<summary>SQL/DDL Statement</summary>
+
+```sql
+CREATE view medicare.qc_adm_union AS SELECT reason,
+   year,
+   state,
+   state_iso,
+   admission_year,
+   diagnoses,
+   zip,
+   admission_date,
+   discharge_date,
+   adm_day_of_week,
+   primary_diagnosis,
+   bene_id,
+   bene,
+   pd_hll_hash,
+   icd_hll
+FROM medicare_audit.admissions
+UNION ALL 
+SELECT 'OK'::VARCHAR AS reason,
+   year,
+   state,
+   state_iso,
+   admission_year,
+   diagnoses,
+   zip,
+   admission_date,
+   discharge_date,
+   adm_day_of_week,
+   primary_diagnosis,
+   bene_id,
+   bene,
+   pd_hll_hash,
+   icd_hll 
+FROM medicare.admissions
+;
+
+COMMENT ON view medicare.qc_adm_union IS 'CREATED BY Dorieh: {"version": "0.5.1.post2", "url": "file://<local checkout>", "commit": null}. Created at 2026-09-12 15:03:07.750509';
+```
+
+</details>
+
+---
+## Columns:
+
+| Column Name | Column Type | Datatype |
+| --- | --- | --- |
+| [adm_day_of_week](medicare.qc_adm_union/adm_day_of_week.md) | copied | INT |
+| [admission_date](medicare.qc_adm_union/admission_date.md) | copied | DATE |
+| [admission_year](medicare.qc_adm_union/admission_year.md) | generated | INT |
+| [bene](medicare.qc_adm_union/bene.md) | generated | HLL_HASHVAL |
+| [bene_id](medicare.qc_adm_union/bene_id.md) | copied | string |
+| [diagnoses](medicare.qc_adm_union/diagnoses.md) | copied | string |
+| [discharge_date](medicare.qc_adm_union/discharge_date.md) | copied | DATE |
+| [icd_hll](medicare.qc_adm_union/icd_hll.md) | generated | HLL |
+| [pd_hll_hash](medicare.qc_adm_union/pd_hll_hash.md) | generated | HLL_HASHVAL |
+| [primary_diagnosis](medicare.qc_adm_union/primary_diagnosis.md) | copied | string |
+| [reason](medicare.qc_adm_union/reason.md) | computed | string |
+| [state](medicare.qc_adm_union/state.md) | copied | string |
+| [state_iso](medicare.qc_adm_union/state_iso.md) | generated | char(5) |
+| [year](medicare.qc_adm_union/year.md) | computed | INT |
+| [zip](medicare.qc_adm_union/zip.md) | copied | INT |
+
+

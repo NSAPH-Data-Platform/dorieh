@@ -1,0 +1,39 @@
+# Column medicare.qc_enrl_bene.age
+
+## Overview of column age in table medicare.qc_enrl_bene 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_enrl_bene](../medicare.qc_enrl_bene.md)           |
+| Qualified name                | medicare.qc_enrl_bene.age  |
+| Datatype                      | string        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT MAX(age)
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+age_svg_envelop.md
+```
+
+
+```{figure} age.svg
+:align: center
+:alt: Column medicare.qc_enrl_bene.age Lineage SVG
+:target: age_svg_envelop.html
+
+Data lineage for column medicare.qc_enrl_bene.age
+
+```
+
+

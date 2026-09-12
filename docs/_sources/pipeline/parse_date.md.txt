@@ -1,0 +1,28 @@
+# parse_date.cwl
+
+
+ [Source code](parse_datecwl_src.md) 
+
+
+```{contents}
+---
+local:
+---
+```
+
+**JavaScript Tool** 
+
+## Inputs
+
+| Name | Type   | Default | Description | 
+|:-----|:-------|:--------|:------------|
+| date | string |         |             | 
+
+## Outputs
+
+| Name  | Type   | Description | 
+|:------|:-------|:------------|
+| year  | string |             | 
+| month | string |             | 
+| day   | string |             | 
+

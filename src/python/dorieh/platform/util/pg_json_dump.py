@@ -29,6 +29,7 @@ import os
 import sys
 from argparse import ArgumentParser
 from contextlib import contextmanager
+from datetime import datetime
 from numbers import Number
 from typing import Dict, List
 from psycopg2.extras import RealDictCursor
@@ -103,7 +104,9 @@ def dump(conn: connection, table: str, fd, corrector = None):
             for key in row:
                 if isinstance(row[key], decimal.Decimal):
                     row[key] = float(row[key])
-            print(json.dumps(row), file=fd)
+                elif isinstance(row[key], datetime):
+                    row[key] = str(row[key])
+            print(json.dumps(dict(row)), file=fd)
 
 
 def export(conn: connection, table: str):
@@ -167,6 +170,11 @@ def import_table(conn: connection, table: str, replace = True):
             logging.info(sql)
             cursor.execute(sql)
     resource = get_resources(table)
+    if not resource:
+        get_resources(table, verbose=True)
+        raise ValueError(f"Resource for table {table} not found")
+    elif 'ddl' not in resource:
+        raise ValueError(f"Resource {resource} does not contain key 'ddl'")
     ddl_path = resource['ddl']
     with open(ddl_path) as f:
         ddl = ''.join([

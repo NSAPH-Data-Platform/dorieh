@@ -1,0 +1,36 @@
+# Materialized view medicare.mbsf_d
+
+## Overview for medicare.mbsf_d
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+medicare.mbsf_d/bene_id.md
+medicare.mbsf_d/dual_indicators.md
+medicare.mbsf_d/dual_mo.md
+medicare.mbsf_d/file.md
+medicare.mbsf_d/record.md
+medicare.mbsf_d/year.md
+```
+
+
+Data from mbsf_d* files that is used to create beneficiary and
+enrollment tables
+
+
+---
+## Columns:
+
+| Column Name | Column Type | Datatype |
+| --- | --- | --- |
+| [bene_id](medicare.mbsf_d/bene_id.md) |  | string |
+| [dual_indicators](medicare.mbsf_d/dual_indicators.md) | transformed | CHAR(1)[12] |
+| [dual_mo](medicare.mbsf_d/dual_mo.md) | transformed | INT |
+| [file](medicare.mbsf_d/file.md) |  | string |
+| [record](medicare.mbsf_d/record.md) |  | string |
+| [year](medicare.mbsf_d/year.md) |  | string |
+
+

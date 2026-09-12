@@ -1,0 +1,39 @@
+# Column medicare.admissions.admission_year
+
+## Overview of column admission_year in table medicare.admissions 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.admissions](../medicare.admissions.md)           |
+| Qualified name                | medicare.admissions.admission_year  |
+| Datatype                      | INT        |
+| Column type | generated |
+
+
+
+## Expressions
+
+```sql
+SELECT GENERATED ALWAYS AS (EXTRACT (YEAR FROM admission_date)) STORED
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+admission_year_svg_envelop.md
+```
+
+
+```{figure} admission_year.svg
+:align: center
+:alt: Column medicare.admissions.admission_year Lineage SVG
+:target: admission_year_svg_envelop.html
+
+Data lineage for column medicare.admissions.admission_year
+
+```
+
+

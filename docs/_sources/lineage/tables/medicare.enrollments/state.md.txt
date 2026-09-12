@@ -1,0 +1,32 @@
+# Column medicare.enrollments.state
+
+## Overview of column state in table medicare.enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.enrollments](../medicare.enrollments.md)           |
+| Qualified name                | medicare.enrollments.state  |
+| Datatype                      | string        |
+| Column type | copied |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+state_svg_envelop.md
+```
+
+
+```{figure} state.svg
+:align: center
+:alt: Column medicare.enrollments.state Lineage SVG
+:target: state_svg_envelop.html
+
+Data lineage for column medicare.enrollments.state
+
+```
+
+

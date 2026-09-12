@@ -1,0 +1,22 @@
+# Column cms.medpar_2017.PRCDTCNT
+
+## Overview of column PRCDTCNT in table cms.medpar_2017 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2017](../cms.medpar_2017.md)           |
+| Qualified name                | cms.medpar_2017.PRCDTCNT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/dates-associated-surgical-procedures-included-stay](https://resdac.org/cms-data/variables/dates-associated-surgical-procedures-included-stay) |
+
+
+Dates associated with surgical procedures included in stay
+
+| Key | Value |
+| --- | ----- |
+| long_name | SRGCL_PRCDR_DT_CNT |
+| original_type | NUM |
+| width | 3.0 |
+
+
+

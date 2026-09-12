@@ -1,0 +1,22 @@
+# Column cms.medpar_2015.DGNSCD18
+
+## Overview of column DGNSCD18 in table cms.medpar_2015 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2015](../cms.medpar_2015.md)           |
+| Qualified name                | cms.medpar_2015.DGNSCD18  |
+| Datatype                      | VARCHAR(7)        |
+| Reference | [https://resdac.org/cms-data/variables/medpar-icd-9-cm-diagnosis-code-18](https://resdac.org/cms-data/variables/medpar-icd-9-cm-diagnosis-code-18) |
+
+
+ICD-9-CM Diagnosis code XVIII
+
+| Key | Value |
+| --- | ----- |
+| long_name | DGNS_18_CD |
+| original_type | CHAR |
+| width | 7.0 |
+
+
+

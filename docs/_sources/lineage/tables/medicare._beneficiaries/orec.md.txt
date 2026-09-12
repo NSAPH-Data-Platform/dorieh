@@ -1,0 +1,51 @@
+# Column medicare._beneficiaries.orec
+
+## Overview of column orec in table medicare._beneficiaries 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare._beneficiaries](../medicare._beneficiaries.md)           |
+| Qualified name                | medicare._beneficiaries.orec  |
+| Datatype                      | string        |
+| Column type | computed |
+| Reference | [https://resdac.org/cms-data/variables/original-reason-entitlement-code](https://resdac.org/cms-data/variables/original-reason-entitlement-code) |
+
+
+Original Reason for Entitlement Code (OREC). Set at the time of
+enrollment and invariant for the life of the beneficiary, hence a
+beneficiary-level attribute. The canonical value is taken from the
+earliest enrollment year (ties broken by smallest code, for
+reproducibility). If the raw data is inconsistent across years the
+divergence is surfaced via orec_latest / consistent_orec rather
+than silently affecting joins.
+
+
+
+
+
+## Expressions
+
+```sql
+SELECT (array_agg(orec ORDER BY year, orec))[1]
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+orec_svg_envelop.md
+```
+
+
+```{figure} orec.svg
+:align: center
+:alt: Column medicare._beneficiaries.orec Lineage SVG
+:target: orec_svg_envelop.html
+
+Data lineage for column medicare._beneficiaries.orec
+
+```
+
+

@@ -1,0 +1,22 @@
+# Column cms.medpar_2014.DGNS_E_4_CD
+
+## Overview of column DGNS_E_4_CD in table cms.medpar_2014 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2014](../cms.medpar_2014.md)           |
+| Qualified name                | cms.medpar_2014.DGNS_E_4_CD  |
+| Datatype                      | VARCHAR(7)        |
+| Reference | [https://resdac.org/cms-data/variables/diagnosis-e-code-4](https://resdac.org/cms-data/variables/diagnosis-e-code-4) |
+
+
+E Diagnosis Code  4 - Extrnl cause of injury, poisoning, or oth adverse effect
+
+| Key | Value |
+| --- | ----- |
+| long_name | DGNS_E_4_CD |
+| original_type | CHAR |
+| width | 7.0 |
+
+
+

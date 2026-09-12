@@ -1,0 +1,39 @@
+# Column medicare.qc_enrl_bene.fips3_valdiated
+
+## Overview of column fips3_valdiated in table medicare.qc_enrl_bene 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_enrl_bene](../medicare.qc_enrl_bene.md)           |
+| Qualified name                | medicare.qc_enrl_bene.fips3_valdiated  |
+| Datatype                      | string        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT public.validate_zip_fips(MAX(zip), MAX(fips2), MAX(fips3))
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+fips3_valdiated_svg_envelop.md
+```
+
+
+```{figure} fips3_valdiated.svg
+:align: center
+:alt: Column medicare.qc_enrl_bene.fips3_valdiated Lineage SVG
+:target: fips3_valdiated_svg_envelop.html
+
+Data lineage for column medicare.qc_enrl_bene.fips3_valdiated
+
+```
+
+

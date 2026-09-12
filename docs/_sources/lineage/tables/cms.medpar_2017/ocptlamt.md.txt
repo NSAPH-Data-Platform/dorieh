@@ -1,0 +1,22 @@
+# Column cms.medpar_2017.OCPTLAMT
+
+## Overview of column OCPTLAMT in table cms.medpar_2017 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2017](../cms.medpar_2017.md)           |
+| Qualified name                | cms.medpar_2017.OCPTLAMT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/occupational-therapy-charge-amount](https://resdac.org/cms-data/variables/occupational-therapy-charge-amount) |
+
+
+Occupational therapy services provided during beneficiarys stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | OCPTNL_THRPY_CHRG_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

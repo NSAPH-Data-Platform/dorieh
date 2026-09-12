@@ -1,0 +1,40 @@
+# Column medicare.beneficiaries.race
+
+## Overview of column race in table medicare.beneficiaries 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.beneficiaries](../medicare.beneficiaries.md)           |
+| Qualified name                | medicare.beneficiaries.race  |
+| Datatype                      | string        |
+| Column type | copied |
+| Reference | [https://resdac.org/cms-data/variables/raceethnicity-msis](https://resdac.org/cms-data/variables/raceethnicity-msis) |
+
+
+
+## Expressions
+
+```sql
+SELECT string_agg(distinct race, ',')
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+race_svg_envelop.md
+```
+
+
+```{figure} race.svg
+:align: center
+:alt: Column medicare.beneficiaries.race Lineage SVG
+:target: race_svg_envelop.html
+
+Data lineage for column medicare.beneficiaries.race
+
+```
+
+

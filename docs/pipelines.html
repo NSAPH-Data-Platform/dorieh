@@ -1,29 +1,34 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Data Processing Pipelines &mdash; Dorieh Data Platform 0.0.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+  <title>Data Processing Pipelines &mdash; Dorieh Data Platform 0.5.1.post2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
       <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
-      <link rel="stylesheet" type="text/css" href="_static/css/dorieh.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/dorieh.css?v=1a3f250d" />
 
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=ad30b421"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Medicare data ingestion and processing pipeline" href="pipeline/medicare.html" />
+    <link rel="next" title="Pipeline to ingest Monthly Pollution data downloaded from WashU Box" href="pipeline/wustl.html" />
     <link rel="prev" title="census_write.cwl" href="pipeline/census_writecwl_src.html" /> 
 </head>
 
@@ -32,6 +37,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
+
 
           
           
@@ -45,23 +51,185 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
+<div class="dorieh-citeas">
+  <button type="button" class="dorieh-citeas-btn"
+          onclick="document.getElementById('dorieh-citeas-pop').classList.toggle('open')">
+    &#128214; Cite as
+  </button>
+  <div id="dorieh-citeas-pop" class="dorieh-citeas-pop">
+    <p>Bouzinier,&nbsp;M., Etin,&nbsp;D., Khoshnevis,&nbsp;N.,
+       Shad,&nbsp;M., Yockel,&nbsp;S. (2026).
+       <em>Research Data that Can be Trusted.</em>
+       SpringerBriefs in Computer Science. Springer.
+       <a href="https://doi.org/10.1007/978-3-032-21032-6">doi:10.1007/978-3-032-21032-6</a></p>
+    <button type="button" class="dorieh-citeas-copy"
+            onclick="navigator.clipboard.writeText(
+              'Bouzinier, M., Etin, D., Khoshnevis, N., Shad, M., Yockel, S. (2026). ' +
+              'Research Data that Can be Trusted. SpringerBriefs in Computer Science. ' +
+              'Springer. https://doi.org/10.1007/978-3-032-21032-6'
+            ).then(() => { this.textContent = 'Copied!'; });">
+      Copy citation
+    </button>
+    <a class="dorieh-citeas-more" href="citing.html">More ways to cite &rarr;</a>
+  </div>
+</div>
+
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
-<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Data Processing Pipelines</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#running-workflows">Running Workflows</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#tested-runners">Tested runners</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#providing-parameters-to-the-pipelines">Providing parameters to the pipelines</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#using-toil">Using Toil</a></li>
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="home.html#introduction-to-data-platform">Introduction to Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#building-blocks">Building Blocks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="home.html#dorieh-utilities">Dorieh Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="home.html#core-platform">Core Platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="home.html#dorieh-gis-utilities">Dorieh GIS Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="home.html#dorieh-documentation-utilities">Dorieh Documentation Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="home.html#data-processing-and-loading-pipelines">Data Processing and Loading Pipelines</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#testing-workflows">Testing workflows</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installing-python-dependencies">Installing Python dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#published-and-tested-workflows">Published and tested workflows</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="home.html#working-with-nsaph-containerized-apps">Working with NSAPH containerized apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#using-the-database">Using the Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#terms-and-acronyms">Terms and Acronyms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#building-platform-documentation">Building Platform documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#next-steps">Next steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rationale.html">Why a data platform</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rationale.html#why-we-need-a-data-platform">Why we need a Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rationale.html#architecture">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rationale.html#supported-programming-languages-and-tools">Supported Programming Languages and Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rationale.html#development-mode">Development Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rationale.html#where-it-can-be-deployed">Where it can be deployed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rationale.html#what-makes-dorieh-different">What makes Dorieh different</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">The Dorieh approach</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#two-languages-one-pipeline">Two languages, one pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#medallion-architecture-as-dorieh-implements-it">Medallion architecture as Dorieh implements it</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#dataset-operators-and-field-construction-operators">Dataset operators and field construction operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#families-of-field-transformations">Families of field transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#disambiguation-rules">Disambiguation rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#validation-and-journaling">Validation and journaling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#fine-grained-lineage">Fine-grained lineage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#where-each-concept-lives">Where each concept lives</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="about-the-book.html">The companion book</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about-the-book.html#bibliographic-information">Bibliographic information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about-the-book.html#chapter-to-documentation-map">Chapter-to-documentation map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about-the-book.html#using-this-documentation-without-the-book">Using this documentation without the book</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="citing.html">Citing Dorieh</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="citing.html#preferred-citation-the-book">Preferred citation: the book</a></li>
+<li class="toctree-l2"><a class="reference internal" href="citing.html#citing-the-software-itself">Citing the software itself</a></li>
+<li class="toctree-l2"><a class="reference internal" href="citing.html#citing-the-tutorials">Citing the tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="citing.html#citing-the-synthetic-dataset">Citing the synthetic dataset</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Learning paths</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="paths/index.html">Choose your path</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="paths/researcher.html">Researchers and analysts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="paths/researcher.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paths/researcher.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="paths/developer.html">Pipeline developers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="paths/developer.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paths/developer.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="paths/operator.html">Platform operators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="paths/operator.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paths/operator.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="paths/book-reader.html">Readers of the book</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="paths/book-reader.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paths/book-reader.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="paths/auditor.html">Reviewers and auditors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="paths/auditor.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paths/auditor.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data domains and pipelines</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cms.html">Health</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="health_data_overview.html">Health Data in Dorieh (Medicare and Medicaid)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Medicare.html">Medicare: Building a Data Warehouse from ResDac Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Medicaid.html">Medicaid: Building a Data Warehouse from ResDac Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="health_seealso.html">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="climate.html">Climate</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="climate.html#what-is-gridmet">What is gridMET?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="climate.html#using-command-line-gridmet-utility">Using command line gridMET utility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="climate.html#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="climate.html#python-modules">Python modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="climate.html#cwl-pipelines-and-tools">CWL pipelines and tools</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="exposures.html">Exposure (PM2.5, WashU)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="exposures.html#python-packages">Python packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exposures.html#cwl-workflows">CWL Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="epa.html">Environmental Protection Agency (EPA) data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="epa.html#package-contents">Package Contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="epa.html#querying-data">Querying Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="census.html">Demographics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="census_about.html">About</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_env_set_up.html">Setting Up Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_quick_start.html">Quick Start</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_yaml.html">Census Variable File Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_cached_data.html">Stored Data Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_modules.html">Modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_glossary.html">Glossary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_start_guide.html">Working with the <code class="docutils literal notranslate"><span class="pre">census</span></code> Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_assemble.html">census_assemble.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_assemblecwl_src.html">census_assemble.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_density.html">census_density.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_densitycwl_src.html">census_density.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_ingest.html">census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_ingest_1.html">Sub-workflow <em>store</em> from census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_ingest_1cwl_src.html">CWL sub-workflow for step <u><em>store</em></u> of workflow census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_ingestcwl_src.html">census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_interpolate.html">census_interpolate.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_interpolatecwl_src.html">census_interpolate.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_qc.html">census_qc.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_qccwl_src.html">census_qc.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_workflow.html">census_workflow.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_workflowcwl_src.html">census_workflow.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_write.html">census_write.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_writecwl_src.html">census_write.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census.html#indices-and-tables">Indices and tables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Data Processing Pipelines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#workflow-description-languages">Workflow Description Languages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-workflows">Running Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tested-runners">Tested Runners</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#providing-parameters-to-the-pipelines">Providing Parameters to the Pipelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-toil">Using Toil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#troubleshooting-workflows-run-by-toil">Troubleshooting Workflows Run by Toil</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-workflows">Testing Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#published-and-tested-workflows">Published and Tested Workflows</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="pipeline/gridmet.html">Pipeline to aggregate data from Climatology Lab</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pipeline/wustl.html">Pipeline to ingest Monthly Pollution data downloaded from WashU Box</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pipeline/pm25_yearly_download.html">Pipeline to aggregate data in NetCDF format over given geographies</a></li>
@@ -72,20 +240,268 @@
 <li class="toctree-l3"><a class="reference internal" href="pipeline/census_workflow.html">census_workflow.cwl</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#developing-your-own-workflows">Developing your own workflows</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#combining-included-cwl-tools-into-a-new-workflow">Combining included CWL tools into a new workflow</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#wrapping-python-modules-as-cwl-tools">Wrapping python modules as CWL tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#developing-new-workflows">Developing New Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#combining-included-cwl-tools-into-a-new-workflow">Combining Included CWL Tools into a New Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ordering-database-steps-with-depends-on">Ordering Database Steps with <code class="docutils literal notranslate"><span class="pre">depends_on</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wrapping-python-modules-as-cwl-tools">Wrapping Python Modules as CWL Tools</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="DBT.html">Database Testing Framework</a></li>
-<li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="AppPipelineGenerator.html">Executing containerized apps</a></li>
-<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials and worked examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Tutorials.html">Dorieh Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/climate/index.html">Climate tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/climate/building-climate-pipeline.html">Part 1. Building the pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/climate/documenting-a-workflow.html">Part 2. Documenting the workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/climate/constructing-lineage.html">Part 3. Data dictionaries and lineage graphs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html">Medicare claims pipeline tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#designing-the-pipeline">Designing the pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#from-fts-documents-to-machine-readable-schemas">From FTS documents to machine-readable schemas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#bronze-one-table-per-source-file">Bronze: one table per source file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#silver-harmonize-disambiguate-validate">Silver: harmonize, disambiguate, validate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#gold-the-qc-aggregates">Gold: the QC aggregates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#orchestration-five-steps-in-medicare-cwl">Orchestration: five steps in medicare.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#documentation-and-lineage">Documentation and lineage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#running-it-yourself">Running it yourself</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Example-climate-workflow.html">A CWL workflow example: aggregating a climate variable</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Example-climate-workflow.html#what-the-sample-workflow-is-doing-aggregating-a-climate-variable">What the sample workflow is doing: aggregating a climate variable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Example-climate-workflow.html#prepare-to-run-a-workflow">Prepare to run a workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Example-climate-workflow.html#running-the-workflow-in-python-virtual-environment">Running the workflow in Python virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Example-climate-workflow.html#running-the-workflow-using-docker">Running the workflow using Docker</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="medicare-example.html">Medicare pipeline with publicly available synthetic data (PostgreSQL + Superset)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="medicare-example.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="medicare-example.html#step-1-download-synthetic-sample-data">Step 1 — Download synthetic sample data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="medicare-example.html#step-3-optional-explore-results-in-apache-superset">Step 3 (Optional) — Explore results in Apache Superset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="medicare-example.html#what-the-pipeline-produces">What the pipeline produces</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#related-how-to-guides">Related how-to guides</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data dictionaries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dictionaries.html">Data Dictionaries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="MedicareLineage.html">Medicare data warehouse</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lineage/medicare.dot.html">Table Lineage Diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lineage/table-list.html">Alphabetic list of all tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lineage/column-list.html">Alphabetic list of all columns in all tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="members/domain_dictionary.html">The Data Dictionary Generation tool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data modeling DSL reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Datamodels.html">Data Modeling for Dorieh Data Platform</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="DataModellingExtensions.html">Data Modeling Extensions: Federated Views Across Years</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="DataModellingExtensions.html#combining-multiple-sources-and-optional-columns">Combining multiple sources and optional columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DataModellingExtensions.html#exclude">Exclude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DataModellingExtensions.html#cast">Cast</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DataModellingExtensions.html#validating-consistency-of-data-across-tables">Validating consistency of data across tables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#introduction-to-data-modeling-for-dorieh-data-platform">Introduction to data modeling for Dorieh Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#domain">Domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#table">Table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#create-statement">Create statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#invalid-record">Invalid Record</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#column">Column</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#source">Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#index">Index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#generated-columns">Generated columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#computed-columns">Computed columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#file-columns">File columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#record-columns">Record columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#identifier-columns-and-the-identifiers-token">Identifier columns and the <code class="docutils literal notranslate"><span class="pre">{identifiers}</span></code> token</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#transposing-columns">Transposing columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#wildcards">Wildcards</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#multi-column-indices">Multi-column indices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#indexing-policies">Indexing policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#linking-with-nomenclature">Linking with nomenclature</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#us-states">US States</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#county-codes">County codes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#ingesting-data">Ingesting data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#where-to-go-next">Where to go next</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">General purpose utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#overview-of-utilities">Overview of Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#current-development">Current Development</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#todo">TODO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#documentation-indices">Documentation Indices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="CoreLibrary.html">Data platform components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="CoreLibrary.html#package-dorieh-platform">Package dorieh.platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CoreLibrary.html#package-dorieh-platform-data-model">Package dorieh.platform.data_model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CoreLibrary.html#package-dorieh-platform-loader">Package dorieh.platform.loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CoreLibrary.html#package-dorieh-platform-requests">Package dorieh.platform.requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CoreLibrary.html#package-dorieh-platform-utils">Package dorieh.platform.utils</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gis.html">GIS utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gis.html#gis-library-overview">GIS Library Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gis.html#shape-files-downloader">Shape files Downloader</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="CMSLibrary.html">Health data manipulation tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="CMSLibrary.html#package-cms">Package cms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CMSLibrary.html#package-dorieh-cms-tools">Package dorieh.cms.tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CMSLibrary.html#additional-details">Additional details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rasters.html">Raster data tools (climate and exposure)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rasters.html#general-tools-for-raster-files">General tools for raster files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rasters.html#specialized-tools-for-working-with-climate-data">Specialized tools for working with climate data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rasters.html#specialized-tools-for-working-with-exposure-data">Specialized tools for working with exposure data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="platform.html">Dorieh Core Data Platform</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="DBConnections.html">Managing database connections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DataLoader.html">Dorieh Data Loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ProjectLoader.html">Project (Directory) Loading Utility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TerritorialCodes.html">Mapping between different territorial codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SQLDocumentation.html">SQL Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="platform.html#core-platform-overview">Core platform overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="platform.html#tool-examples">Tool Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="platform.html#project-structure">Project Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="platform.html#documentation-indices">Documentation Indices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Dorieh Deployment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#using-docker">Using Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#using-python-virtual-environment">Using Python Virtual Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#using-conda-package-manager">Using Conda Package Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#using-toil-with-docker-requirement">Using Toil with Docker requirement</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="capabilities.html">Platform capabilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="SampleQuery.html">How to query the database</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="SampleQuery.html#setup">Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SampleQuery.html#create-connection-definition-file">Create connection definition file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SampleQuery.html#executing-the-query">Executing the query</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SampleQuery.html#using-explain-to-optimize-queries">Using EXPLAIN to optimize queries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="QueringMedicaid.html">Querying Medicaid Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="QueringMedicaid.html#querying-diagnoses">Querying diagnoses</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="MonitoringDB.html">Monitoring database activity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="MonitoringDB.html#module-monitor">Module monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MonitoringDB.html#cli-usage-for-monitor">CLI Usage for monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MonitoringDB.html#using-as-api">Using as API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="UsingHLL.html">Approximate distinct counting with HLL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UserRequests.html">Handling user requests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="UserRequests.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UserRequests.html#structure">Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="example_request_yaml.html">Example user request</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Operational guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DBT.html">Database Testing Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="members/create_test.html">Utility to generate test queries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="members/dbt_runner.html">Test runner: Utility to run generated tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="members/gen_dbt_cwl.html">The gen_dbt_cwl Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="members/create_test.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="members/create_test.html#module-dorieh.platform.dbt.create_test">Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="members/dbt_runner.html">Test runner: Utility to run generated tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="members/dbt_runner.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="members/dbt_runner.html#module-dorieh.platform.dbt.dbt_runner">Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="members/gen_dbt_cwl.html">The gen_dbt_cwl Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="members/gen_dbt_cwl.html#dorieh.platform.dbt.gen_dbt_cwl.CWLTestGenerator"><code class="docutils literal notranslate"><span class="pre">CWLTestGenerator</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="TestingWorkflows.html">Testing bundled workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#introduction-to-testing-and-prerequisites">Introduction to testing and prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#before-running-any-test">Before running any test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#testing-aqs-workflow">Testing AQS workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#testing-airnow-workflow">Testing Airnow workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#testing-climate-workflow">Testing Climate workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#testing-exposure-workflow">Testing Exposure workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#testing-medicare-workflow">Testing Medicare workflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#what-data-are-you-adding">What data are you adding?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#data-modeling-vs-data-introspection">Data modeling vs data introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#adding-new-data-domain">Adding new data domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#creating-new-single-table">Creating new single table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#adding-a-table-from-a-remote-data-source">Adding a table from a remote data source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#adding-data-to-existing-table">Adding data to existing table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#automatically-ingesting-multiple-files-from-a-file-system">Automatically ingesting multiple files from a file system</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="AppPipelineGenerator.html">Executing containerized apps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="AppPipelineGenerator.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AppPipelineGenerator.html#prerequisites">Prerequisites</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#docker-or-python-virtual-environment">Docker or Python virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#setup-dbms-server">Setup DBMS Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#define-connection">Define connection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AppPipelineGenerator.html#using-pipeline-generator">Using pipeline generator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#generate-pipeline-and-metadata">Generate pipeline and metadata</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AppPipelineGenerator.html#execute-generated-pipeline">Execute generated pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AppPipelineGenerator.html#appendix-1-metadata-description">Appendix 1: Metadata description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#file-app-config-yaml">File app.config.yaml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#file-metadata-yml">File metadata.yml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#file-dorieh-metadata-yaml">File dorieh-metadata.yaml</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="glossary.html#concepts">Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="glossary.html#acronyms">Acronyms</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
 </ul>
 
@@ -114,88 +530,109 @@
            <div itemprop="articleBody">
              
   <section id="data-processing-pipelines">
-<h1>Data Processing Pipelines<a class="headerlink" href="#data-processing-pipelines" title="Permalink to this heading"></a></h1>
+<h1>Data Processing Pipelines<a class="headerlink" href="#data-processing-pipelines" title="Link to this heading"></a></h1>
+<p>This page explains how Dorieh pipelines are described in CWL, lists the
+published, tested workflows, and shows how to run and troubleshoot them
+with Toil.</p>
 <nav class="contents local" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#introduction" id="id1">Introduction</a></p></li>
-<li><p><a class="reference internal" href="#running-workflows" id="id2">Running Workflows</a></p>
+<li><p><a class="reference internal" href="#workflow-description-languages" id="id2">Workflow Description Languages</a></p></li>
+<li><p><a class="reference internal" href="#running-workflows" id="id3">Running Workflows</a></p>
 <ul>
-<li><p><a class="reference internal" href="#tested-runners" id="id3">Tested runners</a></p></li>
-<li><p><a class="reference internal" href="#providing-parameters-to-the-pipelines" id="id4">Providing parameters to the pipelines</a></p></li>
-<li><p><a class="reference internal" href="#using-toil" id="id5">Using Toil</a></p></li>
+<li><p><a class="reference internal" href="#tested-runners" id="id4">Tested Runners</a></p></li>
+<li><p><a class="reference internal" href="#providing-parameters-to-the-pipelines" id="id5">Providing Parameters to the Pipelines</a></p></li>
+<li><p><a class="reference internal" href="#using-toil" id="id6">Using Toil</a></p>
+<ul>
+<li><p><a class="reference internal" href="#quick-start-with-toil" id="id7">Quick Start with Toil</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#testing-workflows" id="id6">Testing workflows</a></p></li>
-<li><p><a class="reference internal" href="#installing-python-dependencies" id="id7">Installing Python dependencies</a></p></li>
-<li><p><a class="reference internal" href="#published-and-tested-workflows" id="id8">Published and tested workflows</a></p></li>
-<li><p><a class="reference internal" href="#developing-your-own-workflows" id="id9">Developing your own workflows</a></p>
+<li><p><a class="reference internal" href="#troubleshooting-workflows-run-by-toil" id="id8">Troubleshooting Workflows Run by Toil</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#testing-workflows" id="id9">Testing Workflows</a></p></li>
+<li><p><a class="reference internal" href="#published-and-tested-workflows" id="id10">Published and Tested Workflows</a></p></li>
+<li><p><a class="reference internal" href="#developing-new-workflows" id="id11">Developing New Workflows</a></p>
 <ul>
-<li><p><a class="reference internal" href="#combining-included-cwl-tools-into-a-new-workflow" id="id10">Combining included CWL tools into a new workflow</a></p></li>
-<li><p><a class="reference internal" href="#wrapping-python-modules-as-cwl-tools" id="id11">Wrapping python modules as CWL tools</a></p></li>
+<li><p><a class="reference internal" href="#combining-included-cwl-tools-into-a-new-workflow" id="id12">Combining Included CWL Tools into a New Workflow</a></p></li>
+<li><p><a class="reference internal" href="#ordering-database-steps-with-depends-on" id="id13">Ordering Database Steps with <code class="docutils literal notranslate"><span class="pre">depends_on</span></code></a></p></li>
+<li><p><a class="reference internal" href="#wrapping-python-modules-as-cwl-tools" id="id14">Wrapping Python Modules as CWL Tools</a></p></li>
 </ul>
 </li>
 </ul>
 </nav>
 <section id="introduction">
-<h2><a class="toc-backref" href="#id1" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
-<p>For the majority of computational studies, their data acquisition workflow can
-be represented as a data processing pipeline. A data processing pipeline
-consists of steps, each step being either a script, a binary executable, or a
-specific data transformation within a data warehouse. Some steps are dependent
-on the results of other steps. Therefore, every workflow can be represented as a
-directed acyclic graph (DAG), where steps are the nodes of the graph and
-dependencies are its edges. Pipeline topologies are complex as they provide for
-massive parallelization and multiple dependencies. When pipeline logic is
-expressed in a procedural programming language, the result is a very convoluted
-program that is economically ineffective to maintain. Fortunately, alternatives
-to procedural languages have been proposed and are widely used.</p>
-<p>To the full extent both repeatability and reproducibility of data processing
-pipelines is addressed by special descriptive domain specific languages (DSL).
-Three such languages have been developed by different communities that work
-primarily in bioinformatics. The most widely adopted is
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>Most computational studies acquire and process data using a data
+processing pipeline. Such pipelines are composed of multiple steps,
+where each step may be a script, binary executable, or a specific data
+transformation. These steps often depend on the completion and outcome
+of previous steps, so the entire workflow can be naturally represented
+as a <strong>Directed Acyclic Graph (DAG)</strong>: nodes represent workflow steps,
+and
+edges indicate their dependencies.</p>
+<p>This DAG-based representation allows for complex pipeline topologies,
+including parallelization and multiple dependencies. However, describing
+such logic in procedural programming languages quickly becomes unwieldy
+and hard to maintain. To address this challenge, <strong>domain-specific
+workflow description languages (DSLs)</strong> have been developed.</p>
+</section>
+<section id="workflow-description-languages">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Workflow Description Languages</a><a class="headerlink" href="#workflow-description-languages" title="Link to this heading"></a></h2>
+<p>For reproducibility and repeatability, pipelines are commonly specified
+using descriptive workflow DSLs. In bioinformatics and other scientific
+domains, three such languages are widely used: CWL, WDL and Nextflow.
+The most prevalent is the
 <a class="reference external" href="https://www.commonwl.org/">Common Workflow Language (CWL)</a>,
-the most popular in terms of studies that use it, the number of
-published workflows and the number of runtime platforms supporting execution of
-the workflows defined in CWL. The pipelines we publish here are all written
-in CWL.</p>
-<p>Descriptive workflow languages focus on explicit definition of the pipeline
-topology and insulation of the topology, inputs, requirements and outputs from
-the actual processing algorithms. Developed primarily by bioinformatics
-communities and mostly used by bioinformatics projects they expect the inputs to
-be in a few well-defined formats and orchestrate the work of a limited set of
-known tools. In other areas, for example, in population health research, the
-data comes from much more diverse sources, in diverse and often incompatible
-formats. Therefore, many steps (nodes in the pipeline topology) will be
-responsible for various data transformation operations.</p>
+due to its extensive community support,
+number of published workflows, and broad platform compatibility. All
+pipelines published in this documentation use CWL. CWL is the workflow
+half of the two declarative languages described in
+<a class="reference internal" href="concepts.html#two-languages-one-pipeline"><span class="std std-ref">The Dorieh approach</span></a>: it
+declares the pipeline topology, while the
+<a class="reference internal" href="Datamodels.html"><span class="std std-doc">data-modeling DSL</span></a> declares what each step does to the
+data.</p>
+<p>Descriptive workflow languages separate the definition of pipeline
+structure (topology, inputs, outputs, requirements) from the
+implementation of processing steps. While these languages were pioneered
+in bioinformatics—often operating on well-defined inputs and known
+tools—they are also applicable to fields with more diverse and less
+standardized data, such as population health research. In these domains,
+many workflow steps may focus on complex data transformation and
+harmonization.</p>
 <blockquote>
-<div><p>Some workflows require database connection to perform all steps.
-See <a class="reference internal" href="DBConnections.html"><span class="doc std std-doc">Managing database connections</span></a> section. for details</p>
+<div><p>Some workflows require a database connection during execution;
+see <a class="reference internal" href="DBConnections.html"><span class="std std-doc">Managing database connections</span></a> for details.</p>
 </div></blockquote>
 </section>
 <section id="running-workflows">
-<h2><a class="toc-backref" href="#id2" role="doc-backlink">Running Workflows</a><a class="headerlink" href="#running-workflows" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Running Workflows</a><a class="headerlink" href="#running-workflows" title="Link to this heading"></a></h2>
 <section id="tested-runners">
-<h3><a class="toc-backref" href="#id3" role="doc-backlink">Tested runners</a><a class="headerlink" href="#tested-runners" title="Permalink to this heading"></a></h3>
-<p>CWL is “write once run anywhere” language. If a piepline one has developed
-runs on the developer’s laptop it is more or less guaranteed it will run
-in any on-prem cluster or cloud environment, provided a runner supporting
-a given environment is used. One can find the list of currently
-supported runners in
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Tested Runners</a><a class="headerlink" href="#tested-runners" title="Link to this heading"></a></h3>
+<p>CWL is a “write once, run anywhere” language. A pipeline developed and
+tested in one environment (such as a laptop) will run on clusters and
+cloud platforms using any compliant runner. For the latest list of
+compatible runners, visit the
 <a class="reference external" href="https://www.commonwl.org/implementations/">CWL Implementations</a> page.</p>
-<p>We have used cwltool, CWL-Airflow and Toil in our development
-and production. Toil’s output is a little too verbose, but it has
-great features like ability to restart a pipeline from a failed
-step (even after minor corrections) and native support for AWS Batch.
-CWL-Airflow provides a nice graphical user interface.</p>
-<p>See <a class="reference external" href="https://toil.readthedocs.io/en/latest/">Toil documentation</a>
-for some details of running CWL workflows.</p>
+<p>We have successfully used <strong>cwltool</strong>, <strong>CWL-Airflow</strong>, and <strong>Toil</strong>:</p>
+<ul class="simple">
+<li><p><strong>Toil</strong>: Highly featured, supports AWS Batch and pipeline resumption
+after failures. Output can be quite verbose. We recommend it for
+production and development use.</p></li>
+<li><p><strong>CWL-Airflow</strong>: Provides a graphical interface for managing and
+visualizing workflows.</p></li>
+<li><p><strong>cwltool</strong>: Lightweight reference implementation, ideal for
+development for those who prefer to avoid Toil.</p></li>
+</ul>
+<p>See the <a class="reference external" href="https://toil.readthedocs.io/en/latest/">Toil documentation</a>
+for additional details on using Toil for running CWL workflows.</p>
 </section>
 <section id="providing-parameters-to-the-pipelines">
-<h3><a class="toc-backref" href="#id4" role="doc-backlink">Providing parameters to the pipelines</a><a class="headerlink" href="#providing-parameters-to-the-pipelines" title="Permalink to this heading"></a></h3>
-<p>Parameters can be provided either as command line options
-with two dashes <code class="docutils literal notranslate"><span class="pre">--</span></code> or in YaML or JSON file.</p>
-<p>Note, that when using a YaML file, files and directories
-have to be specified in the following way:</p>
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Providing Parameters to the Pipelines</a><a class="headerlink" href="#providing-parameters-to-the-pipelines" title="Link to this heading"></a></h3>
+<p>Pipeline parameters are supplied on the command line
+(as double-dash <code class="docutils literal notranslate"><span class="pre">--</span></code> options) or via YAML or JSON files.</p>
+<p>When using YAML to specify files or directories as inputs,
+use this structure:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">my_file</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/path/to/data.nc</span>
 <span class="w">  </span><span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
@@ -206,40 +643,112 @@ have to be specified in the following way:</p>
 </div>
 </section>
 <section id="using-toil">
-<h3><a class="toc-backref" href="#id5" role="doc-backlink">Using Toil</a><a class="headerlink" href="#using-toil" title="Permalink to this heading"></a></h3>
-<p>A few hints if you are using Toil:</p>
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">Using Toil</a><a class="headerlink" href="#using-toil" title="Link to this heading"></a></h3>
+<p>For hands-on examples, refer to the
+<a class="reference external" href="https://github.com/ForomePlatform/dorieh/tree/main/examples">Dorieh Examples Folder</a>
+on GitHub. There you will find:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/ForomePlatform/dorieh/tree/main/examples#running-cwl-examples">Instructions for environment setup</a></p></li>
+<li><p><a class="reference internal" href="Example-climate-workflow.html"><span class="std std-doc">Running workflows that do not require a database backend</span></a></p></li>
+<li><p><a class="reference external" href="https://github.com/ForomePlatform/dorieh/tree/main/examples/with-postgres">Workflows with PostgreSQL backend</a></p></li>
+</ul>
+<section id="quick-start-with-toil">
+<h4><a class="toc-backref" href="#id7" role="doc-backlink">Quick Start with Toil</a><a class="headerlink" href="#quick-start-with-toil" title="Link to this heading"></a></h4>
 <ol class="arabic">
-<li><p>Install Toil with aws and cwl options:</p>
+<li><p>Install Toil with AWS and CWL support:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span> pip install toil[aws,cwl]
 </pre></div>
 </div>
 </li>
-<li><p>If you want to be able to restart a pipeline from a failed step you need to
-provide <code class="docutils literal notranslate"><span class="pre">--jobStore</span></code> option. To restart - give exactly the same options
-adding <code class="docutils literal notranslate"><span class="pre">--restart</span></code></p></li>
+<li><p>Enable pipeline resumption:
+Use the <code class="docutils literal notranslate"><span class="pre">--jobStore</span></code> option when running the pipeline.
+To resume after a failure, use the same command plus <code class="docutils literal notranslate"><span class="pre">--restart</span></code>.</p></li>
 </ol>
-<p>Here is an example of a command to execute a pipeline:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>toil-cwl-runner<span class="w"> </span>--retryCount<span class="w"> </span><span class="m">1</span><span class="w"> </span>--cleanWorkDir<span class="w"> </span>never<span class="w"> </span><span class="se">\ </span>
-<span class="w">  </span>--outdir<span class="w"> </span>/scratch/work/exposures/outputs<span class="w"> </span><span class="se">\ </span>
+<p><strong>Sample command</strong>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>toil-cwl-runner<span class="w"> </span>--retryCount<span class="w"> </span><span class="m">1</span><span class="w"> </span>--cleanWorkDir<span class="w"> </span>never<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--outdir<span class="w"> </span>/scratch/work/exposures/outputs<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--workDir<span class="w"> </span>/scratch/work/exposures<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--jobStore<span class="w"> </span>/scratch/work/someDir123
-<span class="w">  </span>pm25_yearly_download.cwl<span class="w"> </span>test_exposure_job.yml<span class="w"> </span>
+<span class="w">  </span>--jobStore<span class="w"> </span>/scratch/work/someDir123<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>pm25_yearly_download.cwl<span class="w"> </span>test_exposure_job.yml
+</pre></div>
+</div>
+<p>Most Dorieh workflows consist of multiple steps, each producing two log
+files: a progress log (<code class="docutils literal notranslate"><span class="pre">*.log</span></code>) and an error log (<code class="docutils literal notranslate"><span class="pre">*.err</span></code>). On success,
+error logs are usually empty; all logs are collected under the
+<code class="docutils literal notranslate"><span class="pre">--outdir</span></code> directory.</p>
+<p>A successful pipeline run typically emits a JSON object in standard
+output or log file, for example:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;qc_ev_create_log&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;location&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;file:///shared/dorieh-logs/data_loader-2025-03-05-09-48-27.log_2&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;basename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;data_loader-2025-03-05-09-48-27.log&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;nameroot&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;data_loader-2025-03-05-09-48-27&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;nameext&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;.log&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;class&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;File&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;checksum&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sha1$fa01481303c9030c8095387661a3bdc6851fc1ed&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12060</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/shared/dorieh-logs/data_loader-2025-03-05-09-48-27.log_2&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;registry&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;location&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;file:///shared/dorieh-logs/data.yaml&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;basename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;data.yaml&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;nameroot&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;data&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;nameext&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;.yaml&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;class&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;File&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;checksum&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sha1$73700ade239b3a0c5f755ef694f05aebb4442c68&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">140457</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/shared/dorieh-logs/ingestion/2015/outputs/cms.yaml&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Alternatively, you can confirm successful completion by searching the
+logs for either of: <code class="docutils literal notranslate"><span class="pre">Finished</span> <span class="pre">toil</span> <span class="pre">run</span> <span class="pre">successfully</span></code>  or
+<code class="docutils literal notranslate"><span class="pre">CWL</span> <span class="pre">run</span> <span class="pre">complete!</span></code>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>grep<span class="w"> </span><span class="s1">&#39;Finished toil run successfully&#39;</span><span class="w"> </span>1_2015prod.log
+grep<span class="w"> </span><span class="s1">&#39;CWL run complete!&#39;</span><span class="w"> </span>1_2015prod.log
+</pre></div>
+</div>
+<p>A failed run usually ends with a <code class="docutils literal notranslate"><span class="pre">PermanentFail</span></code> message, although
+abrupt
+system failures may not log this. If a log file remains unmodified for
+several hours, the workflow is likely not running.</p>
+<blockquote>
+<div><p>Some workflow steps, especially those involving database
+transformations, may run for extended periods but produce little log
+output. Check individual step logs for progress if you suspect issues.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="troubleshooting-workflows-run-by-toil">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">Troubleshooting Workflows Run by Toil</a><a class="headerlink" href="#troubleshooting-workflows-run-by-toil" title="Link to this heading"></a></h3>
+<p>To check for errors across all runs:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>find<span class="w"> </span>/shared/dorieh-logs/<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.err&quot;</span><span class="w"> </span>-size<span class="w"> </span>+0c<span class="w"> </span>-exec<span class="w"> </span>ls<span class="w"> </span>-alF<span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="se">\;</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>No output indicates no errors. Non-empty <code class="docutils literal notranslate"><span class="pre">.err</span></code> files should be
+examined.</p>
+</div></blockquote>
+<p>For logs from a specific run (e.g., subdirectory per run):</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>find<span class="w"> </span>/shared/dorieh-logs/toilwf-c36b795b68935d99be01ed1556c85b1e/<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.err&quot;</span><span class="w"> </span>-size<span class="w"> </span>+0c<span class="w"> </span>-exec<span class="w"> </span>ls<span class="w"> </span>-alF<span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="se">\;</span>
+</pre></div>
+</div>
+<p>To see all error logs regardless of whether they are empty or not omit
+the <code class="docutils literal notranslate"><span class="pre">-size</span> <span class="pre">+0c</span></code> filter:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>find<span class="w"> </span>/shared/dorieh-logs/toilwf-c36b795b68935d99be01ed1556c85b1e/<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.err&quot;</span><span class="w"> </span>-exec<span class="w"> </span>ls<span class="w"> </span>-alF<span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="se">\;</span>
 </pre></div>
 </div>
 </section>
 </section>
 <section id="testing-workflows">
-<h2><a class="toc-backref" href="#id6" role="doc-backlink">Testing workflows</a><a class="headerlink" href="#testing-workflows" title="Permalink to this heading"></a></h2>
-<p>Pipelines can be tested using included
-<a class="reference internal" href="DBT.html"><span class="doc std std-doc">DBT Pipeline Testing Framework</span></a></p>
-</section>
-<section id="installing-python-dependencies">
-<h2><a class="toc-backref" href="#id7" role="doc-backlink">Installing Python dependencies</a><a class="headerlink" href="#installing-python-dependencies" title="Permalink to this heading"></a></h2>
-<p>The following requirements.txt file can be used to fetch all
-Python packages included in the platform.</p>
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">Testing Workflows</a><a class="headerlink" href="#testing-workflows" title="Link to this heading"></a></h2>
+<p>Pipelines can be tested with the included
+<a class="reference internal" href="DBT.html"><span class="std std-doc">DBT pipeline testing framework</span></a>; testing is described in
+detail in <a class="reference internal" href="TestingWorkflows.html"><span class="std std-doc">Testing bundled workflows</span></a>.</p>
 </section>
 <section id="published-and-tested-workflows">
-<h2><a class="toc-backref" href="#id8" role="doc-backlink">Published and tested workflows</a><a class="headerlink" href="#published-and-tested-workflows" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">Published and Tested Workflows</a><a class="headerlink" href="#published-and-tested-workflows" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="pipeline/gridmet.html">Pipeline to aggregate data from Climatology Lab</a><ul>
@@ -300,19 +809,39 @@ Python packages included in the platform.</p>
 </ul>
 </div>
 </section>
-<section id="developing-your-own-workflows">
-<h2><a class="toc-backref" href="#id9" role="doc-backlink">Developing your own workflows</a><a class="headerlink" href="#developing-your-own-workflows" title="Permalink to this heading"></a></h2>
+<section id="developing-new-workflows">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">Developing New Workflows</a><a class="headerlink" href="#developing-new-workflows" title="Link to this heading"></a></h2>
 <section id="combining-included-cwl-tools-into-a-new-workflow">
-<h3><a class="toc-backref" href="#id10" role="doc-backlink">Combining included CWL tools into a new workflow</a><a class="headerlink" href="#combining-included-cwl-tools-into-a-new-workflow" title="Permalink to this heading"></a></h3>
-<p>Dorieh includes many packaged CWL tools that can be combined in custom workflows.
-It also includes a <a class="reference internal" href="members/cwl_collect_outputs.html"><span class="doc std std-doc">utility</span></a>
-to generate CWL code that can be copied abd pasted into a parent
-workflow.</p>
+<h3><a class="toc-backref" href="#id12" role="doc-backlink">Combining Included CWL Tools into a New Workflow</a><a class="headerlink" href="#combining-included-cwl-tools-into-a-new-workflow" title="Link to this heading"></a></h3>
+<p>Dorieh provides multiple pre-packaged CWL tools, which you can mix and
+match into custom workflows; the complete alphabetic index of every
+tool and workflow shipped with the platform is in
+<a class="reference internal" href="cwl_tools.html"><span class="std std-doc">CWL Tools and Common Workflows</span></a>. Use
+the <a class="reference internal" href="members/cwl_collect_outputs.html"><span class="doc std std-doc">CWL output collection utility</span></a> to help
+generate CWL code snippets for new workflows.</p>
+</section>
+<section id="ordering-database-steps-with-depends-on">
+<h3><a class="toc-backref" href="#id13" role="doc-backlink">Ordering Database Steps with <code class="docutils literal notranslate"><span class="pre">depends_on</span></code></a><a class="headerlink" href="#ordering-database-steps-with-depends-on" title="Link to this heading"></a></h3>
+<p>CWL has no explicit “run after” clause: runners start every step whose
+data inputs are available, possibly in parallel. Steps that share a
+database must therefore be ordered explicitly through data dependencies.
+Dorieh CWL tools that write to a database expose a <code class="docutils literal notranslate"><span class="pre">depends_on</span></code> input
+for this purpose (declared as <code class="docutils literal notranslate"><span class="pre">Any?</span></code> or <code class="docutils literal notranslate"><span class="pre">File?</span></code>, depending on the tool):
+wire it to a log output of the step that must finish first, for example
+<code class="docutils literal notranslate"><span class="pre">depends_on:</span> <span class="pre">initdb/log</span></code>. In particular, every step that writes to the
+database should depend, directly or transitively, on the database
+initialization step (<code class="docutils literal notranslate"><span class="pre">initdb.cwl</span></code> or <code class="docutils literal notranslate"><span class="pre">initcoredb.cwl</span></code>); otherwise the
+workflow may fail on its first run against a fresh database, or fail
+intermittently when parallel branches race to create the same schema or
+metadata tables. For a worked example of chaining steps this way, see
+the <a class="reference internal" href="tutorial/climate/building-climate-pipeline.html"><span class="std std-doc">climate tutorial</span></a>.</p>
 </section>
 <section id="wrapping-python-modules-as-cwl-tools">
-<h3><a class="toc-backref" href="#id11" role="doc-backlink">Wrapping python modules as CWL tools</a><a class="headerlink" href="#wrapping-python-modules-as-cwl-tools" title="Permalink to this heading"></a></h3>
-<p>You might want to look at <a class="reference external" href="https://github.com/hexylena/argparse2tool#cwl-specific-functionality">cwl2argparse</a>
-or other <a class="reference external" href="https://www.commonwl.org/tools/">CWL development tools</a></p>
+<h3><a class="toc-backref" href="#id14" role="doc-backlink">Wrapping Python Modules as CWL Tools</a><a class="headerlink" href="#wrapping-python-modules-as-cwl-tools" title="Link to this heading"></a></h3>
+<p>Consider
+using <a class="reference external" href="https://github.com/hexylena/argparse2tool#cwl-specific-functionality">cwl2argparse</a>
+or browse other <a class="reference external" href="https://www.commonwl.org/tools/">CWL development tools</a>
+for converting Python modules into CWL tools.</p>
 </section>
 </section>
 </section>
@@ -322,13 +851,13 @@ or other <a class="reference external" href="https://www.commonwl.org/tools/">CW
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="pipeline/census_writecwl_src.html" class="btn btn-neutral float-left" title="census_write.cwl" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="pipeline/medicare.html" class="btn btn-neutral float-right" title="Medicare data ingestion and processing pipeline" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="pipeline/wustl.html" class="btn btn-neutral float-right" title="Pipeline to ingest Monthly Pollution data downloaded from WashU Box" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2021-2024, Harvard University.</p>
+    <p>&#169; Copyright 2021-2026, Harvard University.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

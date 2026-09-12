@@ -1,0 +1,21 @@
+# Column cms.medpar_2018.CVRLVLDT
+
+## Overview of column CVRLVLDT in table cms.medpar_2018 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2018](../cms.medpar_2018.md)           |
+| Qualified name                | cms.medpar_2018.CVRLVLDT  |
+| Datatype                      | DATE        |
+
+
+Date covered level of care ended in a SNF
+
+| Key | Value |
+| --- | ----- |
+| long_name | CVRD_LVL_CARE_THRU_DT |
+| original_type | DATE |
+| width | 8.0 |
+
+
+

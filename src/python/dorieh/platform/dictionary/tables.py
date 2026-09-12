@@ -21,16 +21,18 @@
 Module to create list of tables from the Domain Data Model
 """
 import math
+import os
 import re
 from typing import Dict, Optional, List, Set
 import html
 import sqlparse
 
 from dorieh.platform.data_model.domain import Domain
+from dorieh.platform.dictionary import RenderMode
 from dorieh.platform.dictionary.columns import Column
 from dorieh.platform.dictionary.element import HTML, DataModelElement, Graph, fqn, qstr, \
     attrs2string, add_row, start_table, add_html_row, end_table, add_header_row, \
-    hr, start_invisible_row, end_invisible_row
+    hr, start_invisible_row, end_invisible_row, PANDOC
 
 
 class Table(DataModelElement):
@@ -49,6 +51,7 @@ class Table(DataModelElement):
         self.parent = None
         self.type: str = "Table"
         self.master = None
+        self.mode = domain_dict.mode
         create_block = None
         if "create" in self.block:
             create_block:Dict[str, Dict] = self.block["create"]
@@ -106,7 +109,7 @@ class Table(DataModelElement):
             for column_block in columns_block:
                 cblocks = Column.expand_macro1(column_block)
                 for cblock in cblocks:
-                    column = Column(self.qualified_name, cblock)
+                    column = Column(self.qualified_name, cblock, self.mode, self.describe_column_type)
                     self.columns[column.name.lower()] = column
         if self.master is not None and create_block and "select" in create_block:
             self.add_master_columns()
@@ -131,13 +134,13 @@ class Table(DataModelElement):
     def add_column_from_master(self, c: str):
         p_column = self.master.columns[c]
         column_block = {c: p_column.block}
-        column = Column(self.qualified_name, column_block)
+        column = Column(self.qualified_name, column_block, self.mode, self.describe_column_type)
         column.copied = True
         self.columns[column.name.lower()] = column
 
     def add_column_from_sql(self, identifier: sqlparse.sql.Identifier):
         c = identifier.get_name()
-        column = Column(self.qualified_name, {c: None})
+        column = Column(self.qualified_name, {c: None}, self.mode, self.describe_column_type)
         column.expression = [identifier.value]
         column.copied = False
         identifiers = self.get_source_columns(identifier)
@@ -225,26 +228,55 @@ class Table(DataModelElement):
                 if c in t.columns:
                     link = ColumnLink(r, t.columns[c], column)
                     links.append(link)
+        if not links:
+            for r in pt:
+                t = r.x
+                if column.name in t.columns:
+                    link = ColumnLink(r, t.columns[column.name], column)
+                    links.append(link)
+
         return links
 
-    def calculate_column_lineage(self, column: Column, graph: Graph):
+    def calculate_column_lineage(self, column: Column, graph: Graph, recursion):
         links = self.get_column_links(column)
+
+        if len(links) > 5 and recursion > 0:
+            node_id = column.qualified_name + "_parent"
+            width = 3 + math.log(len(links), 2)
+            minlen = 2
+            text = column.to_dot(
+                node_id = qstr(node_id),
+                node_label=qstr(f"{len(links)} incoming links (columns)"),
+                attributes={
+                    "shape": '"cylinder"',
+                    "fillcolor": '"yellow"',
+                    "style": '"filled"',
+                    "minlen": minlen,
+                    "width": 3,
+                    "height": 1.5
+                }
+            )
+            graph.add_node(node_id, text)
+            graph.add_edge(GenericLink(node_id, column.qualified_name, width))
+            return 
+
         if len(links) > 3:
             group = "parent_" + column.qualified_name
         else:
             group = None
+
         for link in links:
             graph.add_edge(link)
             parent = qstr(link.x.qualified_name)
             graph.add_node(parent, repr(link.x), group)
-            link.relation.x.calculate_column_lineage(link.x, graph)
+            link.relation.x.calculate_column_lineage(link.x, graph, recursion + 1)
         return
 
     def column_lineage_to_dot(self, column_name: str, out):
         column = self.columns[column_name]
         graph = Graph()
         graph.add_node(qstr(column.qualified_name), repr(column))
-        self.calculate_column_lineage(column, graph)
+        self.calculate_column_lineage(column, graph, 0)
         graph.print(indent=1, file=out)
 
     def describe_column_type(self, column: Column):
@@ -263,73 +295,171 @@ class Table(DataModelElement):
             return "transformed"
         return ""
 
-    @staticmethod
-    def link_to_table(name: str):
-        ref = f"{name}.html"
-        return f'<a href = "{ref}">{name}</a>'
+    def describe(self, format: str = 'html', basedir: str = '') -> str:
+        if format == 'html':
+            return self.describe_html(basedir)
+        return self.describe_markdown(basedir)
 
-    @staticmethod
-    def link_to_column(name: str, basedir: str):
-        cpath = f'{basedir}/{name}.dot.html'
-        return f'<a href="{cpath}">{name}</a>'
-
-    def describe_html(self, basedir) -> str:
-        text = start_table(border=0)
-        text += start_invisible_row()
-        text += start_table(border=2)
+    def describe_html(self, basedir: str = "") -> str:
+        fmt = 'html'
+        text = start_table(border=0, format=fmt)
+        text += start_invisible_row(format=fmt)
+        text += start_table(border=2, format=fmt)
         header = f'<FONT POINT-SIZE="20"><b>{self.type}: {self.qualified_name}</b></FONT>'
-        text += add_html_row([header], border=2)
+        text += add_row([header], format=fmt)
 
         if self.reference:
-            text += f'<tr><td  align = "center" border = "0"><i>For more information see: {self.reference}</i></td></tr>\n'
+            text += add_row([f'<i>For more information see: {self.reference}</i>'], format=fmt)
         if self.description and "text" in self.description:
             value = html.escape(self.description["text"])
-            text += add_row([value])
+            text += add_row([value], format=fmt)
         if self.parent:
             name = self.parent.qualified_name
-            text += add_row([f"Child table of {self.link_to_table(name)}"])
+            text += add_row([f"Child table of {self.link_to_table(name, fmt)}"], format=fmt)
         if self.aggregation:
             name = self.aggregation.parent.qualified_name
-            text += add_row([f"Aggregated from {self.link_to_table(name)} on {self.aggregation.on}"])
+            text += add_row([f"Aggregated from {self.link_to_table(name, fmt)} on {self.aggregation.on}"], format=fmt)
         if self.master:
             name = self.master.qualified_name
-            text += add_row([f"Transformed from {self.link_to_table(name)}"])
+            text += add_row([f"Transformed from {self.link_to_table(name, fmt)}"], format=fmt)
         elif self.join:
             name = self.join.sql
-            text += add_row([f"Join of tables: {name}"])
+            text += add_row([f"Join of tables: {name}"], format=fmt)
         if "primary_key" in self.block:
             pk = self.block["primary_key"]
             pk_text = ", ".join(pk)
-            text += add_row([f"Primary Key:  {pk_text}"])
-        text += end_table()
-        text += end_invisible_row()
-        text += hr()
-        text += start_invisible_row()
-        text += start_table(border=2)
-        text += add_header_row(["Column name", "Column type", "Datatype"])
+            text += add_row([f"Primary Key: {pk_text}"], format=fmt)
+        text += end_table(format=fmt)
+        text += end_invisible_row(format=fmt)
+        text += hr(format=fmt)
+        text += start_invisible_row(format=fmt)
+        text += start_table(border=2, format=fmt)
+        text += add_header_row(["Column Name", "Column Type", "Datatype"], format=fmt)
+
         for c in sorted(self.columns):
             column = self.columns[c]
             text += add_row([
-                self.link_to_column(column.name, basedir),
+                self.link_to_column(column.name, basedir, fmt),
                 self.describe_column_type(column),
                 column.datatype
-            ])
-        text += end_table()
-        text += end_invisible_row()
-        text += end_table()
+            ], format=fmt)
+        text += end_table(format=fmt)
+        text += end_invisible_row(format=fmt)
+        text += end_table(format=fmt)
         return text
 
-    def html(self, of: str, svg = None):
-        body = self.describe_html(self.qualified_name)
+    def columns_toctree(self) -> str:
+        text = "\n```{toctree}\n"
+        text += "---\n"
+        text += "maxdepth: 1\n"
+        text += "hidden:\n"
+        text += "---\n"
+        for c in sorted(self.columns):
+            text += f"{self.qualified_name}/{c}.md\n"
+        text += "```\n\n"
+        return text
+
+    def describe_markdown(self, basedir: str = "") -> str:
+        fmt = 'markdown'
+        text = f"## Overview for {self.qualified_name}\n\n"
+        if self.mode == RenderMode.sphinx:
+            text += self.columns_toctree()
+            text += "\n"
+
+        if self.reference:
+            text += f"*For more information see: {self.reference}*\n\n"
+        if self.description and "text" in self.description:
+            text += f"{self.description['text']}\n\n"
+        if self.parent:
+            name = self.parent.qualified_name
+            text += f"Child table of {self.link_to_table(name, fmt)}\n\n"
+        if self.aggregation:
+            name = self.aggregation.parent.qualified_name
+            text += f"Aggregated from {self.link_to_table(name, fmt)} on {self.aggregation.on}\n\n"
+        if self.master:
+            name = self.master.qualified_name
+            text += f"Transformed from {self.link_to_table(name, fmt)}\n\n"
+        elif self.join:
+            name = self.join.sql
+            text += f"Join of tables: {name}\n\n"
+        if "primary_key" in self.block:
+            pk = self.block["primary_key"]
+            pk_text = ", ".join(pk)
+            text += f"Primary Key: {pk_text}\n\n"
+
+        sql = self.domain.ddl_by_table.get(self.qualified_name)
+        sql = [l for l in sql if l != f"-- {self.qualified_name} skipped;"]
+        # The provenance COMMENT embeds the URL Dorieh was installed from;
+        # for a local checkout that is a machine-specific file:// path.
+        # It belongs in the database it describes, but not in generated
+        # documentation, hence it is redacted at display time only.
+        sql = [
+            re.sub(r"file:///[^\s\"']+", "file://<local checkout>", l)
+            for l in sql
+        ]
+        if sql:
+            text += "\n<details>\n\n"
+            text += "<summary>SQL/DDL Statement</summary>\n\n"
+            text += "```sql\n"
+            for line in sql:
+                text += line + '\n'
+            text += "```\n"
+            text += "\n</details>\n\n"
+
+        text += hr(format=fmt)
+        text += "## Columns:\n\n"
+        text += add_header_row(["Column Name", "Column Type", "Datatype"], format=fmt)
+
+        for c in sorted(self.columns):
+            column = self.columns[c]
+            text += add_row([
+                self.link_to_column(column.name.lower(), basedir, fmt),
+                self.describe_column_type(column),
+                column.datatype
+            ], format=fmt)
+        text += "\n"
+        return text
+
+    def link_to_table(self, name: str, format: str = 'html') -> str:
+        ext = "md" if (self.mode == RenderMode.sphinx) and format == "markdown" else "html"
+        if format == 'markdown':
+            return f"[{name}]({name}.{ext})"
+        ref = f"{name}.{ext}"
+        return f'<a href="{ref}">{name}</a>'
+
+    def link_to_column(self, name: str, basedir: str, format: str = 'html') -> str:
+        ext = "md" if (self.mode == RenderMode.sphinx) and format == "markdown" else "html"
+        if format == 'markdown':
+            cpath = f'{basedir}/{name}.{ext}'
+            return f"[{name}]({cpath})"
+        cpath = f'{basedir}/{name}.html'
+        return f'<a href="{cpath}">{name}</a>'
+
+    def html(self, of: str, svg=None):
+        fmt = 'html'
+        body = self.describe(basedir=self.qualified_name, format=fmt)
         if svg:
-            body += "<hr/>\n"
-            body += f'<object data="{svg}" type="image/svg+xml"> </object>'
+            body += hr(format=fmt)
+            body += f'<object data="{svg}" type="image/svg+xml"></object>'
         block = HTML.format(
             title = f"Table {self.qualified_name}",
             body = body
         )
         with open(of, "wt") as out:
             print(block, file=out)
+
+    def markdown(self, of: str, svg=None):
+        fmt = 'markdown'
+        body = self.describe(basedir=self.qualified_name, format=fmt)
+        if svg:
+            body += hr(format=fmt)
+            body += f'<object data="{svg}" type="image/svg+xml"></object>'
+        block = f"# {self.type.capitalize()} {self.qualified_name}\n\n{body}"
+        with open(of, "wt") as out:
+            print(block, file=out)
+        if self.mode == RenderMode.standalone:
+            fhtml = os.path.splitext(of)[0] + ".html"
+            os.system(f"{PANDOC} --from markdown  --to html {of} > {fhtml}")
 
 
 class Aggregation:
@@ -434,13 +564,33 @@ class ColumnLink:
         if self.y.copied:
             attrs["label"] = "Copied"
         elif "transformation" in attrs["label"]:
-            attrs["label"] = attrs["label"].replace("transformation", "transformed")
+            attrs["label"] = attrs["label"].replace("transformation", "  Transformed")
         elif "aggregation" in attrs["label"]:
-            attrs["label"] = attrs["label"].replace("aggregation", "aggregated")
+            attrs["label"] = attrs["label"].replace("aggregation", "  Aggregated")
+        attrs["labelfloat"] = True
         return f"\t{node1} -> {node2} [{attrs2string(attrs)}];"
 
     def __str__(self):
         return f"{self.x.qualified_name} -> {self.y.qualified_name}"
+
+    def __repr__(self):
+        return self.to_dot()
+
+
+class GenericLink:
+    def __init__(self, node1, node2, width = 5.0):
+        self.node1 = node1
+        self.node2 = node2
+        self.width = width
+
+    def to_dot(self):
+        attrs = dict()
+        attrs["penwidth"] = self.width
+        attrs["color"] = "goldenrod"
+        return f"\t{qstr(self.node1)} -> {qstr(self.node2)} [{attrs2string(attrs)}];"
+
+    def __str__(self):
+        return f"{self.node1} -> {self.node2}"
 
     def __repr__(self):
         return self.to_dot()

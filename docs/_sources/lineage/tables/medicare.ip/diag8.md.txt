@@ -1,0 +1,31 @@
+# Column medicare.ip.diag8
+
+## Overview of column diag8 in table medicare.ip 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.ip](../medicare.ip.md)           |
+| Qualified name                | medicare.ip.diag8  |
+| Datatype                      | varchar        |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+diag8_svg_envelop.md
+```
+
+
+```{figure} diag8.svg
+:align: center
+:alt: Column medicare.ip.diag8 Lineage SVG
+:target: diag8_svg_envelop.html
+
+Data lineage for column medicare.ip.diag8
+
+```
+
+

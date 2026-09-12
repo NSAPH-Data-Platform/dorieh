@@ -1,0 +1,39 @@
+# Column medicare.enrollments.ssa3_list
+
+## Overview of column ssa3_list in table medicare.enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.enrollments](../medicare.enrollments.md)           |
+| Qualified name                | medicare.enrollments.ssa3_list  |
+| Datatype                      | string        |
+| Column type | copied |
+
+
+
+## Expressions
+
+```sql
+SELECT string_agg(distinct ssa3, ',')
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+ssa3_list_svg_envelop.md
+```
+
+
+```{figure} ssa3_list.svg
+:align: center
+:alt: Column medicare.enrollments.ssa3_list Lineage SVG
+:target: ssa3_list_svg_envelop.html
+
+Data lineage for column medicare.enrollments.ssa3_list
+
+```
+
+

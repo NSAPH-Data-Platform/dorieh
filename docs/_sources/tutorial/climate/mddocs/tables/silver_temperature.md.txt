@@ -1,0 +1,60 @@
+# View silver_temperature
+
+## Overview for silver_temperature
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+silver_temperature/city.md
+silver_temperature/date.md
+silver_temperature/temperature_in_c.md
+silver_temperature/temperature_in_f.md
+silver_temperature/tmmx.md
+silver_temperature/us_state.md
+silver_temperature/zcta.md
+```
+
+
+Maximum daily temperature for US Zip Code Tabulation Areas, enriched and harmonized
+
+
+Transformed from [bronze_temperature](bronze_temperature.md)
+
+
+<details>
+
+<summary>SQL/DDL Statement</summary>
+
+```sql
+CREATE view  silver_temperature AS
+SELECT
+    tmmx,
+	date,
+	zcta,
+	(tmmx - 273.15) AS temperature_in_C,
+	((tmmx - 273.15)*9/5 + 32) AS temperature_in_F,
+	public.zip_to_state(EXTRACT(YEAR FROM date)::INT, zcta) AS us_state,
+	public.zip_to_city(EXTRACT(YEAR FROM date)::INT, zcta) AS city
+FROM bronze_temperature;
+COMMENT ON view silver_temperature IS 'CREATED BY Dorieh: {"version": "0.5.1.post2", "url": "file://<local checkout>", "commit": null}. Created at 2026-09-12 15:03:54.874228';
+```
+
+</details>
+
+---
+## Columns:
+
+| Column Name | Column Type | Datatype |
+| --- | --- | --- |
+| [city](silver_temperature/city.md) | computed | VARCHAR(128) |
+| [date](silver_temperature/date.md) |  | string |
+| [temperature_in_c](silver_temperature/temperature_in_c.md) | computed | float |
+| [temperature_in_f](silver_temperature/temperature_in_f.md) | computed | float |
+| [tmmx](silver_temperature/tmmx.md) |  | string |
+| [us_state](silver_temperature/us_state.md) | computed | VARCHAR(2) |
+| [zcta](silver_temperature/zcta.md) |  | string |
+
+

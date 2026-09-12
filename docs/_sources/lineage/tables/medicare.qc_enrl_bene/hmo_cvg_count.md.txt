@@ -1,0 +1,39 @@
+# Column medicare.qc_enrl_bene.hmo_cvg_count
+
+## Overview of column hmo_cvg_count in table medicare.qc_enrl_bene 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_enrl_bene](../medicare.qc_enrl_bene.md)           |
+| Qualified name                | medicare.qc_enrl_bene.hmo_cvg_count  |
+| Datatype                      | string        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT MAX(hmo_cvg_count)
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+hmo_cvg_count_svg_envelop.md
+```
+
+
+```{figure} hmo_cvg_count.svg
+:align: center
+:alt: Column medicare.qc_enrl_bene.hmo_cvg_count Lineage SVG
+:target: hmo_cvg_count_svg_envelop.html
+
+Data lineage for column medicare.qc_enrl_bene.hmo_cvg_count
+
+```
+
+

@@ -1,0 +1,22 @@
+# Column cms.medpar_2015.BNDLD_ADJSTMT_AMT
+
+## Overview of column BNDLD_ADJSTMT_AMT in table cms.medpar_2015 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2015](../cms.medpar_2015.md)           |
+| Qualified name                | cms.medpar_2015.BNDLD_ADJSTMT_AMT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/bundled-payment-adjustment-amount](https://resdac.org/cms-data/variables/bundled-payment-adjustment-amount) |
+
+
+Bundled Adjustment Amount
+
+| Key | Value |
+| --- | ----- |
+| long_name | BNDLD_ADJSTMT_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

@@ -1,0 +1,22 @@
+# Column cms.medpar_2013.HRR_ADJSTMT_AMT
+
+## Overview of column HRR_ADJSTMT_AMT in table cms.medpar_2013 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2013](../cms.medpar_2013.md)           |
+| Qualified name                | cms.medpar_2013.HRR_ADJSTMT_AMT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/hospital-readmission-reduction-hrr-adjustment-amount](https://resdac.org/cms-data/variables/hospital-readmission-reduction-hrr-adjustment-amount) |
+
+
+Hospital Readmission Reduction (HRR) Adjustment Amount
+
+| Key | Value |
+| --- | ----- |
+| long_name | HRR_ADJSTMT_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

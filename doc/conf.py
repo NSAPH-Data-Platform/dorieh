@@ -18,15 +18,29 @@ autoclass_content = 'both'
 autodoc_member_order = 'bysource'
 sys.path.insert(0, os.path.abspath('../src/python'))
 sys.path.insert(0, os.path.abspath('src/python'))
+# local documentation-build extensions (doc/_ext)
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)) + '/_ext')
+sys.setrecursionlimit(2500)
 
 # -- Project information -----------------------------------------------------
 
 project = 'Dorieh Data Platform'
-copyright = '2021-2024, Harvard University'
+copyright = '2021-2026, Harvard University'
 author = 'Michael A Bouzinier'
 
-# The full version, including alpha/beta/rc tags
-release = '0.0.1'
+# The full version, including alpha/beta/rc tags.
+# The documentation is built from this checkout, so the version is parsed
+# from ../setup.py; if that fails (e.g. docs built outside a full source
+# tree), fall back to the installed package metadata.
+try:
+    import re as _re
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                           '..', 'setup.py')) as _f:
+        release = _re.search(r'version\s*=\s*["\']([^"\']+)["\']',
+                             _f.read()).group(1)
+except Exception:
+    from importlib.metadata import version as _pkg_version
+    release = _pkg_version('dorieh')
 
 
 # -- General configuration ---------------------------------------------------
@@ -43,9 +57,21 @@ extensions = [
     'sphinx.ext.viewcode',
     'sphinx_paramlinks',
     'sphinx.ext.autosectionlabel',
+    'sphinx.ext.graphviz',
+    'sphinxcontrib.mermaid',
     'myst_parser',
+    'sphinx_togglebutton',
+    # local shim: guarantees <outdir>/_static exists before build-finished
+    # handlers run (sphinx_paramlinks crashes on Sphinx 8.2 without it)
+    'ensure_static',
 ]
 myst_heading_anchors = 5
+# Enable MyST extensions
+myst_enable_extensions = [
+    "colon_fence",
+    # other extensions...
+]
+
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -65,10 +91,39 @@ html_css_files = [
 #html_theme = 'alabaster'
 html_theme = "sphinx_rtd_theme"
 
-source_suffix = {
-    '.rst': 'restructuredtext',
-    '.txt': 'restructuredtext',
-    '.cwl': 'cwl',
+# Render nested toctree entries in the sidebar on every page (by default the
+# RTD theme collapses branches until the reader navigates into them, which
+# hides e.g. the list of data domains from the main pages).
+html_theme_options = {
+    "collapse_navigation": False,
+    "navigation_depth": 3,
 }
 
-suppress_warnings = ['autosectionlabel.*']
+# Mock optional/heavy dependencies during autodoc imports, so API pages build
+# in any environment: rpy2 (FST support, requires a matching R installation),
+# pyspark/pyhive (the [spark] extra) and memory_profiler (used by memtest).
+# Without this, a missing — or broken, e.g. linked against an uninstalled R —
+# dependency leaves the affected module pages empty and spams the build log.
+autodoc_mock_imports = [
+    "rpy2",
+    "pyspark",
+    "pyhive",
+    "memory_profiler",
+    "pympler",
+]
+
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.txt': 'restructuredtext'
+}
+
+# ,
+#     '.cwl': 'cwl',
+
+suppress_warnings = [
+    'autosectionlabel.*',
+    # Pygments cannot lex the {identifiers} placeholders and plpgsql $body$
+    # blocks embedded in generated lineage pages; it retries in relaxed mode
+    # and renders correctly, so these warnings are purely cosmetic.
+    'misc.highlighting_failure',
+]

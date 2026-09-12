@@ -1,0 +1,22 @@
+# Column cms.medpar_2018.PRVTAMT
+
+## Overview of column PRVTAMT in table cms.medpar_2018 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2018](../cms.medpar_2018.md)           |
+| Qualified name                | cms.medpar_2018.PRVTAMT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/private-room-charge-amount](https://resdac.org/cms-data/variables/private-room-charge-amount) |
+
+
+Private room accommodations related to beneficiarys stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | PRVT_ROOM_CHRG_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

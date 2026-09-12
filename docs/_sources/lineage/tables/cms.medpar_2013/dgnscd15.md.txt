@@ -1,0 +1,22 @@
+# Column cms.medpar_2013.DGNSCD15
+
+## Overview of column DGNSCD15 in table cms.medpar_2013 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2013](../cms.medpar_2013.md)           |
+| Qualified name                | cms.medpar_2013.DGNSCD15  |
+| Datatype                      | VARCHAR(7)        |
+| Reference | [https://resdac.org/cms-data/variables/medpar-icd-9-cm-diagnosis-code-15](https://resdac.org/cms-data/variables/medpar-icd-9-cm-diagnosis-code-15) |
+
+
+ICD-9-CM Diagnosis code XV
+
+| Key | Value |
+| --- | ----- |
+| long_name | DGNS_15_CD |
+| original_type | CHAR |
+| width | 7.0 |
+
+
+

@@ -1,0 +1,48 @@
+# Column cms.mbsf_ab_2014.ZIP
+
+## Overview of column ZIP in table cms.mbsf_ab_2014 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_ab_2014](../cms.mbsf_ab_2014.md)           |
+| Qualified name                | cms.mbsf_ab_2014.ZIP  |
+| Datatype                      | VARCHAR(9)        |
+| Column type | generated |
+| Reference | [https://resdac.org/cms-data/variables/zip-code-beneficiary](https://resdac.org/cms-data/variables/zip-code-beneficiary) |
+
+
+Zip Code of Residence
+
+| Key | Value |
+| --- | ----- |
+| original_type | CHAR |
+| width | 9.0 |
+
+
+
+## Expressions
+
+```sql
+SELECT GENERATED ALWAYS AS (BENE_ZIP) STORED
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+zip_svg_envelop.md
+```
+
+
+```{figure} zip.svg
+:align: center
+:alt: Column cms.mbsf_ab_2014.ZIP Lineage SVG
+:target: zip_svg_envelop.html
+
+Data lineage for column cms.mbsf_ab_2014.ZIP
+
+```
+
+

@@ -39,6 +39,7 @@
 import codecs
 import csv
 import datetime
+import fsspec
 import glob
 import gzip
 import io
@@ -59,7 +60,7 @@ from requests.models import Response
 
 
 logger = logging.getLogger(__name__)
-HEADERS = {'User-Agent': 'NSAPH Data warehouse app; https://github.com/NSAPH-Data-Platform'}
+HEADERS = {'User-Agent': 'NSAPH Data warehouse app; https://github.com/ForomePlatform'}
 
 
 def sizeof_fmt(num, suffix="B") -> str:
@@ -241,12 +242,14 @@ def fopen(path: str, mode: str):
     """
     if isinstance(path, io.BufferedReader):
         return codecs.getreader("utf-8")(path)
-    if path.lower().endswith(".gz"):
+    lpath = path.lower()
+    # if lpath.startswith("http")
+    if lpath.endswith(".gz"):
         #return io.TextIOWrapper(gzip.open(path, mode))
         return gzip.open(path, mode)
     if 'b' in mode:
         return open(path, mode)
-    return open(path, mode, encoding="utf-8")
+    return fsspec.open(path, mode, encoding="utf-8")
 
 
 def check_http_response(r: Response):

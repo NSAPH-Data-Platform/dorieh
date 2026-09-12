@@ -1,0 +1,41 @@
+# Column medicare.admissions.adm_day_of_week
+
+## Overview of column adm_day_of_week in table medicare.admissions 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.admissions](../medicare.admissions.md)           |
+| Qualified name                | medicare.admissions.adm_day_of_week  |
+| Datatype                      | INT        |
+| Column type | copied |
+
+
+
+### Casts:
+
+| Original type | Cast expression      |
+| ------------- | -------------------- |
+| character varying | {column_name}::INT |
+| numeric | {column_name}::INT |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+adm_day_of_week_svg_envelop.md
+```
+
+
+```{figure} adm_day_of_week.svg
+:align: center
+:alt: Column medicare.admissions.adm_day_of_week Lineage SVG
+:target: adm_day_of_week_svg_envelop.html
+
+Data lineage for column medicare.admissions.adm_day_of_week
+
+```
+
+

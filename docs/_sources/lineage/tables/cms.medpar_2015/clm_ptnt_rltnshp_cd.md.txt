@@ -1,0 +1,22 @@
+# Column cms.medpar_2015.CLM_PTNT_RLTNSHP_CD
+
+## Overview of column CLM_PTNT_RLTNSHP_CD in table cms.medpar_2015 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2015](../cms.medpar_2015.md)           |
+| Qualified name                | cms.medpar_2015.CLM_PTNT_RLTNSHP_CD  |
+| Datatype                      | VARCHAR(2)        |
+| Reference | [https://resdac.org/cms-data/variables/claim-patient-relationship-code](https://resdac.org/cms-data/variables/claim-patient-relationship-code) |
+
+
+Claim Patient Relationship Code
+
+| Key | Value |
+| --- | ----- |
+| long_name | CLM_PTNT_RLTNSHP_CD |
+| original_type | CHAR |
+| width | 2.0 |
+
+
+

@@ -1,0 +1,22 @@
+# Column cms.medpar_2014.DGNS_E_CD_CNT
+
+## Overview of column DGNS_E_CD_CNT in table cms.medpar_2014 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2014](../cms.medpar_2014.md)           |
+| Qualified name                | cms.medpar_2014.DGNS_E_CD_CNT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/count-diagnosis-e-codes](https://resdac.org/cms-data/variables/count-diagnosis-e-codes) |
+
+
+MEDPAR Diagnosis E Code Count
+
+| Key | Value |
+| --- | ----- |
+| long_name | DGNS_E_CD_CNT |
+| original_type | NUM |
+| width | 3.0 |
+
+
+

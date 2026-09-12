@@ -1,0 +1,32 @@
+# Display Dorieh platform version
+
+
+ [Source code](monitorcwl_src.md) 
+
+
+```{contents}
+---
+local:
+---
+```
+
+**Tool**. Runs: [dorieh.platform.loader.monitor](../members/monitor)
+
+## Description
+
+This tool prints the DBMS activity statistics, 
+like currently running processes and some details about each process.
+
+
+## Inputs
+
+| Name            | Type   | Default | Description                                            | 
+|:----------------|:-------|:--------|:-------------------------------------------------------|
+| database        | File   |         | Path to database connection file, usually database.ini | 
+| connection_name | string |         | The name of the section in the database.ini file       | 
+
+## Outputs
+
+| Name | Type | Description | 
+|:-----|:-----|:------------|
+

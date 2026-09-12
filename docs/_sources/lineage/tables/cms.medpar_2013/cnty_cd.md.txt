@@ -1,0 +1,22 @@
+# Column cms.medpar_2013.CNTY_CD
+
+## Overview of column CNTY_CD in table cms.medpar_2013 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2013](../cms.medpar_2013.md)           |
+| Qualified name                | cms.medpar_2013.CNTY_CD  |
+| Datatype                      | VARCHAR(3)        |
+| Reference | [https://resdac.org/sites/datadocumentation.resdac.org/files/Introduction%20to%20DE-SynPUF%20%28Slides%29.pdf](https://resdac.org/sites/datadocumentation.resdac.org/files/Introduction%20to%20DE-SynPUF%20%28Slides%29.pdf) |
+
+
+SSA standard county code of a beneficiarys residence.
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_RSDNC_SSA_CNTY_CD |
+| original_type | CHAR |
+| width | 3.0 |
+
+
+

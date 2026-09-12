@@ -1,0 +1,41 @@
+# Column medicare.qc_adm_union.discharge_date
+
+## Overview of column discharge_date in table medicare.qc_adm_union 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_adm_union](../medicare.qc_adm_union.md)           |
+| Qualified name                | medicare.qc_adm_union.discharge_date  |
+| Datatype                      | DATE        |
+| Column type | copied |
+
+
+
+### Casts:
+
+| Original type | Cast expression      |
+| ------------- | -------------------- |
+| character varying | public.parse_date({column_name}) |
+| numeric | public.parse_date({column_name}) |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+discharge_date_svg_envelop.md
+```
+
+
+```{figure} discharge_date.svg
+:align: center
+:alt: Column medicare.qc_adm_union.discharge_date Lineage SVG
+:target: discharge_date_svg_envelop.html
+
+Data lineage for column medicare.qc_adm_union.discharge_date
+
+```
+
+

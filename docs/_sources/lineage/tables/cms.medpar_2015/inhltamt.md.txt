@@ -1,0 +1,22 @@
+# Column cms.medpar_2015.INHLTAMT
+
+## Overview of column INHLTAMT in table cms.medpar_2015 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2015](../cms.medpar_2015.md)           |
+| Qualified name                | cms.medpar_2015.INHLTAMT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/inhalation-therapy-charge-amount](https://resdac.org/cms-data/variables/inhalation-therapy-charge-amount) |
+
+
+Inhalation therapy services provided during beneficiarys stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | INHLTN_THRPY_CHRG_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

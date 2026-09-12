@@ -1,0 +1,22 @@
+# Column cms.medpar_2011.ICAREAMT
+
+## Overview of column ICAREAMT in table cms.medpar_2011 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2011](../cms.medpar_2011.md)           |
+| Qualified name                | cms.medpar_2011.ICAREAMT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/intensive-care-charge-amount](https://resdac.org/cms-data/variables/intensive-care-charge-amount) |
+
+
+Intensive care accommodations related to beneficiarys stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | INTNSV_CARE_CHRG_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

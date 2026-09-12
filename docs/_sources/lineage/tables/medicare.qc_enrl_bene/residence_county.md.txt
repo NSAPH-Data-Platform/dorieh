@@ -1,0 +1,39 @@
+# Column medicare.qc_enrl_bene.residence_county
+
+## Overview of column residence_county in table medicare.qc_enrl_bene 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_enrl_bene](../medicare.qc_enrl_bene.md)           |
+| Qualified name                | medicare.qc_enrl_bene.residence_county  |
+| Datatype                      | string        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT MAX(fips3)
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+residence_county_svg_envelop.md
+```
+
+
+```{figure} residence_county.svg
+:align: center
+:alt: Column medicare.qc_enrl_bene.residence_county Lineage SVG
+:target: residence_county_svg_envelop.html
+
+Data lineage for column medicare.qc_enrl_bene.residence_county
+
+```
+
+

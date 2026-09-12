@@ -1,0 +1,22 @@
+# Column cms.mbsf_ab_2012.RACE
+
+## Overview of column RACE in table cms.mbsf_ab_2012 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_ab_2012](../cms.mbsf_ab_2012.md)           |
+| Qualified name                | cms.mbsf_ab_2012.RACE  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/beneficiary-race-code-base](https://resdac.org/cms-data/variables/beneficiary-race-code-base) |
+
+
+Beneficiary Race Code
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_RACE_CD |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

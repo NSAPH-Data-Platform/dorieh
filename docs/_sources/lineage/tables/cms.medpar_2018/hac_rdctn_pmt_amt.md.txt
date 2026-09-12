@@ -1,0 +1,22 @@
+# Column cms.medpar_2018.HAC_RDCTN_PMT_AMT
+
+## Overview of column HAC_RDCTN_PMT_AMT in table cms.medpar_2018 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2018](../cms.medpar_2018.md)           |
+| Qualified name                | cms.medpar_2018.HAC_RDCTN_PMT_AMT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/hospital-acquired-conditions-hac-reduction-payment-amount](https://resdac.org/cms-data/variables/hospital-acquired-conditions-hac-reduction-payment-amount) |
+
+
+Hospital Acquired Conditions Reduction Payment Amount (IPPS_FLEX_PYMT_6_AMT)
+
+| Key | Value |
+| --- | ----- |
+| long_name | HAC_RDCTN_PMT_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

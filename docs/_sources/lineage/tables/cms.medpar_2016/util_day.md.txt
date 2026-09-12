@@ -1,0 +1,22 @@
+# Column cms.medpar_2016.UTIL_DAY
+
+## Overview of column UTIL_DAY in table cms.medpar_2016 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2016](../cms.medpar_2016.md)           |
+| Qualified name                | cms.medpar_2016.UTIL_DAY  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/covered-days-care-chargeable-medicare-utilization-stay](https://resdac.org/cms-data/variables/covered-days-care-chargeable-medicare-utilization-stay) |
+
+
+Covered days of care chargeable to Medicare utilization for stay
+
+| Key | Value |
+| --- | ----- |
+| long_name | UTLZTN_DAY_CNT |
+| original_type | NUM |
+| width | 7.0 |
+
+
+

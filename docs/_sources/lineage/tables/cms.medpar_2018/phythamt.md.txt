@@ -1,0 +1,22 @@
+# Column cms.medpar_2018.PHYTHAMT
+
+## Overview of column PHYTHAMT in table cms.medpar_2018 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2018](../cms.medpar_2018.md)           |
+| Qualified name                | cms.medpar_2018.PHYTHAMT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/physical-therapy-charge-amount](https://resdac.org/cms-data/variables/physical-therapy-charge-amount) |
+
+
+Physical therapy services provided during beneficiarys stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | PHYS_THRPY_CHRG_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

@@ -1,0 +1,48 @@
+# Column cms.medpar_2011.ZIP
+
+## Overview of column ZIP in table cms.medpar_2011 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2011](../cms.medpar_2011.md)           |
+| Qualified name                | cms.medpar_2011.ZIP  |
+| Datatype                      | VARCHAR(5)        |
+| Column type | generated |
+| Reference | [https://resdac.org/cms-data/variables/zip-code-beneficiary](https://resdac.org/cms-data/variables/zip-code-beneficiary) |
+
+
+Zip code of the mailing address where the beneficiary may be contacted.
+
+| Key | Value |
+| --- | ----- |
+| original_type | CHAR |
+| width | 5.0 |
+
+
+
+## Expressions
+
+```sql
+SELECT GENERATED ALWAYS AS (BENE_ZIP) STORED
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+zip_svg_envelop.md
+```
+
+
+```{figure} zip.svg
+:align: center
+:alt: Column cms.medpar_2011.ZIP Lineage SVG
+:target: zip_svg_envelop.html
+
+Data lineage for column cms.medpar_2011.ZIP
+
+```
+
+

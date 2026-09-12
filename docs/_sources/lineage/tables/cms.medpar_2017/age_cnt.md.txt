@@ -1,0 +1,22 @@
+# Column cms.medpar_2017.AGE_CNT
+
+## Overview of column AGE_CNT in table cms.medpar_2017 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2017](../cms.medpar_2017.md)           |
+| Qualified name                | cms.medpar_2017.AGE_CNT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/age-date-admission](https://resdac.org/cms-data/variables/age-date-admission) |
+
+
+Age as of Date of Admission.
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_AGE_CNT |
+| original_type | NUM |
+| width | 4.0 |
+
+
+

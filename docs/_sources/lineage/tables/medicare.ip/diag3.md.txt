@@ -1,0 +1,31 @@
+# Column medicare.ip.diag3
+
+## Overview of column diag3 in table medicare.ip 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.ip](../medicare.ip.md)           |
+| Qualified name                | medicare.ip.diag3  |
+| Datatype                      | varchar        |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+diag3_svg_envelop.md
+```
+
+
+```{figure} diag3.svg
+:align: center
+:alt: Column medicare.ip.diag3 Lineage SVG
+:target: diag3_svg_envelop.html
+
+Data lineage for column medicare.ip.diag3
+
+```
+
+

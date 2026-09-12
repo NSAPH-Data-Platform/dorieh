@@ -1,0 +1,22 @@
+# Column cms.mbsf_abcd_2018.A_MO_CNT
+
+## Overview of column A_MO_CNT in table cms.mbsf_abcd_2018 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_abcd_2018](../cms.mbsf_abcd_2018.md)           |
+| Qualified name                | cms.mbsf_abcd_2018.A_MO_CNT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/part-months-count](https://resdac.org/cms-data/variables/part-months-count) |
+
+
+Hospital Insurance (HI) Coverage Months Count
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_HI_CVRAGE_TOT_MONS |
+| original_type | NUM |
+| width | 3.0 |
+
+
+

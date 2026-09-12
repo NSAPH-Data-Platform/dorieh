@@ -1,0 +1,22 @@
+# Column cms.medpar_2013.ORGNAMT
+
+## Overview of column ORGNAMT in table cms.medpar_2013 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2013](../cms.medpar_2013.md)           |
+| Qualified name                | cms.medpar_2013.ORGNAMT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/organ-acquisition-or-other-donor-bank-charge-amount](https://resdac.org/cms-data/variables/organ-acquisition-or-other-donor-bank-charge-amount) |
+
+
+Organ acquisition or oth donor bank srvcs related to benes stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | ORGN_ACQSTN_CHRG_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

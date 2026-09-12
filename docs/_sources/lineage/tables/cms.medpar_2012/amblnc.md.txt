@@ -1,0 +1,22 @@
+# Column cms.medpar_2012.AMBLNC
+
+## Overview of column AMBLNC in table cms.medpar_2012 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2012](../cms.medpar_2012.md)           |
+| Qualified name                | cms.medpar_2012.AMBLNC  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/ambulance-charge-amount](https://resdac.org/cms-data/variables/ambulance-charge-amount) |
+
+
+Ambulance services related to beneficiarys stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | AMBLNC_CHRG_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

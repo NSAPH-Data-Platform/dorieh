@@ -32,11 +32,11 @@ import pandas as pd
 import dorieh.utils.qc as qc
 import dorieh.utils.interpolation  as interpolation
 
-from .data import *
-from .exceptions import CensusException
-from .tigerweb import get_area
-from .census_info import census_years
-from .query import get_census_data, _clean_acs_vars
+from dorieh.census.data import *
+from dorieh.census.exceptions import CensusException
+from dorieh.census.tigerweb import get_area
+from dorieh.census.census_info import census_years
+from dorieh.census.query import get_census_data, _clean_acs_vars
 
 class DataPlan:
     """
@@ -44,7 +44,7 @@ class DataPlan:
 
     Inputs for initializing a DataPlan object from a census yaml document
 
-    :yaml_path: path to a yaml file. Structure defined in :doc:`census_yaml`
+    :yaml_path: path to a yaml file. Structure defined in :doc:`/census_yaml`
     :geometry: which census geography this plan is for
     :years: The list of years to query data from. The census_years() function can calculate which years in your timeframe of interest can be queried for the decennial and 5 year acs data. Note that this may not apply for the ACS1 or other data. That function may be updated in the future, but for now creating lists of years besides the defaults is left as an exercise for the interested reader.
     :state: 2 digit FIPS code of the state you want to limit the query to (i.e. "06" for CA)
@@ -56,7 +56,7 @@ class DataPlan:
     * ``years``: The ``list`` of years that the data should be queried for
     * ``state``: 2 digit FIPS code of the state you want to limit the query to (i.e. "06" for CA)
     * ``county``: 3 digit FIPS code of the county you want to include. Requires state to be specified
-    * ``plan``: A ``dict`` with keys of years, storing lists of ``VariableDef`` objects defining the variables to be calculated for that year. Created from a yaml file. Structure defined in :doc:`census_yaml`
+    * ``plan``: A ``dict`` with keys of years, storing lists of ``VariableDef`` objects defining the variables to be calculated for that year. Created from a yaml file. Structure defined in :doc:`/census_yaml`
     * ``data``: A pandas data frame created based on the defined data plan. only exists after the ``DataPlan.assemble_data()`` method is called.
     """
 
@@ -66,7 +66,7 @@ class DataPlan:
         """
         initialize a DataPlan object from a census yaml document
 
-        :param yaml_path: path to a yaml file. Structure defined in :doc:`census_yaml`
+        :param yaml_path: path to a yaml file. Structure defined in :doc:`/census_yaml`
         :param geometry: which census geography this plan is for
         :param years: The list of years to query data from. The census_years() function can
             calculate which years in your timeframe of interest can be queried for the decennial and
@@ -96,7 +96,7 @@ class DataPlan:
         dictionary. Handles the issue of forward counting years to make future
         code readable.
 
-        Yaml structure defined in :doc:`census_yaml`
+        Yaml structure defined in :doc:`/census_yaml`
 
         :param yaml_path:
         :return: dictionary

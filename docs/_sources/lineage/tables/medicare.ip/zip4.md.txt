@@ -1,0 +1,29 @@
+# Column medicare.ip.zip4
+
+## Overview of column zip4 in table medicare.ip 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.ip](../medicare.ip.md)           |
+| Qualified name                | medicare.ip.zip4  |
+| Datatype                      | INT        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT zip
+```
+
+
+### Casts:
+
+| Original type | Cast expression      |
+| ------------- | -------------------- |
+| numeric | (CASE WHEN {column_name} < 100000 THEN NULL ELSE ({column_name}%10000)::INT END) |
+| character varying | (CASE WHEN LENGTH({column_name}) < 6 THEN NULL ELSE SUBSTRING({column_name} FROM 6 FOR 4)::INT END) |
+
+
+

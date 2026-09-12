@@ -1,0 +1,22 @@
+# Column cms.medpar_2011.FACLMCNT
+
+## Overview of column FACLMCNT in table cms.medpar_2011 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2011](../cms.medpar_2011.md)           |
+| Qualified name                | cms.medpar_2011.FACLMCNT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/number-claims-final-action-included-stay](https://resdac.org/cms-data/variables/number-claims-final-action-included-stay) |
+
+
+Claims (final action) included in stay
+
+| Key | Value |
+| --- | ----- |
+| long_name | STAY_FINL_ACTN_CLM_CNT |
+| original_type | NUM |
+| width | 5.0 |
+
+
+

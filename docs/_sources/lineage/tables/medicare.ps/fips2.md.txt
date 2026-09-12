@@ -1,0 +1,44 @@
+# Column medicare.ps.fips2
+
+## Overview of column fips2 in table medicare.ps 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.ps](../medicare.ps.md)           |
+| Qualified name                | medicare.ps.fips2  |
+| Datatype                      | string        |
+| Column type | computed |
+| Reference | [https://www.census.gov/library/reference/code-lists/ansi.html#states](https://www.census.gov/library/reference/code-lists/ansi.html#states) |
+
+
+2 digit state FIPS, see https://en.wikipedia.org/wiki/Federal_Information_Processing_Standard_state_code
+
+
+
+
+## Expressions
+
+```sql
+(SELECT fips2 FROM public.us_states as s WHERE s.ssa2 = "state")
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+fips2_svg_envelop.md
+```
+
+
+```{figure} fips2.svg
+:align: center
+:alt: Column medicare.ps.fips2 Lineage SVG
+:target: fips2_svg_envelop.html
+
+Data lineage for column medicare.ps.fips2
+
+```
+
+

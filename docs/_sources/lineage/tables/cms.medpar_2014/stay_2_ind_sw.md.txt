@@ -1,0 +1,22 @@
+# Column cms.medpar_2014.STAY_2_IND_SW
+
+## Overview of column STAY_2_IND_SW in table cms.medpar_2014 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2014](../cms.medpar_2014.md)           |
+| Qualified name                | cms.medpar_2014.STAY_2_IND_SW  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/two-midnight-stay-indicator](https://resdac.org/cms-data/variables/two-midnight-stay-indicator) |
+
+
+Stay 2 Indicator Switch
+
+| Key | Value |
+| --- | ----- |
+| long_name | STAY_2_IND_SW |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

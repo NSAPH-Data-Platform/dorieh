@@ -1,0 +1,39 @@
+# Column medicare.qc_adm_union.state
+
+## Overview of column state in table medicare.qc_adm_union 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_adm_union](../medicare.qc_adm_union.md)           |
+| Qualified name                | medicare.qc_adm_union.state  |
+| Datatype                      | string        |
+| Column type | copied |
+
+
+
+## Expressions
+
+```sql
+(SELECT state_id FROM public.us_states as s WHERE s.ssa2 = "state")
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+state_svg_envelop.md
+```
+
+
+```{figure} state.svg
+:align: center
+:alt: Column medicare.qc_adm_union.state Lineage SVG
+:target: state_svg_envelop.html
+
+Data lineage for column medicare.qc_adm_union.state
+
+```
+
+

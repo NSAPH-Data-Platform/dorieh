@@ -1,0 +1,22 @@
+# Column cms.medpar_2016.COIN_AMT
+
+## Overview of column COIN_AMT in table cms.medpar_2016 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2016](../cms.medpar_2016.md)           |
+| Qualified name                | cms.medpar_2016.COIN_AMT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/beneficiarys-liability-part-coinsurance-stay](https://resdac.org/cms-data/variables/beneficiarys-liability-part-coinsurance-stay) |
+
+
+Beneficiarys liability for part A coinsurance for stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_PTA_COINSRNC_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

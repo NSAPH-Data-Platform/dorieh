@@ -1,0 +1,22 @@
+# Column cms.medpar_2016.EHR_PYMT_ADJSTMT_AMT
+
+## Overview of column EHR_PYMT_ADJSTMT_AMT in table cms.medpar_2016 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2016](../cms.medpar_2016.md)           |
+| Qualified name                | cms.medpar_2016.EHR_PYMT_ADJSTMT_AMT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/electronic-health-record-ehr-payment-adjustment-amount](https://resdac.org/cms-data/variables/electronic-health-record-ehr-payment-adjustment-amount) |
+
+
+Electronic Health Record (EHR) Payment Adjustment Amount
+
+| Key | Value |
+| --- | ----- |
+| long_name | EHR_PYMT_ADJSTMT_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

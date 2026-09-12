@@ -1,0 +1,22 @@
+# Column cms.medpar_2011.OPSRVC
+
+## Overview of column OPSRVC in table cms.medpar_2011 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2011](../cms.medpar_2011.md)           |
+| Qualified name                | cms.medpar_2011.OPSRVC  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/outpatient-service-charge-amount](https://resdac.org/cms-data/variables/outpatient-service-charge-amount) |
+
+
+Outpatient services provided during beneficiarys stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | OP_SRVC_CHRG_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

@@ -1,0 +1,22 @@
+# Column cms.medpar_2014.DGNSCD22
+
+## Overview of column DGNSCD22 in table cms.medpar_2014 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2014](../cms.medpar_2014.md)           |
+| Qualified name                | cms.medpar_2014.DGNSCD22  |
+| Datatype                      | VARCHAR(7)        |
+| Reference | [https://resdac.org/cms-data/variables/medpar-icd-9-cm-diagnosis-code-22](https://resdac.org/cms-data/variables/medpar-icd-9-cm-diagnosis-code-22) |
+
+
+ICD-9-CM Diagnosis code XXII
+
+| Key | Value |
+| --- | ----- |
+| long_name | DGNS_22_CD |
+| original_type | CHAR |
+| width | 7.0 |
+
+
+

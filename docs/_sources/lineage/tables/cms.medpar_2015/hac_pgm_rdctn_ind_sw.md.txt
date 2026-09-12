@@ -1,0 +1,22 @@
+# Column cms.medpar_2015.HAC_PGM_RDCTN_IND_SW
+
+## Overview of column HAC_PGM_RDCTN_IND_SW in table cms.medpar_2015 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2015](../cms.medpar_2015.md)           |
+| Qualified name                | cms.medpar_2015.HAC_PGM_RDCTN_IND_SW  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/claim-hospital-acquired-condition-hac-program-reduction-indicator-switch](https://resdac.org/cms-data/variables/claim-hospital-acquired-condition-hac-program-reduction-indicator-switch) |
+
+
+Hospital Acquired Conditions (HAC) Program Reduction Indicator Switch
+
+| Key | Value |
+| --- | ----- |
+| long_name | HAC_PGM_RDCTN_IND_SW |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

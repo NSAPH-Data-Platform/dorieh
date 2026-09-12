@@ -1,0 +1,48 @@
+# Column cms.mbsf_d_2011.YEAR
+
+## Overview of column YEAR in table cms.mbsf_d_2011 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_d_2011](../cms.mbsf_d_2011.md)           |
+| Qualified name                | cms.mbsf_d_2011.YEAR  |
+| Datatype                      | INT        |
+| Column type | generated |
+| Reference | [https://resdac.org/cms-data/variables/mbsf-cc-30/alzheimers-disease-end-year-indicator](https://resdac.org/cms-data/variables/mbsf-cc-30/alzheimers-disease-end-year-indicator) |
+
+
+Beneficiary Enrollment Reference Year
+
+| Key | Value |
+| --- | ----- |
+| original_type | NUM |
+| width | 4.0 |
+
+
+
+## Expressions
+
+```sql
+SELECT GENERATED ALWAYS AS (RFRNC_YR) STORED
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+year_svg_envelop.md
+```
+
+
+```{figure} year.svg
+:align: center
+:alt: Column cms.mbsf_d_2011.YEAR Lineage SVG
+:target: year_svg_envelop.html
+
+Data lineage for column cms.mbsf_d_2011.YEAR
+
+```
+
+

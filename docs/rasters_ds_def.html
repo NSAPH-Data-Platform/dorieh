@@ -1,25 +1,30 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Configuration Object &mdash; Dorieh Data Platform 0.0.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+  <title>Configuration Object &mdash; Dorieh Data Platform 0.5.1.post2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
       <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
-      <link rel="stylesheet" type="text/css" href="_static/css/dorieh.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/dorieh.css?v=1a3f250d" />
 
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=ad30b421"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
@@ -30,6 +35,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
+
 
           
           
@@ -43,20 +49,457 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
+<div class="dorieh-citeas">
+  <button type="button" class="dorieh-citeas-btn"
+          onclick="document.getElementById('dorieh-citeas-pop').classList.toggle('open')">
+    &#128214; Cite as
+  </button>
+  <div id="dorieh-citeas-pop" class="dorieh-citeas-pop">
+    <p>Bouzinier,&nbsp;M., Etin,&nbsp;D., Khoshnevis,&nbsp;N.,
+       Shad,&nbsp;M., Yockel,&nbsp;S. (2026).
+       <em>Research Data that Can be Trusted.</em>
+       SpringerBriefs in Computer Science. Springer.
+       <a href="https://doi.org/10.1007/978-3-032-21032-6">doi:10.1007/978-3-032-21032-6</a></p>
+    <button type="button" class="dorieh-citeas-copy"
+            onclick="navigator.clipboard.writeText(
+              'Bouzinier, M., Etin, D., Khoshnevis, N., Shad, M., Yockel, S. (2026). ' +
+              'Research Data that Can be Trusted. SpringerBriefs in Computer Science. ' +
+              'Springer. https://doi.org/10.1007/978-3-032-21032-6'
+            ).then(() => { this.textContent = 'Copied!'; });">
+      Copy citation
+    </button>
+    <a class="dorieh-citeas-more" href="citing.html">More ways to cite &rarr;</a>
+  </div>
+</div>
+
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
-<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="DBT.html">Database Testing Framework</a></li>
-<li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="AppPipelineGenerator.html">Executing containerized apps</a></li>
-<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="home.html#introduction-to-data-platform">Introduction to Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#building-blocks">Building Blocks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="home.html#dorieh-utilities">Dorieh Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="home.html#core-platform">Core Platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="home.html#dorieh-gis-utilities">Dorieh GIS Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="home.html#dorieh-documentation-utilities">Dorieh Documentation Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="home.html#data-processing-and-loading-pipelines">Data Processing and Loading Pipelines</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#working-with-nsaph-containerized-apps">Working with NSAPH containerized apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#using-the-database">Using the Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#terms-and-acronyms">Terms and Acronyms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#building-platform-documentation">Building Platform documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#next-steps">Next steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rationale.html">Why a data platform</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rationale.html#why-we-need-a-data-platform">Why we need a Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rationale.html#architecture">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rationale.html#supported-programming-languages-and-tools">Supported Programming Languages and Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rationale.html#development-mode">Development Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rationale.html#where-it-can-be-deployed">Where it can be deployed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rationale.html#what-makes-dorieh-different">What makes Dorieh different</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">The Dorieh approach</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#two-languages-one-pipeline">Two languages, one pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#medallion-architecture-as-dorieh-implements-it">Medallion architecture as Dorieh implements it</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#dataset-operators-and-field-construction-operators">Dataset operators and field construction operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#families-of-field-transformations">Families of field transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#disambiguation-rules">Disambiguation rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#validation-and-journaling">Validation and journaling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#fine-grained-lineage">Fine-grained lineage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#where-each-concept-lives">Where each concept lives</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="about-the-book.html">The companion book</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about-the-book.html#bibliographic-information">Bibliographic information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about-the-book.html#chapter-to-documentation-map">Chapter-to-documentation map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about-the-book.html#using-this-documentation-without-the-book">Using this documentation without the book</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="citing.html">Citing Dorieh</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="citing.html#preferred-citation-the-book">Preferred citation: the book</a></li>
+<li class="toctree-l2"><a class="reference internal" href="citing.html#citing-the-software-itself">Citing the software itself</a></li>
+<li class="toctree-l2"><a class="reference internal" href="citing.html#citing-the-tutorials">Citing the tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="citing.html#citing-the-synthetic-dataset">Citing the synthetic dataset</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Learning paths</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="paths/index.html">Choose your path</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="paths/researcher.html">Researchers and analysts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="paths/researcher.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paths/researcher.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="paths/developer.html">Pipeline developers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="paths/developer.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paths/developer.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="paths/operator.html">Platform operators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="paths/operator.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paths/operator.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="paths/book-reader.html">Readers of the book</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="paths/book-reader.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paths/book-reader.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="paths/auditor.html">Reviewers and auditors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="paths/auditor.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paths/auditor.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data domains and pipelines</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cms.html">Health</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="health_data_overview.html">Health Data in Dorieh (Medicare and Medicaid)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Medicare.html">Medicare: Building a Data Warehouse from ResDac Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Medicaid.html">Medicaid: Building a Data Warehouse from ResDac Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="health_seealso.html">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="climate.html">Climate</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="climate.html#what-is-gridmet">What is gridMET?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="climate.html#using-command-line-gridmet-utility">Using command line gridMET utility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="climate.html#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="climate.html#python-modules">Python modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="climate.html#cwl-pipelines-and-tools">CWL pipelines and tools</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="exposures.html">Exposure (PM2.5, WashU)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="exposures.html#python-packages">Python packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exposures.html#cwl-workflows">CWL Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="epa.html">Environmental Protection Agency (EPA) data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="epa.html#package-contents">Package Contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="epa.html#querying-data">Querying Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="census.html">Demographics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="census_about.html">About</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_env_set_up.html">Setting Up Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_quick_start.html">Quick Start</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_yaml.html">Census Variable File Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_cached_data.html">Stored Data Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_modules.html">Modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_glossary.html">Glossary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_start_guide.html">Working with the <code class="docutils literal notranslate"><span class="pre">census</span></code> Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_assemble.html">census_assemble.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_assemblecwl_src.html">census_assemble.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_density.html">census_density.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_densitycwl_src.html">census_density.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_ingest.html">census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_ingest_1.html">Sub-workflow <em>store</em> from census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_ingest_1cwl_src.html">CWL sub-workflow for step <u><em>store</em></u> of workflow census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_ingestcwl_src.html">census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_interpolate.html">census_interpolate.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_interpolatecwl_src.html">census_interpolate.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_qc.html">census_qc.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_qccwl_src.html">census_qc.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_workflow.html">census_workflow.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_workflowcwl_src.html">census_workflow.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_write.html">census_write.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_writecwl_src.html">census_write.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census.html#indices-and-tables">Indices and tables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipelines.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipelines.html#workflow-description-languages">Workflow Description Languages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipelines.html#running-workflows">Running Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pipelines.html#tested-runners">Tested Runners</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipelines.html#providing-parameters-to-the-pipelines">Providing Parameters to the Pipelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipelines.html#using-toil">Using Toil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipelines.html#troubleshooting-workflows-run-by-toil">Troubleshooting Workflows Run by Toil</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pipelines.html#testing-workflows">Testing Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipelines.html#published-and-tested-workflows">Published and Tested Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/gridmet.html">Pipeline to aggregate data from Climatology Lab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/wustl.html">Pipeline to ingest Monthly Pollution data downloaded from WashU Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/pm25_yearly_download.html">Pipeline to aggregate data in NetCDF format over given geographies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/aqs.html">Full EPA AQS Processing Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/airnow.html">Full EPA AirNow Processing Pipeline (including downloading shapefiles)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/medicare.html">Medicare data ingestion and processing pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/medicaid.html">Full Medicaid Processing Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_workflow.html">census_workflow.cwl</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pipelines.html#developing-new-workflows">Developing New Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pipelines.html#combining-included-cwl-tools-into-a-new-workflow">Combining Included CWL Tools into a New Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipelines.html#ordering-database-steps-with-depends-on">Ordering Database Steps with <code class="docutils literal notranslate"><span class="pre">depends_on</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipelines.html#wrapping-python-modules-as-cwl-tools">Wrapping Python Modules as CWL Tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials and worked examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Tutorials.html">Dorieh Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/climate/index.html">Climate tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/climate/building-climate-pipeline.html">Part 1. Building the pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/climate/documenting-a-workflow.html">Part 2. Documenting the workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/climate/constructing-lineage.html">Part 3. Data dictionaries and lineage graphs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html">Medicare claims pipeline tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#designing-the-pipeline">Designing the pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#from-fts-documents-to-machine-readable-schemas">From FTS documents to machine-readable schemas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#bronze-one-table-per-source-file">Bronze: one table per source file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#silver-harmonize-disambiguate-validate">Silver: harmonize, disambiguate, validate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#gold-the-qc-aggregates">Gold: the QC aggregates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#orchestration-five-steps-in-medicare-cwl">Orchestration: five steps in medicare.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#documentation-and-lineage">Documentation and lineage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#running-it-yourself">Running it yourself</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Example-climate-workflow.html">A CWL workflow example: aggregating a climate variable</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Example-climate-workflow.html#what-the-sample-workflow-is-doing-aggregating-a-climate-variable">What the sample workflow is doing: aggregating a climate variable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Example-climate-workflow.html#prepare-to-run-a-workflow">Prepare to run a workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Example-climate-workflow.html#running-the-workflow-in-python-virtual-environment">Running the workflow in Python virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Example-climate-workflow.html#running-the-workflow-using-docker">Running the workflow using Docker</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="medicare-example.html">Medicare pipeline with publicly available synthetic data (PostgreSQL + Superset)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="medicare-example.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="medicare-example.html#step-1-download-synthetic-sample-data">Step 1 — Download synthetic sample data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="medicare-example.html#step-3-optional-explore-results-in-apache-superset">Step 3 (Optional) — Explore results in Apache Superset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="medicare-example.html#what-the-pipeline-produces">What the pipeline produces</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#related-how-to-guides">Related how-to guides</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data dictionaries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dictionaries.html">Data Dictionaries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="MedicareLineage.html">Medicare data warehouse</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lineage/medicare.dot.html">Table Lineage Diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lineage/table-list.html">Alphabetic list of all tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lineage/column-list.html">Alphabetic list of all columns in all tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="members/domain_dictionary.html">The Data Dictionary Generation tool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data modeling DSL reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Datamodels.html">Data Modeling for Dorieh Data Platform</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="DataModellingExtensions.html">Data Modeling Extensions: Federated Views Across Years</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="DataModellingExtensions.html#combining-multiple-sources-and-optional-columns">Combining multiple sources and optional columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DataModellingExtensions.html#exclude">Exclude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DataModellingExtensions.html#cast">Cast</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DataModellingExtensions.html#validating-consistency-of-data-across-tables">Validating consistency of data across tables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#introduction-to-data-modeling-for-dorieh-data-platform">Introduction to data modeling for Dorieh Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#domain">Domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#table">Table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#create-statement">Create statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#invalid-record">Invalid Record</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#column">Column</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#source">Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#index">Index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#generated-columns">Generated columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#computed-columns">Computed columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#file-columns">File columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#record-columns">Record columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#identifier-columns-and-the-identifiers-token">Identifier columns and the <code class="docutils literal notranslate"><span class="pre">{identifiers}</span></code> token</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#transposing-columns">Transposing columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#wildcards">Wildcards</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#multi-column-indices">Multi-column indices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#indexing-policies">Indexing policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#linking-with-nomenclature">Linking with nomenclature</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#us-states">US States</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Datamodels.html#county-codes">County codes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#ingesting-data">Ingesting data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Datamodels.html#where-to-go-next">Where to go next</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">General purpose utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#overview-of-utilities">Overview of Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#current-development">Current Development</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#todo">TODO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#documentation-indices">Documentation Indices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="CoreLibrary.html">Data platform components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="CoreLibrary.html#package-dorieh-platform">Package dorieh.platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CoreLibrary.html#package-dorieh-platform-data-model">Package dorieh.platform.data_model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CoreLibrary.html#package-dorieh-platform-loader">Package dorieh.platform.loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CoreLibrary.html#package-dorieh-platform-requests">Package dorieh.platform.requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CoreLibrary.html#package-dorieh-platform-utils">Package dorieh.platform.utils</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gis.html">GIS utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gis.html#gis-library-overview">GIS Library Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gis.html#shape-files-downloader">Shape files Downloader</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="CMSLibrary.html">Health data manipulation tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="CMSLibrary.html#package-cms">Package cms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CMSLibrary.html#package-dorieh-cms-tools">Package dorieh.cms.tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CMSLibrary.html#additional-details">Additional details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rasters.html">Raster data tools (climate and exposure)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rasters.html#general-tools-for-raster-files">General tools for raster files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rasters.html#specialized-tools-for-working-with-climate-data">Specialized tools for working with climate data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rasters.html#specialized-tools-for-working-with-exposure-data">Specialized tools for working with exposure data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="platform.html">Dorieh Core Data Platform</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="DBConnections.html">Managing database connections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DataLoader.html">Dorieh Data Loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ProjectLoader.html">Project (Directory) Loading Utility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TerritorialCodes.html">Mapping between different territorial codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SQLDocumentation.html">SQL Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="platform.html#core-platform-overview">Core platform overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="platform.html#tool-examples">Tool Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="platform.html#project-structure">Project Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="platform.html#documentation-indices">Documentation Indices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Dorieh Deployment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#using-docker">Using Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#using-python-virtual-environment">Using Python Virtual Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#using-conda-package-manager">Using Conda Package Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#using-toil-with-docker-requirement">Using Toil with Docker requirement</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="capabilities.html">Platform capabilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="SampleQuery.html">How to query the database</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="SampleQuery.html#setup">Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SampleQuery.html#create-connection-definition-file">Create connection definition file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SampleQuery.html#executing-the-query">Executing the query</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SampleQuery.html#using-explain-to-optimize-queries">Using EXPLAIN to optimize queries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="QueringMedicaid.html">Querying Medicaid Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="QueringMedicaid.html#querying-diagnoses">Querying diagnoses</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="MonitoringDB.html">Monitoring database activity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="MonitoringDB.html#module-monitor">Module monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MonitoringDB.html#cli-usage-for-monitor">CLI Usage for monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MonitoringDB.html#using-as-api">Using as API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="UsingHLL.html">Approximate distinct counting with HLL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UserRequests.html">Handling user requests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="UserRequests.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UserRequests.html#structure">Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="example_request_yaml.html">Example user request</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Operational guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DBT.html">Database Testing Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="members/create_test.html">Utility to generate test queries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="members/dbt_runner.html">Test runner: Utility to run generated tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="members/gen_dbt_cwl.html">The gen_dbt_cwl Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="members/create_test.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="members/create_test.html#module-dorieh.platform.dbt.create_test">Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="members/dbt_runner.html">Test runner: Utility to run generated tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="members/dbt_runner.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="members/dbt_runner.html#module-dorieh.platform.dbt.dbt_runner">Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="members/gen_dbt_cwl.html">The gen_dbt_cwl Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="members/gen_dbt_cwl.html#dorieh.platform.dbt.gen_dbt_cwl.CWLTestGenerator"><code class="docutils literal notranslate"><span class="pre">CWLTestGenerator</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="TestingWorkflows.html">Testing bundled workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#introduction-to-testing-and-prerequisites">Introduction to testing and prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#before-running-any-test">Before running any test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#testing-aqs-workflow">Testing AQS workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#testing-airnow-workflow">Testing Airnow workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#testing-climate-workflow">Testing Climate workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#testing-exposure-workflow">Testing Exposure workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#testing-medicare-workflow">Testing Medicare workflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#what-data-are-you-adding">What data are you adding?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#data-modeling-vs-data-introspection">Data modeling vs data introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#adding-new-data-domain">Adding new data domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#creating-new-single-table">Creating new single table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#adding-a-table-from-a-remote-data-source">Adding a table from a remote data source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#adding-data-to-existing-table">Adding data to existing table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#automatically-ingesting-multiple-files-from-a-file-system">Automatically ingesting multiple files from a file system</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="AppPipelineGenerator.html">Executing containerized apps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="AppPipelineGenerator.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AppPipelineGenerator.html#prerequisites">Prerequisites</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#docker-or-python-virtual-environment">Docker or Python virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#setup-dbms-server">Setup DBMS Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#define-connection">Define connection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AppPipelineGenerator.html#using-pipeline-generator">Using pipeline generator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#generate-pipeline-and-metadata">Generate pipeline and metadata</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AppPipelineGenerator.html#execute-generated-pipeline">Execute generated pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AppPipelineGenerator.html#appendix-1-metadata-description">Appendix 1: Metadata description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#file-app-config-yaml">File app.config.yaml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#file-metadata-yml">File metadata.yml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#file-dorieh-metadata-yaml">File dorieh-metadata.yaml</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="glossary.html#concepts">Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="glossary.html#acronyms">Acronyms</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
 </ul>
 
@@ -85,174 +528,10 @@
            <div itemprop="articleBody">
              
   <section id="configuration-object">
-<h1>Configuration Object<a class="headerlink" href="#configuration-object" title="Permalink to this heading"></a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GridContext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subclass</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dorieh/rasters/config.html#GridContext"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.config.GridContext" title="Permalink to this definition"></a></dt>
-<dd><p>Defines a configuration object to process aggregations and other tasks
-over data grids</p>
-<p>Constructor</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="target" id="dorieh.rasters.config.GridContext.params.doc"></span><strong>doc</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.config.GridContext.params.doc">¶</a> – Optional argument, specifying what to print as documentation</p>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.enum">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">enum_cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dorieh.rasters.config.GridContext.enum" title="Permalink to this definition"></a></dt>
-<dd><p>A helper method to return Enum value by its name</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><span class="target" id="dorieh.rasters.config.GridContext.enum.params.cls"></span><strong>cls</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.config.GridContext.enum.params.cls">¶</a> – Enum class</p></li>
-<li><p><span class="target" id="dorieh.rasters.config.GridContext.enum.params.s"></span><strong>s</strong><a class="paramlink headerlink reference internal" href="#dorieh.rasters.config.GridContext.enum.params.s">¶</a> – name of a member in Enum class</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>value of the member</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.years">
-<span class="sig-name descname"><span class="pre">years</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.years" title="Permalink to this definition"></a></dt>
-<dd><p>Year or list of years to download. For example, 
-the following argument: 
-<cite>-y 1992:1995 1998 1999 2011 2015:2017</cite> will produce 
-the following list: 
-[1992,1993,1994,1995,1998,1999,2011,2015,2016,2017]</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.compress">
-<span class="sig-name descname"><span class="pre">compress</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.compress" title="Permalink to this definition"></a></dt>
-<dd><p>Specifies whether to use gzip compression for the result</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.variables">
-<span class="sig-name descname"><span class="pre">variables</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.variables" title="Permalink to this definition"></a></dt>
-<dd><p>Gridmet bands or variables</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List[<a class="reference internal" href="members/config.html#dorieh.rasters.config.GridmetVariable" title="dorieh.rasters.config.GridmetVariable">GridmetVariable</a>]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.strategy">
-<span class="sig-name descname"><span class="pre">strategy</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.strategy" title="Permalink to this definition"></a></dt>
-<dd><p>Rasterization strategy
-:type: RasterizationStrategy</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.destination">
-<span class="sig-name descname"><span class="pre">destination</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.destination" title="Permalink to this definition"></a></dt>
-<dd><p>Destination directory for the processed files</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.raw_downloads">
-<span class="sig-name descname"><span class="pre">raw_downloads</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.raw_downloads" title="Permalink to this definition"></a></dt>
-<dd><p>Directory for downloaded raw files</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.geography">
-<span class="sig-name descname"><span class="pre">geography</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.geography" title="Permalink to this definition"></a></dt>
-<dd><p>The type of geographic area over which we aggregate data</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="members/gis_constants.html#dorieh.gis.constants.Geography" title="dorieh.gis.constants.Geography">Geography</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.shapes_dir">
-<span class="sig-name descname"><span class="pre">shapes_dir</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.shapes_dir" title="Permalink to this definition"></a></dt>
-<dd><p>Directory containing shape files for geographies</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.shapes">
-<span class="sig-name descname"><span class="pre">shapes</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.shapes" title="Permalink to this definition"></a></dt>
-<dd><p>Type of shapes to aggregate over, e.g. points, polygons</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List[<a class="reference internal" href="shapes.html#dorieh.rasters.config.Shape" title="dorieh.rasters.config.Shape">Shape</a>]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.points">
-<span class="sig-name descname"><span class="pre">points</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.points" title="Permalink to this definition"></a></dt>
-<dd><p>Path to CSV file containing points</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.coordinates">
-<span class="sig-name descname"><span class="pre">coordinates</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.coordinates" title="Permalink to this definition"></a></dt>
-<dd><p>Column names for coordinates</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.metadata">
-<span class="sig-name descname"><span class="pre">metadata</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.metadata" title="Permalink to this definition"></a></dt>
-<dd><p>Column names for metadata</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.extra_columns">
-<span class="sig-name descname"><span class="pre">extra_columns</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.extra_columns" title="Permalink to this definition"></a></dt>
-<dd><p>Columns with constant values to be added to the output file</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.dates">
-<span class="sig-name descname"><span class="pre">dates</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="members/config.html#dorieh.rasters.config.DateFilter" title="dorieh.rasters.config.DateFilter"><span class="pre">DateFilter</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#dorieh.rasters.config.GridContext.dates" title="Permalink to this definition"></a></dt>
-<dd><p>Filter on dates - for debugging purposes only</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.statistics">
-<span class="sig-name descname"><span class="pre">statistics</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.statistics" title="Permalink to this definition"></a></dt>
-<dd><p>Type of statistics</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.description">
-<span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.description" title="Permalink to this definition"></a></dt>
-<dd><p>Description to be added to data dictionary</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.table">
-<span class="sig-name descname"><span class="pre">table</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.table" title="Permalink to this definition"></a></dt>
-<dd><p>Name of the table where the aggregated data will be stored</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.output">
-<span class="sig-name descname"><span class="pre">output</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.output" title="Permalink to this definition"></a></dt>
-<dd><p>Type of the output the tool should produce</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dorieh.rasters.config.GridContext.ram">
-<span class="sig-name descname"><span class="pre">ram</span></span><a class="headerlink" href="#dorieh.rasters.config.GridContext.ram" title="Permalink to this definition"></a></dt>
-<dd><p>Runtime memory available to the process</p>
-</dd></dl>
-
-</dd></dl>
-
+<h1>Configuration Object<a class="headerlink" href="#configuration-object" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GridMETContext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">doc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dorieh/rasters/config.html#GridMETContext"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.config.GridMETContext" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GridMETContext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">doc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dorieh/rasters/config.html#GridMETContext"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.rasters.config.GridMETContext" title="Link to this definition"></a></dt>
 <dd><p>Defines a configuration object to process aggregations and other tasks
 over data grids containing gridMET data. Includes validation that
 a correct gridMET band is provided</p>
@@ -264,7 +543,7 @@ a correct gridMET band is provided</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.enum">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">enum_cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.enum" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">enum_cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.enum" title="Link to this definition"></a></dt>
 <dd><p>A helper method to return Enum value by its name</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -280,14 +559,8 @@ a correct gridMET band is provided</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.dates">
-<span class="sig-name descname"><span class="pre">dates</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="members/config.html#dorieh.rasters.config.DateFilter" title="dorieh.rasters.config.DateFilter"><span class="pre">DateFilter</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.dates" title="Permalink to this definition"></a></dt>
-<dd><p>Filter on dates - for debugging purposes only</p>
-</dd></dl>
-
-<dl class="py attribute">
 <dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.variables">
-<span class="sig-name descname"><span class="pre">variables</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.variables" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">variables</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.variables" title="Link to this definition"></a></dt>
 <dd><p>Gridmet bands or variables</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -298,43 +571,43 @@ a correct gridMET band is provided</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.strategy">
-<span class="sig-name descname"><span class="pre">strategy</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.strategy" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">strategy</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.strategy" title="Link to this definition"></a></dt>
 <dd><p>Rasterization strategy
 :type: RasterizationStrategy</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.destination">
-<span class="sig-name descname"><span class="pre">destination</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.destination" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">destination</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.destination" title="Link to this definition"></a></dt>
 <dd><p>Destination directory for the processed files</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.raw_downloads">
-<span class="sig-name descname"><span class="pre">raw_downloads</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.raw_downloads" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">raw_downloads</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.raw_downloads" title="Link to this definition"></a></dt>
 <dd><p>Directory for downloaded raw files</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.geography">
-<span class="sig-name descname"><span class="pre">geography</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.geography" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">geography</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.geography" title="Link to this definition"></a></dt>
 <dd><p>The type of geographic area over which we aggregate data</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="members/gis_constants.html#dorieh.gis.constants.Geography" title="dorieh.gis.constants.Geography">Geography</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="members/constants.html#dorieh.gis.constants.Geography" title="dorieh.gis.constants.Geography">Geography</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.shapes_dir">
-<span class="sig-name descname"><span class="pre">shapes_dir</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.shapes_dir" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">shapes_dir</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.shapes_dir" title="Link to this definition"></a></dt>
 <dd><p>Directory containing shape files for geographies</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.shapes">
-<span class="sig-name descname"><span class="pre">shapes</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.shapes" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">shapes</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.shapes" title="Link to this definition"></a></dt>
 <dd><p>Type of shapes to aggregate over, e.g. points, polygons</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -345,61 +618,67 @@ a correct gridMET band is provided</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.points">
-<span class="sig-name descname"><span class="pre">points</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.points" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">points</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.points" title="Link to this definition"></a></dt>
 <dd><p>Path to CSV file containing points</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.coordinates">
-<span class="sig-name descname"><span class="pre">coordinates</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.coordinates" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">coordinates</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.coordinates" title="Link to this definition"></a></dt>
 <dd><p>Column names for coordinates</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.metadata">
-<span class="sig-name descname"><span class="pre">metadata</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.metadata" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">metadata</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.metadata" title="Link to this definition"></a></dt>
 <dd><p>Column names for metadata</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.extra_columns">
-<span class="sig-name descname"><span class="pre">extra_columns</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.extra_columns" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">extra_columns</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.extra_columns" title="Link to this definition"></a></dt>
 <dd><p>Columns with constant values to be added to the output file</p>
 </dd></dl>
 
 <dl class="py attribute">
+<dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.dates">
+<span class="sig-name descname"><span class="pre">dates</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="members/config.html#dorieh.rasters.config.DateFilter" title="dorieh.rasters.config.DateFilter"><span class="pre">DateFilter</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.dates" title="Link to this definition"></a></dt>
+<dd><p>Filter on dates - for debugging purposes only</p>
+</dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.statistics">
-<span class="sig-name descname"><span class="pre">statistics</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.statistics" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">statistics</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.statistics" title="Link to this definition"></a></dt>
 <dd><p>Type of statistics</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.description">
-<span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.description" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.description" title="Link to this definition"></a></dt>
 <dd><p>Description to be added to data dictionary</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.table">
-<span class="sig-name descname"><span class="pre">table</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.table" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">table</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.table" title="Link to this definition"></a></dt>
 <dd><p>Name of the table where the aggregated data will be stored</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.output">
-<span class="sig-name descname"><span class="pre">output</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.output" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">output</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.output" title="Link to this definition"></a></dt>
 <dd><p>Type of the output the tool should produce</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.ram">
-<span class="sig-name descname"><span class="pre">ram</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.ram" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">ram</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.ram" title="Link to this definition"></a></dt>
 <dd><p>Runtime memory available to the process</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.years">
-<span class="sig-name descname"><span class="pre">years</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.years" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">years</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.years" title="Link to this definition"></a></dt>
 <dd><p>Year or list of years to download. For example, 
 the following argument: 
 <cite>-y 1992:1995 1998 1999 2011 2015:2017</cite> will produce 
@@ -409,19 +688,19 @@ the following list:
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="dorieh.rasters.config.GridMETContext.compress">
-<span class="sig-name descname"><span class="pre">compress</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.compress" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">compress</span></span><a class="headerlink" href="#dorieh.rasters.config.GridMETContext.compress" title="Link to this definition"></a></dt>
 <dd><p>Specifies whether to use gzip compression for the result</p>
 </dd></dl>
 
 </dd></dl>
 
 <section id="classes-used-internally">
-<h2>Classes used Internally<a class="headerlink" href="#classes-used-internally" title="Permalink to this heading"></a></h2>
+<h2>Classes used Internally<a class="headerlink" href="#classes-used-internally" title="Link to this heading"></a></h2>
 <section id="abstract-context">
-<h3>Abstract Context<a class="headerlink" href="#abstract-context" title="Permalink to this heading"></a></h3>
+<h3>Abstract Context<a class="headerlink" href="#abstract-context" title="Link to this heading"></a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="dorieh.utils.context.Context">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subclass</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_default</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dorieh/utils/context.html#Context"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.context.Context" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subclass</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_default</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dorieh/utils/context.html#Context"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.context.Context" title="Link to this definition"></a></dt>
 <dd><p>Generic class allowing to build context and configuration objects
 and initialize them using command line arguments</p>
 <p>Creates a new object</p>
@@ -439,7 +718,7 @@ If not specified, then it is extracted from subclass documentation</p></li>
 </dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="dorieh.utils.context.Context.years">
-<span class="sig-name descname"><span class="pre">years</span></span><a class="headerlink" href="#dorieh.utils.context.Context.years" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">years</span></span><a class="headerlink" href="#dorieh.utils.context.Context.years" title="Link to this definition"></a></dt>
 <dd><p>Year or list of years to download. For example, 
 the following argument: 
 <cite>-y 1992:1995 1998 1999 2011 2015:2017</cite> will produce 
@@ -449,13 +728,13 @@ the following list:
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="dorieh.utils.context.Context.compress">
-<span class="sig-name descname"><span class="pre">compress</span></span><a class="headerlink" href="#dorieh.utils.context.Context.compress" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">compress</span></span><a class="headerlink" href="#dorieh.utils.context.Context.compress" title="Link to this definition"></a></dt>
 <dd><p>Specifies whether to use gzip compression for the result</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="dorieh.utils.context.Context.validate">
-<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dorieh/utils/context.html#Context.validate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.context.Context.validate" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dorieh/utils/context.html#Context.validate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.context.Context.validate" title="Link to this definition"></a></dt>
 <dd><p>Subclasses can override this method to implement custom handling
 of command line arguments</p>
 <dl class="field-list simple">
@@ -473,7 +752,7 @@ of command line arguments</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="dorieh.utils.context.Context.enum">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">enum_cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dorieh/utils/context.html#Context.enum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.context.Context.enum" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">enum_cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dorieh/utils/context.html#Context.enum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.context.Context.enum" title="Link to this definition"></a></dt>
 <dd><p>A helper method to return Enum value by its name</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -492,10 +771,10 @@ of command line arguments</p>
 
 </section>
 <section id="argument">
-<h3>Argument<a class="headerlink" href="#argument" title="Permalink to this heading"></a></h3>
+<h3>Argument<a class="headerlink" href="#argument" title="Link to this heading"></a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="dorieh.utils.context.Argument">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Argument</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">help:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type=&lt;class</span> <span class="pre">'str'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aliases:</span> <span class="pre">~typing.Optional[~typing.List]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cardinality:</span> <span class="pre">~dorieh.utils.context.Cardinality</span> <span class="pre">=</span> <span class="pre">Cardinality.single</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_values=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">required=True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dorieh/utils/context.html#Argument"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.context.Argument" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Argument</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">help:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type=&lt;class</span> <span class="pre">'str'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aliases:</span> <span class="pre">~typing.List</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cardinality:</span> <span class="pre">~dorieh.utils.context.Cardinality</span> <span class="pre">=</span> <span class="pre">Cardinality.single</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_values=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">required=True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dorieh/utils/context.html#Argument"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.context.Argument" title="Link to this definition"></a></dt>
 <dd><p>A wrapper class to describe a command-line arguments
 This is practically, a more rigid format for
 :func ArgumentParser.add_argument:</p>
@@ -503,13 +782,13 @@ This is practically, a more rigid format for
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><span class="target" id="dorieh.utils.context.Argument.params.name"></span><strong>name</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.context.Argument.params.name">¶</a> – </p></li>
-<li><p><span class="target" id="dorieh.utils.context.Argument.params.help"></span><strong>help</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.context.Argument.params.help">¶</a> – </p></li>
-<li><p><span class="target" id="dorieh.utils.context.Argument.params.type"></span><strong>type</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.context.Argument.params.type">¶</a> – </p></li>
-<li><p><span class="target" id="dorieh.utils.context.Argument.params.aliases"></span><strong>aliases</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.context.Argument.params.aliases">¶</a> – </p></li>
-<li><p><span class="target" id="dorieh.utils.context.Argument.params.default"></span><strong>default</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.context.Argument.params.default">¶</a> – </p></li>
-<li><p><span class="target" id="dorieh.utils.context.Argument.params.cardinality"></span><strong>cardinality</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.context.Argument.params.cardinality">¶</a> – </p></li>
-<li><p><span class="target" id="dorieh.utils.context.Argument.params.valid_values"></span><strong>valid_values</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.context.Argument.params.valid_values">¶</a> – </p></li>
+<li><p><span class="target" id="dorieh.utils.context.Argument.params.name"></span><strong>name</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.context.Argument.params.name">¶</a></p></li>
+<li><p><span class="target" id="dorieh.utils.context.Argument.params.help"></span><strong>help</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.context.Argument.params.help">¶</a></p></li>
+<li><p><span class="target" id="dorieh.utils.context.Argument.params.type"></span><strong>type</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.context.Argument.params.type">¶</a></p></li>
+<li><p><span class="target" id="dorieh.utils.context.Argument.params.aliases"></span><strong>aliases</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.context.Argument.params.aliases">¶</a></p></li>
+<li><p><span class="target" id="dorieh.utils.context.Argument.params.default"></span><strong>default</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.context.Argument.params.default">¶</a></p></li>
+<li><p><span class="target" id="dorieh.utils.context.Argument.params.cardinality"></span><strong>cardinality</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.context.Argument.params.cardinality">¶</a></p></li>
+<li><p><span class="target" id="dorieh.utils.context.Argument.params.valid_values"></span><strong>valid_values</strong><a class="paramlink headerlink reference internal" href="#dorieh.utils.context.Argument.params.valid_values">¶</a></p></li>
 </ul>
 </dd>
 </dl>
@@ -517,10 +796,10 @@ This is practically, a more rigid format for
 
 </section>
 <section id="argument-cardinality-enum">
-<h3>Argument Cardinality Enum<a class="headerlink" href="#argument-cardinality-enum" title="Permalink to this heading"></a></h3>
+<h3>Argument Cardinality Enum<a class="headerlink" href="#argument-cardinality-enum" title="Link to this heading"></a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="dorieh.utils.context.Cardinality">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Cardinality</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dorieh/utils/context.html#Cardinality"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.context.Cardinality" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Cardinality</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dorieh/utils/context.html#Cardinality"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dorieh.utils.context.Cardinality" title="Link to this definition"></a></dt>
 <dd><p>Cardinality of a configuration parameter: multiple or singular</p>
 </dd></dl>
 
@@ -536,7 +815,7 @@ This is practically, a more rigid format for
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2021-2024, Harvard University.</p>
+    <p>&#169; Copyright 2021-2026, Harvard University.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

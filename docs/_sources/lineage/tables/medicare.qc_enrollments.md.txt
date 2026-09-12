@@ -1,0 +1,106 @@
+# Materialized view medicare.qc_enrollments
+
+## Overview for medicare.qc_enrollments
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+medicare.qc_enrollments/bene_hll.md
+medicare.qc_enrollments/buyin.md
+medicare.qc_enrollments/consistent_curec.md
+medicare.qc_enrollments/consistent_dob.md
+medicare.qc_enrollments/consistent_dod.md
+medicare.qc_enrollments/consistent_orec.md
+medicare.qc_enrollments/consistent_race.md
+medicare.qc_enrollments/consistent_sex.md
+medicare.qc_enrollments/curec.md
+medicare.qc_enrollments/dual.md
+medicare.qc_enrollments/fips3.md
+medicare.qc_enrollments/fips3_is_approximated.md
+medicare.qc_enrollments/fips3_valdiated.md
+medicare.qc_enrollments/hmo.md
+medicare.qc_enrollments/numdistinctbeneficaries.md
+medicare.qc_enrollments/numrecords.md
+medicare.qc_enrollments/orec.md
+medicare.qc_enrollments/state.md
+medicare.qc_enrollments/state_iso.md
+medicare.qc_enrollments/year.md
+medicare.qc_enrollments/zip.md
+```
+
+
+Aggregate data for beneficiaries and enrollments
+
+
+Transformed from [medicare.qc_enrl_bene](medicare.qc_enrl_bene.md)
+
+
+<details>
+
+<summary>SQL/DDL Statement</summary>
+
+```sql
+
+CREATE materialized view  medicare.qc_enrollments AS
+SELECT
+    year,
+	state,
+	zip,
+	fips3,
+	orec,
+	curec,
+	hmo,
+	dual,
+	buyin,
+	consistent_dob,
+	consistent_dod,
+	consistent_sex,
+	consistent_race,
+	consistent_orec,
+	consistent_curec,
+	fips3_is_approximated,
+	fips3_valdiated,
+	MAX(state_iso) AS state_iso,
+	COUNT(*) AS NumRecords,
+	(#(hll_add_agg(bene)))::BIGINT AS NumDistinctBeneficaries,
+	hll_add_agg(bene) AS bene_hll
+FROM medicare.qc_enrl_bene
+
+GROUP BY year,state,zip,fips3,orec,curec,hmo,dual,buyin,consistent_dob,consistent_dod,consistent_sex,consistent_race,consistent_orec,consistent_curec,fips3_is_approximated,fips3_valdiated;
+
+COMMENT ON materialized view medicare.qc_enrollments IS 'CREATED BY Dorieh: {"version": "0.5.1.post2", "url": "file://<local checkout>", "commit": null}. Created at 2026-09-12 15:03:07.747058';
+```
+
+</details>
+
+---
+## Columns:
+
+| Column Name | Column Type | Datatype |
+| --- | --- | --- |
+| [bene_hll](medicare.qc_enrollments/bene_hll.md) | computed | string |
+| [buyin](medicare.qc_enrollments/buyin.md) |  | string |
+| [consistent_curec](medicare.qc_enrollments/consistent_curec.md) |  | string |
+| [consistent_dob](medicare.qc_enrollments/consistent_dob.md) |  | string |
+| [consistent_dod](medicare.qc_enrollments/consistent_dod.md) |  | string |
+| [consistent_orec](medicare.qc_enrollments/consistent_orec.md) |  | string |
+| [consistent_race](medicare.qc_enrollments/consistent_race.md) |  | string |
+| [consistent_sex](medicare.qc_enrollments/consistent_sex.md) |  | string |
+| [curec](medicare.qc_enrollments/curec.md) |  | string |
+| [dual](medicare.qc_enrollments/dual.md) |  | string |
+| [fips3](medicare.qc_enrollments/fips3.md) |  | string |
+| [fips3_is_approximated](medicare.qc_enrollments/fips3_is_approximated.md) |  | string |
+| [fips3_valdiated](medicare.qc_enrollments/fips3_valdiated.md) |  | string |
+| [hmo](medicare.qc_enrollments/hmo.md) |  | string |
+| [numdistinctbeneficaries](medicare.qc_enrollments/numdistinctbeneficaries.md) | computed | BIGINT |
+| [numrecords](medicare.qc_enrollments/numrecords.md) | computed | BIGINT |
+| [orec](medicare.qc_enrollments/orec.md) |  | string |
+| [state](medicare.qc_enrollments/state.md) |  | string |
+| [state_iso](medicare.qc_enrollments/state_iso.md) | computed | CHAR(5) |
+| [year](medicare.qc_enrollments/year.md) |  | string |
+| [zip](medicare.qc_enrollments/zip.md) |  | string |
+
+

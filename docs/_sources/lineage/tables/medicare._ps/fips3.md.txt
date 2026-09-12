@@ -1,0 +1,47 @@
+# Column medicare._ps.fips3
+
+## Overview of column fips3 in table medicare._ps 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare._ps](../medicare._ps.md)           |
+| Qualified name                | medicare._ps.fips3  |
+| Datatype                      | string        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+CASE WHEN ssa3 is NOT NULL THEN
+  CASE WHEN year > 2010 THEN
+      (SELECT fips3 from public.ssa as s where ps.ssa3 = s.ssa3 and ps.year = s.year and ps.fips2 = s.fips2 ORDER BY 1 DESC LIMIT 1)
+    ELSE
+      (SELECT fips3 from public.ssa as s where ps.ssa3 = s.ssa3 and 2003 = s.year and ps.fips2 = s.fips2 ORDER BY 1 DESC LIMIT 1)
+  END
+ELSE
+  (SELECT public.zip_to_fips3(year, zip))
+END AS fips3
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+fips3_svg_envelop.md
+```
+
+
+```{figure} fips3.svg
+:align: center
+:alt: Column medicare._ps.fips3 Lineage SVG
+:target: fips3_svg_envelop.html
+
+Data lineage for column medicare._ps.fips3
+
+```
+
+

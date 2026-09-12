@@ -1,0 +1,22 @@
+# Column cms.mbsf_abcd_2016.SAMPLE_GROUP
+
+## Overview of column SAMPLE_GROUP in table cms.mbsf_abcd_2016 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_abcd_2016](../cms.mbsf_abcd_2016.md)           |
+| Qualified name                | cms.mbsf_abcd_2016.SAMPLE_GROUP  |
+| Datatype                      | VARCHAR(2)        |
+| Reference | [https://resdac.org/cms-data/variables/medicare-sample-group-indicator](https://resdac.org/cms-data/variables/medicare-sample-group-indicator) |
+
+
+Medicare 1, 5, or 20% Strict Sample Group Indicator
+
+| Key | Value |
+| --- | ----- |
+| long_name | SAMPLE_GROUP |
+| original_type | CHAR |
+| width | 2.0 |
+
+
+

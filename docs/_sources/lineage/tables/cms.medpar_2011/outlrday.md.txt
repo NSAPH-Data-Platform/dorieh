@@ -1,0 +1,22 @@
+# Column cms.medpar_2011.OUTLRDAY
+
+## Overview of column OUTLRDAY in table cms.medpar_2011 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2011](../cms.medpar_2011.md)           |
+| Qualified name                | cms.medpar_2011.OUTLRDAY  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/days-paid-outliers-either-day-or-cost-under-pps-beyond-drg-threshold](https://resdac.org/cms-data/variables/days-paid-outliers-either-day-or-cost-under-pps-beyond-drg-threshold) |
+
+
+Days paid as outliers (either day or cost) under PPS beyond DRG threshld
+
+| Key | Value |
+| --- | ----- |
+| long_name | OUTLIER_DAY_CNT |
+| original_type | NUM |
+| width | 5.0 |
+
+
+

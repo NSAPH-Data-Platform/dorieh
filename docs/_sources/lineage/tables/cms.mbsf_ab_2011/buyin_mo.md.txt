@@ -1,0 +1,22 @@
+# Column cms.mbsf_ab_2011.BUYIN_MO
+
+## Overview of column BUYIN_MO in table cms.mbsf_ab_2011 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_ab_2011](../cms.mbsf_ab_2011.md)           |
+| Qualified name                | cms.mbsf_ab_2011.BUYIN_MO  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/state-buy-coverage-count](https://resdac.org/cms-data/variables/state-buy-coverage-count) |
+
+
+State Buy-In Coverage Count
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_STATE_BUYIN_TOT_MONS |
+| original_type | NUM |
+| width | 3.0 |
+
+
+

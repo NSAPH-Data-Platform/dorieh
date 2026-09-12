@@ -1,0 +1,22 @@
+# Column cms.medpar_2013.CLM_TYPE
+
+## Overview of column CLM_TYPE in table cms.medpar_2013 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2013](../cms.medpar_2013.md)           |
+| Qualified name                | cms.medpar_2013.CLM_TYPE  |
+| Datatype                      | VARCHAR(2)        |
+| Reference | [https://resdac.org/cms-data/variables/nch-claim-type-code](https://resdac.org/cms-data/variables/nch-claim-type-code) |
+
+
+NCH Claim Type Code
+
+| Key | Value |
+| --- | ----- |
+| long_name | NCH_CLM_TYPE_CD |
+| original_type | CHAR |
+| width | 2.0 |
+
+
+

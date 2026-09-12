@@ -1,0 +1,25 @@
+# Column medicare.qc_enrl_bene.consistent_dod
+
+## Overview of column consistent_dod in table medicare.qc_enrl_bene 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_enrl_bene](../medicare.qc_enrl_bene.md)           |
+| Qualified name                | medicare.qc_enrl_bene.consistent_dod  |
+| Datatype                      | VARCHAR(12)        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT (CASE
+  WHEN dod IS NULL THEN 'NONE'
+  WHEN dod_earliest IS NOT NULL THEN 'AMBIGUOUS'
+  ELSE 'CONSISTENT'
+END)
+
+```
+
+

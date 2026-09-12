@@ -1,0 +1,39 @@
+# Column medicare.qc_enrl_bene.ssa3
+
+## Overview of column ssa3 in table medicare.qc_enrl_bene 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_enrl_bene](../medicare.qc_enrl_bene.md)           |
+| Qualified name                | medicare.qc_enrl_bene.ssa3  |
+| Datatype                      | string        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT MAX(ssa3)
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+ssa3_svg_envelop.md
+```
+
+
+```{figure} ssa3.svg
+:align: center
+:alt: Column medicare.qc_enrl_bene.ssa3 Lineage SVG
+:target: ssa3_svg_envelop.html
+
+Data lineage for column medicare.qc_enrl_bene.ssa3
+
+```
+
+

@@ -1,0 +1,20 @@
+# Column medicare.admissions.state_iso
+
+## Overview of column state_iso in table medicare.admissions 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.admissions](../medicare.admissions.md)           |
+| Qualified name                | medicare.admissions.state_iso  |
+| Datatype                      | char(5)        |
+| Column type | generated |
+
+
+
+## Expressions
+
+```sql
+SELECT GENERATED ALWAYS AS ('US-' || state)  STORED
+```
+
+

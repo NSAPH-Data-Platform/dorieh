@@ -1,3 +1,5 @@
+:orphan:
+
 Parameters (Enums)
 ==================
 .. toctree::

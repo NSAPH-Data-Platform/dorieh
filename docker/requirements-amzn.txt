@@ -1,0 +1,5 @@
+# Requirments for building image on raw Amazon Linux
+toil[aws,cwl]
+cwlref-runner
+#dorieh[spark]
+dorieh

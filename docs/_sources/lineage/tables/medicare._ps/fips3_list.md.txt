@@ -1,0 +1,40 @@
+# Column medicare._ps.fips3_list
+
+## Overview of column fips3_list in table medicare._ps 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare._ps](../medicare._ps.md)           |
+| Qualified name                | medicare._ps.fips3_list  |
+| Datatype                      | string        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+CASE WHEN year > 2010 THEN (SELECT string_agg(distinct fips3::varchar, ',') from public.ssa as s where ps.ssa3 = s.ssa3 and ps.year = s.year and ps.fips2 = s.fips2)
+    ELSE (SELECT string_agg(distinct fips3::varchar, ',') from public.ssa as s where ps.ssa3 = s.ssa3 and 2003 = s.year and ps.fips2 = s.fips2) END AS fips3_list
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+fips3_list_svg_envelop.md
+```
+
+
+```{figure} fips3_list.svg
+:align: center
+:alt: Column medicare._ps.fips3_list Lineage SVG
+:target: fips3_list_svg_envelop.html
+
+Data lineage for column medicare._ps.fips3_list
+
+```
+
+

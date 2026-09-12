@@ -1,0 +1,22 @@
+# Column cms.medpar_2012.OUTLRAMT
+
+## Overview of column OUTLRAMT in table cms.medpar_2012 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2012](../cms.medpar_2012.md)           |
+| Qualified name                | cms.medpar_2012.OUTLRAMT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/drg-outlier-approved-payment-amount](https://resdac.org/cms-data/variables/drg-outlier-approved-payment-amount) |
+
+
+Addtnl approved due to outlier situation over DRG allowance for stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | DRG_OUTLIER_PMT_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

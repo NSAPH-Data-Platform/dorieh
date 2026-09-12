@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Docker create mutliarch" type="ShConfigurationType" folderName="Docker">
-    <option name="SCRIPT_TEXT" value="docker manifest create forome/dorieh:latest --amend forome/dorieh:arm64 --amend forome/dorieh:amd64 &amp;&amp; docker manifest push forome/dorieh:latest" />
+    <option name="SCRIPT_TEXT" value="docker manifest rm forome/dorieh:latest &amp;&amp; docker manifest create forome/dorieh:latest forome/dorieh:amd64 forome/dorieh:arm64 &amp;&amp; docker manifest annotate forome/dorieh:latest forome/dorieh:amd64 --arch amd64 &amp;&amp; docker manifest annotate forome/dorieh:latest forome/dorieh:arm64 --arch arm64 &amp;&amp; docker manifest push forome/dorieh:latest" />
     <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
     <option name="SCRIPT_PATH" value="" />
     <option name="SCRIPT_OPTIONS" value="" />

@@ -1,0 +1,22 @@
+# Column cms.mbsf_ab_2012.B_TRM_CD
+
+## Overview of column B_TRM_CD in table cms.mbsf_ab_2012 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_ab_2012](../cms.mbsf_ab_2012.md)           |
+| Qualified name                | cms.mbsf_ab_2012.B_TRM_CD  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/part-b-termination-code](https://resdac.org/cms-data/variables/part-b-termination-code) |
+
+
+Part B Termination Code
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_PTB_TRMNTN_CD |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

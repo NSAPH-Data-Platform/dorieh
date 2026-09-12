@@ -1,0 +1,22 @@
+# Column cms.mbsf_abcd_2018.DUAL_01
+
+## Overview of column DUAL_01 in table cms.mbsf_abcd_2018 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_abcd_2018](../cms.mbsf_abcd_2018.md)           |
+| Qualified name                | cms.mbsf_abcd_2018.DUAL_01  |
+| Datatype                      | VARCHAR(2)        |
+| Reference | [https://resdac.org/cms-data/variables/monthly-medicare-medicaid-dual-eligibility-code-january](https://resdac.org/cms-data/variables/monthly-medicare-medicaid-dual-eligibility-code-january) |
+
+
+State Reported Dual Eligible Status Code: January
+
+| Key | Value |
+| --- | ----- |
+| long_name | DUAL_STUS_CD_01 |
+| original_type | CHAR |
+| width | 2.0 |
+
+
+

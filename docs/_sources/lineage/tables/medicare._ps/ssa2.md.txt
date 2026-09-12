@@ -1,0 +1,25 @@
+# Column medicare._ps.ssa2
+
+## Overview of column ssa2 in table medicare._ps 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare._ps](../medicare._ps.md)           |
+| Qualified name                | medicare._ps.ssa2  |
+| Datatype                      | string        |
+| Column type | copied |
+| Reference | [https://www.nber.org/research/data/ssa-federal-information-processing-series-fips-state-and-county-crosswalk](https://www.nber.org/research/data/ssa-federal-information-processing-series-fips-state-and-county-crosswalk) |
+
+
+Social Security Administration (SSA) two digit code for state
+
+
+
+
+## Expressions
+
+```sql
+SELECT state
+```
+
+

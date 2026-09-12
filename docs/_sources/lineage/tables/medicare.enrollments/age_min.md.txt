@@ -1,0 +1,42 @@
+# Column medicare.enrollments.age_min
+
+## Overview of column age_min in table medicare.enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.enrollments](../medicare.enrollments.md)           |
+| Qualified name                | medicare.enrollments.age_min  |
+| Datatype                      | string        |
+| Column type | copied |
+
+
+
+## Expressions
+
+```sql
+SELECT CASE
+  WHEN MIN(age) <> MAX(age) THEN MIN(age)
+END
+
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+age_min_svg_envelop.md
+```
+
+
+```{figure} age_min.svg
+:align: center
+:alt: Column medicare.enrollments.age_min Lineage SVG
+:target: age_min_svg_envelop.html
+
+Data lineage for column medicare.enrollments.age_min
+
+```
+
+

@@ -1,0 +1,22 @@
+# Column cms.mbsf_ab_2014.CREC
+
+## Overview of column CREC in table cms.mbsf_ab_2014 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_ab_2014](../cms.mbsf_ab_2014.md)           |
+| Qualified name                | cms.mbsf_ab_2014.CREC  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/medicare-current-reason-entitlement-code-crec](https://resdac.org/cms-data/variables/medicare-current-reason-entitlement-code-crec) |
+
+
+Current Reason for Entitlement Code
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_ENTLMT_RSN_CURR |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

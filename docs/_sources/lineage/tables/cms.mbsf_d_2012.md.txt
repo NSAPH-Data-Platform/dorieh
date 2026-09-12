@@ -1,0 +1,280 @@
+# Table cms.mbsf_d_2012
+
+## Overview for cms.mbsf_d_2012
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+cms.mbsf_d_2012/bene_id.md
+cms.mbsf_d_2012/cntrct01.md
+cms.mbsf_d_2012/cntrct02.md
+cms.mbsf_d_2012/cntrct03.md
+cms.mbsf_d_2012/cntrct04.md
+cms.mbsf_d_2012/cntrct05.md
+cms.mbsf_d_2012/cntrct06.md
+cms.mbsf_d_2012/cntrct07.md
+cms.mbsf_d_2012/cntrct08.md
+cms.mbsf_d_2012/cntrct09.md
+cms.mbsf_d_2012/cntrct10.md
+cms.mbsf_d_2012/cntrct11.md
+cms.mbsf_d_2012/cntrct12.md
+cms.mbsf_d_2012/crdcovsw.md
+cms.mbsf_d_2012/cstshr01.md
+cms.mbsf_d_2012/cstshr02.md
+cms.mbsf_d_2012/cstshr03.md
+cms.mbsf_d_2012/cstshr04.md
+cms.mbsf_d_2012/cstshr05.md
+cms.mbsf_d_2012/cstshr06.md
+cms.mbsf_d_2012/cstshr07.md
+cms.mbsf_d_2012/cstshr08.md
+cms.mbsf_d_2012/cstshr09.md
+cms.mbsf_d_2012/cstshr10.md
+cms.mbsf_d_2012/cstshr11.md
+cms.mbsf_d_2012/cstshr12.md
+cms.mbsf_d_2012/dual_01.md
+cms.mbsf_d_2012/dual_02.md
+cms.mbsf_d_2012/dual_03.md
+cms.mbsf_d_2012/dual_04.md
+cms.mbsf_d_2012/dual_05.md
+cms.mbsf_d_2012/dual_06.md
+cms.mbsf_d_2012/dual_07.md
+cms.mbsf_d_2012/dual_08.md
+cms.mbsf_d_2012/dual_09.md
+cms.mbsf_d_2012/dual_10.md
+cms.mbsf_d_2012/dual_11.md
+cms.mbsf_d_2012/dual_12.md
+cms.mbsf_d_2012/dual_mo.md
+cms.mbsf_d_2012/file.md
+cms.mbsf_d_2012/pbpid01.md
+cms.mbsf_d_2012/pbpid02.md
+cms.mbsf_d_2012/pbpid03.md
+cms.mbsf_d_2012/pbpid04.md
+cms.mbsf_d_2012/pbpid05.md
+cms.mbsf_d_2012/pbpid06.md
+cms.mbsf_d_2012/pbpid07.md
+cms.mbsf_d_2012/pbpid08.md
+cms.mbsf_d_2012/pbpid09.md
+cms.mbsf_d_2012/pbpid10.md
+cms.mbsf_d_2012/pbpid11.md
+cms.mbsf_d_2012/pbpid12.md
+cms.mbsf_d_2012/plncovmo.md
+cms.mbsf_d_2012/rdscovmo.md
+cms.mbsf_d_2012/rdsind01.md
+cms.mbsf_d_2012/rdsind02.md
+cms.mbsf_d_2012/rdsind03.md
+cms.mbsf_d_2012/rdsind04.md
+cms.mbsf_d_2012/rdsind05.md
+cms.mbsf_d_2012/rdsind06.md
+cms.mbsf_d_2012/rdsind07.md
+cms.mbsf_d_2012/rdsind08.md
+cms.mbsf_d_2012/rdsind09.md
+cms.mbsf_d_2012/rdsind10.md
+cms.mbsf_d_2012/rdsind11.md
+cms.mbsf_d_2012/rdsind12.md
+cms.mbsf_d_2012/record.md
+cms.mbsf_d_2012/rfrnc_yr.md
+cms.mbsf_d_2012/sgmtid01.md
+cms.mbsf_d_2012/sgmtid02.md
+cms.mbsf_d_2012/sgmtid03.md
+cms.mbsf_d_2012/sgmtid04.md
+cms.mbsf_d_2012/sgmtid05.md
+cms.mbsf_d_2012/sgmtid06.md
+cms.mbsf_d_2012/sgmtid07.md
+cms.mbsf_d_2012/sgmtid08.md
+cms.mbsf_d_2012/sgmtid09.md
+cms.mbsf_d_2012/sgmtid10.md
+cms.mbsf_d_2012/sgmtid11.md
+cms.mbsf_d_2012/sgmtid12.md
+cms.mbsf_d_2012/year.md
+```
+
+
+Primary Key: FILE, RECORD
+
+
+<details>
+
+<summary>SQL/DDL Statement</summary>
+
+```sql
+CREATE TABLE  cms.mbsf_d_2012 (
+	BENE_ID VARCHAR(15),
+	RFRNC_YR INT,
+	CRDCOVSW VARCHAR(1),
+	PLNCOVMO VARCHAR(2),
+	RDSCOVMO VARCHAR(2),
+	DUAL_MO VARCHAR(2),
+	CNTRCT01 VARCHAR(5),
+	CNTRCT02 VARCHAR(5),
+	CNTRCT03 VARCHAR(5),
+	CNTRCT04 VARCHAR(5),
+	CNTRCT05 VARCHAR(5),
+	CNTRCT06 VARCHAR(5),
+	CNTRCT07 VARCHAR(5),
+	CNTRCT08 VARCHAR(5),
+	CNTRCT09 VARCHAR(5),
+	CNTRCT10 VARCHAR(5),
+	CNTRCT11 VARCHAR(5),
+	CNTRCT12 VARCHAR(5),
+	PBPID01 VARCHAR(3),
+	PBPID02 VARCHAR(3),
+	PBPID03 VARCHAR(3),
+	PBPID04 VARCHAR(3),
+	PBPID05 VARCHAR(3),
+	PBPID06 VARCHAR(3),
+	PBPID07 VARCHAR(3),
+	PBPID08 VARCHAR(3),
+	PBPID09 VARCHAR(3),
+	PBPID10 VARCHAR(3),
+	PBPID11 VARCHAR(3),
+	PBPID12 VARCHAR(3),
+	SGMTID01 VARCHAR(3),
+	SGMTID02 VARCHAR(3),
+	SGMTID03 VARCHAR(3),
+	SGMTID04 VARCHAR(3),
+	SGMTID05 VARCHAR(3),
+	SGMTID06 VARCHAR(3),
+	SGMTID07 VARCHAR(3),
+	SGMTID08 VARCHAR(3),
+	SGMTID09 VARCHAR(3),
+	SGMTID10 VARCHAR(3),
+	SGMTID11 VARCHAR(3),
+	SGMTID12 VARCHAR(3),
+	CSTSHR01 VARCHAR(2),
+	CSTSHR02 VARCHAR(2),
+	CSTSHR03 VARCHAR(2),
+	CSTSHR04 VARCHAR(2),
+	CSTSHR05 VARCHAR(2),
+	CSTSHR06 VARCHAR(2),
+	CSTSHR07 VARCHAR(2),
+	CSTSHR08 VARCHAR(2),
+	CSTSHR09 VARCHAR(2),
+	CSTSHR10 VARCHAR(2),
+	CSTSHR11 VARCHAR(2),
+	CSTSHR12 VARCHAR(2),
+	RDSIND01 VARCHAR(1),
+	RDSIND02 VARCHAR(1),
+	RDSIND03 VARCHAR(1),
+	RDSIND04 VARCHAR(1),
+	RDSIND05 VARCHAR(1),
+	RDSIND06 VARCHAR(1),
+	RDSIND07 VARCHAR(1),
+	RDSIND08 VARCHAR(1),
+	RDSIND09 VARCHAR(1),
+	RDSIND10 VARCHAR(1),
+	RDSIND11 VARCHAR(1),
+	RDSIND12 VARCHAR(1),
+	DUAL_01 VARCHAR(2),
+	DUAL_02 VARCHAR(2),
+	DUAL_03 VARCHAR(2),
+	DUAL_04 VARCHAR(2),
+	DUAL_05 VARCHAR(2),
+	DUAL_06 VARCHAR(2),
+	DUAL_07 VARCHAR(2),
+	DUAL_08 VARCHAR(2),
+	DUAL_09 VARCHAR(2),
+	DUAL_10 VARCHAR(2),
+	DUAL_11 VARCHAR(2),
+	DUAL_12 VARCHAR(2),
+	FILE VARCHAR(128),
+	RECORD BIGSERIAL,
+	YEAR INT GENERATED ALWAYS AS (RFRNC_YR) STORED,
+	PRIMARY KEY (FILE, RECORD)
+);
+CREATE INDEX  mbsf_d_2012_FILE_idx ON cms.mbsf_d_2012 USING BTREE (FILE) ;
+COMMENT ON table cms.mbsf_d_2012 IS 'CREATED BY Dorieh: {"version": "0.5.1.post2", "url": "file://<local checkout>", "commit": null}. Created at 2026-09-12 15:03:07.549663';
+```
+
+</details>
+
+---
+## Columns:
+
+| Column Name | Column Type | Datatype |
+| --- | --- | --- |
+| [bene_id](cms.mbsf_d_2012/bene_id.md) |  | VARCHAR(15) |
+| [cntrct01](cms.mbsf_d_2012/cntrct01.md) |  | VARCHAR(5) |
+| [cntrct02](cms.mbsf_d_2012/cntrct02.md) |  | VARCHAR(5) |
+| [cntrct03](cms.mbsf_d_2012/cntrct03.md) |  | VARCHAR(5) |
+| [cntrct04](cms.mbsf_d_2012/cntrct04.md) |  | VARCHAR(5) |
+| [cntrct05](cms.mbsf_d_2012/cntrct05.md) |  | VARCHAR(5) |
+| [cntrct06](cms.mbsf_d_2012/cntrct06.md) |  | VARCHAR(5) |
+| [cntrct07](cms.mbsf_d_2012/cntrct07.md) |  | VARCHAR(5) |
+| [cntrct08](cms.mbsf_d_2012/cntrct08.md) |  | VARCHAR(5) |
+| [cntrct09](cms.mbsf_d_2012/cntrct09.md) |  | VARCHAR(5) |
+| [cntrct10](cms.mbsf_d_2012/cntrct10.md) |  | VARCHAR(5) |
+| [cntrct11](cms.mbsf_d_2012/cntrct11.md) |  | VARCHAR(5) |
+| [cntrct12](cms.mbsf_d_2012/cntrct12.md) |  | VARCHAR(5) |
+| [crdcovsw](cms.mbsf_d_2012/crdcovsw.md) |  | VARCHAR(1) |
+| [cstshr01](cms.mbsf_d_2012/cstshr01.md) |  | VARCHAR(2) |
+| [cstshr02](cms.mbsf_d_2012/cstshr02.md) |  | VARCHAR(2) |
+| [cstshr03](cms.mbsf_d_2012/cstshr03.md) |  | VARCHAR(2) |
+| [cstshr04](cms.mbsf_d_2012/cstshr04.md) |  | VARCHAR(2) |
+| [cstshr05](cms.mbsf_d_2012/cstshr05.md) |  | VARCHAR(2) |
+| [cstshr06](cms.mbsf_d_2012/cstshr06.md) |  | VARCHAR(2) |
+| [cstshr07](cms.mbsf_d_2012/cstshr07.md) |  | VARCHAR(2) |
+| [cstshr08](cms.mbsf_d_2012/cstshr08.md) |  | VARCHAR(2) |
+| [cstshr09](cms.mbsf_d_2012/cstshr09.md) |  | VARCHAR(2) |
+| [cstshr10](cms.mbsf_d_2012/cstshr10.md) |  | VARCHAR(2) |
+| [cstshr11](cms.mbsf_d_2012/cstshr11.md) |  | VARCHAR(2) |
+| [cstshr12](cms.mbsf_d_2012/cstshr12.md) |  | VARCHAR(2) |
+| [dual_01](cms.mbsf_d_2012/dual_01.md) |  | VARCHAR(2) |
+| [dual_02](cms.mbsf_d_2012/dual_02.md) |  | VARCHAR(2) |
+| [dual_03](cms.mbsf_d_2012/dual_03.md) |  | VARCHAR(2) |
+| [dual_04](cms.mbsf_d_2012/dual_04.md) |  | VARCHAR(2) |
+| [dual_05](cms.mbsf_d_2012/dual_05.md) |  | VARCHAR(2) |
+| [dual_06](cms.mbsf_d_2012/dual_06.md) |  | VARCHAR(2) |
+| [dual_07](cms.mbsf_d_2012/dual_07.md) |  | VARCHAR(2) |
+| [dual_08](cms.mbsf_d_2012/dual_08.md) |  | VARCHAR(2) |
+| [dual_09](cms.mbsf_d_2012/dual_09.md) |  | VARCHAR(2) |
+| [dual_10](cms.mbsf_d_2012/dual_10.md) |  | VARCHAR(2) |
+| [dual_11](cms.mbsf_d_2012/dual_11.md) |  | VARCHAR(2) |
+| [dual_12](cms.mbsf_d_2012/dual_12.md) |  | VARCHAR(2) |
+| [dual_mo](cms.mbsf_d_2012/dual_mo.md) |  | VARCHAR(2) |
+| [file](cms.mbsf_d_2012/file.md) | file | VARCHAR(128) |
+| [pbpid01](cms.mbsf_d_2012/pbpid01.md) |  | VARCHAR(3) |
+| [pbpid02](cms.mbsf_d_2012/pbpid02.md) |  | VARCHAR(3) |
+| [pbpid03](cms.mbsf_d_2012/pbpid03.md) |  | VARCHAR(3) |
+| [pbpid04](cms.mbsf_d_2012/pbpid04.md) |  | VARCHAR(3) |
+| [pbpid05](cms.mbsf_d_2012/pbpid05.md) |  | VARCHAR(3) |
+| [pbpid06](cms.mbsf_d_2012/pbpid06.md) |  | VARCHAR(3) |
+| [pbpid07](cms.mbsf_d_2012/pbpid07.md) |  | VARCHAR(3) |
+| [pbpid08](cms.mbsf_d_2012/pbpid08.md) |  | VARCHAR(3) |
+| [pbpid09](cms.mbsf_d_2012/pbpid09.md) |  | VARCHAR(3) |
+| [pbpid10](cms.mbsf_d_2012/pbpid10.md) |  | VARCHAR(3) |
+| [pbpid11](cms.mbsf_d_2012/pbpid11.md) |  | VARCHAR(3) |
+| [pbpid12](cms.mbsf_d_2012/pbpid12.md) |  | VARCHAR(3) |
+| [plncovmo](cms.mbsf_d_2012/plncovmo.md) |  | VARCHAR(2) |
+| [rdscovmo](cms.mbsf_d_2012/rdscovmo.md) |  | VARCHAR(2) |
+| [rdsind01](cms.mbsf_d_2012/rdsind01.md) |  | VARCHAR(1) |
+| [rdsind02](cms.mbsf_d_2012/rdsind02.md) |  | VARCHAR(1) |
+| [rdsind03](cms.mbsf_d_2012/rdsind03.md) |  | VARCHAR(1) |
+| [rdsind04](cms.mbsf_d_2012/rdsind04.md) |  | VARCHAR(1) |
+| [rdsind05](cms.mbsf_d_2012/rdsind05.md) |  | VARCHAR(1) |
+| [rdsind06](cms.mbsf_d_2012/rdsind06.md) |  | VARCHAR(1) |
+| [rdsind07](cms.mbsf_d_2012/rdsind07.md) |  | VARCHAR(1) |
+| [rdsind08](cms.mbsf_d_2012/rdsind08.md) |  | VARCHAR(1) |
+| [rdsind09](cms.mbsf_d_2012/rdsind09.md) |  | VARCHAR(1) |
+| [rdsind10](cms.mbsf_d_2012/rdsind10.md) |  | VARCHAR(1) |
+| [rdsind11](cms.mbsf_d_2012/rdsind11.md) |  | VARCHAR(1) |
+| [rdsind12](cms.mbsf_d_2012/rdsind12.md) |  | VARCHAR(1) |
+| [record](cms.mbsf_d_2012/record.md) |  | BIGSERIAL |
+| [rfrnc_yr](cms.mbsf_d_2012/rfrnc_yr.md) |  | INT |
+| [sgmtid01](cms.mbsf_d_2012/sgmtid01.md) |  | VARCHAR(3) |
+| [sgmtid02](cms.mbsf_d_2012/sgmtid02.md) |  | VARCHAR(3) |
+| [sgmtid03](cms.mbsf_d_2012/sgmtid03.md) |  | VARCHAR(3) |
+| [sgmtid04](cms.mbsf_d_2012/sgmtid04.md) |  | VARCHAR(3) |
+| [sgmtid05](cms.mbsf_d_2012/sgmtid05.md) |  | VARCHAR(3) |
+| [sgmtid06](cms.mbsf_d_2012/sgmtid06.md) |  | VARCHAR(3) |
+| [sgmtid07](cms.mbsf_d_2012/sgmtid07.md) |  | VARCHAR(3) |
+| [sgmtid08](cms.mbsf_d_2012/sgmtid08.md) |  | VARCHAR(3) |
+| [sgmtid09](cms.mbsf_d_2012/sgmtid09.md) |  | VARCHAR(3) |
+| [sgmtid10](cms.mbsf_d_2012/sgmtid10.md) |  | VARCHAR(3) |
+| [sgmtid11](cms.mbsf_d_2012/sgmtid11.md) |  | VARCHAR(3) |
+| [sgmtid12](cms.mbsf_d_2012/sgmtid12.md) |  | VARCHAR(3) |
+| [year](cms.mbsf_d_2012/year.md) | generated | INT |
+
+

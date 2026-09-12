@@ -1,0 +1,22 @@
+# Column cms.medpar_2012.ESRDSETG
+
+## Overview of column ESRDSETG in table cms.medpar_2012 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2012](../cms.medpar_2012.md)           |
+| Qualified name                | cms.medpar_2012.ESRDSETG  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/end-stage-renal-disease-esrd-charge-amount](https://resdac.org/cms-data/variables/end-stage-renal-disease-esrd-charge-amount) |
+
+
+ESRD services related to beneficiarys stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | ESRD_REV_SETG_CHRG_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

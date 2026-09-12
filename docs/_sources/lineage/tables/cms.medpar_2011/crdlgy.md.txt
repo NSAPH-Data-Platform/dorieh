@@ -1,0 +1,22 @@
+# Column cms.medpar_2011.CRDLGY
+
+## Overview of column CRDLGY in table cms.medpar_2011 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2011](../cms.medpar_2011.md)           |
+| Qualified name                | cms.medpar_2011.CRDLGY  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/cardiology-charge-amount](https://resdac.org/cms-data/variables/cardiology-charge-amount) |
+
+
+Cardiology services and ECG(s) provided during beneficiarys stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | CRDLGY_CHRG_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

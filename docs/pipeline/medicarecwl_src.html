@@ -1,25 +1,30 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>medicare.cwl &mdash; Dorieh Data Platform 0.0.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+  <title>medicare.cwl &mdash; Dorieh Data Platform 0.5.1.post2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/dorieh.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/dorieh.css?v=1a3f250d" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=ad30b421"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -30,6 +35,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
+
 
           
           
@@ -43,20 +49,457 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
+<div class="dorieh-citeas">
+  <button type="button" class="dorieh-citeas-btn"
+          onclick="document.getElementById('dorieh-citeas-pop').classList.toggle('open')">
+    &#128214; Cite as
+  </button>
+  <div id="dorieh-citeas-pop" class="dorieh-citeas-pop">
+    <p>Bouzinier,&nbsp;M., Etin,&nbsp;D., Khoshnevis,&nbsp;N.,
+       Shad,&nbsp;M., Yockel,&nbsp;S. (2026).
+       <em>Research Data that Can be Trusted.</em>
+       SpringerBriefs in Computer Science. Springer.
+       <a href="https://doi.org/10.1007/978-3-032-21032-6">doi:10.1007/978-3-032-21032-6</a></p>
+    <button type="button" class="dorieh-citeas-copy"
+            onclick="navigator.clipboard.writeText(
+              'Bouzinier, M., Etin, D., Khoshnevis, N., Shad, M., Yockel, S. (2026). ' +
+              'Research Data that Can be Trusted. SpringerBriefs in Computer Science. ' +
+              'Springer. https://doi.org/10.1007/978-3-032-21032-6'
+            ).then(() => { this.textContent = 'Copied!'; });">
+      Copy citation
+    </button>
+    <a class="dorieh-citeas-more" href="../citing.html">More ways to cite &rarr;</a>
+  </div>
+</div>
+
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../rationale.html">What is Data Platform</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../DBT.html">Database Testing Framework</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../AppPipelineGenerator.html">Executing containerized apps</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../home.html#introduction-to-data-platform">Introduction to Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../home.html#building-blocks">Building Blocks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../home.html#dorieh-utilities">Dorieh Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../home.html#core-platform">Core Platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../home.html#dorieh-gis-utilities">Dorieh GIS Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../home.html#dorieh-documentation-utilities">Dorieh Documentation Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../home.html#data-processing-and-loading-pipelines">Data Processing and Loading Pipelines</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../home.html#working-with-nsaph-containerized-apps">Working with NSAPH containerized apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../home.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../home.html#using-the-database">Using the Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../home.html#terms-and-acronyms">Terms and Acronyms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../home.html#building-platform-documentation">Building Platform documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../home.html#next-steps">Next steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rationale.html">Why a data platform</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../rationale.html#why-we-need-a-data-platform">Why we need a Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rationale.html#architecture">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rationale.html#supported-programming-languages-and-tools">Supported Programming Languages and Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rationale.html#development-mode">Development Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rationale.html#where-it-can-be-deployed">Where it can be deployed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rationale.html#what-makes-dorieh-different">What makes Dorieh different</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts.html">The Dorieh approach</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../concepts.html#two-languages-one-pipeline">Two languages, one pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts.html#medallion-architecture-as-dorieh-implements-it">Medallion architecture as Dorieh implements it</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts.html#dataset-operators-and-field-construction-operators">Dataset operators and field construction operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts.html#families-of-field-transformations">Families of field transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts.html#disambiguation-rules">Disambiguation rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts.html#validation-and-journaling">Validation and journaling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts.html#fine-grained-lineage">Fine-grained lineage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts.html#where-each-concept-lives">Where each concept lives</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../about-the-book.html">The companion book</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../about-the-book.html#bibliographic-information">Bibliographic information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../about-the-book.html#chapter-to-documentation-map">Chapter-to-documentation map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../about-the-book.html#using-this-documentation-without-the-book">Using this documentation without the book</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../citing.html">Citing Dorieh</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../citing.html#preferred-citation-the-book">Preferred citation: the book</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../citing.html#citing-the-software-itself">Citing the software itself</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../citing.html#citing-the-tutorials">Citing the tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../citing.html#citing-the-synthetic-dataset">Citing the synthetic dataset</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Learning paths</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../paths/index.html">Choose your path</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../paths/researcher.html">Researchers and analysts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../paths/researcher.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../paths/researcher.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../paths/developer.html">Pipeline developers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../paths/developer.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../paths/developer.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../paths/operator.html">Platform operators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../paths/operator.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../paths/operator.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../paths/book-reader.html">Readers of the book</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../paths/book-reader.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../paths/book-reader.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../paths/auditor.html">Reviewers and auditors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../paths/auditor.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../paths/auditor.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data domains and pipelines</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../domains.html">Data Domains</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cms.html">Health</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../health_data_overview.html">Health Data in Dorieh (Medicare and Medicaid)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Medicare.html">Medicare: Building a Data Warehouse from ResDac Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Medicaid.html">Medicaid: Building a Data Warehouse from ResDac Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../health_seealso.html">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../climate.html">Climate</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../climate.html#what-is-gridmet">What is gridMET?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../climate.html#using-command-line-gridmet-utility">Using command line gridMET utility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../climate.html#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../climate.html#python-modules">Python modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../climate.html#cwl-pipelines-and-tools">CWL pipelines and tools</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../exposures.html">Exposure (PM2.5, WashU)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../exposures.html#python-packages">Python packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../exposures.html#cwl-workflows">CWL Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../epa.html">Environmental Protection Agency (EPA) data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../epa.html#package-contents">Package Contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../epa.html#querying-data">Querying Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../census.html">Demographics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../census_about.html">About</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../census_env_set_up.html">Setting Up Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../census_quick_start.html">Quick Start</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../census_yaml.html">Census Variable File Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../census_cached_data.html">Stored Data Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../census_modules.html">Modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../census_glossary.html">Glossary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../census_start_guide.html">Working with the <code class="docutils literal notranslate"><span class="pre">census</span></code> Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_assemble.html">census_assemble.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_assemblecwl_src.html">census_assemble.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_density.html">census_density.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_densitycwl_src.html">census_density.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_ingest.html">census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_ingest_1.html">Sub-workflow <em>store</em> from census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_ingest_1cwl_src.html">CWL sub-workflow for step <u><em>store</em></u> of workflow census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_ingestcwl_src.html">census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_interpolate.html">census_interpolate.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_interpolatecwl_src.html">census_interpolate.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_qc.html">census_qc.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_qccwl_src.html">census_qc.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_workflow.html">census_workflow.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_workflowcwl_src.html">census_workflow.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_write.html">census_write.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_writecwl_src.html">census_write.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../census.html#indices-and-tables">Indices and tables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pipelines.html">Data Processing Pipelines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pipelines.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pipelines.html#workflow-description-languages">Workflow Description Languages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pipelines.html#running-workflows">Running Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../pipelines.html#tested-runners">Tested Runners</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pipelines.html#providing-parameters-to-the-pipelines">Providing Parameters to the Pipelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pipelines.html#using-toil">Using Toil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pipelines.html#troubleshooting-workflows-run-by-toil">Troubleshooting Workflows Run by Toil</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../pipelines.html#testing-workflows">Testing Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pipelines.html#published-and-tested-workflows">Published and Tested Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gridmet.html">Pipeline to aggregate data from Climatology Lab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wustl.html">Pipeline to ingest Monthly Pollution data downloaded from WashU Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pm25_yearly_download.html">Pipeline to aggregate data in NetCDF format over given geographies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aqs.html">Full EPA AQS Processing Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="airnow.html">Full EPA AirNow Processing Pipeline (including downloading shapefiles)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="medicare.html">Medicare data ingestion and processing pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="medicaid.html">Full Medicaid Processing Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_workflow.html">census_workflow.cwl</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../pipelines.html#developing-new-workflows">Developing New Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../pipelines.html#combining-included-cwl-tools-into-a-new-workflow">Combining Included CWL Tools into a New Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pipelines.html#ordering-database-steps-with-depends-on">Ordering Database Steps with <code class="docutils literal notranslate"><span class="pre">depends_on</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pipelines.html#wrapping-python-modules-as-cwl-tools">Wrapping Python Modules as CWL Tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials and worked examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials.html">Dorieh Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/climate/index.html">Climate tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/climate/building-climate-pipeline.html">Part 1. Building the pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/climate/documenting-a-workflow.html">Part 2. Documenting the workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/climate/constructing-lineage.html">Part 3. Data dictionaries and lineage graphs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/medicare/building-medicare-pipeline.html">Medicare claims pipeline tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/medicare/building-medicare-pipeline.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/medicare/building-medicare-pipeline.html#designing-the-pipeline">Designing the pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/medicare/building-medicare-pipeline.html#from-fts-documents-to-machine-readable-schemas">From FTS documents to machine-readable schemas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/medicare/building-medicare-pipeline.html#bronze-one-table-per-source-file">Bronze: one table per source file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/medicare/building-medicare-pipeline.html#silver-harmonize-disambiguate-validate">Silver: harmonize, disambiguate, validate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/medicare/building-medicare-pipeline.html#gold-the-qc-aggregates">Gold: the QC aggregates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/medicare/building-medicare-pipeline.html#orchestration-five-steps-in-medicare-cwl">Orchestration: five steps in medicare.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/medicare/building-medicare-pipeline.html#documentation-and-lineage">Documentation and lineage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/medicare/building-medicare-pipeline.html#running-it-yourself">Running it yourself</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Example-climate-workflow.html">A CWL workflow example: aggregating a climate variable</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Example-climate-workflow.html#what-the-sample-workflow-is-doing-aggregating-a-climate-variable">What the sample workflow is doing: aggregating a climate variable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Example-climate-workflow.html#prepare-to-run-a-workflow">Prepare to run a workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Example-climate-workflow.html#running-the-workflow-in-python-virtual-environment">Running the workflow in Python virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Example-climate-workflow.html#running-the-workflow-using-docker">Running the workflow using Docker</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../medicare-example.html">Medicare pipeline with publicly available synthetic data (PostgreSQL + Superset)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../medicare-example.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../medicare-example.html#step-1-download-synthetic-sample-data">Step 1 — Download synthetic sample data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../medicare-example.html#step-3-optional-explore-results-in-apache-superset">Step 3 (Optional) — Explore results in Apache Superset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../medicare-example.html#what-the-pipeline-produces">What the pipeline produces</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#related-how-to-guides">Related how-to guides</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data dictionaries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dictionaries.html">Data Dictionaries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MedicareLineage.html">Medicare data warehouse</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../lineage/medicare.dot.html">Table Lineage Diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lineage/table-list.html">Alphabetic list of all tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lineage/column-list.html">Alphabetic list of all columns in all tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../members/domain_dictionary.html">The Data Dictionary Generation tool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data modeling DSL reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Datamodels.html">Data Modeling for Dorieh Data Platform</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../DataModellingExtensions.html">Data Modeling Extensions: Federated Views Across Years</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../DataModellingExtensions.html#combining-multiple-sources-and-optional-columns">Combining multiple sources and optional columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DataModellingExtensions.html#exclude">Exclude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DataModellingExtensions.html#cast">Cast</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DataModellingExtensions.html#validating-consistency-of-data-across-tables">Validating consistency of data across tables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Datamodels.html#introduction-to-data-modeling-for-dorieh-data-platform">Introduction to data modeling for Dorieh Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Datamodels.html#domain">Domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Datamodels.html#table">Table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Datamodels.html#create-statement">Create statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Datamodels.html#invalid-record">Invalid Record</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Datamodels.html#column">Column</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Datamodels.html#source">Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Datamodels.html#index">Index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Datamodels.html#generated-columns">Generated columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Datamodels.html#computed-columns">Computed columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Datamodels.html#file-columns">File columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Datamodels.html#record-columns">Record columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Datamodels.html#identifier-columns-and-the-identifiers-token">Identifier columns and the <code class="docutils literal notranslate"><span class="pre">{identifiers}</span></code> token</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Datamodels.html#transposing-columns">Transposing columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Datamodels.html#wildcards">Wildcards</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Datamodels.html#multi-column-indices">Multi-column indices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Datamodels.html#indexing-policies">Indexing policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Datamodels.html#linking-with-nomenclature">Linking with nomenclature</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Datamodels.html#us-states">US States</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Datamodels.html#county-codes">County codes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Datamodels.html#ingesting-data">Ingesting data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Datamodels.html#where-to-go-next">Where to go next</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Python Packages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../utils.html">General purpose utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../utils.html#overview-of-utilities">Overview of Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils.html#current-development">Current Development</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils.html#todo">TODO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils.html#documentation-indices">Documentation Indices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../CoreLibrary.html">Data platform components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../CoreLibrary.html#package-dorieh-platform">Package dorieh.platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CoreLibrary.html#package-dorieh-platform-data-model">Package dorieh.platform.data_model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CoreLibrary.html#package-dorieh-platform-loader">Package dorieh.platform.loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CoreLibrary.html#package-dorieh-platform-requests">Package dorieh.platform.requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CoreLibrary.html#package-dorieh-platform-utils">Package dorieh.platform.utils</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../gis.html">GIS utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../gis.html#gis-library-overview">GIS Library Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gis.html#shape-files-downloader">Shape files Downloader</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../CMSLibrary.html">Health data manipulation tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../CMSLibrary.html#package-cms">Package cms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CMSLibrary.html#package-dorieh-cms-tools">Package dorieh.cms.tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CMSLibrary.html#additional-details">Additional details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../rasters.html">Raster data tools (climate and exposure)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../rasters.html#general-tools-for-raster-files">General tools for raster files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rasters.html#specialized-tools-for-working-with-climate-data">Specialized tools for working with climate data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rasters.html#specialized-tools-for-working-with-exposure-data">Specialized tools for working with exposure data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guts.html">Data Platform Internals</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../platform.html">Dorieh Core Data Platform</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../DBConnections.html">Managing database connections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DataLoader.html">Dorieh Data Loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ProjectLoader.html">Project (Directory) Loading Utility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../TerritorialCodes.html">Mapping between different territorial codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../SQLDocumentation.html">SQL Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../platform.html#core-platform-overview">Core platform overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../platform.html#tool-examples">Tool Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../platform.html#project-structure">Project Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../platform.html#documentation-indices">Documentation Indices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment.html">Dorieh Deployment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../deployment.html#using-docker">Using Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment.html#using-python-virtual-environment">Using Python Virtual Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment.html#using-conda-package-manager">Using Conda Package Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment.html#using-toil-with-docker-requirement">Using Toil with Docker requirement</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../capabilities.html">Platform capabilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../SampleQuery.html">How to query the database</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../SampleQuery.html#setup">Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../SampleQuery.html#create-connection-definition-file">Create connection definition file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../SampleQuery.html#executing-the-query">Executing the query</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../SampleQuery.html#using-explain-to-optimize-queries">Using EXPLAIN to optimize queries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../QueringMedicaid.html">Querying Medicaid Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../QueringMedicaid.html#querying-diagnoses">Querying diagnoses</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../MonitoringDB.html">Monitoring database activity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../MonitoringDB.html#module-monitor">Module monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../MonitoringDB.html#cli-usage-for-monitor">CLI Usage for monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../MonitoringDB.html#using-as-api">Using as API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../UsingHLL.html">Approximate distinct counting with HLL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UserRequests.html">Handling user requests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../UserRequests.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../UserRequests.html#structure">Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../example_request_yaml.html">Example user request</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Operational guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../DBT.html">Database Testing Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../members/create_test.html">Utility to generate test queries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../members/dbt_runner.html">Test runner: Utility to run generated tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../members/gen_dbt_cwl.html">The gen_dbt_cwl Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../members/create_test.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../members/create_test.html#module-dorieh.platform.dbt.create_test">Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../members/dbt_runner.html">Test runner: Utility to run generated tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../members/dbt_runner.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../members/dbt_runner.html#module-dorieh.platform.dbt.dbt_runner">Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../members/gen_dbt_cwl.html">The gen_dbt_cwl Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../members/gen_dbt_cwl.html#dorieh.platform.dbt.gen_dbt_cwl.CWLTestGenerator"><code class="docutils literal notranslate"><span class="pre">CWLTestGenerator</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../TestingWorkflows.html">Testing bundled workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../TestingWorkflows.html#introduction-to-testing-and-prerequisites">Introduction to testing and prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../TestingWorkflows.html#before-running-any-test">Before running any test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../TestingWorkflows.html#testing-aqs-workflow">Testing AQS workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../TestingWorkflows.html#testing-airnow-workflow">Testing Airnow workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../TestingWorkflows.html#testing-climate-workflow">Testing Climate workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../TestingWorkflows.html#testing-exposure-workflow">Testing Exposure workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../TestingWorkflows.html#testing-medicare-workflow">Testing Medicare workflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../adding_data.html">Adding more data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../adding_data.html#what-data-are-you-adding">What data are you adding?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../adding_data.html#data-modeling-vs-data-introspection">Data modeling vs data introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../adding_data.html#adding-new-data-domain">Adding new data domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../adding_data.html#creating-new-single-table">Creating new single table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../adding_data.html#adding-a-table-from-a-remote-data-source">Adding a table from a remote data source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../adding_data.html#adding-data-to-existing-table">Adding data to existing table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../adding_data.html#automatically-ingesting-multiple-files-from-a-file-system">Automatically ingesting multiple files from a file system</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../AppPipelineGenerator.html">Executing containerized apps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../AppPipelineGenerator.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../AppPipelineGenerator.html#prerequisites">Prerequisites</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../AppPipelineGenerator.html#docker-or-python-virtual-environment">Docker or Python virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../AppPipelineGenerator.html#setup-dbms-server">Setup DBMS Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../AppPipelineGenerator.html#define-connection">Define connection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../AppPipelineGenerator.html#using-pipeline-generator">Using pipeline generator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../AppPipelineGenerator.html#generate-pipeline-and-metadata">Generate pipeline and metadata</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../AppPipelineGenerator.html#execute-generated-pipeline">Execute generated pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../AppPipelineGenerator.html#appendix-1-metadata-description">Appendix 1: Metadata description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../AppPipelineGenerator.html#file-app-config-yaml">File app.config.yaml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../AppPipelineGenerator.html#file-metadata-yml">File metadata.yml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../AppPipelineGenerator.html#file-dorieh-metadata-yaml">File dorieh-metadata.yaml</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Terms and Acronyms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../glossary.html#concepts">Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../glossary.html#acronyms">Acronyms</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../docindices.html">Indices</a></li>
 </ul>
 
@@ -85,7 +528,7 @@
            <div itemprop="articleBody">
              
   <section id="medicare-cwl">
-<h1>medicare.cwl<a class="headerlink" href="#medicare-cwl" title="Permalink to this heading"></a></h1>
+<h1>medicare.cwl<a class="headerlink" href="#medicare-cwl" title="Link to this heading"></a></h1>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1">#!/usr/bin/env cwl-runner</span>
 <span class="linenos">  2</span><span class="c1">### Medicare data ingestion and processing pipeline</span>
 <span class="linenos">  3</span><span class="c1">#  Copyright (c) 2022. Harvard University</span>
@@ -114,348 +557,330 @@
 <span class="linenos"> 26</span><span class="w">  </span><span class="nt">SubworkflowFeatureRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
 <span class="linenos"> 27</span><span class="w">  </span><span class="nt">StepInputExpressionRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
 <span class="linenos"> 28</span><span class="w">  </span><span class="nt">InlineJavascriptRequirement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
-<span class="linenos"> 29</span>
-<span class="linenos"> 30</span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="linenos"> 31</span><span class="w">  </span><span class="no">This workflow processes raw Medicare data. We assume that the data</span>
-<span class="linenos"> 32</span><span class="w">  </span><span class="no">for each year is in a separate set of SAS DAT files accompanied by FTS.</span>
-<span class="linenos"> 33</span><span class="w">  </span><span class="no">For each year we expect at least</span>
-<span class="linenos"> 34</span><span class="w">  </span><span class="no">two tables: patient summary and inpatient admissions.</span>
-<span class="linenos"> 35</span>
-<span class="linenos"> 36</span><span class="w">  </span><span class="no">&gt; NB: Input files must be organized within the dicrectory given in</span>
-<span class="linenos"> 37</span><span class="w">  </span><span class="no">the `input` parameter in a certain way. Immediate parent folder for</span>
-<span class="linenos"> 38</span><span class="w">  </span><span class="no">each file should be named as the year of the data it contains. Example:</span>
-<span class="linenos"> 39</span>
-<span class="linenos"> 40</span><span class="w">      </span><span class="no">data/</span>
-<span class="linenos"> 41</span><span class="w">        </span><span class="no">a/</span>
-<span class="linenos"> 42</span><span class="w">          </span><span class="no">b/</span>
-<span class="linenos"> 43</span><span class="w">            </span><span class="no">2011/</span>
-<span class="linenos"> 44</span><span class="w">            </span><span class="no">2013/</span>
-<span class="linenos"> 45</span><span class="w">          </span><span class="no">d/</span>
-<span class="linenos"> 46</span><span class="w">            </span><span class="no">2017/</span>
-<span class="linenos"> 47</span>
-<span class="linenos"> 48</span><span class="w">  </span><span class="no">See [](../Medicare) for data processing details.</span>
+<span class="linenos"> 29</span><span class="w">  </span><span class="nt">NetworkAccess</span><span class="p">:</span>
+<span class="linenos"> 30</span><span class="w">    </span><span class="nt">networkAccess</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="linenos"> 31</span>
+<span class="linenos"> 32</span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="linenos"> 33</span><span class="w">  </span><span class="no">This workflow processes raw Medicare data. We assume that the data</span>
+<span class="linenos"> 34</span><span class="w">  </span><span class="no">for each year is in a separate set of SAS DAT files accompanied by FTS.</span>
+<span class="linenos"> 35</span><span class="w">  </span><span class="no">For each year we expect at least</span>
+<span class="linenos"> 36</span><span class="w">  </span><span class="no">two tables: patient summary and inpatient admissions.</span>
+<span class="linenos"> 37</span>
+<span class="linenos"> 38</span><span class="w">  </span><span class="no">&gt; NB: Input files must be organized within the dicrectory given in</span>
+<span class="linenos"> 39</span><span class="w">  </span><span class="no">the `input` parameter in a certain way. Immediate parent folder for</span>
+<span class="linenos"> 40</span><span class="w">  </span><span class="no">each file should be named as the year of the data it contains. Example:</span>
+<span class="linenos"> 41</span>
+<span class="linenos"> 42</span><span class="w">      </span><span class="no">data/</span>
+<span class="linenos"> 43</span><span class="w">        </span><span class="no">a/</span>
+<span class="linenos"> 44</span><span class="w">          </span><span class="no">b/</span>
+<span class="linenos"> 45</span><span class="w">            </span><span class="no">2011/</span>
+<span class="linenos"> 46</span><span class="w">            </span><span class="no">2013/</span>
+<span class="linenos"> 47</span><span class="w">          </span><span class="no">d/</span>
+<span class="linenos"> 48</span><span class="w">            </span><span class="no">2017/</span>
 <span class="linenos"> 49</span>
-<span class="linenos"> 50</span><span class="nt">inputs</span><span class="p">:</span>
-<span class="linenos"> 51</span><span class="w">  </span><span class="nt">database</span><span class="p">:</span>
-<span class="linenos"> 52</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos"> 53</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Path to database connection file, usually database.ini</span>
-<span class="linenos"> 54</span><span class="w">  </span><span class="nt">connection_name</span><span class="p">:</span>
-<span class="linenos"> 55</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="linenos"> 56</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The name of the section in the database.ini file</span>
-<span class="linenos"> 57</span><span class="w">  </span><span class="nt">input</span><span class="p">:</span>
-<span class="linenos"> 58</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Directory</span>
-<span class="linenos"> 59</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="linenos"> 60</span><span class="w">      </span><span class="no">A path to directory, containing folders with unpacked CMS</span>
-<span class="linenos"> 61</span><span class="w">      </span><span class="no">files. The tool will recursively look for data files</span>
-<span class="linenos"> 62</span><span class="w">      </span><span class="no">according to provided pattern. Immediate parent folder for</span>
-<span class="linenos"> 63</span><span class="w">      </span><span class="no">each file should be named as the year of the data it contains, e.g.</span>
-<span class="linenos"> 64</span><span class="w">      </span><span class="no">a/b/c/2017/mbsf_abcd_xyzacdfrtwe_request12345.fts</span>
-<span class="linenos"> 65</span>
-<span class="linenos"> 66</span><span class="nt">steps</span><span class="p">:</span>
-<span class="linenos"> 67</span><span class="w">  </span><span class="nt">initdb</span><span class="p">:</span>
-<span class="linenos"> 68</span><span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">initdb.cwl</span>
-<span class="linenos"> 69</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ensure that database utilities are at their latest version</span>
-<span class="linenos"> 70</span><span class="w">    </span><span class="nt">in</span><span class="p">:</span>
-<span class="linenos"> 71</span><span class="w">      </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
-<span class="linenos"> 72</span><span class="w">      </span><span class="nt">connection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection_name</span>
-<span class="linenos"> 73</span><span class="w">    </span><span class="nt">out</span><span class="p">:</span>
-<span class="linenos"> 74</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">log</span>
-<span class="linenos"> 75</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">err</span>
-<span class="linenos"> 76</span>
-<span class="linenos"> 77</span><span class="w">  </span><span class="nt">load_raw_data</span><span class="p">:</span>
-<span class="linenos"> 78</span><span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_raw_medicare.cwl</span>
-<span class="linenos"> 79</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Load raw CMS Medicare data into the database</span>
-<span class="linenos"> 80</span><span class="w">    </span><span class="nt">in</span><span class="p">:</span>
-<span class="linenos"> 81</span><span class="w">      </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
-<span class="linenos"> 82</span><span class="w">      </span><span class="nt">connection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection_name</span>
-<span class="linenos"> 83</span><span class="w">      </span><span class="nt">depends_on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">initdb/log</span>
-<span class="linenos"> 84</span><span class="w">      </span><span class="nt">input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input</span>
-<span class="linenos"> 85</span><span class="w">    </span><span class="nt">out</span><span class="p">:</span>
-<span class="linenos"> 86</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">log</span>
-<span class="linenos"> 87</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">registry</span>
-<span class="linenos"> 88</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">err</span>
-<span class="linenos"> 89</span>
-<span class="linenos"> 90</span><span class="w">  </span><span class="nt">enrollments</span><span class="p">:</span>
-<span class="linenos"> 91</span><span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">medicare_beneficiaries.cwl</span>
-<span class="linenos"> 92</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span>
-<span class="linenos"> 93</span><span class="w">      </span><span class="no">Process beneficiaries enrollment data</span>
-<span class="linenos"> 94</span><span class="w">    </span><span class="nt">in</span><span class="p">:</span>
-<span class="linenos"> 95</span><span class="w">      </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
-<span class="linenos"> 96</span><span class="w">      </span><span class="nt">connection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection_name</span>
-<span class="linenos"> 97</span><span class="w">      </span><span class="nt">depends_on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_raw_data/registry</span>
-<span class="linenos"> 98</span><span class="w">    </span><span class="nt">out</span><span class="p">:</span>
-<span class="linenos"> 99</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">d_create_log</span>
-<span class="linenos">100</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">d_index_log</span>
-<span class="linenos">101</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">d_vacuum_log</span>
-<span class="linenos">102</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">d_create_err</span>
-<span class="linenos">103</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">d_index_err</span>
-<span class="linenos">104</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">d_vacuum_err</span>
-<span class="linenos">105</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ps_create_log</span>
-<span class="linenos">106</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ps_create_err</span>
-<span class="linenos">107</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ps2_create_log</span>
-<span class="linenos">108</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ps2_create_err</span>
-<span class="linenos">109</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bene_view_log</span>
-<span class="linenos">110</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bene_view_err</span>
-<span class="linenos">111</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bene_table_create_log</span>
-<span class="linenos">112</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bene_table_index_log</span>
-<span class="linenos">113</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bene_table_vacuum_log</span>
-<span class="linenos">114</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bene_table_create_err</span>
-<span class="linenos">115</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bene_table_index_err</span>
-<span class="linenos">116</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bene_table_vacuum_err</span>
-<span class="linenos">117</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrlm_view_log</span>
-<span class="linenos">118</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrlm_view_err</span>
-<span class="linenos">119</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrlm_table_create_log</span>
-<span class="linenos">120</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrlm_table_index_log</span>
-<span class="linenos">121</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrlm_table_vacuum_log</span>
-<span class="linenos">122</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrlm_table_create_err</span>
-<span class="linenos">123</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrlm_table_index_err</span>
-<span class="linenos">124</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrlm_table_vacuum_err</span>
-<span class="linenos">125</span>
-<span class="linenos">126</span><span class="w">  </span><span class="nt">admissions</span><span class="p">:</span>
-<span class="linenos">127</span><span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">medicare_admissions.cwl</span>
-<span class="linenos">128</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Process medicare inpatient admissions (aka Medpar) data</span>
-<span class="linenos">129</span><span class="w">    </span><span class="nt">in</span><span class="p">:</span>
-<span class="linenos">130</span><span class="w">      </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
-<span class="linenos">131</span><span class="w">      </span><span class="nt">connection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection_name</span>
-<span class="linenos">132</span><span class="w">      </span><span class="nt">depends_on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/enrlm_table_vacuum_log</span>
-<span class="linenos">133</span><span class="w">    </span><span class="nt">out</span><span class="p">:</span>
-<span class="linenos">134</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ip_create_log</span>
-<span class="linenos">135</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ip_create_err</span>
-<span class="linenos">136</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">adm_create_log</span>
-<span class="linenos">137</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">adm_create_err</span>
-<span class="linenos">138</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">adm_populate_log</span>
-<span class="linenos">139</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">adm_populate_err</span>
-<span class="linenos">140</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">adm_index_log</span>
-<span class="linenos">141</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">adm_index_err</span>
-<span class="linenos">142</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">adm_vacuum_log</span>
-<span class="linenos">143</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">adm_vacuum_err</span>
-<span class="linenos">144</span>
-<span class="linenos">145</span>
-<span class="linenos">146</span><span class="w">  </span><span class="nt">qc</span><span class="p">:</span>
-<span class="linenos">147</span><span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">medicare_qc.cwl</span>
-<span class="linenos">148</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Build QC Tables</span>
-<span class="linenos">149</span><span class="w">    </span><span class="nt">in</span><span class="p">:</span>
-<span class="linenos">150</span><span class="w">      </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
-<span class="linenos">151</span><span class="w">      </span><span class="nt">connection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection_name</span>
-<span class="linenos">152</span><span class="w">      </span><span class="nt">depends_on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admissions/adm_vacuum_log</span>
-<span class="linenos">153</span><span class="w">    </span><span class="nt">out</span><span class="p">:</span>
-<span class="linenos">154</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ev_create_log</span>
-<span class="linenos">155</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ev_create_err</span>
-<span class="linenos">156</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">av_create_log</span>
-<span class="linenos">157</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">av_create_err</span>
-<span class="linenos">158</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollmen343_create_log</span>
-<span class="linenos">159</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollmen343_index_log</span>
-<span class="linenos">160</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollmen343_vacuum_log</span>
-<span class="linenos">161</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollmen343_create_err</span>
-<span class="linenos">162</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollmen343_index_err</span>
-<span class="linenos">163</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollmen343_vacuum_err</span>
-<span class="linenos">164</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admission697_create_log</span>
-<span class="linenos">165</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admission697_index_log</span>
-<span class="linenos">166</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admission697_vacuum_log</span>
-<span class="linenos">167</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admission697_create_err</span>
-<span class="linenos">168</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admission697_index_err</span>
-<span class="linenos">169</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admission697_vacuum_err</span>
-<span class="linenos">170</span>
-<span class="linenos">171</span><span class="w">  </span><span class="nt">grant</span><span class="p">:</span>
-<span class="linenos">172</span><span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">alter_database.cwl</span>
-<span class="linenos">173</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="linenos">174</span><span class="w">      </span><span class="no">Grants read access to the members of NSAPH group for newly created</span>
-<span class="linenos">175</span><span class="w">      </span><span class="no">or updated tables</span>
-<span class="linenos">176</span><span class="w">    </span><span class="nt">in</span><span class="p">:</span>
-<span class="linenos">177</span><span class="w">      </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
-<span class="linenos">178</span><span class="w">      </span><span class="nt">connection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection_name</span>
-<span class="linenos">179</span><span class="w">      </span><span class="nt">depends_on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/admission697_vacuum_log</span>
-<span class="linenos">180</span><span class="w">    </span><span class="nt">out</span><span class="p">:</span>
-<span class="linenos">181</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">log</span>
-<span class="linenos">182</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">err</span>
-<span class="linenos">183</span>
-<span class="linenos">184</span><span class="nt">outputs</span><span class="p">:</span>
-<span class="linenos">185</span><span class="w">  </span><span class="c1">## Generated by nsaph/util/cwl_collect_outputs.py from medicare_beneficiaries.cwl:</span>
-<span class="linenos">186</span><span class="w">    </span><span class="nt">initdb_log</span><span class="p">:</span>
+<span class="linenos"> 50</span><span class="w">  </span><span class="no">See [](../Medicare) for data processing details.</span>
+<span class="linenos"> 51</span>
+<span class="linenos"> 52</span><span class="nt">inputs</span><span class="p">:</span>
+<span class="linenos"> 53</span><span class="w">  </span><span class="nt">database</span><span class="p">:</span>
+<span class="linenos"> 54</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos"> 55</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Path to database connection file, usually database.ini</span>
+<span class="linenos"> 56</span><span class="w">  </span><span class="nt">connection_name</span><span class="p">:</span>
+<span class="linenos"> 57</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="linenos"> 58</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The name of the section in the database.ini file</span>
+<span class="linenos"> 59</span><span class="w">  </span><span class="nt">input</span><span class="p">:</span>
+<span class="linenos"> 60</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Directory</span>
+<span class="linenos"> 61</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="linenos"> 62</span><span class="w">      </span><span class="no">A path to directory, containing folders with unpacked CMS</span>
+<span class="linenos"> 63</span><span class="w">      </span><span class="no">files. The tool will recursively look for data files</span>
+<span class="linenos"> 64</span><span class="w">      </span><span class="no">according to provided pattern. Immediate parent folder for</span>
+<span class="linenos"> 65</span><span class="w">      </span><span class="no">each file should be named as the year of the data it contains, e.g.</span>
+<span class="linenos"> 66</span><span class="w">      </span><span class="no">a/b/c/2017/mbsf_abcd_xyzacdfrtwe_request12345.fts</span>
+<span class="linenos"> 67</span>
+<span class="linenos"> 68</span><span class="nt">steps</span><span class="p">:</span>
+<span class="linenos"> 69</span><span class="w">  </span><span class="nt">initdb</span><span class="p">:</span>
+<span class="linenos"> 70</span><span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">initdb.cwl</span>
+<span class="linenos"> 71</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ensure that database utilities are at their latest version</span>
+<span class="linenos"> 72</span><span class="w">    </span><span class="nt">in</span><span class="p">:</span>
+<span class="linenos"> 73</span><span class="w">      </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
+<span class="linenos"> 74</span><span class="w">      </span><span class="nt">connection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection_name</span>
+<span class="linenos"> 75</span><span class="w">    </span><span class="nt">out</span><span class="p">:</span>
+<span class="linenos"> 76</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">log</span>
+<span class="linenos"> 77</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">err</span>
+<span class="linenos"> 78</span>
+<span class="linenos"> 79</span><span class="w">  </span><span class="nt">load_raw_data</span><span class="p">:</span>
+<span class="linenos"> 80</span><span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_raw_medicare.cwl</span>
+<span class="linenos"> 81</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Load raw CMS Medicare data into the database</span>
+<span class="linenos"> 82</span><span class="w">    </span><span class="nt">in</span><span class="p">:</span>
+<span class="linenos"> 83</span><span class="w">      </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
+<span class="linenos"> 84</span><span class="w">      </span><span class="nt">connection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection_name</span>
+<span class="linenos"> 85</span><span class="w">      </span><span class="nt">depends_on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">initdb/log</span>
+<span class="linenos"> 86</span><span class="w">      </span><span class="nt">input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input</span>
+<span class="linenos"> 87</span><span class="w">    </span><span class="nt">out</span><span class="p">:</span>
+<span class="linenos"> 88</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">log</span>
+<span class="linenos"> 89</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">registry</span>
+<span class="linenos"> 90</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">err</span>
+<span class="linenos"> 91</span>
+<span class="linenos"> 92</span><span class="w">  </span><span class="nt">enrollments</span><span class="p">:</span>
+<span class="linenos"> 93</span><span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">medicare_beneficiaries.cwl</span>
+<span class="linenos"> 94</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span>
+<span class="linenos"> 95</span><span class="w">      </span><span class="no">Process beneficiaries enrollment data</span>
+<span class="linenos"> 96</span><span class="w">    </span><span class="nt">in</span><span class="p">:</span>
+<span class="linenos"> 97</span><span class="w">      </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
+<span class="linenos"> 98</span><span class="w">      </span><span class="nt">connection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection_name</span>
+<span class="linenos"> 99</span><span class="w">      </span><span class="nt">depends_on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_raw_data/registry</span>
+<span class="linenos">100</span><span class="w">    </span><span class="nt">out</span><span class="p">:</span>
+<span class="linenos">101</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">d_create_log</span>
+<span class="linenos">102</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">d_index_log</span>
+<span class="linenos">103</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">d_vacuum_log</span>
+<span class="linenos">104</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">d_create_err</span>
+<span class="linenos">105</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">d_index_err</span>
+<span class="linenos">106</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">d_vacuum_err</span>
+<span class="linenos">107</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ps_create_log</span>
+<span class="linenos">108</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ps_create_err</span>
+<span class="linenos">109</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ps2_create_log</span>
+<span class="linenos">110</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ps2_create_err</span>
+<span class="linenos">111</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bene_view_log</span>
+<span class="linenos">112</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bene_view_err</span>
+<span class="linenos">113</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bene_table_create_log</span>
+<span class="linenos">114</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bene_table_index_log</span>
+<span class="linenos">115</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bene_table_vacuum_log</span>
+<span class="linenos">116</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bene_table_create_err</span>
+<span class="linenos">117</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bene_table_index_err</span>
+<span class="linenos">118</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bene_table_vacuum_err</span>
+<span class="linenos">119</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrlm_view_log</span>
+<span class="linenos">120</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrlm_view_err</span>
+<span class="linenos">121</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrlm_table_create_log</span>
+<span class="linenos">122</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrlm_table_index_log</span>
+<span class="linenos">123</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrlm_table_vacuum_log</span>
+<span class="linenos">124</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrlm_table_create_err</span>
+<span class="linenos">125</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrlm_table_index_err</span>
+<span class="linenos">126</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrlm_table_vacuum_err</span>
+<span class="linenos">127</span>
+<span class="linenos">128</span><span class="w">  </span><span class="nt">admissions</span><span class="p">:</span>
+<span class="linenos">129</span><span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">medicare_admissions.cwl</span>
+<span class="linenos">130</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Process medicare inpatient admissions (aka Medpar) data</span>
+<span class="linenos">131</span><span class="w">    </span><span class="nt">in</span><span class="p">:</span>
+<span class="linenos">132</span><span class="w">      </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
+<span class="linenos">133</span><span class="w">      </span><span class="nt">connection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection_name</span>
+<span class="linenos">134</span><span class="w">      </span><span class="nt">depends_on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/enrlm_table_vacuum_log</span>
+<span class="linenos">135</span><span class="w">    </span><span class="nt">out</span><span class="p">:</span>
+<span class="linenos">136</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ip_create_log</span>
+<span class="linenos">137</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ip_create_err</span>
+<span class="linenos">138</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">adm_create_log</span>
+<span class="linenos">139</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">adm_create_err</span>
+<span class="linenos">140</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">adm_populate_log</span>
+<span class="linenos">141</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">adm_populate_err</span>
+<span class="linenos">142</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">adm_index_log</span>
+<span class="linenos">143</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">adm_index_err</span>
+<span class="linenos">144</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">adm_vacuum_log</span>
+<span class="linenos">145</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">adm_vacuum_err</span>
+<span class="linenos">146</span>
+<span class="linenos">147</span>
+<span class="linenos">148</span><span class="w">  </span><span class="nt">qc</span><span class="p">:</span>
+<span class="linenos">149</span><span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">medicare_qc.cwl</span>
+<span class="linenos">150</span><span class="w">    </span><span class="nt">doc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Build QC Tables</span>
+<span class="linenos">151</span><span class="w">    </span><span class="nt">in</span><span class="p">:</span>
+<span class="linenos">152</span><span class="w">      </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
+<span class="linenos">153</span><span class="w">      </span><span class="nt">connection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection_name</span>
+<span class="linenos">154</span><span class="w">      </span><span class="nt">depends_on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admissions/adm_vacuum_log</span>
+<span class="linenos">155</span><span class="w">    </span><span class="nt">out</span><span class="p">:</span>
+<span class="linenos">156</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ev_create_log</span>
+<span class="linenos">157</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ev_create_err</span>
+<span class="linenos">158</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">av_create_log</span>
+<span class="linenos">159</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">av_create_err</span>
+<span class="linenos">160</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollmen343_create_log</span>
+<span class="linenos">161</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollmen343_index_log</span>
+<span class="linenos">162</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollmen343_vacuum_log</span>
+<span class="linenos">163</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollmen343_create_err</span>
+<span class="linenos">164</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollmen343_index_err</span>
+<span class="linenos">165</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollmen343_vacuum_err</span>
+<span class="linenos">166</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admission697_create_log</span>
+<span class="linenos">167</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admission697_index_log</span>
+<span class="linenos">168</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admission697_vacuum_log</span>
+<span class="linenos">169</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admission697_create_err</span>
+<span class="linenos">170</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admission697_index_err</span>
+<span class="linenos">171</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admission697_vacuum_err</span>
+<span class="linenos">172</span>
+<span class="linenos">173</span>
+<span class="linenos">174</span><span class="nt">outputs</span><span class="p">:</span>
+<span class="linenos">175</span><span class="w">  </span><span class="c1">## Generated by nsaph/util/cwl_collect_outputs.py from medicare_beneficiaries.cwl:</span>
+<span class="linenos">176</span><span class="w">    </span><span class="nt">initdb_log</span><span class="p">:</span>
+<span class="linenos">177</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">178</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">initdb/log</span>
+<span class="linenos">179</span><span class="w">    </span><span class="nt">initdb_err</span><span class="p">:</span>
+<span class="linenos">180</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">181</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">initdb/err</span>
+<span class="linenos">182</span>
+<span class="linenos">183</span><span class="w">    </span><span class="nt">load_raw_log</span><span class="p">:</span>
+<span class="linenos">184</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">185</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_raw_data/log</span>
+<span class="linenos">186</span><span class="w">    </span><span class="nt">load_raw_err</span><span class="p">:</span>
 <span class="linenos">187</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">188</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">initdb/log</span>
-<span class="linenos">189</span><span class="w">    </span><span class="nt">initdb_err</span><span class="p">:</span>
+<span class="linenos">188</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_raw_data/err</span>
+<span class="linenos">189</span><span class="w">    </span><span class="nt">registry</span><span class="p">:</span>
 <span class="linenos">190</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">191</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">initdb/err</span>
+<span class="linenos">191</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_raw_data/registry</span>
 <span class="linenos">192</span>
-<span class="linenos">193</span><span class="w">    </span><span class="nt">load_raw_log</span><span class="p">:</span>
+<span class="linenos">193</span><span class="w">    </span><span class="nt">d_create_log</span><span class="p">:</span>
 <span class="linenos">194</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">195</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_raw_data/log</span>
-<span class="linenos">196</span><span class="w">    </span><span class="nt">load_raw_err</span><span class="p">:</span>
+<span class="linenos">195</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/d_create_log</span>
+<span class="linenos">196</span><span class="w">    </span><span class="nt">d_create_err</span><span class="p">:</span>
 <span class="linenos">197</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">198</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_raw_data/err</span>
-<span class="linenos">199</span><span class="w">    </span><span class="nt">registry</span><span class="p">:</span>
+<span class="linenos">198</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/d_create_err</span>
+<span class="linenos">199</span><span class="w">    </span><span class="nt">d_index_log</span><span class="p">:</span>
 <span class="linenos">200</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">201</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_raw_data/registry</span>
-<span class="linenos">202</span>
-<span class="linenos">203</span><span class="w">    </span><span class="nt">d_create_log</span><span class="p">:</span>
-<span class="linenos">204</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">205</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/d_create_log</span>
-<span class="linenos">206</span><span class="w">    </span><span class="nt">d_create_err</span><span class="p">:</span>
-<span class="linenos">207</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">208</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/d_create_err</span>
-<span class="linenos">209</span><span class="w">    </span><span class="nt">d_index_log</span><span class="p">:</span>
-<span class="linenos">210</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">211</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/d_index_log</span>
-<span class="linenos">212</span><span class="w">    </span><span class="nt">d_index_err</span><span class="p">:</span>
+<span class="linenos">201</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/d_index_log</span>
+<span class="linenos">202</span><span class="w">    </span><span class="nt">d_index_err</span><span class="p">:</span>
+<span class="linenos">203</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">204</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/d_index_err</span>
+<span class="linenos">205</span><span class="w">    </span><span class="nt">d_vacuum_log</span><span class="p">:</span>
+<span class="linenos">206</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">207</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/d_vacuum_log</span>
+<span class="linenos">208</span><span class="w">    </span><span class="nt">d_vacuum_err</span><span class="p">:</span>
+<span class="linenos">209</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">210</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/d_vacuum_err</span>
+<span class="linenos">211</span>
+<span class="linenos">212</span><span class="w">    </span><span class="nt">ps_create_log</span><span class="p">:</span>
 <span class="linenos">213</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">214</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/d_index_err</span>
-<span class="linenos">215</span><span class="w">    </span><span class="nt">d_vacuum_log</span><span class="p">:</span>
+<span class="linenos">214</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/ps_create_log</span>
+<span class="linenos">215</span><span class="w">    </span><span class="nt">ps_create_err</span><span class="p">:</span>
 <span class="linenos">216</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">217</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/d_vacuum_log</span>
-<span class="linenos">218</span><span class="w">    </span><span class="nt">d_vacuum_err</span><span class="p">:</span>
+<span class="linenos">217</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/ps_create_err</span>
+<span class="linenos">218</span><span class="w">    </span><span class="nt">ps2_create_log</span><span class="p">:</span>
 <span class="linenos">219</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">220</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/d_vacuum_err</span>
-<span class="linenos">221</span>
-<span class="linenos">222</span><span class="w">    </span><span class="nt">ps_create_log</span><span class="p">:</span>
-<span class="linenos">223</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">224</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/ps_create_log</span>
-<span class="linenos">225</span><span class="w">    </span><span class="nt">ps_create_err</span><span class="p">:</span>
-<span class="linenos">226</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">227</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/ps_create_err</span>
-<span class="linenos">228</span><span class="w">    </span><span class="nt">ps2_create_log</span><span class="p">:</span>
-<span class="linenos">229</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">230</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/ps2_create_log</span>
-<span class="linenos">231</span><span class="w">    </span><span class="nt">ps2_create_err</span><span class="p">:</span>
-<span class="linenos">232</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">233</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/ps2_create_err</span>
-<span class="linenos">234</span><span class="w">    </span><span class="nt">bene_view_log</span><span class="p">:</span>
-<span class="linenos">235</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">236</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/bene_view_log</span>
-<span class="linenos">237</span><span class="w">    </span><span class="nt">bene_view_err</span><span class="p">:</span>
-<span class="linenos">238</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">239</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/bene_view_err</span>
-<span class="linenos">240</span><span class="w">    </span><span class="nt">bene_table_create_log</span><span class="p">:</span>
-<span class="linenos">241</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">242</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/bene_table_create_log</span>
-<span class="linenos">243</span><span class="w">    </span><span class="nt">bene_table_index_log</span><span class="p">:</span>
-<span class="linenos">244</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">245</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/bene_table_index_log</span>
-<span class="linenos">246</span><span class="w">    </span><span class="nt">bene_table_vacuum_log</span><span class="p">:</span>
-<span class="linenos">247</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">248</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/bene_table_vacuum_log</span>
-<span class="linenos">249</span><span class="w">    </span><span class="nt">bene_table_create_err</span><span class="p">:</span>
-<span class="linenos">250</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">251</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/bene_table_create_err</span>
-<span class="linenos">252</span><span class="w">    </span><span class="nt">bene_table_index_err</span><span class="p">:</span>
-<span class="linenos">253</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">254</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/bene_table_index_err</span>
-<span class="linenos">255</span><span class="w">    </span><span class="nt">bene_table_vacuum_err</span><span class="p">:</span>
-<span class="linenos">256</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">257</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/bene_table_vacuum_err</span>
-<span class="linenos">258</span><span class="w">    </span><span class="nt">enrlm_view_log</span><span class="p">:</span>
-<span class="linenos">259</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">260</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/enrlm_view_log</span>
-<span class="linenos">261</span><span class="w">    </span><span class="nt">enrlm_view_err</span><span class="p">:</span>
-<span class="linenos">262</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">263</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/enrlm_view_err</span>
-<span class="linenos">264</span><span class="w">    </span><span class="nt">enrlm_table_create_log</span><span class="p">:</span>
-<span class="linenos">265</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">266</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/enrlm_table_create_log</span>
-<span class="linenos">267</span><span class="w">    </span><span class="nt">enrlm_table_index_log</span><span class="p">:</span>
-<span class="linenos">268</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">269</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/enrlm_table_index_log</span>
-<span class="linenos">270</span><span class="w">    </span><span class="nt">enrlm_table_vacuum_log</span><span class="p">:</span>
-<span class="linenos">271</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">272</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/enrlm_table_vacuum_log</span>
-<span class="linenos">273</span><span class="w">    </span><span class="nt">enrlm_table_create_err</span><span class="p">:</span>
+<span class="linenos">220</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/ps2_create_log</span>
+<span class="linenos">221</span><span class="w">    </span><span class="nt">ps2_create_err</span><span class="p">:</span>
+<span class="linenos">222</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">223</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/ps2_create_err</span>
+<span class="linenos">224</span><span class="w">    </span><span class="nt">bene_view_log</span><span class="p">:</span>
+<span class="linenos">225</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">226</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/bene_view_log</span>
+<span class="linenos">227</span><span class="w">    </span><span class="nt">bene_view_err</span><span class="p">:</span>
+<span class="linenos">228</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">229</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/bene_view_err</span>
+<span class="linenos">230</span><span class="w">    </span><span class="nt">bene_table_create_log</span><span class="p">:</span>
+<span class="linenos">231</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">232</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/bene_table_create_log</span>
+<span class="linenos">233</span><span class="w">    </span><span class="nt">bene_table_index_log</span><span class="p">:</span>
+<span class="linenos">234</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">235</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/bene_table_index_log</span>
+<span class="linenos">236</span><span class="w">    </span><span class="nt">bene_table_vacuum_log</span><span class="p">:</span>
+<span class="linenos">237</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">238</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/bene_table_vacuum_log</span>
+<span class="linenos">239</span><span class="w">    </span><span class="nt">bene_table_create_err</span><span class="p">:</span>
+<span class="linenos">240</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">241</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/bene_table_create_err</span>
+<span class="linenos">242</span><span class="w">    </span><span class="nt">bene_table_index_err</span><span class="p">:</span>
+<span class="linenos">243</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">244</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/bene_table_index_err</span>
+<span class="linenos">245</span><span class="w">    </span><span class="nt">bene_table_vacuum_err</span><span class="p">:</span>
+<span class="linenos">246</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">247</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/bene_table_vacuum_err</span>
+<span class="linenos">248</span><span class="w">    </span><span class="nt">enrlm_view_log</span><span class="p">:</span>
+<span class="linenos">249</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">250</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/enrlm_view_log</span>
+<span class="linenos">251</span><span class="w">    </span><span class="nt">enrlm_view_err</span><span class="p">:</span>
+<span class="linenos">252</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">253</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/enrlm_view_err</span>
+<span class="linenos">254</span><span class="w">    </span><span class="nt">enrlm_table_create_log</span><span class="p">:</span>
+<span class="linenos">255</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">256</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/enrlm_table_create_log</span>
+<span class="linenos">257</span><span class="w">    </span><span class="nt">enrlm_table_index_log</span><span class="p">:</span>
+<span class="linenos">258</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">259</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/enrlm_table_index_log</span>
+<span class="linenos">260</span><span class="w">    </span><span class="nt">enrlm_table_vacuum_log</span><span class="p">:</span>
+<span class="linenos">261</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">262</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/enrlm_table_vacuum_log</span>
+<span class="linenos">263</span><span class="w">    </span><span class="nt">enrlm_table_create_err</span><span class="p">:</span>
+<span class="linenos">264</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">265</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/enrlm_table_create_err</span>
+<span class="linenos">266</span><span class="w">    </span><span class="nt">enrlm_table_index_err</span><span class="p">:</span>
+<span class="linenos">267</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">268</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/enrlm_table_index_err</span>
+<span class="linenos">269</span><span class="w">    </span><span class="nt">enrlm_table_vacuum_err</span><span class="p">:</span>
+<span class="linenos">270</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">271</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/enrlm_table_vacuum_err</span>
+<span class="linenos">272</span><span class="w">  </span><span class="c1">## Generated by nsaph/util/cwl_collect_outputs.py from medicare_admissions.cwl:</span>
+<span class="linenos">273</span><span class="w">    </span><span class="nt">ip_create_log</span><span class="p">:</span>
 <span class="linenos">274</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">275</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/enrlm_table_create_err</span>
-<span class="linenos">276</span><span class="w">    </span><span class="nt">enrlm_table_index_err</span><span class="p">:</span>
+<span class="linenos">275</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admissions/ip_create_log</span>
+<span class="linenos">276</span><span class="w">    </span><span class="nt">ip_create_err</span><span class="p">:</span>
 <span class="linenos">277</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">278</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/enrlm_table_index_err</span>
-<span class="linenos">279</span><span class="w">    </span><span class="nt">enrlm_table_vacuum_err</span><span class="p">:</span>
+<span class="linenos">278</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admissions/ip_create_err</span>
+<span class="linenos">279</span><span class="w">    </span><span class="nt">adm_create_log</span><span class="p">:</span>
 <span class="linenos">280</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">281</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments/enrlm_table_vacuum_err</span>
-<span class="linenos">282</span><span class="w">  </span><span class="c1">## Generated by nsaph/util/cwl_collect_outputs.py from medicare_admissions.cwl:</span>
-<span class="linenos">283</span><span class="w">    </span><span class="nt">ip_create_log</span><span class="p">:</span>
-<span class="linenos">284</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">285</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admissions/ip_create_log</span>
-<span class="linenos">286</span><span class="w">    </span><span class="nt">ip_create_err</span><span class="p">:</span>
-<span class="linenos">287</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">288</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admissions/ip_create_err</span>
-<span class="linenos">289</span><span class="w">    </span><span class="nt">adm_create_log</span><span class="p">:</span>
-<span class="linenos">290</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">291</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admissions/adm_create_log</span>
-<span class="linenos">292</span><span class="w">    </span><span class="nt">adm_create_err</span><span class="p">:</span>
-<span class="linenos">293</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">294</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admissions/adm_create_err</span>
-<span class="linenos">295</span><span class="w">    </span><span class="nt">adm_populate_log</span><span class="p">:</span>
-<span class="linenos">296</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">297</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admissions/adm_populate_log</span>
-<span class="linenos">298</span><span class="w">    </span><span class="nt">adm_populate_err</span><span class="p">:</span>
-<span class="linenos">299</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">300</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admissions/adm_populate_err</span>
-<span class="linenos">301</span><span class="w">    </span><span class="nt">adm_index_log</span><span class="p">:</span>
-<span class="linenos">302</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">303</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admissions/adm_index_log</span>
-<span class="linenos">304</span><span class="w">    </span><span class="nt">adm_index_err</span><span class="p">:</span>
-<span class="linenos">305</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">306</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admissions/adm_index_err</span>
-<span class="linenos">307</span><span class="w">    </span><span class="nt">adm_vacuum_log</span><span class="p">:</span>
-<span class="linenos">308</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">309</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admissions/adm_vacuum_log</span>
-<span class="linenos">310</span><span class="w">    </span><span class="nt">adm_vacuum_err</span><span class="p">:</span>
-<span class="linenos">311</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">312</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admissions/adm_vacuum_err</span>
-<span class="linenos">313</span>
-<span class="linenos">314</span><span class="w">  </span><span class="c1">## Generated by nsaph/util/cwl_collect_outputs.py from medicare_qc.cwl:</span>
-<span class="linenos">315</span><span class="w">    </span><span class="nt">qc_ev_create_log</span><span class="p">:</span>
-<span class="linenos">316</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">317</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/ev_create_log</span>
-<span class="linenos">318</span><span class="w">    </span><span class="nt">qc_ev_create_err</span><span class="p">:</span>
-<span class="linenos">319</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">320</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/ev_create_err</span>
-<span class="linenos">321</span><span class="w">    </span><span class="nt">qc_av_create_log</span><span class="p">:</span>
-<span class="linenos">322</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">323</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/av_create_log</span>
-<span class="linenos">324</span><span class="w">    </span><span class="nt">qc_av_create_err</span><span class="p">:</span>
-<span class="linenos">325</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">326</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/av_create_err</span>
-<span class="linenos">327</span><span class="w">    </span><span class="nt">qc_enrollmen343_create_log</span><span class="p">:</span>
-<span class="linenos">328</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">329</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/enrollmen343_create_log</span>
-<span class="linenos">330</span><span class="w">    </span><span class="nt">qc_enrollmen343_index_log</span><span class="p">:</span>
-<span class="linenos">331</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">332</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/enrollmen343_index_log</span>
-<span class="linenos">333</span><span class="w">    </span><span class="nt">qc_enrollmen343_vacuum_log</span><span class="p">:</span>
-<span class="linenos">334</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">335</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/enrollmen343_vacuum_log</span>
-<span class="linenos">336</span><span class="w">    </span><span class="nt">qc_enrollmen343_create_err</span><span class="p">:</span>
-<span class="linenos">337</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">338</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/enrollmen343_create_err</span>
-<span class="linenos">339</span><span class="w">    </span><span class="nt">qc_enrollmen343_index_err</span><span class="p">:</span>
-<span class="linenos">340</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">341</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/enrollmen343_index_err</span>
-<span class="linenos">342</span><span class="w">    </span><span class="nt">qc_enrollmen343_vacuum_err</span><span class="p">:</span>
-<span class="linenos">343</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">344</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/enrollmen343_vacuum_err</span>
-<span class="linenos">345</span><span class="w">    </span><span class="nt">qc_admission697_create_log</span><span class="p">:</span>
-<span class="linenos">346</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">347</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/admission697_create_log</span>
-<span class="linenos">348</span><span class="w">    </span><span class="nt">qc_admission697_index_log</span><span class="p">:</span>
-<span class="linenos">349</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">350</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/admission697_index_log</span>
-<span class="linenos">351</span><span class="w">    </span><span class="nt">qc_admission697_vacuum_log</span><span class="p">:</span>
-<span class="linenos">352</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">353</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/admission697_vacuum_log</span>
-<span class="linenos">354</span><span class="w">    </span><span class="nt">qc_admission697_create_err</span><span class="p">:</span>
-<span class="linenos">355</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">356</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/admission697_create_err</span>
-<span class="linenos">357</span><span class="w">    </span><span class="nt">qc_admission697_index_err</span><span class="p">:</span>
-<span class="linenos">358</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">359</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/admission697_index_err</span>
-<span class="linenos">360</span><span class="w">    </span><span class="nt">qc_admission697_vacuum_err</span><span class="p">:</span>
-<span class="linenos">361</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">362</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/admission697_vacuum_err</span>
-<span class="linenos">363</span>
-<span class="linenos">364</span><span class="c1">## Generated by nsaph/util/cwl_collect_outputs.py from grant_read_access.cwl:</span>
-<span class="linenos">365</span><span class="w">    </span><span class="nt">grant_log</span><span class="p">:</span>
-<span class="linenos">366</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">367</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">grant/log</span>
-<span class="linenos">368</span><span class="w">    </span><span class="nt">grant_err</span><span class="p">:</span>
-<span class="linenos">369</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
-<span class="linenos">370</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">grant/err</span>
+<span class="linenos">281</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admissions/adm_create_log</span>
+<span class="linenos">282</span><span class="w">    </span><span class="nt">adm_create_err</span><span class="p">:</span>
+<span class="linenos">283</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">284</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admissions/adm_create_err</span>
+<span class="linenos">285</span><span class="w">    </span><span class="nt">adm_populate_log</span><span class="p">:</span>
+<span class="linenos">286</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">287</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admissions/adm_populate_log</span>
+<span class="linenos">288</span><span class="w">    </span><span class="nt">adm_populate_err</span><span class="p">:</span>
+<span class="linenos">289</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">290</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admissions/adm_populate_err</span>
+<span class="linenos">291</span><span class="w">    </span><span class="nt">adm_index_log</span><span class="p">:</span>
+<span class="linenos">292</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">293</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admissions/adm_index_log</span>
+<span class="linenos">294</span><span class="w">    </span><span class="nt">adm_index_err</span><span class="p">:</span>
+<span class="linenos">295</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">296</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admissions/adm_index_err</span>
+<span class="linenos">297</span><span class="w">    </span><span class="nt">adm_vacuum_log</span><span class="p">:</span>
+<span class="linenos">298</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">299</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admissions/adm_vacuum_log</span>
+<span class="linenos">300</span><span class="w">    </span><span class="nt">adm_vacuum_err</span><span class="p">:</span>
+<span class="linenos">301</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">302</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admissions/adm_vacuum_err</span>
+<span class="linenos">303</span>
+<span class="linenos">304</span><span class="w">  </span><span class="c1">## Generated by nsaph/util/cwl_collect_outputs.py from medicare_qc.cwl:</span>
+<span class="linenos">305</span><span class="w">    </span><span class="nt">qc_ev_create_log</span><span class="p">:</span>
+<span class="linenos">306</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">307</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/ev_create_log</span>
+<span class="linenos">308</span><span class="w">    </span><span class="nt">qc_ev_create_err</span><span class="p">:</span>
+<span class="linenos">309</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">310</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/ev_create_err</span>
+<span class="linenos">311</span><span class="w">    </span><span class="nt">qc_av_create_log</span><span class="p">:</span>
+<span class="linenos">312</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">313</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/av_create_log</span>
+<span class="linenos">314</span><span class="w">    </span><span class="nt">qc_av_create_err</span><span class="p">:</span>
+<span class="linenos">315</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">316</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/av_create_err</span>
+<span class="linenos">317</span><span class="w">    </span><span class="nt">qc_enrollmen343_create_log</span><span class="p">:</span>
+<span class="linenos">318</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">319</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/enrollmen343_create_log</span>
+<span class="linenos">320</span><span class="w">    </span><span class="nt">qc_enrollmen343_index_log</span><span class="p">:</span>
+<span class="linenos">321</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">322</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/enrollmen343_index_log</span>
+<span class="linenos">323</span><span class="w">    </span><span class="nt">qc_enrollmen343_vacuum_log</span><span class="p">:</span>
+<span class="linenos">324</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">325</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/enrollmen343_vacuum_log</span>
+<span class="linenos">326</span><span class="w">    </span><span class="nt">qc_enrollmen343_create_err</span><span class="p">:</span>
+<span class="linenos">327</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">328</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/enrollmen343_create_err</span>
+<span class="linenos">329</span><span class="w">    </span><span class="nt">qc_enrollmen343_index_err</span><span class="p">:</span>
+<span class="linenos">330</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">331</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/enrollmen343_index_err</span>
+<span class="linenos">332</span><span class="w">    </span><span class="nt">qc_enrollmen343_vacuum_err</span><span class="p">:</span>
+<span class="linenos">333</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">334</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/enrollmen343_vacuum_err</span>
+<span class="linenos">335</span><span class="w">    </span><span class="nt">qc_admission697_create_log</span><span class="p">:</span>
+<span class="linenos">336</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">337</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/admission697_create_log</span>
+<span class="linenos">338</span><span class="w">    </span><span class="nt">qc_admission697_index_log</span><span class="p">:</span>
+<span class="linenos">339</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">340</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/admission697_index_log</span>
+<span class="linenos">341</span><span class="w">    </span><span class="nt">qc_admission697_vacuum_log</span><span class="p">:</span>
+<span class="linenos">342</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">343</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/admission697_vacuum_log</span>
+<span class="linenos">344</span><span class="w">    </span><span class="nt">qc_admission697_create_err</span><span class="p">:</span>
+<span class="linenos">345</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">346</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/admission697_create_err</span>
+<span class="linenos">347</span><span class="w">    </span><span class="nt">qc_admission697_index_err</span><span class="p">:</span>
+<span class="linenos">348</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">349</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/admission697_index_err</span>
+<span class="linenos">350</span><span class="w">    </span><span class="nt">qc_admission697_vacuum_err</span><span class="p">:</span>
+<span class="linenos">351</span><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span>
+<span class="linenos">352</span><span class="w">      </span><span class="nt">outputSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qc/admission697_vacuum_err</span>
 </pre></div>
 </div>
 </section>
@@ -468,7 +893,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2021-2024, Harvard University.</p>
+    <p>&#169; Copyright 2021-2026, Harvard University.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

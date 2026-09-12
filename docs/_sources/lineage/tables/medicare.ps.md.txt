@@ -1,0 +1,70 @@
+# View medicare.ps
+
+## Overview for medicare.ps
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+medicare.ps/age.md
+medicare.ps/bene_id.md
+medicare.ps/buyin_cvg_count.md
+medicare.ps/buyin_indicators.md
+medicare.ps/curec.md
+medicare.ps/dob.md
+medicare.ps/dod.md
+medicare.ps/dod_ndi.md
+medicare.ps/file.md
+medicare.ps/fips2.md
+medicare.ps/hmo_cvg_count.md
+medicare.ps/hmo_indicators.md
+medicare.ps/orec.md
+medicare.ps/race.md
+medicare.ps/race_rti.md
+medicare.ps/record.md
+medicare.ps/sex.md
+medicare.ps/ssa2.md
+medicare.ps/ssa3.md
+medicare.ps/state.md
+medicare.ps/year.md
+medicare.ps/zip.md
+medicare.ps/zip4.md
+```
+
+
+Patient Summary view. Combines multiple patient summary (aka MBSF)
+files into a single view, transforming columns to the same type
+
+
+---
+## Columns:
+
+| Column Name | Column Type | Datatype |
+| --- | --- | --- |
+| [age](medicare.ps/age.md) | transformed | INT |
+| [bene_id](medicare.ps/bene_id.md) |  | string |
+| [buyin_cvg_count](medicare.ps/buyin_cvg_count.md) | transformed | INT |
+| [buyin_indicators](medicare.ps/buyin_indicators.md) | transformed | CHAR(1)[12] |
+| [curec](medicare.ps/curec.md) | transformed | INT |
+| [dob](medicare.ps/dob.md) | transformed | date |
+| [dod](medicare.ps/dod.md) | transformed | date |
+| [dod_ndi](medicare.ps/dod_ndi.md) | computed | DATE |
+| [file](medicare.ps/file.md) |  | string |
+| [fips2](medicare.ps/fips2.md) | computed | string |
+| [hmo_cvg_count](medicare.ps/hmo_cvg_count.md) | transformed | INT |
+| [hmo_indicators](medicare.ps/hmo_indicators.md) | transformed | CHAR(1)[12] |
+| [orec](medicare.ps/orec.md) | transformed | INT |
+| [race](medicare.ps/race.md) | transformed | VARCHAR |
+| [race_rti](medicare.ps/race_rti.md) | computed | string |
+| [record](medicare.ps/record.md) |  | string |
+| [sex](medicare.ps/sex.md) | transformed | VARCHAR |
+| [ssa2](medicare.ps/ssa2.md) | computed | string |
+| [ssa3](medicare.ps/ssa3.md) |  | string |
+| [state](medicare.ps/state.md) | computed | string |
+| [year](medicare.ps/year.md) | computed | string |
+| [zip](medicare.ps/zip.md) | transformed | INT |
+| [zip4](medicare.ps/zip4.md) | computed | INT |
+
+

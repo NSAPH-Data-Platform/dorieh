@@ -1,0 +1,49 @@
+# Column medicare.ps.buyin_indicators
+
+## Overview of column buyin_indicators in table medicare.ps 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.ps](../medicare.ps.md)           |
+| Qualified name                | medicare.ps.buyin_indicators  |
+| Datatype                      | CHAR(1)[12]        |
+| Column type | transformed |
+| Reference | [https://resdac.org/cms-data/variables/medicare-entitlementbuy-indicator](https://resdac.org/cms-data/variables/medicare-entitlementbuy-indicator) |
+
+
+Array of indicators if the beneficiary’s state of residence paid his/her monthly
+premium for Part B coverage (and Part A if necessary). State Medicaid programs
+can pay those premiums for certain dual eligibles; this action is called
+“buying in” and so this variable is the “buy-in code.”
+
+
+
+
+
+### Casts:
+
+| Original type | Cast expression      |
+| ------------- | -------------------- |
+| character varying | string_to_array({column_name}, NULL) |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+buyin_indicators_svg_envelop.md
+```
+
+
+```{figure} buyin_indicators.svg
+:align: center
+:alt: Column medicare.ps.buyin_indicators Lineage SVG
+:target: buyin_indicators_svg_envelop.html
+
+Data lineage for column medicare.ps.buyin_indicators
+
+```
+
+

@@ -1,0 +1,22 @@
+# Column cms.medpar_2014.PROD_RPLCMT_LIFECYC_SW
+
+## Overview of column PROD_RPLCMT_LIFECYC_SW in table cms.medpar_2014 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2014](../cms.medpar_2014.md)           |
+| Qualified name                | cms.medpar_2014.PROD_RPLCMT_LIFECYC_SW  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/product-replacement-within-product-lifecycle-early](https://resdac.org/cms-data/variables/product-replacement-within-product-lifecycle-early) |
+
+
+Prod Replacement Lifecycle Switch
+
+| Key | Value |
+| --- | ----- |
+| long_name | PROD_RPLCMT_LIFECYC_SW |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

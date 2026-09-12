@@ -1,0 +1,22 @@
+# Column cms.medpar_2014.LRD_USE
+
+## Overview of column LRD_USE in table cms.medpar_2014 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2014](../cms.medpar_2014.md)           |
+| Qualified name                | cms.medpar_2014.LRD_USE  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/lifetime-reserve-days-lrd-used-beneficiary-stay](https://resdac.org/cms-data/variables/lifetime-reserve-days-lrd-used-beneficiary-stay) |
+
+
+Lifetime reserve days (LRD) used by beneficiary for stay
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_LRD_USE_CNT |
+| original_type | NUM |
+| width | 5.0 |
+
+
+

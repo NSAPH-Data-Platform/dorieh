@@ -1,0 +1,21 @@
+# Column cms.medpar_2012.RECORD
+
+## Overview of column RECORD in table cms.medpar_2012 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2012](../cms.medpar_2012.md)           |
+| Qualified name                | cms.medpar_2012.RECORD  |
+| Datatype                      | BIGSERIAL        |
+| Reference | [https://resdac.org/cms-data/variables/nch-near-line-record-identification-code-ric](https://resdac.org/cms-data/variables/nch-near-line-record-identification-code-ric) |
+
+
+Record number in the file
+
+| Key | Value |
+| --- | ----- |
+| original_type | BIGSERIAL |
+| width | None |
+
+
+

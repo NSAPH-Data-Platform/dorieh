@@ -1,0 +1,42 @@
+# Column medicare.beneficiaries.dob_latest
+
+## Overview of column dob_latest in table medicare.beneficiaries 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.beneficiaries](../medicare.beneficiaries.md)           |
+| Qualified name                | medicare.beneficiaries.dob_latest  |
+| Datatype                      | string        |
+| Column type | copied |
+
+
+
+## Expressions
+
+```sql
+SELECT CASE
+  WHEN MAX(dob) <> MIN(dob) THEN  MAX(dob)
+END
+
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+dob_latest_svg_envelop.md
+```
+
+
+```{figure} dob_latest.svg
+:align: center
+:alt: Column medicare.beneficiaries.dob_latest Lineage SVG
+:target: dob_latest_svg_envelop.html
+
+Data lineage for column medicare.beneficiaries.dob_latest
+
+```
+
+

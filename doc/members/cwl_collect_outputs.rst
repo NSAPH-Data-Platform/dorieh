@@ -1,3 +1,5 @@
+:orphan:
+
 Utility to generate outputs sections for a CWL Tool
 ============================================================================
 
@@ -21,4 +23,3 @@ Positional arguments:
 Options:
   -h, --help   show this help message and exit
   --name NAME  Name to be used as output prefix, defaults to the step name
-

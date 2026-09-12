@@ -38,6 +38,7 @@ from typing import Dict, Callable, Optional, List, Tuple
 
 import pyarrow as pa
 import pyarrow.dataset as ds
+from markdown.extensions.smarty import closeClass
 from psycopg2.extras import RealDictCursor
 from psycopg2.extensions import connection
 from contextlib import contextmanager
@@ -47,6 +48,7 @@ from pyarrow.dataset import Scanner
 
 from dorieh.platform import init_logging
 from dorieh.platform.db import Connection
+from dorieh.platform.util.export_args import parse_args
 from dorieh.platform.util.query_builder import QueryBuilder
 from dorieh.utils.profile_utils import qmem
 from dorieh.utils.io_utils import sizeof_fmt
@@ -90,14 +92,16 @@ class PgPqBase(ABC):
             s[0]: s[1] for s in schema
         }
         self.schema = pa.schema(schema)
-        logging.info("Metdata and schema has been set up")
+        logging.info("Metadata and schema has been set up")
 
-    @staticmethod
-    def type_pg2pq(vtype: str):
+    @classmethod
+    def type_pg2pq(cls, vtype: str):
         if vtype in ['int2', 'int4', 'int8']:
             pa_type = pa.int32()
         elif vtype.startswith("int"):
             pa_type = pa.int64()
+        elif vtype.startswith("bool"):
+            pa_type = pa.bool_()
         elif vtype in ["str", "varchar", "text"]:
             pa_type = pa.string()
         elif vtype.startswith("float") or vtype in ["numeric"]:
@@ -106,8 +110,11 @@ class PgPqBase(ABC):
             pa_type = pa.date32()
         elif vtype in ["time"]:
             pa_type = pa.date64()
-        elif vtype in ["timestamp"]:
-            pa_type = pa.timestamp('ns')
+        elif vtype in ["timestamp", "timestamptz"]:
+            pa_type = pa.timestamp('ms')       ## Spark does not support 'ns'
+        elif vtype.startswith('_'):  # List
+            velemtype = cls.type_pg2pq(vtype[1:])
+            pa_type = pa.list_(velemtype)
         else:
             pa_type = pa.string()
         return pa_type
@@ -141,8 +148,8 @@ class PgPqBase(ABC):
     def set_partitioning(self, columns: List[str]):
         types = []
         for c in columns:
-            self.partition_columns.append(c)
-            pa_type = self.column_types[c]
+            self.partition_columns.append(QueryBuilder.unquote(c))
+            pa_type = self.column_types.get(c, self.column_types.get(QueryBuilder.unquote(c)))
             types.append(pa_type)
         self.cur_partition = {
             p: None for p in self.partition_columns
@@ -158,56 +165,34 @@ class PgPqBase(ABC):
     def export(self):
         pass
 
+    def dryrun(self):
+        n = 10
+        sql = self.sql 
+        with result_set(self.connection, sql, "c12345", self.batch_size) as rs:
+            rs_iterator = iter(rs)
+            while True:
+                try:
+                    row = next(rs_iterator)  # Get the next item from the iterator
+                    if n > 0:
+                        print(row)
+                    n -= 1
+                except StopIteration:
+                    break
+                except Exception as e:
+                    print(f"An error occurred: {e}")
+                    raise 
+
     @classmethod
-    def run(cls):
-        parser = ArgumentParser (description="Import/Export resources")
-        parser.add_argument("--sql", "-s",
-                            help="SQL Query or a path to a file containing SQL query",
-                            required=False)
-        parser.add_argument("--schema",
-                            help="Export all columns for all tables in the given schema",
-                            required=False)
-        parser.add_argument("--table", "-t",
-                            help="Export all columns a given table (fully qualified name required)",
-                            required=False)
-        parser.add_argument("--partition", "-p",
-                            help="Columns to be used for partitioning",
-                            nargs='+',
-                            required=False)
-        parser.add_argument("--output", "--destination", "-o",
-                            help="Path to a directory, where the files will be exported",
-                            required=True)
-        parser.add_argument("--db",
-                            help="Path to a database connection parameters file",
-                            default="database.ini",
-                            required=True)
-        parser.add_argument("--connection", "-c",
-                            help="Section in the database connection parameters file",
-                            default="nsaph2",
-                            required=True)
-        parser.add_argument("--batch_size", "-b",
-                            help="The size of a single batch",
-                            default=2000,
-                            type=int,
-                            required=False)
-        parser.add_argument("--hard",
-                            help="Hard partitioning: execute separate SQL statement for each partition",
-                            action='store_true'
-                            )
-
-        arguments = parser.parse_args()
-        if arguments.sql and (arguments.table or arguments.schema):
-            raise ValueError("Only one type of argument is accepted: sql, schema or table")
-
-        if arguments.sql:
+    def run(cls, arguments = None):
+        if arguments is None:
+            arguments = parse_args()
+        if not arguments.table and arguments.sql:
             if os.path.isfile(arguments.sql):
                 with open(arguments.sql) as inp:
                     sql = '\n'.join([line for line in inp])
             else:
                 sql = arguments.sql
             cls.export_sql(arguments, sql)
-        elif arguments.table and arguments.schema:
-            raise ValueError("Only one type of argument is accepted: sql, schema or table")
         elif arguments.table:
             cls.export_table(arguments, arguments.table)
         elif arguments.schema:
@@ -225,8 +210,12 @@ class PgPqBase(ABC):
                 instance = PgPqSingleQuery(db, sql, arguments.output, mode="error")
                 if arguments.partition:
                     instance.set_partitioning(arguments.partition)
+            if not arguments.dryrun:
+                instance.export()
+            else:
+                instance.dryrun()
 
-            instance.export()
+
 
     @classmethod
     def export_table(cls, arguments, table: str):
@@ -234,6 +223,8 @@ class PgPqBase(ABC):
         with Connection(arguments.db, arguments.connection) as cnxn:
             query_builder = QueryBuilder(cnxn).add_table(table)
             sql = query_builder.query()
+        if arguments.sql:
+            sql += f"\n{arguments.sql}"
         cls.export_sql(arguments, sql)
         logging.info("Exporting: " + table + " DONE")
 
@@ -316,11 +307,14 @@ class PgPqSingleQuery(PgPqBase):
     def batches(self):
         with result_set(self.connection, self.sql, self.cursor_name, self.batch_size) as rs:
             data = []
-            for row in rs:
-                if len(data) >= self.batch_size:
-                    yield self.batch(data)
-                    data.clear()
-                data.append(self.transform(row))
+            try:
+                for row in rs:
+                    if len(data) >= self.batch_size:
+                        yield self.batch(data)
+                        data.clear()
+                    data.append(self.transform(row))
+            except:
+                raise 
             yield self.batch(data)
 
 
@@ -390,7 +384,10 @@ class PgPqPartitionedQuery(PgPqBase):
             where = " AND ".join(
                 f"{self.qualify_column(self.sql, column, i1)}={partition[column]}" for column in partition
             )
-            sql = self.sql + "\nWHERE " + where
+            if index_of(self.sql, "where") > -1:
+                sql = self.sql + "\nAND " + where
+            else:
+                sql = self.sql + "\nWHERE " + where
             executor = PgPqSingleQuery(self.connection, sql, self.destination, "delete_matching", self.schema)
             executor.parquet_partitioning = self.parquet_partitioning
             logging.info(f"Fetching partition: " + where)
@@ -405,6 +402,8 @@ class PgPqPartitionedQuery(PgPqBase):
                      + f"Max memory used: {sizeof_fmt(self.max_mem)}; "
                      + f"Max PyArrow memory: {sizeof_fmt(self.max_pa_mem)}")
         return 
+
+
 
 
 if __name__ == '__main__':

@@ -1,0 +1,22 @@
+# Column cms.medpar_2012.ACMDTNS
+
+## Overview of column ACMDTNS in table cms.medpar_2012 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2012](../cms.medpar_2012.md)           |
+| Qualified name                | cms.medpar_2012.ACMDTNS  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/total-charge-all-accommodations](https://resdac.org/cms-data/variables/total-charge-all-accommodations) |
+
+
+Total charge for all accommodations related to beneficiarys stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | ACMDTNS_TOT_CHRG_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

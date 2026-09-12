@@ -1,0 +1,20 @@
+# Column medicare._beneficiaries.first_enrollment_year
+
+## Overview of column first_enrollment_year in table medicare._beneficiaries 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare._beneficiaries](../medicare._beneficiaries.md)           |
+| Qualified name                | medicare._beneficiaries.first_enrollment_year  |
+| Datatype                      | string        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT MIN(year)
+```
+
+

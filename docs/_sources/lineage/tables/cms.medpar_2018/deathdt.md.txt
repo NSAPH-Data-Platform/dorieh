@@ -1,0 +1,22 @@
+# Column cms.medpar_2018.DEATHDT
+
+## Overview of column DEATHDT in table cms.medpar_2018 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2018](../cms.medpar_2018.md)           |
+| Qualified name                | cms.medpar_2018.DEATHDT  |
+| Datatype                      | DATE        |
+| Reference | [https://resdac.org/cms-data/variables/date-death](https://resdac.org/cms-data/variables/date-death) |
+
+
+Date beneficiary died
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_DEATH_DT |
+| original_type | DATE |
+| width | 8.0 |
+
+
+

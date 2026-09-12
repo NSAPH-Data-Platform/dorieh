@@ -1,0 +1,22 @@
+# Column cms.mbsf_abcd_2018.V_DOD_SW
+
+## Overview of column V_DOD_SW in table cms.mbsf_abcd_2018 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_abcd_2018](../cms.mbsf_abcd_2018.md)           |
+| Qualified name                | cms.mbsf_abcd_2018.V_DOD_SW  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/date-death](https://resdac.org/cms-data/variables/date-death) |
+
+
+Valid Date of Death Switch
+
+| Key | Value |
+| --- | ----- |
+| long_name | VALID_DEATH_DT_SW |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

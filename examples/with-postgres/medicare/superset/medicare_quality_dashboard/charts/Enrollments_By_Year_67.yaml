@@ -1,0 +1,43 @@
+slice_name: Enrollments By Year
+description: null
+certified_by: null
+certification_details: null
+viz_type: dist_bar
+params:
+  adhoc_filters: []
+  bottom_margin: auto
+  color_scheme: supersetColors
+  columns: []
+  extra_form_data: {}
+  granularity_sqla: null
+  groupby:
+  - year
+  metrics:
+  - count
+  - bene cardinality
+  order_bars: true
+  order_desc: true
+  row_limit: 10000
+  show_bar_value: true
+  slice_id: 30
+  time_range: No filter
+  time_range_endpoints:
+  - inclusive
+  - exclusive
+  url_params: {}
+  viz_type: dist_bar
+  x_ticks_layout: auto
+  y_axis_bounds:
+  - null
+  - null
+  y_axis_format: SMART_NUMBER
+  datasource_name: qc_enrollments
+  schema: medicare
+  database_name: DORIEH2
+  datasource: 16__table
+  annotation_layers: []
+query_context: null
+cache_timeout: null
+uuid: 2b085937-64f7-5181-b033-775358e4031d
+version: 1.0.0
+dataset_uuid: adce4851-5172-59af-93bc-1659096abfa4

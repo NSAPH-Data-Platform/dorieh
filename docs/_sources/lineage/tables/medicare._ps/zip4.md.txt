@@ -1,0 +1,34 @@
+# Column medicare._ps.zip4
+
+## Overview of column zip4 in table medicare._ps 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare._ps](../medicare._ps.md)           |
+| Qualified name                | medicare._ps.zip4  |
+| Datatype                      | INT        |
+| Column type | copied |
+
+
+Additional 4 digits for US zip 5+4 code, when provided
+
+
+
+
+## Expressions
+
+```sql
+SELECT zip
+```
+
+
+### Casts:
+
+| Original type | Cast expression      |
+| ------------- | -------------------- |
+| numeric | (CASE WHEN {column_name} < 100000 THEN NULL ELSE ({column_name}%10000)::INT END) |
+| character varying | (CASE WHEN LENGTH({column_name}) < 6 THEN NULL ELSE SUBSTRING({column_name} FROM 6 FOR 4)::INT END) |
+| integer | {column_name}::INT |
+
+
+

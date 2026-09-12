@@ -1,0 +1,22 @@
+# Column medicare.qc_adm_union.zip
+
+## Overview of column zip in table medicare.qc_adm_union 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_adm_union](../medicare.qc_adm_union.md)           |
+| Qualified name                | medicare.qc_adm_union.zip  |
+| Datatype                      | INT        |
+| Column type | copied |
+
+
+
+### Casts:
+
+| Original type | Cast expression      |
+| ------------- | -------------------- |
+| numeric | (CASE WHEN {column_name} < 100000 THEN {column_name}::int ELSE ({column_name}/10000)::INT END) |
+| character varying | SUBSTRING({column_name} FROM 1 FOR 5)::INT |
+
+
+

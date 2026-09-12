@@ -1,0 +1,23 @@
+tutorial:
+  header: true
+  quoting: 3
+  index: "unless excluded"
+  description: "Data model for data transformation tutorial"
+  tables:
+    bronze_temperature:
+      description: |
+        Maximum daily temperature for US Zip Code Tabulation Areas
+      columns:
+        - tmmx:
+            type: float
+            description: Maximum temperature variable from the TerraClimate dataset in K
+            reference: https://developers.google.com/earth-engine/datasets/catalog/IDAHO_EPSCOR_GRIDMET#bands
+        - date:
+            type: date
+        - zcta:
+            description: Zip Code for a Zip Code Tabulation Area
+            type: int
+      primary_key:
+        - zcta
+        - date
+

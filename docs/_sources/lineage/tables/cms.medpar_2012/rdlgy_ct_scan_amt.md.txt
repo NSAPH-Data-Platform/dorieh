@@ -1,0 +1,22 @@
+# Column cms.medpar_2012.RDLGY_CT_SCAN_AMT
+
+## Overview of column RDLGY_CT_SCAN_AMT in table cms.medpar_2012 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2012](../cms.medpar_2012.md)           |
+| Qualified name                | cms.medpar_2012.RDLGY_CT_SCAN_AMT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/radiology-ct-scan-amount](https://resdac.org/cms-data/variables/radiology-ct-scan-amount) |
+
+
+Radiology CT Scan Amount
+
+| Key | Value |
+| --- | ----- |
+| long_name | RDLGY_CT_SCAN_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

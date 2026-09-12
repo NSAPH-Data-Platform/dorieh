@@ -1,0 +1,46 @@
+# Column medicare._enrollments.dual_cvg_count
+
+## Overview of column dual_cvg_count in table medicare._enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare._enrollments](../medicare._enrollments.md)           |
+| Qualified name                | medicare._enrollments.dual_cvg_count  |
+| Datatype                      | string        |
+| Column type | computed |
+| Tables, required for computation | ['medicare.mbsf_d'] |
+
+
+
+## Expressions
+
+```sql
+(CASE
+   WHEN EXISTS (SELECT * FROM medicare.mbsf_d AS d WHERE medicare._ps.year = d.year and medicare._ps.bene_id = d.bene_id)
+   THEN
+       COALESCE((SELECT MAX(dual_mo) FROM medicare.mbsf_d AS d WHERE medicare._ps.year = d.year and medicare._ps.bene_id = d.bene_id), 0)
+   ELSE NULL
+END)
+
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+dual_cvg_count_svg_envelop.md
+```
+
+
+```{figure} dual_cvg_count.svg
+:align: center
+:alt: Column medicare._enrollments.dual_cvg_count Lineage SVG
+:target: dual_cvg_count_svg_envelop.html
+
+Data lineage for column medicare._enrollments.dual_cvg_count
+
+```
+
+

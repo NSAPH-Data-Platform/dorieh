@@ -1,0 +1,22 @@
+# Column cms.medpar_2016.CRNRYAMT
+
+## Overview of column CRNRYAMT in table cms.medpar_2016 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2016](../cms.medpar_2016.md)           |
+| Qualified name                | cms.medpar_2016.CRNRYAMT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/coronary-care-charge-amount](https://resdac.org/cms-data/variables/coronary-care-charge-amount) |
+
+
+Coronary care accommodations related to beneficiarys stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | CRNRY_CARE_CHRG_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

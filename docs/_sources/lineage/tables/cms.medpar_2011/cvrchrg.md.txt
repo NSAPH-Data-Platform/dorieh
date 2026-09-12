@@ -1,0 +1,22 @@
+# Column cms.medpar_2011.CVRCHRG
+
+## Overview of column CVRCHRG in table cms.medpar_2011 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2011](../cms.medpar_2011.md)           |
+| Qualified name                | cms.medpar_2011.CVRCHRG  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/total-covered-charge-amount](https://resdac.org/cms-data/variables/total-covered-charge-amount) |
+
+
+Portion of total charges covered by Medicare for stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | TOT_CVR_CHRG_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

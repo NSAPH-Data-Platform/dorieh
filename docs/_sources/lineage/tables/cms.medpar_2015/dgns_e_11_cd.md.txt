@@ -1,0 +1,22 @@
+# Column cms.medpar_2015.DGNS_E_11_CD
+
+## Overview of column DGNS_E_11_CD in table cms.medpar_2015 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2015](../cms.medpar_2015.md)           |
+| Qualified name                | cms.medpar_2015.DGNS_E_11_CD  |
+| Datatype                      | VARCHAR(7)        |
+| Reference | [https://resdac.org/cms-data/variables/diagnosis-e-code-11](https://resdac.org/cms-data/variables/diagnosis-e-code-11) |
+
+
+E Diagnosis Code 11 - Extrnl cause of injury, poisoning, or oth adverse effect
+
+| Key | Value |
+| --- | ----- |
+| long_name | DGNS_E_11_CD |
+| original_type | CHAR |
+| width | 7.0 |
+
+
+

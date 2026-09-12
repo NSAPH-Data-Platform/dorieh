@@ -1,0 +1,22 @@
+# Column cms.medpar_2014.DISP_SHR
+
+## Overview of column DISP_SHR in table cms.medpar_2014 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2014](../cms.medpar_2014.md)           |
+| Qualified name                | cms.medpar_2014.DISP_SHR  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/inpatient-disproportionate-share-dsh-amount](https://resdac.org/cms-data/variables/inpatient-disproportionate-share-dsh-amount) |
+
+
+Over the DRG amount for disproportionate share hospital for stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | IP_DSPRPRTNT_SHR_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

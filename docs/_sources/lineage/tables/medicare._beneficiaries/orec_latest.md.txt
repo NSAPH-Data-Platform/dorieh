@@ -1,0 +1,49 @@
+# Column medicare._beneficiaries.orec_latest
+
+## Overview of column orec_latest in table medicare._beneficiaries 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare._beneficiaries](../medicare._beneficiaries.md)           |
+| Qualified name                | medicare._beneficiaries.orec_latest  |
+| Datatype                      | string        |
+| Column type | computed |
+
+
+Non-null only when OREC was not consistent across the
+beneficiary's records (i.e. it changed over the years). Drives
+consistent_orec, analogously to dob_latest -> consistent_dob.
+
+
+
+
+
+## Expressions
+
+```sql
+SELECT CASE
+  WHEN MIN(orec) <> MAX(orec) THEN MAX(orec)
+END
+
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+orec_latest_svg_envelop.md
+```
+
+
+```{figure} orec_latest.svg
+:align: center
+:alt: Column medicare._beneficiaries.orec_latest Lineage SVG
+:target: orec_latest_svg_envelop.html
+
+Data lineage for column medicare._beneficiaries.orec_latest
+
+```
+
+

@@ -1,0 +1,58 @@
+slice_name: Discrepancies in DOB (more than 1 month)
+description: DOB discrepancy in days, binned at 10-day resolution (capped at one
+  year) so the off-by-N-months peaks (30/60/90…) stand out with empty bins between.
+certified_by: null
+certification_details: null
+viz_type: histogram
+params:
+  adhoc_filters:
+  - clause: WHERE
+    comparator: null
+    expressionType: SIMPLE
+    filterOptionName: filter_dob_latest_notnull
+    isExtra: false
+    isNew: false
+    operator: IS NOT NULL
+    operatorId: IS_NOT_NULL
+    sqlExpression: null
+    subject: dob_latest
+  - clause: WHERE
+    comparator: '35'
+    expressionType: SIMPLE
+    filterOptionName: filter_dobdiff_gt35
+    isExtra: false
+    isNew: false
+    operator: '>'
+    operatorId: GREATER_THAN
+    sqlExpression: null
+    subject: dob_diff_days
+  - clause: WHERE
+    comparator: '366'
+    expressionType: SIMPLE
+    filterOptionName: filter_dobdiff_lt366
+    isExtra: false
+    isNew: false
+    operator: '<'
+    operatorId: LESS_THAN
+    sqlExpression: null
+    subject: dob_diff_days
+  all_columns_x:
+  - dob_diff_days
+  color_scheme: supersetColors
+  groupby: []
+  link_length: 33
+  normalized: false
+  row_limit: 50000
+  time_range: No filter
+  x_axis_label: DOB discrepancy in days (10-day bins, capped at 1 year)
+  y_axis_label: beneficiaries
+  viz_type: histogram
+  datasource_name: beneficiaries
+  schema: medicare
+  database_name: DORIEH2
+  datasource: 13__table
+query_context: null
+cache_timeout: null
+uuid: 4f42984f-d005-5aa4-b310-3923de3309bf
+version: 1.0.0
+dataset_uuid: 80bf97c0-f153-5252-a115-c1f0566180c6

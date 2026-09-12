@@ -1,0 +1,22 @@
+# Column cms.medpar_2016.POA_DGNS_E_12_IND_CD
+
+## Overview of column POA_DGNS_E_12_IND_CD in table cms.medpar_2016 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2016](../cms.medpar_2016.md)           |
+| Qualified name                | cms.medpar_2016.POA_DGNS_E_12_IND_CD  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/diagnosis-e-code-present-admission-indicator-12](https://resdac.org/cms-data/variables/diagnosis-e-code-present-admission-indicator-12) |
+
+
+Diagnosis E Code Present on Admission Indicator 12
+
+| Key | Value |
+| --- | ----- |
+| long_name | POA_DGNS_E_12_IND_CD |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

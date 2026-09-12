@@ -1,0 +1,158 @@
+# View medicare._enrollments
+
+## Overview for medicare._enrollments
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+medicare._enrollments/age.md
+medicare._enrollments/age_min.md
+medicare._enrollments/bene_id.md
+medicare._enrollments/buyin_cvg_count.md
+medicare._enrollments/buyin_indicators.md
+medicare._enrollments/curec.md
+medicare._enrollments/curec_latest.md
+medicare._enrollments/died.md
+medicare._enrollments/dual_cvg_count.md
+medicare._enrollments/dual_indicators.md
+medicare._enrollments/file.md
+medicare._enrollments/fips2.md
+medicare._enrollments/fips3.md
+medicare._enrollments/fips3_is_approximated.md
+medicare._enrollments/fips3_valdiated.md
+medicare._enrollments/fips5.md
+medicare._enrollments/hmo_cvg_count.md
+medicare._enrollments/hmo_indicators.md
+medicare._enrollments/record.md
+medicare._enrollments/residence_counties.md
+medicare._enrollments/residence_county.md
+medicare._enrollments/ssa2.md
+medicare._enrollments/ssa2_list.md
+medicare._enrollments/ssa3.md
+medicare._enrollments/ssa3_list.md
+medicare._enrollments/state.md
+medicare._enrollments/state_count.md
+medicare._enrollments/state_iso.md
+medicare._enrollments/year.md
+medicare._enrollments/zip.md
+medicare._enrollments/zips.md
+```
+
+
+Internal intermediate view of beneficiary enrollments into
+Medicare program, by year and state of enrollment
+
+
+Aggregated from [medicare._ps](medicare._ps.md) on On bene_id, year, state
+
+Primary Key: bene_id, year, state
+
+
+<details>
+
+<summary>SQL/DDL Statement</summary>
+
+```sql
+
+CREATE view  medicare._enrollments AS
+SELECT
+    bene_id,
+	year,
+	state,
+	MAX(age) AS age,
+	CASE
+		  WHEN MIN(age) <> MAX(age) THEN MIN(age)
+		END AS age_min,
+	MAX(curec) AS curec,
+	CASE
+		  WHEN MIN(curec) <> MAX(curec) THEN MAX(curec)
+		END AS curec_latest,
+	('US-' || state) AS state_iso,
+	MAX(fips2) AS fips2,
+	MAX(fips3) AS fips3,
+	every(fips3_is_approximated) AS fips3_is_approximated,
+	public.validate_zip_fips(MAX(zip), MAX(fips2), MAX(fips3)) AS fips3_valdiated,
+	MAX(ssa2) AS ssa2,
+	MAX(ssa3) AS ssa3,
+	string_agg(distinct ssa2, ',') AS ssa2_list,
+	string_agg(distinct ssa3, ',') AS ssa3_list,
+	MAX(fips3) AS residence_county,
+	string_agg(distinct fips3_list, ',') AS residence_counties,
+	(MAX(fips2) || MAX(fips3)) AS fips5,
+	MAX(zip) AS zip,
+	string_agg(distinct zip::varchar, ',') AS zips,
+	MAX(hmo_indicators) AS hmo_indicators,
+	MAX(hmo_cvg_count) AS hmo_cvg_count,
+	MAX(buyin_indicators) AS buyin_indicators,
+	MAX(buyin_cvg_count) AS buyin_cvg_count,
+	(SELECT MAX(dual_indicators) FROM medicare.mbsf_d AS d WHERE medicare._ps.year = d.year and medicare._ps.bene_id = d.bene_id) AS dual_indicators,
+	(CASE
+		   WHEN EXISTS (SELECT * FROM medicare.mbsf_d AS d WHERE medicare._ps.year = d.year and medicare._ps.bene_id = d.bene_id)
+		   THEN
+		       COALESCE((SELECT MAX(dual_mo) FROM medicare.mbsf_d AS d WHERE medicare._ps.year = d.year and medicare._ps.bene_id = d.bene_id), 0)
+		   ELSE NULL
+		END) AS dual_cvg_count,
+	(
+		  SELECT COUNT(distinct state)
+		  FROM medicare._ps AS ps2
+		  WHERE
+		    _ps.bene_id = ps2.bene_id
+		    AND _ps.year = ps2.year
+		) AS state_count,
+	CASE EXTRACT (YEAR from MAX(dod))
+		  WHEN year THEN TRUE
+		  ELSE FALSE
+		END AS died,
+	string_agg(distinct FILE, ',') AS file,
+	string_agg(distinct RECORD::VARCHAR, ',') AS record
+FROM medicare._ps
+
+WHERE bene_id IS NOT NULL AND year IS NOT NULL AND state IS NOT NULL
+GROUP BY bene_id,year,state;
+
+COMMENT ON view medicare._enrollments IS 'CREATED BY Dorieh: {"version": "0.5.1.post2", "url": "file://<local checkout>", "commit": null}. Created at 2026-09-12 15:03:07.735810';
+```
+
+</details>
+
+---
+## Columns:
+
+| Column Name | Column Type | Datatype |
+| --- | --- | --- |
+| [age](medicare._enrollments/age.md) | computed | string |
+| [age_min](medicare._enrollments/age_min.md) | computed | string |
+| [bene_id](medicare._enrollments/bene_id.md) | grouping | string |
+| [buyin_cvg_count](medicare._enrollments/buyin_cvg_count.md) | computed | string |
+| [buyin_indicators](medicare._enrollments/buyin_indicators.md) | computed | string |
+| [curec](medicare._enrollments/curec.md) | computed | string |
+| [curec_latest](medicare._enrollments/curec_latest.md) | computed | string |
+| [died](medicare._enrollments/died.md) | computed | string |
+| [dual_cvg_count](medicare._enrollments/dual_cvg_count.md) | computed | string |
+| [dual_indicators](medicare._enrollments/dual_indicators.md) | computed | string |
+| [file](medicare._enrollments/file.md) | computed | string |
+| [fips2](medicare._enrollments/fips2.md) | computed | string |
+| [fips3](medicare._enrollments/fips3.md) | computed | string |
+| [fips3_is_approximated](medicare._enrollments/fips3_is_approximated.md) | computed | string |
+| [fips3_valdiated](medicare._enrollments/fips3_valdiated.md) | computed | string |
+| [fips5](medicare._enrollments/fips5.md) | computed | string |
+| [hmo_cvg_count](medicare._enrollments/hmo_cvg_count.md) | computed | string |
+| [hmo_indicators](medicare._enrollments/hmo_indicators.md) | computed | string |
+| [record](medicare._enrollments/record.md) | computed | string |
+| [residence_counties](medicare._enrollments/residence_counties.md) | computed | string |
+| [residence_county](medicare._enrollments/residence_county.md) | computed | string |
+| [ssa2](medicare._enrollments/ssa2.md) | computed | string |
+| [ssa2_list](medicare._enrollments/ssa2_list.md) | computed | string |
+| [ssa3](medicare._enrollments/ssa3.md) | computed | string |
+| [ssa3_list](medicare._enrollments/ssa3_list.md) | computed | string |
+| [state](medicare._enrollments/state.md) | grouping | string |
+| [state_count](medicare._enrollments/state_count.md) | computed | string |
+| [state_iso](medicare._enrollments/state_iso.md) | computed | char(5) |
+| [year](medicare._enrollments/year.md) | grouping | string |
+| [zip](medicare._enrollments/zip.md) | computed | string |
+| [zips](medicare._enrollments/zips.md) | computed | string |
+
+

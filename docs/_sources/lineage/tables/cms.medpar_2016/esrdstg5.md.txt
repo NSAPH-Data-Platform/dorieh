@@ -1,0 +1,22 @@
+# Column cms.medpar_2016.ESRDSTG5
+
+## Overview of column ESRDSTG5 in table cms.medpar_2016 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2016](../cms.medpar_2016.md)           |
+| Qualified name                | cms.medpar_2016.ESRDSTG5  |
+| Datatype                      | VARCHAR(2)        |
+| Reference | [https://resdac.org/cms-data/variables/dialysis-service-type-code-5](https://resdac.org/cms-data/variables/dialysis-service-type-code-5) |
+
+
+Dialysis type code V
+
+| Key | Value |
+| --- | ----- |
+| long_name | ESRD_SETG_IND_5_CD |
+| original_type | CHAR |
+| width | 2.0 |
+
+
+

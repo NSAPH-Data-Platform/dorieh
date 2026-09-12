@@ -4,26 +4,34 @@ Modules
 Modules that are used in this project are listed in this section.
 
 
-.. automodule:: census.query
+.. automodule:: dorieh.census.query
+  :no-index:
   :members:
 
-.. automodule:: census.assemble_data
+.. automodule:: dorieh.census.assemble_data
+  :no-index:
   :members:
 
-.. automodule:: census.census_info
+.. automodule:: dorieh.census.census_info
+  :no-index:
   :members:
 
-.. automodule:: census.tigerweb
+.. automodule:: dorieh.census.tigerweb
+  :no-index:
   :members:
 
-.. automodule:: census.cli
+.. automodule:: dorieh.census.cli
+  :no-index:
   :members:
 
-.. automodule:: census.exceptions
+.. automodule:: dorieh.census.exceptions
+  :no-index:
   :members:
 
-.. automodule:: census.data.load_data
+.. automodule:: dorieh.census.data.load_data
+  :no-index:
   :members:
 
-.. automodule:: census.utils
+.. automodule:: dorieh.census.utils
+  :no-index:
   :members:

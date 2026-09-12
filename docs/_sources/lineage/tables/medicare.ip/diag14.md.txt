@@ -1,0 +1,31 @@
+# Column medicare.ip.diag14
+
+## Overview of column diag14 in table medicare.ip 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.ip](../medicare.ip.md)           |
+| Qualified name                | medicare.ip.diag14  |
+| Datatype                      | varchar        |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+diag14_svg_envelop.md
+```
+
+
+```{figure} diag14.svg
+:align: center
+:alt: Column medicare.ip.diag14 Lineage SVG
+:target: diag14_svg_envelop.html
+
+Data lineage for column medicare.ip.diag14
+
+```
+
+

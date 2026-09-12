@@ -1,0 +1,22 @@
+# Column cms.medpar_2016.VBP_PRTCPNT_IND_CD
+
+## Overview of column VBP_PRTCPNT_IND_CD in table cms.medpar_2016 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2016](../cms.medpar_2016.md)           |
+| Qualified name                | cms.medpar_2016.VBP_PRTCPNT_IND_CD  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/value-based-purchasing-vbp-participant-indicator-code](https://resdac.org/cms-data/variables/value-based-purchasing-vbp-participant-indicator-code) |
+
+
+VBP Participant Indicator Code
+
+| Key | Value |
+| --- | ----- |
+| long_name | VBP_PRTCPNT_IND_CD |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

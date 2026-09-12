@@ -1,0 +1,22 @@
+# Column cms.medpar_2015.MEDPARID
+
+## Overview of column MEDPARID in table cms.medpar_2015 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2015](../cms.medpar_2015.md)           |
+| Qualified name                | cms.medpar_2015.MEDPARID  |
+| Datatype                      | VARCHAR(15)        |
+| Reference | [https://resdac.org/cms-data/variables/medpar-id-number](https://resdac.org/cms-data/variables/medpar-id-number) |
+
+
+Unique Key for CCW MedPAR Table
+
+| Key | Value |
+| --- | ----- |
+| long_name | MEDPAR_ID |
+| original_type | CHAR |
+| width | 15.0 |
+
+
+

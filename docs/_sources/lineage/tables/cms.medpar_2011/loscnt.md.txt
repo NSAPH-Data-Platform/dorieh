@@ -1,0 +1,22 @@
+# Column cms.medpar_2011.LOSCNT
+
+## Overview of column LOSCNT in table cms.medpar_2011 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2011](../cms.medpar_2011.md)           |
+| Qualified name                | cms.medpar_2011.LOSCNT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/days-beneficiarys-stay-hospitalsnf](https://resdac.org/cms-data/variables/days-beneficiarys-stay-hospitalsnf) |
+
+
+Days of beneficiarys stay in a hospital/SNF
+
+| Key | Value |
+| --- | ----- |
+| long_name | LOS_DAY_CNT |
+| original_type | NUM |
+| width | 7.0 |
+
+
+

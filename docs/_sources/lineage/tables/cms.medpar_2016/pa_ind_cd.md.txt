@@ -1,0 +1,22 @@
+# Column cms.medpar_2016.PA_IND_CD
+
+## Overview of column PA_IND_CD in table cms.medpar_2016 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2016](../cms.medpar_2016.md)           |
+| Qualified name                | cms.medpar_2016.PA_IND_CD  |
+| Datatype                      | VARCHAR(4)        |
+| Reference | [https://resdac.org/cms-data/variables/prior-authorization-indicator-code](https://resdac.org/cms-data/variables/prior-authorization-indicator-code) |
+
+
+Claim Prior Authorization Indicator Code
+
+| Key | Value |
+| --- | ----- |
+| long_name | PA_IND_CD |
+| original_type | CHAR |
+| width | 4.0 |
+
+
+

@@ -1,0 +1,45 @@
+# Column medicare.ps.dob
+
+## Overview of column dob in table medicare.ps 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.ps](../medicare.ps.md)           |
+| Qualified name                | medicare.ps.dob  |
+| Datatype                      | date        |
+| Column type | transformed |
+
+
+Date of birth
+
+
+
+
+### Casts:
+
+| Original type | Cast expression      |
+| ------------- | -------------------- |
+| character varying | public.parse_date({column_name}) |
+| numeric | to_date(to_char({column_name}, '00000000'), 'YYYYMMDD') |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+dob_svg_envelop.md
+```
+
+
+```{figure} dob.svg
+:align: center
+:alt: Column medicare.ps.dob Lineage SVG
+:target: dob_svg_envelop.html
+
+Data lineage for column medicare.ps.dob
+
+```
+
+

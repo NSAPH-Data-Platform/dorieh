@@ -1,4 +1,4 @@
-# Handling Medicaid data
+# Medicaid: Building a Data Warehouse from ResDac Files
 
 ```{toctree}
 ---
@@ -10,8 +10,10 @@ pipeline/parse_fts
 members/create_schema_config.rst
 members/medicaid_yaml.md
 pipeline/ingest
-pipeline/medicaid
 ```
+
+The full Medicaid processing pipeline specification lives under
+[Data Processing Pipelines](pipelines.md): [medicaid.cwl](pipeline/medicaid.md).
 
 ```{contents}
 ---
@@ -23,14 +25,14 @@ local:
 
 [Centers for Medicare & Medicaid Services (CMS)](https://www.cms.gov/) 
 provide 
-[Medicaid Medicaid Analytic eXtract (MAX) data](https://www.cms.gov/Research-Statistics-Data-and-Systems/Computer-Data-and-Systems/MedicaidDataSourcesGenInfo/MAXGeneralInformation). 
-The MAX data is export from 
+[Medicaid Analytic eXtract (MAX) data](https://www.cms.gov/Research-Statistics-Data-and-Systems/Computer-Data-and-Systems/MedicaidDataSourcesGenInfo/MAXGeneralInformation). 
+MAX data is exported from 
 [SAS](https://www.sas.com/en_us/software/stat.html) 
-to CSV format, similar to Excel in its semantic. 
-We refer to the original MAX data as RAW data.
+into CSV files. 
+We refer to the original MAX data as raw data.
 
-The pipeline steps are being put into a framework and wrapped
-as CWL workflows.
+The pipeline steps are wrapped as CWL workflows; see
+[medicaid.cwl](pipeline/medicaid.md).
                                 
 ## Importing raw data   
                                        
@@ -52,15 +54,13 @@ each of the column (such as character, numeric or date)
 Parsing FTS is done by running module 
 [create_schema_config](members/create_schema_config.rst).
                                                        
-    pyhton -m dorieh.platform.dorieh.cms.create_schema_config
+    python -m dorieh.cms.create_schema_config
 
 Once the schema is generated, the 
-[Universal Data Loader](members/data_loader) can import it
+[Universal Data Loader](members/data_loader) can import the data
 by running the following command:
 
-    nohup python -u -m dorieh.platform.loader.data_loader --domain cms -t ps --domain cms --incremental --data /data/incoming/rce/ci3_d_medicaid/original_data/cms_medicaid-max/data/  -t ps --pattern "**/maxdata_*_ps_*.csv*"  --threads 4 --page 1000 --log 100000 2>&1 > ps-2021-09-25--21-37.log&
-
-## Processing data
+    python -u -m dorieh.platform.loader.data_loader --domain cms -t ps --incremental --data <path-to-raw-max-files> --pattern "**/maxdata_*_ps_*.csv*"
 
 ## Data Model
 
@@ -102,7 +102,7 @@ amounts of data.
 Creation of non-materialized views is instantaneous operation. 
 Technically, it allows performing the same type of queries
 as with materialized views or physical tables, but many
-(but not all) quiries can be very slow and take hours.
+(but not all) queries can be very slow and take hours.
 
 Materializing a view and building indices takes time, 
 often hours but is much faster than importing raw data. 
@@ -176,11 +176,16 @@ we apply the following rules:
     * dob: the earliest raw DOB 
     * dod (date of death): the latest raw DOD
     * race_ethnicity_code: comma separated list of codes
-    * sex: comm separated list of sexes
+    * sex: comma separated list of sexes
 * Additional columns are added to the record:
     * dob_latest: the latest raw DOB
     * dod_earliest: the earliest raw DOD
-                                        
+
+This is an application of the
+[disambiguation rules](concepts.md#disambiguation-rules) pattern; the
+Medicare model names the counter column `discrepancies` and additionally
+surfaces `consistent_*` QC flags.
+
 This allows a project curator to apply various rules to include or exclude 
 records where data for beneficiaries is inconsistent. For example,
 the curator can:
@@ -191,13 +196,10 @@ the curator can:
   is more than 3 years
 * etc.
 
-We can establish actual rules for NSAPH projects later at a SOP level.
-
-> We have noted that about 7% of records do not have BENE_ID. One 
-> point to consider is that we do not know if this is a result
-> of some kind of a systematic error. For example, it might be
-> that beneficiaries from certain neighbourhoods are missing
-> this data.
+One caveat: we have noted that about 7% of records do not have BENE_ID,
+and we do not know whether this is the result of some kind of systematic
+error. For example, it might be that beneficiaries from certain
+neighbourhoods are missing this data.
 
 ### Enrollments                             
                           
@@ -238,7 +240,7 @@ Additional columns added to the view for convenience:
 * state_count: number of states, where the beneficiary
   was enrolled in medicaid during the year. Note,
   this is also the number of records for this beneficiary and this year
-  in the Enrollments` table.
+  in the `Enrollments` table.
 * died: a boolean flag indicating that the beneficiary has 
   died during this year while being registered
   for medicaid in this state.
@@ -250,8 +252,13 @@ moved during the year.
 
 ### Eligibility
 
-This is in fact a monthly detalization of beneficiaries
-enrollments in medicaid. 
+The `Eligibility` table is a breakdown by month of beneficiaries'
+enrollments in Medicaid: it contains one row per beneficiary, year,
+month and state. It is derived from the intermediate `monthly` view,
+which transposes the per-month columns of the raw data into separate
+rows (see [Data Model](#data-model)). Monthly granularity matters for
+Medicaid because, unlike Medicare, Medicaid eligibility is volatile and
+can change from month to month.
                                                    
 ### Inpatient Admissions
 

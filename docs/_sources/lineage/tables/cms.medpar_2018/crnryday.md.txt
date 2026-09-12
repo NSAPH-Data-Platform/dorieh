@@ -1,0 +1,22 @@
+# Column cms.medpar_2018.CRNRYDAY
+
+## Overview of column CRNRYDAY in table cms.medpar_2018 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2018](../cms.medpar_2018.md)           |
+| Qualified name                | cms.medpar_2018.CRNRYDAY  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/coronary-care-day-count](https://resdac.org/cms-data/variables/coronary-care-day-count) |
+
+
+Coronary care days used by beneficiary for stay
+
+| Key | Value |
+| --- | ----- |
+| long_name | CRNRY_CARE_DAY_CNT |
+| original_type | NUM |
+| width | 5.0 |
+
+
+

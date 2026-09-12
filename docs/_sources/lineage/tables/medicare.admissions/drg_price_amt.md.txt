@@ -1,0 +1,40 @@
+# Column medicare.admissions.drg_price_amt
+
+## Overview of column drg_price_amt in table medicare.admissions 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.admissions](../medicare.admissions.md)           |
+| Qualified name                | medicare.admissions.drg_price_amt  |
+| Datatype                      | NUMERIC        |
+| Column type | copied |
+| Reference | [https://resdac.org/cms-data/variables/drg-price-amount](https://resdac.org/cms-data/variables/drg-price-amount) |
+
+
+The amount (called the 'DRG price' for purposes of MEDPAR analysis) 
+that would have been paid if no deductibles, coinsurance, primary payers, or outliers 
+were involved (rounded to whole dollars).
+
+
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+drg_price_amt_svg_envelop.md
+```
+
+
+```{figure} drg_price_amt.svg
+:align: center
+:alt: Column medicare.admissions.drg_price_amt Lineage SVG
+:target: drg_price_amt_svg_envelop.html
+
+Data lineage for column medicare.admissions.drg_price_amt
+
+```
+
+

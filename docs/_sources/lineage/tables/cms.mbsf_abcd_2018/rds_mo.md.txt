@@ -1,0 +1,22 @@
+# Column cms.mbsf_abcd_2018.RDS_MO
+
+## Overview of column RDS_MO in table cms.mbsf_abcd_2018 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_abcd_2018](../cms.mbsf_abcd_2018.md)           |
+| Qualified name                | cms.mbsf_abcd_2018.RDS_MO  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/months-retiree-drug-subsidy-coverage](https://resdac.org/cms-data/variables/months-retiree-drug-subsidy-coverage) |
+
+
+Retiree Drug Subsidy (RDS) Coverage Months
+
+| Key | Value |
+| --- | ----- |
+| long_name | RDS_CVRG_MONS |
+| original_type | NUM |
+| width | 3.0 |
+
+
+

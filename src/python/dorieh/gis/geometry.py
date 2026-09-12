@@ -92,17 +92,13 @@ class PointInRaster:
         """
         An optimized version of rasterstats.point function:
         given a point's window as 2x2 array, and x, y as its coordinates,
-        treat center points as a unit square.
-
-        .. code-block::
+        treat center points as a unit square::
 
             +---+---+
             | A | B |      +----+
             +---+---+  =>  |    |
             | C | D |      +----+
             +---+---+
-
-        ::
 
             e.g.: Center of A is at (0, 1) on unit square, D is at (1, 0), etc
 

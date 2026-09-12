@@ -1,0 +1,22 @@
+# Column cms.medpar_2011.DGNSCD19
+
+## Overview of column DGNSCD19 in table cms.medpar_2011 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2011](../cms.medpar_2011.md)           |
+| Qualified name                | cms.medpar_2011.DGNSCD19  |
+| Datatype                      | VARCHAR(7)        |
+| Reference | [https://resdac.org/cms-data/variables/medpar-icd-9-cm-diagnosis-code-19](https://resdac.org/cms-data/variables/medpar-icd-9-cm-diagnosis-code-19) |
+
+
+ICD-9-CM Diagnosis code XIX
+
+| Key | Value |
+| --- | ----- |
+| long_name | DGNS_19_CD |
+| original_type | CHAR |
+| width | 7.0 |
+
+
+

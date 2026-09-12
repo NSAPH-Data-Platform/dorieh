@@ -1,0 +1,47 @@
+# Column medicare.enrollments.state_count
+
+## Overview of column state_count in table medicare.enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.enrollments](../medicare.enrollments.md)           |
+| Qualified name                | medicare.enrollments.state_count  |
+| Datatype                      | string        |
+| Column type | copied |
+| Tables, required for computation | ['medicare._ps'] |
+
+
+
+## Expressions
+
+```sql
+(
+  SELECT COUNT(distinct state)
+  FROM medicare._ps AS ps2
+  WHERE
+    _ps.bene_id = ps2.bene_id
+    AND _ps.year = ps2.year
+)
+
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+state_count_svg_envelop.md
+```
+
+
+```{figure} state_count.svg
+:align: center
+:alt: Column medicare.enrollments.state_count Lineage SVG
+:target: state_count_svg_envelop.html
+
+Data lineage for column medicare.enrollments.state_count
+
+```
+
+

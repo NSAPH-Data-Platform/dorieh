@@ -1,0 +1,22 @@
+# Column cms.medpar_2011.PRPAY_CD
+
+## Overview of column PRPAY_CD in table cms.medpar_2011 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2011](../cms.medpar_2011.md)           |
+| Qualified name                | cms.medpar_2011.PRPAY_CD  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/medpar-beneficiary-primary-payer-code](https://resdac.org/cms-data/variables/medpar-beneficiary-primary-payer-code) |
+
+
+Primary payer responsibility code
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_PRMRY_PYR_CD |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

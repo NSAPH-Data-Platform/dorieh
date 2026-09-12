@@ -62,6 +62,9 @@ cwl-runner /opt/airflow/project/epa/src/cwl/aqs.cwl --database /opt/airflow/proj
 | ingest_err     | File |             | 
 | index_err      | File |             | 
 | vacuum_err     | File |             | 
+| export_data    | ['File', 'Directory'] |             | 
+| export_log     | File |             | 
+| export_err     | File |             | 
 
 ## Steps
 
@@ -74,4 +77,5 @@ cwl-runner /opt/airflow/project/epa/src/cwl/aqs.cwl --database /opt/airflow/proj
 | ingest     | [ingest.cwl](ingest.md)             | Uploads data into the database                             | 
 | index      | [index.cwl](index.md)               |                                                            | 
 | vacuum     | [vacuum.cwl](vacuum.md)             |                                                            | 
+| export     | [export.cwl](export.md)             |                                                            | 
 

@@ -1,0 +1,22 @@
+# Column cms.medpar_2018.DSCHRGCD
+
+## Overview of column DSCHRGCD in table cms.medpar_2018 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2018](../cms.medpar_2018.md)           |
+| Qualified name                | cms.medpar_2018.DSCHRGCD  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/code-identifying-status-patient-clmthrudt](https://resdac.org/cms-data/variables/code-identifying-status-patient-clmthrudt) |
+
+
+Code identifying status of patient as of CLM_THRU_DT
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_DSCHRG_STUS_CD |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

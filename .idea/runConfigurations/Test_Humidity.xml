@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Test Humidity" type="PythonConfigurationType" factoryName="Python" folderName="Pipelines Gridmet">
+  <configuration default="false" name="Test Humidity" type="PythonConfigurationType" factoryName="Python" folderName="Pipelines - Gridmet">
     <module name="dorieh" />
     <option name="ENV_FILES" value="" />
     <option name="INTERPRETER_OPTIONS" value="" />
@@ -7,8 +7,7 @@
     <envs>
       <env name="PYTHONUNBUFFERED" value="1" />
     </envs>
-    <option name="SDK_HOME" value="" />
-    <option name="SDK_NAME" value="Python 3.10 (dorieh)" />
+    <option name="SDK_HOME" value="/opt/python/venvs/dorieh_test/bin/python" />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../run/gridmet4" />
     <option name="IS_MODULE_SDK" value="false" />
     <option name="ADD_CONTENT_ROOTS" value="true" />

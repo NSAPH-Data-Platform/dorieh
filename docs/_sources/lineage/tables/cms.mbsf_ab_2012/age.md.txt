@@ -1,0 +1,22 @@
+# Column cms.mbsf_ab_2012.AGE
+
+## Overview of column AGE in table cms.mbsf_ab_2012 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_ab_2012](../cms.mbsf_ab_2012.md)           |
+| Qualified name                | cms.mbsf_ab_2012.AGE  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/age-beneficiary-end-year](https://resdac.org/cms-data/variables/age-beneficiary-end-year) |
+
+
+Age at End of Reference Year
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_AGE_AT_END_REF_YR |
+| original_type | NUM |
+| width | 3.0 |
+
+
+

@@ -1,0 +1,63 @@
+digraph {
+			"medicare.enrollments.residence_county" [label=<
+<TABLE>
+<tr><td align = "center" border = "0"><b>medicare.enrollments.residence_county</b></td></tr>
+	<tr><td align = "left">MAX(fips3)</td></tr>
+
+</TABLE>
+>,shape=box,URL="../medicare.enrollments/residence_county.html",target=_blank];
+			"medicare._enrollments.fips3" [label=<
+<TABLE>
+<tr><td align = "center" border = "0"><b>medicare._enrollments.fips3</b></td></tr>
+	<tr><td align = "left">MAX(fips3)</td></tr>
+
+</TABLE>
+>,shape=box,URL="../medicare._enrollments/fips3.html",target=_blank];
+			"medicare._ps.fips3" [label=<
+<TABLE>
+<tr><td align = "center" border = "0"><b>medicare._ps.fips3</b></td></tr>
+	<tr><td align = "left">CASE WHEN ssa3 is NOT NULL THEN
+  CASE WHEN year &gt; 2010 THEN
+      (SELECT fips3 from public.ssa as s where ps.ssa3 = s.ssa3 and ps.year = s.year and ps.fips2 = s.fips2 ORDER BY 1 DESC LIMIT 1)
+    ELSE
+      (SELECT fips3 from public.ssa as s where ps.ssa3 = s.ssa3 and 2003 = s.year and ps.fips2 = s.fips2 ORDER BY 1 DESC LIMIT 1)
+  END
+ELSE
+  (SELECT public.zip_to_fips3(year, zip))
+END AS fips3</td></tr>
+
+</TABLE>
+>,shape=box,URL="../medicare._ps/fips3.html",target=_blank];
+			"medicare.ps.ssa3" [label=<
+<TABLE>
+<tr><td align = "center" border = "0"><b>medicare.ps.ssa3</b></td></tr>
+<tr><td align = "left" border = "0" cellpadding="25">Social Security Administration (SSA)<br/>three digit code for county</td></tr>
+
+</TABLE>
+>,shape=box,URL="../medicare.ps/ssa3.html",target=_blank];
+			"medicare.ps.ssa3_parent" [label="8 incoming links (columns)",shape="cylinder",fillcolor="yellow",style="filled",minlen=2,width=3,height=1.5,URL="../medicare.ps/ssa3.html",target=_blank];
+			"medicare.ps.fips2" [label=<
+<TABLE>
+<tr><td align = "center" border = "0"><b>medicare.ps.fips2</b></td></tr>
+<tr><td align = "left" border = "0" cellpadding="25">2 digit state FIPS, see https://en.wikip<br/>edia.org/wiki/Federal_Information_Proces<br/>sing_Standard_state_code</td></tr>
+	<tr><td align = "left">(SELECT fips2 FROM public.us_states as s WHERE s.ssa2 = &quot;state&quot;)</td></tr>
+
+</TABLE>
+>,shape=box,URL="../medicare.ps/fips2.html",target=_blank];
+			"medicare.ps.year" [label=<
+<TABLE>
+<tr><td align = "center" border = "0"><b>medicare.ps.year</b></td></tr>
+	<tr><td align = "left">(CASE WHEN &quot;year&quot;::int &lt; 20 THEN (2000 + &quot;year&quot;::int) WHEN (20 &lt; &quot;year&quot;::int AND &quot;year&quot;::int &lt; 100) THEN (1900 + &quot;year&quot;::int) WHEN &quot;year&quot; IS NULL THEN 2000 ELSE &quot;year&quot;::int END)</td></tr>
+
+</TABLE>
+>,shape=box,URL="../medicare.ps/year.html",target=_blank];
+			"medicare.ps.year_parent" [label="8 incoming links (columns)",shape="cylinder",fillcolor="yellow",style="filled",minlen=2,width=3,height=1.5,URL="../medicare.ps/year.html",target=_blank];
+
+	"medicare._enrollments.fips3" -> "medicare.enrollments.residence_county" [label=Copied,penwidth=1,color=black,labelfloat=True];
+	"medicare._ps.fips3" -> "medicare._enrollments.fips3" [label="	  Aggregated On bene_id, year, state",penwidth=5,color=blue,labelfloat=True];
+	"medicare.ps.ssa3" -> "medicare._ps.fips3" [label=	"  Transformed",penwidth=1,color=black,labelfloat=True];
+	"medicare.ps.ssa3_parent" -> "medicare.ps.ssa3" [penwidth=6.0,color=goldenrod];
+	"medicare.ps.fips2" -> "medicare._ps.fips3" [label=	"  Transformed",penwidth=1,color=black,labelfloat=True];
+	"medicare.ps.year" -> "medicare._ps.fips3" [label=	"  Transformed",penwidth=1,color=black,labelfloat=True];
+	"medicare.ps.year_parent" -> "medicare.ps.year" [penwidth=6.0,color=goldenrod];
+}

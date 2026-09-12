@@ -1,6 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Download shapes" type="PythonConfigurationType" factoryName="Python" folderName="Python - GIS Tools">
     <module name="dorieh" />
+    <option name="ENV_FILES" value="" />
     <option name="INTERPRETER_OPTIONS" value="" />
     <option name="PARENT_ENVS" value="true" />
     <envs>
@@ -24,7 +25,7 @@
       </ENTRIES>
     </EXTENSION>
     <option name="SCRIPT_NAME" value="dorieh.gis.shapes_downloader" />
-    <option name="PARAMETERS" value="--collection tiger --geography all --year 2010" />
+    <option name="PARAMETERS" value="--collection tiger --geography zcta --year 2019" />
     <option name="SHOW_COMMAND_LINE" value="false" />
     <option name="EMULATE_TERMINAL" value="false" />
     <option name="MODULE_MODE" value="true" />

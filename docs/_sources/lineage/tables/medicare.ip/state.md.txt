@@ -1,0 +1,39 @@
+# Column medicare.ip.state
+
+## Overview of column state in table medicare.ip 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.ip](../medicare.ip.md)           |
+| Qualified name                | medicare.ip.state  |
+| Datatype                      | string        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+(SELECT state_id FROM public.us_states as s WHERE s.ssa2 = "state")
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+state_svg_envelop.md
+```
+
+
+```{figure} state.svg
+:align: center
+:alt: Column medicare.ip.state Lineage SVG
+:target: state_svg_envelop.html
+
+Data lineage for column medicare.ip.state
+
+```
+
+

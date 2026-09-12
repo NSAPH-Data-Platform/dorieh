@@ -1,0 +1,22 @@
+# Column cms.medpar_2015.OUTLR_CD
+
+## Overview of column OUTLR_CD in table cms.medpar_2015 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2015](../cms.medpar_2015.md)           |
+| Qualified name                | cms.medpar_2015.OUTLR_CD  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/medpar-drgoutlier-stay-code](https://resdac.org/cms-data/variables/medpar-drgoutlier-stay-code) |
+
+
+Cost or Day Outlier code
+
+| Key | Value |
+| --- | ----- |
+| long_name | DRG_OUTLIER_STAY_CD |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

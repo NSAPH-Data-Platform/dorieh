@@ -1,0 +1,20 @@
+# Column medicare.ip.ssa2
+
+## Overview of column ssa2 in table medicare.ip 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.ip](../medicare.ip.md)           |
+| Qualified name                | medicare.ip.ssa2  |
+| Datatype                      | string        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT state
+```
+
+

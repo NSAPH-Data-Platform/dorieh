@@ -1,0 +1,22 @@
+# Column cms.mbsf_abcd_2018.BUYIN_MO
+
+## Overview of column BUYIN_MO in table cms.mbsf_abcd_2018 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_abcd_2018](../cms.mbsf_abcd_2018.md)           |
+| Qualified name                | cms.mbsf_abcd_2018.BUYIN_MO  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/state-buy-coverage-count](https://resdac.org/cms-data/variables/state-buy-coverage-count) |
+
+
+State Buy-In (SBI) Coverage Months
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_STATE_BUYIN_TOT_MONS |
+| original_type | NUM |
+| width | 3.0 |
+
+
+

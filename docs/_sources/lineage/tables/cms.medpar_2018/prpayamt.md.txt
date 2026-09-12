@@ -1,0 +1,22 @@
+# Column cms.medpar_2018.PRPAYAMT
+
+## Overview of column PRPAYAMT in table cms.medpar_2018 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2018](../cms.medpar_2018.md)           |
+| Qualified name                | cms.medpar_2018.PRPAYAMT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/primary-payer-paid-amount](https://resdac.org/cms-data/variables/primary-payer-paid-amount) |
+
+
+Primry payer other than Medicare for covered Medicare chrgs for stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_PRMRY_PYR_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

@@ -105,17 +105,14 @@ See [](../Medicare) for data processing details.
 | qc_admission697_create_err | File |             | 
 | qc_admission697_index_err  | File |             | 
 | qc_admission697_vacuum_err | File |             | 
-| grant_log                  | File |             | 
-| grant_err                  | File |             | 
 
 ## Steps
 
-| Name          | Runs                                                    | Description                                                                           | 
-|:--------------|:--------------------------------------------------------|:--------------------------------------------------------------------------------------|
-| initdb        | [initdb.cwl](initdb.md)                                 | Ensure that database utilities are at their latest version                            | 
-| load_raw_data | [load_raw_medicare.cwl](load_raw_medicare.md)           | Load raw CMS Medicare data into the database                                          | 
-| enrollments   | [medicare_beneficiaries.cwl](medicare_beneficiaries.md) | Process beneficiaries enrollment data                                                 | 
-| admissions    | [medicare_admissions.cwl](medicare_admissions.md)       | Process medicare inpatient admissions (aka Medpar) data                               | 
-| qc            | [medicare_qc.cwl](medicare_qc.md)                       | Build QC Tables                                                                       | 
-| grant         | [alter_database.cwl](alter_database.md)                 | Grants read access to the members of NSAPH group for newly created or updated tables  | 
+| Name          | Runs                                                    | Description                                                | 
+|:--------------|:--------------------------------------------------------|:-----------------------------------------------------------|
+| initdb        | [initdb.cwl](initdb.md)                                 | Ensure that database utilities are at their latest version | 
+| load_raw_data | [load_raw_medicare.cwl](load_raw_medicare.md)           | Load raw CMS Medicare data into the database               | 
+| enrollments   | [medicare_beneficiaries.cwl](medicare_beneficiaries.md) | Process beneficiaries enrollment data                      | 
+| admissions    | [medicare_admissions.cwl](medicare_admissions.md)       | Process medicare inpatient admissions (aka Medpar) data    | 
+| qc            | [medicare_qc.cwl](medicare_qc.md)                       | Build QC Tables                                            | 
 

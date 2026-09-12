@@ -1,0 +1,39 @@
+# Column medicare.enrollments.fips3_is_approximated
+
+## Overview of column fips3_is_approximated in table medicare.enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.enrollments](../medicare.enrollments.md)           |
+| Qualified name                | medicare.enrollments.fips3_is_approximated  |
+| Datatype                      | string        |
+| Column type | copied |
+
+
+
+## Expressions
+
+```sql
+SELECT every(fips3_is_approximated)
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+fips3_is_approximated_svg_envelop.md
+```
+
+
+```{figure} fips3_is_approximated.svg
+:align: center
+:alt: Column medicare.enrollments.fips3_is_approximated Lineage SVG
+:target: fips3_is_approximated_svg_envelop.html
+
+Data lineage for column medicare.enrollments.fips3_is_approximated
+
+```
+
+

@@ -1,0 +1,22 @@
+# Column cms.mbsf_abcd_2018.HMO_MO
+
+## Overview of column HMO_MO in table cms.mbsf_abcd_2018 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_abcd_2018](../cms.mbsf_abcd_2018.md)           |
+| Qualified name                | cms.mbsf_abcd_2018.HMO_MO  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/hmo-coverage-count](https://resdac.org/cms-data/variables/hmo-coverage-count) |
+
+
+Health Maintenance Organization (HMO) Coverage Months
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_HMO_CVRAGE_TOT_MONS |
+| original_type | NUM |
+| width | 3.0 |
+
+
+

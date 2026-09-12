@@ -1,0 +1,22 @@
+# Column cms.medpar_2016.CTSCANSW
+
+## Overview of column CTSCANSW in table cms.medpar_2016 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2016](../cms.medpar_2016.md)           |
+| Qualified name                | cms.medpar_2016.CTSCANSW  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/radiology-computed-tomographic-ct-scan-indicator](https://resdac.org/cms-data/variables/radiology-computed-tomographic-ct-scan-indicator) |
+
+
+Radiology computed tomographic (CT) scan services indicator
+
+| Key | Value |
+| --- | ----- |
+| long_name | RDLGY_CT_SCAN_IND_SW |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

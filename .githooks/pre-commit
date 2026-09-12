@@ -1,0 +1,4 @@
+#!/bin/sh
+# Reject commits that introduce machine-specific absolute paths.
+# Enabled via: tools/install-hooks.sh  (sets core.hooksPath = .githooks)
+exec python3 "$(git rev-parse --show-toplevel)/tools/check_abs_paths.py"

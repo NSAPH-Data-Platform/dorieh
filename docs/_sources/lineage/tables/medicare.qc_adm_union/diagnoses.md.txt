@@ -1,0 +1,32 @@
+# Column medicare.qc_adm_union.diagnoses
+
+## Overview of column diagnoses in table medicare.qc_adm_union 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_adm_union](../medicare.qc_adm_union.md)           |
+| Qualified name                | medicare.qc_adm_union.diagnoses  |
+| Datatype                      | string        |
+| Column type | copied |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+diagnoses_svg_envelop.md
+```
+
+
+```{figure} diagnoses.svg
+:align: center
+:alt: Column medicare.qc_adm_union.diagnoses Lineage SVG
+:target: diagnoses_svg_envelop.html
+
+Data lineage for column medicare.qc_adm_union.diagnoses
+
+```
+
+

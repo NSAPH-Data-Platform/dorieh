@@ -1,30 +1,35 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Data Modelling for Dorieh Data Platform &mdash; Dorieh Data Platform 0.0.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+  <title>Data Modeling for Dorieh Data Platform &mdash; Dorieh Data Platform 0.5.1.post2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
       <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
-      <link rel="stylesheet" type="text/css" href="_static/css/dorieh.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/dorieh.css?v=1a3f250d" />
 
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=ad30b421"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Extensions used for creating federated view of different years" href="DataModellingExtensions.html" />
-    <link rel="prev" title="Dorieh Core Data Platform" href="platform.html" /> 
+    <link rel="next" title="Data Modeling Extensions: Federated Views Across Years" href="DataModellingExtensions.html" />
+    <link rel="prev" title="The Data Dictionary Generation tool" href="members/domain_dictionary.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -32,6 +37,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
+
 
           
           
@@ -45,55 +51,457 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
+<div class="dorieh-citeas">
+  <button type="button" class="dorieh-citeas-btn"
+          onclick="document.getElementById('dorieh-citeas-pop').classList.toggle('open')">
+    &#128214; Cite as
+  </button>
+  <div id="dorieh-citeas-pop" class="dorieh-citeas-pop">
+    <p>Bouzinier,&nbsp;M., Etin,&nbsp;D., Khoshnevis,&nbsp;N.,
+       Shad,&nbsp;M., Yockel,&nbsp;S. (2026).
+       <em>Research Data that Can be Trusted.</em>
+       SpringerBriefs in Computer Science. Springer.
+       <a href="https://doi.org/10.1007/978-3-032-21032-6">doi:10.1007/978-3-032-21032-6</a></p>
+    <button type="button" class="dorieh-citeas-copy"
+            onclick="navigator.clipboard.writeText(
+              'Bouzinier, M., Etin, D., Khoshnevis, N., Shad, M., Yockel, S. (2026). ' +
+              'Research Data that Can be Trusted. SpringerBriefs in Computer Science. ' +
+              'Springer. https://doi.org/10.1007/978-3-032-21032-6'
+            ).then(() => { this.textContent = 'Copied!'; });">
+      Copy citation
+    </button>
+    <a class="dorieh-citeas-more" href="citing.html">More ways to cite &rarr;</a>
+  </div>
+</div>
+
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rationale.html">What is Data Platform</a></li>
-<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="guts.html">Data Platform Internals</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="platform.html">Dorieh Core Data Platform</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Data Modelling for Dorieh Data Platform</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="DataModellingExtensions.html">Extensions used for creating federated view of different years</a></li>
-<li class="toctree-l4"><a class="reference internal" href="Medicare.html">Medicare Files Handling</a></li>
-<li class="toctree-l4"><a class="reference internal" href="Medicaid.html">Handling Medicaid data</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#introduction-to-data-modelling-for-nsaph-data-platform">Introduction to data modelling for NSAPH Data Platform</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#domain">Domain</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#table">Table</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#column">Column</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#multi-column-indices">Multi-column indices</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#generation-of-the-database-schema-ddl">Generation of the database schema (DDL)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#indexing-policies">Indexing policies</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#linking-with-nomenclature">Linking with nomenclature</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#ingesting-data">Ingesting data</a></li>
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="home.html#introduction-to-data-platform">Introduction to Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#building-blocks">Building Blocks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="home.html#dorieh-utilities">Dorieh Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="home.html#core-platform">Core Platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="home.html#dorieh-gis-utilities">Dorieh GIS Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="home.html#dorieh-documentation-utilities">Dorieh Documentation Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="home.html#data-processing-and-loading-pipelines">Data Processing and Loading Pipelines</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#working-with-nsaph-containerized-apps">Working with NSAPH containerized apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#using-the-database">Using the Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#terms-and-acronyms">Terms and Acronyms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#building-platform-documentation">Building Platform documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#next-steps">Next steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rationale.html">Why a data platform</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rationale.html#why-we-need-a-data-platform">Why we need a Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rationale.html#architecture">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rationale.html#supported-programming-languages-and-tools">Supported Programming Languages and Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rationale.html#development-mode">Development Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rationale.html#where-it-can-be-deployed">Where it can be deployed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rationale.html#what-makes-dorieh-different">What makes Dorieh different</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">The Dorieh approach</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#two-languages-one-pipeline">Two languages, one pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#medallion-architecture-as-dorieh-implements-it">Medallion architecture as Dorieh implements it</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#dataset-operators-and-field-construction-operators">Dataset operators and field construction operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#families-of-field-transformations">Families of field transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#disambiguation-rules">Disambiguation rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#validation-and-journaling">Validation and journaling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#fine-grained-lineage">Fine-grained lineage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#where-each-concept-lives">Where each concept lives</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="about-the-book.html">The companion book</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about-the-book.html#bibliographic-information">Bibliographic information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about-the-book.html#chapter-to-documentation-map">Chapter-to-documentation map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about-the-book.html#using-this-documentation-without-the-book">Using this documentation without the book</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="citing.html">Citing Dorieh</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="citing.html#preferred-citation-the-book">Preferred citation: the book</a></li>
+<li class="toctree-l2"><a class="reference internal" href="citing.html#citing-the-software-itself">Citing the software itself</a></li>
+<li class="toctree-l2"><a class="reference internal" href="citing.html#citing-the-tutorials">Citing the tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="citing.html#citing-the-synthetic-dataset">Citing the synthetic dataset</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Learning paths</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="paths/index.html">Choose your path</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="paths/researcher.html">Researchers and analysts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="paths/researcher.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paths/researcher.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="paths/developer.html">Pipeline developers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="paths/developer.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paths/developer.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="paths/operator.html">Platform operators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="paths/operator.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paths/operator.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="paths/book-reader.html">Readers of the book</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="paths/book-reader.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paths/book-reader.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="paths/auditor.html">Reviewers and auditors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="paths/auditor.html#the-path">The path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paths/auditor.html#going-deeper">Going deeper</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data domains and pipelines</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Data Domains</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cms.html">Health</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="health_data_overview.html">Health Data in Dorieh (Medicare and Medicaid)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Medicare.html">Medicare: Building a Data Warehouse from ResDac Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Medicaid.html">Medicaid: Building a Data Warehouse from ResDac Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="health_seealso.html">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="climate.html">Climate</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="climate.html#what-is-gridmet">What is gridMET?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="climate.html#using-command-line-gridmet-utility">Using command line gridMET utility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="climate.html#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="climate.html#python-modules">Python modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="climate.html#cwl-pipelines-and-tools">CWL pipelines and tools</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="exposures.html">Exposure (PM2.5, WashU)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="exposures.html#python-packages">Python packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exposures.html#cwl-workflows">CWL Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="epa.html">Environmental Protection Agency (EPA) data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="epa.html#package-contents">Package Contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="epa.html#querying-data">Querying Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="census.html">Demographics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="census_about.html">About</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_env_set_up.html">Setting Up Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_quick_start.html">Quick Start</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_yaml.html">Census Variable File Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_cached_data.html">Stored Data Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_modules.html">Modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_glossary.html">Glossary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census_start_guide.html">Working with the <code class="docutils literal notranslate"><span class="pre">census</span></code> Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_assemble.html">census_assemble.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_assemblecwl_src.html">census_assemble.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_density.html">census_density.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_densitycwl_src.html">census_density.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_ingest.html">census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_ingest_1.html">Sub-workflow <em>store</em> from census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_ingest_1cwl_src.html">CWL sub-workflow for step <u><em>store</em></u> of workflow census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_ingestcwl_src.html">census_ingest.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_interpolate.html">census_interpolate.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_interpolatecwl_src.html">census_interpolate.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_qc.html">census_qc.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_qccwl_src.html">census_qc.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_workflow.html">census_workflow.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_workflowcwl_src.html">census_workflow.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_write.html">census_write.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_writecwl_src.html">census_write.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="census.html#indices-and-tables">Indices and tables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Data Processing Pipelines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipelines.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipelines.html#workflow-description-languages">Workflow Description Languages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipelines.html#running-workflows">Running Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pipelines.html#tested-runners">Tested Runners</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipelines.html#providing-parameters-to-the-pipelines">Providing Parameters to the Pipelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipelines.html#using-toil">Using Toil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipelines.html#troubleshooting-workflows-run-by-toil">Troubleshooting Workflows Run by Toil</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pipelines.html#testing-workflows">Testing Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipelines.html#published-and-tested-workflows">Published and Tested Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/gridmet.html">Pipeline to aggregate data from Climatology Lab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/wustl.html">Pipeline to ingest Monthly Pollution data downloaded from WashU Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/pm25_yearly_download.html">Pipeline to aggregate data in NetCDF format over given geographies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/aqs.html">Full EPA AQS Processing Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/airnow.html">Full EPA AirNow Processing Pipeline (including downloading shapefiles)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/medicare.html">Medicare data ingestion and processing pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/medicaid.html">Full Medicaid Processing Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline/census_workflow.html">census_workflow.cwl</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pipelines.html#developing-new-workflows">Developing New Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pipelines.html#combining-included-cwl-tools-into-a-new-workflow">Combining Included CWL Tools into a New Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipelines.html#ordering-database-steps-with-depends-on">Ordering Database Steps with <code class="docutils literal notranslate"><span class="pre">depends_on</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipelines.html#wrapping-python-modules-as-cwl-tools">Wrapping Python Modules as CWL Tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials and worked examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Tutorials.html">Dorieh Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/climate/index.html">Climate tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/climate/building-climate-pipeline.html">Part 1. Building the pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/climate/documenting-a-workflow.html">Part 2. Documenting the workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/climate/constructing-lineage.html">Part 3. Data dictionaries and lineage graphs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html">Medicare claims pipeline tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#designing-the-pipeline">Designing the pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#from-fts-documents-to-machine-readable-schemas">From FTS documents to machine-readable schemas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#bronze-one-table-per-source-file">Bronze: one table per source file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#silver-harmonize-disambiguate-validate">Silver: harmonize, disambiguate, validate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#gold-the-qc-aggregates">Gold: the QC aggregates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#orchestration-five-steps-in-medicare-cwl">Orchestration: five steps in medicare.cwl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#documentation-and-lineage">Documentation and lineage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html#running-it-yourself">Running it yourself</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Example-climate-workflow.html">A CWL workflow example: aggregating a climate variable</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Example-climate-workflow.html#what-the-sample-workflow-is-doing-aggregating-a-climate-variable">What the sample workflow is doing: aggregating a climate variable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Example-climate-workflow.html#prepare-to-run-a-workflow">Prepare to run a workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Example-climate-workflow.html#running-the-workflow-in-python-virtual-environment">Running the workflow in Python virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Example-climate-workflow.html#running-the-workflow-using-docker">Running the workflow using Docker</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="medicare-example.html">Medicare pipeline with publicly available synthetic data (PostgreSQL + Superset)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="medicare-example.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="medicare-example.html#step-1-download-synthetic-sample-data">Step 1 — Download synthetic sample data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="medicare-example.html#step-3-optional-explore-results-in-apache-superset">Step 3 (Optional) — Explore results in Apache Superset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="medicare-example.html#what-the-pipeline-produces">What the pipeline produces</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#related-how-to-guides">Related how-to guides</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data dictionaries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dictionaries.html">Data Dictionaries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="MedicareLineage.html">Medicare data warehouse</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lineage/medicare.dot.html">Table Lineage Diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lineage/table-list.html">Alphabetic list of all tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lineage/column-list.html">Alphabetic list of all columns in all tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="members/domain_dictionary.html">The Data Dictionary Generation tool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data modeling DSL reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Data Modeling for Dorieh Data Platform</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="DataModellingExtensions.html">Data Modeling Extensions: Federated Views Across Years</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="DataModellingExtensions.html#combining-multiple-sources-and-optional-columns">Combining multiple sources and optional columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DataModellingExtensions.html#exclude">Exclude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DataModellingExtensions.html#cast">Cast</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DataModellingExtensions.html#validating-consistency-of-data-across-tables">Validating consistency of data across tables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#introduction-to-data-modeling-for-dorieh-data-platform">Introduction to data modeling for Dorieh Data Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#domain">Domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#table">Table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-statement">Create statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#invalid-record">Invalid Record</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#column">Column</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#source">Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#index">Index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#generated-columns">Generated columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#computed-columns">Computed columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#file-columns">File columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#record-columns">Record columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#identifier-columns-and-the-identifiers-token">Identifier columns and the <code class="docutils literal notranslate"><span class="pre">{identifiers}</span></code> token</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#transposing-columns">Transposing columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wildcards">Wildcards</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#multi-column-indices">Multi-column indices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#indexing-policies">Indexing policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#linking-with-nomenclature">Linking with nomenclature</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#us-states">US States</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#county-codes">County codes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ingesting-data">Ingesting data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#where-to-go-next">Where to go next</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="packages.html">Python Packages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">General purpose utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#overview-of-utilities">Overview of Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#current-development">Current Development</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#todo">TODO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#documentation-indices">Documentation Indices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="CoreLibrary.html">Data platform components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="CoreLibrary.html#package-dorieh-platform">Package dorieh.platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CoreLibrary.html#package-dorieh-platform-data-model">Package dorieh.platform.data_model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CoreLibrary.html#package-dorieh-platform-loader">Package dorieh.platform.loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CoreLibrary.html#package-dorieh-platform-requests">Package dorieh.platform.requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CoreLibrary.html#package-dorieh-platform-utils">Package dorieh.platform.utils</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gis.html">GIS utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gis.html#gis-library-overview">GIS Library Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gis.html#shape-files-downloader">Shape files Downloader</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="CMSLibrary.html">Health data manipulation tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="CMSLibrary.html#package-cms">Package cms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CMSLibrary.html#package-dorieh-cms-tools">Package dorieh.cms.tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CMSLibrary.html#additional-details">Additional details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rasters.html">Raster data tools (climate and exposure)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rasters.html#general-tools-for-raster-files">General tools for raster files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rasters.html#specialized-tools-for-working-with-climate-data">Specialized tools for working with climate data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rasters.html#specialized-tools-for-working-with-exposure-data">Specialized tools for working with exposure data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guts.html">Data Platform Internals</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="platform.html">Dorieh Core Data Platform</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="DBConnections.html">Managing database connections</a></li>
 <li class="toctree-l3"><a class="reference internal" href="DataLoader.html">Dorieh Data Loader</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ProjectLoader.html">Project (Directory) Loading Utility</a></li>
 <li class="toctree-l3"><a class="reference internal" href="TerritorialCodes.html">Mapping between different territorial codes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="SampleQuery.html">How to query the database</a></li>
-<li class="toctree-l3"><a class="reference internal" href="UserRequests.html">Preliminary Considerations for Handling User Requests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="SQLDocumentation.html">SQL Documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="platform.html#core-platform-overview">Core platform overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="platform.html#tool-examples">Tool Examples</a></li>
 <li class="toctree-l3"><a class="reference internal" href="platform.html#project-structure">Project Structure</a></li>
-<li class="toctree-l3"><a class="reference internal" href="platform.html#territorial-codes-mappings">Territorial Codes Mappings</a></li>
 <li class="toctree-l3"><a class="reference internal" href="platform.html#documentation-indices">Documentation Indices</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="deployment.html">Dorieh Deployment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="DBConnections.html">Managing database connections</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ProjectLoader.html">Project (Directory) Loading Utility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Dorieh Deployment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#using-docker">Using Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#using-python-virtual-environment">Using Python Virtual Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#using-conda-package-manager">Using Conda Package Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html#using-toil-with-docker-requirement">Using Toil with Docker requirement</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="DBT.html">Database Testing Framework</a></li>
-<li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="AppPipelineGenerator.html">Executing containerized apps</a></li>
-<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="capabilities.html">Platform capabilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="SampleQuery.html">How to query the database</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="SampleQuery.html#setup">Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SampleQuery.html#create-connection-definition-file">Create connection definition file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SampleQuery.html#executing-the-query">Executing the query</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SampleQuery.html#using-explain-to-optimize-queries">Using EXPLAIN to optimize queries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="QueringMedicaid.html">Querying Medicaid Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="QueringMedicaid.html#querying-diagnoses">Querying diagnoses</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="MonitoringDB.html">Monitoring database activity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="MonitoringDB.html#module-monitor">Module monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MonitoringDB.html#cli-usage-for-monitor">CLI Usage for monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MonitoringDB.html#using-as-api">Using as API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="UsingHLL.html">Approximate distinct counting with HLL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UserRequests.html">Handling user requests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="UserRequests.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UserRequests.html#structure">Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="example_request_yaml.html">Example user request</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Operational guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DBT.html">Database Testing Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="members/create_test.html">Utility to generate test queries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="members/dbt_runner.html">Test runner: Utility to run generated tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="members/gen_dbt_cwl.html">The gen_dbt_cwl Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="members/create_test.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="members/create_test.html#module-dorieh.platform.dbt.create_test">Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="members/dbt_runner.html">Test runner: Utility to run generated tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="members/dbt_runner.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="members/dbt_runner.html#module-dorieh.platform.dbt.dbt_runner">Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="members/gen_dbt_cwl.html">The gen_dbt_cwl Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="members/gen_dbt_cwl.html#dorieh.platform.dbt.gen_dbt_cwl.CWLTestGenerator"><code class="docutils literal notranslate"><span class="pre">CWLTestGenerator</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="TestingWorkflows.html">Testing bundled workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#introduction-to-testing-and-prerequisites">Introduction to testing and prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#before-running-any-test">Before running any test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#testing-aqs-workflow">Testing AQS workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#testing-airnow-workflow">Testing Airnow workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#testing-climate-workflow">Testing Climate workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#testing-exposure-workflow">Testing Exposure workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TestingWorkflows.html#testing-medicare-workflow">Testing Medicare workflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="adding_data.html">Adding more data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#what-data-are-you-adding">What data are you adding?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#data-modeling-vs-data-introspection">Data modeling vs data introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#adding-new-data-domain">Adding new data domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#creating-new-single-table">Creating new single table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#adding-a-table-from-a-remote-data-source">Adding a table from a remote data source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#adding-data-to-existing-table">Adding data to existing table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_data.html#automatically-ingesting-multiple-files-from-a-file-system">Automatically ingesting multiple files from a file system</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="AppPipelineGenerator.html">Executing containerized apps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="AppPipelineGenerator.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AppPipelineGenerator.html#prerequisites">Prerequisites</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#docker-or-python-virtual-environment">Docker or Python virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#setup-dbms-server">Setup DBMS Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#define-connection">Define connection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AppPipelineGenerator.html#using-pipeline-generator">Using pipeline generator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#generate-pipeline-and-metadata">Generate pipeline and metadata</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AppPipelineGenerator.html#execute-generated-pipeline">Execute generated pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AppPipelineGenerator.html#appendix-1-metadata-description">Appendix 1: Metadata description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#file-app-config-yaml">File app.config.yaml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#file-metadata-yml">File metadata.yml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AppPipelineGenerator.html#file-dorieh-metadata-yaml">File dorieh-metadata.yaml</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="glossary.html#concepts">Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="glossary.html#acronyms">Acronyms</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="docindices.html">Indices</a></li>
 </ul>
 
@@ -111,9 +519,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="guts.html">Data Platform Internals</a></li>
-          <li class="breadcrumb-item"><a href="platform.html">Dorieh Core Data Platform</a></li>
-      <li class="breadcrumb-item active">Data Modelling for Dorieh Data Platform</li>
+      <li class="breadcrumb-item active">Data Modeling for Dorieh Data Platform</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/Datamodels.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -123,46 +529,79 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="data-modelling-for-dorieh-data-platform">
-<h1>Data Modelling for Dorieh Data Platform<a class="headerlink" href="#data-modelling-for-dorieh-data-platform" title="Permalink to this heading"></a></h1>
+  <section id="data-modeling-for-dorieh-data-platform">
+<h1>Data Modeling for Dorieh Data Platform<a class="headerlink" href="#data-modeling-for-dorieh-data-platform" title="Link to this heading"></a></h1>
 <p><strong>How data models are defined and handled</strong></p>
+<p>This page is the authoritative reference for the core Dorieh
+data-modeling DSL: the YAML directives understood by the
+<a class="reference internal" href="members/domain.html"><span class="doc std std-doc">Domain</span></a> DDL generator and the Universal Database
+Loader. Additional directives, used to combine heterogeneous
+per-year tables into federated views, are documented separately in
+<a class="reference internal" href="DataModellingExtensions.html"><span class="std std-doc">Data Modeling Extensions</span></a>.</p>
 <div class="toctree-wrapper compound">
 </div>
+<p>The DSL in use — worked models and tooling documented elsewhere:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="Medicare.html"><span class="std std-doc">Medicare: Building a Data Warehouse from ResDac Files</span></a> and
+<a class="reference internal" href="Medicaid.html"><span class="std std-doc">Medicaid</span></a> — production-scale models written in this DSL</p></li>
+<li><p><a class="reference internal" href="MedicareLineage.html"><span class="std std-doc">Data dictionary and lineage for Medicare processing</span></a></p></li>
+<li><p><a class="reference internal" href="members/domain_dictionary.html"><span class="std std-doc">The Data Dictionary Generation tool</span></a></p></li>
+</ul>
 <nav class="contents local" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#introduction-to-data-modelling-for-nsaph-data-platform" id="id1">Introduction to data modelling for NSAPH Data Platform</a></p></li>
+<li><p><a class="reference internal" href="#introduction-to-data-modeling-for-dorieh-data-platform" id="id1">Introduction to data modeling for Dorieh Data Platform</a></p></li>
 <li><p><a class="reference internal" href="#domain" id="id2">Domain</a></p></li>
 <li><p><a class="reference internal" href="#table" id="id3">Table</a></p>
 <ul>
-<li><p><a class="reference internal" href="#create-statement" id="id4">Create statement</a></p></li>
-<li><p><a class="reference internal" href="#invalid-record" id="id5">Invalid Record</a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#column" id="id6">Column</a></p>
+<li><p><a class="reference internal" href="#create-statement" id="id4">Create statement</a></p>
 <ul>
-<li><p><a class="reference internal" href="#source" id="id7">Source</a></p></li>
-<li><p><a class="reference internal" href="#index" id="id8">Index</a></p></li>
-<li><p><a class="reference internal" href="#generated-columns" id="id9">Generated columns</a></p></li>
-<li><p><a class="reference internal" href="#computed-columns" id="id10">Computed columns</a></p></li>
-<li><p><a class="reference internal" href="#file-columns" id="id11">File columns</a></p></li>
-<li><p><a class="reference internal" href="#record-columns" id="id12">Record columns</a></p></li>
-<li><p><a class="reference internal" href="#transposing-columns" id="id13">Transposing columns</a></p></li>
-<li><p><a class="reference internal" href="#wildcards" id="id14">Wildcards</a></p></li>
+<li><p><a class="reference internal" href="#natural-join-in-from" id="id5">Natural join in <code class="docutils literal notranslate"><span class="pre">from</span></code></a></p></li>
+<li><p><a class="reference internal" href="#group-by-and-nullable-group-by" id="id6">Group by and nullable group by</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#multi-column-indices" id="id15">Multi-column indices</a></p></li>
-<li><p><a class="reference internal" href="#generation-of-the-database-schema-ddl" id="id16">Generation of the database schema (DDL)</a></p></li>
-<li><p><a class="reference internal" href="#indexing-policies" id="id17">Indexing policies</a></p></li>
-<li><p><a class="reference internal" href="#linking-with-nomenclature" id="id18">Linking with nomenclature</a></p>
+<li><p><a class="reference internal" href="#invalid-record" id="id7">Invalid Record</a></p>
 <ul>
-<li><p><a class="reference internal" href="#us-states" id="id19">US States</a></p></li>
+<li><p><a class="reference internal" href="#validation-checks-and-journaling" id="id8">Validation checks and journaling</a></p></li>
+<li><p><a class="reference internal" href="#the-quality-column" id="id9">The quality column</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#ingesting-data" id="id20">Ingesting data</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#column" id="id10">Column</a></p>
+<ul>
+<li><p><a class="reference internal" href="#source" id="id11">Source</a></p>
+<ul>
+<li><p><a class="reference internal" href="#joined-view-columns-select-from-where" id="id12">Joined view columns (<code class="docutils literal notranslate"><span class="pre">select</span></code> / <code class="docutils literal notranslate"><span class="pre">from</span></code> / <code class="docutils literal notranslate"><span class="pre">where</span></code>)</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#index" id="id13">Index</a></p></li>
+<li><p><a class="reference internal" href="#generated-columns" id="id14">Generated columns</a></p></li>
+<li><p><a class="reference internal" href="#computed-columns" id="id15">Computed columns</a></p>
+<ul>
+<li><p><a class="reference internal" href="#execution-scope-of-the-compute-code" id="id16">Execution scope of the compute code</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#file-columns" id="id17">File columns</a></p></li>
+<li><p><a class="reference internal" href="#record-columns" id="id18">Record columns</a></p></li>
+<li><p><a class="reference internal" href="#identifier-columns-and-the-identifiers-token" id="id19">Identifier columns and the <code class="docutils literal notranslate"><span class="pre">{identifiers}</span></code> token</a></p></li>
+<li><p><a class="reference internal" href="#transposing-columns" id="id20">Transposing columns</a></p></li>
+<li><p><a class="reference internal" href="#wildcards" id="id21">Wildcards</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#multi-column-indices" id="id22">Multi-column indices</a></p></li>
+<li><p><a class="reference internal" href="#indexing-policies" id="id23">Indexing policies</a></p></li>
+<li><p><a class="reference internal" href="#linking-with-nomenclature" id="id24">Linking with nomenclature</a></p>
+<ul>
+<li><p><a class="reference internal" href="#us-states" id="id25">US States</a></p></li>
+<li><p><a class="reference internal" href="#county-codes" id="id26">County codes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#ingesting-data" id="id27">Ingesting data</a></p></li>
+<li><p><a class="reference internal" href="#where-to-go-next" id="id28">Where to go next</a></p></li>
 </ul>
 </nav>
-<section id="introduction-to-data-modelling-for-nsaph-data-platform">
-<h2><a class="toc-backref" href="#id1" role="doc-backlink">Introduction to data modelling for NSAPH Data Platform</a><a class="headerlink" href="#introduction-to-data-modelling-for-nsaph-data-platform" title="Permalink to this heading"></a></h2>
+<section id="introduction-to-data-modeling-for-dorieh-data-platform">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Introduction to data modeling for Dorieh Data Platform</a><a class="headerlink" href="#introduction-to-data-modeling-for-dorieh-data-platform" title="Link to this heading"></a></h2>
 <p>Data models consist of database tables, relations between them
 (e.g. foreign keys), indices and conventions that govern things
 like namings and roles of specific columns.</p>
@@ -170,39 +609,51 @@ like namings and roles of specific columns.</p>
 Between domains, data can be linked based on the naming conventions
 for columns. For instance, a column named <code class="docutils literal notranslate"><span class="pre">zipcode</span></code> means the US zip
 code in any domain and thus can be used for linkages and aggregations.</p>
-<p>Currently, we are in the process of defining data models for the
-following domains</p>
+<p>Dorieh ships data models for the following domains:</p>
 <ul class="simple">
 <li><p>Medicaid</p></li>
 <li><p>Medicare</p></li>
 <li><p>EPA</p></li>
 <li><p>Census</p></li>
 <li><p>Climate (gridMET data)</p></li>
+<li><p>Exposure (Air pollution data)</p></li>
 </ul>
 <p>Extended functionality for data transformations is provided by
-<a class="reference internal" href="DataModellingExtensions.html"><span class="doc std std-doc">Data Modelling Extensions</span></a> that are used by
+<a class="reference internal" href="DataModellingExtensions.html"><span class="doc std std-doc">Data Modeling Extensions</span></a> that are used by
 <a class="reference internal" href="Medicare.html"><span class="doc std std-doc">Medicare processing workflow</span></a>  and
 <a class="reference internal" href="Medicaid.html"><span class="doc std std-doc">Medicaid processing workflow</span></a>. These functionalities include:</p>
 <ul class="simple">
 <li><p>Combining data from different tables (approximate <strong>union</strong> operation)</p></li>
 <li><p>Casting data types</p></li>
-<li><p>Validating consistency of data across tables</p></li>
+<li><p>Composing checks that validate consistency of data across tables
+(there is no single directive; see
+<a class="reference internal" href="DataModellingExtensions.html#validating-consistency-of-data-across-tables"><span class="std std-ref">the extensions page</span></a>)</p></li>
 </ul>
 <p>See also: <a class="reference internal" href="DBConnections.html"><span class="doc std std-doc">Managing database connections</span></a>.</p>
 </section>
 <section id="domain">
-<h2><a class="toc-backref" href="#id2" role="doc-backlink">Domain</a><a class="headerlink" href="#domain" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Domain</a><a class="headerlink" href="#domain" title="Link to this heading"></a></h2>
 <p>Handling domains is implemented by the
 <a class="reference internal" href="members/domain.html"><span class="doc std std-doc">Domain</span></a> class.</p>
-<p>For each domain, its data model is defined by a YAML file in
-the <code class="docutils literal notranslate"><span class="pre">src/yml</span></code> directory.</p>
+<p>For each domain, its data model is defined by a YAML file. The model
+files shipped with Dorieh live in the <code class="docutils literal notranslate"><span class="pre">models</span></code> subdirectory of the
+Python package they belong to, under <code class="docutils literal notranslate"><span class="pre">src/python/dorieh/</span></code>. For
+example, the Medicare model is
+<a class="reference external" href="https://github.com/ForomePlatform/dorieh/blob/main/src/python/dorieh/cms/models/medicare.yaml">src/python/dorieh/cms/models/medicare.yaml</a>
+and the Medicaid model is
+<code class="docutils literal notranslate"><span class="pre">src/python/dorieh/cms/models/medicaid.yaml</span></code>; the model used by the
+climate tutorial is <code class="docutils literal notranslate"><span class="pre">doc/tutorial/climate/example1_model.yml</span></code>. There
+is no requirement to keep model files in any particular directory:
+every tool that consumes a model takes the path to the YAML file as
+an argument, and some tools (such as the Project Loader) can generate
+a starter model file by introspecting the data.</p>
 <p>Each model is represented by a “forest”: a set of treelike
-structures of tables. It can contain one or several root tables</p>
+structures of tables. It can contain one or several root tables.</p>
 <p>Domain should be the first entry in the YAML file:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">my_domain</span><span class="p">:</span>
 </pre></div>
 </div>
-<p>The following parameters can be defined fro domain:</p>
+<p>The following parameters can be defined for a domain:</p>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameter</p></th>
@@ -221,7 +672,7 @@ structures of tables. It can contain one or several root tables</p>
 </tr>
 <tr class="row-even"><td><p>index</p></td>
 <td><p>no</p></td>
-<td><p>Default indexing policy for this domain. This policy is used for tables that do not define their own indexing policy</p></td>
+<td><p>Default <a class="reference internal" href="#indexing-policies">indexing policy</a> for this domain. This policy is used for tables that do not define their own indexing policy</p></td>
 </tr>
 <tr class="row-odd"><td><p>tables</p></td>
 <td><p>yes</p></td>
@@ -247,7 +698,7 @@ structures of tables. It can contain one or several root tables</p>
 </table>
 </section>
 <section id="table">
-<h2><a class="toc-backref" href="#id3" role="doc-backlink">Table</a><a class="headerlink" href="#table" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Table</a><a class="headerlink" href="#table" title="Link to this heading"></a></h2>
 <p>The following parameters can be defined for a table:</p>
 <table class="docutils align-default">
 <thead>
@@ -259,22 +710,22 @@ structures of tables. It can contain one or several root tables</p>
 <tbody>
 <tr class="row-even"><td><p>type</p></td>
 <td><p>no</p></td>
-<td><p>view / table</p></td>
+<td><p>Ignored at the table level; the object kind (table / view / materialized view) is determined by <code class="docutils literal notranslate"><span class="pre">create.type</span></code> (see <a class="reference internal" href="#create-statement">Create statement</a>)</p></td>
 </tr>
 <tr class="row-odd"><td><p>hard_linked</p></td>
 <td><p>no</p></td>
 <td><p>Denotes that the table is an integral part of parent table rather than a separate table with a many-to-one relationship to the parent table</p></td>
 </tr>
 <tr class="row-even"><td><p>columns</p></td>
-<td><p>yes</p></td>
-<td><p>list of column definitions</p></td>
+<td><p>yes*</p></td>
+<td><p>list of column definitions (may be omitted for tables fully defined by their <code class="docutils literal notranslate"><span class="pre">create</span></code> statement)</p></td>
 </tr>
 <tr class="row-odd"><td><p>indices or indexes</p></td>
-<td><p>yes</p></td>
+<td><p>no</p></td>
 <td><p>dictionary of multi-column indices</p></td>
 </tr>
 <tr class="row-even"><td><p>primary_key</p></td>
-<td><p>yes</p></td>
+<td><p>see below</p></td>
 <td><p>list of column names included in the table primary key</p></td>
 </tr>
 <tr class="row-odd"><td><p>children</p></td>
@@ -283,7 +734,7 @@ structures of tables. It can contain one or several root tables</p>
 </tr>
 <tr class="row-even"><td><p>description</p></td>
 <td><p>no</p></td>
-<td><p>description of this domain to be included in auto-generated documentation</p></td>
+<td><p>description of this table to be included in auto-generated documentation</p></td>
 </tr>
 <tr class="row-odd"><td><p>reference</p></td>
 <td><p>no</p></td>
@@ -299,9 +750,26 @@ structures of tables. It can contain one or several root tables</p>
 </tr>
 </tbody>
 </table>
+<p><code class="docutils literal notranslate"><span class="pre">primary_key</span></code> is optional in general, but it is required whenever
+Dorieh needs to know the identity of a row:</p>
+<ul class="simple">
+<li><p>for tables ingested from files by the Universal Database Loader
+(the loader uses the primary key to detect records with missing
+key values);</p></li>
+<li><p>for tables that have child tables (the parent’s primary key becomes
+the foreign key of every child table);</p></li>
+<li><p>for tables that define <a class="reference internal" href="#invalid-record">invalid.records</a>
+validation.</p></li>
+</ul>
+<p>For views created with a <code class="docutils literal notranslate"><span class="pre">group</span> <span class="pre">by</span></code> clause the primary key is derived
+automatically from the grouping columns (see
+<a class="reference internal" href="#create-statement">Create statement</a>).</p>
 <section id="create-statement">
-<h3><a class="toc-backref" href="#id4" role="doc-backlink">Create statement</a><a class="headerlink" href="#create-statement" title="Permalink to this heading"></a></h3>
-<p>Describes how a table or a view should be created.</p>
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Create statement</a><a class="headerlink" href="#create-statement" title="Link to this heading"></a></h3>
+<p>Describes how a table or a view should be created. In the vocabulary
+of
+<a class="reference internal" href="concepts.html#dataset-operators-and-field-construction-operators"><span class="std std-ref">The Dorieh approach</span></a>,
+every table or view with a <code class="docutils literal notranslate"><span class="pre">create</span></code> clause is a dataset operator.</p>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameter</p></th>
@@ -312,34 +780,90 @@ structures of tables. It can contain one or several root tables</p>
 <tbody>
 <tr class="row-even"><td><p>type</p></td>
 <td><p>no</p></td>
-<td><p>view / table</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">table</span></code> (default) / <code class="docutils literal notranslate"><span class="pre">view</span></code> / <code class="docutils literal notranslate"><span class="pre">materialized</span> <span class="pre">view</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>select</p></td>
 <td><p>no</p></td>
-<td><p>columns to put in <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> clause of CREATE statement</p></td>
+<td><p>columns to put in <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> clause of CREATE statement. When <code class="docutils literal notranslate"><span class="pre">select</span></code> is used, <code class="docutils literal notranslate"><span class="pre">type</span></code> must also be given explicitly</p></td>
 </tr>
 <tr class="row-even"><td><p>from</p></td>
 <td><p>no</p></td>
-<td><p>What to put into <code class="docutils literal notranslate"><span class="pre">FROM</span></code> clause</p></td>
+<td><p>What to put into <code class="docutils literal notranslate"><span class="pre">FROM</span></code> clause: a single table or view, two relations combined with the literal keyword <code class="docutils literal notranslate"><span class="pre">natural</span> <span class="pre">join</span></code> (see below), or a list of table name patterns for a <a class="reference internal" href="DataModellingExtensions.html"><span class="std std-doc">federated view</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p>group by</p></td>
 <td><p>no</p></td>
-<td><p>What to put into <code class="docutils literal notranslate"><span class="pre">GROUP</span> <span class="pre">BY</span></code> clause</p></td>
+<td><p>List of columns to put into <code class="docutils literal notranslate"><span class="pre">GROUP</span> <span class="pre">BY</span></code> clause. Also adds a <code class="docutils literal notranslate"><span class="pre">NOT</span> <span class="pre">NULL</span></code> filter for every grouping column and derives the primary key of the view (see below)</p></td>
 </tr>
-<tr class="row-even"><td><p>populate</p></td>
+<tr class="row-even"><td><p>nullable group by</p></td>
+<td><p>no</p></td>
+<td><p>List of columns to put into <code class="docutils literal notranslate"><span class="pre">GROUP</span> <span class="pre">BY</span></code> clause. Unlike <code class="docutils literal notranslate"><span class="pre">group</span> <span class="pre">by</span></code>, keeps records with NULL values in the grouping columns and does not derive a primary key (see below)</p></td>
+</tr>
+<tr class="row-odd"><td><p>populate</p></td>
 <td><p>no, default is <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
-<td><p>If <code class="docutils literal notranslate"><span class="pre">False</span></code>, then a condition that can never be satisfied will be added as <code class="docutils literal notranslate"><span class="pre">WHERE</span></code> clause, ehnce an empty table will be created that can be populated later. This is mostly used when additional triggers needed for population process.</p></td>
+<td><p>If <code class="docutils literal notranslate"><span class="pre">False</span></code>, then a condition that can never be satisfied will be added as <code class="docutils literal notranslate"><span class="pre">WHERE</span></code> clause, hence an empty table will be created that can be populated later. This is mostly used when additional triggers are needed for the population process.</p></td>
 </tr>
 </tbody>
 </table>
+<p>The value of <code class="docutils literal notranslate"><span class="pre">type</span></code> is inserted verbatim into the generated
+<code class="docutils literal notranslate"><span class="pre">CREATE</span> <span class="pre">...</span></code> statement, hence <code class="docutils literal notranslate"><span class="pre">materialized</span> <span class="pre">view</span></code> is fully supported
+alongside <code class="docutils literal notranslate"><span class="pre">table</span></code> and <code class="docutils literal notranslate"><span class="pre">view</span></code>. Both the climate tutorial model
+(<code class="docutils literal notranslate"><span class="pre">gold_temperature_by_state</span></code> in <code class="docutils literal notranslate"><span class="pre">example1_model.yml</span></code>) and the Medicare
+model (<code class="docutils literal notranslate"><span class="pre">_ps</span></code>, <code class="docutils literal notranslate"><span class="pre">qc_enrollments</span></code> and <code class="docutils literal notranslate"><span class="pre">qc_admissions</span></code> in <code class="docutils literal notranslate"><span class="pre">medicare.yaml</span></code>)
+use materialized views.</p>
+<section id="natural-join-in-from">
+<h4><a class="toc-backref" href="#id5" role="doc-backlink">Natural join in <code class="docutils literal notranslate"><span class="pre">from</span></code></a><a class="headerlink" href="#natural-join-in-from" title="Link to this heading"></a></h4>
+<p>When <code class="docutils literal notranslate"><span class="pre">create</span></code> contains both <code class="docutils literal notranslate"><span class="pre">select</span></code> and <code class="docutils literal notranslate"><span class="pre">from</span></code>, the value of <code class="docutils literal notranslate"><span class="pre">from</span></code>
+may be two relations combined with the literal keyword
+<code class="docutils literal notranslate"><span class="pre">natural</span> <span class="pre">join</span></code>. The DDL generator splits the clause on this keyword,
+qualifies each relation with the domain schema, and merges the column
+definitions of both parent relations into the new table or view. Note
+that the whole <code class="docutils literal notranslate"><span class="pre">from</span></code> clause is folded to lower case, so use
+lower-case relation names with this feature. The Medicare model uses
+it to combine beneficiary-level and enrollment-level data for quality
+control:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nt">qc_enrl_bene</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">create</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">view</span>
+<span class="w">        </span><span class="nt">select</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;*&#39;</span>
+<span class="w">        </span><span class="nt">from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollments natural join beneficiaries</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">from</span></code> is a list of table name patterns (or a single pattern
+containing <code class="docutils literal notranslate"><span class="pre">*</span></code>), the core DDL generator skips the table: such
+federated views are built by the
+<a class="reference internal" href="DataModellingExtensions.html"><span class="std std-doc">Data Modeling Extensions</span></a> tooling.</p>
+</section>
+<section id="group-by-and-nullable-group-by">
+<h4><a class="toc-backref" href="#id6" role="doc-backlink">Group by and nullable group by</a><a class="headerlink" href="#group-by-and-nullable-group-by" title="Link to this heading"></a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">group</span> <span class="pre">by</span></code> and <code class="docutils literal notranslate"><span class="pre">nullable</span> <span class="pre">group</span> <span class="pre">by</span></code> apply to views and materialized
+views whose columns are defined by the <code class="docutils literal notranslate"><span class="pre">columns</span></code> list (that is,
+without a <code class="docutils literal notranslate"><span class="pre">select</span></code> clause in <code class="docutils literal notranslate"><span class="pre">create</span></code>). A plain <code class="docutils literal notranslate"><span class="pre">group</span> <span class="pre">by</span></code> has two
+side effects beyond emitting the <code class="docutils literal notranslate"><span class="pre">GROUP</span> <span class="pre">BY</span></code> clause:</p>
+<ul class="simple">
+<li><p>a <code class="docutils literal notranslate"><span class="pre">WHERE</span></code> clause is added requiring every grouping column to be
+<code class="docutils literal notranslate"><span class="pre">NOT</span> <span class="pre">NULL</span></code>, so records with missing keys are excluded from the
+view;</p></li>
+<li><p>the grouping columns are recorded as the primary key of the view in
+the model (mapped through column <code class="docutils literal notranslate"><span class="pre">source</span></code> definitions when the view
+renames a column), and this derived primary key is used wherever
+the primary key is needed — for example, as the foreign key linking
+child tables.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">nullable</span> <span class="pre">group</span> <span class="pre">by</span></code> emits only the <code class="docutils literal notranslate"><span class="pre">GROUP</span> <span class="pre">BY</span></code> clause: records with
+NULL values in the grouping columns are kept (SQL <code class="docutils literal notranslate"><span class="pre">GROUP</span> <span class="pre">BY</span></code> places
+them in a common NULL group per key), and no primary key is derived. This is
+used for quality-control aggregates where NULL is a legitimate group,
+e.g. in <code class="docutils literal notranslate"><span class="pre">qc_enrollments</span></code> and <code class="docutils literal notranslate"><span class="pre">qc_admissions</span></code> in <code class="docutils literal notranslate"><span class="pre">medicare.yaml</span></code>.</p>
+</section>
 </section>
 <section id="invalid-record">
-<h3><a class="toc-backref" href="#id5" role="doc-backlink">Invalid Record</a><a class="headerlink" href="#invalid-record" title="Permalink to this heading"></a></h3>
-<p>By default, an exception is raised if an invalid
-record is encountered during data ingestion. However,
-it is possible to override this behaviour by instructing
-the data loader to either ignore such records or put them
-in a special audit table.</p>
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">Invalid Record</a><a class="headerlink" href="#invalid-record" title="Link to this heading"></a></h3>
+<p>By default, an invalid record encountered during data ingestion
+causes an error: a record violating the primary key raises a database
+error, and a record with a missing primary key value is rejected by
+the loader with a warning. The <code class="docutils literal notranslate"><span class="pre">invalid.records</span></code> directive overrides
+this behaviour by instructing the platform to either silently discard
+such records or journal them in a special audit table.</p>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameter</p></th>
@@ -350,15 +874,15 @@ in a special audit table.</p>
 <tbody>
 <tr class="row-even"><td><p>action</p></td>
 <td><p>yes</p></td>
-<td><p>Action to be performed: <code class="docutils literal notranslate"><span class="pre">INSERT</span></code> or <code class="docutils literal notranslate"><span class="pre">IGNORE</span></code></p></td>
+<td><p>Action to be performed: <code class="docutils literal notranslate"><span class="pre">INSERT</span></code> (journal in an audit table) or <code class="docutils literal notranslate"><span class="pre">IGNORE</span></code> (discard). Case-insensitive</p></td>
 </tr>
 <tr class="row-odd"><td><p>target</p></td>
 <td><p>yes/no</p></td>
-<td><p>For action INSERT - a target table</p></td>
+<td><p>For action INSERT - the target audit table, see below</p></td>
 </tr>
 <tr class="row-even"><td><p>description</p></td>
 <td><p>no</p></td>
-<td><p>description of this domain to be included in auto-generated documentation</p></td>
+<td><p>description of this action to be included in auto-generated documentation</p></td>
 </tr>
 <tr class="row-odd"><td><p>reference</p></td>
 <td><p>no</p></td>
@@ -366,10 +890,111 @@ in a special audit table.</p>
 </tr>
 </tbody>
 </table>
+<p>The <code class="docutils literal notranslate"><span class="pre">target</span></code> value is a dictionary with two optional keys, <code class="docutils literal notranslate"><span class="pre">schema</span></code>
+and <code class="docutils literal notranslate"><span class="pre">table</span></code>. If <code class="docutils literal notranslate"><span class="pre">schema</span></code> is omitted, the domain schema is used; if
+<code class="docutils literal notranslate"><span class="pre">table</span></code> is omitted, the audit table gets the same name as the table
+being validated. A value starting with <code class="docutils literal notranslate"><span class="pre">$</span></code> is a reference to a
+top-level domain parameter: for example, in <code class="docutils literal notranslate"><span class="pre">medicare.yaml</span></code> the
+<code class="docutils literal notranslate"><span class="pre">admissions</span></code> table declares</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">              </span><span class="nt">invalid.records</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;INSERT&quot;</span>
+<span class="w">                </span><span class="nt">target</span><span class="p">:</span>
+<span class="w">                  </span><span class="nt">schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$schema.audit</span>
+</pre></div>
+</div>
+<p>which journals invalid admission records into
+<code class="docutils literal notranslate"><span class="pre">medicare_audit.admissions</span></code> (<code class="docutils literal notranslate"><span class="pre">schema.audit</span></code> is defined as
+<code class="docutils literal notranslate"><span class="pre">medicare_audit</span></code> for the domain, and the table name defaults to
+<code class="docutils literal notranslate"><span class="pre">admissions</span></code>).</p>
+<section id="validation-checks-and-journaling">
+<h4><a class="toc-backref" href="#id8" role="doc-backlink">Validation checks and journaling</a><a class="headerlink" href="#validation-checks-and-journaling" title="Link to this heading"></a></h4>
+<p>The validation machinery is generated for a child table that defines
+its own <code class="docutils literal notranslate"><span class="pre">primary_key</span></code>; the primary key of the parent table serves as
+the implicit foreign key. The DDL generator emits a
+<code class="docutils literal notranslate"><span class="pre">BEFORE</span> <span class="pre">INSERT</span></code> trigger (with a PL/pgSQL function named
+<code class="docutils literal notranslate"><span class="pre">{schema}.validate_{table}()</span></code>) that performs three checks on each
+incoming row, in this order:</p>
+<ol class="arabic simple">
+<li><p><strong>Primary key integrity</strong>: if any primary-key column of the new
+row is NULL, the row fails with reason <code class="docutils literal notranslate"><span class="pre">PRIMARY</span> <span class="pre">KEY</span></code>;</p></li>
+<li><p><strong>Consistency across records (referential integrity)</strong>: if the
+parent table contains no row matching the new row’s foreign-key
+columns, the row fails with reason <code class="docutils literal notranslate"><span class="pre">FOREIGN</span> <span class="pre">KEY</span></code>;</p></li>
+<li><p><strong>Elimination of duplicates</strong>: if the table already contains a row
+with the same primary key values, the new row fails with reason
+<code class="docutils literal notranslate"><span class="pre">DUPLICATE</span></code>.</p></li>
+</ol>
+<p>A failing row is never inserted into the main table. What happens to
+it depends on <code class="docutils literal notranslate"><span class="pre">action</span></code>:</p>
+<ul class="simple">
+<li><p>with <code class="docutils literal notranslate"><span class="pre">IGNORE</span></code> it is silently discarded;</p></li>
+<li><p>with <code class="docutils literal notranslate"><span class="pre">INSERT</span></code> it is journaled in the audit table.</p></li>
+</ul>
+<p>For action <code class="docutils literal notranslate"><span class="pre">INSERT</span></code>, the audit table is created automatically in the
+target schema. It contains the same data columns as the main table —
+including generated columns, which compute their values in the audit
+table as well — but without the primary key or other constraints, so
+that any failing row can be stored. Three bookkeeping columns are
+added:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Column</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Content</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>REASON</p></td>
+<td><p>VARCHAR(16)</p></td>
+<td><p>Which check failed: <code class="docutils literal notranslate"><span class="pre">PRIMARY</span> <span class="pre">KEY</span></code>, <code class="docutils literal notranslate"><span class="pre">FOREIGN</span> <span class="pre">KEY</span></code> or <code class="docutils literal notranslate"><span class="pre">DUPLICATE</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>REFCTID</p></td>
+<td><p>TID</p></td>
+<td><p>For <code class="docutils literal notranslate"><span class="pre">DUPLICATE</span></code>: the physical row id (<code class="docutils literal notranslate"><span class="pre">ctid</span></code>) of the retained row in the main table that the journaled row collided with</p></td>
+</tr>
+<tr class="row-even"><td><p>recorded_at</p></td>
+<td><p>TIMESTAMP DEFAULT CURRENT_TIMESTAMP</p></td>
+<td><p>When the row was journaled</p></td>
+</tr>
+</tbody>
+</table>
+<p>The generator also indexes the audit table: on <code class="docutils literal notranslate"><span class="pre">REASON</span></code>, on
+<code class="docutils literal notranslate"><span class="pre">REFCTID</span></code>, and, for every data column that would be indexed in the
+main table, both a single-column index and a composite
+<code class="docutils literal notranslate"><span class="pre">(REASON,</span> <span class="pre">column)</span></code> index.</p>
+</section>
+<section id="the-quality-column">
+<h4><a class="toc-backref" href="#id9" role="doc-backlink">The quality column</a><a class="headerlink" href="#the-quality-column" title="Link to this heading"></a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">quality</span></code> column is not created automatically. For every table
+that is populated from another relation (a <code class="docutils literal notranslate"><span class="pre">create</span></code> statement with
+<code class="docutils literal notranslate"><span class="pre">select</span></code>/<code class="docutils literal notranslate"><span class="pre">from</span></code> and <code class="docutils literal notranslate"><span class="pre">populate</span></code> not set to <code class="docutils literal notranslate"><span class="pre">False</span></code>) and whose
+<code class="docutils literal notranslate"><span class="pre">invalid.records</span></code> action is <code class="docutils literal notranslate"><span class="pre">INSERT</span></code>, Dorieh generates an
+<code class="docutils literal notranslate"><span class="pre">UPDATE</span> <span class="pre">...</span> <span class="pre">SET</span> <span class="pre">quality</span></code> statement after the table is populated. Such
+a table must therefore declare a <code class="docutils literal notranslate"><span class="pre">quality</span></code> column, as the
+<code class="docutils literal notranslate"><span class="pre">admissions</span></code> table in <code class="docutils literal notranslate"><span class="pre">medicare.yaml</span></code> does:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">                </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">quality</span><span class="p">:</span>
+<span class="w">                    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;VARCHAR(12)</span><span class="nv"> </span><span class="s">DEFAULT</span><span class="nv"> </span><span class="s">&#39;PASS&#39;&quot;</span>
+</pre></div>
+</div>
+<p>Declaring the column satisfies the generated statement; it does not
+gate its generation. The <code class="docutils literal notranslate"><span class="pre">UPDATE</span></code>
+statement back-annotates the retained rows: every row of the
+main table whose <code class="docutils literal notranslate"><span class="pre">ctid</span></code> is recorded as <code class="docutils literal notranslate"><span class="pre">REFCTID</span></code> in the audit table
+with reason <code class="docutils literal notranslate"><span class="pre">DUPLICATE</span></code> gets <code class="docutils literal notranslate"><span class="pre">quality</span> <span class="pre">=</span> <span class="pre">'DUPLICATE'</span></code>, while
+unaffected rows keep the declared default (<code class="docutils literal notranslate"><span class="pre">'PASS'</span></code>). In other words,
+<code class="docutils literal notranslate"><span class="pre">quality</span></code> marks the kept counterpart of every journaled duplicate, so
+that both sides of a collision can be found. This update is emitted
+both when the table is populated on creation and by the generated
+INSERT … SELECT population statement.</p>
+</section>
 </section>
 </section>
 <section id="column">
-<h2><a class="toc-backref" href="#id6" role="doc-backlink">Column</a><a class="headerlink" href="#column" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">Column</a><a class="headerlink" href="#column" title="Link to this heading"></a></h2>
+<p>In the vocabulary of
+<a class="reference internal" href="concepts.html#dataset-operators-and-field-construction-operators"><span class="std std-ref">The Dorieh approach</span></a>,
+every column definition with a <code class="docutils literal notranslate"><span class="pre">source</span></code> is a field construction
+operator.</p>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameter</p></th>
@@ -379,8 +1004,8 @@ in a special audit table.</p>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>type</p></td>
-<td><p>yes</p></td>
-<td><p>Database type</p></td>
+<td><p>no</p></td>
+<td><p>Database type. If omitted, defaults to <code class="docutils literal notranslate"><span class="pre">VARCHAR</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>source</p></td>
 <td><p>no</p></td>
@@ -394,11 +1019,15 @@ in a special audit table.</p>
 <td><p>no</p></td>
 <td><p>Override default to build an index based on this column. Possible values: true/false/dictionary. See <a class="reference internal" href="#index">index</a></p></td>
 </tr>
-<tr class="row-even"><td><p>description</p></td>
+<tr class="row-even"><td><p>identifier</p></td>
 <td><p>no</p></td>
-<td><p>description of this domain to be included in auto-generated documentation</p></td>
+<td><p>Boolean. Marks a column of a view as part of the identity of the modeled entity; see <a class="reference internal" href="#identifier-columns-and-the-identifiers-token">Identifier columns</a></p></td>
 </tr>
-<tr class="row-odd"><td><p>reference</p></td>
+<tr class="row-odd"><td><p>description</p></td>
+<td><p>no</p></td>
+<td><p>description of this column to be included in auto-generated documentation</p></td>
+</tr>
+<tr class="row-even"><td><p>reference</p></td>
 <td><p>no</p></td>
 <td><p>URL with external documentation</p></td>
 </tr>
@@ -416,10 +1045,22 @@ there are three types of special columns:</p>
 name in input source is different from a column name in the
 database, such column also must define <code class="docutils literal notranslate"><span class="pre">source</span></code>.</p>
 <section id="source">
-<h3><a class="toc-backref" href="#id7" role="doc-backlink">Source</a><a class="headerlink" href="#source" title="Permalink to this heading"></a></h3>
-<p>Source must be defined for special columns and for columns
-with the name in the database different from the name
-in the input source.</p>
+<h3><a class="toc-backref" href="#id11" role="doc-backlink">Source</a><a class="headerlink" href="#source" title="Link to this heading"></a></h3>
+<p>The value of <code class="docutils literal notranslate"><span class="pre">source</span></code> can be:</p>
+<ul class="simple">
+<li><p>a string — for tables loaded from files, the name of a column in
+the incoming tabular data; for views, a SQL expression evaluated
+over the relation in <code class="docutils literal notranslate"><span class="pre">create.from</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">MIN(dob)</span></code>);</p></li>
+<li><p>an integer — a zero-based index of a column in the incoming
+tabular data (useful when the input has unnamed columns);</p></li>
+<li><p>a list of candidate column names — an extension used when building
+federated views over tables with varying column names, see
+<a class="reference internal" href="DataModellingExtensions.html"><span class="std std-doc">Data Modeling Extensions</span></a>;</p></li>
+<li><p>the literal string <code class="docutils literal notranslate"><span class="pre">None</span></code> — suppresses the column definition in the
+generated DDL; used when the <code class="docutils literal notranslate"><span class="pre">create.select</span></code> statement already
+produces the column but it still has to be documented in the model;</p></li>
+<li><p>a dictionary with the keys described below.</p></li>
+</ul>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameter</p></th>
@@ -428,35 +1069,67 @@ in the input source.</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>column name</p></td>
+<tr class="row-even"><td><p>type</p></td>
 <td><p>no</p></td>
+<td><p>One of: <code class="docutils literal notranslate"><span class="pre">column</span></code>, <code class="docutils literal notranslate"><span class="pre">multi_column</span></code>, <code class="docutils literal notranslate"><span class="pre">range</span></code>, <code class="docutils literal notranslate"><span class="pre">compute</span></code>, <code class="docutils literal notranslate"><span class="pre">generated</span></code>, <code class="docutils literal notranslate"><span class="pre">file</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>column</p></td>
+<td><p>for type <code class="docutils literal notranslate"><span class="pre">column</span></code></p></td>
 <td><p>A column name in the incoming tabular data</p></td>
 </tr>
-<tr class="row-odd"><td><p>type</p></td>
-<td><p>no</p></td>
-<td><p>Types: <code class="docutils literal notranslate"><span class="pre">generated</span></code>, <code class="docutils literal notranslate"><span class="pre">multi_column</span></code>, <code class="docutils literal notranslate"><span class="pre">range</span></code>, <code class="docutils literal notranslate"><span class="pre">compute</span></code>, <code class="docutils literal notranslate"><span class="pre">file</span></code></p></td>
+<tr class="row-even"><td><p>pattern</p></td>
+<td><p>for type <code class="docutils literal notranslate"><span class="pre">multi_column</span></code></p></td>
+<td><p>Python format pattern (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;MONTH_{:d}&quot;</span></code>) naming the input column for each value of the accompanying <code class="docutils literal notranslate"><span class="pre">range</span></code> column</p></td>
 </tr>
-<tr class="row-even"><td><p>range</p></td>
-<td><p>no</p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p>values</p></td>
+<td><p>for type <code class="docutils literal notranslate"><span class="pre">range</span></code></p></td>
+<td><p>The list of values over which the record is transposed</p></td>
 </tr>
-<tr class="row-odd"><td><p>code</p></td>
-<td><p>no</p></td>
+<tr class="row-even"><td><p>code</p></td>
+<td><p>for types <code class="docutils literal notranslate"><span class="pre">generated</span></code>, <code class="docutils literal notranslate"><span class="pre">compute</span></code></p></td>
 <td><p>Code for generated and computed columns</p></td>
 </tr>
-<tr class="row-even"><td><p>columns</p></td>
-<td><p>no</p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p>columns</p></td>
+<td><p>for type <code class="docutils literal notranslate"><span class="pre">compute</span></code></p></td>
+<td><p>Names of input-file columns referenced by the compute code</p></td>
 </tr>
-<tr class="row-odd"><td><p>parameters</p></td>
-<td><p>no</p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p>parameters</p></td>
+<td><p>for type <code class="docutils literal notranslate"><span class="pre">compute</span></code></p></td>
+<td><p>Names of database columns referenced by the compute code</p></td>
 </tr>
 </tbody>
 </table>
+<p>A column with source type <code class="docutils literal notranslate"><span class="pre">range</span></code> transposes the data: for every
+input record, one database record is created per value listed in
+<code class="docutils literal notranslate"><span class="pre">values</span></code>, and the column stores that value. Only one <code class="docutils literal notranslate"><span class="pre">range</span></code> column
+per table is allowed. Columns with source type <code class="docutils literal notranslate"><span class="pre">multi_column</span></code> can
+only be used in a table that has a <code class="docutils literal notranslate"><span class="pre">range</span></code> column: for each value of
+the range, the value of a <code class="docutils literal notranslate"><span class="pre">multi_column</span></code> column is taken from the
+input column whose name is produced by applying <code class="docutils literal notranslate"><span class="pre">pattern</span></code> to that
+value. Together these two source types convert wide records (e.g.
+one column per month) into long ones (one record per month).</p>
+<section id="joined-view-columns-select-from-where">
+<h4><a class="toc-backref" href="#id12" role="doc-backlink">Joined view columns (<code class="docutils literal notranslate"><span class="pre">select</span></code> / <code class="docutils literal notranslate"><span class="pre">from</span></code> / <code class="docutils literal notranslate"><span class="pre">where</span></code>)</a><a class="headerlink" href="#joined-view-columns-select-from-where" title="Link to this heading"></a></h4>
+<p>In a view created with a <code class="docutils literal notranslate"><span class="pre">group</span> <span class="pre">by</span></code> clause, the <code class="docutils literal notranslate"><span class="pre">source</span></code> of a column
+can also be a dictionary with the keys <code class="docutils literal notranslate"><span class="pre">select</span></code>, <code class="docutils literal notranslate"><span class="pre">from</span></code> and
+(optionally) <code class="docutils literal notranslate"><span class="pre">where</span></code>. Such a column is generated as a correlated
+scalar subquery: <code class="docutils literal notranslate"><span class="pre">select</span></code> supplies the selected expression, <code class="docutils literal notranslate"><span class="pre">from</span></code>
+names another table of the domain, the view’s grouping columns are
+equated with the corresponding columns of the joined table (column
+names are mapped through <code class="docutils literal notranslate"><span class="pre">source</span></code> definitions where they differ), and
+the optional <code class="docutils literal notranslate"><span class="pre">where</span></code> condition is ANDed to these join conditions.
+A living example from <code class="docutils literal notranslate"><span class="pre">medicaid.yaml</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">months_eligible</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">source</span><span class="p">:</span>
+<span class="w">                  </span><span class="nt">select</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;COUNT(distinct</span><span class="nv"> </span><span class="s">month)&quot;</span>
+<span class="w">                  </span><span class="nt">from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monthly</span>
+<span class="w">                  </span><span class="nt">where</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;max_elg_cd</span><span class="nv"> </span><span class="s">!=</span><span class="nv"> </span><span class="s">&#39;00&#39;&quot;</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="index">
-<h3><a class="toc-backref" href="#id8" role="doc-backlink">Index</a><a class="headerlink" href="#index" title="Permalink to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id13" role="doc-backlink">Index</a><a class="headerlink" href="#index" title="Link to this heading"></a></h3>
 <p>The value for <code class="docutils literal notranslate"><span class="pre">index</span></code> key can be a simple boolean <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>. If additional parameters
 are required, the value can be a dictionary with the following keys. For the explanation
 of options like <em>using</em> or <em>include</em>, see
@@ -475,7 +1148,7 @@ of options like <em>using</em> or <em>include</em>, see
 </tr>
 <tr class="row-odd"><td><p>using</p></td>
 <td><p>no</p></td>
-<td><p>The indexing method, the default is BTREE</p></td>
+<td><p>The indexing method; defaults to BTREE, or to GIN for array-typed columns</p></td>
 </tr>
 <tr class="row-even"><td><p>include</p></td>
 <td><p>no</p></td>
@@ -483,13 +1156,13 @@ of options like <em>using</em> or <em>include</em>, see
 </tr>
 <tr class="row-odd"><td><p>required_before_loading_data</p></td>
 <td><p>no</p></td>
-<td><p>Adding this key tells the generator that this index must be created before the table is populated. Otherwise, to improve performance, indices might be created after a table is popualted with all data</p></td>
+<td><p>Adding this key tells the generator that this index must be created before the table is populated. Otherwise, to improve performance, indices might be created after a table is populated with all data</p></td>
 </tr>
 </tbody>
 </table>
 </section>
 <section id="generated-columns">
-<h3><a class="toc-backref" href="#id9" role="doc-backlink">Generated columns</a><a class="headerlink" href="#generated-columns" title="Permalink to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id14" role="doc-backlink">Generated columns</a><a class="headerlink" href="#generated-columns" title="Link to this heading"></a></h3>
 <p>Generated columns are columns that are not present in the source
 (e.g. CSV or FST file) but whose value
 is automatically computed using other columns values,
@@ -512,17 +1185,17 @@ materialized view (except that it is always updated automatically).</p>
 </div></blockquote>
 </section>
 <section id="computed-columns">
-<h3><a class="toc-backref" href="#id10" role="doc-backlink">Computed columns</a><a class="headerlink" href="#computed-columns" title="Permalink to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id15" role="doc-backlink">Computed columns</a><a class="headerlink" href="#computed-columns" title="Link to this heading"></a></h3>
 <p>Computed columns are columns that are not present in the source
 (e.g. CSV or FST file) but whose value is computed
 using provided Python code by the Universal Database Loader.
 They use the values of other columns in the same record and can call
 out to standard Python functions.</p>
-<p>The columns used for computation are listed in either <code class="docutils literal notranslate"><span class="pre">columns</span></code>
-or <code class="docutils literal notranslate"><span class="pre">parameters</span></code> sections. Column names are names of the original
-columns in the data file. To reference columns in the
-database use parameters.
-Referenced them by a number in curly brackets in the compute code.</p>
+<p>The columns used for computation are listed under either <code class="docutils literal notranslate"><span class="pre">columns</span></code>
+or <code class="docutils literal notranslate"><span class="pre">parameters</span></code>. Names under <code class="docutils literal notranslate"><span class="pre">columns</span></code> are the original column names
+in the data file; to reference database columns, use <code class="docutils literal notranslate"><span class="pre">parameters</span></code>.
+Reference either kind by its number in curly brackets in the compute
+code.</p>
 <p>Here is an example of a computed column:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">admission_date</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;DATE&quot;</span>
@@ -533,8 +1206,9 @@ Referenced them by a number in curly brackets in the compute code.</p>
 <span class="w">        </span><span class="nt">code</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;datetime.strptime({1},</span><span class="nv"> </span><span class="s">&#39;%Y%m%d&#39;).date()&quot;</span>
 </pre></div>
 </div>
-<p>Here in <code class="docutils literal notranslate"><span class="pre">code</span></code> the pattern <code class="docutils literal notranslate"><span class="pre">{1}</span></code> is replaced with the name of the
-first (and only) column in the list: <code class="docutils literal notranslate"><span class="pre">ADMSN_DT</span></code>.</p>
+<p>Here in <code class="docutils literal notranslate"><span class="pre">code</span></code> the pattern <code class="docutils literal notranslate"><span class="pre">{1}</span></code> is replaced with a reference to the
+value of the first (and only) listed column, <code class="docutils literal notranslate"><span class="pre">ADMSN_DT</span></code>, in the
+current input record.</p>
 <p>Another example, using database columns:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">fips5</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">source</span><span class="p">:</span>
@@ -547,31 +1221,118 @@ first (and only) column in the list: <code class="docutils literal notranslate">
 </div>
 <p>Here, <code class="docutils literal notranslate"><span class="pre">{1}</span></code> references the value that would be inserted into the
 table column <code class="docutils literal notranslate"><span class="pre">state</span></code> and <code class="docutils literal notranslate"><span class="pre">{2}</span></code> references the value that
-would be inserted into the table column <code class="docutils literal notranslate"><span class="pre">residence_county</span></code>.</p>
+would be inserted into the table column <code class="docutils literal notranslate"><span class="pre">residence_county</span></code>.
+(This example illustrates the <code class="docutils literal notranslate"><span class="pre">parameters</span></code> syntax; see the note at
+the end of this section — it does not run unmodified against the
+current loader.)</p>
+<section id="execution-scope-of-the-compute-code">
+<h4><a class="toc-backref" href="#id16" role="doc-backlink">Execution scope of the compute code</a><a class="headerlink" href="#execution-scope-of-the-compute-code" title="Link to this heading"></a></h4>
+<p>Knowing exactly how the compute code is executed helps when writing
+it:</p>
+<ul class="simple">
+<li><p>The code is a single Python expression, evaluated with <code class="docutils literal notranslate"><span class="pre">eval()</span></code> by
+the <a class="reference internal" href="members/inserter.html"><span class="doc std std-doc">inserter</span></a> module
+(<code class="docutils literal notranslate"><span class="pre">dorieh.platform.data_model.inserter</span></code>) for every database record
+produced — once per input record, or once per range value for
+transposed (range-column) tables.</p></li>
+<li><p>The placeholders <code class="docutils literal notranslate"><span class="pre">{1}</span></code>, <code class="docutils literal notranslate"><span class="pre">{2}</span></code>, … are substituted before
+evaluation with references to cells of the raw input record. They
+refer first to the entries of <code class="docutils literal notranslate"><span class="pre">parameters</span></code> and then to the entries
+of <code class="docutils literal notranslate"><span class="pre">columns</span></code>, in the order listed; <code class="docutils literal notranslate"><span class="pre">{0}</span></code> is reserved and must not
+be used.</p></li>
+<li><p>The names available to the expression are the Python builtins plus
+the names imported by the inserter module. Of these, the ones
+intended for use in compute code are <code class="docutils literal notranslate"><span class="pre">datetime</span></code> and <code class="docutils literal notranslate"><span class="pre">timedelta</span></code>
+(the classes from the standard <code class="docutils literal notranslate"><span class="pre">datetime</span></code> module) — as in the
+<code class="docutils literal notranslate"><span class="pre">datetime.strptime(...)</span></code> example above, which is used in production
+by <code class="docutils literal notranslate"><span class="pre">medicaid.yaml</span></code>. The raw input record is also visible as <code class="docutils literal notranslate"><span class="pre">row</span></code>.</p></li>
+<li><p>If the expression raises any exception, the value is silently set
+to <code class="docutils literal notranslate"><span class="pre">None</span></code> and NULL is stored in the database. Test compute columns
+on sample data: a typo in the expression does not stop the load, it
+produces empty values.</p></li>
+</ul>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">fips_dict</span></code> (a dictionary mapping US state postal codes to
+state FIPS codes, defined in
+<a class="reference internal" href="members/fips.html"><span class="doc std std-doc">dorieh.platform.fips</span></a>) is <strong>not</strong>
+currently imported into the inserter’s namespace, so the <code class="docutils literal notranslate"><span class="pre">fips5</span></code>
+example above illustrates the <code class="docutils literal notranslate"><span class="pre">parameters</span></code> referencing syntax rather
+than a configuration that can run unmodified against the current
+loader.</p>
+</section>
 </section>
 <section id="file-columns">
-<h3><a class="toc-backref" href="#id11" role="doc-backlink">File columns</a><a class="headerlink" href="#file-columns" title="Permalink to this heading"></a></h3>
-<p>File columns are of type <code class="docutils literal notranslate"><span class="pre">file</span></code>. They store the name of the file,
-from which the data has been ingested.</p>
+<h3><a class="toc-backref" href="#id17" role="doc-backlink">File columns</a><a class="headerlink" href="#file-columns" title="Link to this heading"></a></h3>
+<p>File columns are declared with source type <code class="docutils literal notranslate"><span class="pre">file</span></code> (their database
+type is an ordinary character type). They store the base name of the
+file, from which the data has been ingested. When the Project Loader
+introspects the incoming data it appends a <code class="docutils literal notranslate"><span class="pre">FILE</span></code> column
+(<code class="docutils literal notranslate"><span class="pre">VARCHAR(128)</span></code>, with an index created before loading) to every
+table automatically.</p>
 </section>
 <section id="record-columns">
-<h3><a class="toc-backref" href="#id12" role="doc-backlink">Record columns</a><a class="headerlink" href="#record-columns" title="Permalink to this heading"></a></h3>
-<p>Record columns are of type <code class="docutils literal notranslate"><span class="pre">record</span></code>. They store the sequential
-index of the record (line number) in the file,
-from which the data has been ingested.</p>
+<h3><a class="toc-backref" href="#id18" role="doc-backlink">Record columns</a><a class="headerlink" href="#record-columns" title="Link to this heading"></a></h3>
+<p>A record column stores the sequential index of the record within the
+data ingested from a file. There is no special <code class="docutils literal notranslate"><span class="pre">record</span></code> source type:
+a record column is an ordinary column declared with a PostgreSQL
+auto-increment type (<code class="docutils literal notranslate"><span class="pre">SERIAL</span></code> or <code class="docutils literal notranslate"><span class="pre">BIGSERIAL</span></code>). The Universal Database
+Loader omits columns of these types from the generated <code class="docutils literal notranslate"><span class="pre">INSERT</span></code>
+statements, so the database itself assigns each row the next value of
+the backing sequence in ingestion order. When the Project Loader
+introspects the incoming data it appends a <code class="docutils literal notranslate"><span class="pre">RECORD</span></code> column
+(<code class="docutils literal notranslate"><span class="pre">BIGSERIAL</span></code>, indexed) automatically, alongside <code class="docutils literal notranslate"><span class="pre">FILE</span></code>, and makes
+<code class="docutils literal notranslate"><span class="pre">(FILE,</span> <span class="pre">RECORD)</span></code> the default primary key. Together, the <code class="docutils literal notranslate"><span class="pre">FILE</span></code> and
+<code class="docutils literal notranslate"><span class="pre">RECORD</span></code> columns anchor row-level provenance: every database row can
+be traced back to a source file and a position within it.</p>
+</section>
+<section id="identifier-columns-and-the-identifiers-token">
+<h3><a class="toc-backref" href="#id19" role="doc-backlink">Identifier columns and the <code class="docutils literal notranslate"><span class="pre">{identifiers}</span></code> token</a><a class="headerlink" href="#identifier-columns-and-the-identifiers-token" title="Link to this heading"></a></h3>
+<p>In a view definition, a column can be marked with <code class="docutils literal notranslate"><span class="pre">identifier:</span> <span class="pre">true</span></code>
+to declare that it is part of the identity of the modeled entity.
+The <code class="docutils literal notranslate"><span class="pre">source</span></code> expression of any other column of the same view may then
+contain the token <code class="docutils literal notranslate"><span class="pre">{identifiers}</span></code> (in lower case). The DDL generator
+replaces the token with a parenthesized, comma-separated list built
+from all identifier columns: for an identifier column whose source is
+an aggregate expression such as <code class="docutils literal notranslate"><span class="pre">MIN(dob)</span></code>, the underlying column
+name inside the parentheses is used (a <code class="docutils literal notranslate"><span class="pre">distinct</span></code> keyword, if
+present, is stripped); for an identifier column with no <code class="docutils literal notranslate"><span class="pre">source</span></code> at
+all, the column’s own name is used. An identifier column must take
+one of these two forms — a source that is a plain, non-parenthesized
+expression is not supported.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">_beneficiaries</span></code> view in <code class="docutils literal notranslate"><span class="pre">medicare.yaml</span></code> marks <code class="docutils literal notranslate"><span class="pre">dob</span></code>, <code class="docutils literal notranslate"><span class="pre">race</span></code> and
+<code class="docutils literal notranslate"><span class="pre">sex</span></code> as identifiers and counts records that disagree on any of them:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">discrepancies</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span>
+<span class="w">              </span><span class="no">(</span>
+<span class="w">                </span><span class="no">COUNT(distinct {identifiers}) - 1 +</span>
+<span class="w">                </span><span class="no">...</span>
+<span class="w">              </span><span class="no">)</span>
+</pre></div>
+</div>
+<p>Here <code class="docutils literal notranslate"><span class="pre">COUNT(distinct</span> <span class="pre">{identifiers})</span></code> expands to
+<code class="docutils literal notranslate"><span class="pre">COUNT(distinct</span> <span class="pre">(dob,</span> <span class="pre">race,</span> <span class="pre">sex))</span></code>.</p>
 </section>
 <section id="transposing-columns">
-<h3><a class="toc-backref" href="#id13" role="doc-backlink">Transposing columns</a><a class="headerlink" href="#transposing-columns" title="Permalink to this heading"></a></h3>
-<p>Columns can be unnested (aka exploded) or collapsed.</p>
-<p>Exploding might be for example, useful if there is a separate column for every month.
-The easiest way to do it is to combine these monthly columns into an array and then
-use <code class="docutils literal notranslate"><span class="pre">unnest</span></code> function.</p>
+<h3><a class="toc-backref" href="#id20" role="doc-backlink">Transposing columns</a><a class="headerlink" href="#transposing-columns" title="Link to this heading"></a></h3>
+<p>Columns can be unnested (also known as exploded) or collapsed.
+Exploding is useful when, for example, there is a separate column for
+every month. Dorieh supports two mechanisms:</p>
+<ul class="simple">
+<li><p><strong>Wide-to-long at load time.</strong> A column with source type <code class="docutils literal notranslate"><span class="pre">range</span></code>,
+together with <code class="docutils literal notranslate"><span class="pre">multi_column</span></code> source columns, converts wide records
+(one column per month) into long ones (one record per month) while
+the data is ingested; see <a class="reference internal" href="#source">Source</a>.</p></li>
+<li><p><strong>In-database collapse and unnesting.</strong> Repeated columns of one
+record can be collapsed into a single array column, and an array
+can be unnested with the SQL <code class="docutils literal notranslate"><span class="pre">unnest()</span></code> function so that each
+element becomes its own record, as in the Medicaid <code class="docutils literal notranslate"><span class="pre">monthly</span></code> view.</p></li>
+</ul>
 </section>
 <section id="wildcards">
-<h3><a class="toc-backref" href="#id14" role="doc-backlink">Wildcards</a><a class="headerlink" href="#wildcards" title="Permalink to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id21" role="doc-backlink">Wildcards</a><a class="headerlink" href="#wildcards" title="Link to this heading"></a></h3>
 <p>To make it easier to work with similarly named columns, Dorieh supports wildcards.
-Wildcard expression starts with <code class="docutils literal notranslate"><span class="pre">$</span></code> followed by a single letter. Values are provided
-in square braces that follow a wildcard.</p>
+Wildcard expression starts with <code class="docutils literal notranslate"><span class="pre">$</span></code> followed by a variable name
+(single letters are the convention used in the shipped models). Values
+are provided in square brackets that follow the wildcard.</p>
 <p>Example:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">diag[$n=1:25]</span><span class="p p-Indicator">:</span>
 <span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">varchar</span>
@@ -580,11 +1341,11 @@ in square braces that follow a wildcard.</p>
 <span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dgnscd$n</span>
 </pre></div>
 </div>
-<p>Will be expanded to 25 columns named <code class="docutils literal notranslate"><span class="pre">diag1</span></code>, <code class="docutils literal notranslate"><span class="pre">diag2</span></code>, <code class="docutils literal notranslate"><span class="pre">diag25</span></code>.</p>
+<p>Will be expanded to 25 columns named <code class="docutils literal notranslate"><span class="pre">diag1</span></code>, <code class="docutils literal notranslate"><span class="pre">diag2</span></code>, …, <code class="docutils literal notranslate"><span class="pre">diag25</span></code>.</p>
 </section>
 </section>
 <section id="multi-column-indices">
-<h2><a class="toc-backref" href="#id15" role="doc-backlink">Multi-column indices</a><a class="headerlink" href="#multi-column-indices" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id22" role="doc-backlink">Multi-column indices</a><a class="headerlink" href="#multi-column-indices" title="Link to this heading"></a></h2>
 <p>Multi-column indices of a table are defined in <code class="docutils literal notranslate"><span class="pre">indices</span></code> section
 (spelling <code class="docutils literal notranslate"><span class="pre">indexes</span></code> is also acceptable). This is a dictionary with an
 index name as a key and its definition as the value. At the very minimum,
@@ -611,11 +1372,11 @@ index.</p>
 </tr>
 <tr class="row-even"><td><p>include</p></td>
 <td><p>no</p></td>
-<td><p>Additional columns to include with index</p></td>
+<td><p>Additional columns to include with index. Currently ignored when <code class="docutils literal notranslate"><span class="pre">unique</span></code> is also specified</p></td>
 </tr>
 <tr class="row-odd"><td><p>unique</p></td>
 <td><p>no</p></td>
-<td><p>Specifies that the index defines a unique constrain</p></td>
+<td><p>Specifies that the index defines a unique constraint</p></td>
 </tr>
 </tbody>
 </table>
@@ -634,39 +1395,53 @@ index.</p>
 </pre></div>
 </div>
 </section>
-<section id="generation-of-the-database-schema-ddl">
-<h2><a class="toc-backref" href="#id16" role="doc-backlink">Generation of the database schema (DDL)</a><a class="headerlink" href="#generation-of-the-database-schema-ddl" title="Permalink to this heading"></a></h2>
-<p>From a domain YAML file, the database schema is
-generated in the form of PostgreSQL dialect of DDL.</p>
-<p>The main class responsible for the generation of DDL is
-<a class="reference internal" href="members/domain.html"><span class="doc std std-doc">Domain</span></a></p>
-</section>
 <section id="indexing-policies">
-<h2><a class="toc-backref" href="#id17" role="doc-backlink">Indexing policies</a><a class="headerlink" href="#indexing-policies" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id23" role="doc-backlink">Indexing policies</a><a class="headerlink" href="#indexing-policies" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p><strong>explicit</strong>. Indices are only created for columns that define an index</p></li>
-<li><p><strong>all</strong> Indices are only created for all columns</p></li>
-<li><p><strong>selected</strong> Indices are only created for columns matching certain pattern
-(defined in <code class="docutils literal notranslate"><span class="pre">index_columns</span></code> variable of <a class="reference internal" href="members/model.html"><span class="doc std std-doc">model</span></a>) module</p></li>
-<li><p><strong>unless excluded</strong> Indices are only created for all columns not explicitly excluded</p></li>
+<li><p><strong>explicit</strong>. An index is built only where a column definition
+carries an <code class="docutils literal notranslate"><span class="pre">index</span></code> key</p></li>
+<li><p><strong>all</strong> Every column gets an index</p></li>
+<li><p><strong>selected</strong> Indices are created for columns matching certain patterns
+(defined in <code class="docutils literal notranslate"><span class="pre">index_columns</span></code> variable of <a class="reference internal" href="members/model.html"><span class="doc std std-doc">model</span></a> module)
+and for columns that define an <code class="docutils literal notranslate"><span class="pre">index</span></code>. This is the default policy,
+used when the domain does not specify one</p></li>
+<li><p><strong>unless excluded</strong> An alias for <strong>all</strong>: internally both are mapped
+to the same policy. Indices are created for all columns except those
+that explicitly opt out with <code class="docutils literal notranslate"><span class="pre">index:</span> <span class="pre">false</span></code></p></li>
 </ul>
+<p>Regardless of the policy, <code class="docutils literal notranslate"><span class="pre">index:</span> <span class="pre">false</span></code> always suppresses the
+single-column index, and columns of type <code class="docutils literal notranslate"><span class="pre">TEXT</span></code>, <code class="docutils literal notranslate"><span class="pre">HLL</span></code> or
+<code class="docutils literal notranslate"><span class="pre">HLL_HASHVAL</span></code> are never indexed automatically. Specifying any other
+policy name raises an error.</p>
 </section>
 <section id="linking-with-nomenclature">
-<h2><a class="toc-backref" href="#id18" role="doc-backlink">Linking with nomenclature</a><a class="headerlink" href="#linking-with-nomenclature" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id24" role="doc-backlink">Linking with nomenclature</a><a class="headerlink" href="#linking-with-nomenclature" title="Link to this heading"></a></h2>
 <section id="us-states">
-<h3><a class="toc-backref" href="#id19" role="doc-backlink">US States</a><a class="headerlink" href="#us-states" title="Permalink to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id25" role="doc-backlink">US States</a><a class="headerlink" href="#us-states" title="Link to this heading"></a></h3>
 <p>Database includes a table with codes for US states. It is taken from:</p>
 <p><a class="reference external" href="https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/technical/nra/nri/results/?cid=nrcs143_013696">https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/technical/nra/nri/results/?cid=nrcs143_013696</a></p>
-<p>The data leaves locally in <a class="reference internal" href="members/fips.html"><span class="doc std std-doc">fips.py</span></a></p>
-<p>County codes:</p>
+<p>The data lives locally in <a class="reference internal" href="members/fips.html"><span class="doc std std-doc">fips.py</span></a>, which contains a
+hard-coded dictionary of two-digit state FIPS codes keyed by state
+postal abbreviation (together with the SQL query that re-derives them
+from the <code class="docutils literal notranslate"><span class="pre">us_iso</span></code> nomenclature table).</p>
+</section>
+<section id="county-codes">
+<h3><a class="toc-backref" href="#id26" role="doc-backlink">County codes</a><a class="headerlink" href="#county-codes" title="Link to this heading"></a></h3>
+<p>County FIPS codes are not part of <code class="docutils literal notranslate"><span class="pre">fips.py</span></code>. The Medicare data model
+derives them from Social Security Administration (SSA) county codes
+through the <code class="docutils literal notranslate"><span class="pre">ssa</span></code> crosswalk table, which the
+<a class="reference internal" href="members/ssa2fips.html"><span class="doc std std-doc">ssa2fips</span></a> utility
+(<code class="docutils literal notranslate"><span class="pre">dorieh.platform.crosswalks.ssa2fips</span></code>) builds by downloading the
+SSA-to-FIPS state and county crosswalk files published by the
+National Bureau of Economic Research (NBER):</p>
 <p><a class="reference external" href="https://www.nber.org/research/data/ssa-federal-information-processing-series-fips-state-and-county-crosswalk">https://www.nber.org/research/data/ssa-federal-information-processing-series-fips-state-and-county-crosswalk</a></p>
 </section>
 </section>
 <section id="ingesting-data">
-<h2><a class="toc-backref" href="#id20" role="doc-backlink">Ingesting data</a><a class="headerlink" href="#ingesting-data" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id27" role="doc-backlink">Ingesting data</a><a class="headerlink" href="#ingesting-data" title="Link to this heading"></a></h2>
 <p>The following command ingests data into a table and all hard-linked
 child tables:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    usage: python -u -m dorieh.platform.data_model.model2 [-h] [--domain DOMAIN]
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    usage: python -u -m dorieh.platform.loader.data_loader [-h] [--domain DOMAIN]
                 [--table TABLE] [--data DATA]
                 [--reset] [--autocommit] [--db DB] [--connection CONNECTION]
                 [--page PAGE] [--log LOG] [--limit LIMIT] [--buffer BUFFER]
@@ -696,20 +1471,41 @@ child tables:</p>
 </pre></div>
 </div>
 </section>
+<section id="where-to-go-next">
+<h2><a class="toc-backref" href="#id28" role="doc-backlink">Where to go next</a><a class="headerlink" href="#where-to-go-next" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The federated-view directives — combining heterogeneous per-year
+tables into a single view — continue in
+<a class="reference internal" href="DataModellingExtensions.html"><span class="std std-doc">Data Modeling Extensions</span></a>.</p></li>
+<li><p>To see the DSL at production scale, follow the
+<a class="reference internal" href="tutorial/medicare/building-medicare-pipeline.html"><span class="std std-doc">Medicare claims pipeline tutorial</span></a>
+— a guided path — with the
+<a class="reference internal" href="Medicare.html"><span class="std std-doc">Medicare case study</span></a> as its reference; both are built
+around <code class="docutils literal notranslate"><span class="pre">src/python/dorieh/cms/models/medicare.yaml</span></code>.</p></li>
+</ul>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><strong>Further reading:</strong> Appendix A of the companion book
+<a class="reference internal" href="about-the-book.html"><span class="std std-doc"><em>Research Data that Can Be Trusted</em></span></a> covers the
+same core DSL syntax. This page is the maintained, authoritative
+reference. This documentation is self-contained; the book is optional
+enrichment.</p>
+</div>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="platform.html" class="btn btn-neutral float-left" title="Dorieh Core Data Platform" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="DataModellingExtensions.html" class="btn btn-neutral float-right" title="Extensions used for creating federated view of different years" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="members/domain_dictionary.html" class="btn btn-neutral float-left" title="The Data Dictionary Generation tool" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="DataModellingExtensions.html" class="btn btn-neutral float-right" title="Data Modeling Extensions: Federated Views Across Years" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2021-2024, Harvard University.</p>
+    <p>&#169; Copyright 2021-2026, Harvard University.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

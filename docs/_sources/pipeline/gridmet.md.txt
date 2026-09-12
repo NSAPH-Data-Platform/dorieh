@@ -63,7 +63,7 @@ with similar options:
 | geography       | string     |                                                                                                                                                                                    | Type of geography: zip codes or counties Valid values: "zip", "zcta" or "county"                                                                                             | 
 | years           | string[]   | `['1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020']` |                                                                                                                                                                              | 
 | bands           | string[]   |                                                                                                                                                                                    | University of Idaho Gridded Surface Meteorological Dataset  [bands](https://developers.google.com/earth-engine/datasets/catalog/IDAHO_EPSCOR_GRIDMET#bands)                  | 
-| strategy        | string     | `auto`                                                                                                                                                                             | [Rasterization strategy](https://nsaph-data-platform.github.io/nsaph-platform-docs/common/gridmet/doc/strategy.html) used for spatial aggregation                            | 
+| strategy        | string     | `auto`                                                                                                                                                                             | [Rasterization strategy](https://foromeplatform.github.io/dorieh/strategy.html) used for spatial aggregation                                                                 | 
 | ram             | string     | `2GB`                                                                                                                                                                              | Runtime memory, available to the process. When aggregation strategy is `auto`, this value is used to calculate the optimal downscaling factor for the available resources.   | 
 | database        | File       |                                                                                                                                                                                    | Path to database connection file, usually database.ini                                                                                                                       | 
 | connection_name | string     |                                                                                                                                                                                    | The name of the section in the database.ini file                                                                                                                             | 
@@ -72,31 +72,40 @@ with similar options:
 
 ## Outputs
 
-| Name         | Type  | Description | 
-|:-------------|:------|:------------|
-| registry     | File  |             | 
-| registry_log | File  |             | 
-| registry_err | File  |             | 
-| data         | array |             | 
-| download_log | array |             | 
-| download_err | array |             | 
-| process_log  | array |             | 
-| process_err  | array |             | 
-| ingest_log   | array |             | 
-| ingest_err   | array |             | 
-| reset_log    | array |             | 
-| reset_err    | array |             | 
-| index_log    | array |             | 
-| index_err    | array |             | 
-| vacuum_log   | array |             | 
-| vacuum_err   | array |             | 
+| Name            | Type   | Description | 
+|:----------------|:-------|:------------|
+| initdb_log      | File   |             | 
+| initdb_err      | File   |             | 
+| init_schema_log | File   |             | 
+| init_schema_err | File   |             | 
+| registry        | File   |             | 
+| registry_log    | File   |             | 
+| registry_err    | File   |             | 
+| data            | array  |             | 
+| download_log    | array  |             | 
+| download_err    | array  |             | 
+| process_log     | array  |             | 
+| process_err     | array  |             | 
+| ingest_log      | array  |             | 
+| ingest_err      | array  |             | 
+| reset_log       | array  |             | 
+| reset_err       | array  |             | 
+| index_log       | array  |             | 
+| index_err       | array  |             | 
+| vacuum_log      | array  |             | 
+| vacuum_err      | array  |             | 
+| export_data     | array  |             | 
+| export_log      | File[] |             | 
+| export_err      | File[] |             | 
 
 ## Steps
 
-| Name           | Runs                                              | Description                                               | 
-|:---------------|:--------------------------------------------------|:----------------------------------------------------------|
-| init_db_schema | ['python', '-m', 'dorieh.platform.util.psql']     | We need to do it because of parallel creation of tables   | 
-| make_registry  | [build_gridmet_model.cwl](build_gridmet_model.md) | Writes down YAML file with the database model             | 
-| init_tables    | [sub-workflow](gridmet_1.md)                      | creates or recreates database tables, one for each band   | 
-| process        | [gridmet_one_file.cwl](gridmet_one_file.md)       | Downloads raw data and aggregates it over shapes and time | 
+| Name           | Runs                                              | Description                                                | 
+|:---------------|:--------------------------------------------------|:-----------------------------------------------------------|
+| initdb         | [initdb.cwl](initdb.md)                           | Ensure that database utilities are at their latest version | 
+| init_db_schema | ['python', '-m', 'dorieh.platform.util.psql']     | We need to do it because of parallel creation of tables    | 
+| make_registry  | [build_gridmet_model.cwl](build_gridmet_model.md) | Writes down YAML file with the database model              | 
+| init_tables    | [sub-workflow](gridmet_1.md)                      | creates or recreates database tables, one for each band    | 
+| process        | [gridmet_one_file.cwl](gridmet_one_file.md)       | Downloads raw data and aggregates it over shapes and time  | 
+| export         | [export.cwl](export.md)                           |                                                            | 
 

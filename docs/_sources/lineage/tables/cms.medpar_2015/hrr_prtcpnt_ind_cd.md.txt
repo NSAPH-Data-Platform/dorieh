@@ -1,0 +1,22 @@
+# Column cms.medpar_2015.HRR_PRTCPNT_IND_CD
+
+## Overview of column HRR_PRTCPNT_IND_CD in table cms.medpar_2015 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2015](../cms.medpar_2015.md)           |
+| Qualified name                | cms.medpar_2015.HRR_PRTCPNT_IND_CD  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/hospital-readmission-reduction-hrr-participant-indicator-code](https://resdac.org/cms-data/variables/hospital-readmission-reduction-hrr-participant-indicator-code) |
+
+
+HRR Participant Indicator Code
+
+| Key | Value |
+| --- | ----- |
+| long_name | HRR_PRTCPNT_IND_CD |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

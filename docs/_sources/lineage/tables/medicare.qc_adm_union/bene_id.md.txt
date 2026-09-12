@@ -1,0 +1,32 @@
+# Column medicare.qc_adm_union.bene_id
+
+## Overview of column bene_id in table medicare.qc_adm_union 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_adm_union](../medicare.qc_adm_union.md)           |
+| Qualified name                | medicare.qc_adm_union.bene_id  |
+| Datatype                      | string        |
+| Column type | copied |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+bene_id_svg_envelop.md
+```
+
+
+```{figure} bene_id.svg
+:align: center
+:alt: Column medicare.qc_adm_union.bene_id Lineage SVG
+:target: bene_id_svg_envelop.html
+
+Data lineage for column medicare.qc_adm_union.bene_id
+
+```
+
+

@@ -1,0 +1,22 @@
+# Column cms.medpar_2017.BENE_ID
+
+## Overview of column BENE_ID in table cms.medpar_2017 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2017](../cms.medpar_2017.md)           |
+| Qualified name                | cms.medpar_2017.BENE_ID  |
+| Datatype                      | VARCHAR(15)        |
+| Reference | [https://resdac.org/cms-data/variables/ccw-beneficiary-id](https://resdac.org/cms-data/variables/ccw-beneficiary-id) |
+
+
+Encrypted 723 Beneficiary ID
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_ID |
+| original_type | CHAR |
+| width | 15.0 |
+
+
+

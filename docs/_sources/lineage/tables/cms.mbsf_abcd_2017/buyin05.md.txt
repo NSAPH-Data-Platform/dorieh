@@ -1,0 +1,22 @@
+# Column cms.mbsf_abcd_2017.BUYIN05
+
+## Overview of column BUYIN05 in table cms.mbsf_abcd_2017 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_abcd_2017](../cms.mbsf_abcd_2017.md)           |
+| Qualified name                | cms.mbsf_abcd_2017.BUYIN05  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/medicare-entitlementbuy-indicator](https://resdac.org/cms-data/variables/medicare-entitlementbuy-indicator) |
+
+
+Medicare Entitlement/ Buy-In Indicator: May
+
+| Key | Value |
+| --- | ----- |
+| long_name | MDCR_ENTLMT_BUYIN_IND_05 |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

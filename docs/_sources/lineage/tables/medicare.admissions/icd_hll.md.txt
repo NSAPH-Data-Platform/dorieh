@@ -1,0 +1,39 @@
+# Column medicare.admissions.icd_hll
+
+## Overview of column icd_hll in table medicare.admissions 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.admissions](../medicare.admissions.md)           |
+| Qualified name                | medicare.admissions.icd_hll  |
+| Datatype                      | HLL        |
+| Column type | generated |
+
+
+
+## Expressions
+
+```sql
+SELECT GENERATED ALWAYS AS (hll_arr_agg(diagnoses)) STORED
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+icd_hll_svg_envelop.md
+```
+
+
+```{figure} icd_hll.svg
+:align: center
+:alt: Column medicare.admissions.icd_hll Lineage SVG
+:target: icd_hll_svg_envelop.html
+
+Data lineage for column medicare.admissions.icd_hll
+
+```
+
+

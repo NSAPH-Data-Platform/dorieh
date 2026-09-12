@@ -1,0 +1,31 @@
+# Column medicare.ip.diag18
+
+## Overview of column diag18 in table medicare.ip 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.ip](../medicare.ip.md)           |
+| Qualified name                | medicare.ip.diag18  |
+| Datatype                      | varchar        |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+diag18_svg_envelop.md
+```
+
+
+```{figure} diag18.svg
+:align: center
+:alt: Column medicare.ip.diag18 Lineage SVG
+:target: diag18_svg_envelop.html
+
+Data lineage for column medicare.ip.diag18
+
+```
+
+

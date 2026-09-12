@@ -30,7 +30,7 @@ parameter `domain` must be defined if using a different domain
 | sloppy          | boolean |            |                                                                  | 
 | domain          | string  | `medicaid` |                                                                  | 
 | action          | string? |            |                                                                  | 
-| registry        | string? |            |                                                                  | 
+| registry        | File?   |            |                                                                  | 
 | input_data      | File?   |            |                                                                  | 
 | limit           | string? |            |                                                                  | 
 | depends_on      | ['File?', 'File[]'] |            | a special field used to enforce dependencies and execution order | 

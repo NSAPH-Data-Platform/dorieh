@@ -1,0 +1,65 @@
+# Column medicare.admissions.diagnoses
+
+## Overview of column diagnoses in table medicare.admissions 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.admissions](../medicare.admissions.md)           |
+| Qualified name                | medicare.admissions.diagnoses  |
+| Datatype                      | string        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT array_remove(ARRAY[
+btrim(btrim(diag1)),
+btrim(diag2),
+btrim(diag3),
+btrim(diag4),
+btrim(diag5),
+btrim(diag6),
+btrim(diag7),
+btrim(diag8),
+btrim(diag9),
+btrim(diag10),
+btrim(diag11),
+btrim(diag12),
+btrim(diag13),
+btrim(diag14),
+btrim(diag15),
+btrim(diag16),
+btrim(diag17),
+btrim(diag18),
+btrim(diag19),
+btrim(diag20),
+btrim(diag21),
+btrim(diag22),
+btrim(diag23),
+btrim(diag24),
+btrim(diag25)
+], NULL) As diagnoses
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+diagnoses_svg_envelop.md
+```
+
+
+```{figure} diagnoses.svg
+:align: center
+:alt: Column medicare.admissions.diagnoses Lineage SVG
+:target: diagnoses_svg_envelop.html
+
+Data lineage for column medicare.admissions.diagnoses
+
+```
+
+

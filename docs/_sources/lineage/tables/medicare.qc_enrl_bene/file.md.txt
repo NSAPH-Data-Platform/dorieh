@@ -1,0 +1,20 @@
+# Column medicare.qc_enrl_bene.file
+
+## Overview of column file in table medicare.qc_enrl_bene 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_enrl_bene](../medicare.qc_enrl_bene.md)           |
+| Qualified name                | medicare.qc_enrl_bene.file  |
+| Datatype                      | string        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT string_agg(distinct FILE, ',')
+```
+
+

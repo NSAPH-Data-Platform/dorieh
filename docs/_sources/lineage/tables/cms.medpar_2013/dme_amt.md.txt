@@ -1,0 +1,22 @@
+# Column cms.medpar_2013.DME_AMT
+
+## Overview of column DME_AMT in table cms.medpar_2013 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2013](../cms.medpar_2013.md)           |
+| Qualified name                | cms.medpar_2013.DME_AMT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/durable-medical-equipment-dme-charge-amount](https://resdac.org/cms-data/variables/durable-medical-equipment-dme-charge-amount) |
+
+
+DME related to beneficiarys stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | DME_CHRG_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

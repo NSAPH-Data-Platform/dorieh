@@ -1,0 +1,22 @@
+# Column cms.mbsf_abcd_2016.BENE_DOB
+
+## Overview of column BENE_DOB in table cms.mbsf_abcd_2016 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_abcd_2016](../cms.mbsf_abcd_2016.md)           |
+| Qualified name                | cms.mbsf_abcd_2016.BENE_DOB  |
+| Datatype                      | DATE        |
+| Reference | [https://resdac.org/cms-data/variables/beneficiary-date-birth](https://resdac.org/cms-data/variables/beneficiary-date-birth) |
+
+
+Beneficiary Date of Birth
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_BIRTH_DT |
+| original_type | DATE |
+| width | 8.0 |
+
+
+

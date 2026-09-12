@@ -1,0 +1,31 @@
+# Column medicare.ip.record
+
+## Overview of column record in table medicare.ip 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.ip](../medicare.ip.md)           |
+| Qualified name                | medicare.ip.record  |
+| Datatype                      | string        |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+record_svg_envelop.md
+```
+
+
+```{figure} record.svg
+:align: center
+:alt: Column medicare.ip.record Lineage SVG
+:target: record_svg_envelop.html
+
+Data lineage for column medicare.ip.record
+
+```
+
+

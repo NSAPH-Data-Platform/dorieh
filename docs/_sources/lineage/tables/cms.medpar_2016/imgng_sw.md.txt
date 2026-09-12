@@ -1,0 +1,22 @@
+# Column cms.medpar_2016.IMGNG_SW
+
+## Overview of column IMGNG_SW in table cms.medpar_2016 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2016](../cms.medpar_2016.md)           |
+| Qualified name                | cms.medpar_2016.IMGNG_SW  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/radiology-other-imaging-indicator](https://resdac.org/cms-data/variables/radiology-other-imaging-indicator) |
+
+
+Radiology other imaging services indicator
+
+| Key | Value |
+| --- | ----- |
+| long_name | RDLGY_OTHR_IMGNG_IND_SW |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

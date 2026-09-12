@@ -20,6 +20,12 @@ This workflow downloads AirNow data from the government
 servers, introspects it to infer the database schema
 and ingests the data into the database
 
+Starting with version 0.5.0, the workflow initializes the database
+(via initcoredb.cwl) before ingesting the data, hence it can be run
+against a pristine, empty database. Earlier versions required the
+database to be initialized beforehand (e.g., by running another
+pipeline first).
+
 
 ## Inputs
 
@@ -47,10 +53,11 @@ and ingests the data into the database
 
 ## Steps
 
-| Name       | Runs                                      | Description                    | 
-|:-----------|:------------------------------------------|:-------------------------------|
-| download   | [download_airnow.cwl](download_airnow.md) |                                | 
-| introspect | [introspect.cwl](introspect.md)           |                                | 
-| ingest     | [ingest.cwl](ingest.md)                   | Uploads data into the database | 
-| index      | [index.cwl](index.md)                     |                                | 
+| Name       | Runs                                      | Description                                                | 
+|:-----------|:------------------------------------------|:-----------------------------------------------------------|
+| download   | [download_airnow.cwl](download_airnow.md) |                                                            | 
+| introspect | [introspect.cwl](introspect.md)           |                                                            | 
+| initdb     | [initcoredb.cwl](initcoredb.md)           | Ensure that database utilities are at their latest version | 
+| ingest     | [ingest.cwl](ingest.md)                   | Uploads data into the database                             | 
+| index      | [index.cwl](index.md)                     |                                                            | 
 

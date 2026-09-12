@@ -1,17 +1,14 @@
 # Dorieh EPA Package Description
 
-[Documentation Home](home)
-
 Toolkit for downloading and preprocessing of data provided by EPA
 
-Handles the following types of data: 
+Handles the following types of data:
 
-* EPA AQS Data hosted at https://www.epa.gov/aqs and EPA AirNow data 
-  from https://docs.airnowapi.org/webservices
-    * [Pipeline](pipeline/aqs)
-* AirNow contains real-time up-to-date pollution data but is less reliable
-  than AQS
-    * [Pipeline](pipeline/airnow)
+* [EPA AQS](https://www.epa.gov/aqs) — historical, quality-assured air
+  quality data; ingested by the [AQS pipeline](pipeline/aqs).
+* [EPA AirNow](https://docs.airnowapi.org/webservices) — real-time,
+  up-to-date pollution data, less reliable than AQS; ingested by the
+  [AirNow pipeline](pipeline/airnow).
 
 ## Package Contents
 
@@ -22,6 +19,15 @@ epa_cwl_tools
 ```
 
 ## Querying Data
+
+The pipelines load data into the `epa` schema, one table per parameter
+and year (for example, `epa.airnow_pm25_2022` holds AirNow PM2.5
+measurements for 2022). These are Bronze-layer tables in the sense of
+[The Dorieh approach](concepts.md#medallion-architecture-as-dorieh-implements-it):
+they hold the data as ingested, and the `record` column in each table
+is one of the provenance columns used for
+[fine-grained lineage](concepts.md#fine-grained-lineage). The tables
+below list the columns; the sample queries show typical aggregations.
 
 ### AirNow
 

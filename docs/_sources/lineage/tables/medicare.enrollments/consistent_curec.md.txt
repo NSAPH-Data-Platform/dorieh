@@ -1,0 +1,33 @@
+# Column medicare.enrollments.consistent_curec
+
+## Overview of column consistent_curec in table medicare.enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.enrollments](../medicare.enrollments.md)           |
+| Qualified name                | medicare.enrollments.consistent_curec  |
+| Datatype                      | VARCHAR(12)        |
+| Column type | generated |
+
+
+QC flag for CUREC (Current Reason for Entitlement) consistency
+within this single enrollment record (bene_id, year, state).
+CUREC legitimately varies across years, so this is a per-year
+property of the enrollment and lives on this table, not on the
+beneficiary-grain qc_enrl_bene. AMBIGUOUS means duplicate source
+records disagreed on CUREC within the year and MAX(curec) picked
+one. Defensive: expected CONSISTENT on the synthetic dataset
+(every group is a single row); meaningful on real data with
+overlapping or reissued MBSF files.
+
+
+
+
+
+## Expressions
+
+```sql
+SELECT GENERATED ALWAYS AS (CASE WHEN curec IS NULL THEN 'MISSING' WHEN curec_latest IS NOT NULL THEN 'AMBIGUOUS' ELSE 'CONSISTENT' END) STORED
+```
+
+

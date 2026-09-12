@@ -1,0 +1,113 @@
+# ── Shared environment for all Superset containers ────────────────────────────
+x-superset-env: &superset-env
+  DATABASE_HOST: postgres
+  DATABASE_PORT: "5432"
+  DATABASE_USER: dorieh
+  DATABASE_PASSWORD: dorieh_secret
+  DATABASE_DB: superset
+  SECRET_KEY: ${SUPERSET_SECRET_KEY:?Set SUPERSET_SECRET_KEY in .env}
+  REDIS_HOST: redis
+  REDIS_PORT: "6379"
+
+# ── Shared volumes for all Superset containers ────────────────────────────────
+x-superset-volumes: &superset-volumes
+  - ./superset/superset_config.py:/app/pythonpath/superset_config.py:ro
+  - ./superset/superset-init.sh:/app/init.sh:ro
+  - superset_home:/app/superset_home
+
+services:
+
+  # ── PostgreSQL ───────────────────────────────────────────────────────────────
+  postgres:
+    build:
+      context: .
+    shm_size: '4g'
+    environment:
+      POSTGRES_DB: dorieh
+      POSTGRES_USER: dorieh
+      POSTGRES_PASSWORD: dorieh_secret
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init-db:/docker-entrypoint-initdb.d
+    ports:
+      - "${POSTGRES_PORT:-55432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dorieh -d dorieh"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # ── Redis ────────────────────────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # ── One-time initialisation ──────────────────────────────────────────────────
+  superset-init:
+    image: apache/superset:${SUPERSET_VERSION:-3.1.3}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      <<: *superset-env
+      ADMIN_USERNAME: ${SUPERSET_ADMIN_USERNAME:-admin}
+      ADMIN_PASSWORD: ${SUPERSET_ADMIN_PASSWORD:-admin}
+      ADMIN_EMAIL: ${SUPERSET_ADMIN_EMAIL:-admin@example.com}
+    volumes: *superset-volumes
+    command: bash  /app/init.sh
+
+  # ── Superset web server ──────────────────────────────────────────────────────
+  superset:
+    image: apache/superset:${SUPERSET_VERSION:-3.1.3}
+    restart: unless-stopped
+    depends_on:
+      superset-init:
+        condition: service_completed_successfully
+    environment: *superset-env
+    volumes: *superset-volumes
+    ports:
+      - "${SUPERSET_PORT:-8088}:8088"
+    command: >
+      gunicorn
+        --bind "0.0.0.0:8088"
+        --workers 3
+        --worker-class gthread
+        --threads 20
+        --timeout 120
+        --limit-request-line 0
+        --limit-request-field_size 0
+        "superset.app:create_app()"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8088/health || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+
+  # ── Celery worker ────────────────────────────────────────────────────────────
+  superset-worker:
+    image: apache/superset:${SUPERSET_VERSION:-3.1.3}
+    restart: unless-stopped
+    depends_on:
+      superset-init:
+        condition: service_completed_successfully
+    environment: *superset-env
+    volumes: *superset-volumes
+    command: >
+      celery --app=superset.tasks.celery_app:app worker
+        --pool=prefork
+        -O fair
+        -c 4
+
+volumes:
+  pgdata:
+  redis_data:
+  superset_home:

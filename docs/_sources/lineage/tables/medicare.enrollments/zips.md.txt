@@ -1,0 +1,39 @@
+# Column medicare.enrollments.zips
+
+## Overview of column zips in table medicare.enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.enrollments](../medicare.enrollments.md)           |
+| Qualified name                | medicare.enrollments.zips  |
+| Datatype                      | string        |
+| Column type | copied |
+
+
+
+## Expressions
+
+```sql
+SELECT string_agg(distinct zip::varchar, ',')
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+zips_svg_envelop.md
+```
+
+
+```{figure} zips.svg
+:align: center
+:alt: Column medicare.enrollments.zips Lineage SVG
+:target: zips_svg_envelop.html
+
+Data lineage for column medicare.enrollments.zips
+
+```
+
+

@@ -1,0 +1,98 @@
+digraph {
+	nodesep = 0.5;  // even node distribution
+	size = "25,100";  // graph size in inches
+// Tables with raw (original) data
+
+	{ rank = same; 
+		"Table cms.mbsf_ab_2011" [URL="tables/cms.mbsf_ab_2011.html",target=_blank];
+		"Table cms.mbsf_ab_2012" [URL="tables/cms.mbsf_ab_2012.html",target=_blank];
+		"Table cms.mbsf_ab_2013" [URL="tables/cms.mbsf_ab_2013.html",target=_blank];
+		"Table cms.mbsf_ab_2014" [URL="tables/cms.mbsf_ab_2014.html",target=_blank];
+	}
+	{ rank = same; 
+		"Table cms.mbsf_abcd_2015" [URL="tables/cms.mbsf_abcd_2015.html",target=_blank];
+		"Table cms.mbsf_abcd_2016" [URL="tables/cms.mbsf_abcd_2016.html",target=_blank];
+		"Table cms.mbsf_abcd_2017" [URL="tables/cms.mbsf_abcd_2017.html",target=_blank];
+		"Table cms.mbsf_abcd_2018" [URL="tables/cms.mbsf_abcd_2018.html",target=_blank];
+	}
+	"Table cms.mbsf_ab_2013" -> { "Table cms.mbsf_abcd_2015" "Table cms.mbsf_abcd_2016" "Table cms.mbsf_abcd_2017" "Table cms.mbsf_abcd_2018" } [ style = invis ];
+	{ rank = same; 
+		"Table cms.mbsf_d_2011" [URL="tables/cms.mbsf_d_2011.html",target=_blank];
+		"Table cms.mbsf_d_2012" [URL="tables/cms.mbsf_d_2012.html",target=_blank];
+		"Table cms.mbsf_d_2013" [URL="tables/cms.mbsf_d_2013.html",target=_blank];
+		"Table cms.mbsf_d_2014" [URL="tables/cms.mbsf_d_2014.html",target=_blank];
+	}
+	"Table cms.mbsf_abcd_2017" -> { "Table cms.mbsf_d_2011" "Table cms.mbsf_d_2012" "Table cms.mbsf_d_2013" "Table cms.mbsf_d_2014" } [ style = invis ];
+	{ rank = same; 
+		"Table cms.medpar_2011" [URL="tables/cms.medpar_2011.html",target=_blank];
+		"Table cms.medpar_2012" [URL="tables/cms.medpar_2012.html",target=_blank];
+		"Table cms.medpar_2013" [URL="tables/cms.medpar_2013.html",target=_blank];
+		"Table cms.medpar_2014" [URL="tables/cms.medpar_2014.html",target=_blank];
+	}
+	"Table cms.mbsf_d_2013" -> { "Table cms.medpar_2011" "Table cms.medpar_2012" "Table cms.medpar_2013" "Table cms.medpar_2014" } [ style = invis ];
+	{ rank = same; 
+		"Table cms.medpar_2015" [URL="tables/cms.medpar_2015.html",target=_blank];
+		"Table cms.medpar_2016" [URL="tables/cms.medpar_2016.html",target=_blank];
+		"Table cms.medpar_2017" [URL="tables/cms.medpar_2017.html",target=_blank];
+		"Table cms.medpar_2018" [URL="tables/cms.medpar_2018.html",target=_blank];
+	}
+	"Table cms.medpar_2013" -> { "Table cms.medpar_2015" "Table cms.medpar_2016" "Table cms.medpar_2017" "Table cms.medpar_2018" } [ style = invis ];
+
+// Tables with derived (processed) data
+	"materialized view medicare.mbsf_d" [URL="tables/medicare.mbsf_d.html",target=_blank];
+	"view medicare.ps" [URL="tables/medicare.ps.html",target=_blank];
+	"view medicare.ip" [URL="tables/medicare.ip.html",target=_blank];
+	"materialized view medicare._ps" [URL="tables/medicare._ps.html",target=_blank];
+	"view medicare._beneficiaries" [URL="tables/medicare._beneficiaries.html",target=_blank];
+	"view medicare._enrollments" [URL="tables/medicare._enrollments.html",target=_blank];
+	"table medicare.beneficiaries" [URL="tables/medicare.beneficiaries.html",target=_blank];
+	"table medicare.enrollments" [URL="tables/medicare.enrollments.html",target=_blank];
+	"table medicare.admissions" [URL="tables/medicare.admissions.html",target=_blank];
+	"view medicare.qc_enrl_bene" [URL="tables/medicare.qc_enrl_bene.html",target=_blank];
+	"materialized view medicare.qc_enrollments" [URL="tables/medicare.qc_enrollments.html",target=_blank];
+	"view medicare.qc_adm_union" [URL="tables/medicare.qc_adm_union.html",target=_blank];
+	"materialized view medicare.qc_admissions" [URL="tables/medicare.qc_admissions.html",target=_blank];
+
+	"Table cms.mbsf_abcd_2015" -> "materialized view medicare.mbsf_d" [label=	"union",penwidth=2.4,color=chocolate];
+	"Table cms.mbsf_abcd_2016" -> "materialized view medicare.mbsf_d" [label=	"union",penwidth=2.4,color=chocolate];
+	"Table cms.mbsf_abcd_2017" -> "materialized view medicare.mbsf_d" [label=	"union",penwidth=2.4,color=chocolate];
+	"Table cms.mbsf_abcd_2018" -> "materialized view medicare.mbsf_d" [label=	"union",penwidth=2.4,color=chocolate];
+	"Table cms.mbsf_d_2011" -> "materialized view medicare.mbsf_d" [label=	"union",penwidth=2.4,color=chocolate];
+	"Table cms.mbsf_d_2012" -> "materialized view medicare.mbsf_d" [label=	"union",penwidth=2.4,color=chocolate];
+	"Table cms.mbsf_d_2013" -> "materialized view medicare.mbsf_d" [label=	"union",penwidth=2.4,color=chocolate];
+	"Table cms.mbsf_d_2014" -> "materialized view medicare.mbsf_d" [label=	"union",penwidth=2.4,color=chocolate];
+	"Table cms.mbsf_ab_2011" -> "view medicare.ps" [label=	"union",penwidth=2.4,color=chocolate];
+	"Table cms.mbsf_ab_2012" -> "view medicare.ps" [label=	"union",penwidth=2.4,color=chocolate];
+	"Table cms.mbsf_ab_2013" -> "view medicare.ps" [label=	"union",penwidth=2.4,color=chocolate];
+	"Table cms.mbsf_ab_2014" -> "view medicare.ps" [label=	"union",penwidth=2.4,color=chocolate];
+	"Table cms.mbsf_abcd_2015" -> "view medicare.ps" [label=	"union",penwidth=2.4,color=chocolate];
+	"Table cms.mbsf_abcd_2016" -> "view medicare.ps" [label=	"union",penwidth=2.4,color=chocolate];
+	"Table cms.mbsf_abcd_2017" -> "view medicare.ps" [label=	"union",penwidth=2.4,color=chocolate];
+	"Table cms.mbsf_abcd_2018" -> "view medicare.ps" [label=	"union",penwidth=2.4,color=chocolate];
+	"Table cms.medpar_2011" -> "view medicare.ip" [label=	"union",penwidth=2.4,color=chocolate];
+	"Table cms.medpar_2012" -> "view medicare.ip" [label=	"union",penwidth=2.4,color=chocolate];
+	"Table cms.medpar_2013" -> "view medicare.ip" [label=	"union",penwidth=2.4,color=chocolate];
+	"Table cms.medpar_2014" -> "view medicare.ip" [label=	"union",penwidth=2.4,color=chocolate];
+	"Table cms.medpar_2015" -> "view medicare.ip" [label=	"union",penwidth=2.4,color=chocolate];
+	"Table cms.medpar_2016" -> "view medicare.ip" [label=	"union",penwidth=2.4,color=chocolate];
+	"Table cms.medpar_2017" -> "view medicare.ip" [label=	"union",penwidth=2.4,color=chocolate];
+	"Table cms.medpar_2018" -> "view medicare.ip" [label=	"union",penwidth=2.4,color=chocolate];
+	"view medicare.ps" -> "materialized view medicare._ps" [label=	"transformation",penwidth=1,color=black];
+	"materialized view medicare._ps" -> "view medicare._beneficiaries" [label="	aggregation On bene_id",penwidth=5,color=blue];
+	"materialized view medicare._ps" -> "view medicare._enrollments" [label="	aggregation On bene_id, year, state",penwidth=5,color=blue];
+	"view medicare.ip" -> "table medicare.admissions" [label=	"transformation",penwidth=1,color=black];
+	"table medicare.enrollments" -> "table medicare.admissions" [label=	"parent-child",penwidth=2.4,color=darkorchid];
+	"view medicare._enrollments" -> "table medicare.enrollments" [label=	"transformation",penwidth=1,color=black];
+	"table medicare.beneficiaries" -> "table medicare.enrollments" [label=	"parent-child",penwidth=2.4,color=darkorchid];
+	"view medicare._beneficiaries" -> "table medicare.beneficiaries" [label=	"transformation",penwidth=1,color=black];
+	"table medicare.enrollments" -> "view medicare.qc_enrl_bene" [label="	join natural",penwidth=1,color=black];
+	"table medicare.beneficiaries" -> "view medicare.qc_enrl_bene" [label="	join natural",penwidth=1,color=black];
+	"view medicare.qc_enrl_bene" -> "materialized view medicare.qc_enrollments" [label=	"transformation",penwidth=1,color=black];
+	"table medicare.admissions" -> "view medicare.qc_adm_union" [label=	"transformation",penwidth=1,color=black];
+	"view medicare.qc_adm_union" -> "materialized view medicare.qc_admissions" [label=	"transformation",penwidth=1,color=black];
+	"materialized view medicare.mbsf_d" -> "view medicare._enrollments" [label=	"custom-select",penwidth=1,color=chartreuse];
+	"materialized view medicare.mbsf_d" -> "table medicare.enrollments" [label=	"custom-select",penwidth=1,color=chartreuse];
+	"materialized view medicare._ps" -> "table medicare.enrollments" [label=	"custom-select",penwidth=1,color=chartreuse];
+	"materialized view medicare.mbsf_d" -> "view medicare.qc_enrl_bene" [label=	"custom-select",penwidth=1,color=chartreuse];
+	"materialized view medicare._ps" -> "view medicare.qc_enrl_bene" [label=	"custom-select",penwidth=1,color=chartreuse];
+}

@@ -43,12 +43,12 @@ from dorieh.utils.pyfst import FSTReader
 PG_MAXINT = 2147483647
 
 
-integer = re.compile("-?\d+")
-float_number = re.compile("(-?\d*)\.(\d+)([e|E][-|+]?\d+)?")
-exponent = re.compile("(-?\d+)([e|E][-|+]?\d+)")
-_date = "([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))"
+integer = re.compile(r"-?\d+")
+float_number = re.compile(r"(-?\d*)\.(\d+)([e|E][-|+]?\d+)?")
+exponent = re.compile(r"(-?\d+)([e|E][-|+]?\d+)")
+_date = r"([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))"
 date = re.compile(_date)
-timestamp = re.compile(_date + "[T|t][0-9]{2}:[0-9]{2}")
+timestamp = re.compile(_date + r"[T|t][0-9]{2}:[0-9]{2}")
 
 
 class Introspector:

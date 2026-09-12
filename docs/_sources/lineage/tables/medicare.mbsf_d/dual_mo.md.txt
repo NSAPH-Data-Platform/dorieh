@@ -1,0 +1,21 @@
+# Column medicare.mbsf_d.dual_mo
+
+## Overview of column dual_mo in table medicare.mbsf_d 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.mbsf_d](../medicare.mbsf_d.md)           |
+| Qualified name                | medicare.mbsf_d.dual_mo  |
+| Datatype                      | INT        |
+| Column type | transformed |
+
+
+
+### Casts:
+
+| Original type | Cast expression      |
+| ------------- | -------------------- |
+| * | {column_name}::INT |
+
+
+

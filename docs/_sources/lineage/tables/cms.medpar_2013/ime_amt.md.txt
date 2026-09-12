@@ -1,0 +1,22 @@
+# Column cms.medpar_2013.IME_AMT
+
+## Overview of column IME_AMT in table cms.medpar_2013 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2013](../cms.medpar_2013.md)           |
+| Qualified name                | cms.medpar_2013.IME_AMT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/indirect-medical-education-ime-amount](https://resdac.org/cms-data/variables/indirect-medical-education-ime-amount) |
+
+
+Additional payment made to teaching hospitals for IME for stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | IME_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

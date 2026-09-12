@@ -1,0 +1,22 @@
+# Column cms.medpar_2018.ACO_ID_NUM
+
+## Overview of column ACO_ID_NUM in table cms.medpar_2018 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2018](../cms.medpar_2018.md)           |
+| Qualified name                | cms.medpar_2018.ACO_ID_NUM  |
+| Datatype                      | VARCHAR(10)        |
+| Reference | [https://resdac.org/cms-data/variables/claim-accountable-care-organization-aco-identification-number](https://resdac.org/cms-data/variables/claim-accountable-care-organization-aco-identification-number) |
+
+
+Accountable Care Organization (ACO) Identification Number
+
+| Key | Value |
+| --- | ----- |
+| long_name | ACO_ID_NUM |
+| original_type | CHAR |
+| width | 10.0 |
+
+
+

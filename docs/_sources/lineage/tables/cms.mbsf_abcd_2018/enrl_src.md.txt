@@ -1,0 +1,22 @@
+# Column cms.mbsf_abcd_2018.ENRL_SRC
+
+## Overview of column ENRL_SRC in table cms.mbsf_abcd_2018 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_abcd_2018](../cms.mbsf_abcd_2018.md)           |
+| Qualified name                | cms.mbsf_abcd_2018.ENRL_SRC  |
+| Datatype                      | VARCHAR(3)        |
+| Reference | [https://resdac.org/cms-data/variables/enrollment-source](https://resdac.org/cms-data/variables/enrollment-source) |
+
+
+Enrollment Source
+
+| Key | Value |
+| --- | ----- |
+| long_name | ENRL_SRC |
+| original_type | CHAR |
+| width | 3.0 |
+
+
+

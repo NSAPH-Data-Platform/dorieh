@@ -1,0 +1,22 @@
+# Column cms.medpar_2015.EQ_BIC
+
+## Overview of column EQ_BIC in table cms.medpar_2015 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2015](../cms.medpar_2015.md)           |
+| Qualified name                | cms.medpar_2015.EQ_BIC  |
+| Datatype                      | VARCHAR(2)        |
+| Reference | [https://resdac.org/cms-data/variables/equated-bic](https://resdac.org/cms-data/variables/equated-bic) |
+
+
+Equated BIC
+
+| Key | Value |
+| --- | ----- |
+| long_name | EQTBL_BIC_CD |
+| original_type | CHAR |
+| width | 2.0 |
+
+
+

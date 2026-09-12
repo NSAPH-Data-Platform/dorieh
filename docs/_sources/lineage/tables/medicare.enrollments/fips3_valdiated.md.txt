@@ -1,0 +1,39 @@
+# Column medicare.enrollments.fips3_valdiated
+
+## Overview of column fips3_valdiated in table medicare.enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.enrollments](../medicare.enrollments.md)           |
+| Qualified name                | medicare.enrollments.fips3_valdiated  |
+| Datatype                      | string        |
+| Column type | copied |
+
+
+
+## Expressions
+
+```sql
+SELECT public.validate_zip_fips(MAX(zip), MAX(fips2), MAX(fips3))
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+fips3_valdiated_svg_envelop.md
+```
+
+
+```{figure} fips3_valdiated.svg
+:align: center
+:alt: Column medicare.enrollments.fips3_valdiated Lineage SVG
+:target: fips3_valdiated_svg_envelop.html
+
+Data lineage for column medicare.enrollments.fips3_valdiated
+
+```
+
+

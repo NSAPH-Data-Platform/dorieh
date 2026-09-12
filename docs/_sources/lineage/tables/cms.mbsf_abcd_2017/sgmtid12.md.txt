@@ -1,0 +1,22 @@
+# Column cms.mbsf_abcd_2017.SGMTID12
+
+## Overview of column SGMTID12 in table cms.mbsf_abcd_2017 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_abcd_2017](../cms.mbsf_abcd_2017.md)           |
+| Qualified name                | cms.mbsf_abcd_2017.SGMTID12  |
+| Datatype                      | VARCHAR(3)        |
+| Reference | [https://resdac.org/cms-data/variables/monthly-part-d-market-segment-identifier-december](https://resdac.org/cms-data/variables/monthly-part-d-market-segment-identifier-december) |
+
+
+Part D Segment ID: December
+
+| Key | Value |
+| --- | ----- |
+| long_name | PTD_SGMT_ID_12 |
+| original_type | CHAR |
+| width | 3.0 |
+
+
+

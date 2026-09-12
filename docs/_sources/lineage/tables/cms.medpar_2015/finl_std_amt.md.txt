@@ -1,0 +1,22 @@
+# Column cms.medpar_2015.FINL_STD_AMT
+
+## Overview of column FINL_STD_AMT in table cms.medpar_2015 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2015](../cms.medpar_2015.md)           |
+| Qualified name                | cms.medpar_2015.FINL_STD_AMT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/claim-final-standard-payment-amount](https://resdac.org/cms-data/variables/claim-final-standard-payment-amount) |
+
+
+Claim Final Standard Amount
+
+| Key | Value |
+| --- | ----- |
+| long_name | FINL_STD_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

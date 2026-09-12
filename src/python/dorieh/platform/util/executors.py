@@ -47,8 +47,44 @@ def thread_initializer():
 
 
 class BlockingThreadPoolExecutor(ThreadPoolExecutor):
+    """
+    A ThreadPoolExecutor with a bounded queue of fixed given capacity. When
+    the queue reaches its maximum capacity, it stops accepting new tasks and
+    blocks until some tasks are removed from the queue for execution.
+
+    This is important when a task contains a significant amount of data to be
+    processed, for example, text to be parsed or ingested into a database. Reading
+    files is usually much faster than processing them, and without blocking, huge files
+    can lead to out of memory (OOM) errors. Using this executor implements
+    parallelization without the danger of causing OOM.
+
+    :param max_queue_size: The maximum size of the queue.
+    :type max_queue_size: int
+    :param timeout: The timeout for how long to wait for tasks to complete.
+    :type timeout: int or None
+
+    Example:
+
+    .. code-block:: python
+
+        with BlockingThreadPoolExecutor(max_queue_size=10, max_workers=6, timeout=14400) as executor:
+            for batch in data_batches:
+                executor.submit(function_to_process_batch, batch)
+
+    """
 
     def __init__(self, max_queue_size:int, timeout=None, *args, **kwargs):
+        """
+        Create the executor.
+
+        :param max_queue_size: the maximum size of the task queue
+        :param timeout: how long to wait for tasks to complete, in
+            seconds, or ``None`` to wait indefinitely
+        :param args: passed through to
+            :class:`concurrent.futures.ThreadPoolExecutor`
+        :param kwargs: passed through to
+            :class:`concurrent.futures.ThreadPoolExecutor`
+        """
         super().__init__(initializer=thread_initializer, *args, **kwargs)
         self.max_queue_size = max_queue_size
         self.tasks = dict()
@@ -56,6 +92,11 @@ class BlockingThreadPoolExecutor(ThreadPoolExecutor):
         self.log_timestamp = datetime.datetime.now()
 
     def submit(self, __fn: Callable, *args: Any, **kwargs: Any):
+        """
+        Submit a callable for execution, blocking while the task queue
+        is at capacity. ``*args`` and ``**kwargs`` are passed through to
+        the callable.
+        """
         self.wait(self.max_queue_size)
         task = super().submit(__fn, *args, **kwargs)
         self.tasks[task] = datetime.datetime.now()

@@ -1,0 +1,22 @@
+# Column cms.medpar_2013.WARDAMT
+
+## Overview of column WARDAMT in table cms.medpar_2013 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2013](../cms.medpar_2013.md)           |
+| Qualified name                | cms.medpar_2013.WARDAMT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/ward-charge-amount](https://resdac.org/cms-data/variables/ward-charge-amount) |
+
+
+Ward accommodations related to beneficiarys stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | WARD_CHRG_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

@@ -1,0 +1,52 @@
+{
+    "title": "dorieh",
+    "upload_type": "software",
+    "license": "Apache-2.0",
+    "description": "Dorieh is a data engineering platform for population and environmental health research. It turns heterogeneous raw sources, including Medicare and Medicaid claims in fixed-width ResDAC layouts and climate and air-quality data, into documented, queryable warehouses: schema-driven ingestion through a domain-specific language, CWL-orchestrated workflows, data validation and journaling, quality-control aggregates, and column-level provenance. The platform's methodology is described in the monograph \"Research Data that Can be Trusted\" (Springer, 2026, doi:10.1007/978-3-032-21032-6), which is the preferred citation for the methodology; cite this record for the software itself.",
+    "creators": [
+        {
+            "name": "Bouzinier, Michael",
+            "affiliation": "Harvard University",
+            "orcid": "0000-0002-3161-5601"
+        }
+    ],
+    "keywords": [
+        "data-engineering",
+        "provenance",
+        "etl",
+        "medicare",
+        "environmental-health",
+        "population-health"
+    ],
+    "related_identifiers": [
+        {
+            "identifier": "10.1007/978-3-032-21032-6",
+            "relation": "isDescribedBy",
+            "resource_type": "publication-book"
+        },
+        {
+            "identifier": "10.1007/978-3-032-21032-6",
+            "relation": "isSupplementTo",
+            "resource_type": "publication-book"
+        },
+        {
+            "identifier": "10.1007/978-3-032-21032-6_6",
+            "relation": "isDescribedBy",
+            "resource_type": "publication-section"
+        },
+        {
+            "identifier": "10.1007/978-3-032-21032-6_8",
+            "relation": "isDescribedBy",
+            "resource_type": "publication-section"
+        },
+        {
+            "identifier": "10.5281/zenodo.18915557",
+            "relation": "references",
+            "resource_type": "dataset"
+        },
+        {
+            "identifier": "https://foromeplatform.github.io/dorieh/",
+            "relation": "isDocumentedBy"
+        }
+    ]
+}

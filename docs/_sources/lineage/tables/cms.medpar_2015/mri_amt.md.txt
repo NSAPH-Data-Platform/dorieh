@@ -1,0 +1,22 @@
+# Column cms.medpar_2015.MRI_AMT
+
+## Overview of column MRI_AMT in table cms.medpar_2015 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2015](../cms.medpar_2015.md)           |
+| Qualified name                | cms.medpar_2015.MRI_AMT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/magnetic-resonance-imaging-mri-charge-amount](https://resdac.org/cms-data/variables/magnetic-resonance-imaging-mri-charge-amount) |
+
+
+MRI services provided during beneficiarys stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | MRI_CHRG_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

@@ -1,0 +1,22 @@
+# Column cms.mbsf_abcd_2017.COVSTART
+
+## Overview of column COVSTART in table cms.mbsf_abcd_2017 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_abcd_2017](../cms.mbsf_abcd_2017.md)           |
+| Qualified name                | cms.mbsf_abcd_2017.COVSTART  |
+| Datatype                      | DATE        |
+| Reference | [https://resdac.org/cms-data/variables/medicare-coverage-start-date](https://resdac.org/cms-data/variables/medicare-coverage-start-date) |
+
+
+Medicare Coverage Start Date
+
+| Key | Value |
+| --- | ----- |
+| long_name | COVSTART |
+| original_type | DATE |
+| width | 8.0 |
+
+
+

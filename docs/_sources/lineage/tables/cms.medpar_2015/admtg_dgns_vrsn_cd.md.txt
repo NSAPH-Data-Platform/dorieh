@@ -1,0 +1,22 @@
+# Column cms.medpar_2015.ADMTG_DGNS_VRSN_CD
+
+## Overview of column ADMTG_DGNS_VRSN_CD in table cms.medpar_2015 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2015](../cms.medpar_2015.md)           |
+| Qualified name                | cms.medpar_2015.ADMTG_DGNS_VRSN_CD  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/medpar-admitting-diagnosis-version-code-icd-9-or-icd-10](https://resdac.org/cms-data/variables/medpar-admitting-diagnosis-version-code-icd-9-or-icd-10) |
+
+
+MEDPAR Admitting Diagnosis Version Code
+
+| Key | Value |
+| --- | ----- |
+| long_name | ADMTG_DGNS_VRSN_CD |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

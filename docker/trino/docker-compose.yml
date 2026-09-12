@@ -1,0 +1,103 @@
+services:
+  trino:
+    image: trinodb/trino:latest
+    ports:
+      - "${TRINO_PORT:-9080}:8080"
+    volumes:
+      - trino-config:/etc/trino
+      - trino-parquet:/data/parquet:ro
+      - trino-warehouse:/data/warehouse
+    depends_on:
+      - hive-metastore
+
+  hive-metastore:
+    image: apache/hive:4.0.1
+    # command: ["hive", "--service", "metastore"]
+    ports:
+      - "9083:9083"
+      - "10000:10000"
+    environment:
+      DB_DRIVER: "postgres"
+      HIVE_METASTORE_PASSWORD: "${POSTGRES_PASSWORD:-hivepassword}"
+      SERVICE_OPTS: >
+        -Djavax.jdo.option.ConnectionDriverName=org.postgresql.Driver 
+        -Djavax.jdo.option.ConnectionURL=jdbc:postgresql://postgres:5432/my_metastore 
+        -Djavax.jdo.option.ConnectionUserName=${POSTGRES_USER} 
+        -Djavax.jdo.option.ConnectionPassword=${POSTGRES_PASSWORD:-hivepassword}
+      IS_RESUME: "true"
+      HIVE_AUX_JARS_PATH: "/opt/hive/lib/extra/postgresql.jar"
+      SERVICE_NAME: metastore
+    volumes:
+      - drivers:/opt/hive/lib/extra
+      - trino-parquet:/data/parquet
+    depends_on:
+      - postgres
+      - minio
+      
+  postgres:
+    image: postgres:17.0
+    environment:
+      POSTGRES_DB: "${POSTGRES_DB:-metastore}"
+      POSTGRES_USER: "${POSTGRES_USER:-hiveuser}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-hivepassword}"
+    ports:
+      - "${POSTGRES_PORT:-7432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  minio:
+    image: minio/minio:latest
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server /data --console-address ":9001"
+    volumes:
+      - data:/data
+
+volumes:
+  trino-config:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${TRINO_CONFIG_DIR}
+
+  trino-parquet:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${TRINO_DATA_DIR}/parquet
+
+  pgdata:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PGDATA_DIR}
+
+  drivers:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${DRIVER_PATH}
+
+  trino-warehouse:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${TRINO_DATA_DIR}/warehouse
+
+  data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${TRINO_DATA_DIR}
+
+

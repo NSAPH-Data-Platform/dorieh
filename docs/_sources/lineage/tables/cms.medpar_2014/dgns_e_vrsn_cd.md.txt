@@ -1,0 +1,22 @@
+# Column cms.medpar_2014.DGNS_E_VRSN_CD
+
+## Overview of column DGNS_E_VRSN_CD in table cms.medpar_2014 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2014](../cms.medpar_2014.md)           |
+| Qualified name                | cms.medpar_2014.DGNS_E_VRSN_CD  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/diagnosis-e-version-code-earlier-version](https://resdac.org/cms-data/variables/diagnosis-e-version-code-earlier-version) |
+
+
+MEDPAR Diagnosis E Version Code (Earlier Version)
+
+| Key | Value |
+| --- | ----- |
+| long_name | DGNS_E_VRSN_CD |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

@@ -1,0 +1,39 @@
+# Column medicare.qc_adm_union.icd_hll
+
+## Overview of column icd_hll in table medicare.qc_adm_union 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_adm_union](../medicare.qc_adm_union.md)           |
+| Qualified name                | medicare.qc_adm_union.icd_hll  |
+| Datatype                      | HLL        |
+| Column type | generated |
+
+
+
+## Expressions
+
+```sql
+SELECT GENERATED ALWAYS AS (hll_arr_agg(diagnoses)) STORED
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+icd_hll_svg_envelop.md
+```
+
+
+```{figure} icd_hll.svg
+:align: center
+:alt: Column medicare.qc_adm_union.icd_hll Lineage SVG
+:target: icd_hll_svg_envelop.html
+
+Data lineage for column medicare.qc_adm_union.icd_hll
+
+```
+
+

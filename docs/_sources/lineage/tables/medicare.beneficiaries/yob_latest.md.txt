@@ -1,0 +1,42 @@
+# Column medicare.beneficiaries.yob_latest
+
+## Overview of column yob_latest in table medicare.beneficiaries 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.beneficiaries](../medicare.beneficiaries.md)           |
+| Qualified name                | medicare.beneficiaries.yob_latest  |
+| Datatype                      | string        |
+| Column type | copied |
+
+
+
+## Expressions
+
+```sql
+SELECT CASE
+  WHEN MAX(yob) <> MIN(yob) THEN  MAX(yob)
+END
+
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+yob_latest_svg_envelop.md
+```
+
+
+```{figure} yob_latest.svg
+:align: center
+:alt: Column medicare.beneficiaries.yob_latest Lineage SVG
+:target: yob_latest_svg_envelop.html
+
+Data lineage for column medicare.beneficiaries.yob_latest
+
+```
+
+

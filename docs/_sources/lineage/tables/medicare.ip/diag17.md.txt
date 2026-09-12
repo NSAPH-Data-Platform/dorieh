@@ -1,0 +1,31 @@
+# Column medicare.ip.diag17
+
+## Overview of column diag17 in table medicare.ip 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.ip](../medicare.ip.md)           |
+| Qualified name                | medicare.ip.diag17  |
+| Datatype                      | varchar        |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+diag17_svg_envelop.md
+```
+
+
+```{figure} diag17.svg
+:align: center
+:alt: Column medicare.ip.diag17 Lineage SVG
+:target: diag17_svg_envelop.html
+
+Data lineage for column medicare.ip.diag17
+
+```
+
+

@@ -1,0 +1,39 @@
+# Column medicare.enrollments.fips2
+
+## Overview of column fips2 in table medicare.enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.enrollments](../medicare.enrollments.md)           |
+| Qualified name                | medicare.enrollments.fips2  |
+| Datatype                      | string        |
+| Column type | copied |
+
+
+
+## Expressions
+
+```sql
+SELECT MAX(fips2)
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+fips2_svg_envelop.md
+```
+
+
+```{figure} fips2.svg
+:align: center
+:alt: Column medicare.enrollments.fips2 Lineage SVG
+:target: fips2_svg_envelop.html
+
+Data lineage for column medicare.enrollments.fips2
+
+```
+
+

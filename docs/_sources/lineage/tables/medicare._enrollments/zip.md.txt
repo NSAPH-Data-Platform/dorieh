@@ -1,0 +1,39 @@
+# Column medicare._enrollments.zip
+
+## Overview of column zip in table medicare._enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare._enrollments](../medicare._enrollments.md)           |
+| Qualified name                | medicare._enrollments.zip  |
+| Datatype                      | string        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT MAX(zip)
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+zip_svg_envelop.md
+```
+
+
+```{figure} zip.svg
+:align: center
+:alt: Column medicare._enrollments.zip Lineage SVG
+:target: zip_svg_envelop.html
+
+Data lineage for column medicare._enrollments.zip
+
+```
+
+

@@ -23,9 +23,22 @@ import sys
 from pathlib import Path
 from typing import Dict
 
+from dorieh.version import PACKAGE_NAME
+
 
 def get_resource_dir() -> str:
-    root = Path(__file__).parents[4]
+    pp = list(Path(__file__).parents)
+    idx = -1
+    for i in range(len(pp)):
+        d = pp[i].name
+        if d == PACKAGE_NAME:
+            idx = i
+            break
+    if idx < 0:
+        idx = 3
+    if pp[idx+1].name == "python" and pp[idx+2].name == "src":
+        idx += 3
+    root = pp[idx]
     return os.path.join(root, "resources")
 
 
@@ -33,14 +46,16 @@ def name2path(name: str) -> str:
     return os.path.join(*(name.split('.')))
 
 
-def get_resources(name: str) -> Dict[str, str]:
+def get_resources(name: str, verbose=False) -> Dict[str, str]:
     rel_path = name2path(name)
     dirs = [get_resource_dir()] + [
-        os.path.join(d, "resources")
+        os.path.join(d, "dorieh", "resources")
         for d in sys.path
     ]
     for d in dirs:
         rpath = os.path.join(d, rel_path + "*")
+        if verbose:
+            print(rpath)
         resources = glob.glob(rpath, recursive=False)
         if resources:
             return {

@@ -1,0 +1,22 @@
+# Column cms.mbsf_abcd_2015.DUAL_05
+
+## Overview of column DUAL_05 in table cms.mbsf_abcd_2015 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_abcd_2015](../cms.mbsf_abcd_2015.md)           |
+| Qualified name                | cms.mbsf_abcd_2015.DUAL_05  |
+| Datatype                      | VARCHAR(2)        |
+| Reference | [https://resdac.org/cms-data/variables/monthly-medicare-medicaid-dual-eligibility-code-may](https://resdac.org/cms-data/variables/monthly-medicare-medicaid-dual-eligibility-code-may) |
+
+
+State Reported Dual Eligible Status Code: May
+
+| Key | Value |
+| --- | ----- |
+| long_name | DUAL_STUS_CD_05 |
+| original_type | CHAR |
+| width | 2.0 |
+
+
+

@@ -1,0 +1,22 @@
+# Column cms.medpar_2018.PRVDRNUM
+
+## Overview of column PRVDRNUM in table cms.medpar_2018 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2018](../cms.medpar_2018.md)           |
+| Qualified name                | cms.medpar_2018.PRVDRNUM  |
+| Datatype                      | VARCHAR(10)        |
+| Reference | [https://resdac.org/cms-data/variables/provider-number](https://resdac.org/cms-data/variables/provider-number) |
+
+
+MEDPAR Provider Number
+
+| Key | Value |
+| --- | ----- |
+| long_name | PRVDR_NUM |
+| original_type | CHAR |
+| width | 10.0 |
+
+
+

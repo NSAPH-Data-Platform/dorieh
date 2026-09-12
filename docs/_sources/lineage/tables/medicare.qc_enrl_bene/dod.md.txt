@@ -1,0 +1,39 @@
+# Column medicare.qc_enrl_bene.dod
+
+## Overview of column dod in table medicare.qc_enrl_bene 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_enrl_bene](../medicare.qc_enrl_bene.md)           |
+| Qualified name                | medicare.qc_enrl_bene.dod  |
+| Datatype                      | string        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT MAX(dod)
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+dod_svg_envelop.md
+```
+
+
+```{figure} dod.svg
+:align: center
+:alt: Column medicare.qc_enrl_bene.dod Lineage SVG
+:target: dod_svg_envelop.html
+
+Data lineage for column medicare.qc_enrl_bene.dod
+
+```
+
+

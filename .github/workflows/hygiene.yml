@@ -1,0 +1,11 @@
+name: hygiene
+
+on: [push, pull_request]
+
+jobs:
+  absolute-paths:
+    name: No machine-specific absolute paths
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 tools/check_abs_paths.py --all

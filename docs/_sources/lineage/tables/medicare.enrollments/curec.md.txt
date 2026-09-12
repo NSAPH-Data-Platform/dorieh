@@ -1,0 +1,39 @@
+# Column medicare.enrollments.curec
+
+## Overview of column curec in table medicare.enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.enrollments](../medicare.enrollments.md)           |
+| Qualified name                | medicare.enrollments.curec  |
+| Datatype                      | string        |
+| Column type | copied |
+
+
+
+## Expressions
+
+```sql
+SELECT MAX(curec)
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+curec_svg_envelop.md
+```
+
+
+```{figure} curec.svg
+:align: center
+:alt: Column medicare.enrollments.curec Lineage SVG
+:target: curec_svg_envelop.html
+
+Data lineage for column medicare.enrollments.curec
+
+```
+
+

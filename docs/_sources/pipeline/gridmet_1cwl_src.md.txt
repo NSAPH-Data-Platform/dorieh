@@ -11,6 +11,9 @@ inputs:
     type: string
   database:
     type: File
+  depends_on:
+    doc: a special field used to enforce dependencies and execution order
+    type: Any?
   domain:
     type: string
   registry:
@@ -33,6 +36,8 @@ outputs:
 requirements:
   InlineJavascriptRequirement: {}
   MultipleInputFeatureRequirement: {}
+  NetworkAccess:
+    networkAccess: true
   ScatterFeatureRequirement: {}
   StepInputExpressionRequirement: {}
   SubworkflowFeatureRequirement: {}

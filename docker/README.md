@@ -1,28 +1,40 @@
 # Building Docker Image
 
-Provided are two Dockerfile:
+Provided are two Dockerfiles:
 
-* For Intel / AMD platform: [Dockerfile.amd64](Dockerfile.amd64)
-* For ARM platform used by AWG Graviton family of virtual machines and newer Macs: [Dockerfile.arm64](Dockerfile.arm64)
-                                                                                                                    
-Please note, that ARM architecture requires installation of more components (mainly, GIS tools).
+* For general purpose usage in a non-secure environment. Has been tested for Intel/AMD64 and ARM platform 
+  used by AWS Graviton family of virtual machines and newer Macs: [Dockerfile](Dockerfile)
+* For Amazon Linux (AMD64 only) intended for use in secure and regulated data environments. This is a stripped 
+   container without any of the optional dependencies, optimized for addressing any potential CVEs: 
+   [Dockerfile.amzn](Dockerfile.amzn)
 
-The included Docker file builds a multi-architecture docker image for Dorieh. It includes support for 
-R functions and FST file format. If you do not need FST and R support, comment out 
-the installation of R in the Dockerfile and remove `[FST]` from requirements.txt.
+To build a container for a specific platform (tested on ARM64 and AMD64) run the following commands in this 
+($repositoryRoot/docker) directory:
 
-To build docker images in this directory, run the following commands, replacing $(version) with the current version:
+```shell
+export dorieh_version=$(grep -E "version *= *[\"']" ../setup.py | head -1 | sed -E "s/.*version *= *[\"']([^\"']+)[\"'].*/\1/")
+export arch=$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')
+DOCKER_BUILDKIT=1 BUILDKIT_PROGRESS=plain docker buildx build --platform linux/${arch} --no-cache --tag forome/dorieh:${arch}-${dorieh_version} --load -f Dockerfile . &&\
+    docker push forome/dorieh:${arch}-${dorieh_version}
+```
 
-    DOCKER_BUILDKIT=1 BUILDKIT_PROGRESS=plain docker buildx build --platform linux/amd64 --no-cache --tag forome/dorieh:amd64 --load -f Dockerfile.amd64 . && docker push forome/dorieh:amd64
-    DOCKER_BUILDKIT=1 BUILDKIT_PROGRESS=plain docker buildx build --platform linux/arm64 --no-cache --tag forome/dorieh:arm64 --load -f Dockerfile.arm64 . && docker push forome/dorieh:arm64
-    docker manifest create forome/dorieh:latest --amend forome/dorieh:arm64 --amend forome/dorieh:amd64 && docker manifest push forome/dorieh:latest
-    docker tag forome/dorieh:latest forome/dorieh:$(version)
-    docker push forome/dorieh:$(version)
+To create a multiarch container, run the following commands:
 
-To enable multiarchitecture build you might need to run the following commands first:
+```shell
+docker pull forome/dorieh:amd64-${dorieh_version}
+docker pull forome/dorieh:arm64-${dorieh_version}
 
-    docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-    docker buildx rm builder
-    docker buildx create --name builder --driver docker-container --use
-    docker buildx inspect --bootstrap
+docker manifest create forome/dorieh:${dorieh_version} --amend forome/dorieh:amd64-${dorieh_version} --amend forome/dorieh:arm64-${dorieh_version}
+docker manifest annotate forome/dorieh:${dorieh_version}  forome/dorieh:amd64-${dorieh_version} --arch amd64
+docker manifest annotate forome/dorieh:${dorieh_version}  forome/dorieh:arm64-${dorieh_version} --arch arm64
+docker manifest push forome/dorieh:${dorieh_version}
+
+# Optionally
+docker manifest create forome/dorieh:latest --amend forome/dorieh:amd64-${dorieh_version} --amend forome/dorieh:arm64-${dorieh_version}
+docker manifest annotate forome/dorieh:latest  forome/dorieh:amd64-${dorieh_version} --arch amd64
+docker manifest annotate forome/dorieh:latest  forome/dorieh:arm64-${dorieh_version} --arch arm64
+docker manifest push forome/dorieh:latest
+```
+
+
 

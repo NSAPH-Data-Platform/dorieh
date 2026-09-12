@@ -1,0 +1,31 @@
+# Column medicare.ps.record
+
+## Overview of column record in table medicare.ps 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.ps](../medicare.ps.md)           |
+| Qualified name                | medicare.ps.record  |
+| Datatype                      | string        |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+record_svg_envelop.md
+```
+
+
+```{figure} record.svg
+:align: center
+:alt: Column medicare.ps.record Lineage SVG
+:target: record_svg_envelop.html
+
+Data lineage for column medicare.ps.record
+
+```
+
+

@@ -1,0 +1,22 @@
+# Column cms.mbsf_abcd_2017.MDCR_STUS_CD_10
+
+## Overview of column MDCR_STUS_CD_10 in table cms.mbsf_abcd_2017 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_abcd_2017](../cms.mbsf_abcd_2017.md)           |
+| Qualified name                | cms.mbsf_abcd_2017.MDCR_STUS_CD_10  |
+| Datatype                      | VARCHAR(2)        |
+| Reference | [https://resdac.org/cms-data/variables/medicare-status-code-october](https://resdac.org/cms-data/variables/medicare-status-code-october) |
+
+
+Medicare Status Code: October
+
+| Key | Value |
+| --- | ----- |
+| long_name | MDCR_STATUS_CODE_10 |
+| original_type | CHAR |
+| width | 2.0 |
+
+
+

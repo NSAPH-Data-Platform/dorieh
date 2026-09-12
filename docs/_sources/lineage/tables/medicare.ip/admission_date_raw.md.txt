@@ -1,0 +1,41 @@
+# Column medicare.ip.admission_date_raw
+
+## Overview of column admission_date_raw in table medicare.ip 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.ip](../medicare.ip.md)           |
+| Qualified name                | medicare.ip.admission_date_raw  |
+| Datatype                      | VARCHAR        |
+| Column type | transformed |
+
+
+
+### Casts:
+
+| Original type | Cast expression      |
+| ------------- | -------------------- |
+| numeric | TRIM(to_char({column_name}, '999999999')) |
+| * | {column_name}::VARCHAR |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+admission_date_raw_svg_envelop.md
+```
+
+
+```{figure} admission_date_raw.svg
+:align: center
+:alt: Column medicare.ip.admission_date_raw Lineage SVG
+:target: admission_date_raw_svg_envelop.html
+
+Data lineage for column medicare.ip.admission_date_raw
+
+```
+
+

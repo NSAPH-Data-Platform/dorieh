@@ -1,0 +1,39 @@
+# Column medicare.qc_enrollments.bene_hll
+
+## Overview of column bene_hll in table medicare.qc_enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_enrollments](../medicare.qc_enrollments.md)           |
+| Qualified name                | medicare.qc_enrollments.bene_hll  |
+| Datatype                      | string        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT hll_add_agg(bene)
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+bene_hll_svg_envelop.md
+```
+
+
+```{figure} bene_hll.svg
+:align: center
+:alt: Column medicare.qc_enrollments.bene_hll Lineage SVG
+:target: bene_hll_svg_envelop.html
+
+Data lineage for column medicare.qc_enrollments.bene_hll
+
+```
+
+

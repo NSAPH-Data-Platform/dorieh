@@ -1,0 +1,22 @@
+# Column cms.medpar_2013.ADMSNDAY
+
+## Overview of column ADMSNDAY in table cms.medpar_2013 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2013](../cms.medpar_2013.md)           |
+| Qualified name                | cms.medpar_2013.ADMSNDAY  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/code-indicating-day-week-beneficiary-was-admitted-facility](https://resdac.org/cms-data/variables/code-indicating-day-week-beneficiary-was-admitted-facility) |
+
+
+Code indicating day of week beneficiary was admitted to facility.
+
+| Key | Value |
+| --- | ----- |
+| long_name | ADMSN_DAY_CD |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

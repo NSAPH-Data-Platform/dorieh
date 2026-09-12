@@ -1,6 +1,6 @@
 # Example user request for research data
 
-```{literalinclude} ../examples/example_request.yaml
+```{literalinclude} ../examples/no-db/example_request.yaml
 :linenos:
 :language: yaml
 ```

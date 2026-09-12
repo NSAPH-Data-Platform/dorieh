@@ -1,0 +1,22 @@
+# Column cms.medpar_2011.DPRTMNTL
+
+## Overview of column DPRTMNTL in table cms.medpar_2011 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2011](../cms.medpar_2011.md)           |
+| Qualified name                | cms.medpar_2011.DPRTMNTL  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/total-charge-all-ancillary-departments-related-beneficiarys-stay](https://resdac.org/cms-data/variables/total-charge-all-ancillary-departments-related-beneficiarys-stay) |
+
+
+Total charge for all ancillary depts related to beneficiarys stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | DPRTMNTL_TOT_CHRG_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

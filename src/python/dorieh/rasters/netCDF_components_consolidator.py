@@ -84,7 +84,7 @@ class NetCDFDataset:
 
     def read_abs_values(self, filename: str, var: str = None):
         """
-        Reads the NetCDF dataset from a *.nc file
+        Reads the NetCDF dataset from a \*.nc file
         Assumes that this dataset contains absolute values of
         the variable with the name provided by var parameter.
 

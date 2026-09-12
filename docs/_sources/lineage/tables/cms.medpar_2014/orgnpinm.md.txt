@@ -1,0 +1,22 @@
+# Column cms.medpar_2014.ORGNPINM
+
+## Overview of column ORGNPINM in table cms.medpar_2014 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2014](../cms.medpar_2014.md)           |
+| Qualified name                | cms.medpar_2014.ORGNPINM  |
+| Datatype                      | VARCHAR(10)        |
+| Reference | [https://resdac.org/cms-data/variables/organization-npi-number-ffs](https://resdac.org/cms-data/variables/organization-npi-number-ffs) |
+
+
+Organization NPI Number
+
+| Key | Value |
+| --- | ----- |
+| long_name | ORG_NPI_NUM |
+| original_type | CHAR |
+| width | 10.0 |
+
+
+

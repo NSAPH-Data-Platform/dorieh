@@ -1,0 +1,20 @@
+# Column medicare.admissions.ssa2
+
+## Overview of column ssa2 in table medicare.admissions 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.admissions](../medicare.admissions.md)           |
+| Qualified name                | medicare.admissions.ssa2  |
+| Datatype                      | string        |
+| Column type | copied |
+
+
+
+## Expressions
+
+```sql
+SELECT state
+```
+
+

@@ -1,0 +1,39 @@
+# Column medicare.qc_enrl_bene.curec
+
+## Overview of column curec in table medicare.qc_enrl_bene 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_enrl_bene](../medicare.qc_enrl_bene.md)           |
+| Qualified name                | medicare.qc_enrl_bene.curec  |
+| Datatype                      | string        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT MAX(curec)
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+curec_svg_envelop.md
+```
+
+
+```{figure} curec.svg
+:align: center
+:alt: Column medicare.qc_enrl_bene.curec Lineage SVG
+:target: curec_svg_envelop.html
+
+Data lineage for column medicare.qc_enrl_bene.curec
+
+```
+
+

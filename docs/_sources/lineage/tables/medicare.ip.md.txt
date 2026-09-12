@@ -1,0 +1,129 @@
+# View medicare.ip
+
+## Overview for medicare.ip
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+medicare.ip/adm_day_of_week.md
+medicare.ip/admission_date.md
+medicare.ip/admission_date_raw.md
+medicare.ip/admsn_type_cd.md
+medicare.ip/bene_blood_ddctbl_amt.md
+medicare.ip/bene_id.md
+medicare.ip/bene_ip_ddctbl_amt.md
+medicare.ip/bene_prmry_pyr_amt.md
+medicare.ip/bene_pta_coinsrnc_amt.md
+medicare.ip/diag1.md
+medicare.ip/diag10.md
+medicare.ip/diag11.md
+medicare.ip/diag12.md
+medicare.ip/diag13.md
+medicare.ip/diag14.md
+medicare.ip/diag15.md
+medicare.ip/diag16.md
+medicare.ip/diag17.md
+medicare.ip/diag18.md
+medicare.ip/diag19.md
+medicare.ip/diag2.md
+medicare.ip/diag20.md
+medicare.ip/diag21.md
+medicare.ip/diag22.md
+medicare.ip/diag23.md
+medicare.ip/diag24.md
+medicare.ip/diag25.md
+medicare.ip/diag3.md
+medicare.ip/diag4.md
+medicare.ip/diag5.md
+medicare.ip/diag6.md
+medicare.ip/diag7.md
+medicare.ip/diag8.md
+medicare.ip/diag9.md
+medicare.ip/discharge_date.md
+medicare.ip/discharge_date_raw.md
+medicare.ip/drg_outlier_pmt_amt.md
+medicare.ip/drg_price_amt.md
+medicare.ip/dschrg_dstntn_cd.md
+medicare.ip/dschrgcd.md
+medicare.ip/file.md
+medicare.ip/fips2.md
+medicare.ip/los_day_cnt.md
+medicare.ip/mdcr_pmt_amt.md
+medicare.ip/pass_thru_amt.md
+medicare.ip/record.md
+medicare.ip/src_admsn_cd.md
+medicare.ip/ssa2.md
+medicare.ip/state.md
+medicare.ip/year.md
+medicare.ip/zip.md
+medicare.ip/zip4.md
+```
+
+
+Inpatient Adminissions view. Combines multiple inpatient admissions
+files (aka MedPar) into a single view, transforming columns
+to the same type
+
+
+---
+## Columns:
+
+| Column Name | Column Type | Datatype |
+| --- | --- | --- |
+| [adm_day_of_week](medicare.ip/adm_day_of_week.md) | transformed | INT |
+| [admission_date](medicare.ip/admission_date.md) | transformed | DATE |
+| [admission_date_raw](medicare.ip/admission_date_raw.md) | transformed | VARCHAR |
+| [admsn_type_cd](medicare.ip/admsn_type_cd.md) | transformed | CHAR(1) |
+| [bene_blood_ddctbl_amt](medicare.ip/bene_blood_ddctbl_amt.md) |  | NUMERIC |
+| [bene_id](medicare.ip/bene_id.md) |  | string |
+| [bene_ip_ddctbl_amt](medicare.ip/bene_ip_ddctbl_amt.md) |  | NUMERIC |
+| [bene_prmry_pyr_amt](medicare.ip/bene_prmry_pyr_amt.md) |  | NUMERIC |
+| [bene_pta_coinsrnc_amt](medicare.ip/bene_pta_coinsrnc_amt.md) |  | NUMERIC |
+| [diag1](medicare.ip/diag1.md) |  | varchar |
+| [diag10](medicare.ip/diag10.md) |  | varchar |
+| [diag11](medicare.ip/diag11.md) |  | varchar |
+| [diag12](medicare.ip/diag12.md) |  | varchar |
+| [diag13](medicare.ip/diag13.md) |  | varchar |
+| [diag14](medicare.ip/diag14.md) |  | varchar |
+| [diag15](medicare.ip/diag15.md) |  | varchar |
+| [diag16](medicare.ip/diag16.md) |  | varchar |
+| [diag17](medicare.ip/diag17.md) |  | varchar |
+| [diag18](medicare.ip/diag18.md) |  | varchar |
+| [diag19](medicare.ip/diag19.md) |  | varchar |
+| [diag2](medicare.ip/diag2.md) |  | varchar |
+| [diag20](medicare.ip/diag20.md) |  | varchar |
+| [diag21](medicare.ip/diag21.md) |  | varchar |
+| [diag22](medicare.ip/diag22.md) |  | varchar |
+| [diag23](medicare.ip/diag23.md) |  | varchar |
+| [diag24](medicare.ip/diag24.md) |  | varchar |
+| [diag25](medicare.ip/diag25.md) |  | varchar |
+| [diag3](medicare.ip/diag3.md) |  | varchar |
+| [diag4](medicare.ip/diag4.md) |  | varchar |
+| [diag5](medicare.ip/diag5.md) |  | varchar |
+| [diag6](medicare.ip/diag6.md) |  | varchar |
+| [diag7](medicare.ip/diag7.md) |  | varchar |
+| [diag8](medicare.ip/diag8.md) |  | varchar |
+| [diag9](medicare.ip/diag9.md) |  | varchar |
+| [discharge_date](medicare.ip/discharge_date.md) | transformed | DATE |
+| [discharge_date_raw](medicare.ip/discharge_date_raw.md) | transformed | VARCHAR |
+| [drg_outlier_pmt_amt](medicare.ip/drg_outlier_pmt_amt.md) |  | NUMERIC |
+| [drg_price_amt](medicare.ip/drg_price_amt.md) |  | NUMERIC |
+| [dschrg_dstntn_cd](medicare.ip/dschrg_dstntn_cd.md) | transformed | CHAR(2) |
+| [dschrgcd](medicare.ip/dschrgcd.md) |  | CHAR(1) |
+| [file](medicare.ip/file.md) |  | string |
+| [fips2](medicare.ip/fips2.md) | computed | string |
+| [los_day_cnt](medicare.ip/los_day_cnt.md) | transformed | INT |
+| [mdcr_pmt_amt](medicare.ip/mdcr_pmt_amt.md) |  | NUMERIC |
+| [pass_thru_amt](medicare.ip/pass_thru_amt.md) |  | NUMERIC |
+| [record](medicare.ip/record.md) |  | string |
+| [src_admsn_cd](medicare.ip/src_admsn_cd.md) | transformed | CHAR(1) |
+| [ssa2](medicare.ip/ssa2.md) | computed | string |
+| [state](medicare.ip/state.md) | computed | string |
+| [year](medicare.ip/year.md) | computed | INT |
+| [zip](medicare.ip/zip.md) | transformed | INT |
+| [zip4](medicare.ip/zip4.md) | computed | INT |
+
+

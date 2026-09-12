@@ -1,0 +1,12 @@
+# Column medicare.admissions.quality
+
+## Overview of column quality in table medicare.admissions 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.admissions](../medicare.admissions.md)           |
+| Qualified name                | medicare.admissions.quality  |
+| Datatype                      | VARCHAR(12) DEFAULT 'PASS'        |
+
+
+

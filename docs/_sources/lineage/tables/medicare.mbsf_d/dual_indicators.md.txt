@@ -1,0 +1,40 @@
+# Column medicare.mbsf_d.dual_indicators
+
+## Overview of column dual_indicators in table medicare.mbsf_d 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.mbsf_d](../medicare.mbsf_d.md)           |
+| Qualified name                | medicare.mbsf_d.dual_indicators  |
+| Datatype                      | CHAR(1)[12]        |
+| Column type | transformed |
+
+
+
+### Casts:
+
+| Original type | Cast expression      |
+| ------------- | -------------------- |
+| character varying | string_to_array({column_name}, NULL) |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+dual_indicators_svg_envelop.md
+```
+
+
+```{figure} dual_indicators.svg
+:align: center
+:alt: Column medicare.mbsf_d.dual_indicators Lineage SVG
+:target: dual_indicators_svg_envelop.html
+
+Data lineage for column medicare.mbsf_d.dual_indicators
+
+```
+
+

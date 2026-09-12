@@ -1,0 +1,61 @@
+# Materialized view gold_temperature_by_state
+
+## Overview for gold_temperature_by_state
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+gold_temperature_by_state/date.md
+gold_temperature_by_state/t_mean_in_c.md
+gold_temperature_by_state/t_mean_in_f.md
+gold_temperature_by_state/t_span.md
+gold_temperature_by_state/us_state.md
+```
+
+
+Temperature variations by US State
+
+
+Aggregated from [silver_temperature](silver_temperature.md) on On us_state, date
+
+Primary Key: us_state, date
+
+
+<details>
+
+<summary>SQL/DDL Statement</summary>
+
+```sql
+
+CREATE materialized view  gold_temperature_by_state AS
+SELECT
+    us_state,
+	date,
+	MAX(tmmx) - MIN(tmmx) AS t_span,
+	AVG(temperature_in_C) AS t_mean_in_C,
+	AVG(temperature_in_F) AS t_mean_in_F
+FROM silver_temperature
+
+WHERE us_state IS NOT NULL AND date IS NOT NULL
+GROUP BY us_state,date;
+
+COMMENT ON materialized view gold_temperature_by_state IS 'CREATED BY Dorieh: {"version": "0.5.1.post2", "url": "file://<local checkout>", "commit": null}. Created at 2026-09-12 15:03:54.874348';
+```
+
+</details>
+
+---
+## Columns:
+
+| Column Name | Column Type | Datatype |
+| --- | --- | --- |
+| [date](gold_temperature_by_state/date.md) | grouping | string |
+| [t_mean_in_c](gold_temperature_by_state/t_mean_in_c.md) | computed | float |
+| [t_mean_in_f](gold_temperature_by_state/t_mean_in_f.md) | computed | float |
+| [t_span](gold_temperature_by_state/t_span.md) | computed | float |
+| [us_state](gold_temperature_by_state/us_state.md) | grouping | string |
+
+

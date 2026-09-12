@@ -1,0 +1,48 @@
+# Column medicare.beneficiaries.bene
+
+## Overview of column bene in table medicare.beneficiaries 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.beneficiaries](../medicare.beneficiaries.md)           |
+| Qualified name                | medicare.beneficiaries.bene  |
+| Datatype                      | HLL_HASHVAL        |
+| Column type | generated |
+| Reference | [https://github.com/citusdata/postgresql-hll/blob/master/REFERENCE.md#basic-operational-functions](https://github.com/citusdata/postgresql-hll/blob/master/REFERENCE.md#basic-operational-functions) |
+
+
+HLL hash (see https://en.wikipedia.org/wiki/HyperLogLog).
+Can be used to calculate number of beneficiaries
+satisfying a certain given condition
+Use #(hll_add_agg(bene)) or hll_cardinality(hll_add_agg(bene)) aggregator
+
+
+
+
+
+## Expressions
+
+```sql
+SELECT GENERATED ALWAYS AS (hll_hash_text(bene_id)) STORED
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+bene_svg_envelop.md
+```
+
+
+```{figure} bene.svg
+:align: center
+:alt: Column medicare.beneficiaries.bene Lineage SVG
+:target: bene_svg_envelop.html
+
+Data lineage for column medicare.beneficiaries.bene
+
+```
+
+

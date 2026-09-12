@@ -1,0 +1,22 @@
+# Column cms.medpar_2016.BLDDEDAM
+
+## Overview of column BLDDEDAM in table cms.medpar_2016 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2016](../cms.medpar_2016.md)           |
+| Qualified name                | cms.medpar_2016.BLDDEDAM  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/beneficiarys-liability-blood-deductible-stay](https://resdac.org/cms-data/variables/beneficiarys-liability-blood-deductible-stay) |
+
+
+Beneficiarys liability for blood deductible for stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | BENE_BLOOD_DDCTBL_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

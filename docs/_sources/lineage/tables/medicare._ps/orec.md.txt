@@ -1,0 +1,40 @@
+# Column medicare._ps.orec
+
+## Overview of column orec in table medicare._ps 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare._ps](../medicare._ps.md)           |
+| Qualified name                | medicare._ps.orec  |
+| Datatype                      | INT        |
+| Column type | copied |
+
+
+
+### Casts:
+
+| Original type | Cast expression      |
+| ------------- | -------------------- |
+| * | {column_name}::INT |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+orec_svg_envelop.md
+```
+
+
+```{figure} orec.svg
+:align: center
+:alt: Column medicare._ps.orec Lineage SVG
+:target: orec_svg_envelop.html
+
+Data lineage for column medicare._ps.orec
+
+```
+
+

@@ -1,0 +1,22 @@
+# Column cms.medpar_2018.GHOPDCD
+
+## Overview of column GHOPDCD in table cms.medpar_2018 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2018](../cms.medpar_2018.md)           |
+| Qualified name                | cms.medpar_2018.GHOPDCD  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/cms-data/variables/code-indicating-whether-group-health-organization-gho-has-paid-provider-claims](https://resdac.org/cms-data/variables/code-indicating-whether-group-health-organization-gho-has-paid-provider-claims) |
+
+
+Code indicating whether or not GHO has paid provider for claim(s)
+
+| Key | Value |
+| --- | ----- |
+| long_name | GHO_PD_CD |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

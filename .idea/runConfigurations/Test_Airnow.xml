@@ -7,15 +7,25 @@
     <envs>
       <env name="PYTHONUNBUFFERED" value="1" />
     </envs>
-    <option name="SDK_HOME" value="" />
-    <option name="SDK_NAME" value="Python 3.10 (dorieh_test)" />
+    <option name="SDK_HOME" value="/opt/python/venvs/dorieh_test/bin/python" />
+    <option name="SDK_NAME" value="dorieh313_test (Python 3.13)" />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../run/airnow" />
     <option name="IS_MODULE_SDK" value="false" />
     <option name="ADD_CONTENT_ROOTS" value="true" />
     <option name="ADD_SOURCE_ROOTS" value="true" />
     <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-    <option name="SCRIPT_NAME" value="/opt/venv/dorieh_test/bin/toil-cwl-runner" />
-    <option name="PARAMETERS" value="--jobStore j1 --retryCount 0 --cleanWorkDir never --outdir $PROJECT_DIR$/../../run/aqs/outputs --workDir $PROJECT_DIR$/../../run/airnow $PROJECT_DIR$/src/cwl/test_airnow.cwl --database $PROJECT_DIR$/../../database.ini --connection_name nsaph-8432 --test_script $PROJECT_DIR$/src/cwl/test_cases/airnow_test.sql --api-key 9B053C38-3C42-416E-A330-203A698CCCDA --from 2022-01-01 --to 2022-08-31 --parameter_code pm25 --table airnow_pm25_2022 --year 2022" />
+    <EXTENSION ID="net.ashald.envfile">
+      <option name="IS_ENABLED" value="false" />
+      <option name="IS_SUBST" value="false" />
+      <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+      <option name="IS_IGNORE_MISSING_FILES" value="false" />
+      <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+      <ENTRIES>
+        <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+      </ENTRIES>
+    </EXTENSION>
+    <option name="SCRIPT_NAME" value="/opt/venv/dorieh313_test/bin/toil-cwl-runner" />
+    <option name="PARAMETERS" value="--jobStore j1 --retryCount 0 --cleanWorkDir never --outdir $PROJECT_DIR$/../../run/aqs/outputs --workDir $PROJECT_DIR$/../../run/airnow $PROJECT_DIR$/src/cwl/test_airnow.cwl --database $PROJECT_DIR$/../../database.ini --connection_name dorieh-local --test_script $PROJECT_DIR$/src/cwl/test_cases/airnow_test.sql --api-key 9B053C38-3C42-416E-A330-203A698CCCDA --from 2022-01-25 --to 2022-03-10 --parameter_code pm25 --table airnow_pm25_2022 --year 2022" />
     <option name="SHOW_COMMAND_LINE" value="false" />
     <option name="EMULATE_TERMINAL" value="false" />
     <option name="MODULE_MODE" value="false" />

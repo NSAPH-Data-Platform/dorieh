@@ -1,0 +1,48 @@
+# Column cms.mbsf_abcd_2016.ZIP
+
+## Overview of column ZIP in table cms.mbsf_abcd_2016 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_abcd_2016](../cms.mbsf_abcd_2016.md)           |
+| Qualified name                | cms.mbsf_abcd_2016.ZIP  |
+| Datatype                      | VARCHAR(5)        |
+| Column type | generated |
+| Reference | [https://resdac.org/cms-data/variables/zip-code-beneficiary](https://resdac.org/cms-data/variables/zip-code-beneficiary) |
+
+
+5-digit ZIP Code
+
+| Key | Value |
+| --- | ----- |
+| original_type | CHAR |
+| width | 5.0 |
+
+
+
+## Expressions
+
+```sql
+SELECT GENERATED ALWAYS AS (ZIP_CD) STORED
+```
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+zip_svg_envelop.md
+```
+
+
+```{figure} zip.svg
+:align: center
+:alt: Column cms.mbsf_abcd_2016.ZIP Lineage SVG
+:target: zip_svg_envelop.html
+
+Data lineage for column cms.mbsf_abcd_2016.ZIP
+
+```
+
+

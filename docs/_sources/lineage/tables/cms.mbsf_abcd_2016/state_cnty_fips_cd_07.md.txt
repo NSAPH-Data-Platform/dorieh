@@ -1,0 +1,22 @@
+# Column cms.mbsf_abcd_2016.STATE_CNTY_FIPS_CD_07
+
+## Overview of column STATE_CNTY_FIPS_CD_07 in table cms.mbsf_abcd_2016 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_abcd_2016](../cms.mbsf_abcd_2016.md)           |
+| Qualified name                | cms.mbsf_abcd_2016.STATE_CNTY_FIPS_CD_07  |
+| Datatype                      | VARCHAR(5)        |
+| Reference | [https://resdac.org/cms-data/variables/state-and-county-fips-code-july](https://resdac.org/cms-data/variables/state-and-county-fips-code-july) |
+
+
+FIPS State-County Code: July
+
+| Key | Value |
+| --- | ----- |
+| long_name | STATE_CNTY_FIPS_CD_07 |
+| original_type | CHAR |
+| width | 5.0 |
+
+
+

@@ -1,0 +1,22 @@
+# Column cms.medpar_2011.TAKE_HOME_AMT
+
+## Overview of column TAKE_HOME_AMT in table cms.medpar_2011 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2011](../cms.medpar_2011.md)           |
+| Qualified name                | cms.medpar_2011.TAKE_HOME_AMT  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/medicalsurgical-supplies-take-home-amount](https://resdac.org/cms-data/variables/medicalsurgical-supplies-take-home-amount) |
+
+
+Take Home Amount
+
+| Key | Value |
+| --- | ----- |
+| long_name | TAKE_HOME_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

@@ -1,0 +1,22 @@
+# Column cms.mbsf_abcd_2018.SEX
+
+## Overview of column SEX in table cms.mbsf_abcd_2018 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.mbsf_abcd_2018](../cms.mbsf_abcd_2018.md)           |
+| Qualified name                | cms.mbsf_abcd_2018.SEX  |
+| Datatype                      | VARCHAR(1)        |
+| Reference | [https://resdac.org/sites/datadocumentation.resdac.org/files/Introduction%20to%20DE-SynPUF%20%28Slides%29.pdf](https://resdac.org/sites/datadocumentation.resdac.org/files/Introduction%20to%20DE-SynPUF%20%28Slides%29.pdf) |
+
+
+Sex
+
+| Key | Value |
+| --- | ----- |
+| long_name | SEX_IDENT_CD |
+| original_type | CHAR |
+| width | 1.0 |
+
+
+

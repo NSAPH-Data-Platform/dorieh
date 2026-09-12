@@ -1,0 +1,22 @@
+# Column cms.medpar_2016.FICARR
+
+## Overview of column FICARR in table cms.medpar_2016 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2016](../cms.medpar_2016.md)           |
+| Qualified name                | cms.medpar_2016.FICARR  |
+| Datatype                      | VARCHAR(5)        |
+| Reference | [https://resdac.org/cms-data/variables/fiscal-intermediary-fi-id-number](https://resdac.org/cms-data/variables/fiscal-intermediary-fi-id-number) |
+
+
+Intermediary processor identification
+
+| Key | Value |
+| --- | ----- |
+| long_name | FICARR_IDENT_NUM |
+| original_type | CHAR |
+| width | 5.0 |
+
+
+

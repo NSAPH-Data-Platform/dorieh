@@ -1,0 +1,44 @@
+# Column medicare._ps.age
+
+## Overview of column age in table medicare._ps 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare._ps](../medicare._ps.md)           |
+| Qualified name                | medicare._ps.age  |
+| Datatype                      | INT        |
+| Column type | copied |
+
+
+Age on January 1 of a given year, if provided
+
+
+
+
+### Casts:
+
+| Original type | Cast expression      |
+| ------------- | -------------------- |
+| * | {column_name}::INT |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+age_svg_envelop.md
+```
+
+
+```{figure} age.svg
+:align: center
+:alt: Column medicare._ps.age Lineage SVG
+:target: age_svg_envelop.html
+
+Data lineage for column medicare._ps.age
+
+```
+
+

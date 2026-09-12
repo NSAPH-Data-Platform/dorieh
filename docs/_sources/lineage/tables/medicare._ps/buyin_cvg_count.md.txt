@@ -1,0 +1,45 @@
+# Column medicare._ps.buyin_cvg_count
+
+## Overview of column buyin_cvg_count in table medicare._ps 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare._ps](../medicare._ps.md)           |
+| Qualified name                | medicare._ps.buyin_cvg_count  |
+| Datatype                      | INT        |
+| Column type | copied |
+| Reference | [https://resdac.org/cms-data/variables/state-buy-coverage-count](https://resdac.org/cms-data/variables/state-buy-coverage-count) |
+
+
+Number of months during a given year, during the year when the beneficiary premium was paid by the state.
+
+
+
+
+### Casts:
+
+| Original type | Cast expression      |
+| ------------- | -------------------- |
+| * | CASE WHEN {column_name} IS NULL THEN 0 WHEN year = 2015 AND {column_name} = '1' THEN 12 ELSE {column_name}::INT END |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+buyin_cvg_count_svg_envelop.md
+```
+
+
+```{figure} buyin_cvg_count.svg
+:align: center
+:alt: Column medicare._ps.buyin_cvg_count Lineage SVG
+:target: buyin_cvg_count_svg_envelop.html
+
+Data lineage for column medicare._ps.buyin_cvg_count
+
+```
+
+

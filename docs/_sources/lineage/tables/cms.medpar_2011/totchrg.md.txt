@@ -1,0 +1,22 @@
+# Column cms.medpar_2011.TOTCHRG
+
+## Overview of column TOTCHRG in table cms.medpar_2011 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [cms.medpar_2011](../cms.medpar_2011.md)           |
+| Qualified name                | cms.medpar_2011.TOTCHRG  |
+| Datatype                      | INT        |
+| Reference | [https://resdac.org/cms-data/variables/total-charge-amount](https://resdac.org/cms-data/variables/total-charge-amount) |
+
+
+Total all charges for all srvcs provided to beneficiary for stay ($)
+
+| Key | Value |
+| --- | ----- |
+| long_name | TOT_CHRG_AMT |
+| original_type | NUM |
+| width | 10.0 |
+
+
+

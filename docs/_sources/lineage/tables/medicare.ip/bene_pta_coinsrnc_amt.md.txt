@@ -1,0 +1,37 @@
+# Column medicare.ip.bene_pta_coinsrnc_amt
+
+## Overview of column bene_pta_coinsrnc_amt in table medicare.ip 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.ip](../medicare.ip.md)           |
+| Qualified name                | medicare.ip.bene_pta_coinsrnc_amt  |
+| Datatype                      | NUMERIC        |
+| Reference | [https://resdac.org/cms-data/variables/beneficiarys-liability-part-coinsurance-stay](https://resdac.org/cms-data/variables/beneficiarys-liability-part-coinsurance-stay) |
+
+
+The amount of money (rounded to whole dollars) identified as the beneficiary's liability for part A coinsurance for the stay.
+
+
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+bene_pta_coinsrnc_amt_svg_envelop.md
+```
+
+
+```{figure} bene_pta_coinsrnc_amt.svg
+:align: center
+:alt: Column medicare.ip.bene_pta_coinsrnc_amt Lineage SVG
+:target: bene_pta_coinsrnc_amt_svg_envelop.html
+
+Data lineage for column medicare.ip.bene_pta_coinsrnc_amt
+
+```
+
+

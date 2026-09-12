@@ -1,0 +1,84 @@
+digraph {
+			"medicare.ps.dob" [label=<
+<TABLE>
+<tr><td align = "center" border = "0"><b>medicare.ps.dob</b></td></tr>
+<tr><td align = "left" border = "0" cellpadding="25">Date of birth</td></tr>
+<tr><td align = "left">character varying &rarr;</td><td align = "left">public.parse_date({column_name})</td></tr>
+<tr><td align = "left">numeric &rarr;</td><td align = "left">to_date(to_char({column_name}, &#x27;00000000&#x27;), &#x27;YYYYMMDD&#x27;)</td></tr>
+
+</TABLE>
+>,shape=box,URL="../medicare.ps/dob.html",target=_blank];
+// Group: parent_medicare.ps.dob
+	{ rank = same; 
+			"cms.mbsf_ab_2011.BENE_DOB" [label=<
+<TABLE>
+<tr><td align = "center" border = "0"><b>cms.mbsf_ab_2011.BENE_DOB</b></td></tr>
+<tr><td align = "left" border = "0" cellpadding="25">Date of Birth</td></tr>
+
+</TABLE>
+>,shape=box,URL="../cms.mbsf_ab_2011/BENE_DOB.html",target=_blank];
+			"cms.mbsf_ab_2012.BENE_DOB" [label=<
+<TABLE>
+<tr><td align = "center" border = "0"><b>cms.mbsf_ab_2012.BENE_DOB</b></td></tr>
+<tr><td align = "left" border = "0" cellpadding="25">Date of Birth</td></tr>
+
+</TABLE>
+>,shape=box,URL="../cms.mbsf_ab_2012/BENE_DOB.html",target=_blank];
+			"cms.mbsf_ab_2013.BENE_DOB" [label=<
+<TABLE>
+<tr><td align = "center" border = "0"><b>cms.mbsf_ab_2013.BENE_DOB</b></td></tr>
+<tr><td align = "left" border = "0" cellpadding="25">Date of Birth</td></tr>
+
+</TABLE>
+>,shape=box,URL="../cms.mbsf_ab_2013/BENE_DOB.html",target=_blank];
+			"cms.mbsf_ab_2014.BENE_DOB" [label=<
+<TABLE>
+<tr><td align = "center" border = "0"><b>cms.mbsf_ab_2014.BENE_DOB</b></td></tr>
+<tr><td align = "left" border = "0" cellpadding="25">Date of Birth</td></tr>
+
+</TABLE>
+>,shape=box,URL="../cms.mbsf_ab_2014/BENE_DOB.html",target=_blank];
+	}
+	{ rank = same; 
+			"cms.mbsf_abcd_2015.BENE_DOB" [label=<
+<TABLE>
+<tr><td align = "center" border = "0"><b>cms.mbsf_abcd_2015.BENE_DOB</b></td></tr>
+<tr><td align = "left" border = "0" cellpadding="25">Beneficiary Date of Birth</td></tr>
+
+</TABLE>
+>,shape=box,URL="../cms.mbsf_abcd_2015/BENE_DOB.html",target=_blank];
+			"cms.mbsf_abcd_2016.BENE_DOB" [label=<
+<TABLE>
+<tr><td align = "center" border = "0"><b>cms.mbsf_abcd_2016.BENE_DOB</b></td></tr>
+<tr><td align = "left" border = "0" cellpadding="25">Beneficiary Date of Birth</td></tr>
+
+</TABLE>
+>,shape=box,URL="../cms.mbsf_abcd_2016/BENE_DOB.html",target=_blank];
+			"cms.mbsf_abcd_2017.BENE_DOB" [label=<
+<TABLE>
+<tr><td align = "center" border = "0"><b>cms.mbsf_abcd_2017.BENE_DOB</b></td></tr>
+<tr><td align = "left" border = "0" cellpadding="25">Beneficiary Date of Birth</td></tr>
+
+</TABLE>
+>,shape=box,URL="../cms.mbsf_abcd_2017/BENE_DOB.html",target=_blank];
+			"cms.mbsf_abcd_2018.BENE_DOB" [label=<
+<TABLE>
+<tr><td align = "center" border = "0"><b>cms.mbsf_abcd_2018.BENE_DOB</b></td></tr>
+<tr><td align = "left" border = "0" cellpadding="25">Beneficiary Date of Birth</td></tr>
+
+</TABLE>
+>,shape=box,URL="../cms.mbsf_abcd_2018/BENE_DOB.html",target=_blank];
+	}
+	"cms.mbsf_ab_2013.BENE_DOB" -> { "cms.mbsf_abcd_2015.BENE_DOB" "cms.mbsf_abcd_2016.BENE_DOB" "cms.mbsf_abcd_2017.BENE_DOB" "cms.mbsf_abcd_2018.BENE_DOB" } [ style = invis ];
+// End Group: parent_medicare.ps.dob
+
+
+	"cms.mbsf_ab_2011.BENE_DOB" -> "medicare.ps.dob" [label=	"union",penwidth=2.4,color=chocolate,labelfloat=True];
+	"cms.mbsf_ab_2012.BENE_DOB" -> "medicare.ps.dob" [label=	"union",penwidth=2.4,color=chocolate,labelfloat=True];
+	"cms.mbsf_ab_2013.BENE_DOB" -> "medicare.ps.dob" [label=	"union",penwidth=2.4,color=chocolate,labelfloat=True];
+	"cms.mbsf_ab_2014.BENE_DOB" -> "medicare.ps.dob" [label=	"union",penwidth=2.4,color=chocolate,labelfloat=True];
+	"cms.mbsf_abcd_2015.BENE_DOB" -> "medicare.ps.dob" [label=	"union",penwidth=2.4,color=chocolate,labelfloat=True];
+	"cms.mbsf_abcd_2016.BENE_DOB" -> "medicare.ps.dob" [label=	"union",penwidth=2.4,color=chocolate,labelfloat=True];
+	"cms.mbsf_abcd_2017.BENE_DOB" -> "medicare.ps.dob" [label=	"union",penwidth=2.4,color=chocolate,labelfloat=True];
+	"cms.mbsf_abcd_2018.BENE_DOB" -> "medicare.ps.dob" [label=	"union",penwidth=2.4,color=chocolate,labelfloat=True];
+}

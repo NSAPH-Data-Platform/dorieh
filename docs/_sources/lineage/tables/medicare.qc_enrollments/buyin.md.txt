@@ -1,0 +1,31 @@
+# Column medicare.qc_enrollments.buyin
+
+## Overview of column buyin in table medicare.qc_enrollments 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_enrollments](../medicare.qc_enrollments.md)           |
+| Qualified name                | medicare.qc_enrollments.buyin  |
+| Datatype                      | string        |
+
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+buyin_svg_envelop.md
+```
+
+
+```{figure} buyin.svg
+:align: center
+:alt: Column medicare.qc_enrollments.buyin Lineage SVG
+:target: buyin_svg_envelop.html
+
+Data lineage for column medicare.qc_enrollments.buyin
+
+```
+
+

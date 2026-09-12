@@ -1,0 +1,67 @@
+# Materialized view medicare.qc_admissions
+
+## Overview for medicare.qc_admissions
+
+
+```{toctree}
+---
+maxdepth: 1
+hidden:
+---
+medicare.qc_admissions/bene_hll.md
+medicare.qc_admissions/numdistinctbeneficaries.md
+medicare.qc_admissions/numrecords.md
+medicare.qc_admissions/reason.md
+medicare.qc_admissions/state.md
+medicare.qc_admissions/state_iso.md
+medicare.qc_admissions/year.md
+medicare.qc_admissions/zip.md
+```
+
+
+Aggregate data for admissions, beneficiaries and enrollments
+
+
+Transformed from [medicare.qc_adm_union](medicare.qc_adm_union.md)
+
+
+<details>
+
+<summary>SQL/DDL Statement</summary>
+
+```sql
+
+CREATE materialized view  medicare.qc_admissions AS
+SELECT
+    year,
+	state,
+	zip,
+	reason,
+	MAX(state_iso) AS state_iso,
+	COUNT(*) AS NumRecords,
+	(#(hll_add_agg(bene)))::BIGINT AS NumDistinctBeneficaries,
+	hll_add_agg(bene) AS bene_hll
+FROM medicare.qc_adm_union
+
+GROUP BY year,state,zip,reason;
+
+COMMENT ON materialized view medicare.qc_admissions IS 'CREATED BY Dorieh: {"version": "0.5.1.post2", "url": "file://<local checkout>", "commit": null}. Created at 2026-09-12 15:03:07.750570';
+```
+
+</details>
+
+---
+## Columns:
+
+| Column Name | Column Type | Datatype |
+| --- | --- | --- |
+| [bene_hll](medicare.qc_admissions/bene_hll.md) | computed | string |
+| [numdistinctbeneficaries](medicare.qc_admissions/numdistinctbeneficaries.md) | computed | BIGINT |
+| [numrecords](medicare.qc_admissions/numrecords.md) | computed | BIGINT |
+| [reason](medicare.qc_admissions/reason.md) |  | string |
+| [state](medicare.qc_admissions/state.md) |  | string |
+| [state_iso](medicare.qc_admissions/state_iso.md) | computed | CHAR(5) |
+| [year](medicare.qc_admissions/year.md) |  | string |
+| [zip](medicare.qc_admissions/zip.md) |  | string |
+
+

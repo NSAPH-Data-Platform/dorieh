@@ -1,3 +1,5 @@
+:orphan:
+
 Database connection API
 =======================
 
@@ -32,4 +34,3 @@ For details, see `Managing databases connections <DBConnections>`_
 .. automodule:: dorieh.platform.db
    :members:
    :undoc-members:
-

@@ -1,0 +1,20 @@
+# Column medicare.qc_admissions.NumRecords
+
+## Overview of column NumRecords in table medicare.qc_admissions 
+
+|                               |                        |
+| ----------------------------- | ---------------------- |
+| Table                         | [medicare.qc_admissions](../medicare.qc_admissions.md)           |
+| Qualified name                | medicare.qc_admissions.NumRecords  |
+| Datatype                      | BIGINT        |
+| Column type | computed |
+
+
+
+## Expressions
+
+```sql
+SELECT COUNT(*)
+```
+
+
